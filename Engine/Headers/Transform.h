@@ -13,7 +13,8 @@ namespace Engine
         virtual ~Transform() = default;
 
     public:
-        const D2D1_MATRIX_3X2_F& GetWorldMatrix() const { return _worldMatrix; }
+        const D2D1_MATRIX_3X2_F& GetWorldMatrix() const { return _d2dWorldMatrix; }
+        const XMFLOAT4X4& GetXMWorldMatrix() const { return _worldMatrix; }
         Vector3 GetPosition() const { return _transform[Position]; }
         Vector3 GetDirection() const { return _transform[Direction]; }
         Vector3 GetScale() const { return _transform[Scale]; }
@@ -31,10 +32,8 @@ namespace Engine
         void AddScale(const Vector3& scale) { _transform[Scale] += scale; }
         void AddRotation(const Vector3& rotation) { _transform[Rotation] += rotation; }
 
-        Vector3 TransformCoordByMyWorldMatrix(const Vector3& v);
-
     public:
-        void Update(const float& deltaTime) override;
+        void LateUpdate(const float& deltaTime) override;
 
     private:
         void Free() override;
@@ -42,6 +41,7 @@ namespace Engine
     private:
         Transform*          _pParent = nullptr;
         Vector3             _transform[Property_End];
-        D2D1_MATRIX_3X2_F   _worldMatrix{};
+        XMFLOAT4X4          _worldMatrix{};
+        D2D1_MATRIX_3X2_F   _d2dWorldMatrix{};
     };
 }

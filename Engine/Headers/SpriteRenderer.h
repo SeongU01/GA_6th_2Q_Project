@@ -24,6 +24,7 @@ namespace Engine
 		virtual ~SpriteRenderer() = default;
 
 	public:
+		void Awake() override;
 		void Render() override;
 
 	public:

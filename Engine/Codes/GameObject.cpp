@@ -1,8 +1,12 @@
 #include "GameObject.h"
+#include "TextRenderer.h"
+#include "ICollisionNotify.h"
+#include "GameManager.h"
 
 using namespace Engine;
 
 Engine::GameObject::GameObject()
+	: _pGameManager(GameManager::GetInstance())
 {
 	_pTransform = AddComponent<Transform>("Transform");
 	_pSpriteRenderer = AddComponent<SpriteRenderer>("SpriteRenderer");
@@ -14,6 +18,11 @@ Engine::GameObject::~GameObject()
 	Free();
 }
 
+GameObject* Engine::GameObject::Create()
+{
+	return new GameObject;
+}
+
 void Engine::GameObject::FixedUpdate()
 {
 }
@@ -21,7 +30,7 @@ void Engine::GameObject::FixedUpdate()
 int Engine::GameObject::Update(const float& deltaTime)
 {
 	for (auto& component : _components)
-		component->Update(deltaTime);	
+		component->Update(deltaTime);
 
 	return 0;
 }
@@ -32,19 +41,21 @@ int Engine::GameObject::LateUpdate(const float& deltaTime)
 		component->LateUpdate(deltaTime);
 
 	for (auto& collider : _colliders)
-		collider->Update(0.f);
+		collider->LateUpdate(deltaTime);
 
 	return 0;
 }
 
+void Engine::GameObject::AddRenderer()
+{
+	_pGameManager->AddRenderGroup(_renderGroup, this);
+}
+
 void Engine::GameObject::Render()
 {
-	if (!_isLateInit)
-		return;
-
 	for (auto& component : _components)
 	{
-		if (component->_isActive)
+		if (component->IsActive())
 			component->Render();
 	}
 
@@ -57,9 +68,22 @@ void Engine::GameObject::Render()
 #endif
 }
 
-GameObject* Engine::GameObject::Create()
+void Engine::GameObject::OnCollisionEnter(CollisionInfo& info)
 {
-	return new GameObject;
+	for (auto& component : _registeredCollisionEventComponents)
+		component->OnCollisionEnter(info);
+}
+
+void Engine::GameObject::OnCollision(CollisionInfo& info)
+{
+	for (auto& component : _registeredCollisionEventComponents)
+		component->OnCollision(info);
+}
+
+void Engine::GameObject::OnCollisionExit(CollisionInfo& info)
+{
+	for (auto& component : _registeredCollisionEventComponents)
+		component->OnCollisionExit(info);
 }
 
 void Engine::GameObject::Free()
@@ -70,8 +94,6 @@ void Engine::GameObject::Free()
 	for (auto& collider : _colliders)
 		SafeRelease(collider);
 	
-	_textures.clear();
-	_textures.shrink_to_fit();
 	_components.clear();
 	_components.shrink_to_fit();
 	_colliders.clear();
@@ -82,7 +104,7 @@ Engine::Collider* Engine::GameObject::GetComponent(const char* name)
 {
 	for (auto& collider : _colliders)
 	{
-		if (!strcmp(collider->_name, name))
+		if (*collider == name)
 			return collider;
 	}
 

@@ -2,6 +2,11 @@
 
 using namespace Engine;
 
+Engine::EventInvoker::EventInvoker(const char* name)
+	: Component(name)
+{
+}
+
 void Engine::EventInvoker::Update(const float& deltaTime)
 {
 	auto iter = _eventActions.begin();

@@ -222,6 +222,9 @@
     <ClInclude Include="..\Headers\TextRenderer.h">
       <Filter>Component\TextRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\ICollisionNotify.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -319,6 +322,9 @@
     </Filter>
     <Filter Include="Component\Rigidbody">
       <UniqueIdentifier>{367761dd-d0de-43ba-bf9f-c5ccaa4e13bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{48bcd4f2-54eb-42a7-8daf-6381c8c6b203}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ namespace Engine
 	class TextRenderer : public Engine::Component
 	{
 	public:
-		explicit TextRenderer(const char* name) { _name = name; }
+		explicit TextRenderer(const char* name);
 	private:
 		virtual ~TextRenderer() = default;
 

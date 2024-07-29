@@ -21,9 +21,3 @@ bool AddObjectInLayer(int layerGroup, const char* listTag, Engine::GameObject* p
 {
 	return Engine::GameManager::GetInstance()->AddObjectInLayer(layerGroup, listTag, pObject);
 }
-
-// Renderer
-bool AddRenderGroup(int renderGroup, Engine::GameObject* pObject)
-{
-	return Engine::GameManager::GetInstance()->AddRenderGroup(renderGroup, pObject);
-}

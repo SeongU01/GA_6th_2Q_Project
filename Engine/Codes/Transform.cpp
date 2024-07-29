@@ -3,30 +3,26 @@
 using namespace Engine;
 
 Engine::Transform::Transform(const char* name)
+    : Component(name)
 {
-    _name = name;
     _transform[Scale] = { 1.f, 1.f, 1.f };
 }
 
-Vector3 Engine::Transform::TransformCoordByMyWorldMatrix(const Vector3& v)
-{    
-    return Vector3(v.x * _worldMatrix._11 + v.y * _worldMatrix._21 + _worldMatrix._31,
-                   v.x * _worldMatrix._12 + v.y * _worldMatrix._22 + _worldMatrix._32,
-                   0.f);
-}
-
-void Engine::Transform::Update(const float& deltaTime)
+void Engine::Transform::LateUpdate(const float& deltaTime)
 {
-    D2D1_MATRIX_3X2_F scale = D2D1::Matrix3x2F::Scale(_transform[Scale].x, _transform[Scale].y);
-    D2D1_MATRIX_3X2_F rotation = D2D1::Matrix3x2F::Rotation(_transform[Rotation].z);
-    D2D1_MATRIX_3X2_F translation = D2D1::Matrix3x2F::Translation(_transform[Position].x, _transform[Position].y);
+    XMMATRIX scale = XMMatrixScaling(_transform[Scale].x, _transform[Scale].y, _transform[Scale].z);
+    XMMATRIX rotation = XMMatrixRotationZ(XMConvertToRadians(_transform[Rotation].z));
+    XMMATRIX translation = XMMatrixTranslation(_transform[Position].x, _transform[Position].y, _transform[Position].z);
 
-    D2D1_MATRIX_3X2_F relative = scale * rotation * translation;
+    XMMATRIX relative = scale * rotation * translation;
 
     if (nullptr != _pParent)
-        _worldMatrix = relative * _pParent->_worldMatrix;
+        XMStoreFloat4x4(&_worldMatrix, relative * XMLoadFloat4x4(&_pParent->_worldMatrix));
     else
-        _worldMatrix = relative;
+        XMStoreFloat4x4(&_worldMatrix, relative);
+
+    for (int i = 0; i < 3; i++)
+        memcpy(_d2dWorldMatrix.m[i], _worldMatrix.m[i], sizeof(D2D1_VECTOR_2F));
 }
 
 void Engine::Transform::Free()

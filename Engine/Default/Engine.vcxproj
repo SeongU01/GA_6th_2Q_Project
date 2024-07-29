@@ -72,6 +72,7 @@
     <ClInclude Include="..\Headers\GameManager.h" />
     <ClInclude Include="..\Headers\GameObject.h" />
     <ClInclude Include="..\Headers\GraphicManager.h" />
+    <ClInclude Include="..\Headers\ICollisionNotify.h" />
     <ClInclude Include="..\Headers\InputManager.h" />
     <ClInclude Include="..\Headers\Layer.h" />
     <ClInclude Include="..\Headers\Renderer.h" />

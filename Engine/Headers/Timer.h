@@ -12,17 +12,15 @@ namespace Engine
             bool isActive = false;
         }TIMER;
     public:
-        explicit Timer(const char* name) { _name = name; }
+        explicit Timer(const char* name);
     private:
         virtual ~Timer() = default;
 
     public:
-        virtual void Update(const float& deltaTime);
-        template <typename T>
-        void Initialize(const T& groupSize)
-        {
-            _vecTimer.resize(static_cast<int>(groupSize));
-        }
+        void Update(const float& deltaTime) override;
+
+    public:
+        void Initialize(const int groupSize) { _vecTimer.resize(groupSize); }
         bool IsOverTime(int group, float time);
         bool IsBetweenTime(int group, float first, float last);
         void SetActive(int group, bool isActive) { _vecTimer[group].isActive = isActive; }

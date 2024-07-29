@@ -1,4 +1,4 @@
-#include "Engine_Define.h"
+#include "MainGame.h"
 
 #ifdef _DEBUG
 	#ifdef UNICODE
@@ -21,6 +21,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	MainGame* pMainGame = MainGame::Create(hInstance);
+	pMainGame->Run();
 
 	atexit(CheckMemoryLeaks);
 

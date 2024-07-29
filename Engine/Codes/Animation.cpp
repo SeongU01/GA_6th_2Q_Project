@@ -4,6 +4,11 @@
 
 using namespace Engine;
 
+Engine::Animation::Animation(const char* name)
+	: Component(name)
+{
+}
+
 void Engine::Animation::Update(const float& deltaTime)
 {
 	if (_animationData.empty())
@@ -44,8 +49,11 @@ void Engine::Animation::Update(const float& deltaTime)
 			_isLastFrame = true;
 			_currIndex = 0;
 		}
-	}
+	}	
+}
 
+void Engine::Animation::LateUpdate(const float& deltaTime)
+{
 	auto iter_end = _frameEvents.end();
 	for (auto iter = _frameEvents.begin(); iter != iter_end;)
 	{

@@ -13,7 +13,6 @@ namespace Engine
 
 	public:
 		void Update(const float& deltaTime) override;
-		void LateUpdate(const float& deltaTime) override;
 
 	public:
 		void AddForce(const XMFLOAT2& force);

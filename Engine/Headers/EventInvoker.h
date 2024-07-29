@@ -17,7 +17,7 @@ namespace Engine
 			float activeTime = 0.f;
 		};
 	public:
-		explicit EventInvoker(const char* name) { _name = name; }
+		explicit EventInvoker(const char* name);
 	private:
 		virtual ~EventInvoker() = default;
 

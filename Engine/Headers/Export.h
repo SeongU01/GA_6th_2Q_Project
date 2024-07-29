@@ -12,9 +12,6 @@ namespace Engine
 	inline std::list<GameObject*>* GetObjectList(int layerGroup, const char* listTag);
 	inline GameObject* GetObject(int layerGroup, const char* listTag, const char* objectTag);
 	inline bool AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject);
-
-	// Renderer
-	inline bool AddRenderGroup(int renderGroup, GameObject* pObject);
 	
 	#include "Export.inl"
 }

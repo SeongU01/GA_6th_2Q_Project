@@ -3,50 +3,36 @@
 #include "Base.h"
 #include "Texture.h"
 
+struct CollisionInfo;
+
 namespace Engine
 {	
 	class Transform;
 	class Collider;
 	class Component;
 	class SpriteRenderer;
+	class GameManager;
+	class ICollisionNotify;
 	class GameObject : public Base
 	{
 		friend class GameManager;
 		friend class Layer;
 		friend class Component;
 		friend class Renderer;
-
+		friend class CollisionManager;
 	protected:
 		explicit GameObject();
 		virtual ~GameObject();
-
+	
 	public:
-		void FixedUpdate();
-		int Update(const float& deltaTime);
-		int LateUpdate(const float& deltaTime);
-		void Render();
-		void OnCollision(CollisionInfo& info) {}
-		void OnCollisionEnter(CollisionInfo& info) {}
-		void OnCollisionExit(CollisionInfo& info) {}
+		inline Transform* GetTransform() { return _pTransform; }
+		inline std::vector<Collider*>& GetColliders() { return _colliders; }
+		inline bool IsDead() const { return _isDead; }		
 
-	public:
-		bool operator==(const char* str)
-		{
-			if (nullptr == _name) return false;
-			return !strcmp(_name, str);
-		}
-		bool operator!=(const char* str)
-		{ 
-			if (nullptr == _name) return false;
-			return strcmp(_name, str); 
-		}
-
-		Transform* GetTransform() { return _pTransform; }
-		std::vector<Collider*>& GetColliders() { return _colliders; }
-		bool IsDead() const { return _isDead; }		
-
-		void SetDead() { _isDead = true; }
-		void SetDontDestroyObject(bool isActive) { _dontDestroy = isActive; }
+		inline void SetDead() { _isDead = true; }
+		inline void SetDontDestroyObject(bool isActive) { _dontDestroy = isActive; }
+		inline void SetRenderGroup(int renderGroup) { _renderGroup = renderGroup; }
+		inline void AddCollisionEvent(ICollisionNotify* pNotify) { _registeredCollisionEventComponents.push_back(pNotify); }
 
 		template<typename T>
 		T* GetComponent(const char* name)
@@ -75,7 +61,6 @@ namespace Engine
 			return nullptr;
 		}
 
-	protected:
 		template<typename T>
 		T* AddComponent(const char* name)
 		{
@@ -93,18 +78,30 @@ namespace Engine
 		static GameObject* Create();
 
 	private:
+		void FixedUpdate();
+		int Update(const float& deltaTime);
+		int LateUpdate(const float& deltaTime);
+		void AddRenderer();
+		void Render();
+		void OnCollisionEnter(CollisionInfo& info);
+		void OnCollision(CollisionInfo& info);
+		void OnCollisionExit(CollisionInfo& info);
+
+	private:
 		void Free() override;
 	
 	private:
-		std::vector<Component*>	_components;
-		std::vector<Collider*>	_colliders;
-		bool					_isDead = false;
-		bool					_dontDestroy = false;
+		std::vector<Component*>			_components;
+		std::vector<Collider*>			_colliders;
+		std::vector<ICollisionNotify*>	_registeredCollisionEventComponents;
+		GameManager*					_pGameManager = nullptr;
+		int								_renderGroup = -1;
+		bool							_isDead = false;
+		bool							_dontDestroy = false;
 
 	protected:
-		std::vector<Texture*>	_textures;
-		Transform*				_pTransform	= nullptr;
-		SpriteRenderer*			_pSpriteRenderer = nullptr;
+		Transform*						_pTransform	= nullptr;
+		SpriteRenderer*					_pSpriteRenderer = nullptr;
 
 #ifdef _DEBUG
 		bool _isDrawCollider = false;

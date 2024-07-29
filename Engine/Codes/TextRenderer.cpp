@@ -3,6 +3,11 @@
 
 using namespace Engine;
 
+Engine::TextRenderer::TextRenderer(const char* name)
+	: Component(name)
+{
+}
+
 void TextRenderer::Start()
 {
 	GraphicManager* pGraphicMgr = GraphicManager::GetInstance();

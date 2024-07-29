@@ -19,7 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\MainGame.cpp" />
+    <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Headers\Client_Define.h" />
+    <ClInclude Include="..\Headers\Client_Enum.h" />
+    <ClInclude Include="..\Headers\Client_Function.h" />
+    <ClInclude Include="..\Headers\MainGame.h" />
+    <ClInclude Include="..\Headers\TestScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -25,9 +25,6 @@ int Layer::Update(const float& deltaTime)
             if (object->_isDead)
                 continue;
 
-            object->LateInit();
-            object->UpdateComponent(deltaTime);
-            object->UpdateCollider();
             isEvent = object->Update(deltaTime);
 
             if (GameState::Game_End == isEvent)
@@ -56,7 +53,6 @@ int Layer::LateUpdate(const float& deltaTime)
             }
             else
             {
-                (*iter)->LateUpdateComponent(deltaTime);
                 (*iter)->LateUpdate(deltaTime);
                 ++iter;
             }
@@ -72,7 +68,7 @@ void Engine::Layer::AddRenderer()
     {
         for (auto& object : pair.second)
         {
-            if (!object->_isDead && object->_isActive && object->_isLateInit)
+            if (!object->_isDead && object->IsActive())
                 object->AddRenderer();
         }
     }

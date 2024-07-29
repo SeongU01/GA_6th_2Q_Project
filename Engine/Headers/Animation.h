@@ -19,12 +19,15 @@ namespace Engine
             bool isRepeat = false;
         };
     public:
-        explicit Animation(const char* name) { _name = name; }
+        explicit Animation(const char* name);           
     private:
         virtual ~Animation() = default;
 
     public:
         void Update(const float& deltaTime) override;
+        void LateUpdate(const float& deltaTime) override;
+
+    public:
         ID2D1Bitmap* GetCurrentImage();
         ID2D1Bitmap* GetImage(const int index);
         int GetCurrFrame() const { return _currIndex; }

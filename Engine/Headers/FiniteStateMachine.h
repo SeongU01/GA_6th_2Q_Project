@@ -7,7 +7,7 @@ namespace Engine
     class FiniteStateMachine : public Component
     {
     public:
-        explicit FiniteStateMachine(const char* name) { _name = name; }
+        explicit FiniteStateMachine(const char* name);
     private:
         virtual ~FiniteStateMachine() = default;
 

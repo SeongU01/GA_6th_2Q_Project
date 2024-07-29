@@ -1,10 +1,12 @@
 #pragma once
 
-struct Vector3
+struct Vector3 : public XMFLOAT3
 {
 	Vector3() = default;
 	Vector3(float _x, float _y, float _z)
-		: x(_x), y(_y), z(_z) {}
+	{ x = _x; y = _y; z = _z; }
+
+	operator XMFLOAT3() { return *this; }
 
 	Vector3& operator+=(const Vector3& vector)
 	{
@@ -118,37 +120,6 @@ struct Vector3
 
 		return *this;
 	}
-
-	void Abs()
-	{
-		x = fabs(x); y = fabs(y); z = fabs(z);
-	}
-	float Length() const
-	{
-		return sqrtf((this->x * this->x + this->y * this->y));
-	}
-	float SqrMagnitude() const
-	{
-		return this->x * this->x + this->y * this->y;
-	}
-	Vector3 Normalized()
-	{
-		float length = Length();
-		this->x /= length;
-		this->y /= length;
-
-		return *this;
-	}
-	void RotationZ(const float& radian)
-	{
-		Vector3 temp = *this;
-		this->x = temp.x * cosf(radian) - temp.y * sinf(radian);
-		this->y = temp.x * sinf(radian) + temp.y * cosf(radian);
-	}
-
-	float x = 0.f;
-	float y = 0.f;
-	float z = 0.f;
 };
 
 namespace Engine

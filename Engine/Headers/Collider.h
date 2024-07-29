@@ -15,7 +15,7 @@ namespace Engine
 		virtual ~Collider() = default;
 
 	public:
-		void Update(const float& deltaTime) override;
+		void LateUpdate(const float& deltaTime) override;
 
 	public:
 #ifdef _DEBUG
@@ -28,10 +28,7 @@ namespace Engine
 
 		_uint GetID() const { return _ID; }
 		void SetScale(const Vector3& scale) { _scale = scale; }
-		void SetOffset(const Vector3& offset) { _offset = offset; }
-
-		bool operator==(const char* str) { return !strcmp(_name, str); }
-		bool operator!=(const char* str) { return strcmp(_name, str); }
+		void SetOffset(const Vector3& offset) { _offset = offset; }		
 
 	private:
 		void Free() override;

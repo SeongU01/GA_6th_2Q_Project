@@ -2,5 +2,39 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Codes\MainGame.cpp">
+      <Filter>01. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TestScene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="01. MainGame">
+      <UniqueIdentifier>{c540cb03-00f7-420e-83ec-ca6c40748dfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Headers">
+      <UniqueIdentifier>{c7a68a95-2013-4228-8b55-099f8362aee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{2d66ce49-3944-485e-b294-9faa8c293780}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Headers\MainGame.h">
+      <Filter>01. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Client_Define.h">
+      <Filter>99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Client_Enum.h">
+      <Filter>99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Client_Function.h">
+      <Filter>99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TestScene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

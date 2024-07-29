@@ -4,16 +4,11 @@
 using namespace Engine;
 
 Engine::Rigidbody2D::Rigidbody2D(const char* name)
-	: _maxVelocity(XMFLOAT2(200.f, 600.f)), _frictionCoefficient(100.f), _gravity(800.f)
+	: Component(name), _maxVelocity(XMFLOAT2(1000.f, 1000.f)), _frictionCoefficient(100.f), _gravity(800.f)
 {
-	_name = name;
 }
 
 void Engine::Rigidbody2D::Update(const float& deltaTime)
-{
-}
-
-void Engine::Rigidbody2D::LateUpdate(const float& deltaTime)
 {
 	// 힘의 크기
 	XMVECTOR xmForce = XMVector2Length(XMLoadFloat2(&_force));
@@ -64,7 +59,7 @@ void Engine::Rigidbody2D::LateUpdate(const float& deltaTime)
 		_velocity.y = (_velocity.y / fabs(_velocity.y)) * fabs(_maxVelocity.y);
 	}
 
-	// Movement
+	// 이동
 	XMVECTOR xmVelocity = XMLoadFloat2(&_velocity);
 	XMVECTOR xmSpeed = XMVector2Length(xmVelocity);
 

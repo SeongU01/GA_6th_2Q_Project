@@ -16,15 +16,17 @@ namespace Engine
 			delete this;
 		}
 
-		void SetActive(bool isActive) { _isActive = isActive; }
-		void SetName(const char* name) { _name = name; }
-		const char* GetName() { return _name; }
-		bool IsActive() const { return _isActive; }
+		inline void SetActive(bool isActive) { _isActive = isActive; }
+		inline void SetName(const char* name) { _name = name; }
+		inline const char* GetName() const { return _name; }
+		inline bool IsActive() const { return _isActive; }
+		inline bool operator==(const char* str) { return !strcmp(_name, str); }
+		inline bool operator!=(const char* str) { return strcmp(_name, str); }
 
 	protected:
 		virtual void Free() = 0;
 
-	protected:
+	private:
 		const char* _name = nullptr;
 		bool		_isActive = true;
 	};

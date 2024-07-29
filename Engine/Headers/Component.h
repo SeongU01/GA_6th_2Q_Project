@@ -5,18 +5,19 @@ namespace Engine
 {
 	class GameObject;
 	class Collider;
-	class Component : public Base
+	class Component abstract : public Base
 	{
 		friend class GameObject;
 	protected:
-		explicit Component() = default;
+		explicit Component(const char* name) { SetName(name); }
 		virtual ~Component() = default;
 
 	public:
-		virtual void Start() = 0;
-		virtual void Update(const float& deltaTime) = 0;
-		virtual void LateUpdate(const float& deltaTime) = 0;
-		virtual void Render() {}		
+		virtual void Awake() {}
+		virtual void Start() {}
+		virtual void Update(const float& deltaTime) {}
+		virtual void LateUpdate(const float& deltaTime) {}
+		virtual void Render() {}
 
 	protected:
 		template <typename T>
@@ -35,7 +36,6 @@ namespace Engine
 		void Free() = 0;
 
 	protected:
-		const char* _name = nullptr;
 		GameObject* _pOwner = nullptr;
 	};
 }

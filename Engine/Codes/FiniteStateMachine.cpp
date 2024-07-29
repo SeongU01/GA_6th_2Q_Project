@@ -3,6 +3,11 @@
 
 using namespace Engine;
 
+Engine::FiniteStateMachine::FiniteStateMachine(const char* name)
+	: Component(name)
+{
+}
+
 void Engine::FiniteStateMachine::Update(const float& deltaTime)
 {
 	_states[_currStateIndex]->Update(deltaTime);

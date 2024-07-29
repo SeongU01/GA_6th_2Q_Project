@@ -2,6 +2,11 @@
 
 using namespace Engine;
 
+Engine::Timer::Timer(const char* name)
+	: Component(name)
+{
+}
+
 void Engine::Timer::Update(const float& deltaTime)
 {
 	for (auto& Timer : _vecTimer)
