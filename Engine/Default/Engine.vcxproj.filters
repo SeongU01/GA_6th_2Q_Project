@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Codes\Animation.cpp">
+      <Filter>Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BitFlag.cpp">
+      <Filter>Component\BitFlag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Collider.cpp">
+      <Filter>Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CollisionManager.cpp">
+      <Filter>Manager\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EventInvoker.cpp">
+      <Filter>Component\EventInvoker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\FiniteStateMachine.cpp">
+      <Filter>Component\FiniteStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameManager.cpp">
+      <Filter>Manager\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GraphicManager.cpp">
+      <Filter>Manager\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\InputManager.cpp">
+      <Filter>Manager\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Layer.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ResourceManager.cpp">
+      <Filter>Manager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SceneManager.cpp">
+      <Filter>Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SoundManager.cpp">
+      <Filter>Manager\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SpriteRenderer.cpp">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\State.cpp">
+      <Filter>Component\FiniteStateMachine\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimeManager.cpp">
+      <Filter>Manager\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Timer.cpp">
+      <Filter>Component\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Transform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\WinApp.cpp">
+      <Filter>WinApp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Rigidbody2D.cpp">
+      <Filter>Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ShaderComposite.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ShaderColor.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Headers\Shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ShaderMotionBlur.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ShaderVignette.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ShaderGaussianBluer.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TextRenderer.cpp">
+      <Filter>Component\TextRenderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Headers\Base.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Animation.h">
+      <Filter>Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BitFlag.h">
+      <Filter>Component\BitFlag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Collider.h">
+      <Filter>Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CollisionManager.h">
+      <Filter>Manager\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Define.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Enum.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Function.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Macro.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Struct.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Engine_Typedef.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EventInvoker.h">
+      <Filter>Component\EventInvoker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Export.h">
+      <Filter>Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\FiniteStateMachine.h">
+      <Filter>Component\FiniteStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameManager.h">
+      <Filter>Manager\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Frame.h">
+      <Filter>Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GraphicManager.h">
+      <Filter>Manager\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\InputManager.h">
+      <Filter>Manager\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Layer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ResourceManager.h">
+      <Filter>Manager\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SceneManager.h">
+      <Filter>Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SoundManager.h">
+      <Filter>Manager\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SpriteRenderer.h">
+      <Filter>Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\State.h">
+      <Filter>Component\FiniteStateMachine\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TimeManager.h">
+      <Filter>Manager\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Timer.h">
+      <Filter>Component\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Transform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\WinApp.h">
+      <Filter>WinApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Rigidbody2D.h">
+      <Filter>Component\Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Shader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ShaderComposite.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ShaderColor.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ShaderMotionBlur.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ShaderVignette.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ShaderGaussianBluer.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TextRenderer.h">
+      <Filter>Component\TextRenderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{6d1cdb1c-75a7-41c2-852d-f7dff1c99de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{39f00856-c765-4904-96d9-99678b0ceb3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{5ae7eb06-33f8-4962-888f-ac23611898b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Collider">
+      <UniqueIdentifier>{2bf85855-ead4-4b4c-b64f-55f59dee3b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Animation">
+      <UniqueIdentifier>{72236d51-ab36-4e16-bb44-98c955e8b6fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\BitFlag">
+      <UniqueIdentifier>{188ac5f0-1cfe-477d-bbb3-b7fa44b7d3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{9a16a9b9-5103-454b-8380-dbceca826d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Collision">
+      <UniqueIdentifier>{6a2c70ba-d623-4584-a28d-0322c1eabea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{409ddc86-68d7-43ee-a915-ce3a8709b845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\EventInvoker">
+      <UniqueIdentifier>{2ded49b6-1ea1-49ad-99bc-ec47bbf19b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Export">
+      <UniqueIdentifier>{81c3b001-b184-48f6-a995-d1c9b4e54ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\FiniteStateMachine">
+      <UniqueIdentifier>{f2bde752-cbb9-4dc1-af99-ec28b2e12324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Game">
+      <UniqueIdentifier>{56c3630d-a441-45f7-b2b3-58b4b63f3ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{23b067de-7389-49e5-9f3b-c0db5bd99d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Graphic">
+      <UniqueIdentifier>{19990dd6-18d8-44c7-bf3f-c93c58d22e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Input">
+      <UniqueIdentifier>{3a457a54-8863-4574-8687-2512eb73c71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{4f279175-5918-4486-b151-c0a4fbbd58c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{bfb65271-886c-4674-a137-7f94f61ad8bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Resource">
+      <UniqueIdentifier>{4e50a2a0-4814-4c2c-b67d-abfcd080b99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{f0e952e7-b778-4308-ad2a-9002ae3535fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Scene">
+      <UniqueIdentifier>{0fb32b44-c017-43a4-a3c2-53578b97ee7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Sound">
+      <UniqueIdentifier>{3ccb0689-e969-4cce-a7b2-99ecba7c2975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\SpriteRenderer">
+      <UniqueIdentifier>{41aa291f-585b-47fd-8b73-0f51090342d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\FiniteStateMachine\State">
+      <UniqueIdentifier>{5b869d0d-052b-4ea6-83fb-0e44293ee66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Time">
+      <UniqueIdentifier>{212fbc9f-84ce-4107-b5db-e12922de7045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{daae4b3a-c050-4c78-8b90-a780784d8f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Timer">
+      <UniqueIdentifier>{9e220315-5007-4ac7-b332-2e8e8ecd78e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WinApp">
+      <UniqueIdentifier>{b8716b6c-91bc-45ea-88e3-d7ca953b6ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{91c9b4d7-400c-4243-8fe7-21ad74f2e577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{0e1771ad-708d-4eac-b6be-30efed9d2001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TextRenderer">
+      <UniqueIdentifier>{d67a73f4-789c-46fc-b307-4a8c4969b040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Rigidbody">
+      <UniqueIdentifier>{367761dd-d0de-43ba-bf9f-c5ccaa4e13bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Headers\Export.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Input.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Scene.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Sound.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Time.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Resource.inl">
+      <Filter>Export</Filter>
+    </None>
+    <None Include="..\Headers\Export_Camera.inl">
+      <Filter>Export</Filter>
+    </None>
+  </ItemGroup>
+</Project>
