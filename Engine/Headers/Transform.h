@@ -18,19 +18,23 @@ namespace Engine
         Vector3 GetPosition() const { return _transform[Position]; }
         Vector3 GetDirection() const { return _transform[Direction]; }
         Vector3 GetScale() const { return _transform[Scale]; }
+        Vector3 GetRotation() const { return _transform[Rotation]; }
         Transform* GetParent() { return _pParent; }
 
         void SetParent(Transform* parent) { _pParent = parent; }
         void SetPosition(const Vector3& position) { memcpy(&_transform[Position], &position, sizeof(Vector3)); }
+        void SetPosition(const XMVECTOR& position) { _transform[Position] = position; }
         void SetDirection(const Vector3& direction) { memcpy(&_transform[Direction], &direction, sizeof(Vector3)); }
         void SetScale(const Vector3& scale) { memcpy(&_transform[Scale], &scale, sizeof(Vector3)); }
         void SetScaleSign(float x = 1.f, float y = 1.f, float z = 1.f) { _transform[Scale] *= Vector3(x, y, z); }
         void SetRotation(const Vector3& rotation) { memcpy(&_transform[Rotation], &rotation, sizeof(Vector3)); }
-
-        void AddPosition(const Vector3& position) { _transform[Position] += position;; }
-        void AddDirection(const Vector3& direction) { _transform[Direction] += direction;; }
-        void AddScale(const Vector3& scale) { _transform[Scale] += scale; }
-        void AddRotation(const Vector3& rotation) { _transform[Rotation] += rotation; }
+        
+    public:
+        __declspec(property(get = GetPosition, put = SetPosition)) Vector3 position;
+        __declspec(property(get = GetDirection, put = SetDirection)) Vector3 direction;
+        __declspec(property(get = GetRotation, put = SetRotation)) Vector3 rotation;
+        __declspec(property(get = GetScale, put = SetScale)) Vector3 scale;
+        __declspec(property(get = GetWorldMatrix)) D2D1_MATRIX_3X2_F worldMatrix;
 
     public:
         void LateUpdate(const float& deltaTime) override;

@@ -14,7 +14,7 @@ Engine::Collider::Collider(const char* name)
 
 void Engine::Collider::LateUpdate(const float& deltaTime)
 {
-	XMStoreFloat3(&_position, XMVector3TransformCoord(XMLoadFloat3(&_position), XMLoadFloat4x4(&_pTransform->GetXMWorldMatrix())));
+	_position = XMVector3TransformCoord(_position, XMLoadFloat4x4(&_pTransform->GetXMWorldMatrix()));
 }
 
 #ifdef _DEBUG

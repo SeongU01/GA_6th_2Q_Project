@@ -4,10 +4,16 @@
 
 using namespace Engine;
 
+void Engine::SceneManager::Start()
+{
+	for (auto& layer : _layers)
+		layer->Start();
+}
+
 void Engine::SceneManager::FixedUpdate()
 {
-	for (auto& Layer : _layers)
-		Layer->FixUpdate();
+	for (auto& layer : _layers)
+		layer->FixUpdate();
 }
 
 int Engine::SceneManager::Update(const float& deltaTime)
@@ -16,9 +22,9 @@ int Engine::SceneManager::Update(const float& deltaTime)
 		return GameState::Error;
 
 	int isEvent = 0;
-	for (auto& Layer : _layers)
+	for (auto& layer : _layers)
 	{
-		isEvent = Layer->Update(deltaTime);
+		isEvent = layer->Update(deltaTime);
 		if (GameState::Game_End == isEvent)
 			return isEvent;
 	}
@@ -35,9 +41,9 @@ int Engine::SceneManager::LateUpdate(const float& deltaTime)
 
 	int isEvent = 0;
 
-	for (auto& Layer : _layers)
+	for (auto& layer : _layers)
 	{
-		isEvent = Layer->LateUpdate(deltaTime);
+		isEvent = layer->LateUpdate(deltaTime);
 		if (GameState::Game_End == isEvent)
 			return isEvent;
 	}
@@ -49,8 +55,8 @@ int Engine::SceneManager::LateUpdate(const float& deltaTime)
 
 void Engine::SceneManager::AddRenderGroup()
 {
-	for (auto& Layer : _layers)
-		Layer->AddRenderer();
+	for (auto& layer : _layers)
+		layer->AddRenderer();
 }
 
 bool Engine::SceneManager::SetUpLayer(int layerSize)
@@ -70,8 +76,8 @@ bool Engine::SceneManager::ChangeScene(Scene* pScene)
 	if (nullptr != _pScene)
 		SafeRelease(_pScene);
 
-	for (auto& Layer : _layers)
-		Layer->ClearAllObjectList();
+	for (auto& layer : _layers)
+		layer->ClearAllObjectList();
 
 	_pScene = pScene;
 	_pScene->Initialize();
@@ -90,14 +96,14 @@ void Engine::SceneManager::ClearLayer(int layerGroup)
 	_layers[layerGroup]->ClearAllObjectList();
 }
 
-std::list<GameObject*>* Engine::SceneManager::GetObjectList(int layerGroup, const char* listTag)
+std::list<GameObject*>* Engine::SceneManager::FindObjectList(int layerGroup, const char* listTag)
 {
-	return _layers[layerGroup]->GetObjectList(listTag);
+	return _layers[layerGroup]->FindObjectList(listTag);
 }
 
-GameObject* Engine::SceneManager::GetObject(int layerGroup, const char* listTag, const char* objectTag)
+GameObject* Engine::SceneManager::FindObject(int layerGroup, const char* listTag, const char* objectTag)
 {
-	return _layers[layerGroup]->GetObject(listTag, objectTag);
+	return _layers[layerGroup]->FindObject(listTag, objectTag);
 }
 
 bool Engine::SceneManager::AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject)

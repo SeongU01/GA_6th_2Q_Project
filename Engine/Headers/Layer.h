@@ -12,13 +12,14 @@ namespace Engine
 		virtual ~Layer() = default;
 
 	public:
+		void Start();
 		void FixUpdate();
 		int Update(const float& deltaTime);
 		int LateUpdate(const float& deltaTime);
 		void AddRenderer();
 
-		std::list<GameObject*>* GetObjectList(const char* listTag) { return &_objectData[listTag]; }
-		GameObject* GetObject(const char* listTag, const char* objectTag);
+		std::list<GameObject*>* FindObjectList(const char* listTag) { return &_objectData[listTag]; }
+		GameObject* FindObject(const char* listTag, const char* objectTag);
 		bool AddObject(const char* listTag, GameObject* pObject);
 		void ClearObjectList(const char* listTag);
 		void ClearAllObjectList();

@@ -9,7 +9,6 @@ using namespace Engine;
 Engine::SpriteRenderer::SpriteRenderer(const char* name)
 	: Component(name)
 {
-	Awake();
 }
 
 void Engine::SpriteRenderer::Awake()
@@ -66,9 +65,9 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	D2D1_MATRIX_3X2_F offset = D2D1::Matrix3x2F::Translation(size);
 
 	if (_notAffectCamera)
-		_pDeviceContext->SetTransform(offset * _pTransform->GetWorldMatrix());
+		_pDeviceContext->SetTransform(offset * _pTransform->worldMatrix);
 	else
-		_pDeviceContext->SetTransform(offset * _pTransform->GetWorldMatrix() * _cameraMatrix);
+		_pDeviceContext->SetTransform(offset * _pTransform->worldMatrix * _cameraMatrix);
 
 	if (_currShader != typeid(ShaderComposite).hash_code())
 		_shaderData[_currShader]->ComputeShader(pBitmap);

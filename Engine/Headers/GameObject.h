@@ -32,7 +32,6 @@ namespace Engine
 		inline void SetDead() { _isDead = true; }
 		inline void SetDontDestroyObject(bool isActive) { _dontDestroy = isActive; }
 		inline void SetRenderGroup(int renderGroup) { _renderGroup = renderGroup; }
-		inline void AddCollisionEvent(ICollisionNotify* pNotify) { _registeredCollisionEventComponents.push_back(pNotify); }
 
 		template<typename T>
 		T* GetComponent(const char* name)
@@ -66,6 +65,7 @@ namespace Engine
 		{
 			T* pComponent = new T(name);
 			pComponent->_pOwner = this;
+			pComponent->Awake();
 			_components.push_back(pComponent);
 
 			return pComponent;
@@ -78,6 +78,7 @@ namespace Engine
 		static GameObject* Create();
 
 	private:
+		void Start();
 		void FixedUpdate();
 		int Update(const float& deltaTime);
 		int LateUpdate(const float& deltaTime);
@@ -98,6 +99,7 @@ namespace Engine
 		int								_renderGroup = -1;
 		bool							_isDead = false;
 		bool							_dontDestroy = false;
+		bool							_isFirstInit = false;
 
 	protected:
 		Transform*						_pTransform	= nullptr;

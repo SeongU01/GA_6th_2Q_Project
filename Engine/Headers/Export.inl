@@ -9,13 +9,13 @@ void ClearObjectList(int layerGroup, const char* listTag)
 {
 	Engine::GameManager::GetInstance()->ClearObjectList(layerGroup, listTag);
 }
-std::list<Engine::GameObject*>* GetObjectList(int layerGroup, const char* listTag)
+std::list<Engine::GameObject*>* FindObjectList(int layerGroup, const char* listTag)
 {
-	return Engine::GameManager::GetInstance()->GetObjectList(layerGroup, listTag);
+	return Engine::GameManager::GetInstance()->FindObjectList(layerGroup, listTag);
 }
-Engine::GameObject* GetObject(int layerGroup, const char* listTag, const char* objectTag)
+Engine::GameObject* FindObject(int layerGroup, const char* listTag, const char* objectTag)
 {
-	return Engine::GameManager::GetInstance()->GetObject(layerGroup, listTag, objectTag);
+	return Engine::GameManager::GetInstance()->FindObject(layerGroup, listTag, objectTag);
 }
 bool AddObjectInLayer(int layerGroup, const char* listTag, Engine::GameObject* pObject)
 {

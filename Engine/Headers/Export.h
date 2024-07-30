@@ -9,8 +9,8 @@ namespace Engine
 	// Layer
 	inline void ClearLayer(int layerGroup);
 	inline void ClearObjectList(int layerGroup, const char* listTag);
-	inline std::list<GameObject*>* GetObjectList(int layerGroup, const char* listTag);
-	inline GameObject* GetObject(int layerGroup, const char* listTag, const char* objectTag);
+	inline std::list<GameObject*>* FindObjectList(int layerGroup, const char* listTag);
+	inline GameObject* FindObject(int layerGroup, const char* listTag, const char* objectTag);
 	inline bool AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject);
 	
 	#include "Export.inl"

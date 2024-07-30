@@ -6,7 +6,9 @@ struct Vector3 : public XMFLOAT3
 	Vector3(float _x, float _y, float _z)
 	{ x = _x; y = _y; z = _z; }
 
+	void operator=(const XMVECTOR& other) { XMStoreFloat3(this, other); }
 	operator XMFLOAT3() { return *this; }
+	operator XMVECTOR() { return XMLoadFloat3(this); }
 
 	Vector3& operator+=(const Vector3& vector)
 	{
@@ -28,7 +30,7 @@ struct Vector3 : public XMFLOAT3
 
 	Vector3 operator+(const Vector3& vector) const
 	{
-		Vector3 temp;
+		Vector3 temp{};
 
 		temp.x = this->x + vector.x;
 		temp.y = this->y + vector.y;
@@ -39,7 +41,7 @@ struct Vector3 : public XMFLOAT3
 
 	Vector3 operator+(const float& value) const
 	{
-		Vector3 temp;
+		Vector3 temp{};
 
 		temp.x = this->x + value;
 		temp.y = this->y + value;
@@ -68,7 +70,7 @@ struct Vector3 : public XMFLOAT3
 
 	Vector3 operator-(const Vector3& vector) const
 	{
-		Vector3 temp;
+		Vector3 temp{};
 
 		temp.x = this->x - vector.x;
 		temp.y = this->y - vector.y;
@@ -79,7 +81,7 @@ struct Vector3 : public XMFLOAT3
 
 	Vector3 operator-(const float& value) const
 	{
-		Vector3 temp;
+		Vector3 temp{};
 
 		temp.x = this->x - value;
 		temp.y = this->y - value;
@@ -95,7 +97,8 @@ struct Vector3 : public XMFLOAT3
 
 	Vector3 operator*(const float& value) const
 	{
-		Vector3 temp;
+		Vector3 temp{};
+
 		temp.x = this->x * value;
 		temp.y = this->y * value;
 		temp.z = this->z * value;

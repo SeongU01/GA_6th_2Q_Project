@@ -23,12 +23,33 @@ GameObject* Engine::GameObject::Create()
 	return new GameObject;
 }
 
+void Engine::GameObject::Start()
+{
+	if (_isFirstInit) return;
+
+	for (auto& component : _components)
+	{
+		component->Start();
+		ICollisionNotify* pNotify = dynamic_cast<ICollisionNotify*>(component);
+		if (nullptr != pNotify)
+			_registeredCollisionEventComponents.push_back(pNotify);
+	}
+
+	_isFirstInit = true;
+}
+
 void Engine::GameObject::FixedUpdate()
 {
+	if (_isFirstInit) return;
+
+	for (auto& component : _components)
+		component->FixedUpdate();
 }
 
 int Engine::GameObject::Update(const float& deltaTime)
 {
+	if (_isFirstInit) return 0;
+
 	for (auto& component : _components)
 		component->Update(deltaTime);
 
@@ -37,6 +58,8 @@ int Engine::GameObject::Update(const float& deltaTime)
 
 int Engine::GameObject::LateUpdate(const float& deltaTime)
 {
+	if (_isFirstInit) return 0;
+
 	for (auto& component : _components)
 		component->LateUpdate(deltaTime);
 
@@ -48,11 +71,15 @@ int Engine::GameObject::LateUpdate(const float& deltaTime)
 
 void Engine::GameObject::AddRenderer()
 {
+	if (_isFirstInit) return;
+
 	_pGameManager->AddRenderGroup(_renderGroup, this);
 }
 
 void Engine::GameObject::Render()
 {
+	if (_isFirstInit) return;
+
 	for (auto& component : _components)
 	{
 		if (component->IsActive())
@@ -70,18 +97,24 @@ void Engine::GameObject::Render()
 
 void Engine::GameObject::OnCollisionEnter(CollisionInfo& info)
 {
+	if (_isFirstInit) return;
+
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollisionEnter(info);
 }
 
 void Engine::GameObject::OnCollision(CollisionInfo& info)
 {
+	if (_isFirstInit) return;
+
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollision(info);
 }
 
 void Engine::GameObject::OnCollisionExit(CollisionInfo& info)
 {
+	if (_isFirstInit) return;
+
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollisionExit(info);
 }
@@ -117,6 +150,7 @@ Engine::Collider* Engine::GameObject::AddComponent(const char* name)
 	Collider* pCollider = new Collider(name);
 	pCollider->_pOwner = this;
 	pCollider->_pTransform = _pTransform;
+	pCollider->Awake();
 	_colliders.push_back(pCollider);
 
 	return pCollider;

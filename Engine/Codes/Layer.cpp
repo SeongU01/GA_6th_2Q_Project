@@ -3,6 +3,17 @@
 
 using namespace Engine;
 
+void Engine::Layer::Start()
+{
+    for (auto& pair : _objectData)
+    {
+        for (auto& object : pair.second)
+        {
+            object->Start();
+        }
+    }
+}
+
 void Layer::FixUpdate()
 {
     for (auto& pair : _objectData)
@@ -97,7 +108,7 @@ void Engine::Layer::ClearAllObjectList()
     }
 }
 
-GameObject* Engine::Layer::GetObject(const char* listTag, const char* objectTag)
+GameObject* Engine::Layer::FindObject(const char* listTag, const char* objectTag)
 {
     if (0 == _objectData[listTag].size())
         return nullptr;

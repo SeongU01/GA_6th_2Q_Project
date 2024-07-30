@@ -45,6 +45,7 @@ void Engine::GameManager::Run()
         }
         else
         {
+            StartGame();
             FixedUpdateGame(_fixedCount);
 
             if (GameState::Game_End == UpdateGame())
@@ -58,6 +59,11 @@ void Engine::GameManager::Run()
     }
 }
 
+void Engine::GameManager::StartGame()
+{
+    _pSceneMgr->Start();
+}
+
 void Engine::GameManager::FixedUpdateGame(int count)
 {
     _elapsed += _pTimeMgr->GetDeltaTime();
@@ -67,10 +73,9 @@ void Engine::GameManager::FixedUpdateGame(int count)
     if (_elapsed >= fixed)
     {
         _pSceneMgr->FixedUpdate();
+        _pCamera->FixedUpdate();
         _elapsed -= fixed;
     }
-
-    _pCamera->FixedUpdate();
 }
 
 int Engine::GameManager::UpdateGame()
@@ -150,14 +155,14 @@ bool Engine::GameManager::ChagneScene(Scene* pScene)
     return _pSceneMgr->ChangeScene(pScene);
 }
 
-std::list<GameObject*>* Engine::GameManager::GetObjectList(int layerGroup, const char* listTag)
+std::list<GameObject*>* Engine::GameManager::FindObjectList(int layerGroup, const char* listTag)
 {
-    return _pSceneMgr->GetObjectList(layerGroup, listTag);
+    return _pSceneMgr->FindObjectList(layerGroup, listTag);
 }
 
-GameObject* Engine::GameManager::GetObject(int layerGroup, const char* listTag, const char* objectTag)
+GameObject* Engine::GameManager::FindObject(int layerGroup, const char* listTag, const char* objectTag)
 {
-    return _pSceneMgr->GetObject(layerGroup, listTag, objectTag);
+    return _pSceneMgr->FindObject(layerGroup, listTag, objectTag);
 }
 
 void Engine::GameManager::Free()

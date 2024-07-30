@@ -61,8 +61,8 @@ namespace Engine
 		bool ChagneScene(Scene* pScene);
 		void ClearObjectList(int layerGroup, const char* listTag);
 		void ClearLayer(int layerGroup);
-		std::list<GameObject*>* GetObjectList(int layerGroup, const char* listTag);
-		GameObject* GetObject(int layerGroup, const char* listTag, const char* objectTag);
+		std::list<GameObject*>* FindObjectList(int layerGroup, const char* listTag);
+		GameObject* FindObject(int layerGroup, const char* listTag, const char* objectTag);
 		bool AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject);
 
 		// SoundMgr
@@ -83,6 +83,7 @@ namespace Engine
 		Camera* GetCurrCamera();
 
 	private:
+		void StartGame();
 		void FixedUpdateGame(int count);
 		int UpdateGame();
 		int LateUpdateGame();

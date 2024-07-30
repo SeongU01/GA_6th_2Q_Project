@@ -13,6 +13,7 @@ namespace Engine
 		virtual ~SceneManager() = default;
 
 	public:
+		void Start();
 		void FixedUpdate();
 		int Update(const float& deltaTime);
 		int LateUpdate(const float& deltaTime);
@@ -22,8 +23,8 @@ namespace Engine
 		bool ChangeScene(Scene* pScene);
 		void ClearObjectList(int layerGroup, const char* listTag);
 		void ClearLayer(int layerGroup);
-		std::list<GameObject*>* GetObjectList(int layerGroup, const char* listTag);
-		GameObject* GetObject(int layerGroup, const char* listTag, const char* objectTag);
+		std::list<GameObject*>* FindObjectList(int layerGroup, const char* listTag);
+		GameObject* FindObject(int layerGroup, const char* listTag, const char* objectTag);
 		bool AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject);
 
 	private:
