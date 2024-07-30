@@ -98,61 +98,6 @@ void Engine::Rigidbody2D::AddVelocity(const XMFLOAT2& velocity)
 	_velocity.y += velocity.y;
 }
 
-bool Engine::Rigidbody2D::IsActiveGravity() const
-{
-	return _isActiveGravity;
-}
-
-XMFLOAT2 Engine::Rigidbody2D::GetVelocity() const
-{
-	return _velocity;
-}
-
-XMFLOAT2 Engine::Rigidbody2D::GetMaxVelocity() const
-{
-	return _maxVelocity;
-}
-
-void Engine::Rigidbody2D::SetTransform(Transform* pTransform)
-{
-	_pTransform = pTransform;
-}
-
-void Engine::Rigidbody2D::SetMass(const float& mass)
-{
-	_mass = mass;
-}
-
-void Engine::Rigidbody2D::SetVelocity(const XMFLOAT2& velocity)
-{
-	_velocity = velocity;
-}
-
-void Engine::Rigidbody2D::SetMaxVelocity(const XMFLOAT2& velocity)
-{
-	_maxVelocity = velocity;
-}
-
-void Engine::Rigidbody2D::SetFrictionCoefficient(const float& coefficient)
-{
-	_frictionCoefficient = coefficient;
-}
-
-void Engine::Rigidbody2D::SetActiveGravity(bool isActive)
-{
-	_isActiveGravity = isActive;
-}
-
-void Engine::Rigidbody2D::SetGravityScale(float scale)
-{
-	_gravity = scale;
-}
-
-void Engine::Rigidbody2D::SetAddAccel(const XMFLOAT2& accel)
-{
-	_addAccel = accel;
-}
-
 void Engine::Rigidbody2D::Free()
 {
 }

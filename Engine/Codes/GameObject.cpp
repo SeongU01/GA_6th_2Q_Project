@@ -40,7 +40,7 @@ void Engine::GameObject::Start()
 
 void Engine::GameObject::FixedUpdate()
 {
-	if (_isFirstInit) return;
+	if (!_isFirstInit) return;
 
 	for (auto& component : _components)
 		component->FixedUpdate();
@@ -48,7 +48,7 @@ void Engine::GameObject::FixedUpdate()
 
 int Engine::GameObject::Update(const float& deltaTime)
 {
-	if (_isFirstInit) return 0;
+	if (!_isFirstInit) return 0;
 
 	for (auto& component : _components)
 		component->Update(deltaTime);
@@ -58,7 +58,7 @@ int Engine::GameObject::Update(const float& deltaTime)
 
 int Engine::GameObject::LateUpdate(const float& deltaTime)
 {
-	if (_isFirstInit) return 0;
+	if (!_isFirstInit) return 0;
 
 	for (auto& component : _components)
 		component->LateUpdate(deltaTime);
@@ -71,14 +71,14 @@ int Engine::GameObject::LateUpdate(const float& deltaTime)
 
 void Engine::GameObject::AddRenderer()
 {
-	if (_isFirstInit) return;
+	if (!_isFirstInit) return;
 
 	_pGameManager->AddRenderGroup(_renderGroup, this);
 }
 
 void Engine::GameObject::Render()
 {
-	if (_isFirstInit) return;
+	if (!_isFirstInit) return;
 
 	for (auto& component : _components)
 	{
@@ -97,24 +97,18 @@ void Engine::GameObject::Render()
 
 void Engine::GameObject::OnCollisionEnter(CollisionInfo& info)
 {
-	if (_isFirstInit) return;
-
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollisionEnter(info);
 }
 
 void Engine::GameObject::OnCollision(CollisionInfo& info)
 {
-	if (_isFirstInit) return;
-
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollision(info);
 }
 
 void Engine::GameObject::OnCollisionExit(CollisionInfo& info)
 {
-	if (_isFirstInit) return;
-
 	for (auto& component : _registeredCollisionEventComponents)
 		component->OnCollisionExit(info);
 }

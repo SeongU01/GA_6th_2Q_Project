@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Codes\MainGame.cpp" />
+    <ClCompile Include="..\Codes\PlayerComponent.cpp" />
+    <ClCompile Include="..\Codes\TestPlayer.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -28,6 +30,8 @@
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
     <ClInclude Include="..\Headers\MainGame.h" />
+    <ClInclude Include="..\Headers\PlayerComponent.h" />
+    <ClInclude Include="..\Headers\TestPlayer.h" />
     <ClInclude Include="..\Headers\TestScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

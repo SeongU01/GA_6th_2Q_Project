@@ -8,6 +8,12 @@
     <ClCompile Include="..\Codes\TestScene.cpp">
       <Filter>02. Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\TestPlayer.cpp">
+      <Filter>03. GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\PlayerComponent.cpp">
+      <Filter>03. GameObject\Player\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -18,6 +24,15 @@
     </Filter>
     <Filter Include="02. Scene">
       <UniqueIdentifier>{2d66ce49-3944-485e-b294-9faa8c293780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject">
+      <UniqueIdentifier>{02ed2ac6-d1c6-4f27-a3c5-91c4d8ec03f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Player">
+      <UniqueIdentifier>{026210b6-8397-4b75-9a10-b9c3628a932a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Player\Component">
+      <UniqueIdentifier>{51d621c7-0648-42e3-b7cf-53eaa1222e74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +50,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TestScene.h">
       <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TestPlayer.h">
+      <Filter>03. GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\PlayerComponent.h">
+      <Filter>03. GameObject\Player\Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

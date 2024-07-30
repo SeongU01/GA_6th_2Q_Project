@@ -40,9 +40,9 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	wcsrtombs_s(nullptr, multibyteFilePath, &widebyteFilePath, lstrlen(widebyteFilePath), nullptr);
 	_pGameManager->Initialize(info);
 
-	Engine::ResourceManager::GetInstance()->LoadTexture(4, (filePath + L"Texture/Level1").c_str());
-	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation/Level1").c_str());
-	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
+	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
+	//Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation/Level1").c_str());
+	//Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 
 	_pGameManager->ChagneScene(TestScene::Create());
 

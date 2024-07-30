@@ -32,4 +32,23 @@ namespace Engine
 	};
 	template <typename T>
 	T* SingleTon<T>::_pInstance = nullptr;
+
+	inline int RandomGeneratorInt(int first, int last)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> random(first, last);
+
+		return random(gen);
+	}
+
+	template<typename T>
+	inline constexpr T RandomGeneratorReal(T first, T last)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_real<T> random(first, last);
+
+		return random(gen);
+	}
 }

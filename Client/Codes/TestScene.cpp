@@ -1,6 +1,8 @@
 #include "TestScene.h"
 #include "GameObject.h"
 #include "Client_Define.h"
+#include "TestPlayer.h"
+#include "RigidBody2D.h"
 
 void TestScene::Free()
 {
@@ -8,6 +10,7 @@ void TestScene::Free()
 
 int TestScene::Update(const float& deltaTime)
 {
+
     return 0;
 }
 
@@ -18,13 +21,12 @@ int TestScene::LateUpdate(const float& deltaTime)
 
 bool TestScene::Initialize()
 {
-    Engine::GameObject* pGameObject = Engine::GameObject::Create();
-    pGameObject->SetRenderGroup((int)RenderGroup::BackGround);
+    TestPlayer* pTestPlayer = TestPlayer::Create();
 
-    pGameObject->GetTransform()->position = Vector3(100.f, 100.f, 100.f);
-    pGameObject->GetTransform()->position += Vector3(100.f, 100.f, 100.f);
-
-    Engine::AddObjectInLayer((int)LayerGroup::Object, "Test", pGameObject);
+    Camera::SetTarget(pTestPlayer->GetTransform());
+    Camera::SetMaxPosition(Vector3(WINCX, WINCY, 0.f));
+    Camera::SetArea(Vector3(WINCX, WINCY, 0.f));
+    Engine::AddObjectInLayer((int)LayerGroup::Object, "Test", pTestPlayer);
 
     return true;
 }

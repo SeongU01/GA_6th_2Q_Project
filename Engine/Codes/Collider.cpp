@@ -20,7 +20,7 @@ void Engine::Collider::LateUpdate(const float& deltaTime)
 #ifdef _DEBUG
 D2D1_RECT_F Engine::Collider::GetColliderRect() const
 {
-	D2D1_RECT_F rect;
+	D2D1_RECT_F rect{};
 	rect.left = _position.x - _scale.x * 0.5f;
 	rect.right = _position.x + _scale.x * 0.5f;
 	rect.top = _position.y - _scale.y * 0.5f;

@@ -35,15 +35,15 @@ namespace Engine
 	public:
 		struct GameDefaultSetting
 		{
-			HINSTANCE hInstance;
-			const TCHAR* appName;
-			int renderGroupSize;
-			int maxSoundGroup;
-			int layerSize;
-			int width;
-			int height;
+			HINSTANCE hInstance{};
+			const TCHAR* appName{};
+			int renderGroupSize{};
+			int maxSoundGroup{};
+			int layerSize{};
+			int width{};
+			int height{};
 			int fiexedCount = 50;
-			bool isFullScreen;
+			bool isFullScreen = false;
 		};
 	private:
 		explicit GameManager();

@@ -27,7 +27,7 @@ namespace Engine
 	public:
 		inline Transform* GetTransform() { return _pTransform; }
 		inline std::vector<Collider*>& GetColliders() { return _colliders; }
-		inline bool IsDead() const { return _isDead; }		
+		inline bool IsDead() const { return _isDead; }
 
 		inline void SetDead() { _isDead = true; }
 		inline void SetDontDestroyObject(bool isActive) { _dontDestroy = isActive; }

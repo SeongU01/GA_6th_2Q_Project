@@ -43,61 +43,6 @@ bool Engine::GraphicManager::SetUpGraphic(HWND hWnd)
 	{
 		return false;
 	}
-	
-	//D3D_FEATURE_LEVEL featureLevels[] = { D3D_FEATURE_LEVEL_11_0 };
-	//D3D_FEATURE_LEVEL featureLevel;
-	//HRESULT hr = D3D11CreateDevice(
-	//	nullptr,
-	//	D3D_DRIVER_TYPE_HARDWARE,
-	//	nullptr,
-	//	D3D11_CREATE_DEVICE_BGRA_SUPPORT,
-	//	featureLevels,
-	//	ARRAYSIZE(featureLevels),
-	//	D3D11_SDK_VERSION,
-	//	&_pD3DDevice,
-	//	&featureLevel,
-	//	&_pD3DContext);
-	//if (FAILED(hr)) {
-	//	// 오류 처리
-	//}
-
-	//// IDXGIDevice를 얻어옵니다
-	//hr = _pD3DDevice.As(&_pDXGIDevice);
-
-	//if (FAILED(hr)) {
-	//	// 오류 처리
-	//}
-
-	//ScratchImage image;
-	//hr = LoadFromDDSFile(L"01.dds", DDS_FLAGS_NONE, nullptr, image);
-	//if (FAILED(hr)) {
-	//	// 오류 처리
-	//}
-
-	//ComPtr<ID3D11Resource> resource;
-	//hr = CreateTexture(_pD3DDevice.Get(), image.GetImages(), image.GetImageCount(), image.GetMetadata(), &resource);
-	//if (FAILED(hr)) {
-	//	// 오류 처리
-	//}
-	//
-	//ComPtr<ID3D11Texture2D> texture;
-	//hr = resource.As(&texture);
-
-	//ComPtr<IDXGISurface> dxgiSurface;
-	//hr = texture.As(&dxgiSurface);
-	//if (FAILED(hr)) {
-	//	// 오류 처리
-	//}
-
-	//D2D1_BITMAP_PROPERTIES1 bitmapProperties = D2D1::BitmapProperties1(
-	//	D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW,
-	//	D2D1::PixelFormat(DXGI_FORMAT_R8G8B8A8_UNORM, D2D1_ALPHA_MODE_PREMULTIPLIED));
-
-	//ComPtr<ID2D1Bitmap1> d2dBitmap;
-	//hr = _pDeviceContext->CreateBitmapFromDxgiSurface(dxgiSurface.Get(), &bitmapProperties, &d2dBitmap);
-	//if (FAILED(hr))
-	//{
-	//}
 
 	return true;
 }

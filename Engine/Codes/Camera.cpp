@@ -30,7 +30,7 @@ void Engine::Camera::Update(const float& deltaTime)
 
 void Engine::Camera::LateUpdate(const float& deltaTime)
 {	
-	Vector3 position = _pTransform->GetPosition();
+	Vector3 position = _pTransform->position;
 	Vector3 max = _maxPosition;
 	Vector3 area = _area * 0.5f;
 
@@ -85,7 +85,7 @@ void Engine::Camera::LateUpdate(const float& deltaTime)
 	}
 
 	_pTransform->SetPosition(position - _offset + _shakePosition);
-	_pTransform->Update(0.f);
+	_pTransform->LateUpdate(0.f);
 }
 
 void Engine::Camera::SetMaxPosition(const Vector3& position)
