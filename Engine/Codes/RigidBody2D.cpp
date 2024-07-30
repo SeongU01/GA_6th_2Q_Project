@@ -4,47 +4,52 @@
 using namespace Engine;
 
 Engine::Rigidbody2D::Rigidbody2D(const char* name)
-	: Component(name), _maxVelocity(XMFLOAT2(1000.f, 1000.f)), _frictionCoefficient(100.f), _gravity(800.f)
+	: Component(name), _maxVelocity(Vector3(1000.f, 1000.f, 0.f)), _frictionCoefficient(100.f), _gravity(800.f)
+{	
+}
+
+void Engine::Rigidbody2D::Initialize()
 {
+	_pTransform = _pOwner->GetTransform();
 }
 
 void Engine::Rigidbody2D::Update(const float& deltaTime)
 {
 	// 힘의 크기
-	XMVECTOR xmForce = XMVector2Length(XMLoadFloat2(&_force));
+	XMVECTOR xmForce = XMVector3Length(_force);
 
 	if (0.f != xmForce.m128_f32[0])
 	{
 		// 힘의 방향
-		XMVECTOR xmDirection = XMVector2Normalize(XMLoadFloat2(&_force));
+		XMVECTOR xmDirection = XMVector3Normalize(_force);
 
 		// 가속도의 크기
 		float accel = xmForce.m128_f32[0] / _mass;
 
 		// 가속도
-		XMStoreFloat2(&_accel, xmDirection * accel);
+		_accel = xmDirection * accel;
 	}
 
 	// 추가 가속도
-	XMStoreFloat2(&_accel, XMLoadFloat2(&_accel) + XMLoadFloat2(&_addAccel));
+	_accel += _addAccel;
 
 	// 속도
-	XMStoreFloat2(&_velocity, XMLoadFloat2(&_velocity) + XMLoadFloat2(&_accel) * deltaTime);
+	_velocity += _accel * deltaTime;
 
 	// 마찰력에의한 반대방향으로의 가속도
 	if (0.f != _velocity.x || 0.f != _velocity.y)
 	{
-		XMVECTOR xmVelocity = XMLoadFloat2(&_velocity);
-		XMVECTOR xmFriction = -XMVector2Normalize(xmVelocity) * _frictionCoefficient * deltaTime;
+		XMVECTOR xmVelocity = _velocity;
+		XMVECTOR xmFriction = -XMVector3Normalize(xmVelocity) * _frictionCoefficient * deltaTime;
 
-		if (XMVector2Length(xmVelocity).m128_f32[0] < XMVector2Length(xmFriction).m128_f32[0])
+		if (XMVector3Length(xmVelocity).m128_f32[0] < XMVector3Length(xmFriction).m128_f32[0])
 		{
 			// 마찰 가속도가 본래 속도보다 더 큰 경우
-			_velocity = { 0.f, 0.f };
+			_velocity = { 0.f, 0.f, 0.f };
 		}
 		else
 		{
-			XMStoreFloat2(&_velocity, xmVelocity + xmFriction);
+			_velocity = xmVelocity + xmFriction;
 		}
 	}
 
@@ -60,12 +65,12 @@ void Engine::Rigidbody2D::Update(const float& deltaTime)
 	}
 
 	// 이동
-	XMVECTOR xmVelocity = XMLoadFloat2(&_velocity);
-	XMVECTOR xmSpeed = XMVector2Length(xmVelocity);
+	XMVECTOR xmVelocity = _velocity;
+	XMVECTOR xmSpeed = XMVector3Length(xmVelocity);
 
 	if (0.f != xmSpeed.m128_f32[0])
 	{
-		XMVECTOR xmDirection = XMVector2Normalize(xmVelocity);
+		XMVECTOR xmDirection = XMVector3Normalize(xmVelocity);
 		_pTransform->position += xmVelocity * deltaTime;
 	}
 
@@ -83,16 +88,16 @@ void Engine::Rigidbody2D::Gravity(const float& deltaTime)
 {
 	if (_isActiveGravity)
 	{
-		SetAddAccel(XMFLOAT2(0.f, _gravity));
+		SetAddAccel(Vector3(0.f, _gravity, 0.f));
 	}
 }
 
-void Engine::Rigidbody2D::AddForce(const XMFLOAT2& force)
+void Engine::Rigidbody2D::AddForce(const Vector3& force)
 {
-	XMStoreFloat2(&_force, XMVectorAdd(XMLoadFloat2(&_force), XMLoadFloat2(&force)));
+	_force += force;
 }
 
-void Engine::Rigidbody2D::AddVelocity(const XMFLOAT2& velocity)
+void Engine::Rigidbody2D::AddVelocity(const Vector3& velocity)
 {
 	_velocity.x += velocity.x;
 	_velocity.y += velocity.y;

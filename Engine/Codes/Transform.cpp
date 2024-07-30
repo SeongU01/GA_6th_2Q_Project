@@ -25,7 +25,6 @@ void Engine::Transform::LateUpdate(const float& deltaTime)
     memcpy(_d2dWorldMatrix.m[0], _worldMatrix.m[0], sizeof(D2D1_VECTOR_2F));
     memcpy(_d2dWorldMatrix.m[1], _worldMatrix.m[1], sizeof(D2D1_VECTOR_2F));
     memcpy(_d2dWorldMatrix.m[2], _worldMatrix.m[3], sizeof(D2D1_VECTOR_2F));
-
 }
 
 void Engine::Transform::Free()

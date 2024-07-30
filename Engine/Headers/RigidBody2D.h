@@ -12,27 +12,28 @@ namespace Engine
 		virtual ~Rigidbody2D() = default;
 
 	public:
+		void Initialize() override;
 		void Update(const float& deltaTime) override;
 
 	public:
-		void AddForce(const XMFLOAT2& force);
-		void AddVelocity(const XMFLOAT2& velocity);
+		void AddForce(const Vector3& force);
+		void AddVelocity(const Vector3& velocity);
 		
 		bool IsActiveGravity() const { return _isActiveGravity; }
-		XMFLOAT2 GetVelocity() const { return _velocity; }
-		XMFLOAT2 GetMaxVelocity() const { return _maxVelocity; }
+		Vector3 GetVelocity() const { return _velocity; }
+		Vector3 GetMaxVelocity() const { return _maxVelocity; }
 		void SetTransform(Transform* pTransform) { _pTransform = pTransform; }
 		void SetMass(const float& mass) { _mass = mass; }
-		void SetVelocity(const XMFLOAT2& velocity) { _velocity = velocity; }
-		void SetMaxVelocity(const XMFLOAT2& velocity) { _maxVelocity = velocity; }
+		void SetVelocity(const Vector3& velocity) { _velocity = velocity; }
+		void SetMaxVelocity(const Vector3& velocity) { _maxVelocity = velocity; }
 		void SetFrictionCoefficient(const float& coefficient) { _frictionCoefficient = coefficient; }
 		void SetActiveGravity(bool isActive) { _isActiveGravity = isActive; }
 		void SetGravityScale(float scale) { _gravity = scale; }
-		void SetAddAccel(const XMFLOAT2& accel) { _addAccel = accel; }
+		void SetAddAccel(const Vector3& accel) { _addAccel = accel; }
 
 	public:
-		__declspec(property(get = GetVelocity, put = SetVelocity)) XMFLOAT2 velocity;
-		__declspec(property(get = GetMaxVelocity, put = SetMaxVelocity)) XMFLOAT2 maxVelocity;
+		__declspec(property(get = GetVelocity, put = SetVelocity)) Vector3 velocity;
+		__declspec(property(get = GetMaxVelocity, put = SetMaxVelocity)) Vector3 maxVelocity;
 		__declspec(property(put = SetFrictionCoefficient)) float friction;
 
 	private:
@@ -42,11 +43,11 @@ namespace Engine
 
 	private:
 		Transform*	_pTransform = nullptr;
-		XMFLOAT2	_force{};					// 크기, 방향
-		XMFLOAT2	_accel{};					// 가속도
-		XMFLOAT2	_addAccel{};				// 추가가속도
-		XMFLOAT2	_velocity{};				// 속도
-		XMFLOAT2	_maxVelocity{};				// 최대 속도
+		Vector3		_force{};					// 크기, 방향
+		Vector3		_accel{};					// 가속도
+		Vector3		_addAccel{};				// 추가가속도
+		Vector3		_velocity{};				// 속도
+		Vector3		_maxVelocity{};				// 최대 속도
 		
 		float		_mass = 1.f;				// 질량
 		float		_frictionCoefficient = 1.f;	// 마찰계수

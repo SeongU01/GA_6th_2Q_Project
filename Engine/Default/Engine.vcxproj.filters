@@ -94,6 +94,9 @@
     <ClCompile Include="..\Codes\TextRenderer.cpp">
       <Filter>Component\TextRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\MonoBehavior.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">
@@ -224,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\ICollisionNotify.h">
       <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\MonoBehavior.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

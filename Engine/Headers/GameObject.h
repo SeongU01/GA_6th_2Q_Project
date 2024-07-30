@@ -65,7 +65,7 @@ namespace Engine
 		{
 			T* pComponent = new T(name);
 			pComponent->_pOwner = this;
-			pComponent->Awake();
+			pComponent->Initialize();
 			_components.push_back(pComponent);
 
 			return pComponent;

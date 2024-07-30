@@ -38,9 +38,9 @@ namespace Engine
 		static Renderer* Create();
 
 	private:
-		RenderGroupInfo			_info;
-		RenderGroup				_renderGroup;
-		SortInfo				_sortInfo;
+		RenderGroupInfo			_info{};
+		RenderGroup				_renderGroup{};
+		SortInfo				_sortInfo{};
 		Camera*					_pCurrCamera = nullptr;
 		bool					_isSetUp = false;
 	};

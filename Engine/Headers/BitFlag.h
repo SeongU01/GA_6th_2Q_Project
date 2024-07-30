@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	class BitFlag final : public Component
+	class BitFlag : public Component
 	{	
 	public:
 		explicit BitFlag(const char* name);

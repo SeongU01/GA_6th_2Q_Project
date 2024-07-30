@@ -13,6 +13,7 @@ namespace Engine
 		virtual ~Component() = default;
 
 	public:
+		virtual void Initialize() {}
 		virtual void Awake() {}
 		virtual void Start() {}
 		virtual void FixedUpdate() {}

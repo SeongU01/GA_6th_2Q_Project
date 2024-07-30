@@ -49,6 +49,7 @@
     <ClCompile Include="..\Codes\Timer.cpp" />
     <ClCompile Include="..\Codes\Transform.cpp" />
     <ClCompile Include="..\Codes\WinApp.cpp" />
+    <ClCompile Include="..\Headers\MonoBehavior.cpp" />
     <ClCompile Include="..\Headers\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +76,7 @@
     <ClInclude Include="..\Headers\ICollisionNotify.h" />
     <ClInclude Include="..\Headers\InputManager.h" />
     <ClInclude Include="..\Headers\Layer.h" />
+    <ClInclude Include="..\Headers\MonoBehavior.h" />
     <ClInclude Include="..\Headers\Renderer.h" />
     <ClInclude Include="..\Headers\ResourceManager.h" />
     <ClInclude Include="..\Headers\Rigidbody2D.h" />

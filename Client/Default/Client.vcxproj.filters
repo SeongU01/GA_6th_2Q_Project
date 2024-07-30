@@ -11,8 +11,8 @@
     <ClCompile Include="..\Codes\TestPlayer.cpp">
       <Filter>03. GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\PlayerComponent.cpp">
-      <Filter>03. GameObject\Player\Component</Filter>
+    <ClCompile Include="..\Codes\Player.cpp">
+      <Filter>03. GameObject\Player\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,7 +31,7 @@
     <Filter Include="03. GameObject\Player">
       <UniqueIdentifier>{026210b6-8397-4b75-9a10-b9c3628a932a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Player\Component">
+    <Filter Include="03. GameObject\Player\Script">
       <UniqueIdentifier>{51d621c7-0648-42e3-b7cf-53eaa1222e74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -54,8 +54,8 @@
     <ClInclude Include="..\Headers\TestPlayer.h">
       <Filter>03. GameObject\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\PlayerComponent.h">
-      <Filter>03. GameObject\Player\Component</Filter>
+    <ClInclude Include="..\Headers\Player.h">
+      <Filter>03. GameObject\Player\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

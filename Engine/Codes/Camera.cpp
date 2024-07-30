@@ -107,6 +107,9 @@ void Engine::Camera::CameraShake(float shakeTime, float shakePower)
 
 const D2D1_MATRIX_3X2_F& Engine::Camera::GetCameraMatrix()
 {
+	if (nullptr == _pTransform)
+		return D2D1::Matrix3x2F::Identity();
+
 	return _pTransform->GetWorldMatrix();
 }
 
