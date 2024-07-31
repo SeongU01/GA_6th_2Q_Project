@@ -124,13 +124,3 @@ struct Vector3 : public XMFLOAT3
 		return *this;
 	}
 };
-
-namespace Engine
-{
-	class Collider;
-}
-struct CollisionInfo
-{
-	Engine::Collider* other = nullptr;
-	Engine::Collider* itSelf = nullptr;
-};

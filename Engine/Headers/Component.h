@@ -5,6 +5,7 @@ namespace Engine
 {
 	class GameObject;
 	class Collider;
+	class Transform;
 	class Component abstract : public Base
 	{
 		friend class GameObject;
@@ -13,7 +14,6 @@ namespace Engine
 		virtual ~Component() = default;
 
 	public:
-		virtual void Initialize() {}
 		virtual void Awake() {}
 		virtual void Start() {}
 		virtual void FixedUpdate() {}
@@ -21,18 +21,19 @@ namespace Engine
 		virtual void LateUpdate(const float& deltaTime) {}
 		virtual void Render() {}
 
+	public:
+		Transform* GetTransform();
+		_declspec(property(get = GetTransform)) Transform* transform;
+
 	protected:
-		template <typename T>
-		T* AddComponent(const char* name);
+		template <typename T, typename... Args>
+		T* AddComponent(Args&&... args);
 	
 		template<typename T>
 		T* GetComponent();
 
 		template<typename T>
 		T* GetComponent(const char* name);
-
-		template<>
-		Collider* GetComponent(const char* name);
 
 		// Base을(를) 통해 상속됨
 		void Free() = 0;
@@ -43,10 +44,10 @@ namespace Engine
 }
 
 #include "GameObject.h"
-template<typename T>
-inline T* Engine::Component::AddComponent(const char* name)
+template <typename T, typename... Args>
+inline T* Engine::Component::AddComponent(Args&&... args)
 {
-	return _pOwner->AddComponent<T>(name);
+	return _pOwner->AddComponent<T>(std::forward<Args>(args)...);
 }
 
 template<typename T>
@@ -58,11 +59,5 @@ inline T* Engine::Component::GetComponent()
 template<typename T>
 inline T* Engine::Component::GetComponent(const char* name)
 {	
-	return _pOwner->GetComponent(name);
-}
-
-template<>
-inline Engine::Collider* Engine::Component::GetComponent(const char* name)
-{
-	return _pOwner->GetComponent<Collider>(name);
+	return _pOwner->GetComponent<T>(name);
 }

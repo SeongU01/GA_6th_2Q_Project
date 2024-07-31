@@ -8,11 +8,6 @@ Engine::Rigidbody2D::Rigidbody2D(const char* name)
 {	
 }
 
-void Engine::Rigidbody2D::Initialize()
-{
-	_pTransform = _pOwner->GetTransform();
-}
-
 void Engine::Rigidbody2D::Update(const float& deltaTime)
 {
 	// 힘의 크기
@@ -71,7 +66,7 @@ void Engine::Rigidbody2D::Update(const float& deltaTime)
 	if (0.f != xmSpeed.m128_f32[0])
 	{
 		XMVECTOR xmDirection = XMVector3Normalize(xmVelocity);
-		_pTransform->position += xmVelocity * deltaTime;
+		transform->position += xmVelocity * deltaTime;
 	}
 
 	// 힘 초기화

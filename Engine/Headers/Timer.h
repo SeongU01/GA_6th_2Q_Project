@@ -20,18 +20,18 @@ namespace Engine
         void Update(const float& deltaTime) override;
 
     public:
-        void Initialize(const int groupSize) { _vecTimer.resize(groupSize); }
+        void Initialize(const int groupSize) { _timers.resize(groupSize); }
         bool IsOverTime(int group, float time);
         bool IsBetweenTime(int group, float first, float last);
-        void SetActive(int group, bool isActive) { _vecTimer[group].isActive = isActive; }
-        void SetElapsed(int group, float elapsed) { _vecTimer[group].elapsed = elapsed; }
-        TIMER& operator[](int index) { return _vecTimer[index]; }
+        void SetActive(int group, bool isActive) { _timers[group].isActive = isActive; }
+        void SetElapsed(int group, float elapsed) { _timers[group].elapsed = elapsed; }
+        TIMER& operator[](int index) { return _timers[index]; }
 
     private:
         // CComponent을(를) 통해 상속됨
         void Free() override;
 
     private:
-        std::vector<TimerInfo> _vecTimer;
+        std::vector<TimerInfo> _timers;
     };
 }

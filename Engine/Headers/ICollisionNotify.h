@@ -1,7 +1,15 @@
 #pragma once
 
 namespace Engine
-{
+{	
+	class Collider;
+
+	struct CollisionInfo
+	{
+		Collider* other = nullptr;
+		Collider* itSelf = nullptr;
+	};
+
 	class ICollisionNotify
 	{
 	public:

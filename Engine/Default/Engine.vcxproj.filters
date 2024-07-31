@@ -97,6 +97,9 @@
     <ClCompile Include="..\Headers\MonoBehavior.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">

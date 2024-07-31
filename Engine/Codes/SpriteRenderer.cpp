@@ -9,6 +9,10 @@ using namespace Engine;
 Engine::SpriteRenderer::SpriteRenderer(const char* name)
 	: Component(name)
 {
+}
+
+void Engine::SpriteRenderer::Awake()
+{
 	_pDeviceContext = GraphicManager::GetInstance()->GetDeviceContext();
 	_pSolidColorBrush = GraphicManager::GetInstance()->GetSolidColorBrush();
 	AddShader<ShaderColor>();

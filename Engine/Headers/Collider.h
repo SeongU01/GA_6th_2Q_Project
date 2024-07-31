@@ -37,8 +37,6 @@ namespace Engine
 		Vector3			_scale;
 		Vector3			_position;
 		Vector3			_offset;
-
-		Transform*		_pTransform		= nullptr;
 		_uint			_ID				= 0;
 
 		static _uint	g_ID;

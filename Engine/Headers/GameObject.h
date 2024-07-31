@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include "Texture.h"
+#include "ICollisionNotify.h"
 
 struct CollisionInfo;
 
@@ -12,7 +13,7 @@ namespace Engine
 	class Component;
 	class SpriteRenderer;
 	class GameManager;
-	class ICollisionNotify;
+	
 	class GameObject : public Base
 	{
 		friend class GameManager;
@@ -45,9 +46,6 @@ namespace Engine
 			return nullptr;
 		}
 
-		template <>
-		Collider* GetComponent(const char* name);
-
 		template<typename T>
 		T* GetComponent()
 		{
@@ -60,19 +58,22 @@ namespace Engine
 			return nullptr;
 		}
 
-		template<typename T>
-		T* AddComponent(const char* name)
+		template<typename T, typename... Args>
+		T* AddComponent(Args&&... args)
 		{
-			T* pComponent = new T(name);
+			T* pComponent = new T(std::forward<Args>(args)...);
 			pComponent->_pOwner = this;
-			pComponent->Initialize();
+			pComponent->Awake();
 			_components.push_back(pComponent);
 
+			if constexpr (std::is_base_of_v<ICollisionNotify, T>)
+				_registeredCollisionEventComponents.push_back(pComponent);
+
+			if constexpr (std::is_base_of_v<Collider, T>)
+				_colliders.push_back(pComponent);
+			
 			return pComponent;
 		}
-
-		template <>
-		Collider* AddComponent(const char* name);
 
 	public:
 		static GameObject* Create();

@@ -28,12 +28,7 @@ void Engine::GameObject::Start()
 	if (_isFirstInit) return;
 
 	for (auto& component : _components)
-	{
 		component->Start();
-		ICollisionNotify* pNotify = dynamic_cast<ICollisionNotify*>(component);
-		if (nullptr != pNotify)
-			_registeredCollisionEventComponents.push_back(pNotify);
-	}
 
 	_isFirstInit = true;
 }
@@ -117,35 +112,9 @@ void Engine::GameObject::Free()
 {
 	for (auto& component : _components)
 		SafeRelease(component);
-
-	for (auto& collider : _colliders)
-		SafeRelease(collider);
 	
 	_components.clear();
 	_components.shrink_to_fit();
 	_colliders.clear();
-}
-
-template <>
-Engine::Collider* Engine::GameObject::GetComponent(const char* name)
-{
-	for (auto& collider : _colliders)
-	{
-		if (*collider == name)
-			return collider;
-	}
-
-	return nullptr;
-}
-
-template <>
-Engine::Collider* Engine::GameObject::AddComponent(const char* name)
-{
-	Collider* pCollider = new Collider(name);
-	pCollider->_pOwner = this;
-	pCollider->_pTransform = _pTransform;
-	pCollider->Awake();
-	_colliders.push_back(pCollider);
-
-	return pCollider;
+	_colliders.shrink_to_fit();
 }

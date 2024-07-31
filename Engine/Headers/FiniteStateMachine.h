@@ -7,7 +7,7 @@ namespace Engine
     class FiniteStateMachine : public Component
     {
     public:
-        explicit FiniteStateMachine(const char* name);
+        explicit FiniteStateMachine(const char* name, const int size);
     private:
         virtual ~FiniteStateMachine() = default;
 
@@ -20,10 +20,6 @@ namespace Engine
     public:
         State* GetCurrState(const int& state) { return _states[state]; }
         int GetCurrState() const { return _currStateIndex; }
-        void Initialize(const int& size)
-        {
-            _states.resize(size);
-        }
         void AddState(const int& group, State* pState)
         {
             if (nullptr == pState)

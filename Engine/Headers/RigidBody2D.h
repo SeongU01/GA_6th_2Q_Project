@@ -12,7 +12,6 @@ namespace Engine
 		virtual ~Rigidbody2D() = default;
 
 	public:
-		void Initialize() override;
 		void Update(const float& deltaTime) override;
 
 	public:
@@ -22,7 +21,6 @@ namespace Engine
 		bool IsActiveGravity() const { return _isActiveGravity; }
 		Vector3 GetVelocity() const { return _velocity; }
 		Vector3 GetMaxVelocity() const { return _maxVelocity; }
-		void SetTransform(Transform* pTransform) { _pTransform = pTransform; }
 		void SetMass(const float& mass) { _mass = mass; }
 		void SetVelocity(const Vector3& velocity) { _velocity = velocity; }
 		void SetMaxVelocity(const Vector3& velocity) { _maxVelocity = velocity; }
@@ -42,7 +40,6 @@ namespace Engine
 		void Free() override;
 
 	private:
-		Transform*	_pTransform = nullptr;
 		Vector3		_force{};					// 크기, 방향
 		Vector3		_accel{};					// 가속도
 		Vector3		_addAccel{};				// 추가가속도

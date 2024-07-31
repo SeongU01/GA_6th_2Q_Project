@@ -3,9 +3,10 @@
 
 using namespace Engine;
 
-Engine::FiniteStateMachine::FiniteStateMachine(const char* name)
+Engine::FiniteStateMachine::FiniteStateMachine(const char* name, const int size)
 	: Component(name)
 {
+	_states.resize(size);
 }
 
 void Engine::FiniteStateMachine::Update(const float& deltaTime)

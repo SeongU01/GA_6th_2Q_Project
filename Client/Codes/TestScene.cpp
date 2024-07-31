@@ -24,8 +24,8 @@ bool TestScene::Initialize()
     TestPlayer* pTestPlayer = TestPlayer::Create();
 
     Camera::SetTarget(pTestPlayer->GetTransform());
-    Camera::SetMaxPosition(Vector3(WINCX * 2.f, WINCY * 2.f, 0.f));
     Camera::SetArea(Vector3(WINCX, WINCY, 0.f));
+    Camera::SetMaxPosition(Vector3(WINCX * 2.f, WINCY * 2.f, 0.f));
 
     Engine::AddObjectInLayer((int)LayerGroup::Object, "Test", pTestPlayer);
 

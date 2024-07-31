@@ -35,6 +35,7 @@ namespace Engine
         __declspec(property(get = GetRotation, put = SetRotation)) Vector3 rotation;
         __declspec(property(get = GetScale, put = SetScale)) Vector3 scale;
         __declspec(property(get = GetWorldMatrix)) D2D1_MATRIX_3X2_F worldMatrix;
+        __declspec(property(get = GetXMWorldMatrix)) XMFLOAT4X4 xmWorldMatrix;
 
     public:
         void LateUpdate(const float& deltaTime) override;
