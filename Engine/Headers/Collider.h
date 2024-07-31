@@ -22,9 +22,9 @@ namespace Engine
 		D2D1_RECT_F GetColliderRect() const;
 #endif
 		GameObject* GetOwner() { return _pOwner; }
-		Vector3 GetScale() const { return _scale; }
-		Vector3 GetPosition() const { return _position; }
-		Vector3 GetOffset() const { return _offset; }
+		const Vector3& GetScale() const { return _scale; }
+		const Vector3& GetPosition() const { return _position; }
+		const Vector3& GetOffset() const { return _offset; }
 
 		_uint GetID() const { return _ID; }
 		void SetScale(const Vector3& scale) { _scale = scale; }

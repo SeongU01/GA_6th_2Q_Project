@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include "GameObject.h"
+#include "Collider.h"
 
 using namespace Engine;
 

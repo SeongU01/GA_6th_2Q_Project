@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "TextRenderer.h"
+#include "Collider.h"
 #include "ICollisionNotify.h"
 #include "GameManager.h"
 

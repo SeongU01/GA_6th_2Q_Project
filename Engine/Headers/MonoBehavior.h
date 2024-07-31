@@ -20,9 +20,9 @@ namespace Engine
 
 	public:
 		// ICollisionNotify을(를) 통해 상속됨
-		void OnCollisionEnter(CollisionInfo& info) override;
-		void OnCollision(CollisionInfo& info) override;
-		void OnCollisionExit(CollisionInfo& info) override;
+		virtual void OnCollisionEnter(CollisionInfo& info) {};
+		virtual void OnCollision(CollisionInfo& info) {};
+		virtual void OnCollisionExit(CollisionInfo& info) {};
 
 	public:
 		// Component을(를) 통해 상속됨
