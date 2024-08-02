@@ -24,7 +24,7 @@ bool TestScene::Initialize()
   Engine::AddObjectInLayer
   (
     (int)LayerGroup::Tile, "Tile",
-    Map::Create(Vector3(10.f, 10.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(300.f,100.f,0.f))
+    Map::Create(Vector3(20.f, 8.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(100.f,100.f,0.f))
   );
     return true;
 }
