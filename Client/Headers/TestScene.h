@@ -1,11 +1,6 @@
 #pragma once
 #include "Scene.h"
 
-namespace Engine
-{
-	class GameObject;
-}
-
 class TestScene : public Engine::Scene
 {
 private:
@@ -21,8 +16,5 @@ public:
 
 public:
 	static TestScene* Create();
-
-private:
-	Engine::GameObject* _pObject = nullptr;
 };
 

@@ -1,8 +1,8 @@
 #include "TestScene.h"
-#include "GameObject.h"
 #include "Client_Define.h"
-#include "TestPlayer.h"
-#include "RigidBody2D.h"
+
+//object
+#include "Map.h"
 
 void TestScene::Free()
 {
@@ -21,14 +21,11 @@ int TestScene::LateUpdate(const float& deltaTime)
 
 bool TestScene::Initialize()
 {
-    TestPlayer* pTestPlayer = TestPlayer::Create();
-
-    Camera::SetTarget(pTestPlayer->GetTransform());
-    Camera::SetArea(Vector3(WINCX, WINCY, 0.f));
-    Camera::SetMaxPosition(Vector3(WINCX * 2.f, WINCY * 2.f, 0.f));
-
-    Engine::AddObjectInLayer((int)LayerGroup::Object, "Test", pTestPlayer);
-
+  Engine::AddObjectInLayer
+  (
+    (int)LayerGroup::Tile, "Tile",
+    Map::Create(Vector3(10.f, 10.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(300.f,100.f,0.f))
+  );
     return true;
 }
 

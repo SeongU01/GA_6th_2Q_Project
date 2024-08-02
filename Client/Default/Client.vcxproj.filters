@@ -14,6 +14,15 @@
     <ClCompile Include="..\Codes\Player.cpp">
       <Filter>03. GameObject\Player\Script</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Grid.cpp">
+      <Filter>03. GameObject\GridObject\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Tile.cpp">
+      <Filter>03. GameObject\GridObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Map.cpp">
+      <Filter>03. GameObject\GridObject\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -33,6 +42,18 @@
     </Filter>
     <Filter Include="03. GameObject\Player\Script">
       <UniqueIdentifier>{51d621c7-0648-42e3-b7cf-53eaa1222e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject">
+      <UniqueIdentifier>{6f005d45-7c21-4a38-8b6a-e82054bbb8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Grid">
+      <UniqueIdentifier>{3593870c-7ced-4b07-9e64-8c04a4506453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Tile">
+      <UniqueIdentifier>{409166b9-bc05-47e6-bc7f-3df619ac18e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Map">
+      <UniqueIdentifier>{2b9cd7f9-af6a-4c99-9646-fbd3cb0d5e52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +77,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Player.h">
       <Filter>03. GameObject\Player\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Grid.h">
+      <Filter>03. GameObject\GridObject\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Tile.h">
+      <Filter>03. GameObject\GridObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Map.h">
+      <Filter>03. GameObject\GridObject\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
