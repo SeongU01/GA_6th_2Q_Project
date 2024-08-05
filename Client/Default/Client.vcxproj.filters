@@ -29,7 +29,7 @@
     <ClCompile Include="..\Codes\Canvas.cpp">
       <Filter>06. UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\MainUHD.cpp">
+    <ClCompile Include="..\Codes\MainHUD.cpp">
       <Filter>06. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Card.cpp">
@@ -37,6 +37,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>04. System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerSystem.cpp">
+      <Filter>04. System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerUI.cpp">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,12 @@
     <Filter Include="06. UI\HUD">
       <UniqueIdentifier>{077f90b4-1aef-4510-b4e9-4db28b76ecd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\UIObject">
+      <UniqueIdentifier>{e51e9a94-3c56-465c-9e57-ad0415818ac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\UIObject\Timer">
+      <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -120,7 +132,7 @@
     <ClInclude Include="..\Codes\UI.h">
       <Filter>06. UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\MainUHD.h">
+    <ClInclude Include="..\Codes\MainHUD.h">
       <Filter>06. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Card.h">
@@ -128,6 +140,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>04. System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TimerSystem.h">
+      <Filter>04. System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TimerUI.h">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

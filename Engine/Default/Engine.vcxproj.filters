@@ -100,6 +100,7 @@
     <ClCompile Include="..\Headers\Component.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\Headers\Export.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">

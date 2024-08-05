@@ -1,6 +1,6 @@
 #pragma once
 #include "Scene.h"
-
+#include "GameObject.h"
 class TestScene : public Engine::Scene
 {
 private:
@@ -16,5 +16,8 @@ public:
 
 public:
 	static TestScene* Create();
+private:
+	Engine::GameObject* _timeObj;
+	wchar_t _buffer[32];
 };
 

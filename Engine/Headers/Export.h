@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "ResourceManager.h"
+#include "TimeManager.h"
 
 namespace Engine
 {
@@ -36,7 +37,11 @@ namespace Resource
 namespace Time
 {
 	// TimeMgr
-	inline void SetSlowTime(float rate, float time);
+	inline void SetSumTime(float time);
+	inline void SetSlowTime(float rate);
+	inline double GetSumTime();
+	inline float GetDeltaTime();
+	inline bool FrameLock(float frame);
 	#include "Export_Time.inl"
 }
 

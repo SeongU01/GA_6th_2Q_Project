@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "TimerSystem.h"
 
 class Canvas : public Engine::GameObject
 {

@@ -19,7 +19,7 @@ using namespace Engine;
 Engine::GameManager::GameManager()
 {
     _pInputMgr = InputManager::GetInstance();
-    _pTimeMgr = TimeManager::Create();
+    _pTimeMgr = TimeManager::GetInstance();
     _pResourceMgr = ResourceManager::GetInstance();
     _pSoundMgr = SoundManager::GetInstance();
     _pGraphicMgr = GraphicManager::GetInstance();
@@ -145,9 +145,9 @@ bool Engine::GameManager::Initialize(const GameDefaultSetting& info)
     return true;
 }
 
-void Engine::GameManager::SetSlowTime(float rate, float time)
+void Engine::GameManager::SetSlowTime(float rate)
 {
-    _pTimeMgr->SetSlowTime(rate, time);
+    _pTimeMgr->SetSlowTime(rate);
 }
 
 bool Engine::GameManager::ChagneScene(Scene* pScene)

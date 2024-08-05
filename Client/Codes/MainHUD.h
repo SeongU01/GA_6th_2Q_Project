@@ -2,18 +2,18 @@
 #include "MonoBehavior.h"
 
 class UI;
-class MainUHD : public Engine::MonoBehavior
+class MainHUD : public Engine::MonoBehavior
 {
 public:
-	explicit MainUHD();
+	explicit MainHUD();
 private:
-	virtual ~MainUHD() = default;
+	virtual ~MainHUD() = default;
 public:
 	void Awake() override;
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
-	std::vector<UI*> _UIs;
+	//std::vector<UI*> _UIs;
 };
 

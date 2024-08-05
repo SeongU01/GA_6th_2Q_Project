@@ -1,57 +1,45 @@
-#include "TimeManager.h"
+ #include "TimeManager.h"
 
 using namespace Engine;
 
 bool TimeManager::Initialize()
 {
-	_oldTime = GetTickCount64();
-	_currTime = GetTickCount64(); 
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+    _frequency = double(frequency.QuadPart);
+    QueryPerformanceCounter(&_oldTime);
+    QueryPerformanceCounter(&_currTime);
 
-	return true;
+    return true;
 }
 
-TimeManager* TimeManager::Create()
+void Engine::TimeManager::SetSlowTime(float rate)
 {
-	TimeManager* pInstance = new TimeManager;
-
-	if (pInstance->Initialize())
-		return pInstance;
-
-	SafeRelease(pInstance);
-	return nullptr;
-}
-
-void Engine::TimeManager::SetSlowTime(float rate, float time)
-{
-	_elapsed = 0;
-	_slowRate = rate;
-	_slowTime = _ullong(time * 1000); 
+    _slowRate = rate;
 }
 
 void TimeManager::Update()
 {
-	_oldTime = _currTime;
-	_currTime = GetTickCount64();
-	_deltaTime = _currTime - _oldTime;
-	_globalDeltaTime = _deltaTime;
+    _oldTime = _currTime;
+    QueryPerformanceCounter(&_currTime);
 
-	_elapsed += _globalDeltaTime;
+    _globalDeltaTime = (_currTime.QuadPart - _oldTime.QuadPart) / _frequency ;
+    _deltaTime = _globalDeltaTime;
 
-	if (_elapsed >= _slowTime) _slowRate = 1.f;
+    _elapsed += _globalDeltaTime;
 }
 
 bool TimeManager::FrameLock(float frame)
 {
-	_fixTime = _deltaTime;
-	_fixFrame = _ullong(1000 / frame);
+    _fixTime = _deltaTime;
+    _fixFrame = 1000.0 / frame;
 
-	if (_fixFrame <= _fixTime)
-	{
-		_fixTime = 0;
-		return true;
-	}
-
-	return false;
+    if (_fixFrame <= _fixTime)
+    {
+        _fixTime = 0;
+        return true;
+    }
+    return false;
 }
 
 void TimeManager::Free()

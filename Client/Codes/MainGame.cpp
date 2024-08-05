@@ -1,6 +1,7 @@
 #include "MainGame.h"
 #include "TestScene.h"
 
+#include "TimeManager.h"
 #include "GameManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
@@ -41,10 +42,10 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	_pGameManager->Initialize(info);
 
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
-	//Engine::ResourceManager::GetInstance()->LoadAnimation(3, (filePath + L"Texture").c_str());/
+	//Engine::ResourceManager::GetInstance()->LoadAnimation(3, (filePath + L"Texture").c_str());
 	//Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-
 	_pGameManager->ChagneScene(TestScene::Create());
+
 
 	return true;
 }

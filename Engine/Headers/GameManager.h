@@ -55,7 +55,7 @@ namespace Engine
 		bool Initialize(const GameDefaultSetting& info);
 
 		// TimeMgr
-		void SetSlowTime(float rate, float time);
+		void SetSlowTime(float rate);
 
 		// SceneMgr
 		bool ChagneScene(Scene* pScene);

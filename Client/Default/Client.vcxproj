@@ -24,18 +24,22 @@
     <ClCompile Include="..\Codes\CardSystem.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\MainGame.cpp" />
-    <ClCompile Include="..\Codes\MainUHD.cpp" />
+    <ClCompile Include="..\Codes\MainHUD.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\TestPlayer.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="..\Codes\Tile.cpp" />
+    <ClCompile Include="..\Codes\TimerSystem.cpp" />
+    <ClCompile Include="..\Codes\TimerUI.cpp" />
     <ClCompile Include="..\Codes\UI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Codes\Canvas.h" />
-    <ClInclude Include="..\Codes\MainUHD.h" />
+    <ClInclude Include="..\Codes\MainHUD.h" />
+    <ClInclude Include="..\Codes\TimerSystem.h" />
+    <ClInclude Include="..\Codes\TimerUI.h" />
     <ClInclude Include="..\Codes\UI.h" />
     <ClInclude Include="..\Headers\Card.h" />
     <ClInclude Include="..\Headers\CardSystem.h" />

@@ -1,14 +1,11 @@
 #include "UI.h"
 
 // Component
-#include "Animation.h"
-
 #include "Client_Define.h"
 
 const D2D1_SIZE_F& UI::GetImageSize()
 {
     //이미지 사이즈를 가져오기
-    _imageSize = _pAnimation->GetImage(_pAnimation->GetCurrFrame())->GetSize();
     return _imageSize;
 }
 
@@ -18,11 +15,6 @@ void UI::SetPosition(const Vector3& position)
     _info.position = position;
 }
 
-void UI::SetOffsetPosition(const Vector3& position)
-{
-    //오프셋 조정
-    _offsetPosition = position;
-}
 
 void UI::SetScale(const Vector3& scale)
 {
@@ -33,7 +25,7 @@ void UI::SetScale(const Vector3& scale)
 void UI::SetScaleRate(float rate)
 {
     //반전값 조정
-    _info.scale.x = _originScale.x * rate;
+    _info.scale.x = _pTransform->GetScale().x * rate;
     _scaleRate = rate;
 }
 
@@ -43,12 +35,6 @@ void UI::SetRotation(float angle)
     _rotation = angle;
 }
 
-void UI::SetFixFrame(bool isActive, int fixFrame)
-{
-    //??
-    _info.isFixFrame = isActive;
-    _info.fixFrame = fixFrame;
-}
 
 void UI::AddRotation(float angle)
 {
@@ -73,7 +59,7 @@ void UI::Initialize(UIInfo& info)
 
     _pTransform->SetParent(_info.pParent);
     _pTransform->SetPosition(_info.position);
-    _originScale = _info.scale;
+    _pTransform->SetScale(_info.scale);
     SetRenderGroup((int)RenderGroup::UI);
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
     _pSpriteRenderer->NotAffectCamera();

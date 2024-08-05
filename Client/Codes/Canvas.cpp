@@ -1,12 +1,13 @@
 #include "Canvas.h"
-#include "MainUHD.h"
+#include "MainHUD.h"
 void Canvas::Initialize(const char* name)
 {
 	if (name == "Main") {
-		AddComponent<MainUHD>();
+		AddComponent<MainHUD>();
 	}
 	SetName(name);
-	SetRenderGroup(1);//??
+	SetRenderGroup(0);//??
+
 }
 
 
