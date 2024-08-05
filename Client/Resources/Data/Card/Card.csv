@@ -1,2 +1,2 @@
-﻿ID,Options…,
-1,1,2
+﻿Card_ID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,String_Title,Card_Image,Card_Index,Card_Type,Target_Type,Target_Num,Options…,
+1,1,5,1,1,테스트,0,0,0,0,0,1,2
