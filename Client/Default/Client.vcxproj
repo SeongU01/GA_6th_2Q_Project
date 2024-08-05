@@ -19,16 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\Canvas.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\MainGame.cpp" />
+    <ClCompile Include="..\Codes\MainUHD.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\TestPlayer.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="..\Codes\Tile.cpp" />
+    <ClCompile Include="..\Codes\UI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Codes\Canvas.h" />
+    <ClInclude Include="..\Codes\MainUHD.h" />
+    <ClInclude Include="..\Codes\UI.h" />
     <ClInclude Include="..\Headers\Client_Define.h" />
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
