@@ -24,7 +24,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::GameManager::GameDefaultSetting info;
 
 	info.hInstance = hInstance;
-	info.appName = L"Nine Sols";
+	info.appName = L"Archtype:0";
 	info.width = WINCX;
 	info.height = WINCY;
 	info.layerSize = (int)LayerGroup::End;
