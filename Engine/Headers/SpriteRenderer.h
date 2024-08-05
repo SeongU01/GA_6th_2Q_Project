@@ -91,7 +91,6 @@ namespace Engine
 
 	private:
 		D2D1_MATRIX_3X2_F		_cameraMatrix;
-		Transform*				_pTransform = nullptr;
 		Animation*				_pAnimation = nullptr;
 		Texture*				_pTexture = nullptr;
 
