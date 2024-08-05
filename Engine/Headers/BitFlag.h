@@ -6,7 +6,7 @@ namespace Engine
 	class BitFlag : public Component
 	{	
 	public:
-		explicit BitFlag(const char* name);
+		explicit BitFlag(const wchar_t* name);
 	private:
 		virtual ~BitFlag() = default;
 

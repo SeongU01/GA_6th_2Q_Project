@@ -86,7 +86,7 @@ bool Engine::SceneManager::ChangeScene(Scene* pScene)
 	return false;
 }
 
-void Engine::SceneManager::ClearObjectList(int layerGroup, const char* listTag)
+void Engine::SceneManager::ClearObjectList(int layerGroup, const wchar_t* listTag)
 {
 	_layers[layerGroup]->ClearObjectList(listTag);
 }
@@ -96,17 +96,17 @@ void Engine::SceneManager::ClearLayer(int layerGroup)
 	_layers[layerGroup]->ClearAllObjectList();
 }
 
-std::list<GameObject*>* Engine::SceneManager::FindObjectList(int layerGroup, const char* listTag)
+std::list<GameObject*>* Engine::SceneManager::FindObjectList(int layerGroup, const wchar_t* listTag)
 {
 	return _layers[layerGroup]->FindObjectList(listTag);
 }
 
-GameObject* Engine::SceneManager::FindObject(int layerGroup, const char* listTag, const char* objectTag)
+GameObject* Engine::SceneManager::FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag)
 {
 	return _layers[layerGroup]->FindObject(listTag, objectTag);
 }
 
-bool Engine::SceneManager::AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject)
+bool Engine::SceneManager::AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject)
 {
 	if (_layers.empty())
 		return false;

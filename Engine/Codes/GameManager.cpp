@@ -155,12 +155,12 @@ bool Engine::GameManager::ChagneScene(Scene* pScene)
     return _pSceneMgr->ChangeScene(pScene);
 }
 
-std::list<GameObject*>* Engine::GameManager::FindObjectList(int layerGroup, const char* listTag)
+std::list<GameObject*>* Engine::GameManager::FindObjectList(int layerGroup, const wchar_t* listTag)
 {
     return _pSceneMgr->FindObjectList(layerGroup, listTag);
 }
 
-GameObject* Engine::GameManager::FindObject(int layerGroup, const char* listTag, const char* objectTag)
+GameObject* Engine::GameManager::FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag)
 {
     return _pSceneMgr->FindObject(layerGroup, listTag, objectTag);
 }
@@ -233,7 +233,7 @@ void Engine::GameManager::LoadSound(const char* filePath)
     _pSoundMgr->LoadSound(filePath);
 }
 
-void Engine::GameManager::ClearObjectList(int layerGroup, const char* listTag)
+void Engine::GameManager::ClearObjectList(int layerGroup, const wchar_t* listTag)
 {
     _pSceneMgr->ClearObjectList(layerGroup, listTag);
     _pRenderer->ResetRenderGroup();
@@ -245,7 +245,7 @@ void Engine::GameManager::ClearLayer(int layerGroup)
     _pRenderer->ResetRenderGroup();
 }
 
-bool Engine::GameManager::AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject)
+bool Engine::GameManager::AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject)
 {
     return _pSceneMgr->AddObjectInLayer(layerGroup, listTag, pObject);
 }

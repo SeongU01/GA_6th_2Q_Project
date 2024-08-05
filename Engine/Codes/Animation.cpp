@@ -4,7 +4,7 @@
 
 using namespace Engine;
 
-Engine::Animation::Animation(const char* name)
+Engine::Animation::Animation(const wchar_t* name)
 	: Component(name)
 {
 }

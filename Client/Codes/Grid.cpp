@@ -2,7 +2,7 @@
 #include "Client_Define.h"
 #include "Tile.h"
 
-Grid::Grid(const char* name, const Vector3&	matrix, const Vector3& offset,const Vector3& position)
+Grid::Grid(const wchar_t* name, const Vector3&	matrix, const Vector3& offset,const Vector3& position)
 	:MonoBehavior(name)
 {
 	_gridOffset = offset;
@@ -16,7 +16,7 @@ Grid::Grid(const char* name, const Vector3&	matrix, const Vector3& offset,const 
 			Engine::Texture* pBitmap=Resource::FindTexture(L"Test");
 			D2D_SIZE_F tileSize = pBitmap->GetImage(0)->GetSize();
 			Tile* pTile = Tile::Create(Vector3(j * (tileSize.width + offset.x), i * (tileSize.height + offset.y), 0.f)+position);
-			Engine::AddObjectInLayer((int)LayerGroup::Tile, "Tile", pTile);
+			Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", pTile);
 			_grids[i][j]= pTile;
 		}
 	}

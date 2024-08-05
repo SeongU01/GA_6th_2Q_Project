@@ -7,7 +7,7 @@ namespace Engine
 	class Rigidbody2D : public Component
 	{
 	public:
-		explicit Rigidbody2D(const char* name);
+		explicit Rigidbody2D(const wchar_t* name);
 	private:
 		virtual ~Rigidbody2D() = default;
 

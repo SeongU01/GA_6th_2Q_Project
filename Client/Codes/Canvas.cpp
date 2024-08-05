@@ -1,8 +1,8 @@
 #include "Canvas.h"
 #include "MainHUD.h"
-void Canvas::Initialize(const char* name)
+void Canvas::Initialize(const wchar_t* name)
 {
-	if (name == "Main") {
+	if (name == L"Main") {
 		AddComponent<MainHUD>();
 	}
 	SetName(name);
@@ -11,7 +11,7 @@ void Canvas::Initialize(const char* name)
 }
 
 
-Canvas* Canvas::Create(const char* name)
+Canvas* Canvas::Create(const wchar_t* name)
 {
 	Canvas* pInstance = new Canvas;
 	pInstance->Initialize(name);

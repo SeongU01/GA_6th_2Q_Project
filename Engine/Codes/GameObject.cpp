@@ -9,8 +9,8 @@ using namespace Engine;
 Engine::GameObject::GameObject()
 	: _pGameManager(GameManager::GetInstance())
 {
-	_pTransform = AddComponent<Transform>("Transform");
-	_pSpriteRenderer = AddComponent<SpriteRenderer>("SpriteRenderer");
+	_pTransform = AddComponent<Transform>(L"Transform");
+	_pSpriteRenderer = AddComponent<SpriteRenderer>(L"SpriteRenderer");
 }
 
 Engine::GameObject::~GameObject()

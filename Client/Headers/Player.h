@@ -10,7 +10,7 @@ namespace Engine
 class Player : public Engine::MonoBehavior
 {
 public:
-	explicit Player(const char* name);
+	explicit Player(const wchar_t* name);
 private:
 	virtual ~Player() = default;
 

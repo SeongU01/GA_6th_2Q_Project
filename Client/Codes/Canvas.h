@@ -8,8 +8,8 @@ private:
 	explicit Canvas() = default;
 	virtual ~Canvas() = default;
 private:
-	void Initialize(const char* name);
+	void Initialize(const wchar_t* name);
 
 public:
-	static Canvas* Create(const char* name);
+	static Canvas* Create(const wchar_t* name);
 };

@@ -85,7 +85,7 @@ void Engine::Layer::AddRenderer()
     }
 }
 
-void Engine::Layer::ClearObjectList(const char* listTag)
+void Engine::Layer::ClearObjectList(const wchar_t* listTag)
 {
     if (0 == _objectData[listTag].size())
         return;
@@ -108,7 +108,7 @@ void Engine::Layer::ClearAllObjectList()
     }
 }
 
-GameObject* Engine::Layer::FindObject(const char* listTag, const char* objectTag)
+GameObject* Engine::Layer::FindObject(const wchar_t* listTag, const wchar_t* objectTag)
 {
     if (0 == _objectData[listTag].size())
         return nullptr;
@@ -125,7 +125,7 @@ GameObject* Engine::Layer::FindObject(const char* listTag, const char* objectTag
     return nullptr;
 }
 
-bool Layer::AddObject(const char* listTag, GameObject* pObject)
+bool Layer::AddObject(const wchar_t* listTag, GameObject* pObject)
 {
     if (nullptr == pObject)
         return false;

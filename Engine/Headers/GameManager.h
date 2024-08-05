@@ -59,11 +59,11 @@ namespace Engine
 
 		// SceneMgr
 		bool ChagneScene(Scene* pScene);
-		void ClearObjectList(int layerGroup, const char* listTag);
+		void ClearObjectList(int layerGroup, const wchar_t* listTag);
 		void ClearLayer(int layerGroup);
-		std::list<GameObject*>* FindObjectList(int layerGroup, const char* listTag);
-		GameObject* FindObject(int layerGroup, const char* listTag, const char* objectTag);
-		bool AddObjectInLayer(int layerGroup, const char* listTag, GameObject* pObject);
+		std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
+		GameObject* FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag);
+		bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject);
 
 		// SoundMgr
 		void LoadSound(const char* filePath);

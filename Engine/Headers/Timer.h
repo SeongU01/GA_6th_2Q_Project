@@ -12,7 +12,7 @@ namespace Engine
             bool isActive = false;
         }TIMER;
     public:
-        explicit Timer(const char* name);
+        explicit Timer(const wchar_t* name);
     private:
         virtual ~Timer() = default;
 

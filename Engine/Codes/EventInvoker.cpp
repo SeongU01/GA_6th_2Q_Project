@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-Engine::EventInvoker::EventInvoker(const char* name)
+Engine::EventInvoker::EventInvoker(const wchar_t* name)
 	: Component(name)
 {
 }

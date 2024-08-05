@@ -1,15 +1,31 @@
 #include "Card.h"
+#include "CardSystem.h"
 
 // Component
+#include "TextRenderer.h"
 
-void Card::Initialize()
+#include "Client_Define.h"
+
+Card::Card(const wchar_t* name, int costMana, float costTime, float delayBefore, float delayAfter, const wchar_t* textureTag, int index, CardType type, int targetType, int targetNum)
+	: MonoBehavior(name), _costMana(costMana), _costTime(costTime), _delayBefore(delayBefore), _delayAfter(delayAfter)
+{
+	/*Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
+	pSpriteRenderer->BindTexture(Resource::FindTexture(textureTag));
+	pSpriteRenderer->SetIndex(index);	*/
+}
+
+void Card::Awake()
 {
 }
 
-Card* Card::Create()
+void Card::Start()
 {
-    Card* pInstance = new Card;
-    pInstance->Initialize();
+}
 
-    return pInstance;
+void Card::Update(const float& deltaTime)
+{
+}
+
+void Card::LateUpdate(const float& deltaTime)
+{
 }

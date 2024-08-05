@@ -7,14 +7,14 @@
 
 #include "Client_Define.h"
 
-Player::Player(const char* name)
+Player::Player(const wchar_t* name)
 	: MonoBehavior(name)
 {
 }
 
 void Player::Awake()
 {
-	_pRigidbody = AddComponent<Engine::Rigidbody2D>("Rigidbody");
+	_pRigidbody = AddComponent<Engine::Rigidbody2D>(L"Rigidbody");
 	_pRigidbody->maxVelocity = Vector3(1000.f, 1000.f, 0.f);
 	_pRigidbody->friction = 3000.f;
 }

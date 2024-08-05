@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-Engine::BitFlag::BitFlag(const char* name)
+Engine::BitFlag::BitFlag(const wchar_t* name)
 	: Component(name)
 {
 }

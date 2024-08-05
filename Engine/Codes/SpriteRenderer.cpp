@@ -6,7 +6,7 @@
 
 using namespace Engine;
 
-Engine::SpriteRenderer::SpriteRenderer(const char* name)
+Engine::SpriteRenderer::SpriteRenderer(const wchar_t* name)
 	: Component(name)
 {
 }
@@ -49,7 +49,7 @@ void Engine::SpriteRenderer::Draw()
 		return;
 
 	ID2D1Bitmap* pBitmap = GetBitmap();
-	
+
 	if (nullptr == pBitmap)
 		return;
 

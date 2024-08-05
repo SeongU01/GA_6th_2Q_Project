@@ -19,7 +19,7 @@ namespace Engine
             bool isRepeat = false;
         };
     public:
-        explicit Animation(const char* name);           
+        explicit Animation(const wchar_t* name);
     private:
         virtual ~Animation() = default;
 

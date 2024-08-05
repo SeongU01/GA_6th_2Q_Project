@@ -7,7 +7,7 @@
 
 void TimerUI::Initialize()
 {
-	Engine::TextRenderer* text = AddComponent<Engine::TextRenderer>("Timer", D2D1::ColorF::Red);
+	Engine::TextRenderer* text = AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::Red);
 	text->SetDrawRect(D2D1::RectF(0, 0, 1000, 1000));
 
 	TimerSystem* Timer = AddComponent<TimerSystem>();

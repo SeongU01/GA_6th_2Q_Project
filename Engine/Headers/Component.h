@@ -10,7 +10,7 @@ namespace Engine
 	{
 		friend class GameObject;
 	protected:
-		explicit Component(const char* name) { SetName(name); }
+		explicit Component(const wchar_t* name) { SetName(name); }
 		virtual ~Component() = default;
 
 	public:
@@ -33,7 +33,7 @@ namespace Engine
 		T* GetComponent();
 
 		template<typename T>
-		T* GetComponent(const char* name);
+		T* GetComponent(const wchar_t* name);
 
 		// Base을(를) 통해 상속됨
 		void Free() = 0;
@@ -57,7 +57,7 @@ inline T* Engine::Component::GetComponent()
 }
 
 template<typename T>
-inline T* Engine::Component::GetComponent(const char* name)
+inline T* Engine::Component::GetComponent(const wchar_t* name)
 {	
 	return _pOwner->GetComponent<T>(name);
 }

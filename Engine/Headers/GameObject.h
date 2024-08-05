@@ -35,11 +35,11 @@ namespace Engine
 		inline void SetRenderGroup(int renderGroup) { _renderGroup = renderGroup; }
 
 		template<typename T>
-		T* GetComponent(const char* name)
+		T* GetComponent(const wchar_t* name)
 		{
 			for (auto& component : _components)
 			{
-				if (!strcmp(component->GetName(), name))
+				if (!lstrcmp(component->GetName(), name))
 					return static_cast<T*>(component);
 			}
 

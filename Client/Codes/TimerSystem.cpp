@@ -2,7 +2,7 @@
 #include "Client_Define.h"
 
 TimerSystem::TimerSystem()
-	:MonoBehavior("TimeSystem")
+	:MonoBehavior(L"TimeSystem")
 {
 }
 void TimerSystem::Awake()

@@ -10,7 +10,7 @@ namespace Engine
 	{
 		friend GameObject;	
 	public:
-		explicit Collider(const char* name);
+		explicit Collider(const wchar_t* name);
 	private:
 		virtual ~Collider() = default;
 

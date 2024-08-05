@@ -5,7 +5,7 @@ class Tile;
 class Grid :public Engine::MonoBehavior
 {
 public:
-	explicit Grid(const char* name, const Vector3& matrix, const Vector3& offset, const Vector3& position);
+	explicit Grid(const wchar_t* name, const Vector3& matrix, const Vector3& offset, const Vector3& position);
 private:
 	virtual ~Grid() = default;
 public:

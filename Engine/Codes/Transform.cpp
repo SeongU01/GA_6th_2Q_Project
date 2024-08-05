@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-Engine::Transform::Transform(const char* name)
+Engine::Transform::Transform(const wchar_t* name)
     : Component(name)
 {
     _transform[Scale] = { 1.f, 1.f, 1.f };

@@ -3,15 +3,17 @@
 
 namespace Engine
 {
+	class GameObject;
 	class TextRenderer;
 }
 
-class Card;
 class CardSystem final : public Engine::Base, public Engine::SingleTon<CardSystem>
 {
 	using RichText = std::tuple<unsigned int, unsigned int, std::wstring, unsigned int>;
 	using OptionValue = std::pair<int, int>;
 	friend class SingleTon;
+
+	enum EffectType { Test1, Test2, Test3 };
 private:
 	explicit CardSystem() = default;
 	virtual ~CardSystem() = default;
@@ -31,7 +33,7 @@ private:
 	void Free() override;
 
 public:
-	std::vector<Card*> _cards;
+	std::vector<Engine::GameObject*> _cards;
 	std::vector<std::wstring> _texts;
 	std::vector<std::list<RichText>> _richTexts;
 	std::vector<OptionValue> _optionValues;

@@ -3,8 +3,8 @@
 
 void Map::Initialize(const Vector3& matrix, const Vector3& offset, const Vector3& position)
 {
-	AddComponent<Grid>("Grid", matrix, offset,position);
-	SetName("Map");
+	AddComponent<Grid>(L"Grid", matrix, offset,position);
+	SetName(L"Map");
 	SetRenderGroup(0);
 }
 

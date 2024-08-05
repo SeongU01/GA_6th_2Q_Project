@@ -3,7 +3,7 @@
 
 using namespace Engine;
 
-Engine::Rigidbody2D::Rigidbody2D(const char* name)
+Engine::Rigidbody2D::Rigidbody2D(const wchar_t* name)
 	: Component(name), _maxVelocity(Vector3(1000.f, 1000.f, 0.f)), _frictionCoefficient(100.f), _gravity(800.f)
 {	
 }

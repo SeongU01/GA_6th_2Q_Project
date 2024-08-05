@@ -10,7 +10,7 @@ public:
 		Vector3 scale{ 1.f, 1.f, 0.f };
 		Engine::Transform* pParent = nullptr;
 		const wchar_t* textureTag = nullptr;
-		const char* name = nullptr;
+		const wchar_t* name = nullptr;
 	};
 
 private:

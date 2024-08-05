@@ -6,7 +6,7 @@ bool TimeManager::Initialize()
 {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
-    _frequency = double(frequency.QuadPart);
+    _frequency = float(frequency.QuadPart);
     QueryPerformanceCounter(&_oldTime);
     QueryPerformanceCounter(&_currTime);
 
@@ -31,14 +31,14 @@ void TimeManager::Update()
 
 bool TimeManager::FrameLock(float frame)
 {
-    _fixTime = _deltaTime;
+    /*_fixTime = _deltaTime;
     _fixFrame = 1000.0 / frame;
 
     if (_fixFrame <= _fixTime)
     {
         _fixTime = 0;
         return true;
-    }
+    }*/
     return false;
 }
 

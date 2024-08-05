@@ -6,7 +6,7 @@ namespace Engine
 	class TextRenderer : public Engine::Component
 	{
 	public:
-		explicit TextRenderer(const char* name, D2D1::ColorF color = D2D1::ColorF::White, float size = 25.f, DWRITE_FONT_WEIGHT fontWeight = DWRITE_FONT_WEIGHT_NORMAL);
+		explicit TextRenderer(const wchar_t* name, D2D1::ColorF color = D2D1::ColorF::White, float size = 25.f, DWRITE_FONT_WEIGHT fontWeight = DWRITE_FONT_WEIGHT_NORMAL);
 	private:
 		virtual ~TextRenderer() = default;
 

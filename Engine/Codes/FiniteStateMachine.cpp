@@ -3,7 +3,7 @@
 
 using namespace Engine;
 
-Engine::FiniteStateMachine::FiniteStateMachine(const char* name, const int size)
+Engine::FiniteStateMachine::FiniteStateMachine(const wchar_t* name, const int size)
 	: Component(name)
 {
 	_states.resize(size);

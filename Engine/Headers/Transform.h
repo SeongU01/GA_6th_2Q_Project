@@ -8,7 +8,7 @@ namespace Engine
     public:
         enum Property { Position, Direction, Scale, Rotation, Property_End };
     public:
-        explicit Transform(const char* name);
+        explicit Transform(const wchar_t* name);
     private:
         virtual ~Transform() = default;
 

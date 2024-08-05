@@ -1,7 +1,7 @@
 #include "MonoBehavior.h"
 #include "GameObject.h"
 
-Engine::MonoBehavior::MonoBehavior(const char* name)
+Engine::MonoBehavior::MonoBehavior(const wchar_t* name)
 	: Component(name)
 {
 }

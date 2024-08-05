@@ -2,6 +2,7 @@
 
 // Component
 #include "TextRenderer.h"
+#include "Card.h"
 
 #include "Client_Define.h"
 
@@ -95,30 +96,36 @@ bool CardSystem::LoadCardDataOptionText(const wchar_t* filePath)
         std::wstring effect;
 
         std::getline(wss, token, L','); // ID        
-
-        while (std::getline(wss, token, L','))
-        {   
-            if (L"ID" == token.substr(0, 2))
-            {        
-                int ID = _wtoi(token.substr(2).c_str());
-                wchar_t buffer[4];
-                wsprintf(buffer, L"%d", _optionValues[ID - 1].second);
-                effect += buffer;
-            }
-            else
-            {
-                std::wstring findString = L"\\n";
-                size_t pos = 0;
-                while ((pos = token.find(findString, pos)) != std::wstring::npos)
-                {
-                    token.replace(pos, findString.length(), L"\n");
-                    pos += 1; // Move past the last replaced position
-                }
-                effect += token;
-            }
-        }
+        std::getline(wss, token, L',');
         
-        _texts.emplace_back(effect);
+        std::wstring findString = L"\\n";
+        size_t pos = 0;
+        while ((pos = token.find(findString, pos)) != std::wstring::npos)
+        {
+            token.replace(pos, findString.length(), L"\n");
+            pos += 1; // Move past the last replaced position
+        }
+        effect = token;
+
+        std::vector<int> datas;
+        while (std::getline(wss, token, L','))
+            datas.push_back(_wtoi(token.c_str()));        
+
+        std::wstringstream formattedStream;
+        size_t start = 0;
+        pos = effect.find(L"%n");
+        int argIndex = 0;
+
+        while (pos != std::wstring::npos && argIndex < datas.size()) {
+            formattedStream << effect.substr(start, pos - start);
+            formattedStream << datas[argIndex++];
+            start = pos + 2;
+            pos = effect.find(L"%n", start);
+        }
+
+        formattedStream << effect.substr(start);
+
+        _texts.emplace_back(formattedStream.str());
     }
 
     return true;
@@ -172,6 +179,7 @@ bool CardSystem::LoadCardDataRichText(const wchar_t* filePath)
 bool CardSystem::LoadCardData(const wchar_t* filePath)
 {
     std::wifstream file(filePath);
+    file.imbue(std::locale("en_US.UTF-8"));
 
     if (!file.is_open()) {
         std::cout << "파일을 열 수 없습니다." << std::endl;
@@ -186,29 +194,48 @@ bool CardSystem::LoadCardData(const wchar_t* filePath)
         std::wstringstream wss(line);
         std::wstring token;
 
+        std::getline(wss, token, L','); // ID
+        
+        Engine::GameObject* pObject = Engine::GameObject::Create();
+        
         std::getline(wss, token, L',');
-        int id = _wtoi(token.c_str());
-
-        if (id != (int)_richTexts.size())
-            _richTexts.push_back(std::list<RichText>());
-
-        std::getline(wss, token, L',');
-        int start = _wtoi(token.c_str());
+        int costMana = _wtoi(token.c_str());
 
         std::getline(wss, token, L',');
-        int length = _wtoi(token.c_str());
+        float costTime = (float)_wtof(token.c_str());
 
         std::getline(wss, token, L',');
-        std::wstring type = token;
+        float delayBefore = (float)_wtof(token.c_str());
 
         std::getline(wss, token, L',');
-        int value;
+        float delayAfter = (float)_wtof(token.c_str());
 
-        std::wstringstream hexStream;
-        hexStream << std::hex << token;
-        hexStream >> value;
+        std::getline(wss, token, L',');
+        std::wstring title = token;
 
-        _richTexts[id - 1].push_back(std::make_tuple(start, length, type, value));
+        std::getline(wss, token, L',');
+        std::wstring textureTag = token;
+
+        std::getline(wss, token, L',');
+        int index = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        CardType cardType = static_cast<CardType>(_wtoi(token.c_str()));
+
+        std::getline(wss, token, L',');
+        int targetType = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        int targetNum = _wtoi(token.c_str());
+
+        pObject->AddComponent<Card>(title.c_str(), 
+            costMana, costTime, delayBefore, delayAfter, textureTag.c_str(), index, cardType, targetType, targetNum);
+
+        while(std::getline(wss, token, L','))
+        {
+            //pObject->AddComponent<CardOption>()
+        }
+
     }
 
     return true;

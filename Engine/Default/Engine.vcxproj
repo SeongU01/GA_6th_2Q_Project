@@ -50,7 +50,6 @@
     <ClCompile Include="..\Codes\Transform.cpp" />
     <ClCompile Include="..\Codes\WinApp.cpp" />
     <ClCompile Include="..\Headers\Component.cpp" />
-    <ClCompile Include="..\Headers\Export.cpp" />
     <ClCompile Include="..\Headers\MonoBehavior.cpp" />
     <ClCompile Include="..\Headers\Shader.cpp" />
   </ItemGroup>

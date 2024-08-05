@@ -2,7 +2,7 @@
 
 using namespace Engine;
 
-Engine::Timer::Timer(const char* name)
+Engine::Timer::Timer(const wchar_t* name)
 	: Component(name)
 {
 }

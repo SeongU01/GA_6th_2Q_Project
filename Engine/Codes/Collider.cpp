@@ -7,7 +7,7 @@ using namespace Engine;
 
 _uint Collider::g_ID = 0;
 
-Engine::Collider::Collider(const char* name)
+Engine::Collider::Collider(const wchar_t* name)
 	: Component(name), _ID(g_ID++)
 {
 }

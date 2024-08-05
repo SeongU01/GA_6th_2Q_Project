@@ -8,7 +8,7 @@ namespace Engine
 	class MonoBehavior abstract : public Component, public ICollisionNotify
 	{
 	protected:
-		explicit MonoBehavior(const char* name);
+		explicit MonoBehavior(const wchar_t* name);
 		virtual ~MonoBehavior() = default;
 
 	public:

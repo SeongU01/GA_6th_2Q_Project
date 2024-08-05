@@ -19,7 +19,7 @@ namespace Engine
 		friend class Renderer;
 		using ShaderData = std::unordered_map<size_t, Shader*>;
 	public:
-		explicit SpriteRenderer(const char* name);
+		explicit SpriteRenderer(const wchar_t* name);
 	private:
 		virtual ~SpriteRenderer() = default;
 
