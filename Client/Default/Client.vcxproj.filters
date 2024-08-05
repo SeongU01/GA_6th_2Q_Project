@@ -30,7 +30,13 @@
       <Filter>06. UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\MainUHD.cpp">
-      <Filter>06. UI\UHD</Filter>
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Card.cpp">
+      <Filter>03. GameObject\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CardSystem.cpp">
+      <Filter>04. System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +73,13 @@
     <Filter Include="06. UI">
       <UniqueIdentifier>{5bf1ce68-9318-4e60-a9f8-cc73fc45ffff}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. UI\UHD">
+    <Filter Include="03. GameObject\Card">
+      <UniqueIdentifier>{b299a1c5-bc2b-4d49-a1d0-707d09b087b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. System">
+      <UniqueIdentifier>{4d5fd3ad-e994-4a2a-a201-207d2c5a8008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\HUD">
       <UniqueIdentifier>{077f90b4-1aef-4510-b4e9-4db28b76ecd2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -109,7 +121,13 @@
       <Filter>06. UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Codes\MainUHD.h">
-      <Filter>06. UI\UHD</Filter>
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Card.h">
+      <Filter>03. GameObject\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CardSystem.h">
+      <Filter>04. System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
