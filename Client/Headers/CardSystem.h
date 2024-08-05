@@ -17,19 +17,20 @@ private:
 	virtual ~CardSystem() = default;
 
 public:
-	bool LoadCardData(const wchar_t* filePath);
+	bool LoadCard(const wchar_t* filePath);
 	void SetRichText(int ID, Engine::TextRenderer* pTextRenderer);
 
 private:
 	bool LoadCardDataOptionID(const wchar_t* filePath);
 	bool LoadCardDataOptionText(const wchar_t* filePath);
 	bool LoadCardDataRichText(const wchar_t* filePath);
+	bool LoadCardData(const wchar_t* filePath);
 
 private:
 	// Base을(를) 통해 상속됨
 	void Free() override;
 
-private:
+public:
 	std::vector<Card*> _cards;
 	std::vector<std::wstring> _texts;
 	std::vector<std::list<RichText>> _richTexts;
