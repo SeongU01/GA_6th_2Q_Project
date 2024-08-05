@@ -63,11 +63,11 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	size.height = size.height * -0.5f + _drawOffset.y;
 
 	D2D1_MATRIX_3X2_F offset = D2D1::Matrix3x2F::Translation(size);
-
+	
 	if (_notAffectCamera)
-		_pDeviceContext->SetTransform(offset * _pTransform->worldMatrix);
+		_pDeviceContext->SetTransform(offset * transform->worldMatrix);
 	else
-		_pDeviceContext->SetTransform(offset * _pTransform->worldMatrix * _cameraMatrix);
+		_pDeviceContext->SetTransform(offset * transform->worldMatrix * _cameraMatrix);
 
 	if (_currShader != typeid(ShaderComposite).hash_code())
 		_shaderData[_currShader]->ComputeShader(pBitmap);

@@ -11,7 +11,6 @@ Engine::GameObject::GameObject()
 {
 	_pTransform = AddComponent<Transform>("Transform");
 	_pSpriteRenderer = AddComponent<SpriteRenderer>("SpriteRenderer");
-	_pSpriteRenderer->_pTransform = _pTransform;	
 }
 
 Engine::GameObject::~GameObject()
