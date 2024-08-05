@@ -19,6 +19,7 @@ public:
 	virtual void LateUpdate(const float& deltaTime) override;
 private:
 	Engine::TextRenderer* _Text = nullptr;
+	float _slowTime = 0.0f;
 	float _curTime = 0.0f;
 	float _maxTime=60.f;
 	wchar_t _buffer[32];
