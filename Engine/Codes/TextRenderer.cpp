@@ -26,13 +26,13 @@ void TextRenderer::Render()
 	if (nullptr == _pDeviceContext)
 		return;	
 
-	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
+	_pDeviceContext->SetTransform(transform->worldMatrix);
 	_pSolidColorBrush->SetColor(_color);
 	_pSolidColorBrush->SetOpacity(1.f);
 
 	if (nullptr != _pWriteTextLayout)
 	{
-		_pDeviceContext->DrawTextLayout(D2D1::Point2F(0.f, 0.f), _pWriteTextLayout, _pSolidColorBrush);
+		_pDeviceContext->DrawTextLayout(_drawPoint, _pWriteTextLayout, _pSolidColorBrush);
 	}
 	else
 	{		
@@ -46,16 +46,35 @@ void Engine::TextRenderer::SetTextLayout(const wchar_t* text, float width, float
 	_pWriteFactory->CreateTextLayout(text, lstrlen(text), _pWriteTextFormat, width, height, &_pWriteTextLayout);
 }
 
-void Engine::TextRenderer::SetTextRange(unsigned int start, unsigned int length, D2D1::ColorF color)
+void Engine::TextRenderer::SetTextRangeEffectColor(unsigned int start, unsigned int length, D2D1::ColorF color)
 {	
 	if (nullptr == _pWriteTextLayout)
 		return;
+
 	ID2D1SolidColorBrush* pSolidColorBrush = nullptr;
 
 	_pDeviceContext->CreateSolidColorBrush(color, &pSolidColorBrush);
 	DWRITE_TEXT_RANGE textRange = { start, length };
 	_pWriteTextLayout->SetDrawingEffect(pSolidColorBrush, textRange);
 	_colorBrushs.push_back(pSolidColorBrush);
+}
+
+void Engine::TextRenderer::SetTextRangeEffectBold(unsigned int start, unsigned int length)
+{
+	if (nullptr == _pWriteTextLayout)
+		return;
+	
+	DWRITE_TEXT_RANGE textRange = { start, length };
+	_pWriteTextLayout->SetFontWeight(DWRITE_FONT_WEIGHT_BOLD, textRange);
+}
+
+void Engine::TextRenderer::SetTextRangeEffectUnderline(unsigned int start, unsigned int length)
+{
+	if (nullptr == _pWriteTextLayout)
+		return;
+
+	DWRITE_TEXT_RANGE textRange = { start, length };
+	_pWriteTextLayout->SetUnderline(TRUE, textRange);
 }
 
 void TextRenderer::Free()
