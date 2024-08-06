@@ -10,5 +10,6 @@ private:
 	void Initialize(const Vector3& _position);
 public:
 	static Tile* Create(const Vector3& position);
+	bool canMove=true;
 };
 

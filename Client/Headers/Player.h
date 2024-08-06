@@ -3,9 +3,10 @@
 
 namespace Engine
 {
-	class Rigidbody2D;
+	class Animation;
 	class FiniteStateMachine;
 }
+	class GridMovement;
 
 class Player : public Engine::MonoBehavior
 {
@@ -22,7 +23,10 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
-	Engine::Rigidbody2D*		_pRigidbody = nullptr;
+	GridMovement* _movement = nullptr;
+	Engine::Animation* _pAnimation = nullptr;
 	Engine::FiniteStateMachine* _pFSM = nullptr;
+private:
+	Vector3 _gridPosition = { 0.f,0.f,0.f };
 };
 

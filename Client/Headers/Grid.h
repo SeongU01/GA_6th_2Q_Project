@@ -14,6 +14,8 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+	bool IsTileWalkable(int x, int y) const;
+	Vector3 GetTileCenter(int x, int y) const;
 private:
 	std::vector <std::vector<Tile*>>_grids;
 	Vector3 _gridOffset;

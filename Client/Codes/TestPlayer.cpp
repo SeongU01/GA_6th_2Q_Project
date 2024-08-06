@@ -6,12 +6,10 @@ enum Flag : unsigned long long { Attack, Move, Idle };
 
 void TestPlayer::Initialize()
 {
-	AddComponent<Player>(L"PC");
+	AddComponent<Player>(L"PlayerComponent");
+	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
-	_pTransform->position = Vector3(WINCX >> 1, WINCY >> 1, 0.f);
-	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Test"));
-
-	SetRenderGroup((int)RenderGroup::Object);
+	SetRenderGroup((int)RenderGroup::Player);
 }
 
 TestPlayer* TestPlayer::Create()

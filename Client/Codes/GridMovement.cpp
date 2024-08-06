@@ -8,10 +8,13 @@ GridMovement::GridMovement(const wchar_t* name)
 
 void GridMovement::Awake()
 {
+
 }
 
 void GridMovement::Start()
 {
+	_originPos = transform->position;
+	_targetPos = _originPos;
 	Engine::GameObject* pObject=Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map");
 	if (nullptr != pObject)
 	{
@@ -21,16 +24,32 @@ void GridMovement::Start()
 
 void GridMovement::Update(const float& deltaTime)
 {
-	//갈수있나없나 유무처리
-	
-	//이동처리
+	if (_isMoving) 
+	{
+		float moveStep = deltaTime / _timeToMove;
+		Vector3 direction = _targetPos - _originPos;
+		direction=XMVector3Normalize(direction);
+		_originPos += direction * moveStep;
+
+		if (XMVector3Length(_targetPos - _originPos).m128_f32[0] < 0.01f)
+		{
+			_originPos = _targetPos;
+			_isMoving = false;
+		}
+		transform->position = _originPos;
+	}
 }
 
 void GridMovement::LateUpdate(const float& deltaTime)
 {
 }
 
-bool GridMovement::CanMove(Vector3& postion)
+void GridMovement::MoveToCell(int x, int y, float timeToMove)
 {
-	return true;
-}
+	if (_grid->IsTileWalkable(x, y) && !_isMoving)
+	{
+		_targetPos = _grid->GetTileCenter(x, y);
+		_timeToMove = timeToMove;
+		_isMoving = true;
+	}
+ }

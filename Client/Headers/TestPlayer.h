@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class GridMovement;
+
 namespace Engine
 {
 	class RigidBody2D;
@@ -17,5 +19,6 @@ private:
 
 public:
 	static TestPlayer* Create();
+
 };
 

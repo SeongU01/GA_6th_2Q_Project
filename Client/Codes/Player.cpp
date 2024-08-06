@@ -1,9 +1,13 @@
 #include "Player.h"
+#include "SpriteRenderer.h"
+#include "InputManager.h"
 
 // Component
-#include "RigidBody2D.h"
+#include "Animation.h"
 #include "FiniteStateMachine.h"
 #include "Grid.h"
+#include "GridMovement.h"
+
 
 #include "Client_Define.h"
 
@@ -14,13 +18,21 @@ Player::Player(const wchar_t* name)
 
 void Player::Awake()
 {
-	_pRigidbody = AddComponent<Engine::Rigidbody2D>(L"Rigidbody");
-	_pRigidbody->maxVelocity = Vector3(1000.f, 1000.f, 0.f);
-	_pRigidbody->friction = 3000.f;
+	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
+	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
+		throw std::runtime_error("can't load animation!");
+
+	_pAnimation->ChangeAnimation(L"Idle");
+	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
+	pSpriteRenderer->BindAnimation(_pAnimation);
+
+	_movement=AddComponent<GridMovement>(L"GridMovement");
+
 }
 
 void Player::Start()
 {
+	transform->SetPosition(_movement->_grid->GetTileCenter(_gridPosition.x, _gridPosition.y));
 	//이런식으로 그리드 정보 가져올거임
 	/*Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Tile, "Tile", "Map");
 	Grid* pGrid = pObject->GetComponent<Grid>();*/
@@ -28,11 +40,10 @@ void Player::Start()
 
 void Player::Update(const float& deltaTime)
 {
-	float horizon = Input::GetAxis(Input::Horizontal);
-	float vertical = Input::GetAxis(Input::Vertical);
-	float movespeed = 100.f;
-
-	_pRigidbody->velocity += Vector3(horizon * movespeed, vertical * movespeed, 0.f);
+	if (Input::IsKeyDown(DIK_W))
+	{
+		_movement->MoveToCell(_gridPosition.x+1, _gridPosition.y, 1.f);
+	}
 }
 
 void Player::LateUpdate(const float& deltaTime)
