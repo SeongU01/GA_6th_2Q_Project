@@ -35,9 +35,6 @@
     <ClCompile Include="..\Codes\Card.cpp">
       <Filter>03. GameObject\Card</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\CardSystem.cpp">
-      <Filter>04. System</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\TimerUI.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
@@ -58,6 +55,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\ObstacleScript.cpp">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CardManagement.cpp">
+      <Filter>04. System\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CardSystem.cpp">
+      <Filter>04. System\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +127,9 @@
     <Filter Include="03. GameObject\GridObject\Obstacle\Script">
       <UniqueIdentifier>{b753ed06-3588-44f0-b5dc-3518bc1abd2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. System\Card">
+      <UniqueIdentifier>{5db05a69-6fcd-4eec-b6b0-147a1483bf6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -168,9 +174,6 @@
     <ClInclude Include="..\Headers\Card.h">
       <Filter>03. GameObject\Card</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\CardSystem.h">
-      <Filter>04. System</Filter>
-    </ClInclude>
     <ClInclude Include="..\Codes\TimerUI.h">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClInclude>
@@ -191,6 +194,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\ObstacleScript.h">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CardManagement.h">
+      <Filter>04. System\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CardSystem.h">
+      <Filter>04. System\Card</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

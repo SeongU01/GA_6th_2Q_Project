@@ -22,6 +22,7 @@
     <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Canvas.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
+    <ClCompile Include="..\Codes\CardManagement.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="..\Codes\TimerUI.h" />
     <ClInclude Include="..\Codes\UI.h" />
     <ClInclude Include="..\Headers\Card.h" />
+    <ClInclude Include="..\Headers\CardManagement.h" />
     <ClInclude Include="..\Headers\CardSystem.h" />
     <ClInclude Include="..\Headers\Client_Define.h" />
     <ClInclude Include="..\Headers\Client_Enum.h" />
