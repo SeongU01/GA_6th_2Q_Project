@@ -2,6 +2,7 @@
 
 #include "Client_Define.h"
 #include "UI.h"
+#include "TimerUI.h"
 #include "TextRenderer.h"
 
 MainHUD::MainHUD()
@@ -17,14 +18,10 @@ void MainHUD::Awake()
 
 void MainHUD::Start()
 {
-	UI::UIInfo info;
-	info.name = L"Timer";
-	info.textureTag = L"UI_HUD_Timer_Box";
-	info.position = { 200.f, 900.f, 0.f };
-	info.scale = { 0.3f, 1.0f, 0.f };
-	info.pParent = GetTransform();
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", UI::Create(info));
-	
+	Engine::AddObjectInLayer(
+		(int)LayerGroup::UI, L"TimerText",
+		TimerUI::Create()
+	);
 	//_UIs.push_back(_timer);
 }
 

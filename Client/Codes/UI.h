@@ -11,6 +11,7 @@ public:
 		Engine::Transform* pParent = nullptr;
 		const wchar_t* textureTag = nullptr;
 		const wchar_t* name = nullptr;
+		int fixFrame = 0;
 	};
 
 private:
@@ -34,7 +35,7 @@ public:
 
 private:
 	UIInfo				_info;
-	D2D1_SIZE_F			_imageSize;
+	D2D1_SIZE_F			_imageSize;    
 	float				_rotation = 0.f;
 	float				_scaleRate = 1.f;
 };

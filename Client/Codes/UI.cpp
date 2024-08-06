@@ -63,6 +63,7 @@ void UI::Initialize(UIInfo& info)
     SetRenderGroup((int)RenderGroup::UI);
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
     _pSpriteRenderer->NotAffectCamera();
+    _pSpriteRenderer->SetIndex(_info.fixFrame);
 }
 
 void UI::Free()
