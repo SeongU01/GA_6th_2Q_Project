@@ -30,6 +30,7 @@
     <ClCompile Include="..\Codes\MainGame.cpp" />
     <ClCompile Include="..\Codes\MainHUD.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
+    <ClCompile Include="..\Codes\MapManager.cpp" />
     <ClCompile Include="..\Codes\Obstacle.cpp" />
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="..\Headers\GridMovement.h" />
     <ClInclude Include="..\Headers\MainGame.h" />
     <ClInclude Include="..\Headers\Map.h" />
+    <ClInclude Include="..\Headers\MapManager.h" />
     <ClInclude Include="..\Headers\Obstacle.h" />
     <ClInclude Include="..\Headers\ObstacleScript.h" />
     <ClInclude Include="..\Headers\Player.h" />
