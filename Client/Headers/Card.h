@@ -8,23 +8,23 @@ class Card final : public Engine::MonoBehavior
 public:
 	struct CardData
 	{
-		std::wstring name;
-		std::wstring textureTag;
-		int variable[4];
-		int targetTypeID[2];
-		int targetNum[2];
-		CardEffectType effectType[2];
-		int additiveCharState[2];
-		int additiveCardState[2];
-		int charStateNum[2];
-		int ID;
-		int costMana;
-		float costTime;
-		float delayBefore;
-		float delayAfter;
-		CardType type;
-		int effectRelation;
-		int textID;
+		std::wstring name{};
+		std::wstring textureTag{};
+		int variable[4]{};
+		int targetTypeID[2]{};
+		int targetNum[2]{};
+		CardEffectType effectType[2]{};
+		int additiveCharState[2]{};
+		int additiveCardState[2]{};
+		int charStateNum[2]{};
+		int ID{};
+		int costMana{};
+		float costTime{};
+		float delayBefore{};
+		float delayAfter{};
+		CardType type{};
+		int effectRelation{};
+		int textID{};
 	};
 public:
 	explicit Card(const CardData& cardData);
