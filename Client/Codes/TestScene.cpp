@@ -36,7 +36,7 @@ bool TestScene::Initialize()
     _pCardManagement = CardManagement::GetInstance();
     std::wstring path = rootPath;
 
-    //_pCardSystem->LoadCard((path + L"Data/Card").c_str());
+    _pCardManagement->LoadCard((path + L"Data/Card").c_str());
     
     Engine::GameObject* pBackGround = Engine::GameObject::Create();
     Engine::SpriteRenderer* pSpriteRenderer = pBackGround->GetComponent<Engine::SpriteRenderer>();

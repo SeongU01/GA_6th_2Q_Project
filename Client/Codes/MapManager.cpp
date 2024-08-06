@@ -4,7 +4,6 @@ bool MapManager::LoadMap(const wchar_t* filePath)
 {
 	std::wstring path = filePath;
 
-	if()
 
 	return false;
 }

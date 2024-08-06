@@ -62,6 +62,9 @@
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>04. System\Card</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\MapManager.cpp">
+      <Filter>04. System\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -129,6 +132,9 @@
     </Filter>
     <Filter Include="04. System\Card">
       <UniqueIdentifier>{5db05a69-6fcd-4eec-b6b0-147a1483bf6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. System\Map">
+      <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +206,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>04. System\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\MapManager.h">
+      <Filter>04. System\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,6 +27,6 @@ public:
 
 private:
 	Engine::GameObject* _pTimeObject = nullptr;
-	CardSystem*			_pCardSystem = nullptr;
+	CardManagement* _pCardManagement = nullptr;
 	wchar_t				_buffer[32]{};
 };
