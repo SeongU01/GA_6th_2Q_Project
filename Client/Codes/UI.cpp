@@ -6,13 +6,15 @@
 const D2D1_SIZE_F& UI::GetImageSize()
 {
     //이미지 사이즈를 가져오기
-    return _imageSize;
+    _imageSize = Resource::FindTexture(_info.textureTag)->GetImage(_info.fixFrame)->GetSize();
+    return { _imageSize.width*_info.scale.x , _imageSize.height*_info.scale.y };
 }
 
 void UI::SetPosition(const Vector3& position)
 {
     //위치 조정
     _info.position = position;
+    _pTransform->SetPosition(_info.position);
 }
 
 
@@ -20,6 +22,7 @@ void UI::SetScale(const Vector3& scale)
 {
     //스케일 조정
     _info.scale = scale;
+    _pTransform->SetScale(_info.scale);
 }
 
 void UI::SetScaleRate(float rate)
@@ -49,6 +52,7 @@ void UI::AddScale(const Vector3& scale)
 {
     //크기추가
     _info.scale += scale;
+    _pTransform->SetScale(_info.scale);
 }
 
 

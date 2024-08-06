@@ -14,6 +14,5 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
-	//std::vector<UI*> _UIs;
 };
 

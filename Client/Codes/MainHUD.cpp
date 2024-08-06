@@ -3,7 +3,8 @@
 #include "Client_Define.h"
 #include "UI.h"
 #include "TimerUI.h"
-#include "TextRenderer.h"
+#include "Button.h"
+
 
 MainHUD::MainHUD()
 	:MonoBehavior(L"MainUI")
@@ -18,11 +19,29 @@ void MainHUD::Awake()
 
 void MainHUD::Start()
 {
-	Engine::AddObjectInLayer(
+	/*Engine::AddObjectInLayer(
 		(int)LayerGroup::UI, L"TimerText",
 		TimerUI::Create()
+	);*/
+
+	UI::UIInfo info;
+	info.name = L"name";
+	info.textureTag = L"UI_HUD_Timer_Box";
+	info.fixFrame = 0;
+	info.position = { 100.0f , 600.f, -1.f };
+	info.scale = { 0.4f, 1.0f, 1.0f };
+	info.pParent = GetTransform();
+	UI* pObj = UI::Create(info);
+	Engine::AddObjectInLayer(
+		(int)LayerGroup::UI, L"Buttons",
+		pObj
 	);
-	//_UIs.push_back(_timer);
+	Button* btn = pObj->AddComponent<Button>();
+	btn->SetRange(info.position, pObj->GetImageSize());
+	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0,1.0,1.0 }); });
+	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001,0.0001,0.0 }); });
+	btn->SetOnPressed([pObj]() { pObj->SetActive(false); });
+
 }
 
 void MainHUD::Update(const float& deltaTime)

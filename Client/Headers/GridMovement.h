@@ -5,7 +5,7 @@ class Grid;
 class GridMovement:public Engine::MonoBehavior 
 {
 public:
-	explicit GridMovement(const wchar_t* name);
+	explicit GridMovement(const wchar_t* name, const float speed);
 private:
 	virtual ~GridMovement() = default;
 public:
@@ -15,13 +15,15 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 
-	void MoveToCell(int x, int y, float timeToMove);
+	void MoveToCell(Vector3& pos, float timeToMove);
 public:
 	Grid* _grid=nullptr;
+	bool _isMoving=false;
 private:
 	Vector3 _originPos;
 	Vector3 _targetPos;
-	bool _isMoving=false;
 	float _timeToMove=0.f;
+	float _moveSpeed = 0.f;
+	float _elapsedTime = 0.f;
 };
 

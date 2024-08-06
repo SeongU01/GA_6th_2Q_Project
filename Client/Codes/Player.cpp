@@ -26,23 +26,37 @@ void Player::Awake()
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 
-	_movement=AddComponent<GridMovement>(L"GridMovement");
+	_movement=AddComponent<GridMovement>(L"GridMovement",700.f);
 
 }
 
 void Player::Start()
 {
 	transform->SetPosition(_movement->_grid->GetTileCenter(_gridPosition.x, _gridPosition.y));
-	//이런식으로 그리드 정보 가져올거임
-	/*Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Tile, "Tile", "Map");
-	Grid* pGrid = pObject->GetComponent<Grid>();*/
+
 }
 
 void Player::Update(const float& deltaTime)
 {
-	if (Input::IsKeyDown(DIK_W))
+	if (Input::IsKeyDown(DIK_D)&&!(_movement->_isMoving))
 	{
-		_movement->MoveToCell(_gridPosition.x+1, _gridPosition.y, 1.f);
+		_gridPosition.x++;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_A)&&!(_movement->_isMoving))
+	{
+		_gridPosition.x--;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_W)&&!(_movement->_isMoving))
+	{
+		_gridPosition.y--;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_S)&&!(_movement->_isMoving))
+	{
+		_gridPosition.y++;
+		_movement->MoveToCell(_gridPosition, 0.5f);
 	}
 }
 
