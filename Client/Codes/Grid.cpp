@@ -41,13 +41,13 @@ void Grid::LateUpdate(const float& deltaTime)
 
 bool Grid::IsTileWalkable(int x, int y) const
 {
-	int width = _grids[0].size();
-	int height = _grids.size();
+	int width = (int)_grids[0].size();
+	int height = (int)_grids.size();
 	if (x < 0 || x >= width || y < 0 || y >= height)
 	{
 		return false;
 	}
-	return _grids[x][y]->canMove;
+	return _grids[y][x]->canMove;
 }
 
 Vector3 Grid::GetTileCenter(int x, int y) const

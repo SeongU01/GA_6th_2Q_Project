@@ -26,7 +26,7 @@ void Player::Awake()
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 
-	_movement=AddComponent<GridMovement>(L"GridMovement");
+	_movement=AddComponent<GridMovement>(L"GridMovement",300.f);
 
 }
 
@@ -40,9 +40,25 @@ void Player::Start()
 
 void Player::Update(const float& deltaTime)
 {
-	if (Input::IsKeyDown(DIK_W))
+	if (Input::IsKeyDown(DIK_D)&&!(_movement->_isMoving))
 	{
-		_movement->MoveToCell(_gridPosition.x+1, _gridPosition.y, 1.f);
+		_gridPosition.x++;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_A)&&!(_movement->_isMoving))
+	{
+		_gridPosition.x--;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_W)&&!(_movement->_isMoving))
+	{
+		_gridPosition.y--;
+		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else if (Input::IsKeyDown(DIK_S)&&!(_movement->_isMoving))
+	{
+		_gridPosition.y++;
+		_movement->MoveToCell(_gridPosition, 0.5f);
 	}
 }
 
