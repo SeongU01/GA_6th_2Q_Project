@@ -26,16 +26,20 @@ void GridMovement::Update(const float& deltaTime)
 {
 	if (_isMoving)
 	{
+		_elapsedTime += deltaTime;
 		_originPos = transform->position;
+		float t = _elapsedTime / _timeToMove;
+		float smoothStep = sin(t * XM_PI);
 		float moveStep = deltaTime / _timeToMove;
 		Vector3 direction = _targetPos - _originPos;
 		direction = XMVector3Normalize(direction);
-		_originPos += direction * moveStep*_moveSpeed;
+		_originPos += direction * moveStep*_moveSpeed*smoothStep;
 
 		if (XMVector3Length(_targetPos - _originPos).m128_f32[0] < 0.01f)
 		{
 			_originPos = _targetPos;
 			_isMoving = false;
+			_elapsedTime = 0.f;
 		}
 		transform->position = _originPos;
 	}
@@ -47,9 +51,9 @@ void GridMovement::LateUpdate(const float& deltaTime)
 
 void GridMovement::MoveToCell(Vector3& pos, float timeToMove)
 {
-	if (_grid->IsTileWalkable(pos.x, pos.y) && !_isMoving)
+	if (_grid->IsTileWalkable((int)pos.x, (int)pos.y) && !_isMoving)
 	{
-		_targetPos = _grid->GetTileCenter(pos.x, pos.y);
+		_targetPos = _grid->GetTileCenter((int)pos.x, (int)pos.y);
 		_timeToMove = timeToMove;
 		_isMoving = true;
 	}

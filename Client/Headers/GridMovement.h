@@ -24,5 +24,6 @@ private:
 	Vector3 _targetPos;
 	float _timeToMove=0.f;
 	float _moveSpeed = 0.f;
+	float _elapsedTime = 0.f;
 };
 

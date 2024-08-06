@@ -26,16 +26,14 @@ void Player::Awake()
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 
-	_movement=AddComponent<GridMovement>(L"GridMovement",300.f);
+	_movement=AddComponent<GridMovement>(L"GridMovement",700.f);
 
 }
 
 void Player::Start()
 {
 	transform->SetPosition(_movement->_grid->GetTileCenter(_gridPosition.x, _gridPosition.y));
-	//이런식으로 그리드 정보 가져올거임
-	/*Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Tile, "Tile", "Map");
-	Grid* pGrid = pObject->GetComponent<Grid>();*/
+
 }
 
 void Player::Update(const float& deltaTime)
