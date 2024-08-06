@@ -38,6 +38,11 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 
+public:
+	int GetID() const { return _cardData.ID; }
+public:
+	__declspec(property(get = GetID)) int ID;
+
 private:
 	CardData		_cardData{};
 	std::wstring	_costMana;

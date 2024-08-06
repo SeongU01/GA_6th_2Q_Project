@@ -16,6 +16,7 @@ class CardManagement final : public Engine::Base, public Engine::SingleTon<CardM
 private:
 	explicit CardManagement() = default;
 	virtual ~CardManagement() = default;
+	NOCOPY(CardManagement)
 
 public:
 	bool LoadCard(const wchar_t* filePath);
