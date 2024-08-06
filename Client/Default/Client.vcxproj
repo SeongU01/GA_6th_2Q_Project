@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\Astar.cpp" />
     <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Canvas.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardManagement.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
+    <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
     <ClCompile Include="..\Codes\GridMovement.cpp" />
@@ -34,6 +36,7 @@
     <ClCompile Include="..\Codes\Obstacle.cpp" />
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
+    <ClCompile Include="..\Codes\TestEnemy.cpp" />
     <ClCompile Include="..\Codes\TestPlayer.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="..\Codes\Tile.cpp" />
@@ -43,9 +46,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Codes\Astar.h" />
     <ClInclude Include="..\Codes\Button.h" />
     <ClInclude Include="..\Codes\Canvas.h" />
+    <ClInclude Include="..\Codes\Enemy.h" />
     <ClInclude Include="..\Codes\MainHUD.h" />
+    <ClInclude Include="..\Codes\TestEnemy.h" />
     <ClInclude Include="..\Codes\TimerSystem.h" />
     <ClInclude Include="..\Codes\TimerUI.h" />
     <ClInclude Include="..\Codes\UI.h" />

@@ -19,10 +19,10 @@ void MainHUD::Awake()
 
 void MainHUD::Start()
 {
-	/*Engine::AddObjectInLayer(
+	Engine::AddObjectInLayer(
 		(int)LayerGroup::UI, L"TimerText",
 		TimerUI::Create()
-	);*/
+	);
 
 	UI::UIInfo info;
 	info.name = L"name";
@@ -37,7 +37,6 @@ void MainHUD::Start()
 		pObj
 	);
 	Button* btn = pObj->AddComponent<Button>();
-	btn->SetRange(info.position, pObj->GetImageSize());
 	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0,1.0,1.0 }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001,0.0001,0.0 }); });
 	btn->SetOnPressed([pObj]() { pObj->SetActive(false); });
@@ -51,3 +50,4 @@ void MainHUD::Update(const float& deltaTime)
 void MainHUD::LateUpdate(const float& deltaTime)
 {
 }
+//플레이어를 따라오는 적.. enemy

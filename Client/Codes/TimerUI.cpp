@@ -20,22 +20,35 @@ UI::UIInfo CreateInfo(const wchar_t* name, const wchar_t* tag, int fixframe, Vec
 void TimerUI::Initialize()
 {
 	//¹Ú½º
-	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Box", 0, { 210.0f , 870.f, -1.f }, { 0.4f, 1.0f, 1.0f }, GetTransform());
+	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Box", 0, { 210.0f , 900.f, -1.f }, { 1.0f, 1.3f, 1.0f }, GetTransform());
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", UI::Create(ui));
+
+	//for (int i = 0; i < 12; i++) //»¡°­
+	//{
+	//	int num = 0;
+	//	if (i > 5) num = 1;
+	//	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Gage", num, { 92.f + (21.2f * i), 900.f, 0.f }, { 0.07f, 0.8f, 0.f }, GetTransform());
+	//	_UIs.push_back(UI::Create(ui));
+	//	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", _UIs.back());
+	//}
+
+	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Gage", 0, { 147.f , 900.f, 0.f }, { 0.5f, 1.0f, 0.f }, GetTransform());
 	_UIs.push_back(UI::Create(ui));
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", _UIs.back());
-	for (int i = 0; i < 12; i++) //»¡°­
-	{
-		int num = 0;
-		if (i > 8) num = 2;
-		else if (i > 5) num = 1;
-		ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Gage", num, { 100.f+(20.0f*i), 900.f, 0.f}, {0.1f, 0.1f, 0.f}, GetTransform());
-		_UIs.push_back(UI::Create(ui));
-		Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", _UIs.back());
-	}
+
+	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Gage", 1, { 273.f, 900.f, 0.f }, { 0.5f, 1.0f, 0.f }, GetTransform());
+	_UIs.push_back(UI::Create(ui));
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", _UIs.back());
+	//----------------------
+	ui = CreateInfo(L"Timer", L"UI_HUD_Timer_Box", 1, { 210.0f , 900.f, 0.f }, { 1.f, 1.f, 0.f }, GetTransform());
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Timer", UI::Create(ui));
+
 	//µª½ºÁ¤·Ä
 	Engine::TextRenderer* text = AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::Red);
 	text->SetDrawRect(D2D1::RectF(100, 800, 300, 900));
+	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 	TimerSystem* Timer = AddComponent<TimerSystem>();
+
 	Timer->SetTextComponent(text);
 	Timer->SetHeartsUIs(_UIs);
 	SetRenderGroup((int)RenderGroup::UI);

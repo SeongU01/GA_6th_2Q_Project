@@ -12,6 +12,7 @@
 #include "TimerUI.h"
 #include "TestPlayer.h"
 #include "Obstacle.h"
+#include "TestEnemy.h"
 
 int TestScene::Update(const float& deltaTime)
 {
@@ -32,6 +33,7 @@ bool TestScene::Initialize()
     Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create());
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", 
       Obstacle::Create(std::pair(Vector3(7.f,3.f,0.f), Vector3(8.f,3.f, 0.f)),L"Obstacle_Mountain"));
+    Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", TestEnemy::Create());
     
     _pCardManagement = CardManagement::GetInstance();
     std::wstring path = rootPath;

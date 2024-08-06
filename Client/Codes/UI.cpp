@@ -7,16 +7,21 @@ const D2D1_SIZE_F& UI::GetImageSize()
 {
     //이미지 사이즈를 가져오기
     _imageSize = Resource::FindTexture(_info.textureTag)->GetImage(_info.fixFrame)->GetSize();
-    return { _imageSize.width*_info.scale.x , _imageSize.height*_info.scale.y };
+    return { _imageSize.width , _imageSize.height };
 }
 
 void UI::SetPosition(const Vector3& position)
 {
     //위치 조정
     _info.position = position;
-    _pTransform->SetPosition(_info.position);
+    _pTransform->SetPosition(_info.position + _offsetPosition);
 }
 
+void UI::SetOffsetPosition(const Vector3& position)
+{
+    _offsetPosition = position;
+    _pTransform->SetPosition(_info.position + _offsetPosition);
+}
 
 void UI::SetScale(const Vector3& scale)
 {
@@ -30,6 +35,7 @@ void UI::SetScaleRate(float rate)
     //반전값 조정
     _info.scale.x = _pTransform->GetScale().x * rate;
     _scaleRate = rate;
+    _pTransform->SetScale(_info.scale);
 }
 
 void UI::SetRotation(float angle)
@@ -62,12 +68,13 @@ void UI::Initialize(UIInfo& info)
     SetName(_info.name);
 
     _pTransform->SetParent(_info.pParent);
-    _pTransform->SetPosition(_info.position);
+    _pTransform->SetPosition(_info.position+ _offsetPosition);
     _pTransform->SetScale(_info.scale);
     SetRenderGroup((int)RenderGroup::UI);
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
     _pSpriteRenderer->NotAffectCamera();
     _pSpriteRenderer->SetIndex(_info.fixFrame);
+    _originScale = _info.scale;
 }
 
 void UI::Free()

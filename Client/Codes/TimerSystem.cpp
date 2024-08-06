@@ -38,9 +38,27 @@ void TimerSystem::Update(const float& deltaTime)
         }
         Time::SetSlowTime(_slowTime);
     }
-    for (int i = 12; i >= timer / 5+1; i--) 
+    if (timer > 30) // 주황 게이지 변경
     {
-        _RemainingUI[i]->SetActive(false);
+
+        float rate = (1 + int((timer - 30.f) / 5.f)) / 6.f;
+        int rates = 6 - ((timer - 30.f) / 5);
+        _RemainingUI[1]->SetOffsetPosition(Vector3(-10.8 * rates, 0.f, 0.f));
+        _RemainingUI[1]->SetScale({ 0.5f * rate, 1.0f, 0.f }); 
+      //  _RemainingUI[1]->SetOffsetPosition(Vector3(-(126* 0.5f *0.5f* (1.f - rate)), 0.f, 0.f)); 흐아아아앙
+    }
+    else // 빨강 게이지 변경
+    {
+        _RemainingUI[1]->SetScale({ 0.f,0.f,0.f });
+        float rate = (1 + int(timer / 5.f)) / 6.f;
+        int rates = 6 - (timer / 5);
+        _RemainingUI[0]->SetOffsetPosition(Vector3(-10.8 * rates, 0.f, 0.f));
+        _RemainingUI[0]->SetScale({ 0.5f * rate, 1.0f, 0.f });
+    }
+
+    if (timer <= 0) { 
+        Time::SetSlowTime(0.0f);   
+        _RemainingUI[0]->SetScale({ 0.f,0.f,0.f });
     }
 }
 
