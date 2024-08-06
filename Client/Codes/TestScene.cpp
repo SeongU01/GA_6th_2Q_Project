@@ -1,5 +1,5 @@
 #include "TestScene.h"
-#include "CardSystem.h"
+#include "CardManagement.h"
 #include "TextRenderer.h"
 #include "SpriteRenderer.h"
 #include "Client_Define.h"
@@ -33,7 +33,7 @@ bool TestScene::Initialize()
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", 
       Obstacle::Create(std::pair(Vector3(7.f,3.f,0.f), Vector3(8.f,3.f, 0.f)),L"Obstacle_Mountain"));
     
-    _pCardSystem = CardSystem::GetInstance();
+    _pCardManagement = CardManagement::GetInstance();
     std::wstring path = rootPath;
 
     //_pCardSystem->LoadCard((path + L"Data/Card").c_str());
@@ -51,7 +51,7 @@ bool TestScene::Initialize()
 
 void TestScene::Free()
 {
-    SafeRelease(_pCardSystem);
+    SafeRelease(_pCardManagement);
 }
 
 TestScene* TestScene::Create()

@@ -6,7 +6,7 @@ namespace Engine
 	class GameObject;
 }
 
-class CardSystem;
+class CardManagement;
 class TestScene : public Engine::Scene
 {
 private:
