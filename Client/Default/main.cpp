@@ -25,6 +25,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	MainGame* pMainGame = MainGame::Create(hInstance);
 	pMainGame->Run();
 
+	SafeRelease(pMainGame);
 	atexit(CheckMemoryLeaks);
 
 	return EXIT_SUCCESS;
