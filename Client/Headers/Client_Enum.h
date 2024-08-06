@@ -5,7 +5,7 @@ enum class RenderGroup { BackGround, Tile, Object, Player, FrontObject, FrontEff
 enum class SoundGroup { BGM, SFX, Voice, End };
 
 enum class CardType { Attack, Move, Support };
-enum class CardOptionType {};
+enum class CardEffectType { None };
 
 static const int WINCX = 1920;
 static const int WINCY = 1080;

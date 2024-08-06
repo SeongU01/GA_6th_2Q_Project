@@ -2,10 +2,32 @@
 #include "MonoBehavior.h"
 
 enum class CardType;
+enum class CardEffectType;
 class Card final : public Engine::MonoBehavior
 {
 public:
-	explicit Card(const wchar_t* name, int costMana, float costTime, float delayBefore, float delayAfter, const wchar_t* textureTag, int index, CardType type, int targetType, int targetNum);
+	struct CardData
+	{
+		std::wstring name;
+		std::wstring textureTag;
+		int variable[4];
+		int targetTypeID[2];
+		int targetNum[2];
+		CardEffectType effectType[2];
+		int additiveCharState[2];
+		int additiveCardState[2];
+		int charStateNum[2];
+		int ID;
+		int costMana;
+		float costTime;
+		float delayBefore;
+		float delayAfter;
+		CardType type;
+		int effectRelation;
+		int textID;
+	};
+public:
+	explicit Card(const CardData& cardData);
 private:
 	virtual ~Card() = default;
 
@@ -17,23 +39,8 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
-	const wchar_t* _title = nullptr;
-	int _cardID = 0;
-	int _costMana = 0;
-	float _costTime = 0.f;
-
-	float _delayBefore = 0.f;
-	float _delayAfter = 0.f;
-
-	CardType _cardType;
-	int _target_Type_ID;
-	int _target_Num;
-	
-	/*Additive_CharState
-	CharState_Num
-	Additive_CardState
-	CardState_Num
-	Additive_AfterState
-	Variable*/
+	CardData		_cardData{};
+	std::wstring	_costMana;
+	std::wstring	_costTime;
 };
 

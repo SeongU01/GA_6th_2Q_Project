@@ -14,7 +14,7 @@ Engine::TextRenderer::TextRenderer(const wchar_t* name, D2D1::ColorF color, floa
 	_pWriteFactory->CreateTextFormat(
 		L"¸¼Àº °íµñ", NULL,
 		_fontWeight, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
-		_fontSize, L"", &_pWriteTextFormat);	
+		_fontSize, L"", &_pWriteTextFormat);
 }
 
 void TextRenderer::Render()

@@ -13,9 +13,6 @@ bool CardSystem::LoadCard(const wchar_t* filePath)
     if (!LoadCardDataRichText((path + L"/OptionRichText.csv").c_str()))
         return false;
 
-    if (!LoadCardDataOptionID((path + L"/OptionID.csv").c_str()))
-        return false;
-
     if (!LoadCardDataOptionText((path + L"/OptionText.csv").c_str()))
         return false;
 
@@ -27,7 +24,7 @@ bool CardSystem::LoadCard(const wchar_t* filePath)
 
 void CardSystem::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 {
-    for (auto& richText : _richTexts[ID - 1])
+    for (auto& richText : _richTexts[ID])
     {
         auto [start, length, type, value] = richText;
         if (L"Color" == type)
@@ -43,37 +40,6 @@ void CardSystem::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
             pTextRenderer->SetTextRangeEffectUnderline(start, length);
         }        
     }
-}
-
-bool CardSystem::LoadCardDataOptionID(const wchar_t* filePath)
-{
-    std::wifstream file(filePath);
-
-    if (!file.is_open()) {
-        std::cout << "파일을 열 수 없습니다." << std::endl;
-        return false;
-    }
-
-    std::wstring line;
-    std::getline(file, line);
-
-    while (std::getline(file, line))
-    {
-        std::wstringstream wss(line);
-        std::wstring token;
-
-        std::getline(wss, token, L','); // ID
-
-        std::getline(wss, token, L',');
-        int type = _wtoi(token.c_str());
-
-        std::getline(wss, token, L',');
-        int value = _wtoi(token.c_str());
-
-        _optionValues.emplace_back(std::make_pair(type, value));
-    }
-
-    return true;
 }
 
 bool CardSystem::LoadCardDataOptionText(const wchar_t* filePath)
@@ -93,39 +59,19 @@ bool CardSystem::LoadCardDataOptionText(const wchar_t* filePath)
     {
         std::wstringstream wss(line);
         std::wstring token;
-        std::wstring effect;
 
-        std::getline(wss, token, L','); // ID        
+        std::getline(wss, token, L','); // ID
         std::getline(wss, token, L',');
         
         std::wstring findString = L"\\n";
-        size_t pos = 0;
+        size_t pos = 0;        
         while ((pos = token.find(findString, pos)) != std::wstring::npos)
         {
             token.replace(pos, findString.length(), L"\n");
-            pos += 1; // Move past the last replaced position
-        }
-        effect = token;
-
-        std::vector<int> datas;
-        while (std::getline(wss, token, L','))
-            datas.push_back(_wtoi(token.c_str()));        
-
-        std::wstringstream formattedStream;
-        size_t start = 0;
-        pos = effect.find(L"%n");
-        int argIndex = 0;
-
-        while (pos != std::wstring::npos && argIndex < datas.size()) {
-            formattedStream << effect.substr(start, pos - start);
-            formattedStream << datas[argIndex++];
-            start = pos + 2;
-            pos = effect.find(L"%n", start);
+            pos += 1;
         }
 
-        formattedStream << effect.substr(start);
-
-        _texts.emplace_back(formattedStream.str());
+        _texts.emplace_back(token);
     }
 
     return true;
@@ -190,52 +136,82 @@ bool CardSystem::LoadCardData(const wchar_t* filePath)
     std::getline(file, line);
 
     while (std::getline(file, line))
-    {
+    { 
+        Engine::GameObject* pObject = Engine::GameObject::Create();
+
         std::wstringstream wss(line);
         std::wstring token;
 
+        Card::CardData cardData;
+
         std::getline(wss, token, L','); // ID
+        cardData.ID = _wtoi(token.c_str());
         
-        Engine::GameObject* pObject = Engine::GameObject::Create();
-        
         std::getline(wss, token, L',');
-        int costMana = _wtoi(token.c_str());
+        cardData.costMana = _wtoi(token.c_str());
 
         std::getline(wss, token, L',');
-        float costTime = (float)_wtof(token.c_str());
+        cardData.costTime = (float)_wtof(token.c_str());
 
         std::getline(wss, token, L',');
-        float delayBefore = (float)_wtof(token.c_str());
+        cardData.delayBefore = (float)_wtof(token.c_str());
 
         std::getline(wss, token, L',');
-        float delayAfter = (float)_wtof(token.c_str());
+        cardData.delayAfter = (float)_wtof(token.c_str());
 
         std::getline(wss, token, L',');
-        std::wstring title = token;
+        cardData.type = static_cast<CardType>(_wtoi(token.c_str()));
 
         std::getline(wss, token, L',');
-        std::wstring textureTag = token;
+        cardData.effectRelation = _wtoi(token.c_str());
 
-        std::getline(wss, token, L',');
-        int index = _wtoi(token.c_str());
-
-        std::getline(wss, token, L',');
-        CardType cardType = static_cast<CardType>(_wtoi(token.c_str()));
-
-        std::getline(wss, token, L',');
-        int targetType = _wtoi(token.c_str());
-
-        std::getline(wss, token, L',');
-        int targetNum = _wtoi(token.c_str());
-
-        pObject->AddComponent<Card>(title.c_str(), 
-            costMana, costTime, delayBefore, delayAfter, textureTag.c_str(), index, cardType, targetType, targetNum);
-
-        while(std::getline(wss, token, L','))
+        for (int i = 0; i < 2; i++)
         {
-            //pObject->AddComponent<CardOption>()
+            std::getline(wss, token, L',');
+            cardData.effectType[i] = static_cast<CardEffectType>(_wtoi(token.c_str()));
+
+            std::getline(wss, token, L',');
+            cardData.targetTypeID[i] = _wtoi(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardData.targetNum[i] = _wtoi(token.c_str());            
+
+            std::getline(wss, token, L',');
+            cardData.additiveCharState[i] = _wtoi(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardData.charStateNum[i] = _wtoi(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardData.additiveCardState[i] = _wtoi(token.c_str());            
+        }        
+
+        std::getline(wss, token, L',');
+        cardData.name = token;
+
+        std::getline(wss, token, L',');
+        cardData.textID = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        cardData.textureTag = token;
+
+        for (int i = 0; i < 4; i++)
+        {
+            std::getline(wss, token, L',');
+            cardData.variable[i] = _wtoi(token.c_str());
         }
 
+        pObject->AddComponent<Card>(cardData);
+
+        pObject->SetRenderGroup((int)RenderGroup::UI);
+        Engine::TextRenderer* pTextRenderer = pObject->AddComponent<Engine::TextRenderer>(L"OptionText", D2D1::ColorF::White, 40.f);
+        pTextRenderer->SetOffset(Vector3(-225.f, 70.f, 0.f));
+        pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
+        pTextRenderer->SetTextLayout(_texts[cardData.textID - 1].c_str(), 450.f, 300.f);
+        SetRichText(cardData.textID - 1, pTextRenderer);
+
+        Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", pObject);
     }
 
     return true;
