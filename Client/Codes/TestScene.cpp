@@ -30,7 +30,7 @@ bool TestScene::Initialize()
 
     Engine::AddObjectInLayer
     ((int)LayerGroup::Tile, L"Tile", 
-        Map::Create(Vector3(20.f, 8.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(100.f,100.f,0.f)));
+        Map::Create(Vector3(16.f, 7.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(250.f,200.f,0.f)));
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"MainUI", Canvas::Create(L"Main"));
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerText", TimerUI::Create());
 

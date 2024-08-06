@@ -23,6 +23,7 @@
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
+    <ClCompile Include="..\Codes\GridMovement.cpp" />
     <ClCompile Include="..\Codes\MainGame.cpp" />
     <ClCompile Include="..\Codes\MainHUD.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
     <ClInclude Include="..\Headers\Grid.h" />
+    <ClInclude Include="..\Headers\GridMovement.h" />
     <ClInclude Include="..\Headers\MainGame.h" />
     <ClInclude Include="..\Headers\Map.h" />
     <ClInclude Include="..\Headers\Player.h" />

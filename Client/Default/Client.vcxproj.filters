@@ -44,6 +44,9 @@
     <ClCompile Include="..\Codes\TimerUI.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\GridMovement.cpp">
+      <Filter>03. GameObject\GridMovement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -93,6 +96,9 @@
     </Filter>
     <Filter Include="03. GameObject\UIObject\Timer">
       <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridMovement">
+      <UniqueIdentifier>{edfc42df-a7d1-4261-a91e-cc2fd71811d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\Codes\TimerUI.h">
       <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GridMovement.h">
+      <Filter>03. GameObject\GridMovement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

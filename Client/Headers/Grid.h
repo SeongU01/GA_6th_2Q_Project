@@ -17,5 +17,6 @@ public:
 private:
 	std::vector <std::vector<Tile*>>_grids;
 	Vector3 _gridOffset;
+	D2D_SIZE_F _tileSize;
 };
 

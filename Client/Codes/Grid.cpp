@@ -14,8 +14,8 @@ Grid::Grid(const wchar_t* name, const Vector3&	matrix, const Vector3& offset,con
 		for (int j = 0; j < (int)matrix.x; j++)
 		{
 			Engine::Texture* pBitmap=Resource::FindTexture(L"Test");
-			D2D_SIZE_F tileSize = pBitmap->GetImage(0)->GetSize();
-			Tile* pTile = Tile::Create(Vector3(j * (tileSize.width + offset.x), i * (tileSize.height + offset.y), 0.f)+position);
+			_tileSize = pBitmap->GetImage(0)->GetSize();
+			Tile* pTile = Tile::Create(Vector3(j * (_tileSize.width + offset.x), i * (_tileSize.height + offset.y), 0.f)+position);
 			Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", pTile);
 			_grids[i][j]= pTile;
 		}
