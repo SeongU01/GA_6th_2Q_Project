@@ -16,8 +16,9 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 	bool IsTileWalkable(int x, int y) const;
 	Vector3 GetTileCenter(int x, int y) const;
+	std::vector <std::vector<Tile*>> GetTiles()const { return _tiles; }
 private:
-	std::vector <std::vector<Tile*>>_grids;
+	std::vector <std::vector<Tile*>>_tiles;
 	Vector3 _gridOffset;
 	D2D_SIZE_F _tileSize;
 };

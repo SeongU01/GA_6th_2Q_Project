@@ -27,6 +27,6 @@ private:
 	Engine::Animation* _pAnimation = nullptr;
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 private:
-	Vector3 _gridPosition = { 0.f,0.f,0.f };
+	Vector3 _gridPosition = { 0.f,2.f,0.f };
 };
 

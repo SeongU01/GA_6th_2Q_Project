@@ -11,6 +11,7 @@
 #include "Map.h"
 #include "TimerUI.h"
 #include "TestPlayer.h"
+#include "Obstacle.h"
 
 int TestScene::Update(const float& deltaTime)
 {
@@ -26,9 +27,11 @@ bool TestScene::Initialize()
 {
     Engine::AddObjectInLayer
     ((int)LayerGroup::Tile, L"Tile", 
-        Map::Create(Vector3(16.f, 7.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(250.f,200.f,0.f)));
+        Map::Create(Vector3(16.f, 7.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(200.f,200.f,0.f)));
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"MainUI", Canvas::Create(L"Main"));
     Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create());
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", 
+      Obstacle::Create(std::pair(Vector3(7.f,3.f,0.f), Vector3(8.f,3.f, 0.f)),L"Obstacle_Mountain"));
     
     _pCardSystem = CardSystem::GetInstance();
     std::wstring path = rootPath;

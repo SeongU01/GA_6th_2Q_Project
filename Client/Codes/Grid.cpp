@@ -6,8 +6,8 @@ Grid::Grid(const wchar_t* name, const Vector3&	matrix, const Vector3& offset,con
 	:MonoBehavior(name)
 {
 	_gridOffset = offset;
-	_grids.resize((size_t)matrix.y);
-	for (auto& iter : _grids)iter.resize((size_t)matrix.x);
+	_tiles.resize((size_t)matrix.y);
+	for (auto& iter : _tiles)iter.resize((size_t)matrix.x);
 
 	for (int i = 0; i < (int)matrix.y; i++)
 	{
@@ -17,7 +17,7 @@ Grid::Grid(const wchar_t* name, const Vector3&	matrix, const Vector3& offset,con
 			_tileSize = pBitmap->GetImage(0)->GetSize();
 			Tile* pTile = Tile::Create(Vector3(j * (_tileSize.width + offset.x), i * (_tileSize.height + offset.y), 0.f)+position);
 			Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", pTile);
-			_grids[i][j]= pTile;
+			_tiles[i][j]= pTile;
 		}
 	}
 }
@@ -41,16 +41,16 @@ void Grid::LateUpdate(const float& deltaTime)
 
 bool Grid::IsTileWalkable(int x, int y) const
 {
-	int width = (int)_grids[0].size();
-	int height = (int)_grids.size();
+	int width = (int)_tiles[0].size();
+	int height = (int)_tiles.size();
 	if (x < 0 || x >= width || y < 0 || y >= height)
 	{
 		return false;
 	}
-	return _grids[y][x]->canMove;
+	return _tiles[y][x]->canMove;
 }
 
 Vector3 Grid::GetTileCenter(int x, int y) const
 {
-	return _grids[y][x]->GetTransform()->position;
+	return _tiles[y][x]->GetTransform()->position;
 }

@@ -50,6 +50,15 @@
     <ClCompile Include="..\Codes\Button.cpp">
       <Filter>03. GameObject\UIObject\Button</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\GridInfo.cpp">
+      <Filter>03. GameObject\GridObject\GridInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Obstacle.cpp">
+      <Filter>03. GameObject\GridObject\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ObstacleScript.cpp">
+      <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -105,6 +114,15 @@
     </Filter>
     <Filter Include="03. GameObject\GridMovement">
       <UniqueIdentifier>{edfc42df-a7d1-4261-a91e-cc2fd71811d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\GridInfo">
+      <UniqueIdentifier>{07954db5-6a1d-4db9-9746-1a179eba4dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Obstacle">
+      <UniqueIdentifier>{28ac0bf9-2a76-4b41-9caa-f0039ae7735e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Obstacle\Script">
+      <UniqueIdentifier>{b753ed06-3588-44f0-b5dc-3518bc1abd2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +182,15 @@
     </ClInclude>
     <ClInclude Include="..\Codes\Button.h">
       <Filter>03. GameObject\UIObject\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GridInfo.h">
+      <Filter>03. GameObject\GridObject\GridInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Obstacle.h">
+      <Filter>03. GameObject\GridObject\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ObstacleScript.h">
+      <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,37 +26,46 @@ void Player::Awake()
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 
-	_movement=AddComponent<GridMovement>(L"GridMovement",700.f);
+	_movement=AddComponent<GridMovement>(L"GridMovement",500.f);
 
 }
 
 void Player::Start()
 {
-	transform->SetPosition(_movement->_grid->GetTileCenter(_gridPosition.x, _gridPosition.y));
+	transform->SetPosition(_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y));
 
 }
 
 void Player::Update(const float& deltaTime)
 {
+	Vector3 tempGridPosition = _gridPosition;
+
 	if (Input::IsKeyDown(DIK_D)&&!(_movement->_isMoving))
 	{
 		_gridPosition.x++;
-		_movement->MoveToCell(_gridPosition, 0.5f);
 	}
 	else if (Input::IsKeyDown(DIK_A)&&!(_movement->_isMoving))
 	{
 		_gridPosition.x--;
-		_movement->MoveToCell(_gridPosition, 0.5f);
 	}
 	else if (Input::IsKeyDown(DIK_W)&&!(_movement->_isMoving))
 	{
 		_gridPosition.y--;
-		_movement->MoveToCell(_gridPosition, 0.5f);
 	}
 	else if (Input::IsKeyDown(DIK_S)&&!(_movement->_isMoving))
 	{
 		_gridPosition.y++;
+	}
+	_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
+	_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
+	
+	if(_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
+	{
 		_movement->MoveToCell(_gridPosition, 0.5f);
+	}
+	else
+	{
+		_gridPosition = tempGridPosition;
 	}
 }
 
