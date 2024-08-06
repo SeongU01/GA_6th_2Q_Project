@@ -1,6 +1,7 @@
 #include "TestScene.h"
 #include "CardSystem.h"
 #include "TextRenderer.h"
+#include "SpriteRenderer.h"
 #include "Client_Define.h"
 
 //ui
@@ -8,13 +9,8 @@
 
 //object
 #include "Map.h"
-#include "TextRenderer.h"
 #include "TimerUI.h"
 #include "TestPlayer.h"
-
-void TestScene::Free()
-{
-}
 
 int TestScene::Update(const float& deltaTime)
 {
@@ -32,23 +28,27 @@ bool TestScene::Initialize()
     ((int)LayerGroup::Tile, L"Tile", 
         Map::Create(Vector3(16.f, 7.f, 0.f), Vector3(10.f, 10.f, 0.f),Vector3(250.f,200.f,0.f)));
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"MainUI", Canvas::Create(L"Main"));
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerText", TimerUI::Create());
     Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create());
     
-
-    CardSystem* pCardSystem = CardSystem::GetInstance();
+    _pCardSystem = CardSystem::GetInstance();
     std::wstring path = rootPath;
 
-    pCardSystem->LoadCard((path + L"Data/Card").c_str());
-
-    Engine::GameObject* pGameObject = Engine::GameObject::Create();
-    Engine::TextRenderer* pTextRenderer = pGameObject->AddComponent<Engine::TextRenderer>(L"TextRenderer");
-    pTextRenderer->SetTextLayout(pCardSystem->_texts[0].c_str(), 500.f, 300.f);
-
-    pGameObject->SetRenderGroup(0);
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", pGameObject);
+    _pCardSystem->LoadCard((path + L"Data/Card").c_str());
+    
+    Engine::GameObject* pBackGround = Engine::GameObject::Create();
+    Engine::SpriteRenderer* pSpriteRenderer = pBackGround->GetComponent<Engine::SpriteRenderer>();
+    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
+    pSpriteRenderer->SetIndex(0);
+    pBackGround->GetTransform()->SetPosition(Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f));
+    pBackGround->SetRenderGroup((int)RenderGroup::BackGround);
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pBackGround);
 
     return true;
+}
+
+void TestScene::Free()
+{
+    SafeRelease(_pCardSystem);
 }
 
 TestScene* TestScene::Create()

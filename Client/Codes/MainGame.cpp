@@ -1,10 +1,11 @@
 #include "MainGame.h"
 #include "TestScene.h"
-
+#include "GameObject.h"
 #include "TimeManager.h"
 #include "GameManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+
 #include "Client_Define.h"
 
 std::random_device g_rd;
@@ -52,7 +53,6 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	//Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 	_pGameManager->ChagneScene(TestScene::Create());
-
 
 	return true;
 }
