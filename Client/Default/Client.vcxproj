@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Canvas.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Codes\Button.h" />
     <ClInclude Include="..\Codes\Canvas.h" />
     <ClInclude Include="..\Codes\MainHUD.h" />
     <ClInclude Include="..\Codes\TimerSystem.h" />

@@ -47,6 +47,9 @@
     <ClCompile Include="..\Codes\GridMovement.cpp">
       <Filter>03. GameObject\GridMovement</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Button.cpp">
+      <Filter>03. GameObject\UIObject\Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -158,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\GridMovement.h">
       <Filter>03. GameObject\GridMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\Button.h">
+      <Filter>03. GameObject\UIObject\Button</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
