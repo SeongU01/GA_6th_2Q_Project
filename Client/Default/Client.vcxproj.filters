@@ -35,9 +35,6 @@
     <ClCompile Include="..\Codes\Card.cpp">
       <Filter>03. GameObject\Card</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\CardSystem.cpp">
-      <Filter>04. System</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\TimerUI.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
@@ -58,6 +55,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\ObstacleScript.cpp">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CardSystem.cpp">
+      <Filter>04. System\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\MapManager.cpp">
+      <Filter>04. System\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +127,12 @@
     <Filter Include="03. GameObject\GridObject\Obstacle\Script">
       <UniqueIdentifier>{b753ed06-3588-44f0-b5dc-3518bc1abd2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. System\Card">
+      <UniqueIdentifier>{49584dd3-cba9-4fd4-92fc-b3c34e83cd97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. System\Map">
+      <UniqueIdentifier>{03f2b37e-fb63-4f69-a8ee-c70e07e6b88c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -168,9 +177,6 @@
     <ClInclude Include="..\Headers\Card.h">
       <Filter>03. GameObject\Card</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\CardSystem.h">
-      <Filter>04. System</Filter>
-    </ClInclude>
     <ClInclude Include="..\Codes\TimerUI.h">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClInclude>
@@ -191,6 +197,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\ObstacleScript.h">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CardSystem.h">
+      <Filter>04. System\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\MapManager.h">
+      <Filter>04. System\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
