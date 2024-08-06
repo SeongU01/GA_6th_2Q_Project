@@ -14,19 +14,15 @@ Engine::TextRenderer::TextRenderer(const wchar_t* name, D2D1::ColorF color, floa
 	_pWriteFactory->CreateTextFormat(
 		L"맑은 고딕", NULL,
 		_fontWeight, DWRITE_FONT_STYLE_NORMAL, DWRITE_FONT_STRETCH_NORMAL,
-		_fontSize, L"", &_pWriteTextFormat);
-
-	// 텍스트를 수평 및 수직으로 중앙에 맞춥니다.
-	_pWriteTextFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-	_pWriteTextFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+		_fontSize, L"", &_pWriteTextFormat);	
 }
 
 void TextRenderer::Render()
 {
 	if (nullptr == _pDeviceContext)
 		return;	
-
-	_pDeviceContext->SetTransform(transform->worldMatrix);
+	
+	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Translation(_offset.x, _offset.y) * transform->worldMatrix);
 	_pSolidColorBrush->SetColor(_color);
 	_pSolidColorBrush->SetOpacity(1.f);
 
@@ -75,6 +71,16 @@ void Engine::TextRenderer::SetTextRangeEffectUnderline(unsigned int start, unsig
 
 	DWRITE_TEXT_RANGE textRange = { start, length };
 	_pWriteTextLayout->SetUnderline(TRUE, textRange);
+}
+
+void Engine::TextRenderer::SetTextAlignment(DWRITE_TEXT_ALIGNMENT alignment)
+{
+	_pWriteTextFormat->SetTextAlignment(alignment);
+}
+
+void Engine::TextRenderer::SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT alignment)
+{
+	_pWriteTextFormat->SetParagraphAlignment(alignment);
 }
 
 void TextRenderer::Free()

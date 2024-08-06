@@ -17,11 +17,13 @@ namespace Engine
 		void SetText(const wchar_t* text) { _text = text; }
 		void SetDrawRect(const D2D1_RECT_F& drawRect) { _drawRect = drawRect; }
 		void SetDrawRect(const D2D1_POINT_2F& drawPoint) { _drawPoint = drawPoint; }
-		
+		void SetOffset(const Vector3& offset) { _offset = offset; }
 		void SetTextLayout(const wchar_t* text, float width, float height);
 		void SetTextRangeEffectColor(unsigned int start, unsigned int length, D2D1::ColorF color);
 		void SetTextRangeEffectBold(unsigned int start, unsigned int length);
-		void SetTextRangeEffectUnderline(unsigned int start, unsigned int length);
+		void SetTextRangeEffectUnderline(unsigned int start, unsigned int length);		
+		void SetTextAlignment(DWRITE_TEXT_ALIGNMENT alignment);
+		void SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT alignment);
 
 	private:
 		// Component을(를) 통해 상속됨
@@ -37,6 +39,7 @@ namespace Engine
 		IDWriteTextLayout*					_pWriteTextLayout = nullptr;
 		IDWriteFactory*						_pWriteFactory = nullptr;
 
+		Vector3								_offset{};
 		const wchar_t*						_text = nullptr;
 		float								_fontSize = 20.f;		
 		D2D1::ColorF						_color = D2D1::ColorF::White;
