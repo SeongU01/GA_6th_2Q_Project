@@ -48,7 +48,7 @@ bool TestScene::Initialize()
     pGameObject->SetRenderGroup(0);
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", pGameObject);
 
-  return true;
+    return true;
 }
 
 TestScene* TestScene::Create()
