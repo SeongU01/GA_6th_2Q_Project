@@ -41,6 +41,13 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	wcsrtombs_s(nullptr, multibyteFilePath, &widebyteFilePath, lstrlen(widebyteFilePath), nullptr);
 	_pGameManager->Initialize(info);
 
+	_pGameManager->SetSortGroup((int)RenderGroup::UI, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
+		{
+			Vector3 srcPosition = src->GetTransform()->GetPosition();
+			Vector3 dstPosition = dst->GetTransform()->GetPosition();
+			return srcPosition.z < dstPosition.z;
+		});
+
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	//Engine::ResourceManager::GetInstance()->LoadAnimation(3, (filePath + L"Texture").c_str());
 	//Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);

@@ -38,6 +38,10 @@ void TimerSystem::Update(const float& deltaTime)
         }
         Time::SetSlowTime(_slowTime);
     }
+    for (int i = 12; i >= timer / 5+1; i--) 
+    {
+        _RemainingUI[i]->SetActive(false);
+    }
 }
 
 void TimerSystem::LateUpdate(const float& deltaTime)

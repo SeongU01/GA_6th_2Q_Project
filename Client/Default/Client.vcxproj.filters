@@ -38,10 +38,10 @@
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>04. System</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\TimerSystem.cpp">
-      <Filter>04. System</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\TimerUI.cpp">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerSystem.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
   </ItemGroup>
@@ -94,6 +94,9 @@
     <Filter Include="03. GameObject\UIObject\Timer">
       <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\UIObject\Button">
+      <UniqueIdentifier>{54256269-2a04-4f39-bd60-dc0d4d1c44ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -141,10 +144,10 @@
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>04. System</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\TimerSystem.h">
-      <Filter>04. System</Filter>
-    </ClInclude>
     <ClInclude Include="..\Codes\TimerUI.h">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TimerSystem.h">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClInclude>
   </ItemGroup>
