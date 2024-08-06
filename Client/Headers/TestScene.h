@@ -6,7 +6,7 @@ namespace Engine
 	class GameObject;
 }
 
-class CardSystem;
+class CardManagement;
 class TestScene : public Engine::Scene
 {
 private:
@@ -27,6 +27,6 @@ public:
 
 private:
 	Engine::GameObject* _pTimeObject = nullptr;
-	CardSystem*			_pCardSystem = nullptr;
+	CardManagement*		_pCardManagement = nullptr;
 	wchar_t				_buffer[32];
 };
