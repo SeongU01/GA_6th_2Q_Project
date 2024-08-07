@@ -13,6 +13,8 @@
 
 #include "Client_Define.h"
 
+//constexpr Vector3 PLAYERPOSITION = { 0.f,0.f,0.f };
+
 Player::Player(const wchar_t* name)
 	: MonoBehavior(name)
 {

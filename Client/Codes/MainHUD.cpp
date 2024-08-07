@@ -4,7 +4,7 @@
 #include "UI.h"
 #include "TimerUI.h"
 #include "Button.h"
-#include "TitleScene.h"
+#include "SelectScene.h"
 #include "SceneManager.h"
 
 MainHUD::MainHUD()
@@ -41,7 +41,7 @@ void MainHUD::Start()
 	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001f,0.0001f,0.0f }); });
 	btn->SetRange(info.position,pObj->GetImageSize());
-	btn->SetOnPressed([pObj]() { Scene::ChagneScene(TitleScene::Create()); });
+	btn->SetOnPressed([pObj]() { Scene::ChagneScene(SelectScene::Create()); });
 }
 
 void MainHUD::Update(const float& deltaTime)

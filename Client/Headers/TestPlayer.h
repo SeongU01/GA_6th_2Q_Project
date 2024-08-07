@@ -16,7 +16,8 @@ private:
 
 private:
 	void Initialize();
-
+public:
+	void ChangeCurrentGrid();
 public:
 	static TestPlayer* Create();
 
