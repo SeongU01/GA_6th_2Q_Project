@@ -14,6 +14,7 @@
 #include "TestPlayer.h"
 #include "Obstacle.h"
 #include "TestEnemy.h"
+#include "Enemy.h"
 
 int TestScene::Update(const float& deltaTime)
 {
@@ -44,9 +45,9 @@ bool TestScene::Initialize()
       Obstacle::Create(std::pair(Vector3(7.f,0.f,0.f), Vector3(8.f,0.f, 0.f)),L"Obstacle_Mountain"));
 
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"water", 
-      Obstacle::Create(std::pair(Vector3(6.f,1.f,0.f), Vector3(8.f,3.f, 0.f))));
-    Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", TestEnemy::Create());
-    
+    Obstacle::Create(std::pair(Vector3(6.f,1.f,0.f), Vector3(8.f,3.f, 0.f))));
+    TestEnemy* monster = TestEnemy::Create(); Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", monster); monster->GetComponent<Enemy>()->SetGridPosition({ 0,1,0 });
+   
     _pCardManagement = CardManagement::GetInstance();
     _pCardManagement->LoadCard((path + L"Data/Card").c_str());
     

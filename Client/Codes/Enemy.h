@@ -33,5 +33,7 @@ private:
 private:
 	Vector3 _gridPosition = { 0.f,0.f,0.f };
 	Vector3 goalPosition;
+	std::vector<Vector3> _path;
+	size_t _pathIndex = 0;
 
 };

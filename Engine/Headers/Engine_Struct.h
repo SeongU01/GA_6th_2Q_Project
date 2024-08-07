@@ -123,4 +123,7 @@ struct Vector3 : public XMFLOAT3
 
 		return *this;
 	}
+	bool operator==(const Vector3& other) const {
+		return ((int)x == (int)other.x && (int)y == (int)other.y && (int)z == (int)other.z);
+	}
 };

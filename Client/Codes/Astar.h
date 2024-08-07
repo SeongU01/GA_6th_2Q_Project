@@ -6,6 +6,7 @@
 
 #include "Tile.h"
 #include "Client_Define.h"
+//노드풀, 메모리풀
 
 struct Vector3Hash {
     std::size_t operator()(const Vector3& v) const {
@@ -16,10 +17,11 @@ struct Vector3Hash {
 struct Node {
     Vector3 position;
     float gCost, hCost;
-    Node* parent;
+    std::shared_ptr<Node> pParent;
 
-    Node(Vector3 pos, Node* parent = nullptr)
-        : position(pos), gCost(0), hCost(0), parent(parent) {}
+    Node(const Vector3& pos)
+        : position(pos), gCost(0), hCost(0), pParent(nullptr) {}
+    Node() : position{ 0, 0, 0 }, gCost(0), hCost(0), pParent(nullptr) {}
 
     float fCost() const {
         return gCost + hCost;
@@ -31,7 +33,7 @@ struct Node {
 };
 
 struct NodeCompare {
-    bool operator()(const Node* a, const Node* b) const {
+    bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) const {
         return a->fCost() > b->fCost();
     }
 };
@@ -55,62 +57,54 @@ std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vec
     return neighbors;
 }
 
-std::vector<Vector3> reconstructPath(Node* currentNode) {
+std::vector<Vector3> reconstructPath(const std::shared_ptr<Node>& currentNode) {
     std::vector<Vector3> path;
-    while (currentNode != nullptr) {
-        path.push_back(currentNode->position);
-        currentNode = currentNode->parent;
+    std::shared_ptr<Node> node = currentNode;
+    while (node != nullptr) {
+        path.push_back(node->position);
+        node = node->pParent;
     }
     std::reverse(path.begin(), path.end());
     return path;
 }
 
-std::vector<Vector3> aStar(const Vector3& start, const Vector3& goal, const std::vector<std::vector<Tile*>>& grid) {
-    std::priority_queue<Node*, std::vector<Node*>, NodeCompare> openSet;// 우선순위 큐로 열린 목록을 관리
-    std::unordered_map<Vector3, Node*, Vector3Hash> allNodes; // 모든 노드를 관리할 맵
+std::vector<Vector3> AStar(const Vector3& start, const Vector3& goal, const std::vector<std::vector<Tile*>>& grid) {
+    std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, NodeCompare> openSet;
+    std::unordered_map<Vector3, std::shared_ptr<Node>, Vector3Hash> allNodes;
 
-    Node* startNode = new Node(start);
-    Node* goalNode = new Node(goal);
+    auto startNode = std::make_shared<Node>(start);
+    auto goalNode = std::make_shared<Node>(goal);
     openSet.push(startNode);
     allNodes[start] = startNode;
 
     while (!openSet.empty()) {
-        Node* currentNode = openSet.top();
+        auto currentNode = openSet.top();
         openSet.pop();
 
-        if (*currentNode == *goalNode) { //도착하면 끝.
-            std::vector<Vector3> path = reconstructPath(currentNode); //경로재구성
-            
-            for (auto& pair : allNodes) { // 할당 해제
-                delete pair.second;
-            }
-            delete goalNode; 
-            return path;
+        if (*currentNode == *goalNode) {
+            return reconstructPath(currentNode);
         }
 
-        for (const auto& neighborPos : getNeighbors(currentNode->position, grid)) { //현재 위치의 이동가능 이웃 탐색.
-            float tentativeGCost = currentNode->gCost + 1; //이웃 위치까지의 비용은 현재위치에서 1을 더한값
-            Node* neighborNode;
-            if (allNodes.find(neighborPos) == allNodes.end()) { //없던 친구면 새로 만들어서 넣기.
-                neighborNode = new Node(neighborPos, currentNode); 
+        for (const auto& neighborPos : getNeighbors(currentNode->position, grid)) {
+            float tentativeGCost = currentNode->gCost + 1;
+            std::shared_ptr<Node> neighborNode;
+
+            if (allNodes.find(neighborPos) == allNodes.end()) {
+                neighborNode = std::make_shared<Node>(neighborPos);
+                neighborNode->pParent = currentNode;
                 allNodes[neighborPos] = neighborNode;
             }
-            else {//있던 친구면
-                neighborNode = allNodes[neighborPos]; //있던거 넣기 
-                if (tentativeGCost >= neighborNode->gCost) continue; //비용이 더 작은 것 선택
+            else {
+                neighborNode = allNodes[neighborPos];
+                if (tentativeGCost >= neighborNode->gCost) continue;
             }
-            neighborNode->gCost = tentativeGCost; //비용넣기
-            neighborNode->hCost = heuristic(neighborPos, goal);//휴리스틱 비용
-            neighborNode->parent = currentNode; //이동 전 노드 체크.
-            openSet.push(neighborNode); //만든 노드 넣어두기
+
+            neighborNode->gCost = tentativeGCost;
+            neighborNode->hCost = heuristic(neighborPos, goal);
+            neighborNode->pParent = currentNode;
+            openSet.push(neighborNode);
         }
     }
-
-    //이럴일없어야돼..
-    for (auto& pair : allNodes) {
-        delete pair.second;
-    }
-    delete goalNode;  // goalNode를 해제합니다.
     return std::vector<Vector3>(); // 경로를 찾지 못함
 }
 

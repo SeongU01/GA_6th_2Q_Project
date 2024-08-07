@@ -42,22 +42,21 @@ void Enemy::Update(const float& deltaTime)
 {
 
 	Vector3 temporaryGoal = _player->GetGridPosition(); // 목표 지점
-    static std::vector<Vector3> path;
-    static size_t pathIndex = 0;
+
     _curTime += deltaTime;
 
-    if (!(temporaryGoal == goalPosition)||path.empty() || pathIndex >= path.size()) {
+    if (!((int)temporaryGoal.x == (int)goalPosition.x && (int)temporaryGoal.y == (int)goalPosition.y)|| _path.empty() || _pathIndex >= _path.size()) {
 		goalPosition = temporaryGoal;
-        path = aStar(_gridPosition, goalPosition, _movement->_grid->GetTiles());
-        pathIndex = 1;
+        _path = AStar(_gridPosition, goalPosition, _movement->_grid->GetTiles());
+        _pathIndex = 1;
     }
 
-    if (!path.empty() && pathIndex < path.size()) {
-        Vector3 nextPosition = path[pathIndex];
+    if (!_path.empty() && _pathIndex < _path.size()) {
+        Vector3 nextPosition = _path[_pathIndex];
         if (_curTime >= _moveTime) {
             _curTime = 0.0f;
             _gridPosition = nextPosition;
-            pathIndex++;
+            _pathIndex++;
         }
     }
 
@@ -70,7 +69,7 @@ void Enemy::Update(const float& deltaTime)
 	}
 	else
 	{
-		path.clear();
+		_path.clear();
 		//_gridPosition = tempGridPosition;
 	}
 }
