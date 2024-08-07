@@ -13,7 +13,7 @@
 
 #include "Client_Define.h"
 
-//constexpr Vector3 PLAYERPOSITION = { 0.f,0.f,0.f };
+
 
 Player::Player(const wchar_t* name)
 	: MonoBehavior(name)
@@ -22,6 +22,7 @@ Player::Player(const wchar_t* name)
 
 void Player::Awake()
 {
+	
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
 		throw std::runtime_error("can't load animation!");
@@ -36,8 +37,8 @@ void Player::Awake()
 
 void Player::Start()
 {
+	_gridPosition = _startPosition;
 	transform->SetPosition(_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y));
-
 }
 
 void Player::Update(const float& deltaTime)

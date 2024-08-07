@@ -19,8 +19,8 @@ void TestPlayer::ChangeCurrentGrid()
 {
 	GridMovement* pMovement = GetComponent<GridMovement>();
 	pMovement->Start();
-	/*Player* pPlayerSpcript = GetComponent<Player>();
-	pPlayerSpcript->*/
+	Player* pPlayerSpcript = GetComponent<Player>();
+	pPlayerSpcript->Start();
 }
 
 TestPlayer* TestPlayer::Create()
