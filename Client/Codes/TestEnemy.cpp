@@ -7,7 +7,6 @@ enum Flag : unsigned long long { Attack, Move, Idle };
 void TestEnemy::Initialize()
 {
 	AddComponent<Enemy>(L"EnemyComponent");
-	//Engine::FindObject(LayerGroup::Player,L"Player",) //플레이어가져오기.
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
 	SetRenderGroup((int)RenderGroup::Player);

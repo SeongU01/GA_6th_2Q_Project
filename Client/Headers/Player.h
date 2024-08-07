@@ -14,7 +14,8 @@ public:
 	explicit Player(const wchar_t* name);
 private:
 	virtual ~Player() = default;
-
+public:
+	Vector3 GetGridPosition() { return _gridPosition; }
 public:
 	// MonoBehavior을(를) 통해 상속됨
 	void Awake() override;
