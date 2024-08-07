@@ -42,6 +42,25 @@ void CardManagement::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
     }
 }
 
+Card* CardManagement::CloneCard(int ID)
+{
+    const Card::CardData& cardData = _cardDatas[ID - 1];
+
+    Engine::GameObject* pCard = Engine::GameObject::Create(); 
+    pCard->SetName(L"Card");
+    pCard->SetRenderGroup((int)RenderGroup::UI);
+    pCard->AddComponent<Card>(cardData);
+
+    Engine::TextRenderer* pTextRenderer = pCard->AddComponent<Engine::TextRenderer>(L"OptionText", D2D1::ColorF::White, 40.f);
+    pTextRenderer->SetOffset(Vector3(-225.f, 70.f, 0.f));
+    pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
+    pTextRenderer->SetTextLayout(_texts[cardData.textID - 1].c_str(), 450.f, 300.f);
+    SetRichText(cardData.textID - 1, pTextRenderer);
+
+    return pCard->GetComponent<Card>();
+}
+
 bool CardManagement::LoadCardDataOptionText(const wchar_t* filePath)
 {    
     std::wifstream file(filePath);
@@ -137,8 +156,6 @@ bool CardManagement::LoadCardData(const wchar_t* filePath)
 
     while (std::getline(file, line))
     { 
-        Engine::GameObject* pObject = Engine::GameObject::Create();
-
         std::wstringstream wss(line);
         std::wstring token;
 
@@ -201,15 +218,7 @@ bool CardManagement::LoadCardData(const wchar_t* filePath)
             cardData.variable[i] = _wtoi(token.c_str());
         }
 
-        pObject->AddComponent<Card>(cardData);
-
-        pObject->SetRenderGroup((int)RenderGroup::UI);
-        Engine::TextRenderer* pTextRenderer = pObject->AddComponent<Engine::TextRenderer>(L"OptionText", D2D1::ColorF::White, 40.f);
-        pTextRenderer->SetOffset(Vector3(-225.f, 70.f, 0.f));
-        pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-
-        pTextRenderer->SetTextLayout(_texts[cardData.textID - 1].c_str(), 450.f, 300.f);
-        SetRichText(cardData.textID - 1, pTextRenderer);
+        _cardDatas.push_back(cardData);        
     }
 
     return true;
@@ -217,6 +226,4 @@ bool CardManagement::LoadCardData(const wchar_t* filePath)
 
 void CardManagement::Free()
 {
-    for (auto& card : _cards)
-        SafeRelease(card);
 }

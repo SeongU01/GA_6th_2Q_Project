@@ -16,6 +16,7 @@ public:
 	size_t GetExtraDeckSize() const { return _extraDeck.size(); }
 
 public:
+	bool LoadOriginDeck();
 	void StartGame();
 	void DrawCard();
 
@@ -23,7 +24,7 @@ private:
 	void MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst);
 
 private:
-	std::list<Card*> _originDeck;
+	std::vector<int> _originDeck;
 	std::list<Card*> _currentDeck;
 	std::list<Card*> _handDeck;
 	std::list<Card*> _graveDeck;

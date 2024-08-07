@@ -1,5 +1,6 @@
 #pragma once
 #include "Base.h"
+#include "Card.h"
 
 namespace Engine
 {
@@ -7,6 +8,7 @@ namespace Engine
 	class TextRenderer;
 }
 
+class Card;
 class CardManagement final : public Engine::Base, public Engine::SingleTon<CardManagement>
 {
 	using RichText = std::tuple<unsigned int, unsigned int, std::wstring, unsigned int>;
@@ -21,6 +23,7 @@ private:
 public:
 	bool LoadCard(const wchar_t* filePath);
 	void SetRichText(int ID, Engine::TextRenderer* pTextRenderer);
+	Card* CloneCard(int ID);
 
 private:
 	bool LoadCardDataOptionText(const wchar_t* filePath);
@@ -32,7 +35,7 @@ private:
 	void Free() override;
 
 private:
-	std::vector<Engine::GameObject*> _cards;
+	std::vector<Card::CardData> _cardDatas;
 	std::vector<std::wstring> _texts;
 	std::vector<std::list<RichText>> _richTexts;
 };
