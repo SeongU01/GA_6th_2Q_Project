@@ -19,9 +19,8 @@ void Engine::Collider::LateUpdate(const float& deltaTime)
 }
 
 #ifdef _DEBUG
-D2D1_RECT_F Engine::Collider::GetColliderRect()
+D2D1_RECT_F Engine::Collider::GetColliderRect() const
 {
-	const Vector3& parentScale = transform->GetScale();
 	D2D1_RECT_F rect{};
 	rect.left = _position.x - _scale.x * 0.5f;
 	rect.right = _position.x + _scale.x * 0.5f;
