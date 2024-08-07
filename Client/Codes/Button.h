@@ -1,7 +1,7 @@
 #pragma once
 #include "MonoBehavior.h"
 #include "Client_Define.h"
-#include <functional> //Èå¾î¾î¾û
+
 class Button : public Engine::MonoBehavior
 {
 public:

@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include <functional>
 
 namespace Engine
 {

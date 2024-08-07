@@ -12,6 +12,7 @@
 #include <set>
 #include <queue>
 #include <algorithm>
+#include <functional>
 #include <fstream>
 #include <sstream>
 #include <assert.h>
@@ -39,8 +40,8 @@
 
 using namespace DirectX;
 
-#include "Engine_Function.h"
 #include "Engine_Macro.h"
 #include "Engine_Struct.h"
 #include "Engine_Typedef.h"
+#include "Engine_Function.h"
 #include "Engine_Enum.h"

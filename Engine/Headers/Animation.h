@@ -2,7 +2,6 @@
 #include "Component.h"
 #include "Texture.h"
 #include "Frame.h"
-#include <functional>
 
 namespace Engine
 {    
