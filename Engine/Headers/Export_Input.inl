@@ -40,6 +40,10 @@ float GetAxis(Input::Axis type)
 {
 	return Engine::InputManager::GetInstance()->GetAxis(type);
 }
+float GetMouseMove(Input::MouseMove mouseMove)
+{
+	return Engine::InputManager::GetInstance()->GetMouseMove(mouseMove);
+}
 bool IsMouseWheel(Input::MouseState mouseState)
 {
 	Engine::InputManager::GetInstance()->IsMouseWheel(mouseState);

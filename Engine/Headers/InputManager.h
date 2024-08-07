@@ -14,6 +14,7 @@
 namespace Input
 {
 	enum MouseState { DIM_LB, DIM_RB, DIM_WM, DIM_END, DIM_WHUP = 120, DIM_WHDN = -120 };
+	enum MouseMove { DIM_X, DIM_Y };
 	enum PadState
 	{
 		PAD_UP = XINPUT_GAMEPAD_DPAD_UP,
@@ -81,6 +82,7 @@ namespace Engine
 		bool IsKeyPress(Input::PadState padState) const;
 		float GetAxis(Input::Axis type);
 		bool IsMouseWheel(Input::MouseState mouseState) const;
+		float GetMouseMove(Input::MouseMove mouseMove) const;
 		void SetThumbDeadZone(short left, short right) { _leftThumbDeadZone = left; _rightThumbDeadZone = right; }
 		void SetTriggerThreshold(byte value) { _triggerThreshold = value; }
 		void SetVibration(float power);

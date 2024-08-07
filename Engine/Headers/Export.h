@@ -65,6 +65,7 @@ namespace Input
 	inline bool IsKeyPress(Input::MouseState mouseState);
 	inline bool IsKeyPress(Input::PadState padState);
 	inline float GetAxis(Input::Axis type);
+	inline float GetMouseMove(Input::MouseMove mouseMove);
 	inline bool IsMouseWheel(Input::MouseState mouseState);
 	inline void SetThumbDeadZone(short left, short right);
 	inline void SetTriggerThreshold(byte value);
