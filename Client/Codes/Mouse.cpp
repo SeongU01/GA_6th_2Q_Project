@@ -17,17 +17,18 @@ void Mouse::Awake()
 	pCollider->SetScale(Vector3(10.f, 10.f, 0.f));
 
 	_pOwner->_isDrawCollider = true;
+	_hWnd = Engine::GetWindow();
 }
 
 void Mouse::Start()
-{
+{	
 }
 
 void Mouse::Update(const float& deltaTime)
 {	
 	POINT mousePoint{};
 	GetCursorPos(&mousePoint);
-	ScreenToClient(GetActiveWindow(), &mousePoint);
+	ScreenToClient(_hWnd, &mousePoint);
 
 	transform->position = Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f);
 }
