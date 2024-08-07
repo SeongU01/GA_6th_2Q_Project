@@ -15,11 +15,13 @@ Engine::Collider::Collider(const wchar_t* name)
 void Engine::Collider::LateUpdate(const float& deltaTime)
 {
 	_position = XMVector3TransformCoord(_offset, XMLoadFloat4x4(&transform->xmWorldMatrix));
+	_scale = _originScale * transform->scale;
 }
 
 #ifdef _DEBUG
-D2D1_RECT_F Engine::Collider::GetColliderRect() const
+D2D1_RECT_F Engine::Collider::GetColliderRect()
 {
+	const Vector3& parentScale = transform->GetScale();
 	D2D1_RECT_F rect{};
 	rect.left = _position.x - _scale.x * 0.5f;
 	rect.right = _position.x + _scale.x * 0.5f;

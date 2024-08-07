@@ -81,16 +81,11 @@ void Engine::CollisionManager::CheckCollision(std::list<GameObject*>* src, std::
 
 bool CollisionManager::IsCollision(Collider* pSrc, Collider* pDst)
 {
-	float fRadiusSumX = float(int(pSrc->GetScale().x + pDst->GetScale().x) >> 1);
-	float fRadiusSumY = float(int(pSrc->GetScale().y + pDst->GetScale().y) >> 1);
+	Vector3 radiusSum = (pSrc->GetScale() + pDst->GetScale()) * 0.5f;
+	Vector3 distance = XMVectorAbs(pDst->GetPosition() - pSrc->GetPosition());
 
-	float fDistX = fabs(pDst->GetPosition().x - pSrc->GetPosition().x);
-	float fDistY = fabs(pDst->GetPosition().y - pSrc->GetPosition().y);
-
-	if (fRadiusSumX >= fDistX && fRadiusSumY >= fDistY)
-	{
+	if (radiusSum.x >= distance.x && radiusSum.y >= distance.y)
 		return true;
-	}
 
 	return false;
 }
