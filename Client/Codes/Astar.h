@@ -10,7 +10,7 @@
 
 struct Vector3Hash {
     std::size_t operator()(const Vector3& v) const {
-        return std::hash<int>()(v.x) ^ std::hash<int>()(v.y) ^ std::hash<int>()(v.z);
+        return std::hash<int>()((int)v.x) ^ std::hash<int>()((int)v.y) ^ std::hash<int>()((int)v.z);
     }
 };
 
@@ -48,9 +48,9 @@ std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vec
 
     for (const auto& dir : directions) {
         Vector3 neighborPos = { pos.x + dir.x, pos.y + dir.y, pos.z };
-        if (neighborPos.x >= 0 && neighborPos.x < grid[0].size() &&
-            neighborPos.y >= 0 && neighborPos.y < grid.size() &&
-            grid[neighborPos.y][neighborPos.x]->canMove) {
+        if (neighborPos.x >= 0 && (int)neighborPos.x < (int)grid[0].size() &&
+            neighborPos.y >= 0 && (int)neighborPos.y < (int)grid.size() &&
+            grid[(int)neighborPos.y][(int)neighborPos.x]->canMove) {
             neighbors.push_back(neighborPos);
         }
     }
@@ -82,6 +82,7 @@ std::vector<Vector3> AStar(const Vector3& start, const Vector3& goal, const std:
         openSet.pop();
 
         if (*currentNode == *goalNode) {
+
             return reconstructPath(currentNode);
         }
 

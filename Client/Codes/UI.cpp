@@ -7,7 +7,7 @@ const D2D1_SIZE_F& UI::GetImageSize()
 {
     //이미지 사이즈를 가져오기
     _imageSize = Resource::FindTexture(_info.textureTag)->GetImage(_info.fixFrame)->GetSize();
-    return { _imageSize.width , _imageSize.height };
+    return _imageSize;
 }
 
 void UI::SetPosition(const Vector3& position)

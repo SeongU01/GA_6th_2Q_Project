@@ -37,8 +37,8 @@ void MainHUD::Start()
 		pObj
 	);
 	Button* btn = pObj->AddComponent<Button>();
-	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0,1.0,1.0 }); });
-	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001,0.0001,0.0 }); });
+	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0f,1.0f,1.0f }); });
+	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([pObj]() { pObj->SetActive(false); });
 
 }
