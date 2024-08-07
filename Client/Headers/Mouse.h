@@ -22,6 +22,7 @@ private:
 	void OnCollisionExit(Engine::CollisionInfo& info);
 
 private:
-	Card* _hoverCard = nullptr;
+	Card*	_hoverCard = nullptr;
+	HWND	_hWnd = nullptr;
 };
 

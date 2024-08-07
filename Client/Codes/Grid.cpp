@@ -42,11 +42,11 @@ void Grid::Start()
 
 void Grid::Update(const float& deltaTime)
 {
-	int a = -0;
 }
 
 void Grid::LateUpdate(const float& deltaTime)
 {
+	
 }
 
 bool Grid::IsTileWalkable(int x, int y) const
@@ -57,7 +57,10 @@ bool Grid::IsTileWalkable(int x, int y) const
 	{
 		return false;
 	}
-	return _tiles[y][x]->canMove;
+
+	bool canMove = (_tiles[y][x]->canMove);
+
+	return canMove;
 }
 
 Vector3 Grid::GetTileCenter(int x, int y) const

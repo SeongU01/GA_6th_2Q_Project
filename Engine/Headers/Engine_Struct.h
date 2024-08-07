@@ -5,6 +5,7 @@ struct Vector3 : public XMFLOAT3
 	Vector3() = default;
 	Vector3(float _x, float _y, float _z)
 	{ x = _x; y = _y; z = _z; }
+	Vector3(const XMVECTOR& other) { XMStoreFloat3(this, other); }
 
 	void operator=(const XMVECTOR& other) { XMStoreFloat3(this, other); }
 	operator XMFLOAT3() { return *this; }

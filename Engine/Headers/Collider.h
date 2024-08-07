@@ -27,17 +27,18 @@ namespace Engine
 		const Vector3& GetOffset() const { return _offset; }
 
 		_uint GetID() const { return _ID; }
-		void SetScale(const Vector3& scale) { _scale = scale; }
+		void SetScale(const Vector3& scale) { _originScale = scale; }
 		void SetOffset(const Vector3& offset) { _offset = offset; }		
 
 	private:
 		void Free() override;
 
 	private:
+		Vector3			_originScale;
 		Vector3			_scale;
 		Vector3			_position;
 		Vector3			_offset;
-		_uint			_ID				= 0;
+		_uint			_ID = 0;
 
 		static _uint	g_ID;
 	};
