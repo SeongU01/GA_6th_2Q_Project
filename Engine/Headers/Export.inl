@@ -21,3 +21,8 @@ bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, Engine::GameObject
 {
 	return Engine::GameManager::GetInstance()->AddObjectInLayer(layerGroup, listTag, pObject);
 }
+
+HWND GetWindow()
+{
+	return Engine::GameManager::GetInstance()->GetWindow();
+}

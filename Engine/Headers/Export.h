@@ -13,7 +13,7 @@ namespace Engine
 	inline std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
 	inline GameObject* FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag);
 	inline bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject);
-	
+	inline HWND GetWindow();
 	#include "Export.inl"
 }
 

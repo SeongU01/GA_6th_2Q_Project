@@ -145,6 +145,11 @@ bool Engine::GameManager::Initialize(const GameDefaultSetting& info)
     return true;
 }
 
+HWND Engine::GameManager::GetWindow() const
+{
+    return _pWinApp->GetWindow();
+}
+
 void Engine::GameManager::SetSlowTime(float rate)
 {
     _pTimeMgr->SetSlowTime(rate);

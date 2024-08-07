@@ -54,6 +54,9 @@ namespace Engine
 		void Run();
 		bool Initialize(const GameDefaultSetting& info);
 
+		// WinApp
+		HWND GetWindow() const;
+
 		// TimeMgr
 		void SetSlowTime(float rate);
 
