@@ -6,7 +6,7 @@
 
 #include "Client_Define.h"
 
-constexpr float MAXWIDTH = 1000.f;
+constexpr float MAXWIDTH = 1100.f;
 constexpr float CARDWIDTH = 200.f;
 
 void CardSystem::Update(const float& deltaTime)
@@ -75,11 +75,18 @@ void CardSystem::StartGame()
 		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", _currentDeck.back()->gameObject);
 		_currentDeck.back()->gameObject->SetActive(false);
 	}
+	
+	// Card ¼ÅÇÃ
+	std::vector<Card*> cards(_currentDeck.begin(), _currentDeck.end());
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::shuffle(cards.begin(), cards.end(), gen);
+	_currentDeck.assign(cards.begin(), cards.end());
 }
 
 void CardSystem::DrawCard()
 {
-	if (_currentDeck.empty())
+	if (_currentDeck.empty() || 10 == _handDeck.size())
 		return;
 
 	Card* pCard = _currentDeck.back();

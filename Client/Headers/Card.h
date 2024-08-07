@@ -47,21 +47,26 @@ public:
 	int GetID() const { return _cardData.ID; }
 	float GetPriority() const { return _priority; }
 	void SetHand();
-	void SetOffset(const Vector3& offset);
-	void SetPriority(float priority) { _priority = priority; }
+	void SetHover(bool isHover);
 
 	void Reset();
 
 public:
 	__declspec(property(get = GetID)) int ID;
-	__declspec(property(get = GetPriority, put = SetPriority)) float priority;
+	__declspec(property(get = GetPriority)) float priority;
 
 private:
 	CardData			_cardData{};
 	std::wstring		_costMana;
 	std::wstring		_costTime;
 	Vector3				_offset;
+	Vector3				_scale;
+	Vector3				_targetScale[2];
+	Vector3				_targetOffset[2];
 	Engine::Collider*	_pCollider = nullptr;
+	D2D1_SIZE_F			_pixelSize{};
 	float				_priority = 0.f;
+	float				_lerpTime = 0.f;
+	bool				_isLerp = false;
 };
 

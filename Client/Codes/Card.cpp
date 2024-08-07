@@ -56,8 +56,7 @@ void Card::Awake()
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");
 	
-	D2D1_SIZE_F pixelSize = pTexture->GetImage(0)->GetSize();
-	_pCollider->SetScale({ pixelSize.width, pixelSize.height, 0.f });
+	_pixelSize = pTexture->GetImage(0)->GetSize();	
 	_pCollider->SetActive(false);
 
 	gameObject->_isDrawCollider = true;
@@ -68,7 +67,17 @@ void Card::Start()
 }
 
 void Card::Update(const float& deltaTime)
-{	
+{
+	if (_isLerp)
+	{
+		_lerpTime += deltaTime / 0.2f;
+		_offset = XMVectorLerp(_targetOffset[0], _targetOffset[1], _lerpTime);
+	}
+	if (_lerpTime >= 1.f)
+	{
+		_isLerp = false;
+		_offset = _targetOffset[1];
+	}
 }
 
 void Card::LateUpdate(const float& deltaTime)
@@ -79,17 +88,38 @@ void Card::LateUpdate(const float& deltaTime)
 void Card::SetHand()
 {
 	transform->scale = Vector3(0.34f, 0.34f, 0.f);
+	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
 	_pCollider->SetActive(true);
+
+	_isLerp = true;
+	_lerpTime = 0.f;
+	_targetOffset[0] = { 1000.f, 0.f,0.f };
+	_targetOffset[1] = { 0.f, 0.f, 0.f };
+}
+
+void Card::SetHover(bool isHover)
+{
+	if (isHover)
+	{
+		_priority = 2000.f;
+		_targetOffset[1] = { 0.f, -65.f, 0.f };
+		transform->scale = Vector3(0.34f, 0.34f, 0.f) * 1.1f;
+	}
+	else
+	{
+		_priority = 0.f;
+		_targetOffset[1] = { 0.f, 0.f, 0.f };
+		transform->scale = Vector3(0.34f, 0.34f, 0.f);
+	}
+
+	_targetOffset[0] = _offset;
+	_lerpTime = 0.f;
+	_isLerp = true;
 }
 
 void Card::Reset()
 {
 	transform->scale = Vector3(1.f, 1.f, 0.f);
+	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
 	gameObject->SetActive(false);
-	_pCollider->SetActive(false);
-}
-
-void Card::SetOffset(const Vector3& offset)
-{
-	_offset = offset;
 }
