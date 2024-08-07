@@ -24,6 +24,6 @@ private:
 	std::vector<UI*> _RemainingUI;
 	float _slowTime = 0.0f;
 	float _curTime = 0.0f;
-	float _maxTime=20.f;
+	float _maxTime=60.f;
 	wchar_t _buffer[32];
 };

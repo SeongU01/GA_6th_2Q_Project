@@ -32,7 +32,7 @@ bool TestScene::Initialize()
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"MainUI", Canvas::Create(L"Main"));
     Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create());
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"Test", 
-      Obstacle::Create(std::pair(Vector3(7.f,3.f,0.f), Vector3(8.f,3.f, 0.f)),L"Obstacle_Mountain"));
+      Obstacle::Create(std::pair(Vector3(0.f,1.f,0.f), Vector3(0.f,1.f, 0.f)),L"Obstacle_Mountain"));
     Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", TestEnemy::Create());
     
     _pCardManagement = CardManagement::GetInstance();
