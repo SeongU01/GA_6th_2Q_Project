@@ -8,6 +8,14 @@ Engine::Transform::Transform(const wchar_t* name)
     _transform[Scale] = { 1.f, 1.f, 1.f };
 }
 
+Vector3 Engine::Transform::GetWorldPosition() const
+{
+    Vector3 position{};
+    memcpy(&position, _worldMatrix.m[3], sizeof(Vector3));
+
+    return position;
+}
+
 void Engine::Transform::LateUpdate(const float& deltaTime)
 {
     XMMATRIX scale = XMMatrixScaling(_transform[Scale].x, _transform[Scale].y, _transform[Scale].z);
@@ -20,7 +28,6 @@ void Engine::Transform::LateUpdate(const float& deltaTime)
         XMStoreFloat4x4(&_worldMatrix, relative * XMLoadFloat4x4(&_pParent->_worldMatrix));
     else
         XMStoreFloat4x4(&_worldMatrix, relative);
-
     
     memcpy(_d2dWorldMatrix.m[0], _worldMatrix.m[0], sizeof(D2D1_VECTOR_2F));
     memcpy(_d2dWorldMatrix.m[1], _worldMatrix.m[1], sizeof(D2D1_VECTOR_2F));
