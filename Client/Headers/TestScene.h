@@ -7,6 +7,7 @@ namespace Engine
 }
 
 class CardManagement;
+class MapManager;
 class TestScene : public Engine::Scene
 {
 private:
@@ -28,5 +29,6 @@ public:
 private:
 	Engine::GameObject* _pTimeObject = nullptr;
 	CardManagement* _pCardManagement = nullptr;
+	MapManager* _pMapManager = nullptr;
 	wchar_t				_buffer[32]{};
 };

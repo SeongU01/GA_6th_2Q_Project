@@ -44,11 +44,11 @@ bool MapManager::LoadMap(const wchar_t* filePath)
     mapInfo.tileOffsetY = (float)_wtof(token.c_str());
 
 
-    mapInfo.mapData.resize(mapInfo.height);
+    mapInfo.mapData.resize((size_t)mapInfo.height);
 
     for (size_t j = 0; j < mapInfo.height; j++) 
     {
-      mapInfo.mapData[j].resize(mapInfo.width);
+      mapInfo.mapData[j].resize((size_t)mapInfo.width);
       std::getline(file, line);
       std::wstringstream wssLine(line);
       for (size_t k = 0; k < mapInfo.width; k++) 
