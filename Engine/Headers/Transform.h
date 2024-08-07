@@ -40,6 +40,7 @@ namespace Engine
 
     public:
         void LateUpdate(const float& deltaTime) override;
+        void UpdateTransform();
 
     private:
         void Free() override;
