@@ -163,6 +163,11 @@ bool Engine::InputManager::IsMouseWheel(Input::MouseState mouseState) const
     return false;
 }
 
+float Engine::InputManager::GetMouseMove(Input::MouseMove mouseMove) const
+{
+    return (float)*(&_mouseState.lX + mouseMove);
+}
+
 void Engine::InputManager::SetVibration(float power)
 {
     XINPUT_VIBRATION vibration{};
