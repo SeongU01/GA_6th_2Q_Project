@@ -12,7 +12,7 @@ void TestPlayer::Initialize()
 	AddComponent<Player>(L"PlayerComponent");
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
-	SetRenderGroup((int)RenderGroup::Player);
+	SetRenderGroup((int)RenderGroup::Object);
 }
 
 void TestPlayer::ChangeCurrentGrid()

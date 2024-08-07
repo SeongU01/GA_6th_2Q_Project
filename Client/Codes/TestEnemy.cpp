@@ -9,7 +9,7 @@ void TestEnemy::Initialize()
 	AddComponent<Enemy>(L"EnemyComponent");
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
-	SetRenderGroup((int)RenderGroup::Player);
+	SetRenderGroup((int)RenderGroup::Object);
 }
 
 TestEnemy* TestEnemy::Create()
