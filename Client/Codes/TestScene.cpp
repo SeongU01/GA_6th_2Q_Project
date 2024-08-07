@@ -29,9 +29,8 @@ int TestScene::LateUpdate(const float& deltaTime)
 bool TestScene::Initialize()
 {
     std::wstring path = rootPath;
-    _pMapManager = MapManager::GetInstance();
-    _pMapManager->LoadMap((path + L"Data/Map").c_str());
-    MapInfo stage1 = _pMapManager->GetMapInfo(L"Stage1");
+    MapManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
+    MapInfo stage1 = MapManager::GetInstance()->GetMapInfo(L"Stage1");
 
     /*Engine::AddObjectInLayer
     ((int)LayerGroup::Tile, L"Tile", 
@@ -67,7 +66,6 @@ bool TestScene::Initialize()
 void TestScene::Free()
 {
     SafeRelease(_pCardManagement);
-    SafeRelease(_pMapManager);
 }
 
 TestScene* TestScene::Create()

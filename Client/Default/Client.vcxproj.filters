@@ -77,6 +77,39 @@
     <ClCompile Include="..\Codes\Mouse.cpp">
       <Filter>03. GameObject\Mouse</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\MainStageHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\StageSelectHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TitleHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CreditHUD.cpp">
+      <Filter>06. UI\Popup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameOverHUD.cpp">
+      <Filter>06. UI\Popup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\InfoHUD.cpp">
+      <Filter>06. UI\Popup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameClearHUD.cpp">
+      <Filter>06. UI\Popup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TitleScene.cpp">
+      <Filter>02. Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CutScene.cpp">
+      <Filter>02. Scene\Cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SelectScene.cpp">
+      <Filter>02. Scene\SelectStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\StageScene.cpp">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -153,6 +186,21 @@
     </Filter>
     <Filter Include="03. GameObject\Mouse">
       <UniqueIdentifier>{839ef30e-208a-4e7a-a162-1ca3b78aa5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\Popup">
+      <UniqueIdentifier>{68fca3b4-7623-4a47-b54e-12821b5cc995}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Title">
+      <UniqueIdentifier>{95f4cbab-350e-4880-bb7c-12289c4bdbfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Cut">
+      <UniqueIdentifier>{723f12ae-f280-4c90-af80-5b32308385aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\SelectStage">
+      <UniqueIdentifier>{5331ef60-78aa-4c3f-99ab-5878b8aab5ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\MainStage">
+      <UniqueIdentifier>{76e35784-d337-403f-8a66-e23766c8431e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +287,39 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Mouse.h">
       <Filter>03. GameObject\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\MainStageHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\StageSelectHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TitleHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\CreditHUD.h">
+      <Filter>06. UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\GameOverHUD.h">
+      <Filter>06. UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\InfoHUD.h">
+      <Filter>06. UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\GameClearHUD.h">
+      <Filter>06. UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TitleScene.h">
+      <Filter>02. Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\CutScene.h">
+      <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\SelectScene.h">
+      <Filter>02. Scene\SelectStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\StageScene.h">
+      <Filter>02. Scene\MainStage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

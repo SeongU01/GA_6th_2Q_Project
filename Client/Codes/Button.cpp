@@ -10,7 +10,7 @@ Button::Button()
 void Button::MouseUpdate()
 {
 	GetCursorPos(&_mousePosition);
-	ScreenToClient(GetActiveWindow(), &_mousePosition); 
+	ScreenToClient(Engine::GetWindow(), &_mousePosition); 
 }
 
 void Button::Awake()
@@ -20,7 +20,6 @@ void Button::Awake()
 
 void Button::Start()
 {
-
 }
 
 void Button::Update(const float& deltaTime)

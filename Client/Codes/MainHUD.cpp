@@ -4,7 +4,8 @@
 #include "UI.h"
 #include "TimerUI.h"
 #include "Button.h"
-
+#include "TitleScene.h"
+#include "SceneManager.h"
 
 MainHUD::MainHUD()
 	:MonoBehavior(L"MainUI")
@@ -26,10 +27,10 @@ void MainHUD::Start()
 
 	UI::UIInfo info;
 	info.name = L"name";
-	info.textureTag = L"UI_HUD_Timer_Box";
+	info.textureTag = L"UI_HUD_Button";
 	info.fixFrame = 0;
 	info.position = { 100.0f , 600.f, -1.f };
-	info.scale = { 0.4f, 1.0f, 1.0f };
+	info.scale = { 1.0f, 1.0f, 1.0f };
 	info.pParent = GetTransform();
 	UI* pObj = UI::Create(info);
 	Engine::AddObjectInLayer(
@@ -39,8 +40,8 @@ void MainHUD::Start()
 	Button* btn = pObj->AddComponent<Button>();
 	btn->SetCancel([pObj]() { pObj->SetScale( { 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale( { 0.0001f,0.0001f,0.0f }); });
-	btn->SetOnPressed([pObj]() { pObj->SetActive(false); });
-
+	btn->SetRange(info.position,pObj->GetImageSize());
+	btn->SetOnPressed([pObj]() { Scene::ChagneScene(TitleScene::Create()); });
 }
 
 void MainHUD::Update(const float& deltaTime)
@@ -50,4 +51,3 @@ void MainHUD::Update(const float& deltaTime)
 void MainHUD::LateUpdate(const float& deltaTime)
 {
 }
-//플레이어를 따라오는 적.. enemy

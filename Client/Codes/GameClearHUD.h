@@ -1,13 +1,13 @@
 #pragma once
 #include "MonoBehavior.h"
 #include "Client_Define.h"
-class UI;
-class MainHUD : public Engine::MonoBehavior
+
+class GameClearHUD : public Engine::MonoBehavior
 {
 public:
-	explicit MainHUD();
+	explicit GameClearHUD();
 private:
-	virtual ~MainHUD() = default;
+	virtual ~GameClearHUD() = default;
 public:
 	void Awake() override;
 	void Start() override;
