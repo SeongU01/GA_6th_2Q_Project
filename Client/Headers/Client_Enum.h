@@ -1,7 +1,7 @@
 #pragma once
 
 enum class LayerGroup { Tile, Object, Player, Enemy, UI, End };
-enum class RenderGroup { BackGround, Tile, Object, Player, FrontObject, FrontEffect, Plat, UI, Fade, End };
+enum class RenderGroup { BackGround, Tile, Object, Player, FrontObject, FrontEffect, Plat, Card, UI, Fade, End };
 enum class SoundGroup { BGM, SFX, Voice, End };
 
 enum class CardType { Attack, Move, Support };
