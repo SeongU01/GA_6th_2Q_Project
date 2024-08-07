@@ -107,6 +107,7 @@ namespace Engine
 		SpriteRenderer*					_pSpriteRenderer = nullptr;
 
 #ifdef _DEBUG
+	public:
 		bool _isDrawCollider = false;
 #endif
 	};	
