@@ -4,16 +4,6 @@
 
 using namespace Engine;
 
-// Lerp 함수
-Vector3 Lerp(const Vector3& a, const Vector3& b, float t)
-{
-	return {
-		a.x + t * (b.x - a.x),
-		a.y + t * (b.y - a.y),
-		a.z + t * (b.z - a.z)
-	};
-}
-
 void Engine::Camera::FixedUpdate()
 {	
 }
@@ -54,7 +44,7 @@ void Engine::Camera::LateUpdate(const float& deltaTime)
 		}
 
 		// 이전 프레임과의 선형 보간
-		_shakePosition = Lerp(_previousShakePosition, _currentShakePosition, deltaTime * 10.0f); // 보간 속도 조절
+		_shakePosition = XMVectorLerp(_previousShakePosition, _currentShakePosition, deltaTime * 10.0f); // 보간 속도 조절
 
 		// 현재 위치를 이전 위치로 업데이트
 		_previousShakePosition = _shakePosition;
@@ -76,7 +66,7 @@ void Engine::Camera::LateUpdate(const float& deltaTime)
 	// 흔들림 후 원래 자리로 부드럽게 복귀
 	if (_returnToOriginal)
 	{
-		_shakePosition = Lerp(_shakePosition, { 0.f, 0.f, 0.f }, deltaTime * 5.0f); // 복귀 속도 조절
+		_shakePosition = XMVectorLerp(_shakePosition, { 0.f, 0.f, 0.f }, deltaTime * 5.0f); // 복귀 속도 조절
 		if (fabs(_shakePosition.x) < 0.01f && fabs(_shakePosition.y) < 0.01f)
 		{
 			_shakePosition = { 0.f, 0.f, 0.f };
