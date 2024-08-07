@@ -10,6 +10,8 @@
 #include "GameObject.h"
 #include "Astar.h"
 
+#include "Tile.h"
+
 #include "Client_Define.h"
 
 Enemy::Enemy(const wchar_t* name)
@@ -42,18 +44,20 @@ void Enemy::Update(const float& deltaTime)
 {
 
 	Vector3 temporaryGoal = _player->GetGridPosition(); // 목표 지점
-
     _curTime += deltaTime;
-
-    if (!((int)temporaryGoal.x == (int)goalPosition.x && (int)temporaryGoal.y == (int)goalPosition.y)|| _path.empty() || _pathIndex >= _path.size()) {
-		goalPosition = temporaryGoal;
+		
+    if (!((int)temporaryGoal.x == (int)goalPosition.x && (int)temporaryGoal.y == (int)goalPosition.y)|| _path.empty() || _pathIndex >= _path.size())
+		{
+				goalPosition = temporaryGoal;
         _path = AStar(_gridPosition, goalPosition, _movement->_grid->GetTiles());
         _pathIndex = 1;
     }
 
-    if (!_path.empty() && _pathIndex < _path.size()) {
+    if (!_path.empty() && _pathIndex < _path.size()) 
+		{
         Vector3 nextPosition = _path[_pathIndex];
-        if (_curTime >= _moveTime) {
+        if (_curTime >= _moveTime) 
+				{
             _curTime = 0.0f;
             _gridPosition = nextPosition;
             _pathIndex++;
@@ -66,12 +70,13 @@ void Enemy::Update(const float& deltaTime)
 	if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 	{
 		_movement->MoveToCell(_gridPosition, 0.5f);
+
 	}
 	else
 	{
 		_path.clear();
-		//_gridPosition = tempGridPosition;
 	}
+
 }
 
 void Enemy::LateUpdate(const float& deltaTime)

@@ -9,6 +9,8 @@
 #include "GridMovement.h"
 
 
+#include "Tile.h"
+
 #include "Client_Define.h"
 
 Player::Player(const wchar_t* name)
@@ -40,6 +42,8 @@ void Player::Update(const float& deltaTime)
 {
 	Vector3 tempGridPosition = _gridPosition;
 
+	
+
 	if (Input::IsKeyDown(DIK_D)&&!(_movement->_isMoving))
 	{
 		_gridPosition.x++;
@@ -62,11 +66,16 @@ void Player::Update(const float& deltaTime)
 	if(_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 	{
 		_movement->MoveToCell(_gridPosition, 0.5f);
+		Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
+		prevTile->canMove = true;
 	}
 	else
 	{
 		_gridPosition = tempGridPosition;
 	}
+
+	Tile* currTile = _movement->_grid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x];
+	currTile->canMove = false;
 }
 
 void Player::LateUpdate(const float& deltaTime)
