@@ -65,6 +65,15 @@
     <ClCompile Include="..\Codes\MapManager.cpp">
       <Filter>04. System\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Enemy.cpp">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Astar.cpp">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TestEnemy.cpp">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -135,6 +144,9 @@
     </Filter>
     <Filter Include="04. System\Map">
       <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy">
+      <UniqueIdentifier>{89053091-ecfe-433a-8e66-596055912ece}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\MapManager.h">
       <Filter>04. System\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\Enemy.h">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\Astar.h">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TestEnemy.h">
+      <Filter>03. GameObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
