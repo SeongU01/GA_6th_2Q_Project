@@ -35,21 +35,28 @@ void Mouse::Update(const float& deltaTime)
 
 void Mouse::LateUpdate(const float& deltaTime)
 {
+	if (_hoverCard)
+	{
+		_hoverCard->SetOffset(Vector3(0.f, -50.f, 0.f));
+	}
 }
 
 void Mouse::OnCollisionEnter(Engine::CollisionInfo& info)
+{	
+}
+
+void Mouse::OnCollision(Engine::CollisionInfo& info)
 {
 	Engine::GameObject* pOther = info.other->GetOwner();
 
 	if (*pOther == L"Card")
 	{
 		if (nullptr == _hoverCard)
+		{
 			_hoverCard = pOther->GetComponent<Card>();
+			_hoverCard->priority = 2000.f;
+		}
 	}
-}
-
-void Mouse::OnCollision(Engine::CollisionInfo& info)
-{
 }
 
 void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
@@ -59,6 +66,10 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 	if (*pOther == L"Card")
 	{
 		if (pOther->GetComponent<Card>() == _hoverCard)
+		{
+			_hoverCard->SetOffset(Vector3());
+			_hoverCard->priority = 0.f;
 			_hoverCard = nullptr;
+		}
 	}
 }

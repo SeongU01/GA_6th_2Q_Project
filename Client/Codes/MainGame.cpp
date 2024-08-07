@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "Card.h"
 
 #include "Client_Define.h"
 
@@ -49,9 +50,16 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 			return srcPosition.z < dstPosition.z;
 		});
 
+	_pGameManager->SetSortGroup((int)RenderGroup::Card, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
+		{
+			Vector3 srcPosition = src->GetTransform()->GetPosition();
+			Vector3 dstPosition = dst->GetTransform()->GetPosition();
+			return srcPosition.x + src->GetComponent<Card>()->priority < dstPosition.x + dst->GetComponent<Card>()->priority;
+		});
+
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
-	//Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
+	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 	_pGameManager->ChagneScene(TestScene::Create());
 
 	return true;

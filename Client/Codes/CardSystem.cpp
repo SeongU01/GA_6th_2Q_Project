@@ -6,6 +6,39 @@
 
 #include "Client_Define.h"
 
+constexpr float MAXWIDTH = 1000.f;
+constexpr float CARDWIDTH = 200.f;
+
+void CardSystem::Update(const float& deltaTime)
+{
+	int index = 0;
+	size_t size = _handDeck.size();
+	float width = size * CARDWIDTH;
+	float maxWitdh = MAXWIDTH < width ? MAXWIDTH : width;
+	float halfX = maxWitdh * 0.5f;
+	float offsetX = maxWitdh / size;
+
+	for (auto& card : _handDeck)
+	{
+		card->gameObject->SetActive(true);
+		card->transform->position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
+		index++;
+	}
+}
+
+void CardSystem::LateUpdate(const float& deltaTime)
+{
+	if (Input::IsKeyDown(DIK_O))
+	{
+		DrawCard();
+	}
+
+	if (Input::IsKeyDown(DIK_P))
+	{
+		MoveTo(1, _handDeck, _graveDeck);
+	}
+}
+
 bool CardSystem::LoadOriginDeck()
 {
 	std::wstring path = rootPath;
@@ -28,6 +61,8 @@ bool CardSystem::LoadOriginDeck()
 		std::getline(wss, token, L',');	
 		_originDeck.push_back(_wtoi(token.c_str()));
 	}
+
+	return true;
 }
 
 void CardSystem::StartGame()
@@ -38,12 +73,20 @@ void CardSystem::StartGame()
 	{
 		_currentDeck.push_back(pCardManagement->CloneCard(cardID));
 		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", _currentDeck.back()->gameObject);
+		_currentDeck.back()->gameObject->SetActive(false);
 	}
 }
 
 void CardSystem::DrawCard()
 {
-	_handDeck.push_back(_currentDeck.back());
+	if (_currentDeck.empty())
+		return;
+
+	Card* pCard = _currentDeck.back();
+	pCard->gameObject->SetActive(true);
+	pCard->SetHand();
+
+	_handDeck.push_back(pCard);
 	_currentDeck.pop_back();
 }
 
@@ -54,6 +97,11 @@ void CardSystem::MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst)
 	if (find_iter == src.end())
 		return;
 
+	(*find_iter)->Reset();
 	dst.push_back(*find_iter);
 	src.erase(find_iter);
+}
+
+void CardSystem::Free()
+{
 }
