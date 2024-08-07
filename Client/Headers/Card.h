@@ -1,6 +1,11 @@
 #pragma once
 #include "MonoBehavior.h"
 
+namespace Engine
+{
+	class Collider;
+}
+
 enum class CardType;
 enum class CardEffectType;
 class Card final : public Engine::MonoBehavior
@@ -40,12 +45,23 @@ public:
 
 public:
 	int GetID() const { return _cardData.ID; }
+	float GetPriority() const { return _priority; }
+	void SetHand();
+	void SetOffset(const Vector3& offset);
+	void SetPriority(float priority) { _priority = priority; }
+
+	void Reset();
+
 public:
 	__declspec(property(get = GetID)) int ID;
+	__declspec(property(get = GetPriority, put = SetPriority)) float priority;
 
 private:
-	CardData		_cardData{};
-	std::wstring	_costMana;
-	std::wstring	_costTime;
+	CardData			_cardData{};
+	std::wstring		_costMana;
+	std::wstring		_costTime;
+	Vector3				_offset;
+	Engine::Collider*	_pCollider = nullptr;
+	float				_priority = 0.f;
 };
 

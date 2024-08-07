@@ -58,8 +58,7 @@ int Engine::GameObject::LateUpdate(const float& deltaTime)
 	for (auto& component : _components)
 		component->LateUpdate(deltaTime);
 
-	for (auto& collider : _colliders)
-		collider->LateUpdate(deltaTime);
+	_pTransform->UpdateTransform();
 
 	return 0;
 }

@@ -3,6 +3,7 @@
 
 // Component
 #include "TextRenderer.h"
+#include "Collider.h"
 
 #include "Client_Define.h"
 
@@ -14,8 +15,10 @@ Card::Card(const CardData& cardData)
 
 void Card::Awake()
 {
+	Engine::Texture* pTexture = Resource::FindTexture(L"Card");
+
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
-	pSpriteRenderer->BindTexture(Resource::FindTexture(L"Card"));
+	pSpriteRenderer->BindTexture(pTexture);
 	pSpriteRenderer->SetIndex((int)_cardData.type);
 
 	transform->position = Vector3(500.f, 500.f, 0.f);
@@ -50,6 +53,14 @@ void Card::Awake()
 	wsprintf(buffer, L"[%d]", _cardData.costMana);
 	_costMana = buffer;
 	pTextRenderer->SetText(_costMana.c_str());
+
+	_pCollider = AddComponent<Engine::Collider>(L"Card");
+	
+	D2D1_SIZE_F pixelSize = pTexture->GetImage(0)->GetSize();
+	_pCollider->SetScale({ pixelSize.width, pixelSize.height, 0.f });
+	_pCollider->SetActive(false);
+
+	gameObject->_isDrawCollider = true;
 }
 
 void Card::Start()
@@ -57,9 +68,28 @@ void Card::Start()
 }
 
 void Card::Update(const float& deltaTime)
-{
+{	
 }
 
 void Card::LateUpdate(const float& deltaTime)
 {
+	transform->position += _offset;
+}
+
+void Card::SetHand()
+{
+	transform->scale = Vector3(0.34f, 0.34f, 0.f);
+	_pCollider->SetActive(true);
+}
+
+void Card::Reset()
+{
+	transform->scale = Vector3(1.f, 1.f, 0.f);
+	gameObject->SetActive(false);
+	_pCollider->SetActive(false);
+}
+
+void Card::SetOffset(const Vector3& offset)
+{
+	_offset = offset;
 }

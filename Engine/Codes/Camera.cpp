@@ -85,7 +85,7 @@ void Engine::Camera::LateUpdate(const float& deltaTime)
 	}
 
 	_pTransform->SetPosition(position - _offset + _shakePosition);
-	_pTransform->LateUpdate(0.f);
+	_pTransform->UpdateTransform();
 }
 
 void Engine::Camera::SetMaxPosition(const Vector3& position)
@@ -107,9 +107,6 @@ void Engine::Camera::CameraShake(float shakeTime, float shakePower)
 
 const D2D1_MATRIX_3X2_F& Engine::Camera::GetCameraMatrix()
 {
-	if (nullptr == _pTransform)
-		return D2D1::Matrix3x2F::Identity();
-
 	return _pTransform->GetWorldMatrix();
 }
 

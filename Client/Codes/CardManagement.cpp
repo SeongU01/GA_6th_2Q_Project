@@ -48,7 +48,7 @@ Card* CardManagement::CloneCard(int ID)
 
     Engine::GameObject* pCard = Engine::GameObject::Create(); 
     pCard->SetName(L"Card");
-    pCard->SetRenderGroup((int)RenderGroup::UI);
+    pCard->SetRenderGroup((int)RenderGroup::Card);
     pCard->AddComponent<Card>(cardData);
 
     Engine::TextRenderer* pTextRenderer = pCard->AddComponent<Engine::TextRenderer>(L"OptionText", D2D1::ColorF::White, 40.f);
