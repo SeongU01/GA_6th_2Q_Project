@@ -18,7 +18,7 @@ struct MapInfo
 struct ObjectArrangeInfo
 {
 	std::wstring stageName;
-	//std::unordered_map<
+	std::vector<std::pair<int, Vector3>> objectPositionInfo;
 };
 
 class DataManager:public Engine::Base,public Engine::SingleTon<DataManager>
@@ -43,7 +43,20 @@ public:
 		}
 		throw std::runtime_error("Stage not found");
 	}
+
+	ObjectArrangeInfo GetObjectInfo(std::wstring _stageName)
+	{
+		for (const auto& objInfo : _objectInfo)
+		{
+			if (objInfo.stageName == _stageName)
+			{
+				return objInfo;
+			}
+		}
+		throw std::runtime_error("Stage not found");
+	}
 private:
 	std::vector<MapInfo> _mapInfos;
+	std::vector<ObjectArrangeInfo>_objectInfo;
 };
 
