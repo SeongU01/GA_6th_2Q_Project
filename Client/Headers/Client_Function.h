@@ -8,3 +8,12 @@ inline void PlayRandomSound(const int count, const char* soundTag, float volume 
 
 	Sound::PlaySound(tag.c_str(), (int)soundGroup, volume);
 }
+
+struct 
+{
+	template<typename T>
+	inline void Log(T a)
+	{
+		std::cout << a << std::endl;
+	}
+}Debug;
