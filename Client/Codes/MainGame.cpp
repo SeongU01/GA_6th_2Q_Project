@@ -40,6 +40,13 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	wcsrtombs_s(nullptr, multibyteFilePath, &widebyteFilePath, lstrlen(widebyteFilePath), nullptr);
 	_pGameManager->Initialize(info);
 
+	_pGameManager->SetSortGroup((int)RenderGroup::Object, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
+		{
+			Vector3 srcPosition = src->transform.position;
+			Vector3 dstPosition = dst->transform.position;
+			return srcPosition.y < dstPosition.y;
+		});
+
 	_pGameManager->SetSortGroup((int)RenderGroup::UI, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
 		{
 			Vector3 srcPosition = src->transform.position;
@@ -52,12 +59,13 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 			Vector3 srcPosition = src->transform.position;
 			Vector3 dstPosition = dst->transform.position;
 			return srcPosition.x + src->GetComponent<Card>()->priority < dstPosition.x + dst->GetComponent<Card>()->priority;
-		});
+		});	
 
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-	_pGameManager->ChagneScene(TitleScene::Create());
+
+	_pGameManager->ChagneScene(TestScene::Create());
 
 	return true;
 }
