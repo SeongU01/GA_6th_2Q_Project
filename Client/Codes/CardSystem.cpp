@@ -6,8 +6,8 @@
 
 #include "Client_Define.h"
 
-constexpr float MAXWIDTH = 1100.f;
-constexpr float CARDWIDTH = 200.f;
+constexpr float MAXWIDTH = 1150.f;
+constexpr float CARDWIDTH = 180.f;
 
 void CardSystem::Update(const float& deltaTime)
 {
@@ -20,8 +20,8 @@ void CardSystem::Update(const float& deltaTime)
 
 	for (auto& card : _handDeck)
 	{
-		card->gameObject->SetActive(true);
-		card->transform->position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
+		card->gameObject.SetActive(true);
+		card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
 		index++;
 	}
 }
@@ -72,8 +72,8 @@ void CardSystem::StartGame()
 	for (auto& cardID : _originDeck)
 	{
 		_currentDeck.push_back(pCardManagement->CloneCard(cardID));
-		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", _currentDeck.back()->gameObject);
-		_currentDeck.back()->gameObject->SetActive(false);
+		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
+		_currentDeck.back()->gameObject.SetActive(false);
 	}
 	
 	// Card ¼ÅÇÃ
@@ -90,7 +90,7 @@ void CardSystem::DrawCard()
 		return;
 
 	Card* pCard = _currentDeck.back();
-	pCard->gameObject->SetActive(true);
+	pCard->gameObject.SetActive(true);
 	pCard->SetHand();
 
 	_handDeck.push_back(pCard);

@@ -9,9 +9,6 @@
 
 #include "Client_Define.h"
 
-std::random_device g_rd;
-std::mt19937 g_gen(g_rd());
-
 MainGame::MainGame()
 	: _pGameManager(Engine::GameManager::GetInstance())
 {
@@ -23,7 +20,7 @@ void MainGame::Run()
 }
 
 bool MainGame::Initialize(HINSTANCE hInstance)
-{
+{	
 	Engine::GameManager::GameDefaultSetting info;
 
 	info.hInstance = hInstance;
@@ -45,15 +42,15 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 
 	_pGameManager->SetSortGroup((int)RenderGroup::UI, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
 		{
-			Vector3 srcPosition = src->GetTransform()->GetPosition();
-			Vector3 dstPosition = dst->GetTransform()->GetPosition();
+			Vector3 srcPosition = src->transform.position;
+			Vector3 dstPosition = dst->transform.position;
 			return srcPosition.z < dstPosition.z;
 		});
 
 	_pGameManager->SetSortGroup((int)RenderGroup::Card, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
 		{
-			Vector3 srcPosition = src->GetTransform()->GetPosition();
-			Vector3 dstPosition = dst->GetTransform()->GetPosition();
+			Vector3 srcPosition = src->transform.position;
+			Vector3 dstPosition = dst->transform.position;
 			return srcPosition.x + src->GetComponent<Card>()->priority < dstPosition.x + dst->GetComponent<Card>()->priority;
 		});
 

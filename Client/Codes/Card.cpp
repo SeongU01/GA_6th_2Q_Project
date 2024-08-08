@@ -21,8 +21,7 @@ void Card::Awake()
 	pSpriteRenderer->BindTexture(pTexture);
 	pSpriteRenderer->SetIndex((int)_cardData.type);
 
-	transform->position = Vector3(500.f, 500.f, 0.f);
-	// transform->scale = Vector3(0.34f, 0.34f, 0.f);
+	transform.position = Vector3(500.f, 500.f, 0.f);
 
 	// 카드 이름
 	Engine::TextRenderer* pTextRenderer = AddComponent<Engine::TextRenderer>(L"Title", D2D1::ColorF::White, 50.f, DWRITE_FONT_WEIGHT_BOLD);
@@ -59,7 +58,7 @@ void Card::Awake()
 	_pixelSize = pTexture->GetImage(0)->GetSize();	
 	_pCollider->SetActive(false);
 
-	gameObject->_isDrawCollider = true;
+	gameObject._isDrawCollider = true;
 }
 
 void Card::Start()
@@ -82,12 +81,12 @@ void Card::Update(const float& deltaTime)
 
 void Card::LateUpdate(const float& deltaTime)
 {
-	transform->position += _offset;
+	transform.position += _offset;
 }
 
 void Card::SetHand()
 {
-	transform->scale = Vector3(0.34f, 0.34f, 0.f);
+	transform.scale = Vector3(0.34f, 0.34f, 0.f);
 	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
 	_pCollider->SetActive(true);
 
@@ -103,13 +102,13 @@ void Card::SetHover(bool isHover)
 	{
 		_priority = 2000.f;
 		_targetOffset[1] = { 0.f, -65.f, 0.f };
-		transform->scale = Vector3(0.34f, 0.34f, 0.f) * 1.1f;
+		transform.scale = Vector3(0.34f, 0.34f, 0.f) * 1.1f;
 	}
 	else
 	{
 		_priority = 0.f;
 		_targetOffset[1] = { 0.f, 0.f, 0.f };
-		transform->scale = Vector3(0.34f, 0.34f, 0.f);
+		transform.scale = Vector3(0.34f, 0.34f, 0.f);
 	}
 
 	_targetOffset[0] = _offset;
@@ -119,7 +118,7 @@ void Card::SetHover(bool isHover)
 
 void Card::Reset()
 {
-	transform->scale = Vector3(1.f, 1.f, 0.f);
+	transform.scale = Vector3(1.f, 1.f, 0.f);
 	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
-	gameObject->SetActive(false);
+	gameObject.SetActive(false);
 }

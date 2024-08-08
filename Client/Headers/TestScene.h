@@ -4,8 +4,10 @@
 namespace Engine
 {
 	class GameObject;
+	class CollisionManager;
 }
 
+class CardSystem;
 class CardManagement;
 class MapManager;
 class TestScene : public Engine::Scene
@@ -20,6 +22,7 @@ public:
 	int LateUpdate(const float& deltaTime) override;
 
 private:
+	bool UIInitialize();
 	bool Initialize() override;
 	void Free() override;
 
@@ -27,8 +30,10 @@ public:
 	static TestScene* Create();
 
 private:
-	Engine::GameObject* _pTimeObject = nullptr;
-	CardManagement* _pCardManagement = nullptr;
-	MapManager* _pMapManager = nullptr;
-	wchar_t				_buffer[32]{};
+	Engine::GameObject*			_pTimeObject = nullptr;
+	Engine::CollisionManager*	_pCollisionManager = nullptr;
+	CardManagement*				_pCardManagement = nullptr;
+	CardSystem*					_pCardSystem = nullptr;
+	MapManager*					_pMapManager = nullptr;
+	wchar_t						_buffer[32]{};
 };

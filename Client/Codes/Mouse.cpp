@@ -30,7 +30,9 @@ void Mouse::Update(const float& deltaTime)
 	GetCursorPos(&mousePoint);
 	ScreenToClient(_hWnd, &mousePoint);
 
-	transform->position = Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f);
+	mousePoint.x = std::clamp((int)mousePoint.x, 0, WINCX);
+	mousePoint.y = std::clamp((int)mousePoint.y, 0, WINCY);
+	transform.position = Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f);
 }
 
 void Mouse::LateUpdate(const float& deltaTime)

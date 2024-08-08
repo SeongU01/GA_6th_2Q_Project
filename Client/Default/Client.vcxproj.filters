@@ -107,11 +107,11 @@
     <ClCompile Include="..\Codes\StageScene.cpp">
       <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\DeckUI.cpp">
-      <Filter>03. GameObject\UIObject\Deck</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DeckSystem.cpp">
-      <Filter>03. GameObject\UIObject\Deck</Filter>
+      <Filter>06. UI\Interaction\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\UIComponent.cpp">
+      <Filter>06. UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Player.cpp">
       <Filter>03. GameObject\Player\Script\Player</Filter>
@@ -166,9 +166,6 @@
     <Filter Include="03. GameObject\UIObject">
       <UniqueIdentifier>{e51e9a94-3c56-465c-9e57-ad0415818ac3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\UIObject\Timer">
-      <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\UIObject\Button">
       <UniqueIdentifier>{54256269-2a04-4f39-bd60-dc0d4d1c44ea}</UniqueIdentifier>
     </Filter>
@@ -211,7 +208,13 @@
     <Filter Include="02. Scene\MainStage">
       <UniqueIdentifier>{76e35784-d337-403f-8a66-e23766c8431e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\UIObject\Deck">
+    <Filter Include="03. GameObject\UIObject\Timer">
+      <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\Interaction">
+      <UniqueIdentifier>{ff40fc88-34ef-487f-99d0-172bd916b9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\Interaction\Deck">
       <UniqueIdentifier>{bc57b9de-50da-4ddb-a97d-51b529cea515}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\Player\Script\Player">
@@ -339,11 +342,11 @@
     <ClInclude Include="..\Codes\StageScene.h">
       <Filter>02. Scene\MainStage</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\DeckUI.h">
-      <Filter>03. GameObject\UIObject\Deck</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\DeckSystem.h">
-      <Filter>03. GameObject\UIObject\Deck</Filter>
+      <Filter>06. UI\Interaction\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\UIComponent.h">
+      <Filter>06. UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Player.h">
       <Filter>03. GameObject\Player\Script\Player</Filter>
