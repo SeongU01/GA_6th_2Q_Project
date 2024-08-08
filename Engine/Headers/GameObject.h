@@ -26,7 +26,7 @@ namespace Engine
 		virtual ~GameObject();
 	
 	public:
-		inline Transform* GetTransform() { return _pTransform; }
+		inline Transform& GetTransform() { return *_pTransform; }
 		inline std::vector<Collider*>& GetColliders() { return _colliders; }
 		inline bool IsDead() const { return _isDead; }
 
@@ -74,6 +74,9 @@ namespace Engine
 			
 			return pComponent;
 		}
+
+	public:
+		__declspec(property(get = GetTransform)) Transform& transform;
 
 	public:
 		static GameObject* Create();

@@ -66,7 +66,7 @@ void Engine::Rigidbody2D::Update(const float& deltaTime)
 	if (0.f != xmSpeed.m128_f32[0])
 	{
 		XMVECTOR xmDirection = XMVector3Normalize(xmVelocity);
-		transform->position += Vector3(xmVelocity * deltaTime);
+		transform.position += Vector3(xmVelocity * deltaTime);
 	}
 
 	// »˚ √ ±‚»≠

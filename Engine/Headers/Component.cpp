@@ -2,12 +2,12 @@
 
 using namespace Engine;
 
-Engine::Transform* Engine::Component::GetTransform()
+Engine::Transform& Engine::Component::GetTransform()
 {
     return _pOwner->GetTransform();
 }
 
-Engine::GameObject* Engine::Component::GetOwner()
+Engine::GameObject& Engine::Component::GetOwner()
 {
-    return _pOwner;
+    return *_pOwner;
 }

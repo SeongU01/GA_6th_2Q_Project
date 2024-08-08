@@ -22,7 +22,7 @@ void TextRenderer::Render()
 	if (nullptr == _pDeviceContext)
 		return;	
 	
-	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Translation(_offset.x, _offset.y) * transform->worldMatrix);
+	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Translation(_offset.x, _offset.y) * transform.worldMatrix);
 	_pSolidColorBrush->SetColor(_color);
 	_pSolidColorBrush->SetOpacity(1.f);
 

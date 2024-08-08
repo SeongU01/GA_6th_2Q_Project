@@ -22,10 +22,10 @@ namespace Engine
 		virtual void Render() {}
 
 	public:
-		Transform* GetTransform();
-		GameObject* GetOwner();
-		_declspec(property(get = GetTransform)) Transform* transform;
-		_declspec(property(get = GetOwner)) GameObject* gameObject;
+		Transform& GetTransform();
+		GameObject& GetOwner();
+		_declspec(property(get = GetTransform)) Transform& transform;
+		_declspec(property(get = GetOwner)) GameObject& gameObject;
 
 	protected:
 		template <typename T, typename... Args>
