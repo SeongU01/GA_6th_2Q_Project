@@ -29,9 +29,6 @@
     <ClCompile Include="..\Codes\TimerUI.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\TimerSystem.cpp">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\GridMovement.cpp">
       <Filter>03. GameObject\GridMovement</Filter>
     </ClCompile>
@@ -77,9 +74,6 @@
     <ClCompile Include="..\Codes\SelectScene.cpp">
       <Filter>02. Scene\SelectStage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\StageScene.cpp">
-      <Filter>02. Scene\MainStage</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DeckSystem.cpp">
       <Filter>06. UI\Interaction\Deck</Filter>
     </ClCompile>
@@ -91,6 +85,24 @@
     </ClCompile>
     <ClCompile Include="..\Codes\PlayerMP.cpp">
       <Filter>03. GameObject\Player\Script\MP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TitleButtons.cpp">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerSystem.cpp">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Stage2Scene.cpp">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Stage3Scene.cpp">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Stage4Scene.cpp">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Stage1Scene.cpp">
+      <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +208,9 @@
     <Filter Include="03. GameObject\Player\Script\MP">
       <UniqueIdentifier>{c6244185-5a42-44b7-8a46-1fd1b4c0f49b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. UI\Interaction\Button">
+      <UniqueIdentifier>{e51239d8-807e-4821-9835-1df79c7887ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -231,17 +246,8 @@
     <ClInclude Include="..\Headers\Card.h">
       <Filter>03. GameObject\Card</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\TimerUI.h">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\TimerSystem.h">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\GridMovement.h">
       <Filter>03. GameObject\GridMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\Button.h">
-      <Filter>03. GameObject\UIObject\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GridInfo.h">
       <Filter>03. GameObject\GridObject\GridInfo</Filter>
@@ -261,29 +267,11 @@
     <ClInclude Include="..\Headers\MapManager.h">
       <Filter>04. System\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\Enemy.h">
-      <Filter>03. GameObject\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\Astar.h">
-      <Filter>03. GameObject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Codes\TestEnemy.h">
       <Filter>03. GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Mouse.h">
       <Filter>03. GameObject\Mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\TitleScene.h">
-      <Filter>02. Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\CutScene.h">
-      <Filter>02. Scene\Cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\SelectScene.h">
-      <Filter>02. Scene\SelectStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\StageScene.h">
-      <Filter>02. Scene\MainStage</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DeckSystem.h">
       <Filter>06. UI\Interaction\Deck</Filter>
@@ -296,6 +284,45 @@
     </ClInclude>
     <ClInclude Include="..\Headers\PlayerMP.h">
       <Filter>03. GameObject\Player\Script\MP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Codes\TitleButtons.h">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Button.h">
+      <Filter>03. GameObject\UIObject\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TimerSystem.h">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TimerUI.h">
+      <Filter>03. GameObject\UIObject\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Astar.h">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Enemy.h">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Stage2Scene.h">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Stage3Scene.h">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Stage4Scene.h">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Stage1Scene.h">
+      <Filter>02. Scene\MainStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CutScene.h">
+      <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SelectScene.h">
+      <Filter>02. Scene\SelectStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TitleScene.h">
+      <Filter>02. Scene\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
