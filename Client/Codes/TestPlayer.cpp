@@ -1,4 +1,6 @@
 #include "TestPlayer.h"
+//script
+#include "PlayerMP.h"
 #include "Player.h"
 #include "Client_Define.h"
 #include "GridMovement.h"
@@ -10,6 +12,7 @@ void TestPlayer::Initialize()
 {
 	SetDontDestroyObject(true);
 	AddComponent<Player>(L"PlayerComponent");
+	AddComponent<PlayerMP>(L"MP");
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
 	SetRenderGroup((int)RenderGroup::Object);

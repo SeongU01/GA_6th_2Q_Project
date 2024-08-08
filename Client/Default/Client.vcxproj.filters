@@ -11,9 +11,6 @@
     <ClCompile Include="..\Codes\TestPlayer.cpp">
       <Filter>03. GameObject\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Player.cpp">
-      <Filter>03. GameObject\Player\Script</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\Grid.cpp">
       <Filter>03. GameObject\GridObject\Grid</Filter>
     </ClCompile>
@@ -116,6 +113,12 @@
     <ClCompile Include="..\Codes\DeckSystem.cpp">
       <Filter>03. GameObject\UIObject\Deck</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Player.cpp">
+      <Filter>03. GameObject\Player\Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\PlayerMP.cpp">
+      <Filter>03. GameObject\Player\Script\MP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -211,6 +214,15 @@
     <Filter Include="03. GameObject\UIObject\Deck">
       <UniqueIdentifier>{bc57b9de-50da-4ddb-a97d-51b529cea515}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Player\Script\Player">
+      <UniqueIdentifier>{3073aa2f-9a78-4a07-b62d-9ac6ffc4b704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Component">
+      <UniqueIdentifier>{8d1fe4b8-1fa6-4ece-8455-9e28dbfaa3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Player\Script\MP">
+      <UniqueIdentifier>{c6244185-5a42-44b7-8a46-1fd1b4c0f49b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -230,9 +242,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TestPlayer.h">
       <Filter>03. GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Player.h">
-      <Filter>03. GameObject\Player\Script</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Grid.h">
       <Filter>03. GameObject\GridObject\Grid</Filter>
@@ -335,6 +344,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DeckSystem.h">
       <Filter>03. GameObject\UIObject\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Player.h">
+      <Filter>03. GameObject\Player\Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\PlayerMP.h">
+      <Filter>03. GameObject\Player\Script\MP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
