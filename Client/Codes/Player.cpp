@@ -15,8 +15,8 @@
 
 
 
-Player::Player(const wchar_t* name)
-	: MonoBehavior(name)
+Player::Player(const wchar_t* name, const Vector3& startPos)
+	: MonoBehavior(name),_startPosition(startPos)
 {
 }
 

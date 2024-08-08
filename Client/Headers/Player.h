@@ -11,7 +11,7 @@ namespace Engine
 class Player : public Engine::MonoBehavior
 {
 public:
-	explicit Player(const wchar_t* name);
+	explicit Player(const wchar_t* name, const Vector3& startPos);
 private:
 	virtual ~Player() = default;
 public:
@@ -31,6 +31,6 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
-	Vector3 _startPosition = { 0.f,0.f,0.f };
+	Vector3 _startPosition;
 };
 

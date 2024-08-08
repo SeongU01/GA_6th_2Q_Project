@@ -15,11 +15,11 @@ private:
 	virtual ~TestPlayer() = default;
 
 private:
-	void Initialize();
+	void Initialize(const Vector3& startPos);
 public:
 	void ChangeCurrentGrid();
 public:
-	static TestPlayer* Create();
+	static TestPlayer* Create(const Vector3& startPos);
 
 };
 

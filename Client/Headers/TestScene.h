@@ -1,5 +1,5 @@
 #pragma once
-#include "Scene.h"
+#include "DefaultStageScene.h"
 
 namespace Engine
 {
@@ -9,8 +9,8 @@ namespace Engine
 
 class CardSystem;
 class CardManagement;
-class MapManager;
-class TestScene : public Engine::Scene
+class DataManager;
+class TestScene : public DefaultStageScene
 {
 private:
 	explicit TestScene() = default;
@@ -34,6 +34,6 @@ private:
 	Engine::CollisionManager*	_pCollisionManager = nullptr;
 	CardManagement*				_pCardManagement = nullptr;
 	CardSystem*					_pCardSystem = nullptr;
-	MapManager*					_pMapManager = nullptr;
+	DataManager*					_pDataManager = nullptr;
 	wchar_t						_buffer[32]{};
 };
