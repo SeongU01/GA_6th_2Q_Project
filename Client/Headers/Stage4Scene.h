@@ -1,14 +1,14 @@
 #pragma once
-#include "Scene.h"
+#include "DefaultStageScene.h"
 //메인게임스테이지
 namespace Engine
 {
 	class GameObject;
 }
-
 class CardManagement;
 class MapManager;
-class Stage4Scene : public Engine::Scene
+class TimerSystem;
+class Stage4Scene : public DefaultStageScene
 {
 private:
 	explicit Stage4Scene() = default;
@@ -27,8 +27,8 @@ private:
 public:
 	static Stage4Scene* Create();
 private:
+	TimerSystem* _pTimerSystem = nullptr;
 	Engine::GameObject* _pTimeObject = nullptr;
 	CardManagement* _pCardManagement = nullptr;
 	MapManager* _pMapManager = nullptr;
-	wchar_t				_buffer[32]{};
 };
