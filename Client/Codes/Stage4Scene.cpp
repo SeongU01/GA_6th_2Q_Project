@@ -53,8 +53,25 @@ bool Stage4Scene::Initialize()
     pBackGround->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     pBackGround->SetRenderGroup((int)RenderGroup::BackGround);
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pBackGround);
-
+    UIInitialize();
     return true;
+}
+
+bool Stage4Scene::UIInitialize()
+{
+    //컴포넌트(배경)
+    Engine::GameObject* pHUDObj = Engine::GameObject::Create();
+    Engine::SpriteRenderer* pSpriteRenderer = pHUDObj->GetComponent<Engine::SpriteRenderer>();
+    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
+    pSpriteRenderer->SetIndex(0);
+    pHUDObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
+
+    //버튼 (4개)
+    /*Engine::GameObject* pButtonObj = Engine::GameObject::Create();
+    pButtonObj->AddComponent<TitleButtons>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);*/
+    return false;
 }
 
 void Stage4Scene::Free()

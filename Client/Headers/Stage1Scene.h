@@ -8,6 +8,7 @@ namespace Engine
 
 class CardManagement;
 class MapManager;
+class TimerSystem;
 class Stage1Scene : public Engine::Scene
 {
 private:
@@ -21,11 +22,13 @@ public:
 
 private:
 	bool Initialize() override;
+	bool UIInitialize();
 	void Free() override;
 
 public:
 	static Stage1Scene* Create();
 private:
+	TimerSystem* _pTimerSystem = nullptr;
 	Engine::GameObject* _pTimeObject = nullptr;
 	CardManagement* _pCardManagement = nullptr;
 	MapManager* _pMapManager = nullptr;

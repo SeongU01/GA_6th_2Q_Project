@@ -53,8 +53,8 @@
     <ClCompile Include="..\Codes\TestPlayer.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="..\Codes\Tile.cpp" />
+    <ClCompile Include="..\Codes\TimerHUD.cpp" />
     <ClCompile Include="..\Codes\TimerSystem.cpp" />
-    <ClCompile Include="..\Codes\TimerUI.cpp" />
     <ClCompile Include="..\Codes\TitleButtons.cpp" />
     <ClCompile Include="..\Codes\TitleScene.cpp" />
     <ClCompile Include="..\Codes\UI.cpp" />
@@ -100,8 +100,8 @@
     <ClInclude Include="..\Headers\TestPlayer.h" />
     <ClInclude Include="..\Headers\TestScene.h" />
     <ClInclude Include="..\Headers\Tile.h" />
+    <ClInclude Include="..\Headers\TimerHUD.h" />
     <ClInclude Include="..\Headers\TimerSystem.h" />
-    <ClInclude Include="..\Headers\TimerUI.h" />
     <ClInclude Include="..\Headers\TitleButtons.h" />
     <ClInclude Include="..\Headers\TitleScene.h" />
     <ClInclude Include="..\Headers\UIComponent.h" />

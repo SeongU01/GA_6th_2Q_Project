@@ -26,9 +26,6 @@
     <ClCompile Include="..\Codes\Card.cpp">
       <Filter>03. GameObject\Card</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\TimerUI.cpp">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\GridMovement.cpp">
       <Filter>03. GameObject\GridMovement</Filter>
     </ClCompile>
@@ -121,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\DefaultStageScene.cpp">
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,9 +315,6 @@
     <ClInclude Include="..\Headers\TimerSystem.h">
       <Filter>03. GameObject\UIObject\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\TimerUI.h">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Astar.h">
       <Filter>03. GameObject\Enemy</Filter>
     </ClInclude>
@@ -365,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DefaultStageScene.h">
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TimerHUD.h">
+      <Filter>06. UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
