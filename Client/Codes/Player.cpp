@@ -30,7 +30,7 @@ void Player::Awake()
 	_pAnimation->ChangeAnimation(L"Idle");
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
-
+	pSpriteRenderer->SetDrawOffset(Vector3(-10.f, -50.f, 0.f));
 	_movement=AddComponent<GridMovement>(L"GridMovement",500.f);
 
 }
