@@ -1,7 +1,6 @@
 #include "SelectScene.h"
 
-//ui
-#include "StageSelectHUD.h"
+
 //¿Ãµø∞°¥… æ¿
 
 #include "MapManager.h"
