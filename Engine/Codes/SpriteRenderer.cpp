@@ -22,7 +22,14 @@ void Engine::SpriteRenderer::Awake()
 
 void Engine::SpriteRenderer::Render()
 {
-	Draw();
+	if (_isOneSelfDraw)
+	{
+		_oneSelfDrawFunction();
+	}
+	else
+	{
+		Draw();
+	}
 }
 
 void Engine::SpriteRenderer::BindTexture(Texture* pTexture)
@@ -74,17 +81,25 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	_pDeviceContext->DrawImage(_shaderData[_currShader]->GetEffect());
 }
 
-void Engine::SpriteRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1_COLOR_F& color)
+void Engine::SpriteRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, float width)
 {
-	_pDeviceContext->SetTransform(_cameraMatrix);
+	if (_notAffectCamera)
+		_pDeviceContext->SetTransform(transform.worldMatrix);
+	else
+		_pDeviceContext->SetTransform(transform.worldMatrix * _cameraMatrix);
+
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(1.f);
-	_pDeviceContext->DrawRectangle(rect, _pSolidColorBrush);
+	_pDeviceContext->DrawRectangle(rect, _pSolidColorBrush, width);
 }
 
-void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1_COLOR_F& color, const float& opacity)
+void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, const float& opacity)
 {
-	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
+	if (_notAffectCamera)
+		_pDeviceContext->SetTransform(transform.worldMatrix);
+	else
+		_pDeviceContext->SetTransform(transform.worldMatrix * _cameraMatrix);
+
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(opacity);
 	_pDeviceContext->FillRectangle(rect, _pSolidColorBrush);
@@ -98,6 +113,12 @@ void Engine::SpriteRenderer::SetDrawOffset(const Vector3& offset)
 void Engine::SpriteRenderer::NotAffectCamera()
 {
 	_notAffectCamera = true;
+}
+
+void Engine::SpriteRenderer::SetOneSelfDraw(bool isActive, const std::function<void()>& function)
+{
+	_isOneSelfDraw = isActive;
+	_oneSelfDrawFunction = function;
 }
 
 ID2D1Bitmap* Engine::SpriteRenderer::GetBitmap()

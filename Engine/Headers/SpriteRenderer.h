@@ -32,8 +32,8 @@ namespace Engine
 		void BindAnimation(Animation* pAnimation);
 		void Draw();
 		void Draw(ID2D1Bitmap* pBitmap);
-		void DrawRect(const D2D1_RECT_F& rect, const D2D1_COLOR_F& color = D2D1::ColorF(D2D1::ColorF::Lime));
-		void DrawFillRect(const D2D1_RECT_F& rect, const D2D1_COLOR_F& color, const float& opacity);
+		void DrawRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color = D2D1::ColorF::Lime, float width = 1.f);
+		void DrawFillRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, const float& opacity);
 
 		template <typename T>
 		T* AddShader()
@@ -83,6 +83,7 @@ namespace Engine
 		void SetIndex(const int index) { _index = index; }
 		void SetDrawOffset(const Vector3& offset);
 		void NotAffectCamera();
+		void SetOneSelfDraw(bool isActive, const std::function<void()>& function = nullptr);
 
 	private:
 		ID2D1Bitmap* GetBitmap();
@@ -90,18 +91,17 @@ namespace Engine
 		void Free() override;
 
 	private:
+		ShaderData				_shaderData;
+		std::function<void()>	_oneSelfDrawFunction;
 		D2D1_MATRIX_3X2_F		_cameraMatrix;
+		Vector3					_drawOffset;
 		Animation*				_pAnimation = nullptr;
 		Texture*				_pTexture = nullptr;
-
-		ShaderData				_shaderData;
-		size_t					_currShader;
-
 		ID2D1DeviceContext*		_pDeviceContext = nullptr;
 		ID2D1SolidColorBrush*	_pSolidColorBrush = nullptr;
-
-		Vector3					_drawOffset;
+		size_t					_currShader;
 		int						_index = 0;
 		bool					_notAffectCamera = false;
+		bool					_isOneSelfDraw = false;
 	};
 }
