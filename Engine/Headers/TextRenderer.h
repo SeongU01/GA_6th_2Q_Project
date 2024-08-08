@@ -15,8 +15,7 @@ namespace Engine
 
 	public:		
 		void SetText(const wchar_t* text) { _text = text; }
-		void SetDrawRect(const D2D1_RECT_F& drawRect) { _drawRect = drawRect; }
-		void SetDrawRect(const D2D1_POINT_2F& drawPoint) { _drawPoint = drawPoint; }
+		void SetDrawRect(float width, float height);
 		void SetOffset(const Vector3& offset) { _offset = offset; }
 		void SetTextLayout(const wchar_t* text, float width, float height);
 		void SetTextRangeEffectColor(unsigned int start, unsigned int length, D2D1::ColorF color);

@@ -28,7 +28,7 @@ void TimerHUD::Start()
 
 	Engine::GameObject* pObj = Engine::GameObject::Create();
 	pText = pObj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::Red);
-	pText->SetDrawRect(D2D1::RectF(100, 800, 300, 900));
+	pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pObj); pObj->SetRenderGroup((int)RenderGroup::UI);
 	pTimer = Engine::FindObject((int)LayerGroup::UI, L"TimerSystem", NULL)->GetComponent<TimerSystem>(); //타이머시스템
 
@@ -41,8 +41,8 @@ void TimerHUD::Update(const float& deltaTime)
 	if (timer > 30) // 주황 게이지 변경
 	{
 		float rate = (1 + int((timer - 30.f) / 5.f)) / 6.f;
-		int rates = 6 - ((timer - 30.f) / 5);
-		pYellow->SetOffsetPosition(Vector3(-10.8 * rates, 0.f, 0.f));
+		int rates = int(6 - ((timer - 30.f) / 5));
+		pYellow->SetOffsetPosition(Vector3(-10.8f * rates, 0.f, 0.f));
 		pYellow->SetScale({ 0.5f * rate, 1.0f, 0.f });
 		//  _RemainingUI[1]->SetOffsetPosition(Vector3(-(126* 0.5f *0.5f* (1.f - rate)), 0.f, 0.f)); 흐아아아앙
 	}
@@ -50,8 +50,8 @@ void TimerHUD::Update(const float& deltaTime)
 	{
 		pYellow->SetScale({ 0.f,0.f,0.f });
 		float rate = (1 + int(timer / 5.f)) / 6.f;
-		int rates = 6 - (timer / 5);
-		pRed->SetOffsetPosition(Vector3(-10.8 * rates, 0.f, 0.f));
+		int rates = int(6 - (timer / 5));
+		pRed->SetOffsetPosition(Vector3(-10.8f * rates, 0.f, 0.f));
 		pRed->SetScale({ 0.5f * rate, 1.0f, 0.f });
 	}
 	if (timer <= 0) { 

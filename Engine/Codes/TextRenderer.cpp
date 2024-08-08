@@ -37,6 +37,12 @@ void TextRenderer::Render()
 
 }
 
+void Engine::TextRenderer::SetDrawRect(float width, float height)
+{
+	_drawRect = { 0.f, 0.f, width, height };
+	_drawPoint = { width, height };
+}
+
 void Engine::TextRenderer::SetTextLayout(const wchar_t* text, float width, float height)
 {
 	_pWriteFactory->CreateTextLayout(text, lstrlen(text), _pWriteTextFormat, width, height, &_pWriteTextLayout);
