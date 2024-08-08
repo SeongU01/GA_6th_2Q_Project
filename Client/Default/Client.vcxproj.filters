@@ -122,6 +122,9 @@
     <ClCompile Include="..\Codes\TimerHUD.cpp">
       <Filter>06. UI\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\HP.cpp">
+      <Filter>05. Component\HP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -234,6 +237,9 @@
     </Filter>
     <Filter Include="02. Scene\MainStage\DefaultStage">
       <UniqueIdentifier>{7cf7c6dd-a3c0-49a4-8f37-54accd767b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Component\HP">
+      <UniqueIdentifier>{741f4b5e-5cb8-4dfb-8f63-1c7886f7e7ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +371,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TimerHUD.h">
       <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\HP.h">
+      <Filter>05. Component\HP</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
