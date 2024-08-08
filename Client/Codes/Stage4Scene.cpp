@@ -5,7 +5,8 @@
 #include "SpriteRenderer.h"
 #include "Client_Define.h"
 #include "DataManager.h"
-
+#include "TimerHUD.h"
+#include "TimerSystem.h"
 //object
 #include "Map.h"
 #include "TimerUI.h"
@@ -13,7 +14,6 @@
 #include "Obstacle.h"
 #include "TestEnemy.h"
 #include "Enemy.h"
-
 
 int Stage4Scene::Update(const float& deltaTime)
 {
@@ -27,6 +27,11 @@ int Stage4Scene::LateUpdate(const float& deltaTime)
 
 bool Stage4Scene::Initialize()
 {
+    //Timer=======================
+    Engine::GameObject* pTimer = Engine::GameObject::Create();
+    _pTimerSystem = pTimer->AddComponent<TimerSystem>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerSystem", pTimer); pTimer->SetRenderGroup((int)RenderGroup::UI);
+    //============================
     std::wstring path = rootPath;
     DataManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
     MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
@@ -45,14 +50,6 @@ bool Stage4Scene::Initialize()
     //_pCardManagement = CardManagement::GetInstance();
     //_pCardManagement->LoadCard((path + L"Data/Card").c_str());
 
-
-    Engine::GameObject* pBackGround = Engine::GameObject::Create();
-    Engine::SpriteRenderer* pSpriteRenderer = pBackGround->GetComponent<Engine::SpriteRenderer>();
-    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
-    pSpriteRenderer->SetIndex(0);
-    pBackGround->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
-    pBackGround->SetRenderGroup((int)RenderGroup::BackGround);
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pBackGround);
     UIInitialize();
     return true;
 }
@@ -67,10 +64,10 @@ bool Stage4Scene::UIInitialize()
     pHUDObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
 
-    //버튼 (4개)
-    /*Engine::GameObject* pButtonObj = Engine::GameObject::Create();
-    pButtonObj->AddComponent<TitleButtons>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);*/
+    //타이머
+    Engine::GameObject* pTimerObj = Engine::GameObject::Create();
+    pTimerObj->AddComponent<TimerHUD>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
     return false;
 }
 
