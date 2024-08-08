@@ -3,7 +3,6 @@
 //ui
 #include "StageSelectHUD.h"
 //¿Ãµø∞°¥… æ¿
-#include "StageScene.h"
 
 #include "MapManager.h"
 #include "Map.h"
@@ -31,13 +30,21 @@ bool SelectScene::Initialize()
     
     TestPlayer* pPlayer = static_cast<TestPlayer*>(Engine::FindObject((int)LayerGroup::Player, L"Player",NULL));
     pPlayer->ChangeCurrentGrid();
-    
-    
+   // UIFrame = ((int)LayerGroup::UI, L"MainUI", NULL);
+    UIInitialize();
     return true;
 }
 
 void SelectScene::Free()
 {
+}
+
+bool SelectScene::UIInitialize()
+{
+    Engine::GameObject* pObj = Engine::GameObject::Create();
+    //pObj->AddComponent<>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pObj);
+    return false;
 }
 
 SelectScene* SelectScene::Create()

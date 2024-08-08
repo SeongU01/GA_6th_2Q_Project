@@ -1,11 +1,11 @@
 #pragma once
 #include "Scene.h"
-//메인게임스테이지
-class StageScene : public Engine::Scene
+
+class TitleScene : public Engine::Scene
 {
 private:
-	explicit StageScene() = default;
-	virtual ~StageScene() = default;
+	explicit TitleScene() = default;
+	virtual ~TitleScene() = default;
 
 public:
 	// Scene을(를) 통해 상속됨
@@ -14,8 +14,8 @@ public:
 
 private:
 	bool Initialize() override;
+	bool UIInitialize();
 	void Free() override;
-
 public:
-	static StageScene* Create();
+	static TitleScene* Create();
 };

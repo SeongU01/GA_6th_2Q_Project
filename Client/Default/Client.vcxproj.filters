@@ -23,12 +23,6 @@
     <ClCompile Include="..\Codes\UI.cpp">
       <Filter>06. UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Canvas.cpp">
-      <Filter>06. UI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\MainHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\Card.cpp">
       <Filter>03. GameObject\Card</Filter>
     </ClCompile>
@@ -73,27 +67,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Mouse.cpp">
       <Filter>03. GameObject\Mouse</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\MainStageHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\StageSelectHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\TitleHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\CreditHUD.cpp">
-      <Filter>06. UI\Popup</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameOverHUD.cpp">
-      <Filter>06. UI\Popup</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\InfoHUD.cpp">
-      <Filter>06. UI\Popup</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameClearHUD.cpp">
-      <Filter>06. UI\Popup</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\TitleScene.cpp">
       <Filter>02. Scene\Title</Filter>
@@ -193,9 +166,6 @@
     <Filter Include="03. GameObject\Mouse">
       <UniqueIdentifier>{839ef30e-208a-4e7a-a162-1ca3b78aa5d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. UI\Popup">
-      <UniqueIdentifier>{68fca3b4-7623-4a47-b54e-12821b5cc995}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Scene\Title">
       <UniqueIdentifier>{95f4cbab-350e-4880-bb7c-12289c4bdbfb}</UniqueIdentifier>
     </Filter>
@@ -255,14 +225,8 @@
     <ClInclude Include="..\Headers\Map.h">
       <Filter>03. GameObject\GridObject\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\Canvas.h">
-      <Filter>06. UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Codes\UI.h">
       <Filter>06. UI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\MainHUD.h">
-      <Filter>06. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Card.h">
       <Filter>03. GameObject\Card</Filter>
@@ -308,27 +272,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Mouse.h">
       <Filter>03. GameObject\Mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\MainStageHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\StageSelectHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\TitleHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\CreditHUD.h">
-      <Filter>06. UI\Popup</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\GameOverHUD.h">
-      <Filter>06. UI\Popup</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\InfoHUD.h">
-      <Filter>06. UI\Popup</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Codes\GameClearHUD.h">
-      <Filter>06. UI\Popup</Filter>
     </ClInclude>
     <ClInclude Include="..\Codes\TitleScene.h">
       <Filter>02. Scene\Title</Filter>

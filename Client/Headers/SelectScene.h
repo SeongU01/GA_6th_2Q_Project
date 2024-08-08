@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 
+class Canvas;
 class SelectScene : public Engine::Scene
 {
 private:
@@ -15,7 +16,10 @@ public:
 private:
 	bool Initialize() override;
 	void Free() override;
+	bool UIInitialize();
 
 public:
 	static SelectScene* Create();
+private:
+	Canvas* UIFrame;
 };

@@ -1,13 +1,11 @@
 #pragma once
-#include "MonoBehavior.h"
-#include "Client_Define.h"
-
-class GameClearHUD : public Engine::MonoBehavior
+#include "UIComponent.h"
+class TitleButtons:public UIComponent
 {
 public:
-	explicit GameClearHUD();
+	explicit TitleButtons();
 private:
-	virtual ~GameClearHUD() = default;
+	virtual ~TitleButtons() = default;
 public:
 	void Awake() override;
 	void Start() override;

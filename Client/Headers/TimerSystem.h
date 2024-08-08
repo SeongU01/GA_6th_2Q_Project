@@ -2,6 +2,8 @@
 #include "MonoBehavior.h"
 #include "TextRenderer.h"
 #include "UI.h"
+//½Ì±ÛÅæ¾ø¾Ö±â..
+
 class TimerSystem :public Engine::MonoBehavior , public Engine::SingleTon<TimerSystem>
 {
 	friend class SingleTon;

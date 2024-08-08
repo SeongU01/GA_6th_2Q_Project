@@ -36,7 +36,7 @@ void Enemy::Awake()
 
 void Enemy::Start()
 {
-	transform->SetPosition(_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y));
+	transform.position=_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 
 }
 
