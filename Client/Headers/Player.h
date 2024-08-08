@@ -22,6 +22,8 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+private:
+	void DefaultMove(const float& deltaTime);
 
 private:
 	GridMovement* _movement = nullptr;

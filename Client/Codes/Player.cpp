@@ -38,35 +38,42 @@ void Player::Awake()
 void Player::Start()
 {
 	_gridPosition = _startPosition;
-	transform->SetPosition(_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y));
+	transform.position=_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 }
 
 void Player::Update(const float& deltaTime)
 {
+	DefaultMove(deltaTime);
+}
+
+void Player::LateUpdate(const float& deltaTime)
+{
+}
+
+void Player::DefaultMove(const float& deltaTime)
+{
 	Vector3 tempGridPosition = _gridPosition;
 
-	
-
-	if (Input::IsKeyDown(DIK_D)&&!(_movement->_isMoving))
+	if (Input::IsKeyDown(DIK_D) && !(_movement->_isMoving))
 	{
 		_gridPosition.x++;
 	}
-	else if (Input::IsKeyDown(DIK_A)&&!(_movement->_isMoving))
+	else if (Input::IsKeyDown(DIK_A) && !(_movement->_isMoving))
 	{
 		_gridPosition.x--;
 	}
-	else if (Input::IsKeyDown(DIK_W)&&!(_movement->_isMoving))
+	else if (Input::IsKeyDown(DIK_W) && !(_movement->_isMoving))
 	{
 		_gridPosition.y--;
 	}
-	else if (Input::IsKeyDown(DIK_S)&&!(_movement->_isMoving))
+	else if (Input::IsKeyDown(DIK_S) && !(_movement->_isMoving))
 	{
 		_gridPosition.y++;
 	}
 	_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
 	_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
-	
-	if(_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
+
+	if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 	{
 		_movement->MoveToCell(_gridPosition, 0.5f);
 		Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
@@ -81,6 +88,3 @@ void Player::Update(const float& deltaTime)
 	currTile->canMove = false;
 }
 
-void Player::LateUpdate(const float& deltaTime)
-{
-}

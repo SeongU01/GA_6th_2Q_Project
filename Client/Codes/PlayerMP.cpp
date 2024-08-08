@@ -16,7 +16,6 @@ void PlayerMP::Start()
 void PlayerMP::Update(const float& deltaTime)
 {
 	MPUpdate(deltaTime);
-	Debug.Log(_mp);
 }
 
 void PlayerMP::LateUpdate(const float& deltaTime)
@@ -28,6 +27,7 @@ void PlayerMP::MPUpdate(const float& deltaTime)
 	if (_mp < 5)
 		NaturalRecovery(deltaTime);
 
+	//마나 테스트용...
 	if (Input::IsKeyDown(DIK_M))
 	{
 		_mp--;

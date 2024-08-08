@@ -20,7 +20,7 @@ void ObstacleScript::Start()
 	float y = (_pGridInfo->GetGrid()->GetTileCenter((int)_gridRange.first.x, (int)_gridRange.first.y).y +
 		_pGridInfo->GetGrid()->GetTileCenter((int)_gridRange.second.x, (int)_gridRange.second.y).y) / 2;
 
-	transform->SetPosition(Vector3(x,y,0.f));
+	transform.position=Vector3(x,y,0.f);
 	for (int y = (int)_gridRange.first.y; y < (int)_gridRange.second.y + 1; y++)
 	{
 		for (int x = (int)_gridRange.first.x; x < (int)_gridRange.second.x + 1; x++)

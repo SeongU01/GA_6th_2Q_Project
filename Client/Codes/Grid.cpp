@@ -65,5 +65,5 @@ bool Grid::IsTileWalkable(int x, int y) const
 
 Vector3 Grid::GetTileCenter(int x, int y) const
 {
-	return _tiles[y][x]->GetTransform()->position;
+	return _tiles[y][x]->transform.position;
 }
