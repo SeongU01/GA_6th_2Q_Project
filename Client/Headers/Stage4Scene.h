@@ -21,6 +21,7 @@ public:
 
 private:
 	bool Initialize() override;
+	bool UIInitialize();
 	void Free() override;
 
 public:
