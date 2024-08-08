@@ -9,7 +9,7 @@ public:
 private:
 	virtual ~Button() = default;
 public:
-	void SetRange(Vector3 position, D2D1_SIZE_F size) {_buttonRange = { position.x, position.y,position.x + size.width,position.y + size.height }; }
+	void SetRange(Vector3 position, D2D1_SIZE_F size) {_buttonRange = { position.x-(size.width/2), position.y - (size.width / 2),position.x + size.width,position.y + size.height}; }
 	void SetOnPressed(std::function<void()>function) { _onPressed = function; }; //버튼 클릭
 	void SetOnHover(std::function<void()> function) { _onHover = function; }; //버튼 호버
 	void SetCancel(std::function<void()> function) { _cancel = function; }; //호버취소

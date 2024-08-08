@@ -82,7 +82,7 @@ std::vector<Vector3> AStar(const Vector3& start, const Vector3& goal, const std:
 
         if (*currentNode == *goalNode) {
 
-            return reconstructPath(currentNode);
+            return reconstructPath(currentNode->pParent);
         }
 
         for (const auto& neighborPos : getNeighbors(currentNode->position, grid,goal)) {
