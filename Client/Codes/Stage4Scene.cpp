@@ -51,7 +51,7 @@ bool Stage4Scene::Initialize()
     Engine::SpriteRenderer* pSpriteRenderer = pBackGround->GetComponent<Engine::SpriteRenderer>();
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
     pSpriteRenderer->SetIndex(0);
-    pBackGround->GetTransform()->SetPosition(Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f));
+    pBackGround->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     pBackGround->SetRenderGroup((int)RenderGroup::BackGround);
     Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pBackGround);
 
