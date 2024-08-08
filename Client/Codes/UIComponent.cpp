@@ -6,11 +6,12 @@ UIComponent::UIComponent(const wchar_t* name)
 {
 }
 
-void UIComponent::AddUI(const UI::UIInfo& info)
+UI* UIComponent::AddUI(const UI::UIInfo& info)
 {
 	UI* pUI = UI::Create(info);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pUI);
 	_UIs.push_back(pUI);
+	return pUI;
 }
 
 void UIComponent::SetDontDestroyObject(bool isActive)

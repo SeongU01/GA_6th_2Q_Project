@@ -9,7 +9,7 @@ protected:
 	virtual ~UIComponent() = default;
 
 protected:
-	void AddUI(const UI::UIInfo& info);
+	UI* AddUI(const UI::UIInfo& info);
 	void SetDontDestroyObject(bool isActive);
 	UI::UIInfo CreateInfo(const wchar_t* name, const wchar_t* tag, int fixframe, Vector3 position, Vector3 scale, Engine::Transform* parent)
 	{
