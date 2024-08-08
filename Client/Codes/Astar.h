@@ -6,7 +6,6 @@
 
 #include "Tile.h"
 #include "Client_Define.h"
-//노드풀, 메모리풀
 
 struct Vector3Hash {
     std::size_t operator()(const Vector3& v) const {
@@ -42,7 +41,7 @@ float heuristic(const Vector3& a, const Vector3& b) {
     return std::abs(a.x - b.x) + std::abs(a.y - b.y);
 }
 
-std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vector<Tile*>>& grid) {
+std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vector<Tile*>>& grid, Vector3 goal) {
     std::vector<Vector3> neighbors;
     std::vector<Vector3> directions = { {1, 0, 0}, {0, 1, 0}, {-1, 0, 0}, {0, -1, 0} };
 
@@ -50,7 +49,7 @@ std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vec
         Vector3 neighborPos = { pos.x + dir.x, pos.y + dir.y, pos.z };
         if (neighborPos.x >= 0 && (int)neighborPos.x < (int)grid[0].size() &&
             neighborPos.y >= 0 && (int)neighborPos.y < (int)grid.size() &&
-            grid[(int)neighborPos.y][(int)neighborPos.x]->canMove) {
+            (grid[(int)neighborPos.y][(int)neighborPos.x]->canMove || ((int)goal.x==(int)neighborPos.x ) && ((int)goal.y == (int)neighborPos.y))) {
             neighbors.push_back(neighborPos);
         }
     }
@@ -86,7 +85,7 @@ std::vector<Vector3> AStar(const Vector3& start, const Vector3& goal, const std:
             return reconstructPath(currentNode);
         }
 
-        for (const auto& neighborPos : getNeighbors(currentNode->position, grid)) {
+        for (const auto& neighborPos : getNeighbors(currentNode->position, grid,goal)) {
             float tentativeGCost = currentNode->gCost + 1;
             std::shared_ptr<Node> neighborNode;
 
