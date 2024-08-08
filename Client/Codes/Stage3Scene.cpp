@@ -4,10 +4,9 @@
 #include "TextRenderer.h"
 #include "SpriteRenderer.h"
 #include "Client_Define.h"
-#include "MapManager.h"
+#include "DataManager.h"
 
 //object
-#include "MapManager.h"
 #include "Map.h"
 #include "TimerUI.h"
 #include "TestPlayer.h"
@@ -29,8 +28,8 @@ int Stage3Scene::LateUpdate(const float& deltaTime)
 bool Stage3Scene::Initialize()
 {
     std::wstring path = rootPath;
-    MapManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
-    MapInfo stage1 = MapManager::GetInstance()->GetMapInfo(L"Stage1");
+    DataManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
+    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
 
     /*Engine::AddObjectInLayer
     ((int)LayerGroup::Tile, L"Tile",

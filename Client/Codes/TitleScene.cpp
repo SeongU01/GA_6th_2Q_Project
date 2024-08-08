@@ -4,7 +4,7 @@
 #include "UIComponent.h"
 #include "SpriteRenderer.h"
 
-#include "MapManager.h"
+#include "DataManager.h"
 #include "Map.h"
 #include "TestPlayer.h"
 

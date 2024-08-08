@@ -1,6 +1,6 @@
-#include "MapManager.h"
+#include "DataManager.h"
 
-bool MapManager::LoadMap(const wchar_t* filePath)
+bool DataManager::LoadMap(const wchar_t* filePath)
 {
   std::wstring path = filePath;
   std::wifstream file((path + L"/Map.csv").c_str());
@@ -65,6 +65,11 @@ bool MapManager::LoadMap(const wchar_t* filePath)
   return true;
 }
 
-void MapManager::Free()
+bool DataManager::LoadObjectArrange(const wchar_t* filePath)
+{
+  return false;
+}
+
+void DataManager::Free()
 {
 }

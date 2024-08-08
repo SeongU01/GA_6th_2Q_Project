@@ -1,6 +1,6 @@
 #pragma once
 #include "MonoBehavior.h"
-#include "MapManager.h"
+#include "DataManager.h"
 
 class Tile;
 

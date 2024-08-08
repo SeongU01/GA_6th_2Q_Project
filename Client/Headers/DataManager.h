@@ -2,7 +2,7 @@
 #include "Base.h"
 
 
-
+//map
 struct MapInfo
 {
 	std::wstring stageName;
@@ -14,14 +14,22 @@ struct MapInfo
 	std::vector<std::vector<int>>mapData;
 };
 
-class MapManager:public Engine::Base,public Engine::SingleTon<MapManager>
+//object
+struct ObjectArrangeInfo
+{
+	std::wstring stageName;
+	//std::unordered_map<
+};
+
+class DataManager:public Engine::Base,public Engine::SingleTon<DataManager>
 {
 	friend class SingleTon;
 private:
-	explicit MapManager() = default;
-	virtual ~MapManager() = default;
+	explicit DataManager() = default;
+	virtual ~DataManager() = default;
 public:
 	bool LoadMap(const wchar_t* filePath);
+	bool LoadObjectArrange(const wchar_t* filePath);
 	void Free() override;
 
 	MapInfo GetMapInfo(std::wstring _stageName) 

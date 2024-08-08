@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "MapManager.h"
+#include "DataManager.h"
 
 class Map :public Engine::GameObject
 {

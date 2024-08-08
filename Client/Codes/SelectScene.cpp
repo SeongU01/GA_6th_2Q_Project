@@ -3,7 +3,7 @@
 
 //ÀÌµ¿°¡´É ¾À
 
-#include "MapManager.h"
+#include "DataManager.h"
 #include "Map.h"
 #include "TestPlayer.h"
 
@@ -23,8 +23,8 @@ int SelectScene::LateUpdate(const float& deltaTime)
 bool SelectScene::Initialize()
 {
     std::wstring path = rootPath;
-    MapManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
-    MapInfo stage1 = MapManager::GetInstance()->GetMapInfo(L"Stage2");
+    DataManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
+    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage2");
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
     
     TestPlayer* pPlayer = static_cast<TestPlayer*>(Engine::FindObject((int)LayerGroup::Player, L"Player",NULL));

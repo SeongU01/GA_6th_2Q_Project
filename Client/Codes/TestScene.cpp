@@ -1,7 +1,7 @@
 #include "TestScene.h"
 #include "CardManagement.h"
 #include "CardSystem.h"
-#include "MapManager.h"
+#include "DataManager.h"
 #include "CollisionManager.h"
 #include "Client_Define.h"
 
@@ -10,9 +10,6 @@
 #include "TextRenderer.h"
 #include "SpriteRenderer.h"
 #include "DeckSystem.h"
-
-//ui
-#include "Canvas.h"
 
 //object
 #include "Map.h"
@@ -51,14 +48,13 @@ bool TestScene::UIInitialize()
 bool TestScene::Initialize()
 {
     std::wstring path = rootPath;
-    MapManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
-    MapInfo stage1 = MapManager::GetInstance()->GetMapInfo(L"Stage1");
+    DataManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
+    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
 
     /*Engine::AddObjectInLayer
     ((int)LayerGroup::Tile, L"Tile", 
         Map::Create(Vector3(stage1.width, stage1.height, 0.f), Vector3(stage1.tileOffsetX, stage1.tileOffsetY, 0.f)
           ,Vector3(WINCX>>1,WINCY>>1,0.f),stage1.mapOffsetY));*/
-
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
 
 

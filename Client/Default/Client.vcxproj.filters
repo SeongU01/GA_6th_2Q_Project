@@ -50,8 +50,8 @@
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>04. System\Card</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\MapManager.cpp">
-      <Filter>04. System\Map</Filter>
+    <ClCompile Include="..\Codes\DataManager.cpp">
+      <Filter>04. System\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Enemy.cpp">
       <Filter>03. GameObject\Enemy</Filter>
@@ -169,9 +169,6 @@
     <Filter Include="04. System\Card">
       <UniqueIdentifier>{5db05a69-6fcd-4eec-b6b0-147a1483bf6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. System\Map">
-      <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Enemy">
       <UniqueIdentifier>{89053091-ecfe-433a-8e66-596055912ece}</UniqueIdentifier>
     </Filter>
@@ -210,6 +207,9 @@
     </Filter>
     <Filter Include="06. UI\Interaction\Button">
       <UniqueIdentifier>{e51239d8-807e-4821-9835-1df79c7887ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. System\Data">
+      <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,8 +264,8 @@
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>04. System\Card</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\MapManager.h">
-      <Filter>04. System\Map</Filter>
+    <ClInclude Include="..\Headers\DataManager.h">
+      <Filter>04. System\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\Codes\TestEnemy.h">
       <Filter>03. GameObject\Enemy</Filter>
