@@ -119,6 +119,9 @@
     <ClCompile Include="..\Codes\Pannel.cpp">
       <Filter>03. GameObject\Pannel</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DefaultStageScene.cpp">
+      <Filter>02. Scene\MainStage\DefaultStage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -228,6 +231,9 @@
     </Filter>
     <Filter Include="03. GameObject\Pannel">
       <UniqueIdentifier>{428abf47-2a26-4f96-a7d7-387f9721717a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\MainStage\DefaultStage">
+      <UniqueIdentifier>{7cf7c6dd-a3c0-49a4-8f37-54accd767b52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -356,6 +362,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Pannel.h">
       <Filter>03. GameObject\Pannel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultStageScene.h">
+      <Filter>02. Scene\MainStage\DefaultStage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

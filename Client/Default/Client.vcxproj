@@ -27,6 +27,7 @@
     <ClCompile Include="..\Codes\CreditHUD.cpp" />
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
+    <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
@@ -74,6 +75,7 @@
     <ClInclude Include="..\Headers\CreditHUD.h" />
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
+    <ClInclude Include="..\Headers\DefaultStageScene.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
     <ClInclude Include="..\Headers\Grid.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
