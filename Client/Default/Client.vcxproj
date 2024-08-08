@@ -25,6 +25,8 @@
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardManagement.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
+    <ClCompile Include="..\Codes\DeckSystem.cpp" />
+    <ClCompile Include="..\Codes\DeckUI.cpp" />
     <ClCompile Include="..\Codes\GameClearHUD.cpp" />
     <ClCompile Include="..\Codes\CreditHUD.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
@@ -84,6 +86,8 @@
     <ClInclude Include="..\Headers\Client_Define.h" />
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
+    <ClInclude Include="..\Headers\DeckSystem.h" />
+    <ClInclude Include="..\Headers\DeckUI.h" />
     <ClInclude Include="..\Headers\Grid.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
     <ClInclude Include="..\Headers\GridMovement.h" />

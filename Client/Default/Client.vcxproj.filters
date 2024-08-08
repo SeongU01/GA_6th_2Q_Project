@@ -110,6 +110,12 @@
     <ClCompile Include="..\Codes\StageScene.cpp">
       <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DeckUI.cpp">
+      <Filter>03. GameObject\UIObject\Deck</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DeckSystem.cpp">
+      <Filter>03. GameObject\UIObject\Deck</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -201,6 +207,9 @@
     </Filter>
     <Filter Include="02. Scene\MainStage">
       <UniqueIdentifier>{76e35784-d337-403f-8a66-e23766c8431e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\UIObject\Deck">
+      <UniqueIdentifier>{bc57b9de-50da-4ddb-a97d-51b529cea515}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +329,12 @@
     </ClInclude>
     <ClInclude Include="..\Codes\StageScene.h">
       <Filter>02. Scene\MainStage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DeckUI.h">
+      <Filter>03. GameObject\UIObject\Deck</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DeckSystem.h">
+      <Filter>03. GameObject\UIObject\Deck</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

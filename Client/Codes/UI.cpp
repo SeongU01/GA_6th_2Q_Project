@@ -62,15 +62,16 @@ void UI::AddScale(const Vector3& scale)
 }
 
 
-void UI::Initialize(UIInfo& info)
+void UI::Initialize(const UIInfo& info)
 {
     _info = info;
     SetName(_info.name);
+    SetRenderGroup((int)RenderGroup::UI);
 
     _pTransform->SetParent(_info.pParent);
     _pTransform->SetPosition(_info.position+ _offsetPosition);
     _pTransform->SetScale(_info.scale);
-    SetRenderGroup((int)RenderGroup::UI);
+
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
     _pSpriteRenderer->NotAffectCamera();
     _pSpriteRenderer->SetIndex(_info.fixFrame);
@@ -81,7 +82,7 @@ void UI::Free()
 {
 }
 
-UI* UI::Create(UIInfo& info)
+UI* UI::Create(const UIInfo& info)
 {
     UI* pInstance = new UI;
     pInstance->Initialize(info);

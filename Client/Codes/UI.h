@@ -28,12 +28,13 @@ public:
 	void SetRotation(float angle);
 	void AddRotation(float angle);
 	void AddScale(const Vector3& scale);
+
 private:
-	void Initialize(UIInfo& info);
+	void Initialize(const UIInfo& info);
 	void Free() override;
 
 public:
-	static UI* Create(UIInfo& info);
+	static UI* Create(const UIInfo& info);
 
 private:
 	UIInfo				_info;
