@@ -116,6 +116,9 @@
     <ClCompile Include="..\Codes\InfoHUD.cpp">
       <Filter>06. UI\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Pannel.cpp">
+      <Filter>03. GameObject\Pannel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -222,6 +225,9 @@
     </Filter>
     <Filter Include="04. System\Data">
       <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Pannel">
+      <UniqueIdentifier>{428abf47-2a26-4f96-a7d7-387f9721717a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\InfoHUD.h">
       <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Pannel.h">
+      <Filter>03. GameObject\Pannel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

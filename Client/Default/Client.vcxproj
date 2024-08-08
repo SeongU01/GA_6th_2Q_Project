@@ -39,6 +39,7 @@
     <ClCompile Include="..\Codes\Mouse.cpp" />
     <ClCompile Include="..\Codes\Obstacle.cpp" />
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
+    <ClCompile Include="..\Codes\Pannel.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\PlayerMP.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
@@ -85,6 +86,7 @@
     <ClInclude Include="..\Headers\Mouse.h" />
     <ClInclude Include="..\Headers\Obstacle.h" />
     <ClInclude Include="..\Headers\ObstacleScript.h" />
+    <ClInclude Include="..\Headers\Pannel.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\PlayerMP.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
