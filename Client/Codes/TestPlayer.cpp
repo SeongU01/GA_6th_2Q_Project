@@ -8,10 +8,10 @@
 
 enum Flag : unsigned long long { Attack, Move, Idle };
 
-void TestPlayer::Initialize()
+void TestPlayer::Initialize(const Vector3& startPos)
 {
 	SetDontDestroyObject(true);
-	AddComponent<Player>(L"PlayerComponent");
+	AddComponent<Player>(L"PlayerComponent",startPos);
 	AddComponent<PlayerMP>(L"MP");
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 
@@ -26,10 +26,10 @@ void TestPlayer::ChangeCurrentGrid()
 	pPlayerSpcript->Start();
 }
 
-TestPlayer* TestPlayer::Create()
+TestPlayer* TestPlayer::Create(const Vector3& startPos)
 {
 	TestPlayer* pInstance = new TestPlayer;
-	pInstance->Initialize();
+	pInstance->Initialize(startPos);
 
 	return pInstance;
 }
