@@ -22,6 +22,8 @@ protected:
 		info.pParent = parent;
 		return info;
 	}
+public:
+	void SetActives(bool check);
 
 private:
 	std::list<UI*> _UIs;

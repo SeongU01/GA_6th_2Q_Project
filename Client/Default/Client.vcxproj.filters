@@ -104,6 +104,18 @@
     <ClCompile Include="..\Codes\Stage1Scene.cpp">
       <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\HPHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SelectButtons.cpp">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CreditHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\InfoHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -285,9 +297,6 @@
     <ClInclude Include="..\Headers\PlayerMP.h">
       <Filter>03. GameObject\Player\Script\MP</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\TitleButtons.h">
-      <Filter>06. UI\Interaction\Button</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Button.h">
       <Filter>03. GameObject\UIObject\Button</Filter>
     </ClInclude>
@@ -323,6 +332,21 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TitleScene.h">
       <Filter>02. Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\HPHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SelectButtons.h">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TitleButtons.h">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CreditHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\InfoHUD.h">
+      <Filter>06. UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

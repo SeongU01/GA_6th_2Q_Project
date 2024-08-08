@@ -24,12 +24,15 @@
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardManagement.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
+    <ClCompile Include="..\Codes\CreditHUD.cpp" />
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
     <ClCompile Include="..\Codes\GridMovement.cpp" />
+    <ClCompile Include="..\Codes\HPHUD.cpp" />
+    <ClCompile Include="..\Codes\InfoHUD.cpp" />
     <ClCompile Include="..\Codes\MainGame.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
     <ClCompile Include="..\Codes\DataManager.cpp" />
@@ -38,6 +41,7 @@
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\PlayerMP.cpp" />
+    <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
     <ClCompile Include="..\Codes\Stage1Scene.cpp" />
     <ClCompile Include="..\Codes\Stage2Scene.cpp" />
@@ -57,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Codes\TestEnemy.h" />
-    <ClInclude Include="..\Codes\TitleButtons.h" />
     <ClInclude Include="..\Codes\UI.h" />
     <ClInclude Include="..\Headers\Astar.h" />
     <ClInclude Include="..\Headers\Button.h" />
@@ -67,12 +70,15 @@
     <ClInclude Include="..\Headers\Client_Define.h" />
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
+    <ClInclude Include="..\Headers\CreditHUD.h" />
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
     <ClInclude Include="..\Headers\Grid.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
     <ClInclude Include="..\Headers\GridMovement.h" />
+    <ClInclude Include="..\Headers\HPHUD.h" />
+    <ClInclude Include="..\Headers\InfoHUD.h" />
     <ClInclude Include="..\Headers\MainGame.h" />
     <ClInclude Include="..\Headers\Map.h" />
     <ClInclude Include="..\Headers\DataManager.h" />
@@ -81,6 +87,7 @@
     <ClInclude Include="..\Headers\ObstacleScript.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\PlayerMP.h" />
+    <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />
     <ClInclude Include="..\Headers\Stage1Scene.h" />
     <ClInclude Include="..\Headers\Stage2Scene.h" />
@@ -91,6 +98,7 @@
     <ClInclude Include="..\Headers\Tile.h" />
     <ClInclude Include="..\Headers\TimerSystem.h" />
     <ClInclude Include="..\Headers\TimerUI.h" />
+    <ClInclude Include="..\Headers\TitleButtons.h" />
     <ClInclude Include="..\Headers\TitleScene.h" />
     <ClInclude Include="..\Headers\UIComponent.h" />
   </ItemGroup>

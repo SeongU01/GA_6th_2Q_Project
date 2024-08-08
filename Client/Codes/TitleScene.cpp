@@ -3,15 +3,21 @@
 #include "TitleButtons.h"
 #include "UIComponent.h"
 #include "SpriteRenderer.h"
-
-#include "DataManager.h"
-#include "Map.h"
-#include "TestPlayer.h"
+#include "CreditHUD.h"
+#include "InfoHUD.h"
 
 #include "Client_Define.h"
 
 int TitleScene::Update(const float& deltaTime)
 {
+    if (Input::IsKeyDown(DIK_ESCAPE))
+    {
+        InfoHUD* pInfo = Engine::FindObject((int)LayerGroup::UI, L"Info", NULL)->GetComponent<InfoHUD>();
+        pInfo->SetActives(false);
+
+        CreditHUD* pCredit = Engine::FindObject((int)LayerGroup::UI, L"Credit", NULL)->GetComponent<CreditHUD>();
+        pCredit->SetActives(false);
+    }
     return 0;
 }
 
@@ -35,12 +41,21 @@ bool TitleScene::UIInitialize()
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
     pSpriteRenderer->SetIndex(0);
     pHUDObj->transform.position=Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
+    
     //¹öÆ° (4°³)
     Engine::GameObject* pButtonObj = Engine::GameObject::Create();
     pButtonObj->AddComponent<TitleButtons>();
-    
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);
+    
+    //Å©·¹µ÷ ÆË¾÷
+    Engine::GameObject* pCreditObj = Engine::GameObject::Create();
+    pCreditObj->AddComponent<CreditHUD>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Credit", pCreditObj); pCreditObj->SetRenderGroup((int)RenderGroup::Fade); //ÆË¾÷ÀÌ¶ó ´õ ³ô°Ô..
+    //Á¤º¸º¸±â ÆË¾÷
+    Engine::GameObject* pInfoObj = Engine::GameObject::Create();
+    pInfoObj->AddComponent<InfoHUD>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Info", pInfoObj); pInfoObj->SetRenderGroup((int)RenderGroup::Fade);
     return false;
 }
 void TitleScene::Free()

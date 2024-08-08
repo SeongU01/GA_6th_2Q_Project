@@ -19,3 +19,9 @@ void UIComponent::SetDontDestroyObject(bool isActive)
 	for (auto& ui : _UIs)
 		ui->SetDontDestroyObject(isActive);
 }
+
+void UIComponent::SetActives(bool check)
+{
+	for (auto& ui : _UIs)
+		ui->SetActive(check);
+}

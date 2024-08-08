@@ -57,7 +57,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-	_pGameManager->ChagneScene(TestScene::Create());
+	_pGameManager->ChagneScene(TitleScene::Create());
 
 	return true;
 }
