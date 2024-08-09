@@ -29,6 +29,8 @@
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
+    <ClCompile Include="..\Codes\Defense.cpp" />
+    <ClCompile Include="..\Codes\DefenseScript.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\Fade.cpp" />
@@ -85,6 +87,8 @@
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
+    <ClInclude Include="..\Headers\Defense.h" />
+    <ClInclude Include="..\Headers\DefenseScript.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
     <ClInclude Include="..\Headers\Fade.h" />

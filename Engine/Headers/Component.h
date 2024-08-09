@@ -27,7 +27,7 @@ namespace Engine
 		_declspec(property(get = GetTransform)) Transform& transform;
 		_declspec(property(get = GetOwner)) GameObject& gameObject;
 
-	protected:
+	public:
 		template <typename T, typename... Args>
 		T* AddComponent(Args&&... args);
 	

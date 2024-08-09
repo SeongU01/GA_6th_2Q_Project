@@ -10,6 +10,7 @@
 #include "TestPlayer.h"
 #include "Obstacle.h"
 #include "Player.h"
+#include "Defense.h"
 
 #include "Client_Define.h"
 
@@ -26,9 +27,21 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
     {
     case 0:
       //TODO:방어 목표(발전기) object만들면 추가하기
+      Engine::AddObjectInLayer((int)LayerGroup::Object, L"Defense",
+        Defense::Create(
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x , obj.objectPosition.y, 0.f)),
+          Vector3(0.f, -60.f, 0.f), obj.objectTag,
+          L"Defense_Generator")
+      );
       break;
     case 1:
       //TODO:방어 목표(방위본부) object만들면 추가하기
+      Engine::AddObjectInLayer((int)LayerGroup::Object, L"Defense",
+        Defense::Create(
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x + 1.f, obj.objectPosition.y, 0.f)),
+          Vector3(0.f, -80.f, 0.f), obj.objectTag,
+          L"Defense_Command")
+      );
       break;
     case 2:
       Engine::AddObjectInLayer((int)LayerGroup::Object, L"Mountain",
