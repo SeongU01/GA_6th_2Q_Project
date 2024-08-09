@@ -5,13 +5,12 @@ namespace Engine
 {
 	class EventInvoker : public Component
 	{
-		using EventFunction = std::function<void()>;
 		struct EventAction
 		{
-			EventAction(EventFunction func, float activeTime)
+			EventAction(const std::function<void()>& func, float activeTime)
 				: function(func), activeTime(activeTime) {}
 
-			EventFunction function = nullptr;
+			std::function<void()> function = nullptr;
 			float elapsed = 0.f;
 			float activeTime = 0.f;
 		};
@@ -23,15 +22,9 @@ namespace Engine
 	public:
 		void Update(const float& deltaTime) override;
 		void ResetAction() { _eventActions.clear(); }
-		template <typename T>
-		void BindAction(const float activeTime, T* instance, void (T::*function)())
+		void BindAction(const float activeTime, const std::function<void()>& function)
 		{
-			auto effect = [instance, function]()-> void
-				{
-					(instance->*function)();
-				};
-
-			_eventActions.push_back(EventAction(effect, activeTime));
+			_eventActions.push_back(EventAction(function, activeTime));
 		}
 	private:
 		// Component을(를) 통해 상속됨

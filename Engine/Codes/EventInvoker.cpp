@@ -17,7 +17,7 @@ void Engine::EventInvoker::Update(const float& deltaTime)
 
 		if (iter->activeTime < iter->elapsed)
 		{
-			std::invoke(iter->function);
+			iter->function();
 			iter = _eventActions.erase(iter);
 		}
 		else

@@ -16,10 +16,10 @@ namespace Engine
         const D2D1_MATRIX_3X2_F& GetWorldMatrix() const { return _d2dWorldMatrix; }
         const XMFLOAT4X4& GetXMWorldMatrix() const { return _worldMatrix; }
         Vector3 GetPosition() const { return _transform[Position]; };
-        Vector3 GetWorldPosition() const;
         Vector3 GetDirection() const { return _transform[Direction]; }
         Vector3 GetScale() const { return _transform[Scale]; }
         Vector3 GetRotation() const { return _transform[Rotation]; }
+        Vector3 GetWorldPosition() const;
         Transform* GetParent() { return _pParent; }
 
         void SetParent(Transform* parent) { _pParent = parent; }
