@@ -1,0 +1,45 @@
+﻿Tooltip_ID,State_Title,State_Text,LeftArrange
+42,특성임니다.,특성 효과임니다.,TRUE
+State_Char_000,실드,"캐릭터가 피격 당했을 때, 해당 피해를 1회 무효화합니다.",FALSE
+State_Char_001,잔류,"10초간 지속됩니다. <잔류> 상태의 캐릭터가 처치되면, 플레이어의 체력을 1만큼 회복합니다.",FALSE
+State_Char_002,차지,"10초간 지속됩니다. <차지> 상태의 캐릭터가 피해를 입으면, 고출력을 획득합니다.",FALSE
+State_Char_003,고출력,캐릭터의 다음 공격이 1의 피해를 추가로 입힙니다.,FALSE
+State_Char_004,방전,"캐릭터가 피격 당했을 때, 캐릭터 주변 1칸 범위(최대 8칸)에 1의 피해를 입힙니다.",FALSE
+State_Char_005,허점,"<허점> 상태의 캐릭터가 피격 당했을 때, 1의 피해를 추가로 입습니다.",FALSE
+State_Card_000,오버클럭,"<오버클럭> 카드 사용 시, 1의 피해를 입습니다.",FALSE
+Skill_Attack,공격,적에게 피해를 입힙니다.,FALSE
+Skill_Move,이동,지정된 거리만큼 캐릭터가 이동합니다.,FALSE
+Skill_Assist,보조,자신에게 특성을 부여합니다.,FALSE
+Behavior_Attack_000,,,
+Behavior_Attack_001,,,
+Behavior_Attack_002,,,
+Behavior_Attack_003,,,
+Behavior_Move_000,,,
+Behavior_Move_001,,,
+Behavior_Move_002,,,
+Behavior_Assist_000,,,
+Behavior_Assist_001,,,
+Behavior_Assist_002,,,
+Behavior_Stop_000,,,
+Object_Character_001,<몬스터 이름>,이 유닛은 방어 구조물만을 타겟으로 삼습니다.,TRUE
+Object_Character_002,,이 유닛은 플레이어만을 타겟으로 삼습니다. 강력한 레이저를 발사하기 때문에 조심해야 합니다.,TRUE
+Object_Character_003,,이 유닛은 방어 구조물과 플레이어 모두 타겟으로 삼습니다.,TRUE
+Object_Character_004,,,TRUE
+Object_Structure_000,,산입니다. 산은 파괴되거나 넘어가지지 않습니다.,FALSE
+Object_Structure_001,,파괴된 건물 잔해입니다. 건물 잔해는 파괴되거나 넘어가지지 않습니다.,FALSE
+Object_Structure_002,,방어 건물입니다. 적들로부터 이 건물을 지켜내야 합니다.,FALSE
+Object_Structure_003,,방어 건물입니다. 적들로부터 이 건물을 지켜내야 합니다.,FALSE
+Object_Structure_004,,포탈입니다. 적들이 이 근처에서 소환됩니다.,FALSE
+UI_Cost_Time,,,FALSE
+UI_Queue_Ready,,사용 대기 중인 카드입니다. [슬로우]가 해제되면 순차적으로 효과가 실행됩니다.,FALSE
+UI_Queue_Used,,사용 완료된 카드입니다.,FALSE
+UI_Cost_Mana,,현재 보유하고 있는 마나입니다. 카드의 사용은 마나를 소모합니다.,FALSE
+UI_Cost_Time,,,FALSE
+UI_Cost_Mana_Recovery,,,FALSE
+UI_Cost_Mana_Storage,,,FALSE
+UI_Cost_Time_Operating,,,FALSE
+UI_Card_Reload_Recovery,,,FALSE
+UI_Card_Reload,,,FALSE
+UI_Card_Deck,덱입니다.,카드가 보관될 곳입니다.,FALSE
+UI_Card_Graveyard,,,FALSE
+UI_Card_Exclusion,,,

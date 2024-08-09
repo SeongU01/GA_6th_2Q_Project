@@ -101,17 +101,8 @@
     <ClCompile Include="..\Codes\Stage1Scene.cpp">
       <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\HPHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\SelectButtons.cpp">
       <Filter>06. UI\Interaction\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\CreditHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\InfoHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Pannel.cpp">
       <Filter>03. GameObject\Pannel</Filter>
@@ -119,23 +110,35 @@
     <ClCompile Include="..\Codes\DefaultStageScene.cpp">
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\TimerHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\HP.cpp">
       <Filter>05. Component\HP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameOverHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameClearHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameClearButtons.cpp">
       <Filter>06. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameOverButtons.cpp">
       <Filter>06. UI\Interaction\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ToolTip.cpp">
+      <Filter>06. UI\HUD\ToolTip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CreditHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameClearHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameOverHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\HPHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\InfoHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TimerHUD.cpp">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +256,12 @@
     <Filter Include="05. Component\HP">
       <UniqueIdentifier>{741f4b5e-5cb8-4dfb-8f63-1c7886f7e7ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. UI\HUD\ToolTip">
+      <UniqueIdentifier>{f46b6155-3930-475e-9cd7-df3e410c0ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\HUD\DefaultHUD">
+      <UniqueIdentifier>{0a927ffa-b523-471f-b31c-1245cbd43bd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -357,20 +366,11 @@
     <ClInclude Include="..\Headers\TitleScene.h">
       <Filter>02. Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\HPHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\SelectButtons.h">
       <Filter>06. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TitleButtons.h">
       <Filter>06. UI\Interaction\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\CreditHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\InfoHUD.h">
-      <Filter>06. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Pannel.h">
       <Filter>03. GameObject\Pannel</Filter>
@@ -378,24 +378,36 @@
     <ClInclude Include="..\Headers\DefaultStageScene.h">
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\TimerHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\HP.h">
       <Filter>05. Component\HP</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\UI.h" />
-    <ClInclude Include="..\Headers\GameOverHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\GameClearHUD.h">
-      <Filter>06. UI\HUD</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\GameClearButtons.h">
       <Filter>06. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GameOverButtons.h">
       <Filter>06. UI\Interaction\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CreditHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameClearHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameOverHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\HPHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\InfoHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TimerHUD.h">
+      <Filter>06. UI\HUD\DefaultHUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ToolTip.h">
+      <Filter>06. UI\HUD\ToolTip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

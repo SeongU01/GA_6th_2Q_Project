@@ -205,6 +205,46 @@ bool DataManager::LoadEnemySpawn(const wchar_t* filePath)
 	return true;
 }
 
+bool DataManager::LoadToolTip(const wchar_t* filePath)
+{
+	std::wstring path = filePath;
+	std::wifstream file((path + L"/ToolTip.csv").c_str());
+	if (!file.is_open())
+	{
+		throw std::runtime_error("Can not open file");
+		return false;
+	}
+
+	std::wstring line;
+	// 맨 윗줄 버리기
+	std::getline(file, line);
+	std::getline(file, line);
+	std::wstringstream wss(line);
+	int TipCount = 0;
+	wss >> TipCount;
+	_ToolTipInfos.resize(TipCount);
+	for (size_t i = 0; i < TipCount; i++)
+	{
+		ToolTipInfo objInfo;
+		std::getline(file, line);
+		std::wstring token;
+		std::wstringstream wss(line);
+		std::getline(wss, token, L',');
+		objInfo._id = token.c_str();
+		std::getline(wss, token, L',');
+		objInfo._title = token.c_str();
+		std::getline(wss, token, L',');
+		objInfo._content = token.c_str();
+		std::getline(wss, token, L',');
+		objInfo._leftTop = token.c_str();
+
+
+		_ToolTipInfos[i] = objInfo;
+	}
+	file.close();
+	return true;
+}
+
 void DataManager::Free()
 {
 }

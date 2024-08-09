@@ -45,6 +45,14 @@ struct EnemySpawnInfo
 	std::vector<WaveInfo> waveInfos;
 };
 
+class Pannel;
+struct ToolTipInfo {
+	const wchar_t* _id;
+	const wchar_t* _title;
+	const wchar_t* _content;
+	bool _leftTop;
+	Pannel* _pannel;
+};
 
 
 class DataManager:public Engine::Base,public Engine::SingleTon<DataManager>
@@ -57,6 +65,7 @@ public:
 	bool LoadMap(const wchar_t* filePath);
 	bool LoadObjectArrange(const wchar_t* filePath);
 	bool LoadEnemySpawn(const wchar_t* filePath);
+	bool LoadToolTip(const wchar_t* filePath);
 	void Free() override;
 
 	MapInfo GetMapInfo(std::wstring _stageName) 
@@ -82,8 +91,21 @@ public:
 		}
 		throw std::runtime_error("Stage not found");
 	}
+
+	ToolTipInfo GetToolTipInfo(std::wstring _name)
+	{
+		for (const auto& objInfo : _ToolTipInfos)
+		{
+			if (objInfo._id == _name)
+			{
+				return objInfo;
+			}
+		}
+		throw std::runtime_error("Stage not found");
+	}
 private:
 	std::vector<MapInfo> _mapInfos;
 	std::vector<ObjectArrangeInfo>_objectArrangeInfos;
 	std::vector<EnemySpawnInfo>_enemySpawnInfos;
+	std::vector<ToolTipInfo>_ToolTipInfos;
 };

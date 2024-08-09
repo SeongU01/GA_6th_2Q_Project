@@ -1,22 +1,15 @@
 #include "DefaultStageScene.h"
-#include "CardManagement.h"
-#include "CardSystem.h"
-#include "DataManager.h"
-#include "CollisionManager.h"
-
-// Component
-#include "Mouse.h"
-#include "TextRenderer.h"
-#include "SpriteRenderer.h"
-#include "DeckSystem.h"
-
+//UI
+#include "TimerHUD.h"
+#include "GameOverHUD.h"
+#include "GameOverButtons.h"
+#include "GameClearHUD.h"
+#include "GameClearButtons.h"
+#include "TimerSystem.h"
 //object
-#include "Map.h"
-#include "TimerUI.h"
 #include "TestPlayer.h"
 #include "Obstacle.h"
-#include "TestEnemy.h"
-#include "Enemy.h"
+#include "Player.h"
 
 #include "Client_Define.h"
 
@@ -79,6 +72,29 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
 
 int DefaultStageScene::Update(const float& deltaTime)
 {
+    //테스트용 코드(게임오버, 클리어 팝업 체크
+    if (Input::IsKeyDown(DIK_1))
+    {
+        Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
+        pOver->GetComponent<GameOverHUD>()->SetActives(true);
+        pOver->GetComponent<GameOVerButtons>()->SetActives(true);
+    }
+    else if (Input::IsKeyDown(DIK_2))
+    {
+        Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
+        pClear->GetComponent<GameClearHUD>()->SetActives(true);
+        pClear->GetComponent<GameClearButtons>()->SetActives(true);
+    }
+    else if (Input::IsKeyDown(DIK_3))
+    {
+        Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
+        pOver->GetComponent<GameOverHUD>()->SetActives(false);
+        pOver->GetComponent<GameOVerButtons>()->SetActives(false);
+
+        Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
+        pClear->GetComponent<GameClearHUD>()->SetActives(false);
+        pClear->GetComponent<GameClearButtons>()->SetActives(false);
+    }
     return 0;
 }
 
@@ -89,5 +105,45 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
 
 bool DefaultStageScene::Initialize()
 {
+    //Timer=======================
+    Engine::GameObject* pTimer = Engine::GameObject::Create();
+    _pTimerSystem = pTimer->AddComponent<TimerSystem>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerSystem", pTimer); pTimer->SetRenderGroup((int)RenderGroup::UI);
+    //============================
+    if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
+        Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 1.0f,1.0f,1.0f }));
+    else
+    {
+        Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+        pPlayer->GetComponent<Player>()->ResetPlayer({ 1.0f,1.0f,1.0f });
+        pPlayer->SetActive(true);
+    }
+    UIinitialize();
     return false;
 }
+bool DefaultStageScene::UIinitialize()
+{
+    //컴포넌트(배경)
+    Engine::GameObject* pHUDObj = Engine::GameObject::Create();
+    Engine::SpriteRenderer* pSpriteRenderer = pHUDObj->GetComponent<Engine::SpriteRenderer>();
+    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
+    pSpriteRenderer->SetIndex(0);
+    pHUDObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
+    //타이머
+    Engine::GameObject* pTimerObj = Engine::GameObject::Create();
+    pTimerObj->AddComponent<TimerHUD>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
+    //게임오버 팝업
+    Engine::GameObject* pGameOverObj = Engine::GameObject::Create();
+    pGameOverObj->AddComponent<GameOverHUD>();
+    pGameOverObj->AddComponent<GameOVerButtons>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameOver", pGameOverObj); pGameOverObj->SetRenderGroup((int)RenderGroup::Fade); //팝업이라 더 높게..
+    //게임클리어 팝업
+    Engine::GameObject* pGameClearObj = Engine::GameObject::Create();
+    pGameClearObj->AddComponent<GameClearHUD>();
+    pGameClearObj->AddComponent<GameClearButtons>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Fade);
+    return false;
+}
+

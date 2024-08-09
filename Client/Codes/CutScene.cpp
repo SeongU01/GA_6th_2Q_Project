@@ -18,10 +18,6 @@ int CutScene::LateUpdate(const float& deltaTime)
 
 bool CutScene::Initialize()
 {
-    std::wstring path = rootPath;
-    DataManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
-    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-
     return true;
 }
 

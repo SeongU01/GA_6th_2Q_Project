@@ -19,10 +19,10 @@ public:
 	// Scene을(를) 통해 상속됨
 	int Update(const float& deltaTime) override;
 	int LateUpdate(const float& deltaTime) override;
+	bool UIinitialize() override;
 
 private:
 	bool Initialize() override;
-	bool UIInitialize();
 	void Free() override;
 
 public:

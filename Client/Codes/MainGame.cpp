@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "DataManager.h"
 #include "Card.h"
 #include "TestScene.h"
 #include "Client_Define.h"
@@ -64,7 +65,10 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-
+	DataManager::GetInstance()->LoadToolTip((filePath + L"Data/ToolTip").c_str());
+	//DataManager::GetInstance()->LoadEnemySpawn((filePath + L"Data/Map").c_str());
+	DataManager::GetInstance()->LoadMap((filePath + L"Data/Map").c_str());
+	DataManager::GetInstance()->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
 	_pGameManager->ChagneScene(TestScene::Create());
 
 	return true;
@@ -72,6 +76,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 
 void MainGame::Free()
 {
+	//SafeRelease(DataManager::GetInstance());
 	SafeRelease(_pGameManager);
 }
 
