@@ -19,6 +19,8 @@ public:
 	void SetHP(int hp) { _HP = hp; }
 	__declspec(property(get = GetHP, put = SetHP))int hp;
 
+	const int GetMaxHP() { return _maxHP; }
+
 private:
 	int _HP = 0;
 	int _maxHP = 0;
