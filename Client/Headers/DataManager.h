@@ -15,11 +15,37 @@ struct MapInfo
 };
 
 //object
+struct ObjectInfo
+{
+	int objectID=-1;
+	Vector3 objectPosition = {0.f,0.f,0.f};
+	std::wstring objectTag;
+};
 struct ObjectArrangeInfo
 {
 	std::wstring stageName;
-	std::vector<std::pair<int, Vector3>> objectPositionInfo;
+	std::vector<ObjectInfo> objectInfos;
 };
+
+//enemy wave
+struct EnemyInfo
+{
+	Vector3 spawnPosition = { 0.f,0.f ,0.f };
+	Vector3 subSpawnPosition = { 0.f,0.f ,0.f };
+	std::wstring targetName;
+};
+struct WaveInfo
+{
+	std::wstring waveName;
+	std::vector<EnemyInfo>enemyInfos;
+};
+struct EnemySpawnInfo
+{
+	std::wstring stageName;
+	std::vector<WaveInfo> waveInfos;
+};
+
+
 
 class DataManager:public Engine::Base,public Engine::SingleTon<DataManager>
 {
@@ -30,6 +56,7 @@ private:
 public:
 	bool LoadMap(const wchar_t* filePath);
 	bool LoadObjectArrange(const wchar_t* filePath);
+	bool LoadEnemySpawn(const wchar_t* filePath);
 	void Free() override;
 
 	MapInfo GetMapInfo(std::wstring _stageName) 
@@ -46,7 +73,7 @@ public:
 
 	ObjectArrangeInfo GetObjectInfo(std::wstring _stageName)
 	{
-		for (const auto& objInfo : _objectInfo)
+		for (const auto& objInfo : _objectArrangeInfos)
 		{
 			if (objInfo.stageName == _stageName)
 			{
@@ -57,6 +84,6 @@ public:
 	}
 private:
 	std::vector<MapInfo> _mapInfos;
-	std::vector<ObjectArrangeInfo>_objectInfo;
+	std::vector<ObjectArrangeInfo>_objectArrangeInfos;
+	std::vector<EnemySpawnInfo>_enemySpawnInfos;
 };
-

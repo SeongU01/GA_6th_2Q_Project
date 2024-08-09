@@ -26,10 +26,10 @@ void DefaultStageScene::Free()
 
 void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
 {
-  for (auto obj : objInfo.objectPositionInfo)
+  for (auto obj : objInfo.objectInfos)
   {
     //ID별로 object 그리드에 생성
-    switch (obj.first)
+    switch (obj.objectID)
     {
     case 0:
       //TODO:방어 목표(발전기) object만들면 추가하기
@@ -40,7 +40,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
     case 2:
       Engine::AddObjectInLayer((int)LayerGroup::Object, L"Mountain",
         Obstacle::Create(
-          std::pair(Vector3(obj.second.x, obj.second.y, 0.f), Vector3(obj.second.x + 1.f, obj.second.y, 0.f)),
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x + 1.f, obj.objectPosition.y, 0.f)),
           Vector3(0.f, -50.f, 0.f),
           L"Obstacle_Mountain")
       );
@@ -48,7 +48,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
     case 3:
       Engine::AddObjectInLayer((int)LayerGroup::Object, L"Buliding",
         Obstacle::Create(
-          std::pair(Vector3(obj.second.x, obj.second.y, 0.f), Vector3(obj.second.x, obj.second.y, 0.f)),
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)),
           Vector3(0.f, -40.f, 0.f),
           L"Obstacle_Building")
       );
@@ -56,7 +56,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
     case 4:
       Engine::AddObjectInLayer((int)LayerGroup::Object, L"Buliding",
         Obstacle::Create(
-          std::pair(Vector3(obj.second.x, obj.second.y, 0.f), Vector3(obj.second.x, obj.second.y, 0.f)),
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)),
           Vector3(0.f, -40.f, 0.f),
           L"Obstacle_BrokenBuilding")
       );
@@ -64,14 +64,14 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
     case 5:
       Engine::AddObjectInLayer((int)LayerGroup::Object, L"Buliding",
         Obstacle::Create(
-          std::pair(Vector3(obj.second.x, obj.second.y, 0.f), Vector3(obj.second.x, obj.second.y, 0.f)),
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)),
           Vector3(0.f, -30.f, 0.f),
           L"Obstacle_Portal")
       );
       break;
 
     case 99:
-      Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create(Vector3(obj.second.x, obj.second.y, 0.f)));
+      Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)));
       break;
     }
   }
