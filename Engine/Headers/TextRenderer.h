@@ -23,6 +23,7 @@ namespace Engine
 		void SetTextRangeEffectUnderline(unsigned int start, unsigned int length);		
 		void SetTextAlignment(DWRITE_TEXT_ALIGNMENT alignment);
 		void SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT alignment);
+		void SetNotAffectCamera(bool isActive) { _notAffectCamera = isActive; }
 
 	private:
 		// Component을(를) 통해 상속됨
@@ -38,10 +39,11 @@ namespace Engine
 		IDWriteTextLayout*					_pWriteTextLayout = nullptr;
 		IDWriteFactory*						_pWriteFactory = nullptr;
 
+		D2D1::ColorF						_color = D2D1::ColorF::White;
 		Vector3								_offset{};
 		const wchar_t*						_text = nullptr;
 		float								_fontSize = 20.f;		
-		D2D1::ColorF						_color = D2D1::ColorF::White;
 		DWRITE_FONT_WEIGHT					_fontWeight = DWRITE_FONT_WEIGHT_NORMAL;
+		bool								_notAffectCamera = false;
 	};
 }

@@ -73,7 +73,7 @@ void UI::Initialize(const UIInfo& info)
     _pTransform->SetScale(_info.scale);
 
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
-    _pSpriteRenderer->NotAffectCamera();
+    _pSpriteRenderer->SetNotAffectCamera(true);
     _pSpriteRenderer->SetIndex(_info.fixFrame);
     _originScale = _info.scale;
 }

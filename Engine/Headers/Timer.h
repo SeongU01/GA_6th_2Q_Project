@@ -12,7 +12,7 @@ namespace Engine
             bool isActive = false;
         }TIMER;
     public:
-        explicit Timer(const wchar_t* name);
+        explicit Timer(const wchar_t* name, const int size);
     private:
         virtual ~Timer() = default;
 
@@ -20,7 +20,6 @@ namespace Engine
         void Update(const float& deltaTime) override;
 
     public:
-        void Initialize(const int groupSize) { _timers.resize(groupSize); }
         bool IsOverTime(int group, float time);
         bool IsBetweenTime(int group, float first, float last);
         void SetActive(int group, bool isActive) { _timers[group].isActive = isActive; }

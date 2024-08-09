@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\AdditiveState.cpp" />
     <ClCompile Include="..\Codes\Astar.cpp" />
     <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
@@ -28,7 +29,9 @@
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
+    <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
+    <ClCompile Include="..\Codes\Fade.cpp" />
     <ClCompile Include="..\Codes\GameClearButtons.cpp" />
     <ClCompile Include="..\Codes\GameClearHUD.cpp" />
     <ClCompile Include="..\Codes\GameOverButtons.cpp" />
@@ -62,13 +65,13 @@
     <ClCompile Include="..\Codes\TimerSystem.cpp" />
     <ClCompile Include="..\Codes\TitleButtons.cpp" />
     <ClCompile Include="..\Codes\TitleScene.cpp" />
-    <ClCompile Include="..\Codes\ToolTip.cpp" />
     <ClCompile Include="..\Codes\UI.cpp" />
     <ClCompile Include="..\Codes\UIComponent.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Codes\TestEnemy.h" />
+    <ClInclude Include="..\Headers\AdditiveState.h" />
     <ClInclude Include="..\Headers\Astar.h" />
     <ClInclude Include="..\Headers\Button.h" />
     <ClInclude Include="..\Headers\Card.h" />
@@ -81,7 +84,9 @@
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
+    <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
+    <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\GameClearButtons.h" />
     <ClInclude Include="..\Headers\GameClearHUD.h" />
     <ClInclude Include="..\Headers\GameOverButtons.h" />
@@ -114,7 +119,6 @@
     <ClInclude Include="..\Headers\TimerSystem.h" />
     <ClInclude Include="..\Headers\TitleButtons.h" />
     <ClInclude Include="..\Headers\TitleScene.h" />
-    <ClInclude Include="..\Headers\ToolTip.h" />
     <ClInclude Include="..\Headers\UI.h" />
     <ClInclude Include="..\Headers\UIComponent.h" />
   </ItemGroup>

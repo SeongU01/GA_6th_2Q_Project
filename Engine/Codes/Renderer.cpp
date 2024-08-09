@@ -23,7 +23,7 @@ void Engine::Renderer::Render_GameObject()
 
         for (auto& Object : _renderGroup[i])
         {
-            memcpy(&Object->_pSpriteRenderer->_cameraMatrix, &cameraMatrix, sizeof(D2D1_MATRIX_3X2_F));
+            memcpy(&Object->_cameraMatrix, &cameraMatrix, sizeof(D2D1_MATRIX_3X2_F));
             Object->Render();
         }
 

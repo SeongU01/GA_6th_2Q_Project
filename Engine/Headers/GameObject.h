@@ -20,6 +20,8 @@ namespace Engine
 		friend class Layer;
 		friend class Component;
 		friend class Renderer;
+		friend class SpriteRenderer;
+		friend class TextRenderer;
 		friend class CollisionManager;
 	protected:
 		explicit GameObject();
@@ -99,6 +101,7 @@ namespace Engine
 		std::vector<Component*>			_components;
 		std::vector<Collider*>			_colliders;
 		std::vector<ICollisionNotify*>	_registeredCollisionEventComponents;
+		D2D1_MATRIX_3X2_F				_cameraMatrix;
 		GameManager*					_pGameManager = nullptr;
 		int								_renderGroup = -1;
 		bool							_isDead = false;

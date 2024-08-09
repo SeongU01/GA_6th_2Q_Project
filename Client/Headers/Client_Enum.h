@@ -4,8 +4,18 @@ enum class LayerGroup { Tile, Object, Player, Enemy, UI, End };
 enum class RenderGroup { BackGround, Tile, BackEffect, Object, FrontEffect, UI, Card, Fade, End };
 enum class SoundGroup { BGM, SFX, Voice, End };
 
+// Card
 enum class CardType { Attack, Move, Support };
 enum class CardEffectType { None };
+enum AdditiveFlag : unsigned long long
+{
+	Shield		= 1 << 1,
+	Extra		= 1 << 2,
+	Charge		= 1 << 3,
+	HighPower	= 1 << 4,
+	OverCharge	= 1 << 5,
+	WeakPoint	= 1 << 6
+};
 
 static const int WINCX = 1920;
 static const int WINCY = 1080;

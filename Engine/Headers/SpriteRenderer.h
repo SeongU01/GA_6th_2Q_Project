@@ -82,7 +82,7 @@ namespace Engine
 
 		void SetIndex(const int index) { _index = index; }
 		void SetDrawOffset(const Vector3& offset);
-		void NotAffectCamera();
+		void SetNotAffectCamera(bool isActive) { _notAffectCamera = isActive; }
 		void SetOneSelfDraw(bool isActive, const std::function<void()>& function = nullptr);
 
 	private:
@@ -93,7 +93,6 @@ namespace Engine
 	private:
 		ShaderData				_shaderData;
 		std::function<void()>	_oneSelfDrawFunction;
-		D2D1_MATRIX_3X2_F		_cameraMatrix;
 		Vector3					_drawOffset;
 		Animation*				_pAnimation = nullptr;
 		Texture*				_pTexture = nullptr;
