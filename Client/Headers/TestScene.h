@@ -8,7 +8,7 @@ namespace Engine
 }
 
 class CardSystem;
-class CardManagement;
+class CardManager;
 class DataManager;
 class TestScene : public DefaultStageScene
 {
@@ -32,8 +32,6 @@ public:
 private:
 	Engine::GameObject*			_pTimeObject = nullptr;
 	Engine::CollisionManager*	_pCollisionManager = nullptr;
-	CardManagement*				_pCardManagement = nullptr;
 	CardSystem*					_pCardSystem = nullptr;
-	DataManager*					_pDataManager = nullptr;
 	wchar_t						_buffer[32]{};
 };

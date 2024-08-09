@@ -26,7 +26,6 @@ void ToolTip::Awake()
 
 void ToolTip::Start()
 {
-	//파일읽기
 }
 
 void ToolTip::Update(const float& deltaTime)

@@ -9,6 +9,7 @@
 #include "Card.h"
 #include "TestScene.h"
 #include "Client_Define.h"
+#include "CardManager.h"
 
 MainGame::MainGame()
 	: _pGameManager(Engine::GameManager::GetInstance())
@@ -65,19 +66,23 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-	DataManager::GetInstance()->LoadToolTip((filePath + L"Data/ToolTip").c_str());
-	//DataManager::GetInstance()->LoadEnemySpawn((filePath + L"Data/Map").c_str());
-	DataManager::GetInstance()->LoadMap((filePath + L"Data/Map").c_str());
-	DataManager::GetInstance()->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
+	_pDataManager = DataManager::GetInstance();
+	_pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
+	_pDataManager->LoadEnemySpawn((filePath + L"Data/Map").c_str());
+	_pDataManager->LoadMap((filePath + L"Data/Map").c_str());
+	_pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
 	_pGameManager->ChagneScene(TestScene::Create());
-
+	_pCardManager = CardManager::GetInstance();
+	_pCardManager->LoadCard((filePath + L"Data/Card").c_str());
 	return true;
 }
 
 void MainGame::Free()
 {
-	//SafeRelease(DataManager::GetInstance());
+
+	SafeRelease(_pDataManager);
 	SafeRelease(_pGameManager);
+	SafeRelease(_pCardManager);
 }
 
 MainGame* MainGame::Create(HINSTANCE hInstance)

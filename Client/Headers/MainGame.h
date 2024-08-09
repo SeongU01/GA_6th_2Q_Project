@@ -6,6 +6,8 @@ namespace Engine
 	class GameManager;
 }
 
+class DataManager;
+class CardManager;
 class MainGame : public Engine::Base
 {
 private:
@@ -25,5 +27,8 @@ public:
 
 private:
 	Engine::GameManager* _pGameManager = nullptr;
+	DataManager* _pDataManager = nullptr;
+	CardManager* _pCardManager = nullptr;
+
 };
 

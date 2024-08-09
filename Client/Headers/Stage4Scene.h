@@ -5,7 +5,7 @@ namespace Engine
 {
 	class GameObject;
 }
-class CardManagement;
+class CardManager;
 class MapManager;
 class TimerSystem;
 class Stage4Scene : public DefaultStageScene

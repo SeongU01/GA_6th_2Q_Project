@@ -6,7 +6,7 @@ namespace Engine
 	class GameObject;
 }
 
-class CardManagement;
+class CardManager;
 class TimerSystem;
 class Stage1Scene : public DefaultStageScene
 {

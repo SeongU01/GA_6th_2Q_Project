@@ -1,15 +1,10 @@
 #pragma once
 #include "MonoBehavior.h"
+#include "DataManager.h"
 
-class Pannel;
 class ToolTip :public Engine::MonoBehavior
 {
-public:
-	struct ToolTipInfo {
-		wchar_t* _title;
-		wchar_t* _content;
-		Pannel* _pannel;
-	};
+
 
 public:
 	explicit ToolTip(const wchar_t* name);
@@ -24,6 +19,6 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
-	std::set<wchar_t*, ToolTipInfo*> _toolTipList;
+	std::set<const wchar_t*, ToolTipInfo*> _toolTipList;
 };
 

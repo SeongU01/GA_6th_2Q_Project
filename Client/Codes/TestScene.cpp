@@ -1,5 +1,5 @@
 #include "TestScene.h"
-#include "CardManagement.h"
+#include "CardManager.h"
 #include "CardSystem.h"
 #include "DataManager.h"
 #include "CollisionManager.h"
@@ -47,10 +47,6 @@ bool TestScene::UIInitialize()
 
 bool TestScene::Initialize()
 {
-    std::wstring path = rootPath;
-    _pDataManager = DataManager::GetInstance();
-    _pDataManager->LoadMap((path + L"Data/Map").c_str());
-    _pDataManager->LoadObjectArrange((path + L"Data/ObjectArrange").c_str());
     MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
     ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
 
@@ -64,11 +60,6 @@ bool TestScene::Initialize()
     Obstacle::Create(std::pair(Vector3(6.f,1.f,0.f), Vector3(8.f,3.f, 0.f))));
     TestEnemy* monster = TestEnemy::Create(); Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", monster); monster->GetComponent<Enemy>()->SetGridPosition({ 0,1,0 });
    */
-    
-    
-    //card
-    _pCardManagement = CardManagement::GetInstance();
-    _pCardManagement->LoadCard((path + L"Data/Card").c_str());
     
     // BackGround
     Engine::GameObject* pObject = Engine::GameObject::Create();
@@ -103,8 +94,6 @@ void TestScene::Free()
 {
     SafeRelease(_pCollisionManager);
     SafeRelease(_pCardSystem);
-    SafeRelease(_pCardManagement);
-    SafeRelease(_pDataManager);
 }
 
 TestScene* TestScene::Create()

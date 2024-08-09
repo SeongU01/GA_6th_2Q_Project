@@ -47,9 +47,9 @@ struct EnemySpawnInfo
 
 class Pannel;
 struct ToolTipInfo {
-	const wchar_t* _id;
-	const wchar_t* _title;
-	const wchar_t* _content;
+	std::wstring _id;
+	std::wstring _title;
+	std::wstring _content;
 	bool _leftTop;
 	Pannel* _pannel;
 };

@@ -41,7 +41,7 @@
     <ClCompile Include="..\Codes\ObstacleScript.cpp">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\CardManagement.cpp">
+    <ClCompile Include="..\Codes\CardManager.cpp">
       <Filter>04. System\Card</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CardSystem.cpp">
@@ -306,7 +306,7 @@
     <ClInclude Include="..\Headers\ObstacleScript.h">
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\CardManagement.h">
+    <ClInclude Include="..\Headers\CardManager.h">
       <Filter>04. System\Card</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
