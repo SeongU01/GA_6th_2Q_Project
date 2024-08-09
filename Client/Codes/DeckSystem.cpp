@@ -15,8 +15,6 @@ DeckSystem::DeckSystem()
 
 void DeckSystem::Awake()
 {	
-	_pCardSystem = CardSystem::GetInstance();
-
 	Pannel::PannelInfo info;
 	info.fillColor = 0xffffff;
 	info.outlineColor = 0x000000;
@@ -82,6 +80,8 @@ void DeckSystem::Awake()
 
 void DeckSystem::Start()
 {
+	_pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
+
 	Button* pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(-75.f, 25.f, 0.f), {150.f, 150.f});
 	pButton->SetOnPressed([this]() { _pCardSystem->ReloadCard(); });

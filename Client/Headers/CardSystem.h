@@ -1,5 +1,5 @@
 #pragma once
-#include "Base.h"
+#include "MonoBehavior.h"
 
 namespace Engine
 {
@@ -7,13 +7,12 @@ namespace Engine
 }
 
 class Card;
-class CardSystem : public Engine::Base, public Engine::SingleTon<CardSystem>
+class CardSystem : public Engine::MonoBehavior
 {
-	friend class SingleTon;
-private:
+public:
 	explicit CardSystem();
+private:
 	virtual ~CardSystem() = default;
-	NOCOPY(CardSystem)
 
 public:
 	size_t GetCurrentDeckSize() const { return _currentDeck.size(); }
@@ -21,6 +20,9 @@ public:
 	size_t GetExtraDeckSize() const { return _extraDeck.size(); }
 
 public:
+	// MonoBehavior을(를) 통해 상속됨
+	void Awake() override;
+	void Start() override;
 	void Update(const float& deltaTime);
 	void LateUpdate(const float& deltaTime);
 
@@ -36,10 +38,6 @@ private:
 	void ShuffleCard();
 
 private:
-	// Base을(를) 통해 상속됨
-	void Free() override;
-
-private:
 	std::vector<int>				_originDeck;
 	std::list<Card*>				_currentDeck;
 	std::list<Card*>				_handDeck;
@@ -47,6 +45,5 @@ private:
 	std::list<Card*>				_extraDeck;
 
 	Engine::EventInvoker*			_pEventInvoker = nullptr;
-
 };
 

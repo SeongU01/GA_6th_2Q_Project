@@ -1,5 +1,5 @@
 #include "CardSystem.h"
-#include "CardManagement.h"
+#include "CardManager.h"
 
 //Component
 #include "Card.h"
@@ -11,8 +11,19 @@ constexpr float MAXWIDTH = 1150.f;
 constexpr float CARDWIDTH = 200.f;
 
 CardSystem::CardSystem()
+	: MonoBehavior(L"CardSystem")
+{	
+}
+
+void CardSystem::Awake()
 {
-	_pEventInvoker = new Engine::EventInvoker(L"EventInvoker");
+	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
+	LoadOriginDeck();
+}
+
+void CardSystem::Start()
+{
+	StartGame();
 }
 
 void CardSystem::Update(const float& deltaTime)
@@ -30,8 +41,6 @@ void CardSystem::Update(const float& deltaTime)
 		card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
 		index++;
 	}
-
-	_pEventInvoker->Update(deltaTime);
 }
 
 void CardSystem::LateUpdate(const float& deltaTime)
@@ -75,11 +84,11 @@ bool CardSystem::LoadOriginDeck()
 
 void CardSystem::StartGame()
 {
-	CardManagement* pCardManagement = CardManagement::GetInstance();
+	CardManager* pCardManager = CardManager::GetInstance();
 
 	for (auto& cardID : _originDeck)
 	{
-		_currentDeck.push_back(pCardManagement->CloneCard(cardID));
+		_currentDeck.push_back(pCardManager->CloneCard(cardID));
 		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
 		_currentDeck.back()->gameObject.SetActive(false);
 	}
@@ -146,9 +155,4 @@ void CardSystem::ShuffleCard()
 	std::shuffle(cards.begin(), cards.end(), gen);
 	_currentDeck.assign(cards.begin(), cards.end());
 	_graveDeck.clear();
-}
-
-void CardSystem::Free()
-{
-	SafeRelease(_pEventInvoker);
 }

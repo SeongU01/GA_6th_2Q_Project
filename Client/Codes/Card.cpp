@@ -15,13 +15,22 @@ Card::Card(const CardData& cardData)
 
 void Card::Awake()
 {
+	// 카드 기본 이미지 설정
 	Engine::Texture* pTexture = Resource::FindTexture(L"Card");
-
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindTexture(pTexture);
 	pSpriteRenderer->SetIndex((int)_cardData.type);
+	_pixelSize = pTexture->GetImage(0)->GetSize();
 
-	transform.position = Vector3(500.f, 500.f, 0.f);
+	// 카드 아이콘 설정
+	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Icons");
+	pSpriteRenderer->BindTexture(Resource::FindTexture(L"Card_Icon"));
+	pSpriteRenderer->SetIndex(_cardData.iconID);
+
+	//pSpriteRenderer->SetDrawOffset(Vector3(0.f, -100.f, 0.f));
+	// 
+	// 기본 위치
+	transform.position = Vector3(-9999.f, -9999.f, 0.f);
 
 	// 카드 이름
 	Engine::TextRenderer* pTextRenderer = AddComponent<Engine::TextRenderer>(L"Title", D2D1::ColorF::White, 50.f, DWRITE_FONT_WEIGHT_BOLD);
@@ -53,9 +62,7 @@ void Card::Awake()
 	_costMana = buffer;
 	pTextRenderer->SetText(_costMana.c_str());
 
-	_pCollider = AddComponent<Engine::Collider>(L"Card");
-	
-	_pixelSize = pTexture->GetImage(0)->GetSize();	
+	_pCollider = AddComponent<Engine::Collider>(L"Card");	
 	_pCollider->SetActive(false);
 
 	gameObject._isDrawCollider = true;

@@ -1,4 +1,4 @@
-#include "CardManagement.h"
+#include "CardManager.h"
 
 // Component
 #include "TextRenderer.h"
@@ -6,7 +6,7 @@
 
 #include "Client_Define.h"
 
-bool CardManagement::LoadCard(const wchar_t* filePath)
+bool CardManager::LoadCard(const wchar_t* filePath)
 {
     std::wstring path = filePath;
 
@@ -22,7 +22,7 @@ bool CardManagement::LoadCard(const wchar_t* filePath)
     return true;
 }
 
-void CardManagement::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
+void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 {
     for (auto& richText : _richTexts[ID])
     {
@@ -42,7 +42,7 @@ void CardManagement::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
     }
 }
 
-Card* CardManagement::CloneCard(int ID)
+Card* CardManager::CloneCard(int ID)
 {
     const Card::CardData& cardData = _cardDatas[ID - 1];
 
@@ -61,7 +61,7 @@ Card* CardManagement::CloneCard(int ID)
     return pCard->GetComponent<Card>();
 }
 
-bool CardManagement::LoadCardDataOptionText(const wchar_t* filePath)
+bool CardManager::LoadCardDataOptionText(const wchar_t* filePath)
 {    
     std::wifstream file(filePath);
     file.imbue(std::locale("en_US.UTF-8"));
@@ -96,7 +96,7 @@ bool CardManagement::LoadCardDataOptionText(const wchar_t* filePath)
     return true;
 }
 
-bool CardManagement::LoadCardDataRichText(const wchar_t* filePath)
+bool CardManager::LoadCardDataRichText(const wchar_t* filePath)
 {
     std::wifstream file(filePath);
 
@@ -141,7 +141,7 @@ bool CardManagement::LoadCardDataRichText(const wchar_t* filePath)
     return true;
 }
 
-bool CardManagement::LoadCardData(const wchar_t* filePath)
+bool CardManager::LoadCardData(const wchar_t* filePath)
 {
     std::wifstream file(filePath);
     file.imbue(std::locale("en_US.UTF-8"));
@@ -210,7 +210,7 @@ bool CardManagement::LoadCardData(const wchar_t* filePath)
         cardData.textID = _wtoi(token.c_str());
 
         std::getline(wss, token, L',');
-        cardData.textureTag = token;
+        cardData.iconID = _wtoi(token.c_str());
 
         for (int i = 0; i < 4; i++)
         {
@@ -224,6 +224,6 @@ bool CardManagement::LoadCardData(const wchar_t* filePath)
     return true;
 }
 
-void CardManagement::Free()
+void CardManager::Free()
 {
 }

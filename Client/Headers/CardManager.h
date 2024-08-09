@@ -9,16 +9,16 @@ namespace Engine
 }
 
 class Card;
-class CardManagement final : public Engine::Base, public Engine::SingleTon<CardManagement>
+class CardManager final : public Engine::Base, public Engine::SingleTon<CardManager>
 {
 	using RichText = std::tuple<unsigned int, unsigned int, std::wstring, unsigned int>;
 	friend class SingleTon;
 
 	enum EffectType { Test1, Test2, Test3 };
 private:
-	explicit CardManagement() = default;
-	virtual ~CardManagement() = default;
-	NOCOPY(CardManagement)
+	explicit CardManager() = default;
+	virtual ~CardManager() = default;
+	NOCOPY(CardManager)
 
 public:
 	bool LoadCard(const wchar_t* filePath);

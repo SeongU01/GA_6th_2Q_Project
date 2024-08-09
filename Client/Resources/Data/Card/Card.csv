@@ -1,4 +1,4 @@
 ﻿Card_ID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,Card_Type,EffectRelation,Effect_Type_1,Target_Type_ID_1,Target_Num_1,Additive_CharState_1,CharState_Num_1,Additive_CardState_1,Effect_Type_2,Target_Type_ID_2,Target_Num_2,Additive_CharState_2,CharState_Num_2,Additive_CardState_2,String_Title,String_Text,CardImage,Variable_1,Variable_2,Variable_3,Variable_4
-1,10,12.57,3,4,0,12,6,7,8,13,14,17,9,10,11,15,16,18,카드1,1,Card_Icon,0,0,0,0
-2,5,5.3,3,4,1,12,6,7,8,13,14,17,9,10,11,15,16,18,카드2,1,Card_Icon,0,0,0,0
-3,5,5.3,3,4,2,12,6,7,8,13,14,17,9,10,11,15,16,18,카드3,1,Card_Icon,0,0,0,0
+1,10,12.57,3,4,0,12,6,7,8,13,14,17,9,10,11,15,16,18,카드1,1,0,0,0,0,0
+2,5,5.3,3,4,1,12,6,7,8,13,14,17,9,10,11,15,16,18,카드2,1,0,0,0,0,0
+3,5,5.3,3,4,2,12,6,7,8,13,14,17,9,10,11,15,16,18,카드3,1,0,0,0,0,0

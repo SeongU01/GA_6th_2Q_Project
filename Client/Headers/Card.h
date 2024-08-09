@@ -14,7 +14,7 @@ public:
 	struct CardData
 	{
 		std::wstring name{};
-		std::wstring textureTag{};
+		int iconID{};
 		int variable[4]{};
 		int targetTypeID[2]{};
 		int targetNum[2]{};

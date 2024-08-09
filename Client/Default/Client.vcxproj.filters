@@ -44,9 +44,6 @@
     <ClCompile Include="..\Codes\CardManager.cpp">
       <Filter>04. System\Card</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\CardSystem.cpp">
-      <Filter>04. System\Card</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DataManager.cpp">
       <Filter>04. System\Data</Filter>
     </ClCompile>
@@ -145,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\AdditiveState.cpp">
       <Filter>05. Component\AdditiveState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\CardSystem.cpp">
+      <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +268,9 @@
     <Filter Include="05. Component\AdditiveState">
       <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Player\Script\CardSystem">
+      <UniqueIdentifier>{60c34e6b-b878-4f79-a2ec-ed9db949831b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -313,9 +316,6 @@
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CardManager.h">
-      <Filter>04. System\Card</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>04. System\Card</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DataManager.h">
@@ -422,6 +422,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\AdditiveState.h">
       <Filter>05. Component\AdditiveState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CardSystem.h">
+      <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
