@@ -44,7 +44,7 @@ void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 
 Card* CardManager::CloneCard(int ID)
 {
-    const Card::CardData& cardData = _cardDatas[ID - 1];
+    const Card::CardData& cardData = _cardDatas[ID];
 
     Engine::GameObject* pCard = Engine::GameObject::Create(); 
     pCard->SetName(L"Card");
@@ -55,8 +55,8 @@ Card* CardManager::CloneCard(int ID)
     pTextRenderer->SetOffset(Vector3(-225.f, 70.f, 0.f));
     pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
-    pTextRenderer->SetTextLayout(_texts[cardData.textID - 1].c_str(), 450.f, 300.f);
-    SetRichText(cardData.textID - 1, pTextRenderer);
+    pTextRenderer->SetTextLayout(_texts[cardData.textID].c_str(), 450.f, 300.f);
+    SetRichText(cardData.textID, pTextRenderer);
 
     return pCard->GetComponent<Card>();
 }
@@ -114,9 +114,9 @@ bool CardManager::LoadCardDataRichText(const wchar_t* filePath)
         std::wstring token;
 
         std::getline(wss, token, L',');
-        int id = _wtoi(token.c_str());
+        int ID = _wtoi(token.c_str());
 
-        if (id != (int)_richTexts.size())
+        if (ID != (int)_richTexts.size() - 1)
             _richTexts.push_back(std::list<RichText>());
 
         std::getline(wss, token, L',');
@@ -135,7 +135,7 @@ bool CardManager::LoadCardDataRichText(const wchar_t* filePath)
         hexStream << std::hex << token;
         hexStream >> value;
 
-        _richTexts[id - 1].push_back(std::make_tuple(start, length, type, value));
+        _richTexts[ID].push_back(std::make_tuple(start, length, type, value));
     }
 
     return true;
@@ -162,8 +162,9 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
         Card::CardData cardData;
 
         std::getline(wss, token, L','); // ID
+        token.replace(0, 5, L"");
         cardData.ID = _wtoi(token.c_str());
-        
+
         std::getline(wss, token, L',');
         cardData.costMana = _wtoi(token.c_str());
 
@@ -185,13 +186,14 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
         for (int i = 0; i < 2; i++)
         {
             std::getline(wss, token, L',');
+            if (!token.empty()) token.replace(1, token.length(), L"");
             cardData.effectType[i] = static_cast<CardEffectType>(_wtoi(token.c_str()));
 
             std::getline(wss, token, L',');
             cardData.targetTypeID[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
-            cardData.targetNum[i] = _wtoi(token.c_str());            
+            cardData.targetNum[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
             cardData.additiveCharState[i] = _wtoi(token.c_str());
@@ -200,7 +202,7 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
             cardData.charStateNum[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
-            cardData.additiveCardState[i] = _wtoi(token.c_str());            
+            cardData.additiveCardState[i] = _wtoi(token.c_str());
         }
 
         std::getline(wss, token, L',');
