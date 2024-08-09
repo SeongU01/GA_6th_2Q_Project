@@ -26,9 +26,4 @@ private:
 
 public:
 	static Stage4Scene* Create();
-private:
-	TimerSystem* _pTimerSystem = nullptr;
-	Engine::GameObject* _pTimeObject = nullptr;
-	CardManagement* _pCardManagement = nullptr;
-	MapManager* _pMapManager = nullptr;
 };

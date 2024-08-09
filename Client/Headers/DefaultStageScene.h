@@ -10,6 +10,7 @@ namespace Engine
 class CardSystem;
 class CardManagement;
 class DataManager;
+class TimerSystem;
 
 class DefaultStageScene : public Engine::Scene
 {
@@ -27,8 +28,7 @@ public:
 protected:
 	void MakeObject(ObjectArrangeInfo& objInfo);
 protected:
-	Engine::GameObject* _pTimeObject = nullptr;
-	Engine::CollisionManager* _pCollisionManager = nullptr;
+	TimerSystem* _pTimerSystem = nullptr;
 	CardManagement* _pCardManagement = nullptr;
 	CardSystem* _pCardSystem = nullptr;
 	DataManager* _pDataManager = nullptr;

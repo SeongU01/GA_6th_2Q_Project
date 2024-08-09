@@ -125,6 +125,18 @@
     <ClCompile Include="..\Codes\HP.cpp">
       <Filter>05. Component\HP</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\GameOverHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameClearHUD.cpp">
+      <Filter>06. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameClearButtons.cpp">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GameOverButtons.cpp">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -270,9 +282,6 @@
     <ClInclude Include="..\Headers\Map.h">
       <Filter>03. GameObject\GridObject\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\UI.h">
-      <Filter>06. UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Card.h">
       <Filter>03. GameObject\Card</Filter>
     </ClInclude>
@@ -374,6 +383,19 @@
     </ClInclude>
     <ClInclude Include="..\Headers\HP.h">
       <Filter>05. Component\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\UI.h" />
+    <ClInclude Include="..\Headers\GameOverHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameClearHUD.h">
+      <Filter>06. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameClearButtons.h">
+      <Filter>06. UI\Interaction\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GameOverButtons.h">
+      <Filter>06. UI\Interaction\Button</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

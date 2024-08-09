@@ -20,6 +20,13 @@ Player::Player(const wchar_t* name, const Vector3& startPos)
 {
 }
 
+void Player::ResetPlayer(const Vector3& startPos)
+{
+	 _movement->SetGrid();
+	 _gridPosition = startPos;
+	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+}
+
 void Player::Awake()
 {
 	
@@ -52,39 +59,42 @@ void Player::LateUpdate(const float& deltaTime)
 
 void Player::DefaultMove(const float& deltaTime)
 {
-	Vector3 tempGridPosition = _gridPosition;
+	if (!(_movement->_grid==nullptr)) {
+		Vector3 tempGridPosition = _gridPosition;
+		if (!(_movement->_grid->GetTiles().empty())) {
+			if (Input::IsKeyDown(DIK_D) && !(_movement->_isMoving))
+			{
+				_gridPosition.x++;
+			}
+			else if (Input::IsKeyDown(DIK_A) && !(_movement->_isMoving))
+			{
+				_gridPosition.x--;
+			}
+			else if (Input::IsKeyDown(DIK_W) && !(_movement->_isMoving))
+			{
+				_gridPosition.y--;
+			}
+			else if (Input::IsKeyDown(DIK_S) && !(_movement->_isMoving))
+			{
+				_gridPosition.y++;
+			}
+			_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
+			_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
 
-	if (Input::IsKeyDown(DIK_D) && !(_movement->_isMoving))
-	{
-		_gridPosition.x++;
-	}
-	else if (Input::IsKeyDown(DIK_A) && !(_movement->_isMoving))
-	{
-		_gridPosition.x--;
-	}
-	else if (Input::IsKeyDown(DIK_W) && !(_movement->_isMoving))
-	{
-		_gridPosition.y--;
-	}
-	else if (Input::IsKeyDown(DIK_S) && !(_movement->_isMoving))
-	{
-		_gridPosition.y++;
-	}
-	_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
-	_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
+			if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
+			{
+				_movement->MoveToCell(_gridPosition, 0.5f);
+				Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
+				prevTile->canMove = true;
+			}
+			else
+			{
+				_gridPosition = tempGridPosition;
+			}
 
-	if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
-	{
-		_movement->MoveToCell(_gridPosition, 0.5f);
-		Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
-		prevTile->canMove = true;
+			Tile* currTile = _movement->_grid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x];
+			currTile->canMove = false;
+		}
 	}
-	else
-	{
-		_gridPosition = tempGridPosition;
-	}
-
-	Tile* currTile = _movement->_grid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x];
-	currTile->canMove = false;
 }
 

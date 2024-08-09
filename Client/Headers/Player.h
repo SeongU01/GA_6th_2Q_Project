@@ -1,6 +1,5 @@
 #pragma once
 #include "MonoBehavior.h"
-
 namespace Engine
 {
 	class Animation;
@@ -16,6 +15,7 @@ private:
 	virtual ~Player() = default;
 public:
 	Vector3 GetGridPosition() { return _gridPosition; }
+	void ResetPlayer(const Vector3& startPos);
 public:
 	// MonoBehavior을(를) 통해 상속됨
 	void Awake() override;

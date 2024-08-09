@@ -1,19 +1,17 @@
 #pragma once
 #include "UIComponent.h"
 
-class HP;
-class HPHUD : public UIComponent
+class GameClearHUD : public UIComponent
 {
 public:
-	explicit HPHUD();//юс╫ц.
-	//explicit HPHUD(HP* _hp) { _pHP = _hp; };
+	explicit GameClearHUD();
 private:
-	virtual ~HPHUD() = default;
+	virtual ~GameClearHUD() = default;
 public:
 	void Awake() override;
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
-	HP* _pHP = nullptr;
 };
+

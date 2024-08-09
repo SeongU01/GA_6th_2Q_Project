@@ -31,8 +31,6 @@ void TimerHUD::Start()
 	pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pObj); pObj->SetRenderGroup((int)RenderGroup::UI);
 	pTimer = Engine::FindObject((int)LayerGroup::UI, L"TimerSystem", NULL)->GetComponent<TimerSystem>(); //타이머시스템
-
-	SetDontDestroyObject(true);
 }
 
 void TimerHUD::Update(const float& deltaTime)

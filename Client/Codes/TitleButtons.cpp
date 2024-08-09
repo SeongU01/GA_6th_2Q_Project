@@ -56,7 +56,6 @@ void TitleButtons::Start()
 	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([]() { PostQuitMessage(0);});
 	btn->SetRange(info.position, pObj->GetImageSize());
-	
 	//SetDontDestroyObject(true);
 }
 

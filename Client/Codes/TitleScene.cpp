@@ -1,12 +1,13 @@
 #include "TitleScene.h"
-//타이틀 ui (팝업 스크린 ui 포함)
-#include "TitleButtons.h"
-#include "UIComponent.h"
-#include "SpriteRenderer.h"
-#include "CreditHUD.h"
-#include "InfoHUD.h"
 
 #include "Client_Define.h"
+//component
+#include "UIComponent.h"
+#include "TitleButtons.h"
+#include "SpriteRenderer.h"
+//UHD
+#include "CreditHUD.h"
+#include "InfoHUD.h"
 
 int TitleScene::Update(const float& deltaTime)
 {
@@ -42,12 +43,10 @@ bool TitleScene::UIInitialize()
     pSpriteRenderer->SetIndex(0);
     pHUDObj->transform.position=Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
-    
     //버튼 (4개)
     Engine::GameObject* pButtonObj = Engine::GameObject::Create();
     pButtonObj->AddComponent<TitleButtons>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);
-    
     //크레딧 팝업
     Engine::GameObject* pCreditObj = Engine::GameObject::Create();
     pCreditObj->AddComponent<CreditHUD>();

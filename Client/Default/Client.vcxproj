@@ -29,6 +29,10 @@
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
+    <ClCompile Include="..\Codes\GameClearButtons.cpp" />
+    <ClCompile Include="..\Codes\GameClearHUD.cpp" />
+    <ClCompile Include="..\Codes\GameOverButtons.cpp" />
+    <ClCompile Include="..\Codes\GameOverHUD.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
     <ClCompile Include="..\Codes\GridMovement.cpp" />
@@ -64,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Codes\TestEnemy.h" />
-    <ClInclude Include="..\Codes\UI.h" />
     <ClInclude Include="..\Headers\Astar.h" />
     <ClInclude Include="..\Headers\Button.h" />
     <ClInclude Include="..\Headers\Card.h" />
@@ -78,6 +81,10 @@
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
+    <ClInclude Include="..\Headers\GameClearButtons.h" />
+    <ClInclude Include="..\Headers\GameClearHUD.h" />
+    <ClInclude Include="..\Headers\GameOverButtons.h" />
+    <ClInclude Include="..\Headers\GameOverHUD.h" />
     <ClInclude Include="..\Headers\Grid.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
     <ClInclude Include="..\Headers\GridMovement.h" />
@@ -106,6 +113,7 @@
     <ClInclude Include="..\Headers\TimerSystem.h" />
     <ClInclude Include="..\Headers\TitleButtons.h" />
     <ClInclude Include="..\Headers\TitleScene.h" />
+    <ClInclude Include="..\Headers\UI.h" />
     <ClInclude Include="..\Headers\UIComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

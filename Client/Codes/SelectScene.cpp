@@ -1,11 +1,10 @@
 #include "SelectScene.h"
 
-//ui
-#include "HPHUD.h"
-#include "SelectButtons.h"
-
 #include "Client_Define.h"
 
+#include "SelectButtons.h"
+//UHD
+#include "HPHUD.h"
 
 int SelectScene::Update(const float& deltaTime)
 {
@@ -19,14 +18,6 @@ int SelectScene::LateUpdate(const float& deltaTime)
 
 bool SelectScene::Initialize()
 {
-    //std::wstring path = rootPath;
-    //MapManager::GetInstance()->LoadMap((path + L"Data/Map").c_str());
-    //MapInfo stage1 = MapManager::GetInstance()->GetMapInfo(L"Stage2");
-    //Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
-    //
-    //TestPlayer* pPlayer = static_cast<TestPlayer*>(Engine::FindObject((int)LayerGroup::Player, L"Player",NULL));
-    //pPlayer->ChangeCurrentGrid();
-   // UIFrame = ((int)LayerGroup::UI, L"MainUI", NULL);
     UIInitialize();
     return true;
 }
@@ -43,9 +34,12 @@ bool SelectScene::UIInitialize()
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
     pSpriteRenderer->SetIndex(0);
     pBackObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
-    Engine::GameObject* pHUDObj = Engine::GameObject::Create();
-    pHUDObj->AddComponent<HPHUD>(); // 체력바
-    pHUDObj->SetDontDestroyObject(true);
+    Engine::GameObject* pHUDObj = Engine::FindObject((int)LayerGroup::UI, L"SelectUI", NULL);
+    if (pHUDObj == nullptr) {
+        pHUDObj = Engine::GameObject::Create();
+        pHUDObj->AddComponent<HPHUD>(); // 체력바
+        pHUDObj->SetDontDestroyObject(true);
+    }
     //스테이지 선택 버튼 (추후 변경 예정
     Engine::GameObject* pButtonObj = Engine::GameObject::Create();
     pButtonObj->AddComponent<SelectButtons>();

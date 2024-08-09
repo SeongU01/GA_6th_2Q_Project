@@ -13,13 +13,7 @@ void GridMovement::Awake()
 
 void GridMovement::Start()
 {
-	_originPos = { 0.f,0.f,0.f };
-	_targetPos = _originPos;
-	Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map");
-	if (nullptr != pObject)
-	{
-		_grid = pObject->GetComponent<Grid>();
-	}
+	SetGrid();
 }
 
 void GridMovement::Update(const float& deltaTime)
@@ -49,6 +43,17 @@ void GridMovement::Update(const float& deltaTime)
 }
 void GridMovement::LateUpdate(const float& deltaTime)
 {
+}
+
+void GridMovement::SetGrid()
+{
+	_originPos = { 0.f,0.f,0.f };
+	_targetPos = _originPos;
+	Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map");
+	if (nullptr != pObject)
+	{
+		_grid = pObject->GetComponent<Grid>();
+	}
 }
 
 

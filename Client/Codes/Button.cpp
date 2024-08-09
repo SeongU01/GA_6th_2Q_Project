@@ -29,7 +29,7 @@ void Button::Update(const float& deltaTime)
 	
 	if (x > _buttonRange.left && x < _buttonRange.right && y>_buttonRange.top && y < _buttonRange.bottom)
 	{
-		if (Input::IsKeyDown(Input::DIM_LB))//클릭
+		if (Input::IsKeyDown(Input::DIM_LB)&& GetOwner().IsActive())//클릭
 		{
 			_onPressed();
 		}

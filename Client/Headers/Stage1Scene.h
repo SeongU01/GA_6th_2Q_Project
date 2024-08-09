@@ -7,7 +7,6 @@ namespace Engine
 }
 
 class CardManagement;
-class MapManager;
 class TimerSystem;
 class Stage1Scene : public DefaultStageScene
 {
@@ -27,9 +26,5 @@ private:
 
 public:
 	static Stage1Scene* Create();
-private:
-	TimerSystem* _pTimerSystem = nullptr;
-	Engine::GameObject* _pTimeObject = nullptr;
-	CardManagement* _pCardManagement = nullptr;
-	MapManager* _pMapManager = nullptr;
+
 };

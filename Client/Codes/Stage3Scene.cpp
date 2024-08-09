@@ -1,20 +1,21 @@
 #include "Stage3Scene.h"
 
-#include "CardManagement.h"
-#include "TextRenderer.h"
-#include "SpriteRenderer.h"
 #include "Client_Define.h"
+//Component
+#include "CardManagement.h"
+#include "SpriteRenderer.h"
 #include "DataManager.h"
-#include "TimerHUD.h"
 #include "TimerSystem.h"
+//UHD
+#include "TimerHUD.h"
+#include "GameOverHUD.h"
+#include "GameClearHUD.h"
 //object
 #include "Map.h"
-#include "TimerUI.h"
 #include "TestPlayer.h"
 #include "Obstacle.h"
 #include "TestEnemy.h"
 #include "Enemy.h"
-
 int Stage3Scene::Update(const float& deltaTime)
 {
     return 0;

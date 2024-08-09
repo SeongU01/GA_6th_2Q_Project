@@ -14,7 +14,7 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
-
+	void SetGrid();
 	void MoveToCell(Vector3& pos, float timeToMove);
 public:
 	Grid* _grid=nullptr;
