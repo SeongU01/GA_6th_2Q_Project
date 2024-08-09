@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Animation.h"
 #include "Texture.h"
+#include "GameObject.h"
 #include "GraphicManager.h"
 
 using namespace Engine;
@@ -69,12 +70,12 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	size.width = size.width * -0.5f + _drawOffset.x;
 	size.height = size.height * -0.5f + _drawOffset.y;
 
-	D2D1_MATRIX_3X2_F offset = D2D1::Matrix3x2F::Translation(size);
+	const D2D1_MATRIX_3X2_F& offset = D2D1::Matrix3x2F::Translation(size);
 	
 	if (_notAffectCamera)
 		_pDeviceContext->SetTransform(offset * transform.worldMatrix);
 	else
-		_pDeviceContext->SetTransform(offset * transform.worldMatrix * _cameraMatrix);
+		_pDeviceContext->SetTransform(offset * transform.worldMatrix * gameObject._cameraMatrix);
 
 	if (_currShader != typeid(ShaderComposite).hash_code())
 		_shaderData[_currShader]->ComputeShader(pBitmap);
@@ -86,7 +87,7 @@ void Engine::SpriteRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1::Color
 	if (_notAffectCamera)
 		_pDeviceContext->SetTransform(transform.worldMatrix);
 	else
-		_pDeviceContext->SetTransform(transform.worldMatrix * _cameraMatrix);
+		_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
 
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(1.f);
@@ -98,7 +99,7 @@ void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1::C
 	if (_notAffectCamera)
 		_pDeviceContext->SetTransform(transform.worldMatrix);
 	else
-		_pDeviceContext->SetTransform(transform.worldMatrix * _cameraMatrix);
+		_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
 
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(opacity);
@@ -108,11 +109,6 @@ void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1::C
 void Engine::SpriteRenderer::SetDrawOffset(const Vector3& offset)
 {
 	_drawOffset = offset;
-}
-
-void Engine::SpriteRenderer::NotAffectCamera()
-{
-	_notAffectCamera = true;
 }
 
 void Engine::SpriteRenderer::SetOneSelfDraw(bool isActive, const std::function<void()>& function)

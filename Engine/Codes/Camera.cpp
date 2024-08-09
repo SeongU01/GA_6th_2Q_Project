@@ -109,8 +109,7 @@ Vector3 Engine::Camera::GetRandomShakeVector(const float shakePower)
 bool Engine::Camera::Initialize()
 {
 	_pTransform = new Transform(L"Transform");
-	_pTimer = new Timer(L"Timer");
-	_pTimer->Initialize(1);
+	_pTimer = new Timer(L"Timer", 1);
 
 	return true;
 }
