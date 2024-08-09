@@ -17,6 +17,7 @@ namespace Engine
 		_ullong CheckFlag(const _ullong& flag) const { return _flag & flag; }
 		void ResetFlag() { _flag = 0; }
 		void SetFlag(const _ullong& flag) { _flag = flag; }
+		_ullong GetCurrentFlag() const { return _flag; }
 
 	private:
 		virtual void Free() override;
