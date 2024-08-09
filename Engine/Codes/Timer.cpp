@@ -2,9 +2,10 @@
 
 using namespace Engine;
 
-Engine::Timer::Timer(const wchar_t* name)
+Engine::Timer::Timer(const wchar_t* name, const int size)
 	: Component(name)
 {
+	_timers.resize(size);
 }
 
 void Engine::Timer::Update(const float& deltaTime)
