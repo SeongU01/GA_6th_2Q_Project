@@ -75,7 +75,22 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
           L"Obstacle_Portal")
       );
       break;
-
+    case 6:
+      Engine::AddObjectInLayer((int)LayerGroup::Object, L"Plant",
+        Obstacle::Create(
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)),
+          Vector3(0.f, 0.f, 0.f),
+          L"Obstacle_Plant1")
+      );
+      break;
+    case 7:
+      Engine::AddObjectInLayer((int)LayerGroup::Object, L"Plant",
+        Obstacle::Create(
+          std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)),
+          Vector3(0.f, 0.f, 0.f),
+          L"Obstacle_Plant2")
+      );
+      break;
     case 99:
       Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)));
       break;
