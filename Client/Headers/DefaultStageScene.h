@@ -32,6 +32,7 @@ protected:
 	CardManagement* _pCardManagement = nullptr;
 	CardSystem* _pCardSystem = nullptr;
 	DataManager* _pDataManager = nullptr;
+
 	wchar_t						_buffer[32]{};
 };
 

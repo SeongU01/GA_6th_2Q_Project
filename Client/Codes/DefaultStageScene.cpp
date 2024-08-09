@@ -69,12 +69,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
           L"Obstacle_Portal")
       );
       break;
-    case 6:
-      //TODO: enmeySpawner 만들면 추가하기
-      break;
-    case 7:
-      //TODO: enmeySpawner 만들면 추가하기
-      break;
+
     case 99:
       Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create(Vector3(obj.second.x, obj.second.y, 0.f)));
       break;
