@@ -146,6 +146,9 @@
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\ToolTip.cpp">
+      <Filter>06. UI\ToolTip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -270,6 +273,9 @@
     </Filter>
     <Filter Include="03. GameObject\Player\Script\CardSystem">
       <UniqueIdentifier>{60c34e6b-b878-4f79-a2ec-ed9db949831b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. UI\ToolTip">
+      <UniqueIdentifier>{e6f94e4f-680b-4a6b-abb8-61a83f672e32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +431,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\ToolTip.h">
+      <Filter>06. UI\ToolTip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

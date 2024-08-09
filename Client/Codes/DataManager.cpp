@@ -228,17 +228,18 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 	{
 		ToolTipInfo objInfo;
 		std::getline(file, line);
-		std::wstring token;
 		std::wstringstream wss(line);
+		std::wstring token;
+
 		std::getline(wss, token, L',');
 		objInfo._id = token.c_str();
 		std::getline(wss, token, L',');
 		objInfo._title = token.c_str();
 		std::getline(wss, token, L',');
 		objInfo._content = token.c_str();
-		std::getline(wss, token, L',');
-		objInfo._leftTop = token.c_str();
 
+		std::getline(wss, token, L',');
+		objInfo._leftTop = (token == L"TRUE");
 
 		_ToolTipInfos[i] = objInfo;
 	}

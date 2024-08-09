@@ -45,13 +45,11 @@ struct EnemySpawnInfo
 	std::vector<WaveInfo> waveInfos;
 };
 
-class Pannel;
 struct ToolTipInfo {
 	std::wstring _id;
 	std::wstring _title;
 	std::wstring _content;
 	bool _leftTop;
-	Pannel* _pannel;
 };
 
 

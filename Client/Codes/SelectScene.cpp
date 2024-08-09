@@ -43,10 +43,10 @@ bool SelectScene::UIInitialize()
     //스테이지 선택 버튼 (추후 변경 예정
     Engine::GameObject* pButtonObj = Engine::GameObject::Create();
     pButtonObj->AddComponent<SelectButtons>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pBackObj); pBackObj->SetRenderGroup((int)RenderGroup::BackGround);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::UI);
-    return false;
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectBack", pBackObj); pBackObj->SetRenderGroup((int)RenderGroup::BackGround);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectButton", pButtonObj); pButtonObj->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectHUD", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::UI);
+    return true;
 }
 
 SelectScene* SelectScene::Create()

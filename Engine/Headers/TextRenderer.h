@@ -14,7 +14,7 @@ namespace Engine
 		void Render() override;
 
 	public:		
-		void SetText(const wchar_t* text) { _text = text; }
+		void SetText(const wchar_t* text) {_text = text; }
 		void SetDrawRect(float width, float height);
 		void SetOffset(const Vector3& offset) { _offset = offset; }
 		void SetTextLayout(const wchar_t* text, float width, float height);
@@ -41,7 +41,7 @@ namespace Engine
 
 		D2D1::ColorF						_color = D2D1::ColorF::White;
 		Vector3								_offset{};
-		const wchar_t*						_text = nullptr;
+		std::wstring						_text;
 		float								_fontSize = 20.f;		
 		DWRITE_FONT_WEIGHT					_fontWeight = DWRITE_FONT_WEIGHT_NORMAL;
 		bool								_notAffectCamera = false;
