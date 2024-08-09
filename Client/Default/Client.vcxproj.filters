@@ -146,6 +146,12 @@
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Defense.cpp">
+      <Filter>03. GameObject\GridObject\Defense</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefenseScript.cpp">
+      <Filter>03. GameObject\GridObject\Defense\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -270,6 +276,12 @@
     </Filter>
     <Filter Include="03. GameObject\Player\Script\CardSystem">
       <UniqueIdentifier>{60c34e6b-b878-4f79-a2ec-ed9db949831b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Defense">
+      <UniqueIdentifier>{14c2c27b-aa9f-4db1-ac2d-df7b911fb3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Defense\Script">
+      <UniqueIdentifier>{c45cc77f-7478-4b41-b1e8-7a1e277fb37c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +437,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Defense.h">
+      <Filter>03. GameObject\GridObject\Defense</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefenseScript.h">
+      <Filter>03. GameObject\GridObject\Defense\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
