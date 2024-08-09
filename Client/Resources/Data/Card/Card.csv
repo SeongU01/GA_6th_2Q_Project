@@ -1,4 +1,11 @@
 ﻿Card_ID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,Card_Type,EffectRelation,Effect_Type_1,Target_Type_ID_1,Target_Num_1,Additive_CharState_1,CharState_Num_1,Additive_CardState_1,Effect_Type_2,Target_Type_ID_2,Target_Num_2,Additive_CharState_2,CharState_Num_2,Additive_CardState_2,String_Title,String_Text,CardImage,Variable_1,Variable_2,Variable_3,Variable_4
-1,10,12.57,3,4,0,12,6,7,8,13,14,17,9,10,11,15,16,18,카드1,1,0,0,0,0,0
-2,5,5.3,3,4,1,12,6,7,8,13,14,17,9,10,11,15,16,18,카드2,1,0,0,0,0,0
-3,5,5.3,3,4,2,12,6,7,8,13,14,17,9,10,11,15,16,18,카드3,1,0,0,0,0,0
+Card_0,0,1.5,0.15,0.25,0,1,RangeAttack,Range,,,,,,,,,,,블레이드,1,0,1,0,0,0
+Card_1,1,1,0.15,0.3,0,1,PathMove,Range,,,,,RangeAttack,Range,,,,,부스트,1,0,1,0,0,0
+Card_2,1,4,0.5,0.3,0,1,RangeAttack,Range,,,,State_Card_001,RangeCast,Range,,State_Char_002,1,,이온 블래스트,1,0,1,0,0,0
+Card_3,1,1,0.15,0.15,0,1,RangeAttack,Range,,,,,RangeCast,Range,,State_Char_006,1,,하이 블레이드,1,0,1,,,
+Card_4,2,1,0.25,0.15,0,1,RangeAttack,Range,,,,,RangeCast,Range,,State_Char_005,1,,하이퍼 드라이브,1,0,1,,,
+Card_5,1,0.25,0.15,0.15,1,1,PathMove,Path,"1,4",,,,,,,,,,긴급구동,1,0,,,,
+Card_6,1,0.5,0.15,0.15,1,1,PathMove,Path,"1,2",,,,SelfCast,Self,,State_Char_003,1,,곡예,1,0,,,,
+Card_7,1,2,0.15,0.15,2,1,SelfCast,Self,,State_Char_001,1,,,,,,,,실드 전개,1,0,,,,
+Card_8,1,3,0.15,0.15,2,1,SelfCast,Self,,State_Char_004,1,State_Card_001,Reload,Self,,,,,멜트다운,1,0,,,,
+Card_9,1,0.5,0.15,0.25,2,1,SelfCast,Self,,State_Char_003,1,,,,,,,,차지 유닛,1,0,,,,
