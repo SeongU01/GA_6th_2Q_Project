@@ -37,8 +37,10 @@ void CardSystem::Update(const float& deltaTime)
 
 	for (auto& card : _handDeck)
 	{
+		if (!card->isHold)
+			card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
+
 		card->gameObject.SetActive(true);
-		card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
 		index++;
 	}
 }

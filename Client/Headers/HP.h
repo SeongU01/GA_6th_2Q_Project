@@ -4,7 +4,7 @@
 class HP :public Engine::MonoBehavior
 {
 public:
-	explicit HP(const wchar_t* name,int maxHp);
+	explicit HP(const wchar_t* name, int maxHp);
 private:
 	virtual ~HP() = default;
 public:
@@ -20,6 +20,7 @@ public:
 	__declspec(property(get = GetHP, put = SetHP))int hp;
 
 	const int GetMaxHP() { return _maxHP; }
+	bool IsZeroHP() { return 0 >= _HP; }
 
 private:
 	int _HP = 0;

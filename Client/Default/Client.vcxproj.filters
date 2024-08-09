@@ -149,6 +149,15 @@
     <ClCompile Include="..\Codes\ToolTip.cpp">
       <Filter>06. UI\ToolTip</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\CombatEvent.cpp">
+      <Filter>04. System\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Defense.cpp">
+      <Filter>03. GameObject\GridObject\Ddefense</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefenseScript.cpp">
+      <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -276,6 +285,15 @@
     </Filter>
     <Filter Include="06. UI\ToolTip">
       <UniqueIdentifier>{e6f94e4f-680b-4a6b-abb8-61a83f672e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. System\Combat">
+      <UniqueIdentifier>{671df900-10b4-467f-9aad-7eeb7f79a309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Ddefense">
+      <UniqueIdentifier>{0d844191-c1c2-4dda-a1d5-8354b0216719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Ddefense\Script">
+      <UniqueIdentifier>{c5cce575-497c-4999-8415-7c3e4e5828d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +452,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\ToolTip.h">
       <Filter>06. UI\ToolTip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\CombatEvent.h">
+      <Filter>04. System\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Defense.h">
+      <Filter>03. GameObject\GridObject\Ddefense</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefenseScript.h">
+      <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,11 +6,13 @@
 
 #include "Client_Define.h"
 
-void AdditiveState::Awake()
+AdditiveState::AdditiveState()
+	: MonoBehavior(L"AdditiveState")
 {
-	_pBitFlag = AddComponent<Engine::BitFlag>(L"BitFlag");
-	_pTimer = AddComponent<Engine::Timer>(L"Timer", State::End);
+}
 
+void AdditiveState::Awake()
+{	
     std::wstring path = rootPath;
     std::wifstream file(path + L"Data/Card/AddtiveStateTable.csv");
     file.imbue(std::locale("en_US.UTF-8"));
@@ -35,10 +37,13 @@ void AdditiveState::Awake()
 		while (std::getline(wss, token, L','))
 			_stateDatas[ID - 1].push_back((float)_wtof(token.c_str()));
     }
+
+	_pBitFlag = AddComponent<Engine::BitFlag>(L"BitFlag");
+	_pTimer = AddComponent<Engine::Timer>(L"Timer", State::End);
 }
 
 void AdditiveState::Start()
-{
+{	
 }
 
 void AdditiveState::Update(const float& deltaTime)
@@ -47,6 +52,11 @@ void AdditiveState::Update(const float& deltaTime)
 
 void AdditiveState::LateUpdate(const float& deltaTime)
 {
+	for (int i = 0; i < State::End; i++)
+	{
+		if (!_stateStacks[i]) _pBitFlag->OffFlag((unsigned long long)1 << i);
+	}
+
 	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
 	{
 		_pTimer->SetActive(State::Charge, true);
@@ -68,14 +78,66 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 			_pTimer->SetActive(State::Extra, false);
 		}
 	}
+
+	for (int i = 0; i < State::End; i++)
+	{
+		if (!_pBitFlag->CheckFlag((unsigned long long)1 << i))
+			_pTimer->SetActive(i, false);
+	}
 }
 
-void AdditiveState::AddState(unsigned long long flag)
+float AdditiveState::GetWeakPointValue() const
 {
-	_pBitFlag->OnFlag(flag);
+	return _stateDatas[State::WeakPoint][0];
+}
+
+float AdditiveState::GetExtraRecoveryValue() const
+{
+	return _stateDatas[State::Extra][1];
 }
 
 bool AdditiveState::IsActiveState(unsigned long long flag) const
 {
 	return _pBitFlag->CheckFlag(flag);
+}
+
+void AdditiveState::UseStack(State state)
+{
+	_stateStacks[state]--;
+}
+
+void AdditiveState::AddState(unsigned long long flag, int stack)
+{
+	unsigned long long n = flag;
+	int count = 0;
+	while (1 < n)
+	{
+		n >>= 1;
+		count++;
+	}
+
+	_pBitFlag->OnFlag(flag);
+	_stateStacks[1 >> count] = stack;
+}
+
+void AdditiveState::ActiveCharge()
+{
+	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
+	{
+		_pBitFlag->OffFlag(AdditiveFlag::Charge);
+		_pBitFlag->OnFlag(AdditiveFlag::HighPower);
+		_stateStacks[State::HighPower] = 1;
+	}
+}
+
+void AdditiveState::ActiveHighPower()
+{
+}
+
+void AdditiveState::ActiveOverCharge()
+{
+}
+
+void AdditiveState::ActiveWeakPoint()
+{
 }

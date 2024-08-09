@@ -9,9 +9,10 @@ namespace Engine
 
 class AdditiveState : public Engine::MonoBehavior
 {
+public:
 	enum State { Shield, Extra, Charge, HighPower, OverCharge, WeakPoint, End };
 public:
-	explicit AdditiveState() = default;
+	explicit AdditiveState();
 private:
 	virtual ~AdditiveState() = default;
 
@@ -23,13 +24,21 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	void AddState(unsigned long long flag);
+	float GetWeakPointValue() const;
+	float GetExtraRecoveryValue() const;
 	bool IsActiveState(unsigned long long flag) const;
+	void UseStack(State state);
+	void ActiveOverCharge();
+	void ActiveWeakPoint();
+	void ActiveCharge();
+	void ActiveHighPower();
+	void AddState(unsigned long long flag, int stack);
 
 private:
 	Engine::BitFlag*	_pBitFlag = nullptr;
 	Engine::Timer*		_pTimer = nullptr;
 
-	std::vector<float>	_stateDatas[End];
+	std::vector<float>	_stateDatas[State::End];
+	int					_stateStacks[State::End]{};
 };
 

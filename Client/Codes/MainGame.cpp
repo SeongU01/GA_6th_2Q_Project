@@ -71,7 +71,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	_pDataManager->LoadEnemySpawn((filePath + L"Data/Map").c_str());
 	_pDataManager->LoadMap((filePath + L"Data/Map").c_str());
 	_pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
-	_pGameManager->ChagneScene(TitleScene::Create());
+	_pGameManager->ChagneScene(TestScene::Create());
 	_pCardManager = CardManager::GetInstance();
 	_pCardManager->LoadCard((filePath + L"Data/Card").c_str());
 	return true;

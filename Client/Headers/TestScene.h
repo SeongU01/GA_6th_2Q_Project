@@ -7,7 +7,6 @@ namespace Engine
 	class CollisionManager;
 }
 
-class CardSystem;
 class CardManager;
 class DataManager;
 class TestScene : public DefaultStageScene
@@ -32,6 +31,7 @@ public:
 private:
 	Engine::GameObject*			_pTimeObject = nullptr;
 	Engine::CollisionManager*	_pCollisionManager = nullptr;
-	CardSystem*					_pCardSystem = nullptr;
+	CardManager*				_pCardManager = nullptr;
+	DataManager*				_pDataManager = nullptr;
 	wchar_t						_buffer[32]{};
 };

@@ -7,13 +7,17 @@
 #include "FiniteStateMachine.h"
 #include "Grid.h"
 #include "GridMovement.h"
+#include "AdditiveState.h"
+#include "HP.h"
+#include "PlayerMP.h"
+#include "CombatEvent.h"
+#include "CardSystem.h"
+#include "Collider.h"
 
-
+// Object
 #include "Tile.h"
 
 #include "Client_Define.h"
-
-
 
 Player::Player(const wchar_t* name, const Vector3& startPos)
 	: MonoBehavior(name),_startPosition(startPos)
@@ -28,8 +32,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 }
 
 void Player::Awake()
-{
-	
+{	
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
 		throw std::runtime_error("can't load animation!");
@@ -38,14 +41,19 @@ void Player::Awake()
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 	pSpriteRenderer->SetDrawOffset(Vector3(-10.f, -50.f, 0.f));
-	_movement=AddComponent<GridMovement>(L"GridMovement",500.f);
+	_movement = AddComponent<GridMovement>(L"GridMovement", 500.f);
 
+	_pMP = AddComponent<PlayerMP>(L"MP");
+	_pCardSystem = AddComponent<CardSystem>();
+	_pHP = AddComponent<HP>(L"HP", 5);
+	_pCombatEvent = AddComponent<CombatEvent>();
+	_pAdditiveState = AddComponent<AdditiveState>();
 }
 
 void Player::Start()
 {
 	_gridPosition = _startPosition;
-	transform.position=_movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);	
 }
 
 void Player::Update(const float& deltaTime)
@@ -55,6 +63,46 @@ void Player::Update(const float& deltaTime)
 
 void Player::LateUpdate(const float& deltaTime)
 {
+}
+
+void Player::OnCollisionEnter(Engine::CollisionInfo& info)
+{
+	if (*info.other == L"Attack")
+	{
+		if (_pAdditiveState->IsActiveState(AdditiveFlag::Shield))
+		{
+			_pAdditiveState->UseStack(AdditiveState::State::Shield);
+		}
+		else
+		{
+			_pAdditiveState->ActiveCharge();
+
+			if (_pAdditiveState->IsActiveState(AdditiveFlag::OverCharge))
+			{
+				// ¹æÀü 8Ä­ °ø°Ý
+			}
+
+			int damage = 1;
+
+			if (_pAdditiveState->IsActiveState(AdditiveFlag::WeakPoint))
+				damage += _pAdditiveState->GetWeakPointValue();
+
+			_pHP->hp -= damage;
+		}
+	}	
+}
+
+void Player::OnCollisionExit(Engine::CollisionInfo& info)
+{
+	if (*info.other == L"Body")
+	{
+		HP* pHP = info.other->GetComponent<HP>();
+
+		if (pHP->IsZeroHP())
+		{
+			_pHP->hp += _pAdditiveState->GetExtraRecoveryValue();
+		}
+	}
 }
 
 void Player::DefaultMove(const float& deltaTime)

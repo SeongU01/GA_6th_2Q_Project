@@ -1,6 +1,5 @@
 #include "TestScene.h"
 #include "CardManager.h"
-#include "CardSystem.h"
 #include "DataManager.h"
 #include "CollisionManager.h"
 #include "Client_Define.h"
@@ -21,14 +20,11 @@
 
 int TestScene::Update(const float& deltaTime)
 {
-    _pCardSystem->Update(deltaTime);
-
     return 0;
 }
 
 int TestScene::LateUpdate(const float& deltaTime)
 {
-    _pCardSystem->LateUpdate(deltaTime);
     _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
                                        Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
 
@@ -39,53 +35,42 @@ bool TestScene::UIInitialize()
 {
     Engine::GameObject* pGameObject = Engine::GameObject::Create();
     pGameObject->AddComponent<DeckSystem>();
-    pGameObject->SetRenderGroup(0);
-    pGameObject->transform.position;
+    pGameObject->SetRenderGroup((int)RenderGroup::UI);
+    pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
+
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Deck", pGameObject);
 
     return true;
 }
 
 bool TestScene::Initialize()
 {
-   // MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-   // ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
+    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
+    ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
 
-   // Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
-   // 
-   // MakeObject(stage1Obj);
-   // /*Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create());
-   // Engine::AddObjectInLayer((int)LayerGroup::Object, L"Mountain1", 
-   //   Obstacle::Create(std::pair(Vector3(7.f,0.f,0.f), Vector3(8.f,0.f, 0.f)),L"Obstacle_Mountain"));
-   // Engine::AddObjectInLayer((int)LayerGroup::Object, L"water", 
-   // Obstacle::Create(std::pair(Vector3(6.f,1.f,0.f), Vector3(8.f,3.f, 0.f))));
-   // TestEnemy* monster = TestEnemy::Create(); Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Enemy", monster); monster->GetComponent<Enemy>()->SetGridPosition({ 0,1,0 });
-   //*/
-   // 
-   // // BackGround
-   // Engine::GameObject* pObject = Engine::GameObject::Create();
-   // Engine::SpriteRenderer* pSpriteRenderer = pObject->GetComponent<Engine::SpriteRenderer>();
-   // pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
-   // pSpriteRenderer->SetIndex(0);
-   // pObject->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
-   // pObject->SetRenderGroup((int)RenderGroup::BackGround);
-   // Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pObject);
+    Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
+    
+    MakeObject(stage1Obj);
+    
+    // BackGround
+    Engine::GameObject* pObject = Engine::GameObject::Create();
+    Engine::SpriteRenderer* pSpriteRenderer = pObject->GetComponent<Engine::SpriteRenderer>();
+    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
+    pSpriteRenderer->SetIndex(0);
+    pObject->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    pObject->SetRenderGroup((int)RenderGroup::BackGround);
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pObject);
 
-   // // Mouse
-   // pObject = Engine::GameObject::Create();
-   // pObject->SetName(L"Mouse");
-   // pObject->SetRenderGroup((int)RenderGroup::UI);
-   // pObject->AddComponent<Mouse>(L"Mouse");
-   // Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
+    // Mouse
+    pObject = Engine::GameObject::Create();
+    pObject->SetName(L"Mouse");
+    pObject->SetRenderGroup((int)RenderGroup::UI);
+    pObject->AddComponent<Mouse>(L"Mouse");
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
 
-   // _pCardSystem = CardSystem::GetInstance();
-   // if (!_pCardSystem->LoadOriginDeck())
-   //     return false;
+    _pCollisionManager = Engine::CollisionManager::Create();
 
-   // _pCardSystem->StartGame();
-
-   // _pCollisionManager = Engine::CollisionManager::Create();
-
-   // UIInitialize();
+   UIInitialize();
 
    return true;
 }
@@ -93,7 +78,6 @@ bool TestScene::Initialize()
 void TestScene::Free()
 {
     SafeRelease(_pCollisionManager);
-    SafeRelease(_pCardSystem);
 }
 
 TestScene* TestScene::Create()

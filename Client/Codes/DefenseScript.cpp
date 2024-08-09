@@ -38,15 +38,9 @@ void DefenseScript::Start()
 
 void DefenseScript::Update(const float& deltaTime)
 {
-	if (Input::IsKeyDown(DIK_N))
-	{
-		_pHP->hp--;
-	}
-	if (_pHP->hp < 0) _pHP->hp = 0;
-
-	_pSpriteRenderer->SetIndex(( _pHP->GetMaxHP()- _pHP->hp));
 }
 
 void DefenseScript::LateUpdate(const float& deltaTime)
 {
+	_pSpriteRenderer->SetIndex((_pHP->GetMaxHP() - _pHP->hp));
 }

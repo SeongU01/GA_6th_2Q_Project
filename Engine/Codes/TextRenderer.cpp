@@ -38,7 +38,7 @@ void TextRenderer::Render()
 	}
 	else
 	{		
-		_pDeviceContext->DrawText(_text.c_str(),_text.length(), _pWriteTextFormat, _drawRect, _pSolidColorBrush);
+		_pDeviceContext->DrawText(_text.c_str(), (UINT32)_text.length(), _pWriteTextFormat, _drawRect, _pSolidColorBrush);
 	}
 
 }

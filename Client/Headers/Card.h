@@ -4,6 +4,7 @@
 namespace Engine
 {
 	class Collider;
+	class GameObject;
 }
 
 enum class CardType;
@@ -46,14 +47,23 @@ public:
 public:
 	int GetID() const { return _cardData.ID; }
 	float GetPriority() const { return _priority; }
+	bool GetHoldCard() const { return _isHoldMouse; }
+	void SetHoldCard(bool isActive);
+
+public:
 	void SetHand();
 	void SetHover(bool isHover);
 	void ThrowCard();
 	void Reset();
+	void ActiveEffect();
 
 public:
 	__declspec(property(get = GetID)) int ID;
 	__declspec(property(get = GetPriority)) float priority;
+	__declspec(property(get = GetHoldCard, put = SetHoldCard)) bool isHold;
+
+private:
+	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
 
 private:
 	CardData			_cardData{};
@@ -63,10 +73,14 @@ private:
 	Vector3				_scale;
 	Vector3				_targetScale[2];
 	Vector3				_targetOffset[2];
+	Vector3				_fixPosition;
 	Engine::Collider*	_pCollider = nullptr;
+	Engine::GameObject* _pPlayer = nullptr;
 	D2D1_SIZE_F			_pixelSize{};
 	float				_priority = 0.f;
 	float				_lerpTime = 0.f;
 	bool				_isLerp = false;
+	bool				_isThrow = false;
+	bool				_isHoldMouse = false;
 };
 

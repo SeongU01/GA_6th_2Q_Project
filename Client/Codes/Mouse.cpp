@@ -54,6 +54,24 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 			_hoverCard = pOther->GetComponent<Card>();
 			_hoverCard->SetHover(true);
 		}
+		else
+		{
+			if (Input::IsKeyPress(Input::DIM_LB))
+			{
+				_hoverCard->transform.position = transform.position;
+				_hoverCard->isHold = true;
+			}
+
+			if (Input::IsKeyUp(Input::DIM_LB))
+			{
+				_hoverCard->isHold = false;
+
+				if (900.f > transform.position.y)
+				{
+					_hoverCard->ActiveEffect();
+				}
+			}
+		}
 	}
 }
 
@@ -65,6 +83,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 	{
 		if (pOther->GetComponent<Card>() == _hoverCard)
 		{
+			_hoverCard->isHold = false;
 			_hoverCard->SetHover(false);
 			_hoverCard = nullptr;
 		}

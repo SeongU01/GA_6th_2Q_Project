@@ -1,9 +1,11 @@
 #include "Card.h"
 #include "CardSystem.h"
+#include "GameObject.h"
 
 // Component
 #include "TextRenderer.h"
 #include "Collider.h"
+#include "PlayerMP.h"
 
 #include "Client_Define.h"
 
@@ -27,8 +29,6 @@ void Card::Awake()
 	pSpriteRenderer->BindTexture(Resource::FindTexture(L"Card_Icon"));
 	pSpriteRenderer->SetIndex(_cardData.iconID);
 
-	//pSpriteRenderer->SetDrawOffset(Vector3(0.f, -100.f, 0.f));
-	// 
 	// 기본 위치
 	transform.position = Vector3(-9999.f, -9999.f, 0.f);
 
@@ -70,25 +70,31 @@ void Card::Awake()
 
 void Card::Start()
 {
+	_pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
 }
 
 void Card::Update(const float& deltaTime)
 {
 	if (_isLerp)
 	{
-		_lerpTime += deltaTime / 0.2f;
-		_offset = XMVectorLerp(_targetOffset[0], _targetOffset[1], _lerpTime);
+		_lerpTime += deltaTime / 0.3f;
+		_offset = SmoothStep(_targetOffset[0], _targetOffset[1], _lerpTime);
 	}
 	if (_lerpTime >= 1.f)
 	{
 		_isLerp = false;
+		_isThrow = false;
 		_offset = _targetOffset[1];
 	}
 }
 
 void Card::LateUpdate(const float& deltaTime)
 {
-	transform.position += _offset;
+	if (!_isHoldMouse)
+	{
+		if (_isThrow) transform.position = _fixPosition;
+		transform.position += _offset;
+	}
 }
 
 void Card::SetHand()
@@ -126,9 +132,11 @@ void Card::SetHover(bool isHover)
 void Card::ThrowCard()
 {
 	_isLerp = true;
+	_isThrow = true;
 	_lerpTime = 0.f;
+	_fixPosition = transform.position;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
-	_targetOffset[1] = { -10.f, 0.f, 0.f };
+	_targetOffset[1] = { -1000.f, 0.f, 0.f };
 	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
 }
 
@@ -137,4 +145,28 @@ void Card::Reset()
 	transform.scale = Vector3(1.f, 1.f, 0.f);
 	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
 	gameObject.SetActive(false);
+}
+
+void Card::ActiveEffect()
+{
+	PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
+
+	if (pMP->mp >= _cardData.costMana)
+	{
+		pMP->mp -= _cardData.costMana;
+
+		std::cout << "카드 사용! 소모 마나 " << _cardData.costMana << ", 남은 마나 " << pMP->mp << std::endl;
+	}
+}
+
+void Card::SetHoldCard(bool isActive)
+{
+	_isHoldMouse = isActive;
+}
+
+Vector3 Card::SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t)
+{
+	t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);  // Clamp value to 0 to 1
+	t = t * t * (3.f - 2.f * t);
+	return XMVectorLerp(v0, v1, t);
 }

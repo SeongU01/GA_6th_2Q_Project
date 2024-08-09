@@ -1,23 +1,19 @@
 #include "TestPlayer.h"
 
 //Script
-#include "PlayerMP.h"
 #include "Player.h"
-#include "Client_Define.h"
 #include "GridMovement.h"
 #include "Grid.h"
-#include "CardSystem.h"
+#include "Client_Define.h"
 
 enum Flag : unsigned long long { Attack, Move, Idle };
 
 void TestPlayer::Initialize(const Vector3& startPos)
 {
 	SetDontDestroyObject(true);
-	AddComponent<Player>(L"PlayerComponent",startPos);
-	AddComponent<PlayerMP>(L"MP");
-	AddComponent<CardSystem>();
-	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
+	AddComponent<Player>(L"PlayerComponent",startPos);	
 
+	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 	SetRenderGroup((int)RenderGroup::Object);
 }
 
