@@ -3,11 +3,17 @@
 
 //Component
 #include "Card.h"
+#include "EventInvoker.h"
 
 #include "Client_Define.h"
 
 constexpr float MAXWIDTH = 1150.f;
-constexpr float CARDWIDTH = 180.f;
+constexpr float CARDWIDTH = 200.f;
+
+CardSystem::CardSystem()
+{
+	_pEventInvoker = new Engine::EventInvoker(L"EventInvoker");
+}
 
 void CardSystem::Update(const float& deltaTime)
 {
@@ -24,6 +30,8 @@ void CardSystem::Update(const float& deltaTime)
 		card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
 		index++;
 	}
+
+	_pEventInvoker->Update(deltaTime);
 }
 
 void CardSystem::LateUpdate(const float& deltaTime)
@@ -76,18 +84,16 @@ void CardSystem::StartGame()
 		_currentDeck.back()->gameObject.SetActive(false);
 	}
 	
-	// Card ¼ÅÇÃ
-	std::vector<Card*> cards(_currentDeck.begin(), _currentDeck.end());
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::shuffle(cards.begin(), cards.end(), gen);
-	_currentDeck.assign(cards.begin(), cards.end());
+	ShuffleCard();
 }
 
 void CardSystem::DrawCard()
 {
-	if (_currentDeck.empty() || 10 == _handDeck.size())
-		return;
+	if (_currentDeck.empty())
+	{
+		_currentDeck.assign(_graveDeck.begin(), _graveDeck.end());
+		ShuffleCard();
+	}
 
 	Card* pCard = _currentDeck.back();
 	pCard->gameObject.SetActive(true);
@@ -95,6 +101,11 @@ void CardSystem::DrawCard()
 
 	_handDeck.push_back(pCard);
 	_currentDeck.pop_back();
+}
+
+void CardSystem::ReloadCard()
+{
+	_pEventInvoker->BindAction(0.f, [this]() { this->ThrowCard(); });
 }
 
 void CardSystem::MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst)
@@ -109,6 +120,35 @@ void CardSystem::MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst)
 	src.erase(find_iter);
 }
 
+void CardSystem::ThrowCard()
+{	
+	if (_handDeck.empty())
+	{		
+		for (int i = 0; i < 5; i++)
+		{
+			_pEventInvoker->BindAction(0.2f + 0.1f * i, [this]() {this->DrawCard(); });
+		}
+		return;
+	}
+
+	Card* pCard = _handDeck.front();
+	pCard->ThrowCard();
+	_graveDeck.push_back(pCard);
+	_handDeck.pop_front();
+	_pEventInvoker->BindAction(0.05f, [this]() {this->ThrowCard(); });
+}
+
+void CardSystem::ShuffleCard()
+{
+	std::vector<Card*> cards(_currentDeck.begin(), _currentDeck.end());
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::shuffle(cards.begin(), cards.end(), gen);
+	_currentDeck.assign(cards.begin(), cards.end());
+	_graveDeck.clear();
+}
+
 void CardSystem::Free()
 {
+	SafeRelease(_pEventInvoker);
 }

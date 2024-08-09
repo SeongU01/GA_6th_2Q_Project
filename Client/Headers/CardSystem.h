@@ -1,12 +1,17 @@
 #pragma once
 #include "Base.h"
 
+namespace Engine
+{
+	class EventInvoker;
+}
+
 class Card;
 class CardSystem : public Engine::Base, public Engine::SingleTon<CardSystem>
 {
 	friend class SingleTon;
 private:
-	explicit CardSystem() = default;
+	explicit CardSystem();
 	virtual ~CardSystem() = default;
 	NOCOPY(CardSystem)
 
@@ -23,20 +28,25 @@ public:
 	bool LoadOriginDeck();
 	void StartGame();
 	void DrawCard();
+	void ReloadCard();
 
 private:
 	void MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst);
+	void ThrowCard();
+	void ShuffleCard();
 
 private:
 	// Base을(를) 통해 상속됨
 	void Free() override;
 
 private:
-	std::vector<int> _originDeck;
-	std::list<Card*> _currentDeck;
-	std::list<Card*> _handDeck;
-	std::list<Card*> _graveDeck;
-	std::list<Card*> _extraDeck;
+	std::vector<int>				_originDeck;
+	std::list<Card*>				_currentDeck;
+	std::list<Card*>				_handDeck;
+	std::list<Card*>				_graveDeck;
+	std::list<Card*>				_extraDeck;
+
+	Engine::EventInvoker*			_pEventInvoker = nullptr;
 
 };
 

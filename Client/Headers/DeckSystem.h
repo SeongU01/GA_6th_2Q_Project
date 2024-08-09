@@ -1,12 +1,15 @@
 #pragma once
-#include "MonoBehavior.h"
+#include "UIComponent.h"
 
 namespace Engine
 {
-	class GameObject;
+	class TextRenderer;
 }
-class DeckSystem : public Engine::MonoBehavior
+
+class CardSystem;
+class DeckSystem : public UIComponent
 {
+	enum DeckType { Current, Grave, Extra, End };
 public:
 	explicit DeckSystem();
 private:
@@ -20,5 +23,10 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
-	std::list<Engine::GameObject*> _objects;
+	CardSystem*				_pCardSystem = nullptr;
+	Engine::TextRenderer*	_pDeck = nullptr;
+	Engine::TextRenderer*	_pGrave = nullptr;
+	Engine::TextRenderer*	_pExtra = nullptr;
+
+	std::wstring _deckCount[End];
 };

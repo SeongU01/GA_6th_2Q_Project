@@ -26,7 +26,7 @@ void Card::Awake()
 	// 카드 이름
 	Engine::TextRenderer* pTextRenderer = AddComponent<Engine::TextRenderer>(L"Title", D2D1::ColorF::White, 50.f, DWRITE_FONT_WEIGHT_BOLD);
 	pTextRenderer->SetText(_cardData.name.c_str());
-	pTextRenderer->SetDrawRect({ 0.f, 0.f, 450.f, 100.f });
+	pTextRenderer->SetDrawRect(450.f, 100.f);
 	pTextRenderer->SetOffset(Vector3(-225.f, -50.f, 0.f));
 	pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 
@@ -34,7 +34,7 @@ void Card::Awake()
 	pTextRenderer = AddComponent<Engine::TextRenderer>(L"CostTime", D2D1::ColorF::Black, 70.f, DWRITE_FONT_WEIGHT_BOLD);
 	pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
 	pTextRenderer->SetOffset(Vector3(-280.f, -390.f, 0.f));
-	pTextRenderer->SetDrawRect({ 0.f, 0.f, 200.f, 200.f });
+	pTextRenderer->SetDrawRect(200.f, 200.f);
 	wchar_t buffer[16];
 
 	int integer = (int)_cardData.costTime * 100;
@@ -47,7 +47,7 @@ void Card::Awake()
 	pTextRenderer = AddComponent<Engine::TextRenderer>(L"CostMana", 0x5555ff, 55.f, DWRITE_FONT_WEIGHT_BOLD);
 	pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	pTextRenderer->SetOffset(Vector3(-245.f, -314.f, 0.f));
-	pTextRenderer->SetDrawRect({ 0.f, 0.f, 200.f, 100.f });
+	pTextRenderer->SetDrawRect(200.f, 100.f);
 
 	wsprintf(buffer, L"[%d]", _cardData.costMana);
 	_costMana = buffer;
@@ -92,7 +92,7 @@ void Card::SetHand()
 
 	_isLerp = true;
 	_lerpTime = 0.f;
-	_targetOffset[0] = { 1000.f, 0.f,0.f };
+	_targetOffset[0] = { 1000.f, 0.f, 0.f };
 	_targetOffset[1] = { 0.f, 0.f, 0.f };
 }
 
@@ -114,6 +114,15 @@ void Card::SetHover(bool isHover)
 	_targetOffset[0] = _offset;
 	_lerpTime = 0.f;
 	_isLerp = true;
+}
+
+void Card::ThrowCard()
+{
+	_isLerp = true;
+	_lerpTime = 0.f;
+	_targetOffset[0] = { 0.f, 0.f, 0.f };
+	_targetOffset[1] = { -10.f, 0.f, 0.f };
+	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
 }
 
 void Card::Reset()

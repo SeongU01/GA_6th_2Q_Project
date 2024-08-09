@@ -48,7 +48,7 @@ public:
 	float GetPriority() const { return _priority; }
 	void SetHand();
 	void SetHover(bool isHover);
-
+	void ThrowCard();
 	void Reset();
 
 public:

@@ -10,8 +10,8 @@ bool Pannel::Initialize(const PannelInfo& info)
     transform.position = _info.position;
 
     _pSpriteRenderer->SetOneSelfDraw(true, [&]()
-        {
-            D2D1_RECT_F rect{ 0.f, 0.f, _info.size.x, _info.size.y };
+        {            
+            D2D1_RECT_F rect{ -_info.size.x * 0.5f, -_info.size.y * 0.5f, _info.size.x * 0.5f, _info.size.y * 0.5f };
             _pSpriteRenderer->DrawFillRect(rect, _info.fillColor, _info.opacity);
             _pSpriteRenderer->DrawRect(rect, _info.outlineColor, _info.lineWidth);
         });
