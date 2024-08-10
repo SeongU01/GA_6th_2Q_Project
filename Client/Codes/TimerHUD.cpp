@@ -30,7 +30,7 @@ void TimerHUD::Start()
 	pText = pObj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::Red);
 	pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pObj); pObj->SetRenderGroup((int)RenderGroup::UI);
-	pTimer = Engine::FindObject((int)LayerGroup::UI, L"TimerSystem", NULL)->GetComponent<TimerSystem>(); //타이머시스템
+	pTimer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<TimerSystem>(); //타이머시스템
 }
 
 void TimerHUD::Update(const float& deltaTime)

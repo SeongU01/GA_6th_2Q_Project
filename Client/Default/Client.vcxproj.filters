@@ -84,7 +84,7 @@
       <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\TimerSystem.cpp">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
+      <Filter>03. GameObject\Player\Script\Timer</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Stage2Scene.cpp">
       <Filter>02. Scene\MainStage</Filter>
@@ -229,9 +229,6 @@
     <Filter Include="02. Scene\MainStage">
       <UniqueIdentifier>{76e35784-d337-403f-8a66-e23766c8431e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\UIObject\Timer">
-      <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Player\Script\Player">
       <UniqueIdentifier>{3073aa2f-9a78-4a07-b62d-9ac6ffc4b704}</UniqueIdentifier>
     </Filter>
@@ -294,6 +291,9 @@
     </Filter>
     <Filter Include="06. Manager\Data">
       <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Player\Script\Timer">
+      <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -367,7 +367,7 @@
       <Filter>03. GameObject\UIObject\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TimerSystem.h">
-      <Filter>03. GameObject\UIObject\Timer</Filter>
+      <Filter>03. GameObject\Player\Script\Timer</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Astar.h">
       <Filter>03. GameObject\Enemy</Filter>

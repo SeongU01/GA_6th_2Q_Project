@@ -4,15 +4,16 @@
 #include "UI.h"
 //½Ì±ÛÅæ¾ø¾Ö±â..
 
-class TimerSystem :public Engine::MonoBehavior , public Engine::SingleTon<TimerSystem>
+class TimerSystem :public Engine::MonoBehavior
 {
-	friend class SingleTon;
 public:
 	explicit TimerSystem();
 private:
 	virtual ~TimerSystem() = default;
+
 public:
 	float GetRemainingTime() { return _maxTime-_curTime; }
+	float UseTime(float time) { _curTime += time; }
 
 public:
 	virtual void Awake() override;
@@ -20,6 +21,7 @@ public:
 	virtual void FixedUpdate() override;
 	virtual void Update(const float& deltaTime) override;
 	virtual void LateUpdate(const float& deltaTime) override;
+
 private:
 	float _slowTime = 0.0f;
 	float _curTime = 0.0f;

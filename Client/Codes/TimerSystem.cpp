@@ -39,4 +39,5 @@ void TimerSystem::Update(const float& deltaTime)
 
 void TimerSystem::LateUpdate(const float& deltaTime)
 {
+    _curTime = std::clamp(_curTime, 0.f, _maxTime);
 }
