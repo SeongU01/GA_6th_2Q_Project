@@ -13,6 +13,7 @@
 #include "CombatEvent.h"
 #include "CardSystem.h"
 #include "Collider.h"
+#include "TimerSystem.h"
 
 // Object
 #include "Tile.h"
@@ -48,6 +49,7 @@ void Player::Awake()
 	_pHP = AddComponent<HP>(L"HP", 5);
 	_pCombatEvent = AddComponent<CombatEvent>();
 	_pAdditiveState = AddComponent<AdditiveState>();
+	AddComponent<TimerSystem>();
 }
 
 void Player::Start()
