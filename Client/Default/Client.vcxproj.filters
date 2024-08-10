@@ -21,7 +21,7 @@
       <Filter>03. GameObject\GridObject\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\UI.cpp">
-      <Filter>06. UI</Filter>
+      <Filter>05. UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Card.cpp">
       <Filter>03. GameObject\Card</Filter>
@@ -42,10 +42,10 @@
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CardManager.cpp">
-      <Filter>04. System\Card</Filter>
+      <Filter>06. Manager\Card</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\DataManager.cpp">
-      <Filter>04. System\Data</Filter>
+      <Filter>06. Manager\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Enemy.cpp">
       <Filter>03. GameObject\Enemy</Filter>
@@ -69,10 +69,10 @@
       <Filter>02. Scene\SelectStage</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\DeckSystem.cpp">
-      <Filter>06. UI\Interaction\Deck</Filter>
+      <Filter>05. UI\Interaction\Deck</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\UIComponent.cpp">
-      <Filter>06. UI</Filter>
+      <Filter>05. UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Player.cpp">
       <Filter>03. GameObject\Player\Script\Player</Filter>
@@ -81,7 +81,7 @@
       <Filter>03. GameObject\Player\Script\MP</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\TitleButtons.cpp">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\TimerSystem.cpp">
       <Filter>03. GameObject\UIObject\Timer</Filter>
@@ -99,16 +99,16 @@
       <Filter>02. Scene\MainStage</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\HPHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\SelectButtons.cpp">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CreditHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\InfoHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Pannel.cpp">
       <Filter>03. GameObject\Pannel</Filter>
@@ -117,40 +117,40 @@
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\TimerHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\HP.cpp">
-      <Filter>05. Component\HP</Filter>
+      <Filter>04. Component\HP</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameOverHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameClearHUD.cpp">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameClearButtons.cpp">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GameOverButtons.cpp">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Effect.cpp">
-      <Filter>05. Component\Effect</Filter>
+      <Filter>04. Component\Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Fade.cpp">
-      <Filter>05. Component\Effect</Filter>
+      <Filter>04. Component\Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\AdditiveState.cpp">
-      <Filter>05. Component\AdditiveState</Filter>
+      <Filter>04. Component\AdditiveState</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\ToolTip.cpp">
-      <Filter>06. UI\ToolTip</Filter>
+      <Filter>05. UI\ToolTip</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CombatEvent.cpp">
-      <Filter>04. System\Combat</Filter>
+      <Filter>04. Component\Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Defense.cpp">
       <Filter>03. GameObject\GridObject\Ddefense</Filter>
@@ -190,17 +190,8 @@
     <Filter Include="03. GameObject\GridObject\Map">
       <UniqueIdentifier>{2b9cd7f9-af6a-4c99-9646-fbd3cb0d5e52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. UI">
-      <UniqueIdentifier>{5bf1ce68-9318-4e60-a9f8-cc73fc45ffff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Card">
       <UniqueIdentifier>{b299a1c5-bc2b-4d49-a1d0-707d09b087b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. System">
-      <UniqueIdentifier>{4d5fd3ad-e994-4a2a-a201-207d2c5a8008}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. UI\HUD">
-      <UniqueIdentifier>{077f90b4-1aef-4510-b4e9-4db28b76ecd2}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\UIObject">
       <UniqueIdentifier>{e51e9a94-3c56-465c-9e57-ad0415818ac3}</UniqueIdentifier>
@@ -219,9 +210,6 @@
     </Filter>
     <Filter Include="03. GameObject\GridObject\Obstacle\Script">
       <UniqueIdentifier>{b753ed06-3588-44f0-b5dc-3518bc1abd2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. System\Card">
-      <UniqueIdentifier>{5db05a69-6fcd-4eec-b6b0-147a1483bf6c}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\Enemy">
       <UniqueIdentifier>{89053091-ecfe-433a-8e66-596055912ece}</UniqueIdentifier>
@@ -244,26 +232,11 @@
     <Filter Include="03. GameObject\UIObject\Timer">
       <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06. UI\Interaction">
-      <UniqueIdentifier>{ff40fc88-34ef-487f-99d0-172bd916b9b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. UI\Interaction\Deck">
-      <UniqueIdentifier>{bc57b9de-50da-4ddb-a97d-51b529cea515}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Player\Script\Player">
       <UniqueIdentifier>{3073aa2f-9a78-4a07-b62d-9ac6ffc4b704}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. Component">
-      <UniqueIdentifier>{8d1fe4b8-1fa6-4ece-8455-9e28dbfaa3c2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Player\Script\MP">
       <UniqueIdentifier>{c6244185-5a42-44b7-8a46-1fd1b4c0f49b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. UI\Interaction\Button">
-      <UniqueIdentifier>{e51239d8-807e-4821-9835-1df79c7887ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. System\Data">
-      <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\Pannel">
       <UniqueIdentifier>{428abf47-2a26-4f96-a7d7-387f9721717a}</UniqueIdentifier>
@@ -271,29 +244,56 @@
     <Filter Include="02. Scene\MainStage\DefaultStage">
       <UniqueIdentifier>{7cf7c6dd-a3c0-49a4-8f37-54accd767b52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. Component\HP">
-      <UniqueIdentifier>{741f4b5e-5cb8-4dfb-8f63-1c7886f7e7ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Component\Effect">
-      <UniqueIdentifier>{cc0553d1-5241-404d-b504-6ac55fa51f09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Component\AdditiveState">
-      <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. GameObject\Player\Script\CardSystem">
       <UniqueIdentifier>{60c34e6b-b878-4f79-a2ec-ed9db949831b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="06. UI\ToolTip">
-      <UniqueIdentifier>{e6f94e4f-680b-4a6b-abb8-61a83f672e32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. System\Combat">
-      <UniqueIdentifier>{671df900-10b4-467f-9aad-7eeb7f79a309}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\GridObject\Ddefense">
       <UniqueIdentifier>{0d844191-c1c2-4dda-a1d5-8354b0216719}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. GameObject\GridObject\Ddefense\Script">
       <UniqueIdentifier>{c5cce575-497c-4999-8415-7c3e4e5828d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component">
+      <UniqueIdentifier>{8d1fe4b8-1fa6-4ece-8455-9e28dbfaa3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\HP">
+      <UniqueIdentifier>{741f4b5e-5cb8-4dfb-8f63-1c7886f7e7ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\Effect">
+      <UniqueIdentifier>{cc0553d1-5241-404d-b504-6ac55fa51f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\AdditiveState">
+      <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\Combat">
+      <UniqueIdentifier>{671df900-10b4-467f-9aad-7eeb7f79a309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI">
+      <UniqueIdentifier>{5bf1ce68-9318-4e60-a9f8-cc73fc45ffff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI\HUD">
+      <UniqueIdentifier>{077f90b4-1aef-4510-b4e9-4db28b76ecd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI\Interaction">
+      <UniqueIdentifier>{ff40fc88-34ef-487f-99d0-172bd916b9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI\Interaction\Deck">
+      <UniqueIdentifier>{bc57b9de-50da-4ddb-a97d-51b529cea515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI\Interaction\Button">
+      <UniqueIdentifier>{e51239d8-807e-4821-9835-1df79c7887ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. UI\ToolTip">
+      <UniqueIdentifier>{e6f94e4f-680b-4a6b-abb8-61a83f672e32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Manager">
+      <UniqueIdentifier>{4d5fd3ad-e994-4a2a-a201-207d2c5a8008}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Manager\Card">
+      <UniqueIdentifier>{5db05a69-6fcd-4eec-b6b0-147a1483bf6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Manager\Data">
+      <UniqueIdentifier>{9883cd47-fcb1-49a7-83b7-e26d53786fa3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -340,10 +340,10 @@
       <Filter>03. GameObject\GridObject\Obstacle\Script</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CardManager.h">
-      <Filter>04. System\Card</Filter>
+      <Filter>06. Manager\Card</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DataManager.h">
-      <Filter>04. System\Data</Filter>
+      <Filter>06. Manager\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\Codes\TestEnemy.h">
       <Filter>03. GameObject\Enemy</Filter>
@@ -352,10 +352,10 @@
       <Filter>03. GameObject\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DeckSystem.h">
-      <Filter>06. UI\Interaction\Deck</Filter>
+      <Filter>05. UI\Interaction\Deck</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\UIComponent.h">
-      <Filter>06. UI</Filter>
+      <Filter>05. UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Player.h">
       <Filter>03. GameObject\Player\Script\Player</Filter>
@@ -397,19 +397,19 @@
       <Filter>02. Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\HPHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\SelectButtons.h">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TitleButtons.h">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CreditHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\InfoHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Pannel.h">
       <Filter>03. GameObject\Pannel</Filter>
@@ -418,43 +418,43 @@
       <Filter>02. Scene\MainStage\DefaultStage</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TimerHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\HP.h">
-      <Filter>05. Component\HP</Filter>
+      <Filter>04. Component\HP</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GameOverHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GameClearHUD.h">
-      <Filter>06. UI\HUD</Filter>
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GameClearButtons.h">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GameOverButtons.h">
-      <Filter>06. UI\Interaction\Button</Filter>
+      <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\UI.h">
-      <Filter>06. UI</Filter>
+      <Filter>05. UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Effect.h">
-      <Filter>05. Component\Effect</Filter>
+      <Filter>04. Component\Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Fade.h">
-      <Filter>05. Component\Effect</Filter>
+      <Filter>04. Component\Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\AdditiveState.h">
-      <Filter>05. Component\AdditiveState</Filter>
+      <Filter>04. Component\AdditiveState</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\ToolTip.h">
-      <Filter>06. UI\ToolTip</Filter>
+      <Filter>05. UI\ToolTip</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CombatEvent.h">
-      <Filter>04. System\Combat</Filter>
+      <Filter>04. Component\Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Defense.h">
       <Filter>03. GameObject\GridObject\Ddefense</Filter>
