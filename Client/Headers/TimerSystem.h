@@ -13,7 +13,7 @@ private:
 
 public:
 	float GetRemainingTime() { return _maxTime-_curTime; }
-	float UseTime(float time) { _curTime += time; }
+	float UseTime(float time) { return _curTime += time; }
 
 public:
 	virtual void Awake() override;
