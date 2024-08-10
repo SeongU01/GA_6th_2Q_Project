@@ -1,6 +1,7 @@
 #pragma once
 #include "MonoBehavior.h"
 
+class CardSystem;
 class Card;
 class Mouse : public Engine::MonoBehavior
 {
@@ -22,7 +23,8 @@ private:
 	void OnCollisionExit(Engine::CollisionInfo& info);
 
 private:
-	Card*	_hoverCard = nullptr;
-	HWND	_hWnd = nullptr;
+	CardSystem*		_pCardSystem = nullptr;
+	Card*			_hoverCard = nullptr;
+	HWND			_hWnd = nullptr;
 };
 

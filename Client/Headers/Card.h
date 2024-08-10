@@ -11,6 +11,7 @@ enum class CardType;
 enum class CardEffectType;
 class Card final : public Engine::MonoBehavior
 {
+	friend class CardSystem;
 public:
 	struct CardData
 	{
@@ -49,13 +50,14 @@ public:
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
 	void SetHoldCard(bool isActive);
+	void SetMouseHover(bool isHover);
 
-public:
-	void SetHand();
-	void SetHover(bool isHover);
+private:
+	void SetHandDeckPosition(const Vector3& position) { _handDeckPosition = position; }
+	void DrawCard();
 	void ThrowCard();
 	void Reset();
-	void ActiveEffect();
+	bool ActiveEffect();
 
 public:
 	__declspec(property(get = GetID)) int ID;
@@ -73,7 +75,7 @@ private:
 	Vector3				_scale;
 	Vector3				_targetScale[2];
 	Vector3				_targetOffset[2];
-	Vector3				_fixPosition;
+	Vector3				_handDeckPosition;
 	Engine::Collider*	_pCollider = nullptr;
 	Engine::GameObject* _pPlayer = nullptr;
 	D2D1_SIZE_F			_pixelSize{};

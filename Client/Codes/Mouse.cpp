@@ -3,6 +3,7 @@
 // Component
 #include "Collider.h"
 #include "Card.h"
+#include "CardSystem.h"
 
 #include "Client_Define.h"
 
@@ -21,7 +22,9 @@ void Mouse::Awake()
 }
 
 void Mouse::Start()
-{	
+{
+	Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
+	if (pObject) _pCardSystem = pObject->GetComponent<CardSystem>();
 }
 
 void Mouse::Update(const float& deltaTime)
@@ -52,24 +55,29 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		if (nullptr == _hoverCard)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
-			_hoverCard->SetHover(true);
+			_hoverCard->SetMouseHover(true);
 		}
 		else
 		{
-			if (Input::IsKeyPress(Input::DIM_LB))
-			{
-				_hoverCard->transform.position = transform.position;
+			if (Input::IsKeyDown(Input::DIM_LB))
 				_hoverCard->isHold = true;
-			}
+
+			if (_hoverCard->isHold)
+				_hoverCard->transform.position = transform.position;
 
 			if (Input::IsKeyUp(Input::DIM_LB))
 			{
 				_hoverCard->isHold = false;
 
 				if (900.f > transform.position.y)
-				{
-					_hoverCard->ActiveEffect();
-				}
+					_pCardSystem->ActiveCard(_hoverCard);
+			}
+			
+			if (Input::IsKeyDown(Input::DIM_RB))
+			{
+				_hoverCard->isHold = false;
+				_hoverCard->SetMouseHover(false);
+				_hoverCard = nullptr;
 			}
 		}
 	}
@@ -84,7 +92,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 		if (pOther->GetComponent<Card>() == _hoverCard)
 		{
 			_hoverCard->isHold = false;
-			_hoverCard->SetHover(false);
+			_hoverCard->SetMouseHover(false);
 			_hoverCard = nullptr;
 		}
 	}

@@ -27,22 +27,7 @@ void CardSystem::Start()
 }
 
 void CardSystem::Update(const float& deltaTime)
-{
-	int index = 0;
-	size_t size = _handDeck.size();
-	float width = size * CARDWIDTH;
-	float maxWitdh = MAXWIDTH < width ? MAXWIDTH : width;
-	float halfX = maxWitdh * 0.5f;
-	float offsetX = maxWitdh / size;
-
-	for (auto& card : _handDeck)
-	{
-		if (!card->isHold)
-			card->transform.position = Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f);
-
-		card->gameObject.SetActive(true);
-		index++;
-	}
+{	
 }
 
 void CardSystem::LateUpdate(const float& deltaTime)
@@ -50,12 +35,7 @@ void CardSystem::LateUpdate(const float& deltaTime)
 	if (Input::IsKeyDown(DIK_O))
 	{
 		DrawCard();
-	}
-
-	if (Input::IsKeyDown(DIK_P))
-	{
-		MoveTo(1, _handDeck, _graveDeck);
-	}
+	}	
 }
 
 bool CardSystem::LoadOriginDeck()
@@ -108,10 +88,12 @@ void CardSystem::DrawCard()
 
 	Card* pCard = _currentDeck.back();
 	pCard->gameObject.SetActive(true);
-	pCard->SetHand();
+	pCard->DrawCard();
 
 	_handDeck.push_back(pCard);
 	_currentDeck.pop_back();
+
+	SetHandDeckPosition();
 }
 
 void CardSystem::ReloadCard()
@@ -119,9 +101,17 @@ void CardSystem::ReloadCard()
 	_pEventInvoker->BindAction(0.f, [this]() { this->ThrowCard(); });
 }
 
-void CardSystem::MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst)
+void CardSystem::ActiveCard(Card* pCard)
 {
-	auto find_iter = std::find_if(src.begin(), src.end(), [ID](Card* card)->bool {return ID == card->ID; });
+	if (pCard->ActiveEffect()) MoveTo(pCard, _handDeck, _graveDeck);
+}
+
+void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst)
+{
+	auto find_iter = std::find_if(src.begin(), src.end(), [pCard](Card* card) -> bool
+		{
+			return (pCard == card);
+		});
 
 	if (find_iter == src.end())
 		return;
@@ -129,6 +119,7 @@ void CardSystem::MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst)
 	(*find_iter)->Reset();
 	dst.push_back(*find_iter);
 	src.erase(find_iter);
+	SetHandDeckPosition();
 }
 
 void CardSystem::ThrowCard()
@@ -157,4 +148,23 @@ void CardSystem::ShuffleCard()
 	std::shuffle(cards.begin(), cards.end(), gen);
 	_currentDeck.assign(cards.begin(), cards.end());
 	_graveDeck.clear();
+}
+
+void CardSystem::SetHandDeckPosition()
+{
+	int index = 0;
+	size_t size = _handDeck.size();
+	float width = size * CARDWIDTH;
+	float maxWitdh = MAXWIDTH < width ? MAXWIDTH : width;
+	float halfX = maxWitdh * 0.5f;
+	float offsetX = maxWitdh / size;
+
+	for (auto& card : _handDeck)
+	{
+		if (!card->isHold)
+			card->SetHandDeckPosition(Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f));
+
+		card->gameObject.SetActive(true);
+		index++;
+	}
 }

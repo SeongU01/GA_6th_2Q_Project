@@ -6,6 +6,7 @@
 #include "TextRenderer.h"
 #include "Collider.h"
 #include "PlayerMP.h"
+#include "TimerSystem.h"
 
 #include "Client_Define.h"
 
@@ -64,8 +65,6 @@ void Card::Awake()
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");	
 	_pCollider->SetActive(false);
-
-	gameObject._isDrawCollider = true;
 }
 
 void Card::Start()
@@ -90,14 +89,10 @@ void Card::Update(const float& deltaTime)
 
 void Card::LateUpdate(const float& deltaTime)
 {
-	if (!_isHoldMouse)
-	{
-		if (_isThrow) transform.position = _fixPosition;
-		transform.position += _offset;
-	}
+	if (!_isHoldMouse) transform.position = _handDeckPosition + _offset;
 }
 
-void Card::SetHand()
+void Card::DrawCard()
 {
 	transform.scale = Vector3(0.34f, 0.34f, 0.f);
 	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
@@ -109,7 +104,7 @@ void Card::SetHand()
 	_targetOffset[1] = { 0.f, 0.f, 0.f };
 }
 
-void Card::SetHover(bool isHover)
+void Card::SetMouseHover(bool isHover)
 {
 	if (isHover)
 	{
@@ -134,9 +129,8 @@ void Card::ThrowCard()
 	_isLerp = true;
 	_isThrow = true;
 	_lerpTime = 0.f;
-	_fixPosition = transform.position;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
-	_targetOffset[1] = { -1000.f, 0.f, 0.f };
+	_targetOffset[1] = { -2000.f, 0.f, 0.f };
 	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
 }
 
@@ -147,16 +141,21 @@ void Card::Reset()
 	gameObject.SetActive(false);
 }
 
-void Card::ActiveEffect()
+bool Card::ActiveEffect()
 {
 	PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
+	TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
 
-	if (pMP->mp >= _cardData.costMana)
-	{
-		pMP->mp -= _cardData.costMana;
+	if (pMP->mp < _cardData.costMana)
+		return false;
 
-		std::cout << "카드 사용! 소모 마나 " << _cardData.costMana << ", 남은 마나 " << pMP->mp << std::endl;
-	}
+	if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
+		return false;
+
+	pMP->mp -= _cardData.costMana;
+	pTimerSystem->UseTime(_cardData.costTime);
+
+	return true;
 }
 
 void Card::SetHoldCard(bool isActive)

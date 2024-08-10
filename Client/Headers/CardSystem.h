@@ -31,11 +31,13 @@ public:
 	void StartGame();
 	void DrawCard();
 	void ReloadCard();
+	void ActiveCard(Card* pCard);
 
 private:
-	void MoveTo(int ID, std::list<Card*>& src, std::list<Card*>& dst);
+	void MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst);
 	void ThrowCard();
 	void ShuffleCard();
+	void SetHandDeckPosition();
 
 private:
 	std::vector<int>				_originDeck;
