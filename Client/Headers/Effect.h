@@ -12,10 +12,10 @@ class Effect : public Engine::MonoBehavior
 public:
 	struct EffectInfo
 	{
-		Vector3 position;
+		Vector3 position{};
 		Vector3 scale = { 1.f, 1.f, 1.f };
-		Vector3 direction;
-		Vector3 drawOffset;
+		Vector3 direction{};
+		Vector3 drawOffset{};
 		Engine::Transform* pTarget = nullptr;
 		const wchar_t* textureTag = nullptr;
 		ID2D1Bitmap* pBitmap = nullptr;
@@ -32,6 +32,7 @@ public:
 		bool isDecelerate = false;
 		bool isFadeOut = false;
 		bool isOnePlay = false;
+		bool isInfinity = false;
 	};
 
 public:
@@ -51,6 +52,7 @@ public:
 	void SetColor(const XMFLOAT4& color);
 	void SetFadeOut(bool isActive, float speed);
 	void SetAlpha(float alpha);
+	void SetFixFrame(int frame);
 
 private:
 	EffectInfo				_info;

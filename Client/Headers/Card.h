@@ -9,6 +9,7 @@ namespace Engine
 
 enum class CardType;
 enum class CardEffectType;
+class EffectTarget;
 class Card final : public Engine::MonoBehavior
 {
 	friend class CardSystem;
@@ -58,6 +59,7 @@ private:
 	void ThrowCard();
 	void Reset();
 	bool ActiveEffect();
+	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
 
 public:
 	__declspec(property(get = GetID)) int ID;
@@ -65,7 +67,7 @@ public:
 	__declspec(property(get = GetHoldCard, put = SetHoldCard)) bool isHold;
 
 private:
-	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
+	void Free() override;
 
 private:
 	CardData			_cardData{};
@@ -78,6 +80,7 @@ private:
 	Vector3				_handDeckPosition;
 	Engine::Collider*	_pCollider = nullptr;
 	Engine::GameObject* _pPlayer = nullptr;
+	EffectTarget*		_pEffectTarget = nullptr;
 	D2D1_SIZE_F			_pixelSize{};
 	float				_priority = 0.f;
 	float				_lerpTime = 0.f;

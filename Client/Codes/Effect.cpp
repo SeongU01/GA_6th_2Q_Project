@@ -103,24 +103,28 @@ void Effect::Update(const float& deltaTime)
 
 void Effect::LateUpdate(const float& deltaTime)
 {
-    if (_info.isActiveLife)
+    if (!_info.isInfinity)
     {
-        if (_info.life + _info.fadeSpeed <= _elapsed)
-            gameObject.SetDead();
-    }
-    else if (_info.isFadeOut)
-    {
-        if (_pAnimation->IsLastFrame())
+
+        if (_info.isActiveLife)
         {
-            _isLastFrame = true;
-            _pAnimation->SetLastFrame();
+            if (_info.life + _info.fadeSpeed <= _elapsed)
+                gameObject.SetDead();
         }
+        else if (_info.isFadeOut)
+        {
+            if (_pAnimation->IsLastFrame())
+            {
+                _isLastFrame = true;
+                _pAnimation->SetLastFrame();
+            }
+        }
+        else
+        {
+            if (_pAnimation->IsLastFrame())
+                gameObject.SetDead();
+        }                
     }
-    else
-    {
-        if (_pAnimation->IsLastFrame())
-            gameObject.SetDead();
-    }    
 
     if (_info.isFixFrame)
         _pAnimation->SetFrame(_info.fixFrame);
@@ -151,4 +155,9 @@ void Effect::SetAlpha(float alpha)
 {
     _alpha = alpha;
     _pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha); 
+}
+
+void Effect::SetFixFrame(int frame)
+{
+    _info.fixFrame = frame;
 }

@@ -158,6 +158,15 @@
     <ClCompile Include="..\Codes\DefenseScript.cpp">
       <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\GageHUD.cpp">
+      <Filter>05. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EffectTarget.cpp">
+      <Filter>03. GameObject\Card\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\GridEffect.cpp">
+      <Filter>04. Component\GridEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -294,6 +303,12 @@
     </Filter>
     <Filter Include="03. GameObject\Player\Script\Timer">
       <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Card\Target">
+      <UniqueIdentifier>{9832ebe2-5086-4b3f-a72d-ceb85dcb4344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\GridEffect">
+      <UniqueIdentifier>{1b4cf4bc-a016-4cf1-92ad-ba3342bb8f54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -461,6 +476,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DefenseScript.h">
       <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GageHUD.h">
+      <Filter>05. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EffectTarget.h">
+      <Filter>03. GameObject\Card\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\GridEffect.h">
+      <Filter>04. Component\GridEffect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

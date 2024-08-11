@@ -47,5 +47,6 @@ private:
 	std::list<Card*>				_extraDeck;
 
 	Engine::EventInvoker*			_pEventInvoker = nullptr;
+	float							_reloadTime = 0.f;
 };
 

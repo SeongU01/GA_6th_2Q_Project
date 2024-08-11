@@ -4,11 +4,13 @@
 //Component
 #include "Card.h"
 #include "EventInvoker.h"
+#include "GageHUD.h"
 
 #include "Client_Define.h"
 
 constexpr float MAXWIDTH = 1150.f;
 constexpr float CARDWIDTH = 200.f;
+constexpr float RELOADCOOLTIME = 10.f;
 
 CardSystem::CardSystem()
 	: MonoBehavior(L"CardSystem")
@@ -17,6 +19,11 @@ CardSystem::CardSystem()
 
 void CardSystem::Awake()
 {
+	auto pGameObject = Engine::GameObject::Create();
+	pGameObject->AddComponent<GageHUD>(Vector3(1650.f, 875.f, 0.f), &_reloadTime, RELOADCOOLTIME);
+	pGameObject->SetRenderGroup(0);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
+
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
 	LoadOriginDeck();
 }
@@ -27,15 +34,12 @@ void CardSystem::Start()
 }
 
 void CardSystem::Update(const float& deltaTime)
-{	
+{
+	_reloadTime = std::clamp(_reloadTime + deltaTime, 0.f, RELOADCOOLTIME);
 }
 
 void CardSystem::LateUpdate(const float& deltaTime)
 {
-	if (Input::IsKeyDown(DIK_O))
-	{
-		DrawCard();
-	}	
 }
 
 bool CardSystem::LoadOriginDeck()
@@ -74,8 +78,10 @@ void CardSystem::StartGame()
 		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
 		_currentDeck.back()->gameObject.SetActive(false);
 	}
-	
+
+	_reloadTime = RELOADCOOLTIME;
 	ShuffleCard();
+	ReloadCard();
 }
 
 void CardSystem::DrawCard()
@@ -98,7 +104,11 @@ void CardSystem::DrawCard()
 
 void CardSystem::ReloadCard()
 {
-	_pEventInvoker->BindAction(0.f, [this]() { this->ThrowCard(); });
+	if (_reloadTime >= RELOADCOOLTIME)
+	{
+		_pEventInvoker->BindAction(0.f, [this]() { this->ThrowCard(); });
+		_reloadTime = 0.f;
+	}
 }
 
 void CardSystem::ActiveCard(Card* pCard)

@@ -53,13 +53,11 @@ void TimerHUD::Update(const float& deltaTime)
 		pRed->SetScale({ 0.5f * rate, 1.0f, 0.f });
 	}
 	if (timer <= 0) { 
-	    Time::SetSlowTime(0.0f);   
+	    //Time::SetSlowTime(0.0f);   
 	 pRed->SetScale({ 0.f,0.f,0.f });
 	}
 	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"Timer : %02d:%02d", (int)timer, (int)(timer * 100) % 100);
-	pText->SetText(_buffer);
-	
-
+	pText->SetText(_buffer);	
 }
 
 void TimerHUD::LateUpdate(const float& deltaTime)

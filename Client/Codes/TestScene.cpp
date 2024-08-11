@@ -9,6 +9,8 @@
 #include "TextRenderer.h"
 #include "SpriteRenderer.h"
 #include "DeckSystem.h"
+#include "TimerHUD.h"
+#include "GridEffect.h"
 
 //object
 #include "Map.h"
@@ -38,7 +40,11 @@ bool TestScene::UIInitialize()
     pGameObject->SetRenderGroup((int)RenderGroup::UI);
     pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
 
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Deck", pGameObject);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
+
+    Engine::GameObject* pTimerObj = Engine::GameObject::Create();
+    pTimerObj->AddComponent<TimerHUD>();
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
 
     return true;
 }
@@ -70,9 +76,15 @@ bool TestScene::Initialize()
 
     _pCollisionManager = Engine::CollisionManager::Create();
 
-   UIInitialize();
+    pObject = Engine::GameObject::Create();
+    pObject->SetName(L"GridEffect");
+    pObject->AddComponent<GridEffect>(stage1.width, stage1.height);
+    pObject->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
-   return true;
+    UIInitialize();
+
+    return true;
 }
 
 void TestScene::Free()
@@ -82,5 +94,5 @@ void TestScene::Free()
 
 TestScene* TestScene::Create()
 {
-  return new TestScene;
+    return new TestScene;
 }

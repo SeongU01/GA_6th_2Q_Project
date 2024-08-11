@@ -2,11 +2,15 @@
 #include "CardSystem.h"
 #include "GameObject.h"
 
+// CardEffect
+#include "EffectTarget.h"
+
 // Component
 #include "TextRenderer.h"
 #include "Collider.h"
 #include "PlayerMP.h"
 #include "TimerSystem.h"
+#include "Player.h"
 
 #include "Client_Define.h"
 
@@ -64,12 +68,13 @@ void Card::Awake()
 	pTextRenderer->SetText(_costMana.c_str());
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");	
-	_pCollider->SetActive(false);
+	_pCollider->SetActive(false);	
 }
 
 void Card::Start()
 {
 	_pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
+	_pEffectTarget = EffectTarget::Create(_pPlayer->GetComponent<Player>(), _cardData.effectType[0], { {1, 0}, {2, 0} });
 }
 
 void Card::Update(const float& deltaTime)
@@ -84,11 +89,16 @@ void Card::Update(const float& deltaTime)
 		_isLerp = false;
 		_isThrow = false;
 		_offset = _targetOffset[1];
-	}
+	}	
 }
 
 void Card::LateUpdate(const float& deltaTime)
 {
+	if (_isHoldMouse)
+	{
+		_pEffectTarget->ShowRange();
+	}
+
 	if (!_isHoldMouse) transform.position = _handDeckPosition + _offset;
 }
 
@@ -168,4 +178,9 @@ Vector3 Card::SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t)
 	t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);  // Clamp value to 0 to 1
 	t = t * t * (3.f - 2.f * t);
 	return XMVectorLerp(v0, v1, t);
+}
+
+void Card::Free()
+{
+	SafeRelease(_pEffectTarget);
 }
