@@ -1,11 +1,11 @@
 ﻿Card_ID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,Card_Type,EffectRelation,Effect_Type_1,Target_Type_ID_1,Target_Num_1,Additive_CharState_1,CharState_Num_1,Additive_CardState_1,Effect_Type_2,Target_Type_ID_2,Target_Num_2,Additive_CharState_2,CharState_Num_2,Additive_CardState_2,String_Title,String_Text,CardImage,Variable_1,Variable_2,Variable_3,Variable_4
-Card_0,0,1.5,0.15,0.25,0,1,0_RangeAttack,Range,,,,,,,,,,,블레이드,1,0,1,0,0,0
-Card_1,1,1,0.15,0.3,0,1,2_PathMove,Path,,,,,0_RangeAttack,Range,,,,,부스트,1,0,1,0,0,0
-Card_2,1,4,0.5,0.3,0,1,0_RangeAttack,Range,,,,State_Card_001,1_RangeCast,Range,,State_Char_002,1,,이온 블래스트,1,0,1,0,0,0
-Card_3,1,1,0.15,0.15,0,1,0_RangeAttack,Range,,,,,1_RangeCast,Range,,State_Char_006,1,,하이 블레이드,1,0,1,,,
-Card_4,2,1,0.25,0.15,0,1,0_RangeAttack,Range,,,,,1_RangeCast,Range,,State_Char_005,1,,하이퍼 드라이브,1,0,1,,,
-Card_5,1,0.25,0.15,0.15,1,1,2_PathMove,Path,14,,,,,,,,,,긴급구동,1,0,,,,
-Card_6,1,0.5,0.15,0.15,1,1,2_PathMove,Path,12,,,,3_SelfCast,Self,,State_Char_003,1,,곡예,1,0,,,,
-Card_7,1,2,0.15,0.15,2,1,3_SelfCast,Self,,State_Char_001,1,,,,,,,,실드 전개,1,0,,,,
-Card_8,1,3,0.15,0.15,2,1,3_SelfCast,Self,,State_Char_004,1,State_Card_001,4_Reload,Self,,,,,멜트다운,1,0,,,,
-Card_9,1,0.5,0.15,0.25,2,1,3_SelfCast,Self,,State_Char_003,1,,,,,,,,차지 유닛,1,0,,,,
+Card_0,0,1.5,0.15,0.25,0,1,1_RangeAttack,Range,0,,,,0,,,,,,블레이드,1,0,1,0,0,0
+Card_1,1,1,0.15,0.3,0,1,3_PathMove,Path,7,,,,1_RangeAttack,Range,1,,,,부스트,1,0,1,0,0,0
+Card_2,1,4,0.5,0.3,0,1,1_RangeAttack,Range,2,,,State_Card_001,2_RangeCast,Range,2,2_Extra,1,,이온 블래스트,1,0,1,0,0,0
+Card_3,1,1,0.15,0.15,0,1,1_RangeAttack,Range,3,,,,2_RangeCast,Range,3,6_WeakPoint,1,,하이 블레이드,1,0,1,,,
+Card_4,2,1,0.25,0.15,0,1,1_RangeAttack,Range,4,,,,2_RangeCast,Range,4,4_HighPower,1,,하이퍼 드라이브,1,0,1,,,
+Card_5,1,0.25,0.15,0.15,1,1,3_PathMove,Path,5,,,,0,,,,,,긴급구동,1,0,,,,
+Card_6,1,0.5,0.15,0.15,1,1,3_PathMove,Path,6,,,,4_SelfCast,Self,,3_Charge,1,,곡예,1,0,,,,
+Card_7,1,2,0.15,0.15,2,1,4_SelfCast,Self,0,1_Shield,1,,0,,,,,,실드 전개,1,0,,,,
+Card_8,1,3,0.15,0.15,2,1,4_SelfCast,Self,0,4_HighPower,1,State_Card_001,5_Reload,Self,,,,,멜트다운,1,0,,,,
+Card_9,1,0.5,0.15,0.25,2,1,4_SelfCast,Self,0,3_Charge,1,,,,,,,,차지 유닛,1,0,,,,
