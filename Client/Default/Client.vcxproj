@@ -54,6 +54,7 @@
     <ClCompile Include="..\Codes\Map.cpp" />
     <ClCompile Include="..\Codes\DataManager.cpp" />
     <ClCompile Include="..\Codes\Mouse.cpp" />
+    <ClCompile Include="..\Codes\MPHUD.cpp" />
     <ClCompile Include="..\Codes\Obstacle.cpp" />
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
     <ClCompile Include="..\Codes\Pannel.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="..\Headers\Map.h" />
     <ClInclude Include="..\Headers\DataManager.h" />
     <ClInclude Include="..\Headers\Mouse.h" />
+    <ClInclude Include="..\Headers\MPHUD.h" />
     <ClInclude Include="..\Headers\Obstacle.h" />
     <ClInclude Include="..\Headers\ObstacleScript.h" />
     <ClInclude Include="..\Headers\Pannel.h" />

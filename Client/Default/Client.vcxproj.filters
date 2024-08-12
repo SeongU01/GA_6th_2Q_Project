@@ -179,6 +179,9 @@
     <ClCompile Include="..\Codes\DefaultEnemy.cpp">
       <Filter>03. GameObject\Enemy\Default</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\MPHUD.cpp">
+      <Filter>05. UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -529,6 +532,9 @@
       <Filter>03. GameObject\Enemy\Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TopHUD.h">
+      <Filter>05. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\MPHUD.h">
       <Filter>05. UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
