@@ -97,6 +97,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
       );
       break;
     case 99:
+        Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->ResetPlayer({ obj.objectPosition.x, obj.objectPosition.y, 0.f });
       break;
     }
   }
