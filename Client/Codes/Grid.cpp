@@ -68,6 +68,6 @@ Vector3 Grid::GetTileCenter(int x, int y) const
 	int width = (int)_tiles[0].size();
 	int height = (int)_tiles.size();
 	y = std::clamp(y, 0, height - 1);
-	x = std::clamp(y, 0, width - 1);
+	x = std::clamp(x, 0, width - 1);
 	return _tiles[y][x]->transform.position;
 }
