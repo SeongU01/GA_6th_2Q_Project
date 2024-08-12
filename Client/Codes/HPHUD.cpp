@@ -1,6 +1,6 @@
 #include "HPHUD.h"
 #include "HP.h"
-
+#include "Client_Define.h"
 HPHUD::HPHUD()
 	:UIComponent(L"HP")
 {
@@ -22,8 +22,10 @@ void HPHUD::Start()
 	UI* pObj;
 	for (int i = 0; i < _pHP->GetMaxHP(); i++) {
 		info = CreateInfo(L"HPBackground", L"UI_HUD_HP", 0, {
-			(float)((i * 10) - (_pHP->GetMaxHP() / 2 * 10)),30.0f , -1.f}, {1.0f,1.0f,1.f}, &transform);
-		_HPBar.push_back(AddUI(info));
+			(float)((i * 10) - (_pHP->GetMaxHP() / 2 * 10)),40.0f , -1000.f}, {1.0f,1.0f,1.f}, &transform);
+		pObj = AddUI(info);
+		pObj->SetRenderGroup((int)RenderGroup::Object);
+		_HPBar.push_back(pObj);
 	}
 	SetDontDestroyObject(true);
 }
