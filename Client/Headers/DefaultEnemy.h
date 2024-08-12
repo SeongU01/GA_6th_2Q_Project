@@ -8,7 +8,7 @@ private:
 	virtual ~DefaultEnemy() = default;
 
 private:
-	void Initialize();
+	void Initialize(const Vector3& startPos);
 public:
-	static DefaultEnemy* Create();
+	static DefaultEnemy* Create(const Vector3& startPos);
 };

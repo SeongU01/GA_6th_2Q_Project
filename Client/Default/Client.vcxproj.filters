@@ -182,6 +182,9 @@
     <ClCompile Include="..\Codes\MPHUD.cpp">
       <Filter>05. UI\HUD</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyScript.cpp">
+      <Filter>03. GameObject\Enemy\Default\Script</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -345,6 +348,9 @@
     </Filter>
     <Filter Include="03. GameObject\GridObject\Defense\Script">
       <UniqueIdentifier>{c5cce575-497c-4999-8415-7c3e4e5828d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\Script">
+      <UniqueIdentifier>{6135f0ba-dc17-4258-b0bb-a932e6b4888d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -536,6 +542,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\MPHUD.h">
       <Filter>05. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Default\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

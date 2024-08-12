@@ -16,10 +16,14 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+public:
+	void CheckWaveEnd();
 private:
 	EnemySpawnInfo _currSpawnInfo;
 	WaveInfo _currWave;
 	GridInfo* _pGridInfo=nullptr;
 	bool _waveOn=false;
-	
+	bool _stageEnd = false;
+	int _currWaveCount = 0;
+	int _maxWaveCount = 0;
 };

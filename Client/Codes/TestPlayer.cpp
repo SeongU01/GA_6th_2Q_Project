@@ -14,7 +14,6 @@ void TestPlayer::Initialize(const Vector3& startPos)
 	AddComponent<Player>(L"PlayerComponent",startPos);	
 
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
-	_pSpriteRenderer->SetDrawOffset(Vector3(20.f, -100.f, 0.f));
 	SetRenderGroup((int)RenderGroup::Object);
 }
 

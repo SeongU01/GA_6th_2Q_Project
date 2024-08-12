@@ -28,6 +28,7 @@ Player::Player(const wchar_t* name, const Vector3& startPos)
 void Player::ResetPlayer(const Vector3& startPos)
 {
 	 _movement->SetGrid();
+	 _startPosition = startPos;
 	 _gridPosition = startPos;
 	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 	 GetComponent<TimerSystem>()->ResetTime();
@@ -42,7 +43,7 @@ void Player::Awake()
 	_pAnimation->ChangeAnimation(L"Idle");
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
-	pSpriteRenderer->SetDrawOffset(Vector3(-10.f, -50.f, 0.f));
+	pSpriteRenderer->SetDrawOffset(Vector3(20.f, -100.f, 0.f));
 	_movement = AddComponent<GridMovement>(L"GridMovement", 500.f);
 
 	_pMP = AddComponent<PlayerMP>(L"MP");
