@@ -101,6 +101,18 @@ public:
 		}
 		throw std::runtime_error("Stage not found");
 	}
+	
+	EnemySpawnInfo GetEnemySpawnInfo(std::wstring _stageName)
+	{
+		for (const auto& spawnInfo : _enemySpawnInfos)
+		{
+			if (spawnInfo.stageName == _stageName)
+			{
+				return spawnInfo;
+			}
+		}
+		throw std::runtime_error("Stage not found");
+	}
 private:
 	std::vector<MapInfo> _mapInfos;
 	std::vector<ObjectArrangeInfo>_objectArrangeInfos;
