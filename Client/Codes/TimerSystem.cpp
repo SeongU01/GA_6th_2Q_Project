@@ -19,7 +19,12 @@ void TimerSystem::FixedUpdate()
 
 void TimerSystem::Update(const float& deltaTime)
 {
-	_curTime += deltaTime;
+    _curTime += deltaTime;
+    if (_playTime > 0.0f)
+    {
+        _playTime -= deltaTime;
+        _playTime = _playTime < 0.0f ? 0 : _playTime;//끝난경우 0으로 다시 초기화
+    }
     float timer = GetRemainingTime();
 
     //시간정지

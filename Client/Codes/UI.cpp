@@ -10,6 +10,12 @@ const D2D1_SIZE_F& UI::GetImageSize()
     return _imageSize;
 }
 
+void UI::SetFrame(int index)
+{
+    _info.fixFrame = index;
+    _pSpriteRenderer->SetIndex(_info.fixFrame);
+}
+
 void UI::SetPosition(const Vector3& position)
 {
     //위치 조정

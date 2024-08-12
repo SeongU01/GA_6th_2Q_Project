@@ -6,6 +6,7 @@
 #include "GameClearHUD.h"
 #include "GameClearButtons.h"
 #include "TimerSystem.h"
+#include "HPHUD.h"
 //object
 #include "TestPlayer.h"
 #include "Obstacle.h"
@@ -138,8 +139,10 @@ bool DefaultStageScene::Initialize()
     _pTimerSystem = pTimer->AddComponent<TimerSystem>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerSystem", pTimer); pTimer->SetRenderGroup((int)RenderGroup::UI);
     //============================
-    if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
+    if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr) {
         Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 1.0f,1.0f,1.0f }));
+        Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
+    }
     else
     {
         Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);

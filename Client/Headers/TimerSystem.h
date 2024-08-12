@@ -2,7 +2,6 @@
 #include "MonoBehavior.h"
 #include "TextRenderer.h"
 #include "UI.h"
-//싱글톤없애기..
 
 class TimerSystem :public Engine::MonoBehavior
 {
@@ -14,6 +13,7 @@ private:
 public:
 	float GetRemainingTime() { return _maxTime-_curTime; }
 	float UseTime(float time) { return _curTime += time; }
+	float AddPlayTime(float time) { _playTime += time; } //스킬이 진행될 시간(카드의 추가 및 삭제에 따른 변경.)
 
 public:
 	virtual void Awake() override;
@@ -23,6 +23,7 @@ public:
 	virtual void LateUpdate(const float& deltaTime) override;
 
 private:
+	float _playTime = 0.0f;
 	float _slowTime = 0.0f;
 	float _curTime = 0.0f;
 	float _maxTime=60.f;

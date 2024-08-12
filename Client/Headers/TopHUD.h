@@ -1,15 +1,14 @@
 #pragma once
 #include "UIComponent.h"
-
 class HP;
-class HPHUD : public UIComponent
+class TopHUD : public UIComponent
 {
 public:
-	explicit HPHUD(HP* _hp,int index);
-	explicit HPHUD();
+	explicit TopHUD(HP* _hp, int index);
+	explicit TopHUD();
 	//explicit HPHUD(HP* _hp) { _pHP = _hp; };
 private:
-	virtual ~HPHUD() = default;
+	virtual ~TopHUD() = default;
 public:
 	void Awake() override;
 	void Start() override;

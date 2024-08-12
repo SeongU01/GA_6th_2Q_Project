@@ -56,7 +56,10 @@ void TimerHUD::Update(const float& deltaTime)
 	    //Time::SetSlowTime(0.0f);   
 	 pRed->SetScale({ 0.f,0.f,0.f });
 	}
+	
 	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"Timer : %02d:%02d", (int)timer, (int)(timer * 100) % 100);
+	pText->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	pText->transform.SetPosition({ 130,810 });
 	pText->SetText(_buffer);	
 }
 

@@ -22,7 +22,7 @@ private:
 public:
 	Vector3 GetGridPosition() { return _gridPosition; }
 	void ResetPlayer(const Vector3& startPos);
-
+	HP* GetPlayerHPComponent() { return _pHP; }
 public:
 	// MonoBehavior을(를) 통해 상속됨
 	void Awake() override;

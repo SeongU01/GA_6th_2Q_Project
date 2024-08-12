@@ -14,7 +14,7 @@
 #include "CardSystem.h"
 #include "Collider.h"
 #include "TimerSystem.h"
-
+#include "HPHUD.h"
 // Object
 #include "Tile.h"
 
@@ -50,10 +50,17 @@ void Player::Awake()
 	_pCombatEvent = AddComponent<CombatEvent>();
 	_pAdditiveState = AddComponent<AdditiveState>();
 	AddComponent<TimerSystem>();
+
+	//플레이어 체력바
+	Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
+	pHPHUDDObj->transform.SetParent(&transform);
+	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 }
 
 void Player::Start()
 {
+	_pHP->SetHP(4);
 	_gridPosition = _startPosition;
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);	
 }

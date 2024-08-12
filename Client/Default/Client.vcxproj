@@ -72,6 +72,7 @@
     <ClCompile Include="..\Codes\TitleButtons.cpp" />
     <ClCompile Include="..\Codes\TitleScene.cpp" />
     <ClCompile Include="..\Codes\ToolTip.cpp" />
+    <ClCompile Include="..\Codes\TopHUD.cpp" />
     <ClCompile Include="..\Codes\UI.cpp" />
     <ClCompile Include="..\Codes\UIComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="..\Headers\TitleButtons.h" />
     <ClInclude Include="..\Headers\TitleScene.h" />
     <ClInclude Include="..\Headers\ToolTip.h" />
+    <ClInclude Include="..\Headers\TopHUD.h" />
     <ClInclude Include="..\Headers\UI.h" />
     <ClInclude Include="..\Headers\UIComponent.h" />
   </ItemGroup>

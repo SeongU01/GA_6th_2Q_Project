@@ -167,6 +167,9 @@
     <ClCompile Include="..\Codes\GridEffect.cpp">
       <Filter>04. Component\GridEffect</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\TopHUD.cpp">
+      <Filter>05. UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -485,6 +488,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\GridEffect.h">
       <Filter>04. Component\GridEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TopHUD.h">
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
