@@ -55,8 +55,6 @@ void Player::Awake()
 	//플레이어 체력바
 	Engine::GameObject* pHPHUDDObj = &transform.GetOwner();
 	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj);
-	pHPHUDDObj->SetRenderGroup((int)RenderGroup::Object);
 }
 
 void Player::Start()

@@ -6,8 +6,7 @@ class HPHUD : public UIComponent
 {
 public:
 	explicit HPHUD(HP* _hp,int index);
-	explicit HPHUD();
-	//explicit HPHUD(HP* _hp) { _pHP = _hp; };
+
 private:
 	virtual ~HPHUD() = default;
 public:

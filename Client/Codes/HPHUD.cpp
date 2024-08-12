@@ -1,10 +1,7 @@
 #include "HPHUD.h"
 #include "HP.h"
 #include "Client_Define.h"
-HPHUD::HPHUD()
-	:UIComponent(L"HP")
-{
-}
+
 HPHUD::HPHUD(HP* _hp,int index)
 	:UIComponent(L"HP")
 {
