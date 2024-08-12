@@ -29,12 +29,14 @@
     <ClCompile Include="..\Codes\CreditHUD.cpp" />
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemy.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
     <ClCompile Include="..\Codes\Defense.cpp" />
     <ClCompile Include="..\Codes\DefenseScript.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\EffectTarget.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
+    <ClCompile Include="..\Codes\EnemySpawner.cpp" />
     <ClCompile Include="..\Codes\Fade.cpp" />
     <ClCompile Include="..\Codes\GageHUD.cpp" />
     <ClCompile Include="..\Codes\GameClearButtons.cpp" />
@@ -59,6 +61,7 @@
     <ClCompile Include="..\Codes\PlayerMP.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
+    <ClCompile Include="..\Codes\SpawnEnemy.cpp" />
     <ClCompile Include="..\Codes\Stage1Scene.cpp" />
     <ClCompile Include="..\Codes\Stage2Scene.cpp" />
     <ClCompile Include="..\Codes\Stage3Scene.cpp" />
@@ -78,7 +81,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Codes\TestEnemy.h" />
     <ClInclude Include="..\Headers\AdditiveState.h" />
     <ClInclude Include="..\Headers\Astar.h" />
     <ClInclude Include="..\Headers\Button.h" />
@@ -92,12 +94,14 @@
     <ClInclude Include="..\Headers\CreditHUD.h" />
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
+    <ClInclude Include="..\Headers\DefaultEnemy.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
     <ClInclude Include="..\Headers\Defense.h" />
     <ClInclude Include="..\Headers\DefenseScript.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\EffectTarget.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
+    <ClInclude Include="..\Headers\EnemySpawner.h" />
     <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\GageHUD.h" />
     <ClInclude Include="..\Headers\GameClearButtons.h" />
@@ -122,10 +126,12 @@
     <ClInclude Include="..\Headers\PlayerMP.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />
+    <ClInclude Include="..\Headers\SpawnEnemy.h" />
     <ClInclude Include="..\Headers\Stage1Scene.h" />
     <ClInclude Include="..\Headers\Stage2Scene.h" />
     <ClInclude Include="..\Headers\Stage3Scene.h" />
     <ClInclude Include="..\Headers\Stage4Scene.h" />
+    <ClInclude Include="..\Headers\TestEnemy.h" />
     <ClInclude Include="..\Headers\TestPlayer.h" />
     <ClInclude Include="..\Headers\TestScene.h" />
     <ClInclude Include="..\Headers\Tile.h" />

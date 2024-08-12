@@ -50,9 +50,6 @@
     <ClCompile Include="..\Codes\Enemy.cpp">
       <Filter>03. GameObject\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Astar.cpp">
-      <Filter>03. GameObject\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\TestEnemy.cpp">
       <Filter>03. GameObject\Enemy</Filter>
     </ClCompile>
@@ -167,8 +164,20 @@
     <ClCompile Include="..\Codes\GridEffect.cpp">
       <Filter>04. Component\GridEffect</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Astar.cpp">
+      <Filter>03. GameObject\Enemy\Astar</Filter>
+    </ClCompile>
     <ClCompile Include="..\Codes\TopHUD.cpp">
       <Filter>05. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EnemySpawner.cpp">
+      <Filter>03. GameObject\Enemy\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SpawnEnemy.cpp">
+      <Filter>03. GameObject\Enemy\Spawner\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemy.cpp">
+      <Filter>03. GameObject\Enemy\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +322,27 @@
     <Filter Include="04. Component\GridEffect">
       <UniqueIdentifier>{1b4cf4bc-a016-4cf1-92ad-ba3342bb8f54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Enemy\Astar">
+      <UniqueIdentifier>{1e7b3f16-f816-4fba-8cfe-a8d13a2b6e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite">
+      <UniqueIdentifier>{4f919b67-3bd4-4c21-a8e5-eba36dcc5923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range">
+      <UniqueIdentifier>{a569407e-fc16-4ce6-b379-9a01dd32e252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default">
+      <UniqueIdentifier>{f5d71d02-192b-47e0-a2a0-09f5117ae7ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss">
+      <UniqueIdentifier>{b940ac90-bfcf-41c7-ace7-3cbc13c8d6fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Spawner">
+      <UniqueIdentifier>{c85a5df5-b838-438a-bb2f-98f12c88616c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Spawner\Script">
+      <UniqueIdentifier>{d23b4420-9c81-4cfa-8301-2b523fd6fdcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
@@ -363,9 +393,6 @@
     <ClInclude Include="..\Headers\DataManager.h">
       <Filter>06. Manager\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\Codes\TestEnemy.h">
-      <Filter>03. GameObject\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Mouse.h">
       <Filter>03. GameObject\Mouse</Filter>
     </ClInclude>
@@ -386,9 +413,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\TimerSystem.h">
       <Filter>03. GameObject\Player\Script\Timer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Astar.h">
-      <Filter>03. GameObject\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Enemy.h">
       <Filter>03. GameObject\Enemy</Filter>
@@ -488,6 +512,21 @@
     </ClInclude>
     <ClInclude Include="..\Headers\GridEffect.h">
       <Filter>04. Component\GridEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Astar.h">
+      <Filter>03. GameObject\Enemy\Astar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TestEnemy.h">
+      <Filter>03. GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EnemySpawner.h">
+      <Filter>03. GameObject\Enemy\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SpawnEnemy.h">
+      <Filter>03. GameObject\Enemy\Spawner\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemy.h">
+      <Filter>03. GameObject\Enemy\Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TopHUD.h">
       <Filter>05. UI\HUD</Filter>
