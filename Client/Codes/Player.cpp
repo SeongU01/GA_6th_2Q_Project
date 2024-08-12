@@ -55,7 +55,8 @@ void Player::Awake()
 	Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
 	pHPHUDDObj->transform.SetParent(&transform);
 	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj);
+	pHPHUDDObj->SetRenderGroup((int)RenderGroup::Object);
 }
 
 void Player::Start()
