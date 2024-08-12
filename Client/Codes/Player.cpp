@@ -30,6 +30,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 	 _movement->SetGrid();
 	 _gridPosition = startPos;
 	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+	 GetComponent<TimerSystem>()->ResetTime();
 }
 
 void Player::Awake()
@@ -52,8 +53,7 @@ void Player::Awake()
 	AddComponent<TimerSystem>();
 
 	//플레이어 체력바
-	Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
-	pHPHUDDObj->transform.SetParent(&transform);
+	Engine::GameObject* pHPHUDDObj = &transform.GetOwner();
 	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj);
 	pHPHUDDObj->SetRenderGroup((int)RenderGroup::Object);

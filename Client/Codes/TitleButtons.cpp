@@ -32,8 +32,7 @@ void TitleButtons::Start()
 	pObj = AddUI(info);
 	ToolTip* pToolTip = pObj->AddComponent<ToolTip>(L"Test");
 	Vector3 NextPos = pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Char_003"), Vector3(0.f, 0.f, 0.f));
-	NextPos = pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Char_002"), NextPos);
-	NextPos = pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Char_001"), NextPos);
+
 	btn = pObj->AddComponent<Button>();
 	btn->SetCancel([pObj]() { 
 		ToolTip* pToolTip = pObj->GetComponent<ToolTip>(L"Test");

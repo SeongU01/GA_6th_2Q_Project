@@ -11,7 +11,7 @@
 #include "DeckSystem.h"
 #include "TimerHUD.h"
 #include "GridEffect.h"
-
+#include "TimerSystem.h"
 //object
 #include "Map.h"
 #include "TimerUI.h"
@@ -33,56 +33,29 @@ int TestScene::LateUpdate(const float& deltaTime)
     return 0;
 }
 
-bool TestScene::UIInitialize()
+bool TestScene::UIinitialize()
 {
-    Engine::GameObject* pGameObject = Engine::GameObject::Create();
-    pGameObject->AddComponent<DeckSystem>();
-    pGameObject->SetRenderGroup((int)RenderGroup::UI);
-    pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
-
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
-
-    Engine::GameObject* pTimerObj = Engine::GameObject::Create();
-    pTimerObj->AddComponent<TimerHUD>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
-
-    return true;
+    __super::UIinitialize();
+    return false;
 }
 
 bool TestScene::Initialize()
 {
+    __super::Initialize();
     MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
     ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
-
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
-    
     MakeObject(stage1Obj);
-    
-    // BackGround
-    Engine::GameObject* pObject = Engine::GameObject::Create();
-    Engine::SpriteRenderer* pSpriteRenderer = pObject->GetComponent<Engine::SpriteRenderer>();
-    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
-    pSpriteRenderer->SetIndex(0);
-    pObject->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
-    pObject->SetRenderGroup((int)RenderGroup::BackGround);
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pObject);
-
-    // Mouse
-    pObject = Engine::GameObject::Create();
-    pObject->SetName(L"Mouse");
-    pObject->SetRenderGroup((int)RenderGroup::UI);
-    pObject->AddComponent<Mouse>(L"Mouse");
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
 
     _pCollisionManager = Engine::CollisionManager::Create();
 
-    pObject = Engine::GameObject::Create();
+    Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
     pObject->AddComponent<GridEffect>(stage1.width, stage1.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
-    UIInitialize();
+    UIinitialize();
 
     return true;
 }

@@ -4,8 +4,8 @@
 namespace Engine
 {
 	class GameObject;
+	class CollisionManager;
 }
-
 class CardManager;
 class TimerSystem;
 class Stage1Scene : public DefaultStageScene
@@ -26,5 +26,7 @@ private:
 
 public:
 	static Stage1Scene* Create();
+private:
+	Engine::CollisionManager* _pCollisionManager = nullptr;
 
 };

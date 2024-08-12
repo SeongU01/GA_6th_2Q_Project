@@ -6,8 +6,9 @@
 #include "Client_Define.h"
 
 TimerHUD::TimerHUD()
-	:UIComponent(L"HP")
+	:UIComponent(L"TimerHUD")
 {
+	_pTimer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<TimerSystem>(); //타이머시스템
 }
 
 void TimerHUD::Awake()
@@ -36,7 +37,6 @@ void TimerHUD::Start()
 	_pText = pObj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::Red);
 	_pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pObj); pObj->SetRenderGroup((int)RenderGroup::UI);	
-	_pTimer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<TimerSystem>(); //타이머시스템
 
 	_pCurrentValue = _pTimer->GetRemainingTime();
 	_maxValue = 10.0f;

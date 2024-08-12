@@ -21,7 +21,7 @@ public:
 	int LateUpdate(const float& deltaTime) override;
 
 private:
-	bool UIInitialize();
+	bool UIinitialize() override;
 	bool Initialize() override;
 	void Free() override;
 

@@ -7,7 +7,11 @@
 #include "GameClearButtons.h"
 #include "TimerSystem.h"
 #include "HPHUD.h"
+#include "TopHUD.h"
+#include "MPHUD.h"
+#include "Mouse.h"
 //object
+#include "CollisionManager.h"
 #include "TestPlayer.h"
 #include "Obstacle.h"
 #include "Player.h"
@@ -93,7 +97,6 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
       );
       break;
     case 99:
-      Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f)));
       break;
     }
   }
@@ -134,21 +137,36 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
 
 bool DefaultStageScene::Initialize()
 {
+    _pCollisionManager = Engine::CollisionManager::Create();
     //Timer=======================
     Engine::GameObject* pTimer = Engine::GameObject::Create();
     _pTimerSystem = pTimer->AddComponent<TimerSystem>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerSystem", pTimer); pTimer->SetRenderGroup((int)RenderGroup::UI);
+    pTimer->SetRenderGroup((int)RenderGroup::UI);
     //============================
-    if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr) {
+    if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
+    {
         Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 1.0f,1.0f,1.0f }));
-        Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
+        Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+        pPlayer->SetRenderGroup((int)RenderGroup::Object);
+        Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
+        pHPHUDObj->SetDontDestroyObject(true);
+        Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerTopHP", pHPHUDObj);
+        pHPHUDObj->AddComponent<TopHUD>(pPlayer->GetComponent<Player>()->GetPlayerHPComponent(), 0);
+        pHPHUDObj->SetRenderGroup((int)RenderGroup::UI);
     }
     else
     {
         Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
         pPlayer->GetComponent<Player>()->ResetPlayer({ 1.0f,1.0f,1.0f });
         pPlayer->SetActive(true);
+        pPlayer->GetComponent<HPHUD>()->SetActives(true);
     }
+    // Mouse
+    Engine::GameObject* pObject = Engine::GameObject::Create();
+    pObject->SetName(L"Mouse");
+    pObject->SetRenderGroup((int)RenderGroup::UI);
+    pObject->AddComponent<Mouse>(L"Mouse");
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
     UIinitialize();
     return false;
 }
@@ -175,6 +193,10 @@ bool DefaultStageScene::UIinitialize()
     pGameClearObj->AddComponent<GameClearHUD>();
     pGameClearObj->AddComponent<GameClearButtons>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Fade);
+    //¸¶³ª ¹Ù
+    Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
+    pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerMP", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
     return false;
 }
 

@@ -2,6 +2,9 @@
 #include "Scene.h"
 #include "DataManager.h"
 
+namespace Engine {
+	class CollisionManager;
+}
 class TimerSystem;
 class DefaultStageScene : public Engine::Scene
 {
@@ -20,6 +23,7 @@ protected:
 	void MakeObject(ObjectArrangeInfo& objInfo);
 protected:
 	TimerSystem* _pTimerSystem = nullptr;
+	Engine::CollisionManager* _pCollisionManager = nullptr;
 	wchar_t						_buffer[32]{};
 };
 

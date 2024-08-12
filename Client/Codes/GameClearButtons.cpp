@@ -1,6 +1,6 @@
 #include "GameClearButtons.h"
 #include "Button.h"
-
+#include "HPHUD.h"
 #include "Client_Define.h"
 
 #include "SelectScene.h"
@@ -24,7 +24,10 @@ void GameClearButtons::Start()
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([]() {
-		Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->SetActive(false);
+		Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+		pPlayer->SetActive(false);
+		pPlayer->GetComponent<HPHUD>()->SetActives(false);
+
 		Scene::ChagneScene(SelectScene::Create());
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
@@ -35,7 +38,9 @@ void GameClearButtons::Start()
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([]() {
-		Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->SetActive(false);
+		Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+		pPlayer->SetActive(false);
+		pPlayer->GetComponent<HPHUD>()->SetActives(false);
 		Scene::ChagneScene(SelectScene::Create());
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
@@ -46,7 +51,9 @@ void GameClearButtons::Start()
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([]() {
-		Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->SetActive(false);
+		Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+		pPlayer->SetActive(false);
+		pPlayer->GetComponent<HPHUD>()->SetActives(false);
 		Scene::ChagneScene(SelectScene::Create());
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
