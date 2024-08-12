@@ -106,6 +106,42 @@ void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1::C
 	_pDeviceContext->FillRectangle(rect, _pSolidColorBrush);
 }
 
+void Engine::SpriteRenderer::DrawLine(const D2D1_POINT_2F& point0, const D2D1_POINT_2F& point1, const D2D1::ColorF& color, float strokeWidth)
+{
+	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
+	_pSolidColorBrush->SetColor(color);
+	_pSolidColorBrush->SetOpacity(1.f);
+	_pDeviceContext->DrawLine(point0, point1, _pSolidColorBrush, strokeWidth);
+}
+
+void Engine::SpriteRenderer::DrawTriangle(const D2D1_POINT_2F& point0, const D2D1_POINT_2F& point1, const D2D1_POINT_2F& point2, const D2D1::ColorF& color, float opacity)
+{
+	ID2D1Factory* pFactory = GraphicManager::GetInstance()->GetFactory();
+	ID2D1PathGeometry* pPathGeometry = nullptr;
+	pFactory->CreatePathGeometry(&pPathGeometry);
+
+	ID2D1GeometrySink* pSink = nullptr;
+	pPathGeometry->Open(&pSink);
+
+	// 삼각형의 시작 점으로 이동
+	pSink->BeginFigure(point0, D2D1_FIGURE_BEGIN_FILLED);
+
+	// 나머지 점을 통해 경로 정의
+	pSink->AddLine(point1);
+	pSink->AddLine(point2);
+
+	// 경로 닫기
+	pSink->EndFigure(D2D1_FIGURE_END_CLOSED);
+	pSink->Close();
+
+	pSink->Release();
+
+	_pDeviceContext->SetTransform(D2D1::Matrix3x2F::Identity());
+	_pSolidColorBrush->SetColor(color);
+	_pSolidColorBrush->SetOpacity(opacity);
+	_pDeviceContext->FillGeometry(pPathGeometry, _pSolidColorBrush);
+}
+
 void Engine::SpriteRenderer::SetDrawOffset(const Vector3& offset)
 {
 	_drawOffset = offset;

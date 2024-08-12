@@ -34,6 +34,8 @@ namespace Engine
 		void Draw(ID2D1Bitmap* pBitmap);
 		void DrawRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color = D2D1::ColorF::Lime, float width = 1.f);
 		void DrawFillRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, const float& opacity);
+		void DrawLine(const D2D1_POINT_2F& point0, const D2D1_POINT_2F& point1, const D2D1::ColorF& color, float strokeWidth);
+		void DrawTriangle(const D2D1_POINT_2F& point0, const D2D1_POINT_2F& point1, const D2D1_POINT_2F& point2, const D2D1::ColorF& color, float opacity = 1.f);
 
 		template <typename T>
 		T* AddShader()
