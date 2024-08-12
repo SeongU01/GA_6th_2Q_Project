@@ -150,10 +150,10 @@
       <Filter>04. Component\Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Defense.cpp">
-      <Filter>03. GameObject\GridObject\Ddefense</Filter>
+      <Filter>03. GameObject\GridObject\Defense</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\DefenseScript.cpp">
-      <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
+      <Filter>03. GameObject\GridObject\Defense\Script</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GageHUD.cpp">
       <Filter>05. UI\HUD</Filter>
@@ -265,12 +265,6 @@
     <Filter Include="03. GameObject\Player\Script\CardSystem">
       <UniqueIdentifier>{60c34e6b-b878-4f79-a2ec-ed9db949831b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\GridObject\Ddefense">
-      <UniqueIdentifier>{0d844191-c1c2-4dda-a1d5-8354b0216719}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\GridObject\Ddefense\Script">
-      <UniqueIdentifier>{c5cce575-497c-4999-8415-7c3e4e5828d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Component">
       <UniqueIdentifier>{8d1fe4b8-1fa6-4ece-8455-9e28dbfaa3c2}</UniqueIdentifier>
     </Filter>
@@ -342,6 +336,12 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Spawner\Script">
       <UniqueIdentifier>{d23b4420-9c81-4cfa-8301-2b523fd6fdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Defense">
+      <UniqueIdentifier>{0d844191-c1c2-4dda-a1d5-8354b0216719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\GridObject\Defense\Script">
+      <UniqueIdentifier>{c5cce575-497c-4999-8415-7c3e4e5828d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -499,10 +499,10 @@
       <Filter>04. Component\Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Defense.h">
-      <Filter>03. GameObject\GridObject\Ddefense</Filter>
+      <Filter>03. GameObject\GridObject\Defense</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DefenseScript.h">
-      <Filter>03. GameObject\GridObject\Ddefense\Script</Filter>
+      <Filter>03. GameObject\GridObject\Defense\Script</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GageHUD.h">
       <Filter>05. UI\HUD</Filter>

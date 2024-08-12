@@ -156,6 +156,7 @@ bool DataManager::LoadEnemySpawn(const wchar_t* filePath)
 		EnemyInfo enemyInfo;
 		enemyInfo.spawnPosition = { spawnX, spawnY, 0.f };
 		enemyInfo.subSpawnPosition = { subSpawnX, subSpawnY, 0.f };
+		enemyInfo.spawnType = enemyType;
 		enemyInfo.targetName = enemyTarget;
 
 		// WaveInfo 찾거나 생성

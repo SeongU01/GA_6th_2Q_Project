@@ -33,6 +33,7 @@ struct EnemyInfo
 	Vector3 spawnPosition = { 0.f,0.f ,0.f };
 	Vector3 subSpawnPosition = { 0.f,0.f ,0.f };
 	std::wstring targetName;
+	std::wstring spawnType;
 };
 struct WaveInfo
 {
@@ -112,6 +113,18 @@ public:
 			}
 		}
 		throw std::runtime_error("Stage not found");
+	}
+	WaveInfo GetWaveInfo(const EnemySpawnInfo& spawnInfo, const std::wstring& waveName) 
+	{
+
+		for (const auto& waveInfo : spawnInfo.waveInfos) 
+		{
+			if (waveInfo.waveName == waveName)
+			{
+				return waveInfo;
+			}
+		}
+		throw std::runtime_error("Wave not found");
 	}
 private:
 	std::vector<MapInfo> _mapInfos;
