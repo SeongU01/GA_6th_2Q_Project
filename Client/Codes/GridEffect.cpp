@@ -19,9 +19,9 @@ void GridEffect::Awake()
 {
 	Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
 	
-	for (size_t i = 0; i < _gridEffects.size(); i++)
+	for (int i = 0; i < _gridEffects.size(); i++)
 	{
-		for (size_t j = 0; j < _gridEffects[i].size(); j++)
+		for (int j = 0; j < _gridEffects[i].size(); j++)
 		{
 			auto pEffect = Engine::GameObject::Create();
 			pEffect->SetActive(false);
@@ -60,6 +60,12 @@ void GridEffect::LateUpdate(const float& deltaTime)
 
 void GridEffect::OnEffect(int x, int y, int type)
 {
+	if (y >= (int)_gridEffects.size() || y < 0)
+		return;
+
+	if (x >= (int)_gridEffects[y].size() || x < 0)
+		return;
+
 	_gridEffects[y][x]->SetActive(true);
 	auto pEffect = _gridEffects[y][x]->GetComponent<Effect>();
 	pEffect->SetFixFrame(type);

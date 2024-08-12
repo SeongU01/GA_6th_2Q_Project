@@ -10,6 +10,9 @@ bool CardManager::LoadCard(const wchar_t* filePath)
 {
     std::wstring path = filePath;
 
+    if (!LoadCardAttackRangeData((path + L"/AttackRange.csv").c_str()))
+        return false;
+
     if (!LoadCardDataRichText((path + L"/OptionRichText.csv").c_str()))
         return false;
 
@@ -196,6 +199,7 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
             cardData.targetNum[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
+            token = token.substr(0, 1);
             cardData.additiveCharState[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
@@ -221,6 +225,41 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
         }
 
         _cardDatas.push_back(cardData);        
+    }
+
+    return true;
+}
+
+bool CardManager::LoadCardAttackRangeData(const wchar_t* filePath)
+{
+    std::wifstream file(filePath);
+
+    if (!file.is_open()) {
+        std::cout << "파일을 열 수 없습니다." << std::endl;
+        return false;
+    }
+
+    std::wstring line;
+    std::getline(file, line);
+
+    while (std::getline(file, line))
+    {
+        std::wstringstream wss(line);
+        std::wstring token;
+
+        std::getline(wss, token, L',');
+        if (L"ID" == token.substr(0, 2))
+        {
+            _attackRanges.push_back(std::vector<std::pair<int, int>>());
+            continue;
+        }
+
+        int x = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        int y = _wtoi(token.c_str());
+
+        _attackRanges.back().push_back(std::make_pair(x, y));
     }
 
     return true;

@@ -57,7 +57,7 @@ void GridMovement::SetGrid()
 }
 
 
-void GridMovement::MoveToCell(Vector3& pos, float timeToMove)
+void GridMovement::MoveToCell(const Vector3& pos, float timeToMove)
 {
 	if (_grid != nullptr && _grid->IsTileWalkable((int)pos.x, (int)pos.y) && !_isMoving)
 	{

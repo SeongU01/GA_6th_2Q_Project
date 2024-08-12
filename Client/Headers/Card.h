@@ -9,7 +9,7 @@ namespace Engine
 
 enum class CardType;
 enum class CardEffectType;
-class EffectTarget;
+class CardEffect;
 class Card final : public Engine::MonoBehavior
 {
 	friend class CardSystem;
@@ -80,7 +80,7 @@ private:
 	Vector3				_handDeckPosition;
 	Engine::Collider*	_pCollider = nullptr;
 	Engine::GameObject* _pPlayer = nullptr;
-	EffectTarget*		_pEffectTarget = nullptr;
+	CardEffect*			_pCardEffect[2]{};
 	D2D1_SIZE_F			_pixelSize{};
 	float				_priority = 0.f;
 	float				_lerpTime = 0.f;

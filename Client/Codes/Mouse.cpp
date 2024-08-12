@@ -19,6 +19,15 @@ void Mouse::Awake()
 
 	_pOwner->_isDrawCollider = true;
 	_hWnd = Engine::GetWindow();
+
+	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
+	pSpriteRenderer->SetOneSelfDraw(true, [=]()
+		{
+			if (_isLineDraw)
+			{
+				pSpriteRenderer->DrawTriangle(_linePoint[0], _linePoint[1], _linePoint[2], D2D1::ColorF::White, 0.75f);
+			}
+		});
 }
 
 void Mouse::Start()
@@ -40,6 +49,30 @@ void Mouse::Update(const float& deltaTime)
 
 void Mouse::LateUpdate(const float& deltaTime)
 {
+	if (_hoverCard)
+	{
+		if (Input::IsKeyUp(Input::DIM_LB))
+		{
+			if (800.f > transform.position.y)
+				_pCardSystem->ActiveCard(_hoverCard);
+
+			_hoverCard->isHold = false;
+			_hoverCard->SetMouseHover(false);
+			_hoverCard = nullptr;
+			_isLineDraw = false;
+		}
+
+		if (Input::IsKeyDown(Input::DIM_RB))
+		{
+			_hoverCard->isHold = false;
+			_hoverCard->SetMouseHover(false);
+			_hoverCard = nullptr;
+			_isLineDraw = false;
+		}		
+	}
+
+	if (_isLineDraw)
+		_linePoint[2] = { transform.position.x, transform.position.y };
 }
 
 void Mouse::OnCollisionEnter(Engine::CollisionInfo& info)
@@ -60,24 +93,11 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		else
 		{
 			if (Input::IsKeyDown(Input::DIM_LB))
+			{
 				_hoverCard->isHold = true;
-
-			if (_hoverCard->isHold)
-				_hoverCard->transform.position = transform.position;
-
-			if (Input::IsKeyUp(Input::DIM_LB))
-			{
-				_hoverCard->isHold = false;
-
-				if (900.f > transform.position.y)
-					_pCardSystem->ActiveCard(_hoverCard);
-			}
-			
-			if (Input::IsKeyDown(Input::DIM_RB))
-			{
-				_hoverCard->isHold = false;
-				_hoverCard->SetMouseHover(false);
-				_hoverCard = nullptr;
+				_linePoint[0] = { _hoverCard->transform.position.x - 10.f, _hoverCard->transform.position.y - 140.f };
+				_linePoint[1] = { _hoverCard->transform.position.x + 10.f, _hoverCard->transform.position.y - 140.f };
+				_isLineDraw = true;
 			}
 		}
 	}
@@ -91,9 +111,12 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 	{
 		if (pOther->GetComponent<Card>() == _hoverCard)
 		{
-			_hoverCard->isHold = false;
-			_hoverCard->SetMouseHover(false);
-			_hoverCard = nullptr;
+			if (!Input::IsKeyPress(Input::DIM_LB))
+			{
+				_hoverCard->isHold = false;
+				_hoverCard->SetMouseHover(false);
+				_hoverCard = nullptr;
+			}
 		}
 	}
 }

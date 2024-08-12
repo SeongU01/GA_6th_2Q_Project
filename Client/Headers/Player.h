@@ -20,7 +20,8 @@ private:
 	virtual ~Player() = default;
 
 public:
-	Vector3 GetGridPosition() { return _gridPosition; }
+	Vector3 GetGridPosition()const  { return _gridPosition; } 
+	void SetGridPostion(const Vector3& _pos);
 	void ResetPlayer(const Vector3& startPos);
 	HP* GetPlayerHPComponent() { return _pHP; }
 	PlayerMP* GetPlayerMPComponent() { return _pMP; }

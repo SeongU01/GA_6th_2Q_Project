@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 // CardEffect
-#include "EffectTarget.h"
+#include "CardEffect.h"
 
 // Component
 #include "TextRenderer.h"
@@ -11,7 +11,12 @@
 #include "PlayerMP.h"
 #include "TimerSystem.h"
 #include "Player.h"
+#include "Grid.h"
+#include "Effect.h"
+#include "AdditiveState.h"
+#include "GridMovement.h"
 
+#include "CardManager.h"
 #include "Client_Define.h"
 
 
@@ -74,7 +79,25 @@ void Card::Awake()
 void Card::Start()
 {
 	_pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
-	_pEffectTarget = EffectTarget::Create(_pPlayer->GetComponent<Player>(), _cardData.effectType[0], { {1, 0}, {2, 0} });
+	CardManager* pCardManager = CardManager::GetInstance();
+
+	Player* pPlayer = _pPlayer->GetComponent<Player>();
+		
+	CardEffect::CardEffectInfo info;
+	info.effectType = _cardData.effectType[0];
+	info.ranges = pCardManager->GetAttackRange(_cardData.targetNum[0]);
+	info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[0];
+	info.additiveStack = _cardData.charStateNum[0];
+	_pCardEffect[0] = CardEffect::Create(pPlayer, info);
+
+	if (CardEffectType::None != _cardData.effectType[1])
+	{
+		info.effectType = _cardData.effectType[1];
+		info.ranges = pCardManager->GetAttackRange(_cardData.targetNum[1]);
+		info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[1];
+		info.additiveStack = _cardData.charStateNum[1];
+		_pCardEffect[1] = CardEffect::Create(pPlayer, info);
+	}
 }
 
 void Card::Update(const float& deltaTime)
@@ -96,10 +119,12 @@ void Card::LateUpdate(const float& deltaTime)
 {
 	if (_isHoldMouse)
 	{
-		_pEffectTarget->ShowRange();
+		_offset = { 0.f, -65.f, 0.f };
+		_pCardEffect[0]->ShowRange();
+		//if (_pCardEffect[1]) _pCardEffect[1]->ShowRange();
 	}
 
-	if (!_isHoldMouse) transform.position = _handDeckPosition + _offset;
+	transform.position = _handDeckPosition + _offset;
 }
 
 void Card::DrawCard()
@@ -165,6 +190,63 @@ bool Card::ActiveEffect()
 	pMP->mp -= _cardData.costMana;
 	pTimerSystem->UseTime(_cardData.costTime);
 
+	std::vector<std::pair<int, int>> attackRange = _pCardEffect[0]->GetAttackRange();
+	
+	if (CardEffectType::PathMove == _cardData.effectType[0])
+	{
+		Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+
+		POINT mousePoint;
+		GetCursorPos(&mousePoint);
+		ScreenToClient(Engine::GetWindow(), &mousePoint);
+		Vector3 currentGrid = pGrid->GetCurrGrid(Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f));
+
+		if (currentGrid.z >= 0)
+		{
+			bool isFind = false;
+			for (auto& range : attackRange)
+			{
+				if (currentGrid.x == range.first && currentGrid.y == range.second
+					&&pGrid->IsTileWalkable(currentGrid.x,currentGrid.y))
+				{
+					_pPlayer->GetComponent<Player>()->SetGridPostion(currentGrid);
+					_pPlayer->GetComponent<GridMovement>()->MoveToCell(
+						_pPlayer->GetComponent<Player>()->GetGridPosition(), 0.5f);
+					isFind = true;
+					break;
+				}
+			}
+
+			if (!isFind)
+				return false;
+		}
+	}
+
+	if (CardEffectType::RangeAttack == _cardData.effectType[0])
+	{
+		Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+		for (auto& range : attackRange)
+		{
+			auto pEffect = Engine::GameObject::Create();
+			Effect::EffectInfo info;
+			info.renderGroup = RenderGroup::FrontEffect;
+			info.aniSpeed = 0.05f;
+			info.textureTag = L"Effect";
+			info.position = pGrid->GetTileCenter(range.first, range.second);
+			pEffect->AddComponent<Effect>(info);
+			Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+		}
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		if (CardEffectType::SelfCast == _cardData.effectType[i])
+		{
+			AdditiveState* pAdditiveState = _pPlayer->GetComponent<AdditiveState>();
+			pAdditiveState->AddState(1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
+		}
+	}
+
 	return true;
 }
 
@@ -182,5 +264,5 @@ Vector3 Card::SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t)
 
 void Card::Free()
 {
-	SafeRelease(_pEffectTarget);
+	SafeRelease(_pCardEffect[0]);
 }

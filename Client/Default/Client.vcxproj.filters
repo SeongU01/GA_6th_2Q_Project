@@ -158,8 +158,8 @@
     <ClCompile Include="..\Codes\GageHUD.cpp">
       <Filter>05. UI\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\EffectTarget.cpp">
-      <Filter>03. GameObject\Card\Target</Filter>
+    <ClCompile Include="..\Codes\CardEffect.cpp">
+      <Filter>03. GameObject\Card\Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\GridEffect.cpp">
       <Filter>04. Component\GridEffect</Filter>
@@ -316,9 +316,6 @@
     <Filter Include="03. GameObject\Player\Script\Timer">
       <UniqueIdentifier>{c9741b24-0daa-406a-9ba3-fdce58450a0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Card\Target">
-      <UniqueIdentifier>{9832ebe2-5086-4b3f-a72d-ceb85dcb4344}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Component\GridEffect">
       <UniqueIdentifier>{1b4cf4bc-a016-4cf1-92ad-ba3342bb8f54}</UniqueIdentifier>
     </Filter>
@@ -351,6 +348,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Default\Script">
       <UniqueIdentifier>{6135f0ba-dc17-4258-b0bb-a932e6b4888d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Card\Effect">
+      <UniqueIdentifier>{9832ebe2-5086-4b3f-a72d-ceb85dcb4344}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -516,8 +516,8 @@
     <ClInclude Include="..\Headers\GageHUD.h">
       <Filter>05. UI\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EffectTarget.h">
-      <Filter>03. GameObject\Card\Target</Filter>
+    <ClInclude Include="..\Headers\CardEffect.h">
+      <Filter>03. GameObject\Card\Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\GridEffect.h">
       <Filter>04. Component\GridEffect</Filter>

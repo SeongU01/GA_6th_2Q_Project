@@ -25,6 +25,13 @@ Player::Player(const wchar_t* name, const Vector3& startPos)
 {
 }
 
+void Player::SetGridPostion(const Vector3& _pos)
+{
+	Tile* prevTile = _movement->_grid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x];
+	prevTile->canMove = true;
+	_gridPosition = _pos;
+}
+
 void Player::ResetPlayer(const Vector3& startPos)
 {
 	 _movement->SetGrid();
@@ -140,7 +147,7 @@ void Player::DefaultMove(const float& deltaTime)
 
 			if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 			{
-				_movement->MoveToCell(_gridPosition, 0.5f);
+				_movement->MoveToCell(_gridPosition, 0.25f);
 				Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
 				prevTile->canMove = true;
 			}

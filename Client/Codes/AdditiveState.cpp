@@ -47,7 +47,12 @@ void AdditiveState::Start()
 }
 
 void AdditiveState::Update(const float& deltaTime)
-{	
+{
+	if (_pBitFlag->CheckFlag(AdditiveFlag::Shield))
+		std::cout << "½¯µå On" << std::endl;
+
+	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
+		std::cout << "Â÷Áö On" << std::endl;
 }
 
 void AdditiveState::LateUpdate(const float& deltaTime)
@@ -61,7 +66,7 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 	{
 		_pTimer->SetActive(State::Charge, true);
 
-		if (_pTimer->IsOverTime(State::Charge, _stateDatas[State::Charge][0]))
+		if (_pTimer->IsOverTime(State::Charge, _stateDatas[State::Charge][1]))
 		{
 			_pBitFlag->OffFlag(AdditiveFlag::Charge);
 			_pTimer->SetActive(State::Charge, false);
@@ -72,7 +77,7 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 	{
 		_pTimer->SetActive(State::Extra, true);
 
-		if (_pTimer->IsOverTime(State::Extra, _stateDatas[State::Extra][0]))
+		if (_pTimer->IsOverTime(State::Extra, _stateDatas[State::Extra][1]))
 		{
 			_pBitFlag->OffFlag(AdditiveFlag::Extra);
 			_pTimer->SetActive(State::Extra, false);
@@ -88,12 +93,12 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 
 float AdditiveState::GetWeakPointValue() const
 {
-	return _stateDatas[State::WeakPoint][0];
+	return _stateDatas[State::WeakPoint][1];
 }
 
 float AdditiveState::GetExtraRecoveryValue() const
 {
-	return _stateDatas[State::Extra][1];
+	return _stateDatas[State::Extra][2];
 }
 
 bool AdditiveState::IsActiveState(unsigned long long flag) const
@@ -110,6 +115,7 @@ void AdditiveState::AddState(unsigned long long flag, int stack)
 {
 	unsigned long long n = flag;
 	int count = 0;
+
 	while (1 < n)
 	{
 		n >>= 1;
@@ -117,7 +123,7 @@ void AdditiveState::AddState(unsigned long long flag, int stack)
 	}
 
 	_pBitFlag->OnFlag(flag);
-	_stateStacks[1 >> count] = stack;
+	_stateStacks[count - 1] = stack;
 }
 
 void AdditiveState::ActiveCharge()

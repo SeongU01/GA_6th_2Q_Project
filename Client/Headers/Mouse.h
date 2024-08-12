@@ -26,5 +26,7 @@ private:
 	CardSystem*		_pCardSystem = nullptr;
 	Card*			_hoverCard = nullptr;
 	HWND			_hWnd = nullptr;
+	D2D1_POINT_2F	_linePoint[3];
+	bool			_isLineDraw = false;
 };
 

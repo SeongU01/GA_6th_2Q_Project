@@ -10,7 +10,7 @@
 
 constexpr float MAXWIDTH = 1150.f;
 constexpr float CARDWIDTH = 200.f;
-constexpr float RELOADCOOLTIME = 10.f;
+constexpr float RELOADCOOLTIME = 3.f;
 
 CardSystem::CardSystem()
 	: MonoBehavior(L"CardSystem")
