@@ -74,7 +74,7 @@
     <ClCompile Include="..\Codes\Stage3Scene.cpp" />
     <ClCompile Include="..\Codes\Stage4Scene.cpp" />
     <ClCompile Include="..\Codes\TestEnemy.cpp" />
-    <ClCompile Include="..\Codes\TestPlayer.cpp" />
+    <ClCompile Include="..\Codes\Zero.cpp" />
     <ClCompile Include="..\Codes\TestScene.cpp" />
     <ClCompile Include="..\Codes\Tile.cpp" />
     <ClCompile Include="..\Codes\TimerHUD.cpp" />
@@ -147,7 +147,7 @@
     <ClInclude Include="..\Headers\Stage3Scene.h" />
     <ClInclude Include="..\Headers\Stage4Scene.h" />
     <ClInclude Include="..\Headers\TestEnemy.h" />
-    <ClInclude Include="..\Headers\TestPlayer.h" />
+    <ClInclude Include="..\Headers\Zero.h" />
     <ClInclude Include="..\Headers\TestScene.h" />
     <ClInclude Include="..\Headers\Tile.h" />
     <ClInclude Include="..\Headers\TimerHUD.h" />

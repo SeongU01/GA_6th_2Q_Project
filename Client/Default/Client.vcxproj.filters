@@ -8,7 +8,7 @@
     <ClCompile Include="..\Codes\TestScene.cpp">
       <Filter>02. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\TestPlayer.cpp">
+    <ClCompile Include="..\Codes\Zero.cpp">
       <Filter>03. GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Grid.cpp">
@@ -399,7 +399,7 @@
     <ClInclude Include="..\Headers\TestScene.h">
       <Filter>02. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\TestPlayer.h">
+    <ClInclude Include="..\Headers\Zero.h">
       <Filter>03. GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Grid.h">
