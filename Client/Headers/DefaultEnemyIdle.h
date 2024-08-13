@@ -14,13 +14,15 @@ public:
 	void OnExit() override;
 
 private:
-	int SelectNextBehave();
+	DefaultEnemy::FSM SelectNextBehave();
 private:
-	bool CheckAttackRange(int arrange);
+	bool CheckAttackRange(int x, int y);
 public:
 	static DefaultEnemyIdle* Create(DefaultEnemyScript* pScript);
-
 private:
+	float _currTime = 0.f;
 	float _delayTime = 0.f;
+	DefaultEnemy::FSM _nextState;
+	bool _checkState = false;
 };
 

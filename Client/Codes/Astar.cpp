@@ -40,13 +40,13 @@ void AStar::Update(const float& deltaTime)
 
 	_curTime += deltaTime;
 
-	if (_path.size() > 1 && _pathIndex < _path.size())
+	if (!_path.empty() && _pathIndex < _path.size())
 	{
-		Vector3 nextPosition = _path[_pathIndex];
+			Vector3 nextPosition = _path[_pathIndex];
+			_gridPosition = nextPosition;
 		if (_curTime >= _moveTime)
 		{
 			_curTime = 0.0f;
-			_gridPosition = nextPosition;
 			_pathIndex++;
 			_currentMoveSteps++; // 이동 단계 증가
 
@@ -163,8 +163,7 @@ std::vector<Vector3> AStar::AStarMove(const Vector3& start, const Vector3& goal,
 			}
 
 			// gCost, hCost 업데이트
-			neighborNode->gCost =
-				neighborNode->gCost = tentativeGCost;
+			neighborNode->gCost = tentativeGCost;
 			neighborNode->hCost = heuristic(neighborPos, goal);
 			neighborNode->fCost = neighborNode->gCost + neighborNode->hCost; // fCost 계산
 			neighborNode->pParent = currentNode; // 부모 노드 설정

@@ -11,6 +11,7 @@ class HP;
 class GridMovement;
 class DefenseScript;
 class AStar;
+class Pannel;
 class DefaultEnemyScript:public Engine::MonoBehavior
 {
 	friend class DefaultEnemyState;
@@ -25,12 +26,17 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+public:
+	virtual void OnCollisionEnter(Engine::CollisionInfo& info);
+	virtual void OnCollision(Engine::CollisionInfo& info) ;
+	virtual void OnCollisionExit(Engine::CollisionInfo& info) ;
 private:
 	GridMovement* _movement = nullptr;
 	AStar* _aStar = nullptr;
 	HP* _pHP = nullptr;
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
+	Pannel* _pPannel = nullptr;
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;

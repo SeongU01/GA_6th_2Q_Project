@@ -1,6 +1,7 @@
 #include "GridMovement.h"
 #include "Client_Define.h"
 #include "Grid.h"
+#include "Tile.h"
 GridMovement::GridMovement(const wchar_t* name,const float speed)
 	:MonoBehavior(name),_moveSpeed(speed)
 {
@@ -62,7 +63,9 @@ void GridMovement::MoveToCell(const Vector3& pos, float timeToMove)
 	if (_grid != nullptr && _grid->IsTileWalkable((int)pos.x, (int)pos.y) && !_isMoving)
 	{
 		_originPos = transform.position;
+    _grid->GetTiles()[_grid->GetCurrGrid(_originPos).y][_grid->GetCurrGrid(_originPos).x]->canMove = true;
 		_targetPos = _grid->GetTileCenter((int)pos.x, (int)pos.y);
+    _grid->GetTiles()[pos.y][pos.x]->canMove = false;
 		_timeToMove = timeToMove;
 		_isMoving = true;
 		_elapsedTime = 0.f;

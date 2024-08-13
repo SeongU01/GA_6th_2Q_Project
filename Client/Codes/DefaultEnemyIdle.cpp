@@ -5,45 +5,59 @@
 #include "GridMovement.h"
 
 #include "Client_Define.h"
+
+
+
 int DefaultEnemyIdle::Update(const float& deltaTime)
 {
-	if (_pAnimation->IsLastFrame())
-	{
-		_pAnimation->ChangeAnimation(L"Idle");
-	}
+	
+
 	return 0;
 }
 
 int DefaultEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	_delayTime += deltaTime;
-
-	if (_delayTime >= 2.f)
-	{
-		_delayTime = 0.f;
-		return SelectNextBehave();
-	}
-	return 0;
+	
+	return (int)SelectNextBehave();
 }
 
 void DefaultEnemyIdle::OnStart()
 {
+	_pAnimation->ChangeAnimation(L"Idle");
 }
 
 void DefaultEnemyIdle::OnExit()
 {
 }
 
-int DefaultEnemyIdle::SelectNextBehave()
+DefaultEnemy::FSM DefaultEnemyIdle::SelectNextBehave()
 {
-	CheckAttackRange(1);
+	if (CheckAttackRange(1, 1))
+	{
+		return DefaultEnemy::FSM::WeakAttack;
+	}
 	
-	return (int)DefaultEnemy::FSM::Move;
+	return DefaultEnemy::FSM::Move;
 }
 
-bool DefaultEnemyIdle::CheckAttackRange(int arrange)
+bool DefaultEnemyIdle::CheckAttackRange(int x,int y)
 {
-	_pGridPosition;
+	Vector3 currPosition = *_pGridPosition;
+
+	int currGridX =(int)currPosition.x;
+	int currGridY =(int)currPosition.y;
+	
+	for (int dx = -x; dx <= x; dx++)
+	{
+		for (int dy = -y; dy <= y; dy++)
+		{
+			Vector3 temp = { (float)(currGridX + dx),(float)(currGridY + dy),0.f };
+			if (temp == *_pTargetPosition)
+			{
+				return true;
+			}
+		}
+	}
 	return false;
 }
 

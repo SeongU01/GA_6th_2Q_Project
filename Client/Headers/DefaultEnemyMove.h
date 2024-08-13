@@ -1,5 +1,7 @@
 #pragma once
 #include "DefaultEnemyState.h"
+class UI;
+
 class DefaultEnemyMove:public DefaultEnemyState
 {
 private:
@@ -11,7 +13,13 @@ public:
 	int LateUpdate(const float& deltaTime) override;
 	void OnStart() override;
 	void OnExit() override;
+
+	virtual void ShowInfo();
+	virtual void CloseInfo();
 public:
 	static DefaultEnemyMove* Create(DefaultEnemyScript* pScript);
+private:
+	float _currTime = 0.f;
+	float _delayTime = 0.f;
 };
 

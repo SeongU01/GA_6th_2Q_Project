@@ -2,6 +2,7 @@
 #include "Animation.h"
 int DefaultEnemyWeakAttack::Update(const float& deltaTime)
 {
+  
     return 0;
 }
 
@@ -21,6 +22,7 @@ void DefaultEnemyWeakAttack::OnStart()
 
 void DefaultEnemyWeakAttack::OnExit()
 {
+  _pAnimation->ChangeAnimation(L"Idle");
 }
 
 DefaultEnemyWeakAttack* DefaultEnemyWeakAttack::Create(DefaultEnemyScript* pScript)

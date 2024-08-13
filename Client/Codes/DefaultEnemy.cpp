@@ -21,3 +21,4 @@ DefaultEnemy* DefaultEnemy::Create(const Vector3& startPos, const std::wstring& 
 
 	return pInstance;
 }
+ 
