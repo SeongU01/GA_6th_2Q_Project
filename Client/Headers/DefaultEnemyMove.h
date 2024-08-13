@@ -20,6 +20,7 @@ public:
 	static DefaultEnemyMove* Create(DefaultEnemyScript* pScript);
 private:
 	float _currTime = 0.f;
-	float _delayTime = 0.f;
+	float _delayTime = 0.f;	
+	bool _isStateOn = false;
 };
 
