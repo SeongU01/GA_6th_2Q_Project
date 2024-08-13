@@ -1,111 +1,83 @@
-#include <queue>
-#include <unordered_map>
-#include <cmath>
-#include <algorithm>
-#include <vector>
+#pragma once
+#include "MonoBehavior.h"
 
-#include "Tile.h"
-#include "Client_Define.h"
-
-struct Vector3Hash {
-    std::size_t operator()(const Vector3& v) const {
-        return std::hash<int>()((int)v.x) ^ std::hash<int>()((int)v.y) ^ std::hash<int>()((int)v.z);
-    }
+struct Vector3Hash
+{
+	std::size_t operator()(const Vector3& v) const {
+		return std::hash<int>()((int)v.x) ^ std::hash<int>()((int)v.y) ^ std::hash<int>()((int)v.z);
+	}
 };
 
-struct Node {
-    Vector3 position;
-    float gCost, hCost;
-    std::shared_ptr<Node> pParent;
+struct Node
+{
+	Vector3 position;
+	float gCost, hCost,fCost;
+	std::shared_ptr<Node> pParent;
 
-    Node(const Vector3& pos)
-        : position(pos), gCost(0), hCost(0), pParent(nullptr) {}
-    Node() : position{ 0, 0, 0 }, gCost(0), hCost(0), pParent(nullptr) {}
+	Node(const Vector3& pos)
+		: position(pos), gCost(0), hCost(0), pParent(nullptr) {}
+	Node() : position{ 0, 0, 0 }, gCost(0), hCost(0), pParent(nullptr) {}
 
-    float fCost() const {
-        return gCost + hCost;
-    }
+	float calculateFCost() const{
+		return gCost + hCost;
+	}
 
-    bool operator==(const Node& other) const {
-        return ((int)position.x == (int)other.position.x && (int)position.y == (int)other.position.y);
-    }
+	bool operator==(const Node& other) const {
+		return ((int)position.x == (int)other.position.x && (int)position.y == (int)other.position.y);
+	}
 };
 
-struct NodeCompare {
-    bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) const {
-        return a->fCost() > b->fCost();
-    }
+struct NodeCompare
+{
+	bool operator()(const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) const {
+		return a->calculateFCost() > b->calculateFCost();
+	}
 };
 
-float heuristic(const Vector3& a, const Vector3& b) {
-    return std::abs(a.x - b.x) + std::abs(a.y - b.y);
-}
+class GridMovement;
+class Tile;
+class AStar :public Engine::MonoBehavior
+{
+public:
+	explicit AStar(const wchar_t* name,const std::wstring& targetName);
+private:
+	virtual ~AStar() = default;
+public:
+	// MonoBehavior을(를) 통해 상속됨
+	void Awake() override;
+	void Start() override;
+	void Update(const float& deltaTime) override;
+	void LateUpdate(const float& deltaTime) override;
+public:
+	void SetGoalPosition(const Vector3& goalPos) { _goalPosition = goalPos; }
+	void SetGridPosition(const Vector3& gridPos) { _gridPosition = gridPos; }
+	void SetGridMovement(GridMovement* _move) { _movement = _move; }
+	void SetMaxMoveSteps(int steps);
+	bool CheckMoveEnd() { return !_isMoving; }
+private:
+	float heuristic(const Vector3& a, const Vector3& b);
+	std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vector<Tile*>>& grid, Vector3 goal);
+	std::vector<Vector3> reconstructPath(const std::shared_ptr<Node>& currentNode);
+	std::vector<Vector3> AStarMove(const Vector3& start, const Vector3& goal, const std::vector<std::vector<Tile*>>& grid);
 
-std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vector<Tile*>>& grid, Vector3 goal) {
-    std::vector<Vector3> neighbors;
-    std::vector<Vector3> directions = { {1, 0, 0}, {0, 1, 0}, {-1, 0, 0}, {0, -1, 0} };
+	//동적할당뺴기..
+public:
+	GridMovement* _movement = nullptr;
+	Vector3 _gridPosition = { 0.f,2.f,0.f };
+private:
+	Engine::GameObject* _pTargetObject = nullptr;
+	Vector3 _goalPosition;
+	std::vector<Vector3> _path;
+	std::wstring _targetObjectName;
+	size_t _pathIndex = 0;
+	float _moveTime = 0.7f;
+	float _curTime = 0.f;
+private:
+	int _maxMoveSteps = 0;
+	int _currentMoveSteps = 0;
+	bool _isMoving = false;
+};
 
-    for (const auto& dir : directions) {
-        Vector3 neighborPos = { pos.x + dir.x, pos.y + dir.y, pos.z };
-        if (neighborPos.x >= 0 && (int)neighborPos.x < (int)grid[0].size() &&
-            neighborPos.y >= 0 && (int)neighborPos.y < (int)grid.size() &&
-            (grid[(int)neighborPos.y][(int)neighborPos.x]->canMove || ((int)goal.x==(int)neighborPos.x ) && ((int)goal.y == (int)neighborPos.y))) {
-            neighbors.push_back(neighborPos);
-        }
-    }
-    return neighbors;
-}
 
-std::vector<Vector3> reconstructPath(const std::shared_ptr<Node>& currentNode) {
-    std::vector<Vector3> path;
-    std::shared_ptr<Node> node = currentNode;
-    while (node != nullptr) {
-        path.push_back(node->position);
-        node = node->pParent;
-    }
-    std::reverse(path.begin(), path.end());
-    return path;
-}
 
-std::vector<Vector3> AStar(const Vector3& start, const Vector3& goal, const std::vector<std::vector<Tile*>>& grid) {
-    std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, NodeCompare> openSet;
-    std::unordered_map<Vector3, std::shared_ptr<Node>, Vector3Hash> allNodes;
 
-    auto startNode = std::make_shared<Node>(start);
-    auto goalNode = std::make_shared<Node>(goal);
-    openSet.push(startNode);
-    allNodes[start] = startNode;
-
-    while (!openSet.empty()) {
-        auto currentNode = openSet.top();
-        openSet.pop();
-
-        if (*currentNode == *goalNode) {
-
-            return reconstructPath(currentNode->pParent);
-        }
-
-        for (const auto& neighborPos : getNeighbors(currentNode->position, grid,goal)) {
-            float tentativeGCost = currentNode->gCost + 1;
-            std::shared_ptr<Node> neighborNode;
-
-            if (allNodes.find(neighborPos) == allNodes.end()) {
-                neighborNode = std::make_shared<Node>(neighborPos);
-                neighborNode->pParent = currentNode;
-                allNodes[neighborPos] = neighborNode;
-            }
-            else {
-                neighborNode = allNodes[neighborPos];
-                if (tentativeGCost >= neighborNode->gCost) continue;
-            }
-
-            neighborNode->gCost = tentativeGCost;
-            neighborNode->hCost = heuristic(neighborPos, goal);
-            neighborNode->pParent = currentNode;
-            openSet.push(neighborNode);
-        }
-    }
-    return std::vector<Vector3>(); // 경로를 찾지 못함
-}
-
-//동적할당뺴기..
