@@ -98,6 +98,7 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
       );
       break;
     case 99:
+        Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->ResetPlayer(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f));
       break;
     }
   }
@@ -148,7 +149,7 @@ bool DefaultStageScene::Initialize()
     //============================
     if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
     {
-        Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 1.0f,1.0f,1.0f }));
+        Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 3.0f,1.0f,1.0f }));
         Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
         pPlayer->SetRenderGroup((int)RenderGroup::Object);
         Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
@@ -164,13 +165,13 @@ bool DefaultStageScene::Initialize()
         pPlayer->SetActive(true);
         pPlayer->GetComponent<HPHUD>()->SetActives(true);
     }
+    UIinitialize();
     // Mouse
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"Mouse");
     pObject->SetRenderGroup((int)RenderGroup::UI);
     pObject->AddComponent<Mouse>(L"Mouse");
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
-    UIinitialize();
     return false;
 }
 bool DefaultStageScene::UIinitialize()
@@ -190,7 +191,7 @@ bool DefaultStageScene::UIinitialize()
     //타이머
     Engine::GameObject* pTimerObj = Engine::GameObject::Create();
     pTimerObj->AddComponent<TimerHUD>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerObj", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
     //게임오버 팝업
     Engine::GameObject* pGameOverObj = Engine::GameObject::Create();
     pGameOverObj->AddComponent<GameOverHUD>();
