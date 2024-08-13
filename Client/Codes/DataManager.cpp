@@ -107,7 +107,7 @@ bool DataManager::LoadObjectArrange(const wchar_t* filePath)
 			std::getline(wssLine, token, L',');
 			temoObj.objectPosition.y = (float)_wtof(token.c_str());
 			std::getline(wssLine, token, L',');
-			temoObj.objectTag = token;
+			temoObj.objectTag = token.c_str();
 			objInfo.objectInfos[j]= temoObj;
 		}
 

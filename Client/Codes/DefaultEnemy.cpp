@@ -2,24 +2,22 @@
 
 //script
 #include "DefaultEnemyScript.h"
-#include "HP.h"
 
 #include "Client_Define.h"
 
-void DefaultEnemy::Initialize(const Vector3& startPos)
+void DefaultEnemy::Initialize(const Vector3& startPos, const std::wstring& _targetName)
 {
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Enemy_Default_Idle"));
 	_pSpriteRenderer->SetDrawOffset(Vector3(20.f, -100.f, 0.f));
-	AddComponent<DefaultEnemyScript>(L"Script",startPos);
-	AddComponent<HP>(L"HP", 5);
+	AddComponent<DefaultEnemyScript>(L"Script",startPos,_targetName);
 	SetRenderGroup((int)RenderGroup::Object);
 	
 }
 
-DefaultEnemy* DefaultEnemy::Create(const Vector3& startPos)
+DefaultEnemy* DefaultEnemy::Create(const Vector3& startPos, const std::wstring& _targetName)
 {
 	DefaultEnemy* pInstance = new DefaultEnemy;
-	pInstance->Initialize(startPos);
+	pInstance->Initialize(startPos,_targetName);
 
 	return pInstance;
 }
