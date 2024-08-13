@@ -30,14 +30,10 @@ void TimerSystem::Update(const float& deltaTime)
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
     {
-        if (_slowTime == 0.0f)
-        {
-            _slowTime=1.0f;
-        }
-        else
-        {
-            _slowTime = 0.0f;
-        }
+        _isStopTime = !_isStopTime;
+        if (_isStopTime) _slowTime = 0.0f;
+        else _slowTime = 1.0f;
+                
         Time::SetSlowTime(_slowTime);
     }
 }

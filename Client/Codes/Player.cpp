@@ -15,6 +15,8 @@
 #include "Collider.h"
 #include "TimerSystem.h"
 #include "HPHUD.h"
+#include "JobQueue.h"
+
 // Object
 #include "Tile.h"
 
@@ -58,11 +60,28 @@ void Player::Awake()
 	_pHP = AddComponent<HP>(L"HP", 5);
 	_pCombatEvent = AddComponent<CombatEvent>();
 	_pAdditiveState = AddComponent<AdditiveState>();
-	AddComponent<TimerSystem>();
+	_pTimerSystem = AddComponent<TimerSystem>();
+	AddComponent<JobQueue>();
 
 	//플레이어 체력바
 	Engine::GameObject* pHPHUDDObj = &transform.GetOwner();
 	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
+
+	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
+	pSpriteRenderer->BindAnimation(_pAnimation);
+	pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, 0.5f);
+	pSpriteRenderer->SetOneSelfDraw(true, [=]()
+		{
+			if (_pTimerSystem->IsStopTime())
+			{
+				Vector3 offset = { 20.f, -100.f, 0.f };
+				Vector3 position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+				position = position - transform.position;
+
+				pSpriteRenderer->SetDrawOffset(offset + position);
+				pSpriteRenderer->Draw();
+			}
+		});
 }
 
 void Player::Start()

@@ -55,6 +55,7 @@
     <ClCompile Include="..\Codes\HP.cpp" />
     <ClCompile Include="..\Codes\HPHUD.cpp" />
     <ClCompile Include="..\Codes\InfoHUD.cpp" />
+    <ClCompile Include="..\Codes\JobQueue.cpp" />
     <ClCompile Include="..\Codes\MainGame.cpp" />
     <ClCompile Include="..\Codes\Map.cpp" />
     <ClCompile Include="..\Codes\DataManager.cpp" />
@@ -127,6 +128,7 @@
     <ClInclude Include="..\Headers\HP.h" />
     <ClInclude Include="..\Headers\HPHUD.h" />
     <ClInclude Include="..\Headers\InfoHUD.h" />
+    <ClInclude Include="..\Headers\JobQueue.h" />
     <ClInclude Include="..\Headers\MainGame.h" />
     <ClInclude Include="..\Headers\Map.h" />
     <ClInclude Include="..\Headers\DataManager.h" />

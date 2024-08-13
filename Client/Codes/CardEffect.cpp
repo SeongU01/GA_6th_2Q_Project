@@ -3,6 +3,8 @@
 // Component
 #include "Player.h"
 #include "GridEffect.h"
+#include "GridMovement.h"
+#include "Grid.h"
 
 #include "Client_Define.h"
 
@@ -41,14 +43,13 @@ void CardEffect::ShowRange()
 }
 
 std::vector<std::pair<int, int>> CardEffect::GetAttackRange()
-{
-	const Vector3& gridPosition = _pPlayer->GetGridPosition();
+{	
 	std::vector<std::pair<int, int>> attackRange;
 
 	for (auto& grid : _info.ranges)
 	{
 		std::pair<int, int> position = ComputeRotationTarget(grid.first, grid.second);
-		attackRange.push_back(std::make_pair(int(gridPosition.x + position.first), int(gridPosition.y + position.second)));
+		attackRange.push_back(std::make_pair(position.first, position.second));
 	}
 
 	return attackRange;
@@ -75,7 +76,11 @@ std::pair<int, int> CardEffect::ComputeRotationTarget(int x, int y)
 	ScreenToClient(Engine::GetWindow(), &mousePoint);
 
 	Vector3 mousePosition = { float(mousePoint.x), float(mousePoint.y),0.f };
-	Vector3 direction = mousePosition - _pPlayer->transform.position;
+
+	Vector3 gridPosition = _pPlayer->GetGridPosition();
+	Vector3 playerPosition = _pPlayer->GetComponent<GridMovement>()->_grid->GetTileCenter((int)gridPosition.x, (int)gridPosition.y);
+	 
+	Vector3 direction = mousePosition - playerPosition;
 	float radian = XMVectorATan2({ direction.y }, { direction.x }).m128_f32[0];
 	
 	if (radian >= XM_PIDIV4 && radian < 3 * XM_PIDIV4) 
@@ -94,7 +99,6 @@ std::pair<int, int> CardEffect::ComputeRotationTarget(int x, int y)
 	{
 		radian = XM_PI;
 	}
-
 
 	XMMATRIX xmRotationZ = XMMatrixRotationZ(radian);
 	Vector3 rotatePosition = XMVector3TransformCoord(Vector3((float)x, (float)y, 0.f), xmRotationZ);

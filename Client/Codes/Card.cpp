@@ -15,6 +15,7 @@
 #include "Effect.h"
 #include "AdditiveState.h"
 #include "GridMovement.h"
+#include "JobQueue.h"
 
 #include "CardManager.h"
 #include "Client_Define.h"
@@ -73,7 +74,7 @@ void Card::Awake()
 	pTextRenderer->SetText(_costMana.c_str());
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");	
-	_pCollider->SetActive(false);	
+	_pCollider->SetActive(false);
 }
 
 void Card::Start()
@@ -104,7 +105,7 @@ void Card::Update(const float& deltaTime)
 {
 	if (_isLerp)
 	{
-		_lerpTime += deltaTime / 0.3f;
+		_lerpTime += Time::GetGlobalDeltaTime() / 0.3f;
 		_offset = SmoothStep(_targetOffset[0], _targetOffset[1], _lerpTime);
 	}
 	if (_lerpTime >= 1.f)
@@ -121,10 +122,9 @@ void Card::LateUpdate(const float& deltaTime)
 	{
 		_offset = { 0.f, -65.f, 0.f };
 		_pCardEffect[0]->ShowRange();
-		//if (_pCardEffect[1]) _pCardEffect[1]->ShowRange();
 	}
 
-	transform.position = _handDeckPosition + _offset;
+	transform.position = _fixPosition + _offset;
 }
 
 void Card::DrawCard()
@@ -141,6 +141,7 @@ void Card::DrawCard()
 
 void Card::SetMouseHover(bool isHover)
 {
+	if (_isAddQueue)return;
 	if (isHover)
 	{
 		_priority = 2000.f;
@@ -176,63 +177,83 @@ void Card::Reset()
 	gameObject.SetActive(false);
 }
 
-bool Card::ActiveEffect()
+bool Card::AddJobQueue()
 {
-	PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
-	TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
+	if (!_isAddQueue)
+	{
+		PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
+		TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
 
-	if (pMP->mp < _cardData.costMana)
-		return false;
+		if (pMP->mp < _cardData.costMana)
+			return false;
 
-	if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
-		return false;
+		if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
+			return false;
 
-	pMP->mp -= _cardData.costMana;
-	pTimerSystem->UseTime(_cardData.costTime);
+		_attackRange = _pCardEffect[0]->GetAttackRange();
 
-	std::vector<std::pair<int, int>> attackRange = _pCardEffect[0]->GetAttackRange();
-	
+		if (CardEffectType::PathMove == _cardData.effectType[0])
+		{
+			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+
+			POINT mousePoint;
+			GetCursorPos(&mousePoint);
+			ScreenToClient(Engine::GetWindow(), &mousePoint);
+			Vector3 currentGrid = pGrid->GetCurrGrid(Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f));
+
+			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+
+			if (currentGrid.z >= 0)
+			{
+				bool isFind = false;
+				for (auto& range : _attackRange)
+				{
+					if ((int)currentGrid.x == int(range.first + gridPosition.x) && (int)currentGrid.y == int(range.second + gridPosition.y)
+						&& pGrid->IsTileWalkable((int)currentGrid.x, (int)currentGrid.y))
+					{
+						isFind = true;
+						_toGridPosition = currentGrid;
+						_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
+						break;
+					}
+				}
+
+				if (!isFind)
+					return false;
+			}
+		}
+
+		pMP->mp -= _cardData.costMana;
+		pTimerSystem->UseTime(_cardData.costTime);
+		_pPlayer->GetComponent<JobQueue>()->AddQueue(this);
+		GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type + 3);
+		JobQueueSetting();
+	}
+
+	return true;
+}
+
+void Card::ActiveEffect()
+{			
 	if (CardEffectType::PathMove == _cardData.effectType[0])
 	{
-		Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-
-		POINT mousePoint;
-		GetCursorPos(&mousePoint);
-		ScreenToClient(Engine::GetWindow(), &mousePoint);
-		Vector3 currentGrid = pGrid->GetCurrGrid(Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f));
-
-		if (currentGrid.z >= 0)
-		{
-			bool isFind = false;
-			for (auto& range : attackRange)
-			{
-				if (currentGrid.x == range.first && currentGrid.y == range.second
-					&&pGrid->IsTileWalkable(currentGrid.x,currentGrid.y))
-				{
-					_pPlayer->GetComponent<Player>()->SetGridPostion(currentGrid);
-					_pPlayer->GetComponent<GridMovement>()->MoveToCell(
-						_pPlayer->GetComponent<Player>()->GetGridPosition(), 0.5f);
-					isFind = true;
-					break;
-				}
-			}
-
-			if (!isFind)
-				return false;
-		}
+		_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
+		_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
 	}
 
 	if (CardEffectType::RangeAttack == _cardData.effectType[0])
 	{
 		Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-		for (auto& range : attackRange)
+		const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+
+		for (auto& range : _attackRange)
 		{
 			auto pEffect = Engine::GameObject::Create();
 			Effect::EffectInfo info;
 			info.renderGroup = RenderGroup::FrontEffect;
 			info.aniSpeed = 0.05f;
 			info.textureTag = L"Effect";
-			info.position = pGrid->GetTileCenter(range.first, range.second);
+			info.position = pGrid->GetTileCenter(int(range.first + gridPosition.x), int(range.second + gridPosition.y));
 			pEffect->AddComponent<Effect>(info);
 			Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 		}
@@ -247,7 +268,10 @@ bool Card::ActiveEffect()
 		}
 	}
 
-	return true;
+	_isLerp = true;
+	_lerpTime = 0.f;
+	_targetOffset[0] = { 0.f, 0.f, 0.f };
+	_targetOffset[1] = { 250.f, 0.f, 0.f };
 }
 
 void Card::SetHoldCard(bool isActive)
@@ -260,6 +284,52 @@ Vector3 Card::SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t)
 	t = (t > 1.0f) ? 1.0f : ((t < 0.0f) ? 0.0f : t);  // Clamp value to 0 to 1
 	t = t * t * (3.f - 2.f * t);
 	return XMVectorLerp(v0, v1, t);
+}
+
+void Card::HandDeckSetting()
+{
+	// 아이콘
+	GetComponent<Engine::SpriteRenderer>(L"Icons")->SetDrawOffset(Vector3(0.f, 0.f, 0.f));
+
+	// 카드 이름
+	GetComponent<Engine::TextRenderer>(L"Title")->SetActive(true);
+
+	// 카드 코스트
+	auto costTime = GetComponent<Engine::TextRenderer>(L"CostTime");
+	costTime->SetOffset(Vector3(-280.f, -390.f, 0.f));
+	costTime->SetDrawRect(200.f, 200.f);
+	
+	auto costMana = GetComponent<Engine::TextRenderer>(L"CostMana");
+	costMana->SetOffset(Vector3(-245.f, -314.f, 0.f));
+	costMana->SetDrawRect(200.f, 100.f);
+
+	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(true);
+}
+
+void Card::JobQueueSetting()
+{
+	_isLerp = false;
+	_lerpTime = 0.f;
+	_offset = { 0.f, 0.f, 0.f };
+
+	// 아이콘
+	GetComponent<Engine::SpriteRenderer>(L"Icons")->SetDrawOffset(Vector3(0.f, 200.f, 0.f));
+
+	// 카드 이름
+	GetComponent<Engine::TextRenderer>(L"Title")->SetActive(false);
+
+	// 카드 코스트
+	auto costTime = GetComponent<Engine::TextRenderer>(L"CostTime");
+	costTime->SetOffset(Vector3(-280.f, -160.f, 0.f));
+	costTime->SetDrawRect(200.f, 200.f);
+
+	auto costMana = GetComponent<Engine::TextRenderer>(L"CostMana");
+	costMana->SetOffset(Vector3(-245.f, -84.f, 0.f));
+	costMana->SetDrawRect(200.f, 100.f);
+
+	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(false);
+
+	_isAddQueue = true;
 }
 
 void Card::Free()

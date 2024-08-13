@@ -113,7 +113,7 @@ void CardSystem::ReloadCard()
 
 void CardSystem::ActiveCard(Card* pCard)
 {
-	if (pCard->ActiveEffect()) MoveTo(pCard, _handDeck, _graveDeck);
+	if (pCard->AddJobQueue()) MoveTo(pCard, _handDeck, _graveDeck);
 }
 
 void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst)
@@ -126,7 +126,7 @@ void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& ds
 	if (find_iter == src.end())
 		return;
 
-	(*find_iter)->Reset();
+	// (*find_iter)->Reset();
 	dst.push_back(*find_iter);
 	src.erase(find_iter);
 	SetHandDeckPosition();
@@ -172,7 +172,7 @@ void CardSystem::SetHandDeckPosition()
 	for (auto& card : _handDeck)
 	{
 		if (!card->isHold)
-			card->SetHandDeckPosition(Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f));
+			card->SetFixPosition(Vector3(float(WINCX >> 1) + offsetX * 0.5f - halfX + (offsetX * index), 1000.f, 0.f));
 
 		card->gameObject.SetActive(true);
 		index++;

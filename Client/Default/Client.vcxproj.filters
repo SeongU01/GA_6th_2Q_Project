@@ -197,6 +197,9 @@
     <ClCompile Include="..\Codes\DefaultEnemyWeakAttack.cpp">
       <Filter>03. GameObject\Enemy\Default\State\WeakAttack</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\JobQueue.cpp">
+      <Filter>03. GameObject\Player\Script\JobQueue</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -375,6 +378,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Default\State\WeakAttack">
       <UniqueIdentifier>{bc4ef85e-b4dd-4105-91da-0ee0c871c432}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Player\Script\JobQueue">
+      <UniqueIdentifier>{8187b8ff-4aa2-446f-a051-c016f3d70b15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -584,6 +590,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DefaultEnemyWeakAttack.h">
       <Filter>03. GameObject\Enemy\Default\State\WeakAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\JobQueue.h">
+      <Filter>03. GameObject\Player\Script\JobQueue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

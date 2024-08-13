@@ -12,6 +12,7 @@ class AdditiveState;
 class GridMovement;
 class CardSystem;
 class CombatEvent;
+class TimerSystem;
 class Player : public Engine::MonoBehavior
 {
 public:
@@ -20,11 +21,12 @@ private:
 	virtual ~Player() = default;
 
 public:
-	Vector3 GetGridPosition()const  { return _gridPosition; } 
+	const Vector3& GetGridPosition() const { return _gridPosition; }
 	void SetGridPostion(const Vector3& _pos);
 	void ResetPlayer(const Vector3& startPos);
 	HP* GetPlayerHPComponent() { return _pHP; }
 	PlayerMP* GetPlayerMPComponent() { return _pMP; }
+
 public:
 	// MonoBehavior을(를) 통해 상속됨
 	void Awake() override;
@@ -49,8 +51,10 @@ private:
 	PlayerMP* _pMP = nullptr;
 	CardSystem* _pCardSystem = nullptr;
 	CombatEvent* _pCombatEvent = nullptr;
+	TimerSystem* _pTimerSystem = nullptr;
+
 private:
-	Vector3 _gridPosition = { 0.f,2.f,0.f };
+	Vector3 _gridPosition = { 0.f, 2.f, 0.f };
 	Vector3 _startPosition;
 };
 

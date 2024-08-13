@@ -13,6 +13,7 @@ class CardEffect;
 class Card final : public Engine::MonoBehavior
 {
 	friend class CardSystem;
+	friend class JobQueue;
 public:
 	struct CardData
 	{
@@ -52,14 +53,17 @@ public:
 	bool GetHoldCard() const { return _isHoldMouse; }
 	void SetHoldCard(bool isActive);
 	void SetMouseHover(bool isHover);
+	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 
 private:
-	void SetHandDeckPosition(const Vector3& position) { _handDeckPosition = position; }
+	bool AddJobQueue();
+	void ActiveEffect();
 	void DrawCard();
-	void ThrowCard();
 	void Reset();
-	bool ActiveEffect();
+	void ThrowCard();
 	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
+	void HandDeckSetting();
+	void JobQueueSetting();
 
 public:
 	__declspec(property(get = GetID)) int ID;
@@ -70,22 +74,25 @@ private:
 	void Free() override;
 
 private:
-	CardData			_cardData{};
-	std::wstring		_costMana;
-	std::wstring		_costTime;
-	Vector3				_offset;
-	Vector3				_scale;
-	Vector3				_targetScale[2];
-	Vector3				_targetOffset[2];
-	Vector3				_handDeckPosition;
-	Engine::Collider*	_pCollider = nullptr;
-	Engine::GameObject* _pPlayer = nullptr;
-	CardEffect*			_pCardEffect[2]{};
-	D2D1_SIZE_F			_pixelSize{};
-	float				_priority = 0.f;
-	float				_lerpTime = 0.f;
-	bool				_isLerp = false;
-	bool				_isThrow = false;
-	bool				_isHoldMouse = false;
+	CardData							_cardData{};
+	std::wstring						_costMana;
+	std::wstring						_costTime;
+	std::vector<std::pair<int, int>>	_attackRange;
+	Vector3								_offset;
+	Vector3								_scale;
+	Vector3								_targetScale[2];
+	Vector3								_targetOffset[2];
+	Vector3								_fixPosition;
+	Vector3								_toGridPosition;
+	Engine::Collider*					_pCollider = nullptr;
+	Engine::GameObject*					_pPlayer = nullptr;
+	CardEffect*							_pCardEffect[2]{};
+	D2D1_SIZE_F							_pixelSize{};
+	float								_priority = 0.f;
+	float								_lerpTime = 0.f;
+	bool								_isLerp = false;
+	bool								_isThrow = false;
+	bool								_isHoldMouse = false;
+	bool								_isAddQueue = false;
 };
 
