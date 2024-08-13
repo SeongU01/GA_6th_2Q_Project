@@ -343,5 +343,6 @@ void Card::JobQueueSetting()
 
 void Card::Free()
 {
-	SafeRelease(_pCardEffect[0]);
+	for (int i = 0; i < 2; i++)
+		SafeRelease(_pCardEffect[i]);
 }
