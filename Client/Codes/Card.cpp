@@ -137,6 +137,8 @@ void Card::DrawCard()
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 1000.f, 0.f, 0.f };
 	_targetOffset[1] = { 0.f, 0.f, 0.f };
+
+	HandDeckSetting();
 }
 
 void Card::SetMouseHover(bool isHover)
@@ -221,12 +223,13 @@ bool Card::AddJobQueue()
 				if (!isFind)
 					return false;
 			}
+			else
+				return false;
 		}
 
 		pMP->mp -= _cardData.costMana;
 		pTimerSystem->UseTime(_cardData.costTime);
 		_pPlayer->GetComponent<JobQueue>()->AddQueue(this);
-		GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type + 3);
 		JobQueueSetting();
 	}
 
@@ -288,6 +291,9 @@ Vector3 Card::SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t)
 
 void Card::HandDeckSetting()
 {
+	// 카드 이미지
+	GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type);
+
 	// 아이콘
 	GetComponent<Engine::SpriteRenderer>(L"Icons")->SetDrawOffset(Vector3(0.f, 0.f, 0.f));
 
@@ -311,6 +317,9 @@ void Card::JobQueueSetting()
 	_isLerp = false;
 	_lerpTime = 0.f;
 	_offset = { 0.f, 0.f, 0.f };
+
+	// 카드 이미지
+	GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type + 3);
 
 	// 아이콘
 	GetComponent<Engine::SpriteRenderer>(L"Icons")->SetDrawOffset(Vector3(0.f, 200.f, 0.f));
