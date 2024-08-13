@@ -1,3 +1,5 @@
 ﻿Animation,TextureTag,Duration
-1,,
+3,,
 Idle,Enemy_Default_Idle,0.06
+Move,Enemy_Default_Move,0.06
+Attack,Enemy_Default_Attack,0.06

@@ -30,7 +30,11 @@
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemy.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyIdle.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyMove.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyScript.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyState.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyWeakAttack.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
     <ClCompile Include="..\Codes\Defense.cpp" />
     <ClCompile Include="..\Codes\DefenseScript.cpp" />
@@ -97,7 +101,12 @@
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\DefaultEnemy.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyIdle.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyInfomation.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyMove.h" />
     <ClInclude Include="..\Headers\DefaultEnemyScript.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyState.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyWeakAttack.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
     <ClInclude Include="..\Headers\Defense.h" />
     <ClInclude Include="..\Headers\DefenseScript.h" />

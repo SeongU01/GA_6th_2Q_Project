@@ -34,6 +34,7 @@ void DefenseScript::Start()
 			_pGridInfo->GetGrid()->GetTiles()[y][x]->canMove = false;
 		}
 	}
+	_gridPosition = { _gridRange.second.x, _gridRange.second.y ,0.f };
 }
 
 void DefenseScript::Update(const float& deltaTime)

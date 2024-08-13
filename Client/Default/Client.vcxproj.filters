@@ -185,6 +185,18 @@
     <ClCompile Include="..\Codes\DefaultEnemyScript.cpp">
       <Filter>03. GameObject\Enemy\Default\Script</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyState.cpp">
+      <Filter>03. GameObject\Enemy\Default\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyIdle.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyMove.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyWeakAttack.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\WeakAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -351,6 +363,18 @@
     </Filter>
     <Filter Include="03. GameObject\Card\Effect">
       <UniqueIdentifier>{9832ebe2-5086-4b3f-a72d-ceb85dcb4344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State">
+      <UniqueIdentifier>{a24e4eba-a77d-43ff-b694-7140d76282bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State\Idle">
+      <UniqueIdentifier>{c1adc31f-4ac8-4c7d-87cc-db5ddfe60b27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State\Move">
+      <UniqueIdentifier>{1f9d25e3-5be3-4d92-83d6-580dcef1c6ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State\WeakAttack">
+      <UniqueIdentifier>{bc4ef85e-b4dd-4105-91da-0ee0c871c432}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -545,6 +569,21 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DefaultEnemyScript.h">
       <Filter>03. GameObject\Enemy\Default\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyInfomation.h">
+      <Filter>03. GameObject\Enemy\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyState.h">
+      <Filter>03. GameObject\Enemy\Default\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyIdle.h">
+      <Filter>03. GameObject\Enemy\Default\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyMove.h">
+      <Filter>03. GameObject\Enemy\Default\State\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyWeakAttack.h">
+      <Filter>03. GameObject\Enemy\Default\State\WeakAttack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
