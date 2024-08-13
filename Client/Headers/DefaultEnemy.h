@@ -8,7 +8,7 @@ private:
 	virtual ~DefaultEnemy() = default;
 
 private:
-	void Initialize(const Vector3& startPos);
+	void Initialize(const Vector3& startPos, const std::wstring& _targetName);
 public:
-	static DefaultEnemy* Create(const Vector3& startPos);
+	static DefaultEnemy* Create(const Vector3& startPos,const std::wstring& _targetName);
 };
