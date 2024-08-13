@@ -17,6 +17,7 @@ private:
 	DefaultEnemy::FSM SelectNextBehave();
 private:
 	bool CheckAttackRange(int x, int y);
+
 public:
 	static DefaultEnemyIdle* Create(DefaultEnemyScript* pScript);
 private:

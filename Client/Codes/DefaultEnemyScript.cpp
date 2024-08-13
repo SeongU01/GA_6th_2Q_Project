@@ -47,7 +47,7 @@ void DefaultEnemyScript::Awake()
 	Pannel::PannelInfo info;
 	info.parent = &transform;
 	info.position = Vector3(0.f, -170.f, 0.f);
-	info.size = Vector3{ 120, 50, 0 }; //크기
+	info.size = Vector3{ 200, 50, 0 }; //크기
 	info.fillColor = 0x99AEAEAE; //색상
 	info.outlineColor = 0xFF000000; //테두리 색상
 	info.opacity = 0.4f;
