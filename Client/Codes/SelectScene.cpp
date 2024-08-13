@@ -34,12 +34,6 @@ bool SelectScene::UIInitialize()
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
     pSpriteRenderer->SetIndex(0);
     pBackObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
-    //Engine::GameObject* pHUDObj = Engine::FindObject((int)LayerGroup::UI, L"SelectUI", NULL);
-    //if (pHUDObj == nullptr) {
-    //    pHUDObj = Engine::GameObject::Create();
-    //    pHUDObj->AddComponent<HPHUD>(); // 체력바
-    //    pHUDObj->SetDontDestroyObject(true);
-    //}
     //스테이지 선택 버튼 (추후 변경 예정
     Engine::GameObject* pButtonObj = Engine::GameObject::Create();
     pButtonObj->AddComponent<SelectButtons>();

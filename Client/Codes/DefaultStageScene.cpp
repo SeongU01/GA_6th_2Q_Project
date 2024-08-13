@@ -10,6 +10,7 @@
 #include "TopHUD.h"
 #include "MPHUD.h"
 #include "Mouse.h"
+#include "DeckSystem.h"
 //object
 #include "CollisionManager.h"
 #include "TestPlayer.h"
@@ -97,7 +98,6 @@ void DefaultStageScene::MakeObject(ObjectArrangeInfo& objInfo)
       );
       break;
     case 99:
-        Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->ResetPlayer({ obj.objectPosition.x, obj.objectPosition.y, 0.f });
       break;
     }
   }
@@ -133,6 +133,8 @@ int DefaultStageScene::Update(const float& deltaTime)
 
 int DefaultStageScene::LateUpdate(const float& deltaTime)
 {
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+        Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
     return 0;
 }
 
@@ -152,13 +154,13 @@ bool DefaultStageScene::Initialize()
         Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
         pHPHUDObj->SetDontDestroyObject(true);
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerTopHP", pHPHUDObj);
-        pHPHUDObj->AddComponent<TopHUD>(pPlayer->GetComponent<Player>()->GetPlayerHPComponent(), 0);
+        pHPHUDObj->AddComponent<TopHUD>(pPlayer->GetComponent<Player>()->GetPlayerHPComponent(), 1);
         pHPHUDObj->SetRenderGroup((int)RenderGroup::UI);
     }
     else
     {
         Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
-        pPlayer->GetComponent<Player>()->ResetPlayer({ 1.0f,1.0f,1.0f });
+        pPlayer->GetComponent<Player>()->ResetPlayer({ 4.0f,4.0f,1.0f });
         pPlayer->SetActive(true);
         pPlayer->GetComponent<HPHUD>()->SetActives(true);
     }
@@ -173,6 +175,10 @@ bool DefaultStageScene::Initialize()
 }
 bool DefaultStageScene::UIinitialize()
 {
+    Engine::GameObject* pGameObject = Engine::GameObject::Create();
+    pGameObject->AddComponent<DeckSystem>();
+    pGameObject->SetRenderGroup((int)RenderGroup::UI);
+    pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
     //컴포넌트(배경)
     Engine::GameObject* pHUDObj = Engine::GameObject::Create();
     Engine::SpriteRenderer* pSpriteRenderer = pHUDObj->GetComponent<Engine::SpriteRenderer>();
@@ -180,6 +186,7 @@ bool DefaultStageScene::UIinitialize()
     pSpriteRenderer->SetIndex(0);
     pHUDObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
+
     //타이머
     Engine::GameObject* pTimerObj = Engine::GameObject::Create();
     pTimerObj->AddComponent<TimerHUD>();
@@ -196,8 +203,9 @@ bool DefaultStageScene::UIinitialize()
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Fade);
     //마나 바
     Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
+    pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
     pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerMP", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
     return false;
 }
 

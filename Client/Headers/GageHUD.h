@@ -4,7 +4,7 @@
 class GageHUD : public UIComponent
 {
 public:
-	explicit GageHUD(const Vector3& position, float* pCurrentValue, float maxValue);
+	explicit GageHUD(const Vector3& position, float* pCurrentValue, float maxValue,int num);
 private:
 	virtual ~GageHUD() = default;
 
@@ -21,5 +21,6 @@ private:
 	UI*			_pGage = nullptr;
 	float*		_pCurrentValue = nullptr;
 	float		_maxValue = 0.f;
+	int			_number; // 0==마나, 1==재장전
 };
 

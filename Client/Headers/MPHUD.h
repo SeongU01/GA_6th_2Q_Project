@@ -2,6 +2,7 @@
 #include "UIComponent.h"
 
 class PlayerMP;
+class ToolTip;
 class MPHUD : public UIComponent
 {
 public:
@@ -16,7 +17,8 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
+	ToolTip* _ptoolTip = nullptr;
 	PlayerMP* _pMP = nullptr;
-	int _hpColor; //0: 플레이어초록 , 1: 적빨강
-	std::vector<UI*> _HPBar;
+	int _mpColor; //0: 플레이어초록 , 1: 적빨강
+	std::vector<UI*> _MPBar;
 };

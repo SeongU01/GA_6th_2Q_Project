@@ -25,7 +25,7 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         {
             position = info._leftTop ? Vector3{ 160.f, 80.f, 0.f } : Vector3{ -150.f, -100.f, 0.f };
         }
-        int line = (info._content.length() % 18==0)? (info._content.length() / 18): (info._content.length() / 18) +1;
+        int line = (info._content.length() % 19==0)? (info._content.length() / 19): (info._content.length() / 19) +1;
         float height = 80 + (float)(line * 20);
         //판넬
         Pannel::PannelInfo pannelInfo;
@@ -48,7 +48,7 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         pTextRenderer->SetOffset(Vector3(-120, 10.f - (line * 7), 0.f));//위치. (왼쪽 정렬 고정. y축 체크.
         pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 
-        Engine::AddObjectInLayer((int)LayerGroup::UI, L"ToolTipTest", pPannel);
+        Engine::AddObjectInLayer((int)LayerGroup::UI, L"ToolTip", pPannel);
         pPannel->SetRenderGroup((int)RenderGroup::UI);
         _toolTipList[info._id] = pPannel;
 

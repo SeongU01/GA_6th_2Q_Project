@@ -1,18 +1,40 @@
 #include "GageHUD.h"
 #include "Client_Define.h"
 
-GageHUD::GageHUD(const Vector3& position, float* pCurrentValue, float maxValue)
-	: UIComponent(L"GageHUD"), _position(position), _pCurrentValue(pCurrentValue), _maxValue(maxValue)
+#include "ToolTip.h"
+#include "Button.h"
+#include "UI.h"
+
+GageHUD::GageHUD(const Vector3& position, float* pCurrentValue, float maxValue, int num)
+	: UIComponent(L"GageHUD"), _position(position), _pCurrentValue(pCurrentValue), _maxValue(maxValue),_number(num)
 {
 }
 
 void GageHUD::Awake()
 {
-	AddUI(CreateInfo(L"Gage_BackGround", L"UI_Gage", 0, _position, Vector3(1.f, 1.f, 0.f), &transform));
-	_pGage = AddUI(CreateInfo(L"Gage", L"UI_Gage", 1, _position, Vector3(1.f, 1.f, 0.f), &transform));
+
+	UI* uis = AddUI(CreateInfo(L"Gage_BackGround", L"UI_HUD_MP_recharge", 0, _position, Vector3(1.f, 1.f, 0.f), &transform));
+	_pGage = AddUI(CreateInfo(L"Gage", L"UI_HUD_MP_recharge", 1, _position, Vector3(1.f, 1.f, 0.f), &transform));
 
 	Engine::Texture* pTexture = Resource::FindTexture(L"UI_Gage");
-	_imageSize = pTexture->GetImage(0)->GetSize();
+	_imageSize = pTexture->GetImage(0)->GetSize(); 
+
+	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"reChargeTool"); //마나 안내
+	if(_number==1)
+		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana"), Vector3(1500.0f, 830.0f, 0.0f));
+	else
+		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(350.0f, 830.0f, 0.0f));
+	Engine::GameObject& pObj = GetOwner();
+	Button* btn = AddComponent<Button>();
+	btn->SetRange(_position, _imageSize);
+	btn->SetOnHover([&pObj] {
+		ToolTip* pToolTip = pObj.GetComponent<ToolTip>(L"reChargeTool");
+		pToolTip->ActiveToolTip(true);
+		});
+	btn->SetCancel([&pObj] {
+		ToolTip* pToolTip = pObj.GetComponent<ToolTip>(L"reChargeTool");
+		pToolTip->ActiveToolTip(false);
+		});
 }
 
 void GageHUD::Start()

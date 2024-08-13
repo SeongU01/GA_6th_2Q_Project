@@ -16,9 +16,12 @@ void TopHUD::Start()
 {
 	UI::UIInfo info;
 	UI* pObj;
+	info = CreateInfo(L"HPBackground", L"UI_HUD_HP_Top", 0, {
+		80.0f ,40.0f , -1.f }, { 1.0f,1.0f,1.f }, &transform);
+	AddUI(info);
 	for (int i = 0; i < _pHP->GetMaxHP(); i++) {
-		info = CreateInfo(L"HPBackground", L"UI_HUD_HP", 0, {
-			30+(float)(i * 10) ,30.0f , -1.f }, { 1.0f,1.0f,1.f }, &transform);
+		info = CreateInfo(L"HPBackground", L"UI_HUD_HP_Top", 1, {
+			30+(float)(i * 20) ,40.0f , -1.f }, { 1.0f,1.0f,1.f }, &transform);
 		_HPBar.push_back(AddUI(info));
 	}
 	SetDontDestroyObject(true);
@@ -32,7 +35,7 @@ void TopHUD::Update(const float& deltaTime)
 		if (i < currentHP)
 			_HPBar[i]->SetFrame(_hpColor);
 		else
-			_HPBar[i]->SetFrame(2);
+			_HPBar[i]->SetFrame(3);
 	}
 }
 

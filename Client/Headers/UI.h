@@ -21,6 +21,7 @@ private:
 public:
 	const Vector3& GetOriginScale() { return _originScale; }
 	const D2D1_SIZE_F& GetImageSize();
+	const D2D1_SIZE_F& GetSize();
 	void SetFrame(int index);
 	void SetPosition(const Vector3& position);
 	void SetOffsetPosition(const Vector3& position);

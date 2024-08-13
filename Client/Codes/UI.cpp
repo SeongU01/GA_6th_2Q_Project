@@ -10,6 +10,12 @@ const D2D1_SIZE_F& UI::GetImageSize()
     return _imageSize;
 }
 
+const D2D1_SIZE_F& UI::GetSize()
+{
+    _imageSize = Resource::FindTexture(_info.textureTag)->GetImage(_info.fixFrame)->GetSize();
+    return { _imageSize.width * _info.scale.x, _imageSize.height * _info.scale.y };
+}
+
 void UI::SetFrame(int index)
 {
     _info.fixFrame = index;
