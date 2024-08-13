@@ -1,4 +1,4 @@
-#include "TestPlayer.h"
+#include "Zero.h"
 
 //Script
 #include "Player.h"
@@ -8,7 +8,7 @@
 
 enum Flag : unsigned long long { Attack, Move, Idle };
 
-void TestPlayer::Initialize(const Vector3& startPos)
+void Zero::Initialize(const Vector3& startPos)
 {
 	SetDontDestroyObject(true);
 	AddComponent<Player>(L"PlayerComponent",startPos);	
@@ -17,7 +17,7 @@ void TestPlayer::Initialize(const Vector3& startPos)
 	SetRenderGroup((int)RenderGroup::Object);
 }
 
-void TestPlayer::ChangeCurrentGrid()
+void Zero::ChangeCurrentGrid()
 {
 	GridMovement* pMovement = GetComponent<GridMovement>();
 	pMovement->Start();
@@ -25,9 +25,9 @@ void TestPlayer::ChangeCurrentGrid()
 	pPlayerSpcript->Start();
 }
 
-TestPlayer* TestPlayer::Create(const Vector3& startPos)
+Zero* Zero::Create(const Vector3& startPos)
 {
-	TestPlayer* pInstance = new TestPlayer;
+	Zero* pInstance = new Zero;
 	pInstance->Initialize(startPos);
 
 	return pInstance;

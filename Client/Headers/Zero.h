@@ -8,18 +8,18 @@ namespace Engine
 	class RigidBody2D;
 }
 
-class TestPlayer : public Engine::GameObject
+class Zero : public Engine::GameObject
 {
 private:
-	explicit TestPlayer() = default;
-	virtual ~TestPlayer() = default;
+	explicit Zero() = default;
+	virtual ~Zero() = default;
 
 private:
 	void Initialize(const Vector3& startPos);
 public:
 	void ChangeCurrentGrid();
 public:
-	static TestPlayer* Create(const Vector3& startPos);
+	static Zero* Create(const Vector3& startPos);
 
 };
 
