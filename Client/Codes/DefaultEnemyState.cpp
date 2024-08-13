@@ -19,6 +19,6 @@ void DefaultEnemyState::Initialize(DefaultEnemyScript* pScript)
 	_pAstar = pScript->_aStar;
 	_pPannel = pScript->_pPannel;
 	_pTextRenderer = _pPannel->GetComponent<Engine::TextRenderer>();
-	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
-	_pTextRenderer->SetDrawRect(100.f, 50.f);
+	
+	_pTextRenderer->SetDrawRect(200.f, 50.f);
 }
