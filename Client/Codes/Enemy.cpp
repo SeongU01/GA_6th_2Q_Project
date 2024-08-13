@@ -43,37 +43,7 @@ void Enemy::Start()
 void Enemy::Update(const float& deltaTime)
 {
 
-	Vector3 temporaryGoal = _player->GetGridPosition(); // 목표 지점
-    if (!((int)temporaryGoal.x == (int)goalPosition.x && (int)temporaryGoal.y == (int)goalPosition.y)|| _path.empty() || _pathIndex >= _path.size())
-		{
-		goalPosition = temporaryGoal;
-        _path = AStar(_gridPosition, goalPosition, _movement->_grid->GetTiles());
-        _pathIndex = 1;
-    }
-	_curTime += deltaTime;
-    if (_path.size()>1 && _pathIndex < _path.size())
-		{
-        Vector3 nextPosition = _path[_pathIndex];
-        if (_curTime >= _moveTime) 
-				{
-            _curTime = 0.0f;
-            _gridPosition = nextPosition;
-            _pathIndex++;
-        }
-    }
-
-	_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
-	_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
-
-	if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
-	{
-		_movement->MoveToCell(_gridPosition, 0.5f);
-
-	}
-	else
-	{
-		_path.clear();
-	}
+	
 
 }
 
