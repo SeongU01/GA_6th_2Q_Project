@@ -18,10 +18,11 @@
 //object
 #include "Map.h"
 #include "TimerUI.h"
-#include "TestPlayer.h"
+#include "Zero.h"
 #include "Obstacle.h"
 #include "TestEnemy.h"
 #include "Enemy.h"
+#include "EnemySpawner.h"
 
 int TestScene::Update(const float& deltaTime)
 {
@@ -32,6 +33,9 @@ int TestScene::LateUpdate(const float& deltaTime)
 {
     _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
                                        Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
+
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+                                       Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
     return 0;
 }
@@ -73,9 +77,12 @@ bool TestScene::Initialize()
 
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
-    pObject->AddComponent<GridEffect>(stage1.width, stage1.height);
+    pObject->AddComponent<GridEffect>((int)stage1.width, (int)stage1.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
+
+    EnemySpawnInfo stage1Enemy = DataManager::GetInstance()->GetEnemySpawnInfo(L"Stage1");
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"EnemySpawner", EnemySpawner::Create(stage1Enemy));
 
     UIinitialize();
 

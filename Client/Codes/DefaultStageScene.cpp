@@ -13,7 +13,7 @@
 #include "DeckSystem.h"
 //object
 #include "CollisionManager.h"
-#include "TestPlayer.h"
+#include "Zero.h"
 #include "Obstacle.h"
 #include "Player.h"
 #include "Defense.h"
@@ -149,7 +149,7 @@ bool DefaultStageScene::Initialize()
     //============================
     if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
     {
-        Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", TestPlayer::Create({ 3.0f,1.0f,1.0f }));
+        Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", Zero::Create({ 3.0f,1.0f,1.0f }));
         Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
         pPlayer->SetRenderGroup((int)RenderGroup::Object);
         Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
