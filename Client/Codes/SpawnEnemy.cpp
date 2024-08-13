@@ -42,8 +42,8 @@ void SpawnEnemy::Update(const float& deltaTime)
 				{
 					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f};
 				}
-				
-				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos);
+					
+				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
 			}
 		}
