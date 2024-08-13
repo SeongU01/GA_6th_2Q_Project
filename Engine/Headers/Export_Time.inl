@@ -10,6 +10,11 @@ void SetSlowTime(float rate)
 	Engine::TimeManager::GetInstance()->SetSlowTime(rate);
 }
 
+float GetGlobalDeltaTime()
+{
+	return Engine::TimeManager::GetInstance()->GetGlobalDeltaTime();
+}
+
 double GetSumTime()
 { 
 	return Engine::TimeManager::GetInstance()->GetSumTime();

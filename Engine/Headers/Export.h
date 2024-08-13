@@ -37,9 +37,10 @@ namespace Resource
 namespace Time
 {
 	// TimeMgr
+	inline double GetSumTime();
+	inline float GetGlobalDeltaTime();
 	inline void SetSumTime(float time);
 	inline void SetSlowTime(float rate);
-	inline double GetSumTime();
 	inline float GetDeltaTime();
 	inline bool FrameLock(float frame);
 	#include "Export_Time.inl"
