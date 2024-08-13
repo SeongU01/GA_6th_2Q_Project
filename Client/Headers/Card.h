@@ -48,6 +48,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
+	float GetCostTime() { return _cardData.costTime; }
 	int GetID() const { return _cardData.ID; }
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
