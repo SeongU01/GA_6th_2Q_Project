@@ -248,6 +248,42 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 	return true;
 }
 
+bool DataManager::LoadAttackRangeData(const wchar_t* filePath)
+{
+	std::wstring path = filePath;
+	std::wifstream file((path + L"/AttackRange.csv").c_str());
+
+	if (!file.is_open()) {
+		std::cout << "파일을 열 수 없습니다." << std::endl;
+		return false;
+	}
+
+	std::wstring line;
+	std::getline(file, line);
+
+	while (std::getline(file, line))
+	{
+		std::wstringstream wss(line);
+		std::wstring token;
+
+		std::getline(wss, token, L',');
+		if (L"ID" == token.substr(0, 2))
+		{
+			_attackRanges.push_back(std::vector<std::pair<int, int>>());
+			continue;
+		}
+
+		int x = _wtoi(token.c_str());
+
+		std::getline(wss, token, L',');
+		int y = _wtoi(token.c_str());
+
+		_attackRanges.back().push_back(std::make_pair(x, y));
+	}
+
+	return true;
+}
+
 void DataManager::Free()
 {
 }

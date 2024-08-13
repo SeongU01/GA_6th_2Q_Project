@@ -24,13 +24,12 @@ public:
 	bool LoadCard(const wchar_t* filePath);
 	void SetRichText(int ID, Engine::TextRenderer* pTextRenderer);
 	Card* CloneCard(int ID);
-	const std::vector<std::pair<int, int>>& GetAttackRange(int ID) const { return _attackRanges[ID]; }
-
+	
 private:
 	bool LoadCardDataOptionText(const wchar_t* filePath);
 	bool LoadCardDataRichText(const wchar_t* filePath);
 	bool LoadCardData(const wchar_t* filePath);
-	bool LoadCardAttackRangeData(const wchar_t* filePath);
+	
 
 private:
 	// Base을(를) 통해 상속됨
@@ -39,6 +38,5 @@ private:
 private:
 	std::vector<Card::CardData> _cardDatas;
 	std::vector<std::wstring> _texts;
-	std::vector<std::list<RichText>> _richTexts;
-	std::vector<std::vector<std::pair<int, int>>> _attackRanges;
+	std::vector<std::list<RichText>> _richTexts;	
 };

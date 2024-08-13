@@ -17,7 +17,7 @@
 #include "GridMovement.h"
 #include "JobQueue.h"
 
-#include "CardManager.h"
+#include "DataManager.h"
 #include "Client_Define.h"
 
 
@@ -80,13 +80,13 @@ void Card::Awake()
 void Card::Start()
 {
 	_pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
-	CardManager* pCardManager = CardManager::GetInstance();
+	DataManager* pDataManager = DataManager::GetInstance();
 
 	Player* pPlayer = _pPlayer->GetComponent<Player>();
 		
 	CardEffect::CardEffectInfo info;
 	info.effectType = _cardData.effectType[0];
-	info.ranges = pCardManager->GetAttackRange(_cardData.targetNum[0]);
+	info.ranges = pDataManager->GetAttackRange(_cardData.targetNum[0]);
 	info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[0];
 	info.additiveStack = _cardData.charStateNum[0];
 	_pCardEffect[0] = CardEffect::Create(pPlayer, info);
@@ -94,7 +94,7 @@ void Card::Start()
 	if (CardEffectType::None != _cardData.effectType[1])
 	{
 		info.effectType = _cardData.effectType[1];
-		info.ranges = pCardManager->GetAttackRange(_cardData.targetNum[1]);
+		info.ranges = pDataManager->GetAttackRange(_cardData.targetNum[1]);
 		info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[1];
 		info.additiveStack = _cardData.charStateNum[1];
 		_pCardEffect[1] = CardEffect::Create(pPlayer, info);

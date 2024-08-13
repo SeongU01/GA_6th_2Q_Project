@@ -66,14 +66,21 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
+	
+	// 공통 데이터
 	_pDataManager = DataManager::GetInstance();
 	_pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
-	_pDataManager->LoadEnemySpawn((filePath + L"Data/Map").c_str());
+	_pDataManager->LoadEnemySpawn((filePath + L"Data/Wave").c_str());
 	_pDataManager->LoadMap((filePath + L"Data/Map").c_str());
 	_pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
-	_pGameManager->ChagneScene(TitleScene::Create());
+	_pDataManager->LoadAttackRangeData((filePath + L"Data/Card").c_str());
+
+	// 카드 데이터
 	_pCardManager = CardManager::GetInstance();
 	_pCardManager->LoadCard((filePath + L"Data/Card").c_str());
+
+	_pGameManager->ChagneScene(TestScene::Create());
+
 	return true;
 }
 

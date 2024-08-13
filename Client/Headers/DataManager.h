@@ -64,7 +64,8 @@ public:
 	bool LoadMap(const wchar_t* filePath);
 	bool LoadObjectArrange(const wchar_t* filePath);
 	bool LoadEnemySpawn(const wchar_t* filePath);
-	bool LoadToolTip(const wchar_t* filePath);
+	bool LoadToolTip(const wchar_t* filePath);	
+	bool LoadAttackRangeData(const wchar_t* filePath);
 	void Free() override;
 
 	MapInfo GetMapInfo(std::wstring _stageName) 
@@ -126,9 +127,13 @@ public:
 		}
 		throw std::runtime_error("Wave not found");
 	}
+
+	const std::vector<std::pair<int, int>>& GetAttackRange(int ID) const { return _attackRanges[ID]; }
+
 private:
 	std::vector<MapInfo> _mapInfos;
 	std::vector<ObjectArrangeInfo>_objectArrangeInfos;
 	std::vector<EnemySpawnInfo>_enemySpawnInfos;
 	std::vector<ToolTipInfo>_ToolTipInfos;
+	std::vector<std::vector<std::pair<int, int>>> _attackRanges;
 };
