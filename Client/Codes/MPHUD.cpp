@@ -1,8 +1,9 @@
 #include "MPHUD.h"
+
 #include "PlayerMP.h"
-#include "Collider.h"
 #include "ToolTip.h"
 #include "Button.h"
+
 #include "Client_Define.h"
 MPHUD::MPHUD(PlayerMP* _Mp, int index)
 	:UIComponent(L"MPHUD")

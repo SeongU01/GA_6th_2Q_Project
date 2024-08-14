@@ -40,9 +40,11 @@ public:
 
 private:
 	UIInfo				_info;
+
 	Vector3				_originScale;
 	Vector3				_offsetPosition;
 	D2D1_SIZE_F			_imageSize;    
+	D2D1_SIZE_F			_realSize;
 	float				_rotation = 0.f;
 	float				_scaleRate = 1.f;
 };

@@ -15,7 +15,6 @@ void TopHUD::Awake()
 void TopHUD::Start()
 {
 	UI::UIInfo info;
-	UI* pObj;
 	info = CreateInfo(L"HPBackground", L"UI_HUD_HP_Top", 0, 
 		{80.0f ,40.0f , -1.f }, { 1.2f,1.2f,1.f }, &transform);
 	 AddUI(info)->SetRenderGroup((int)RenderGroup::UI);

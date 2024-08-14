@@ -25,7 +25,7 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         {
             position = info._leftTop ? Vector3{ 160.f, 80.f, 0.f } : Vector3{ -150.f, -100.f, 0.f };
         }
-        int line = (info._content.length() % 19==0)? (info._content.length() / 19): (info._content.length() / 19) +1;
+        int line = ((int)info._content.length() % 19==0)? ((int)info._content.length() / 19): ((int)info._content.length() / 19) +1;
         float height = 80 + (float)(line * 20);
         //ÆÇ³Ú
         Pannel::PannelInfo pannelInfo;
