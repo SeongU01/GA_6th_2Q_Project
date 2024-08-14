@@ -8,6 +8,7 @@
 #include "GridMovement.h"
 #include "Astar.h"
 #include "HP.h"
+#include "HPHUD.h"
 #include "Collider.h"
 #include "Pannel.h"
 #include "Defense.h"
@@ -45,6 +46,7 @@ void DefaultEnemyScript::Awake()
 
 	//TODO: FSM 작성하기
 	_pHP=AddComponent<HP>(L"HP", 5);
+	AddComponent<HPHUD>(_pHP, 1);
 	_aStar = AddComponent<AStar>(L"AStar",_targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement",500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
