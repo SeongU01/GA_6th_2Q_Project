@@ -13,13 +13,10 @@ void Engine::CollisionManager::CheckCollision(std::list<GameObject*>* src, std::
 		{
 			std::vector<Collider*>& dstColliders = Dst->GetColliders();
 			for (auto& srcCollider : srcColliders)
-			{
-				if (!srcCollider->IsActive()) continue;
-
+			{				
 				for (auto& dstCollider : dstColliders)
 				{
-					if (srcCollider == dstCollider) continue;
-					if (!dstCollider->IsActive()) continue;
+					if (srcCollider == dstCollider) continue;					
 
 					COLLIDER_ID ID, reverseID;
 					ID.leftID = srcCollider->GetID();
@@ -49,6 +46,18 @@ void Engine::CollisionManager::CheckCollision(std::list<GameObject*>* src, std::
 					infoSrc.other = dstCollider;
 					infoDst.itSelf = dstCollider;
 					infoDst.other = srcCollider;
+
+					if (!srcCollider->IsActive() || !dstCollider->IsActive())
+					{
+						if (iter->second)
+						{
+							Src->OnCollisionExit(infoSrc);
+							Dst->OnCollisionExit(infoDst);
+							iter->second = false;
+						}
+
+						continue;
+					}
 
 					if (IsCollision(srcCollider, dstCollider))
 					{						
