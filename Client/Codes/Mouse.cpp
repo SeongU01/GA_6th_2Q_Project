@@ -67,6 +67,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 
 		if (Input::IsKeyDown(Input::DIM_RB))
 		{
+			_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
 			_hoverCard->SetMouseHover(false);
 			_hoverCard = nullptr;
