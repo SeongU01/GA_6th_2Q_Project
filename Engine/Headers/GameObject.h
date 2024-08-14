@@ -77,6 +77,10 @@ namespace Engine
 			return pComponent;
 		}
 
+		void OnCollisionEnter(CollisionInfo& info);
+		void OnCollision(CollisionInfo& info);
+		void OnCollisionExit(CollisionInfo& info);
+
 	public:
 		__declspec(property(get = GetTransform)) Transform& transform;
 
@@ -90,9 +94,6 @@ namespace Engine
 		int LateUpdate(const float& deltaTime);
 		void AddRenderer();
 		void Render();
-		void OnCollisionEnter(CollisionInfo& info);
-		void OnCollision(CollisionInfo& info);
-		void OnCollisionExit(CollisionInfo& info);
 
 	private:
 		void Free() override;
