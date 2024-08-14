@@ -84,8 +84,8 @@ Vector3 Grid::GetCurrGrid(const Vector3& _position) const
 	float startY = _tiles[0][0]->transform.position.y - (height * 0.5f);
 
 	// 현재 위치에서 타일 좌표를 계산
-	int gridX = (int)(_position.x - startX) / width;
-	int gridY = (int)(_position.y - startY) / height;
+	int gridX = (int)((_position.x - startX) / width);
+	int gridY = (int)((_position.y - startY) / height);
 
 	// 그리드 범위를 벗어나는 경우 쓰레기 값 반환
 	if (gridX < 0 || gridX >= (int)_tiles[0].size() || gridY < 0 || gridY >= (int)_tiles.size())

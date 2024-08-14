@@ -23,7 +23,8 @@ public:
 private:
 	float _currTime = 0.f;
 	float _delayTime = 0.f;
-	DefaultEnemy::FSM _nextState;
+	DefaultEnemy::FSM _nextState=DefaultEnemy::FSM::None;
 	bool _checkState = false;
+	int _chargeStack = 0;
 };
 
