@@ -20,8 +20,11 @@ void TimerHUD::Start()
 {
 	UI::UIInfo info;
 	UI* pUI;
-	info = CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform);
+	//카드 라인
+	info = CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960 , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform);
 	UI* backpUI = AddUI(info);
+	info = CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform);
+	 backpUI = AddUI(info);
 	info = CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Box", 0, { 210.0f , 1030.f, -1.f }, { 1.0f, 1.3f, 1.0f }, &transform);
 	pUI = AddUI(info);
 	info = CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 210.0f , 1030.f, 0.f }, { 1.0f, 1.0f, 0.f }, &transform);

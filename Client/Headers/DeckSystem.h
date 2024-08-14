@@ -26,7 +26,6 @@ private:
 	CardSystem*				_pCardSystem = nullptr;
 	Engine::TextRenderer*	_pDeck = nullptr;
 	Engine::TextRenderer*	_pGrave = nullptr;
-	Engine::TextRenderer*	_pExtra = nullptr;
 
 	std::wstring _deckCount[End];
 };

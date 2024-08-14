@@ -20,7 +20,7 @@ CardSystem::CardSystem()
 void CardSystem::Awake()
 {
 	auto pGameObject = Engine::GameObject::Create();
-	pGameObject->AddComponent<GageHUD>(Vector3(1650.f, 920.f, 0.f), &_reloadTime, RELOADCOOLTIME,1);
+	pGameObject->AddComponent<GageHUD>(Vector3(1680.f, 930.f, 0.f), &_reloadTime, RELOADCOOLTIME,1);
 	pGameObject->SetRenderGroup(0);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 
