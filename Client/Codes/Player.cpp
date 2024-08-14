@@ -73,8 +73,7 @@ void Player::Awake()
 	_pAttackCollider = AddComponent<AttackCollider>();
 
 	//플레이어 체력바
-	Engine::GameObject* pHPHUDDObj = &transform.GetOwner();
-	pHPHUDDObj->AddComponent<HPHUD>(_pHP, 0);
+	AddComponent<HPHUD>(_pHP, 0);
 
 	// 잔상 표시용
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
@@ -117,17 +116,24 @@ void Player::LateUpdate(const float& deltaTime)
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
 	if (*info.other == L"Body")
-	{
-		std::cout << "충돌" << std::endl;
-
-		const AttackCollider::AttackInfo& attackInfo = _pAttackCollider->GetCurrentAttackInfo();
+	{		
 		HP* pHP = info.other->GetComponent<HP>();
 
 		AdditiveState* pAdditiveState = info.other->GetComponent<AdditiveState>();
-		pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
-		
-		pHP->hp -= attackInfo.damage + _pAdditiveState->ActiveHighPower();
-		
+
+		for (int i = 0; i < 2; i++)
+		{
+			const AttackCollider::AttackInfo& attackInfo = _pAttackCollider->GetCurrentAttackInfo(i);
+			pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
+
+			int damage = 0;
+
+			if(attackInfo.damage)
+				damage = attackInfo.damage + _pAdditiveState->ActiveHighPower();
+
+			pHP->hp -= damage;
+		}
+
 		if (pHP->IsZeroHP())
 		{
 			if (pAdditiveState->IsActiveState(AdditiveFlag::Extra))
@@ -152,12 +158,20 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 				// 방전 8칸 공격
 			}
 
-			const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo();
-			int damage = _pAdditiveState->ActiveWeakPoint() + attackInfo.damage;
-			_pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
-			_pHP->hp -= damage;
+			for (int i = 0; i < 2; i++)
+			{
+				const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(i);				
+
+				int damage = 0;
+				
+				if (attackInfo.damage)
+					damage = _pAdditiveState->ActiveWeakPoint() + attackInfo.damage;
+
+				_pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
+				_pHP->hp -= damage;
+			}
 		}
-	}	
+	}
 }
 
 void Player::OnCollisionExit(Engine::CollisionInfo& info)
