@@ -29,7 +29,7 @@ DefaultEnemyScript::DefaultEnemyScript(const wchar_t* name, const Vector3& start
 
 void DefaultEnemyScript::Awake()
 {
-	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"DefaultEnemy");
+	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
 	_pOwner->_isDrawCollider = true;
