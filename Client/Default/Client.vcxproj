@@ -34,6 +34,7 @@
     <ClCompile Include="..\Codes\DefaultEnemyMove.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyScript.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyState.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyStrongAttack.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyWeakAttack.cpp" />
     <ClCompile Include="..\Codes\DefaultStageScene.cpp" />
     <ClCompile Include="..\Codes\Defense.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="..\Headers\DefaultEnemyMove.h" />
     <ClInclude Include="..\Headers\DefaultEnemyScript.h" />
     <ClInclude Include="..\Headers\DefaultEnemyState.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyStrongAttack.h" />
     <ClInclude Include="..\Headers\DefaultEnemyWeakAttack.h" />
     <ClInclude Include="..\Headers\DefaultStageScene.h" />
     <ClInclude Include="..\Headers\Defense.h" />

@@ -4,7 +4,7 @@
 
 #include "TextRenderer.h"
 #include "Pannel.h"
-
+#include "GridEffect.h"
 #include "Client_Define.h"
 
 void DefaultEnemyState::Initialize(DefaultEnemyScript* pScript)
@@ -19,6 +19,6 @@ void DefaultEnemyState::Initialize(DefaultEnemyScript* pScript)
 	_pAstar = pScript->_aStar;
 	_pPannel = pScript->_pPannel;
 	_pTextRenderer = _pPannel->GetComponent<Engine::TextRenderer>();
-	
 	_pTextRenderer->SetDrawRect(200.f, 50.f);
+	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
 }

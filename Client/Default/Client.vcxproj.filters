@@ -200,6 +200,9 @@
     <ClCompile Include="..\Codes\JobQueue.cpp">
       <Filter>03. GameObject\Player\Script\JobQueue</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyStrongAttack.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -381,6 +384,9 @@
     </Filter>
     <Filter Include="03. GameObject\Player\Script\JobQueue">
       <UniqueIdentifier>{8187b8ff-4aa2-446f-a051-c016f3d70b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State\StrongAttack">
+      <UniqueIdentifier>{03064725-2e61-4016-9cc3-0dd9871c204a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -593,6 +599,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\JobQueue.h">
       <Filter>03. GameObject\Player\Script\JobQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyStrongAttack.h">
+      <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,7 +3,9 @@
 #include "Animation.h"
 #include "Pannel.h"
 #include "TextRenderer.h"
+#include "GridEffect.h"
 
+#include "DataManager.h"
 #include "Client_Define.h"
 int DefaultEnemyWeakAttack::Update(const float& deltaTime)
 {
@@ -42,6 +44,10 @@ void DefaultEnemyWeakAttack::OnExit()
 
 void DefaultEnemyWeakAttack::ShowInfo()
 {
+  if (_pAnimation->IsCurrAnimation(L"Idle"))
+  {
+    ShowAttackRange();
+  }
   _pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
   _pPannel->SetActive(true);
   
@@ -56,6 +62,17 @@ void DefaultEnemyWeakAttack::ShowInfo()
 void DefaultEnemyWeakAttack::CloseInfo()
 {
   _pPannel->SetActive(false);
+}
+
+void DefaultEnemyWeakAttack::ShowAttackRange()
+{
+  const Vector3& gridPosition = *_pGridPosition;
+  std::vector<std::pair<int, int>> ranges =DataManager::GetInstance()->GetAttackRange(11);
+  int index = 1;
+  for (auto& grid : ranges)
+  {
+    _pGridEffect->OnEffect(int(gridPosition.x+grid.first), int(gridPosition.y+ grid.second), index);
+  }
 }
 
 DefaultEnemyWeakAttack* DefaultEnemyWeakAttack::Create(DefaultEnemyScript* pScript)

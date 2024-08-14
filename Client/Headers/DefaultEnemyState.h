@@ -7,6 +7,7 @@ namespace Engine
 	class SpriteRenderer;
 	class	TextRenderer;
 }
+class GridEffect;
 class HP;
 class GridMovement;
 class AStar;
@@ -30,7 +31,7 @@ protected:
 	GridMovement* _pMovement = nullptr;
 	AStar* _pAstar = nullptr;
 	Pannel* _pPannel = nullptr;
-
+	GridEffect* _pGridEffect = nullptr;
 	std::wstring _infoText;
 
 };

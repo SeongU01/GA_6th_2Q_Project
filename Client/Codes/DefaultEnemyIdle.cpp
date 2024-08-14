@@ -34,7 +34,16 @@ DefaultEnemy::FSM DefaultEnemyIdle::SelectNextBehave()
 {
 	if (CheckAttackRange(1, 1))
 	{
-		return DefaultEnemy::FSM::WeakAttack;
+		if (_chargeStack < 2)
+		{
+			_chargeStack++;
+			return DefaultEnemy::FSM::WeakAttack;
+		}
+		else if (_chargeStack >= 2)
+		{
+			_chargeStack = 0;
+			return DefaultEnemy::FSM::StrongAttack;
+		}
 	}
 	
 	return DefaultEnemy::FSM::Move;

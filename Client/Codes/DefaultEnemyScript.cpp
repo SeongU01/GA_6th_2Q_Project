@@ -16,6 +16,7 @@
 #include "DefaultEnemyIdle.h"
 #include "DefaultEnemyMove.h"
 #include "DefaultEnemyWeakAttack.h"
+#include "DefaultEnemyStrongAttack.h"
 
 #include "DefaultEnemyInfomation.h"
 #include "Client_Define.h"
@@ -73,6 +74,7 @@ void DefaultEnemyScript::Start()
 	_pFSM->AddState((int)DefaultEnemy::FSM::Idle, DefaultEnemyIdle::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::Move, DefaultEnemyMove::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::WeakAttack, DefaultEnemyWeakAttack::Create(this));
+	_pFSM->AddState((int)DefaultEnemy::FSM::StrongAttack, DefaultEnemyStrongAttack::Create(this));
 	_pFSM->ChangeState((int)DefaultEnemy::FSM::Idle);
 }
 
