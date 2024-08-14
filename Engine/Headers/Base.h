@@ -27,7 +27,7 @@ namespace Engine
 		virtual void Free() = 0;
 
 	private:
-		std::wstring	_name = nullptr;
+		std::wstring	_name;
 		bool			_isActive = true;
 	};
 }
