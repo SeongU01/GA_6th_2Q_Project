@@ -4,7 +4,9 @@
 #include "Collider.h"
 #include "Card.h"
 #include "CardSystem.h"
-
+#include "TimerSystem.h"
+// timer
+#include "TimerHUD.h"
 #include "Client_Define.h"
 
 Mouse::Mouse(const wchar_t* name)
@@ -34,6 +36,7 @@ void Mouse::Start()
 {
 	Engine::GameObject* pObject = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
 	if (pObject) _pCardSystem = pObject->GetComponent<CardSystem>();
+	_pTimerSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<TimerSystem>(); //타이머시스템
 }
 
 void Mouse::Update(const float& deltaTime)
@@ -55,7 +58,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 		{
 			if (800.f > transform.position.y)
 				_pCardSystem->ActiveCard(_hoverCard);
-
+			_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
 			_hoverCard->SetMouseHover(false);
 			_hoverCard = nullptr;
@@ -89,6 +92,7 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
 			_hoverCard->SetMouseHover(true);
+			_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
 		}
 		else
 		{
@@ -113,6 +117,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 		{
 			if (!Input::IsKeyPress(Input::DIM_LB))
 			{
+				_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 				_hoverCard->isHold = false;
 				_hoverCard->SetMouseHover(false);
 				_hoverCard = nullptr;

@@ -13,7 +13,6 @@ void CreditHUD::Start()
 {
 	UI::UIInfo info;
 	UI* pObj;
-	//À½.
 	info = CreateInfo(L"HPBackground", L"UI_HUD_Button", 0, { 100.f,100.f, -1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 	info = CreateInfo(L"HPBackground", L"UI_HUD_Button", 0, { 200.f,100.f, -1.f }, { 1.f,1.f,1.f }, &transform);
