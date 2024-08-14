@@ -32,7 +32,8 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         pannelInfo.parent = info._leftTop ? transform.GetParent() : &transform;
         pannelInfo.position = position; 
         pannelInfo.size = Vector3{ 300, height, 0}; //크기
-        pannelInfo.fillColor = 0xFF000000; //색상
+        pannelInfo.fillColor = 0x00000000; //색상
+        pannelInfo.opacity = 0.5f;
         pannelInfo.outlineColor = 0xFF000000; //테두리 색상
         Pannel* pPannel = Pannel::Create(pannelInfo);
         //제목

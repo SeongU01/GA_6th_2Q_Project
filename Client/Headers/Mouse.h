@@ -2,6 +2,7 @@
 #include "MonoBehavior.h"
 
 class CardSystem;
+class TimerSystem;
 class Card;
 class Mouse : public Engine::MonoBehavior
 {
@@ -23,6 +24,7 @@ private:
 	void OnCollisionExit(Engine::CollisionInfo& info);
 
 private:
+	TimerSystem*	_pTimerSystem = nullptr;
 	CardSystem*		_pCardSystem = nullptr;
 	Card*			_hoverCard = nullptr;
 	HWND			_hWnd = nullptr;

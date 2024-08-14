@@ -24,10 +24,11 @@ void TimerHUD::Start()
 	UI* backpUI = AddUI(info);
 	info = CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Box", 0, { 210.0f , 1030.f, -1.f }, { 1.0f, 1.3f, 1.0f }, &transform);
 	pUI = AddUI(info);
-	info = CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 147.f , 1030.f, 0.f }, { 0.5f, 1.0f, 0.f }, &transform);
+	info = CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 210.0f , 1030.f, 0.f }, { 1.0f, 1.0f, 0.f }, &transform);
 	_pRed = AddUI(info);
-	info = CreateInfo(L"Timer_Orange", L"UI_HUD_Timer_Gage", 1, { 273.f, 1030.f, 0.f }, { 0.5f, 1.0f, 0.f }, &transform);
+	info = CreateInfo(L"Timer_Orange", L"UI_HUD_Timer_Gage", 1, { 210.0f , 1030.f, 0.f }, { 1.0, 1.0f, 0.f }, &transform);
 	_pYellow = AddUI(info);
+
 	info = CreateInfo(L"Timer_Back2", L"UI_HUD_Timer_Box", 1, { 210.0f , 1030.f, 0.f }, { 1.f, 1.f, 0.f }, &transform);
 	pUI = AddUI(info);
 	//텍스트
@@ -54,8 +55,6 @@ void TimerHUD::Start()
 	AddUI(info);
 	info = CreateInfo(L"Timer_top_red", L"UI_HUD_Timer_Top", 3, { 960, 30, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform);
 	_pTopDefault = AddUI(info);
-	//info = CreateInfo(L"Timer_top_Orange", L"UI_HUD_Timer_Top", 4, { 960, 30, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform);
-	//_pTopSkill = AddUI(info);
 	//위 툴팁
 	_ptoolTip = AddComponent<ToolTip>(L"TimerTool2"); //마나 안내
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(300.0f, 100.0f, 0.0f));
@@ -70,44 +69,47 @@ void TimerHUD::Start()
 		ToolTip* pToolTip = pOwner.GetComponent<ToolTip>(L"TimerTool2");
 		pToolTip->ActiveToolTip(false);
 		});
+	info = CreateInfo(L"Timer_top_Orange", L"UI_HUD_Timer_Top", 4, { 0, 30, 1.f }, { 1.0f, 1.0f,1.0f }, &transform);
+	_pTopSkill = AddUI(info);
 }
 
 void TimerHUD::Update(const float& deltaTime)
 {
 	float timer = _pTimer->GetRemainingTime();
-	if (timer > 30) // 주황 게이지 변경
+	float rate = timer / _pTimer->GetMaxTime();
+	_pRed->SetOffsetPosition(Vector3(_pRed->GetImageSize().width * -0.5f * (1.f - rate), 0.f, 0.f));
+	_pRed->SetScale({ rate, 1.0f, 0.f });
+
+	float _skillValue = _pTimer->GetSkillTime();
+	rate = _skillValue / 60;
+	_pYellow->SetScale({ rate  ,1.0f,1.0f });
+	_pYellow->SetPosition({ 
+		_pRed->transform.position.x+_pRed->GetSize().width*0.5f-(3.15f*_skillValue) - 9.5f,
+		1030.f ,0.0f});
+	if (timer <= 0) 
 	{
-		float rate = (1 + int((timer - 30.f) / 5.f)) / 6.f;
-		int rates = int(6 - ((timer - 30.f) / 5));
-		_pYellow->SetOffsetPosition(Vector3(-10.8f * rates, 0.f, 0.f));
-		_pYellow->SetScale({ 0.5f * rate, 1.0f, 0.f });
-		//  _RemainingUI[1]->SetOffsetPosition(Vector3(-(126* 0.5f *0.5f* (1.f - rate)), 0.f, 0.f)); 흐아아아앙
-	}
-	else // 빨강 게이지 변경
-	{
-		_pYellow->SetScale({ 0.f,0.f,0.f });
-		float rate = (1 + int(timer / 5.f)) / 6.f;
-		int rates = int(6 - (timer / 5));
-		_pRed->SetOffsetPosition(Vector3(-10.8f * rates, 0.f, 0.f));
-		_pRed->SetScale({ 0.5f * rate, 1.0f, 0.f });
-	}
-	if (timer <= 0) { 
-	    //Time::SetSlowTime(0.0f);   
 		_pRed->SetScale({ 0.f,0.f,0.f });
+		_pYellow->SetScale({ 0.f,0.f,0.f });
 	}
+	//상단 타이머ui
+	rate = timer / _pTimer->GetMaxTime();
+	_pTopDefault->SetOffsetPosition(Vector3(_pTopDefault->GetImageSize().width * -0.5f * (1.f - rate), 0.f, 0.f));
+	_pTopDefault->SetScale({ rate, 1.0f, 0.f }); 
+	//사용된 시간(주황탑
+	rate = _skillValue / 60;
+	_pTopSkill->SetScale({ rate  ,1.0f,1.0f });
+	_pTopSkill->SetOffsetPosition( 
+		{
+			_pTopDefault->GetSize().width-(15.8f*_skillValue), //값을못찾았어요 흐어어어엉
+			0,
+			0
+		}
+	);
 	//글씨조정
 	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"%02d:%02d", (int)timer, (int)(timer * 100) % 100);
 	_pText->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	_pText->transform.SetPosition({ 120,920 });
-	_pText->SetText(_buffer);	
-
-	//상단 타이머ui
-	_pCurrentValue = _pTimer->GetRemainingTime();
-	float rate = _pCurrentValue / _maxValue;//60/60 =1 20/60 =0.3...
-	_pTopDefault->SetOffsetPosition(Vector3(_pTopDefault->GetImageSize().width * -0.5f * (1.f - rate), 0.f, 0.f));
-	_pTopDefault->SetScale({ rate, 1.0f, 0.f }); //1~0
-	//사용된 시간(주황탑
-
+	_pText->SetText(_buffer);
 }
 
 void TimerHUD::LateUpdate(const float& deltaTime)
