@@ -15,7 +15,7 @@ public:
 	void OnExit() override;
 
 	void ShowAttackRange();
-
+	bool CheckAttackRange(int x, int y);
 	virtual void ShowInfo();
 	virtual void CloseInfo();
 public:

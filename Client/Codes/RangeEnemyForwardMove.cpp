@@ -19,7 +19,7 @@ int RangeEnemyForwardMove::Update(const float& deltaTime)
 		{
 			_currTime = _delayTime;
 			_pAnimation->ChangeAnimation(L"Move");
-			_pAstar->SetMaxMoveSteps(1);
+			_pAstar->SetMaxMoveSteps(2);
 			_isStateOn = true;
 		}
 	}
@@ -37,7 +37,7 @@ void RangeEnemyForwardMove::OnStart()
 {
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+	_delayTime = (float)Engine::RandomGeneratorInt(1, 3);
 }
 
 void RangeEnemyForwardMove::OnExit()

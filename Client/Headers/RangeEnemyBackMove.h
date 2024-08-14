@@ -13,7 +13,7 @@ public:
 	int LateUpdate(const float& deltaTime) override;
 	void OnStart() override;
 	void OnExit() override;
-
+	Vector3 FindBFS(int step);
 	virtual void ShowInfo();
 	virtual void CloseInfo();
 public:

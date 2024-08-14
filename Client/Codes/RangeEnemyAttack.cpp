@@ -11,8 +11,8 @@ int RangeEnemyAttack::Update(const float& deltaTime)
 {
 	if (!_isStateOn)
 	{
-		if (_pAnimation->IsCurrAnimation(L"Idle"))
-			_currTime += deltaTime;
+
+		_currTime += deltaTime;
 
 		if (_currTime >= _delayTime)
 		{
@@ -35,7 +35,8 @@ void RangeEnemyAttack::OnStart()
 {
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+	_delayTime = (float)Engine::RandomGeneratorInt(1, 3);
+	_newTargetPosition = *_pTargetPosition;
 }
 
 void RangeEnemyAttack::OnExit()
@@ -45,17 +46,54 @@ void RangeEnemyAttack::OnExit()
 void RangeEnemyAttack::ShowAttackRange()
 {
 	const Vector3& gridPosition = *_pGridPosition;
-	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(12);
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(13);
 	int index = 1;
 	for (auto& grid : ranges)
 	{
-		_pGridEffect->OnEffect(int(gridPosition.x + grid.first), int(gridPosition.y + grid.second), index);
+		std::pair<int, int> _computePosition= ComputeRotationTarget((int)(gridPosition.x + grid.first), int(gridPosition.y + grid.second));
+		_pGridEffect->OnEffect(_computePosition.first,_computePosition.second, index);
 	}
+}
+
+std::pair<int, int> RangeEnemyAttack::ComputeRotationTarget(int x, int y)
+{
+	Vector3 direction = _newTargetPosition - *_pGridPosition;
+	float radian = XMVectorATan2({ direction.y }, { direction.x }).m128_f32[0];
+
+	int originX = _pGridPosition->x;
+	int originY = _pGridPosition->y;
+
+	float relativeX = x - originX;
+	float relativeY = y - originY;
+
+	if (radian >= XM_PIDIV4 && radian < 3 * XM_PIDIV4)
+	{
+		radian = XM_PIDIV2; 
+	}
+	else if (radian >= 3 * -XM_PIDIV4 && radian < -XM_PIDIV4)
+	{
+		radian = -XM_PIDIV2; 
+	}
+	else if (radian >= -XM_PIDIV4 && radian < XM_PIDIV4)
+	{
+		radian = 0.f; 
+	}
+	else
+	{
+		radian = XM_PI; 
+	}
+	XMMATRIX xmRotationZ = XMMatrixRotationZ(radian);
+	Vector3 rotatePosition = XMVector3TransformCoord(Vector3(relativeX, relativeY, 0.f), xmRotationZ);
+	float rotatedX = rotatePosition.x + originX;
+	float rotatedY = rotatePosition.y + originY;
+
+	return std::pair<int, int>((int)ceil(rotatedX - 0.5f), (int)ceil(rotatedY - 0.5f));
 }
 
 
 void RangeEnemyAttack::ShowInfo()
 {
+	ShowAttackRange(); //юс╫ц
 	if (_pAnimation->IsCurrAnimation(L"Idle"))
 	{
 		ShowAttackRange();

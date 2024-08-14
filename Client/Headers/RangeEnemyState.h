@@ -34,6 +34,7 @@ protected:
 	Pannel* _pPannel = nullptr;
 	GridEffect* _pGridEffect = nullptr;
 	std::wstring _infoText;
+	bool _isBack = false;
 
 };
 

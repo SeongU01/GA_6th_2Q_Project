@@ -7,6 +7,7 @@
 #include "GridMovement.h"
 #include "Astar.h"
 #include "HP.h"
+#include "HPHUD.h"
 #include "Collider.h"
 #include "Pannel.h"
 #include "Player.h"
@@ -38,6 +39,7 @@ void RangeEnemyScript::Awake()
 
 	//TODO: FSM 작성하기
 	_pHP = AddComponent<HP>(L"HP", 5);
+	AddComponent<HPHUD>(_pHP, 1);
 	_aStar = AddComponent<AStar>(L"AStar", _targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement", 500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
@@ -83,6 +85,7 @@ void RangeEnemyScript::Start()
 
 void RangeEnemyScript::Update(const float& deltaTime)
 {
+	_targetPosition = _pDefense->GetGridPosition();
 	if (Input::IsKeyDown(DIK_M))
 	{
 		gameObject.SetDead();

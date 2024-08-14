@@ -15,7 +15,7 @@ public:
 	void OnExit() override;
 
 	void ShowAttackRange();
-
+	std::pair<int, int> ComputeRotationTarget(int x, int y);
 	virtual void ShowInfo();
 	virtual void CloseInfo();
 public:
@@ -24,5 +24,6 @@ private:
 	float _currTime = 0.f;
 	float _delayTime = 0.f;
 	bool _isStateOn = false;
+	Vector3 _newTargetPosition;
 };
 

@@ -11,7 +11,7 @@ int RangeEnemySupport::Update(const float& deltaTime)
 {
 	if (!_isStateOn)
 	{
-		if (_pAnimation->IsCurrAnimation(L"Idle"))
+		//if (_pAnimation->IsCurrAnimation(L"Idle"))
 			_currTime += deltaTime;
 
 		if (_currTime >= _delayTime)
@@ -27,7 +27,11 @@ int RangeEnemySupport::Update(const float& deltaTime)
 int RangeEnemySupport::LateUpdate(const float& deltaTime)
 {
 	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Attack") && _pAnimation->IsLastFrame())
-		return (int)RangeEnemy::FSM::Idle;
+	{
+		if (CheckAttackRange(4, 2))
+			return (int)RangeEnemy::FSM::Attack; //공격
+		return (int)RangeEnemy::FSM::Support; //계속대기..
+	}
 	return 0;
 }
 
@@ -35,7 +39,7 @@ void RangeEnemySupport::OnStart()
 {
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+	_delayTime = 1.0f;
 }
 
 void RangeEnemySupport::OnExit()
@@ -45,14 +49,29 @@ void RangeEnemySupport::OnExit()
 void RangeEnemySupport::ShowAttackRange()
 {
 	const Vector3& gridPosition = *_pGridPosition;
-	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(12);
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(13);
 	int index = 1;
 	for (auto& grid : ranges)
 	{
+
 		_pGridEffect->OnEffect(int(gridPosition.x + grid.first), int(gridPosition.y + grid.second), index);
 	}
 }
 
+
+bool RangeEnemySupport::CheckAttackRange(int x, int y)
+{
+	Vector3 currPosition = *_pGridPosition;
+
+	int currGridX = (int)currPosition.x;
+	int currGridY = (int)currPosition.y;
+	if (abs(currGridX - _pTargetPosition->x) <= x &&
+		abs(currGridY - _pTargetPosition->y) <= y)
+	{
+		return true;
+	}
+	return false;
+}
 
 void RangeEnemySupport::ShowInfo()
 {
@@ -67,7 +86,7 @@ void RangeEnemySupport::ShowInfo()
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
 
-	_infoText = L"[Attack] " + timeString + L" s";
+	_infoText = L"[Charge] " + timeString + L" s";
 	_pTextRenderer->SetText(_infoText.c_str());
 }
 

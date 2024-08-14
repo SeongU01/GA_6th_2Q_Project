@@ -3,15 +3,13 @@
 //component
 #include "Animation.h"
 #include "GridMovement.h"
-
+#include "Astar.h"
 #include "Client_Define.h"
 
 
 
 int RangeEnemyIdle::Update(const float& deltaTime)
 {
-
-
 	return 0;
 }
 
@@ -23,6 +21,7 @@ int RangeEnemyIdle::LateUpdate(const float& deltaTime)
 
 void RangeEnemyIdle::OnStart()
 {
+	
 	_pAnimation->ChangeAnimation(L"Idle");
 }
 
@@ -32,21 +31,24 @@ void RangeEnemyIdle::OnExit()
 
 RangeEnemy::FSM RangeEnemyIdle::SelectNextBehave()
 {
-	if (CheckAttackRange(1, 1))
+	_pAstar->SetGoalPosition(*_pTargetPosition);
+	if (_chargeStack == 2) //충전완료
 	{
-		if (_chargeStack < 2)
-		{
-			_chargeStack++;
-			return RangeEnemy::FSM::Attack;
-		}
-		else if (_chargeStack >= 2)
-		{
-			_chargeStack = 0;
-			return RangeEnemy::FSM::Attack;
-		}
+		_chargeStack = 0;
+		_isBack = false;
+		return RangeEnemy::FSM::Support;
 	}
-
-	return RangeEnemy::FSM::ForwardMove;
+	else
+	{
+		_chargeStack++;
+		if (CheckAttackRange(2, 2)&& !_isBack)//범위안에있다
+		{
+			_isBack = true;
+			return RangeEnemy::FSM::BackMove;
+		}
+		_isBack = false;
+		return RangeEnemy::FSM::ForwardMove;
+	}
 }
 
 bool RangeEnemyIdle::CheckAttackRange(int x, int y)
@@ -55,17 +57,10 @@ bool RangeEnemyIdle::CheckAttackRange(int x, int y)
 
 	int currGridX = (int)currPosition.x;
 	int currGridY = (int)currPosition.y;
-
-	for (int dx = -x; dx <= x; dx++)
+	if (abs(currGridX - _pTargetPosition->x) <= x &&
+		abs(currGridY - _pTargetPosition->y) <= y)
 	{
-		for (int dy = -y; dy <= y; dy++)
-		{
-			Vector3 temp = { (float)(currGridX + dx),(float)(currGridY + dy),0.f };
-			if (temp == *_pTargetPosition)
-			{
-				return true;
-			}
-		}
+		return true;
 	}
 	return false;
 }
