@@ -29,13 +29,13 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	const AttackInfo& GetCurrentAttackInfo() const { return _info; }
+	const AttackInfo& GetCurrentAttackInfo(int index) const { return _info[index]; }
 	void Initialize(const wchar_t* name, int width, int height);
-	void OnCollider(float time, int coordX, int coordY, const AttackInfo& info);
+	void OnCollider(float time, int coordX, int coordY, const AttackInfo& info, int index);
 
 private:
 	std::vector<std::vector<std::pair<float, Engine::Collider*>>> _colliders;
-	AttackInfo _info;
+	AttackInfo _info[2];
 	Grid* _pGrid = nullptr;
 	int _maxCoordX = 0;
 	int _maxCoordY = 0;

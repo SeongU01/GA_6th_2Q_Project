@@ -100,6 +100,8 @@ bool AdditiveState::IsActiveState(unsigned long long flag) const
 void AdditiveState::UseStack(State state)
 {
 	_stateStacks[state]--;
+	if (0 > _stateStacks[state])
+		_stateStacks[state] = 0;
 }
 
 void AdditiveState::AddState(unsigned long long flag, int stack)

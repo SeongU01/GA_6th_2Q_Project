@@ -31,6 +31,7 @@ public:
 	void StartGame();
 	void DrawCard();
 	void ReloadCard();
+	void OnReloadCoolTime();
 	void ActiveCard(Card* pCard);
 
 private:

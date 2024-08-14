@@ -60,6 +60,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 		{
 			if (800.f > transform.position.y)
 				_pCardSystem->ActiveCard(_hoverCard);
+
 			_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
 			_hoverCard->SetMouseHover(false);

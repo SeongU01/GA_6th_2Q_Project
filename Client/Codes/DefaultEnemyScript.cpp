@@ -17,6 +17,7 @@
 
 #include "AdditiveState.h"
 #include "AttackCollider.h"
+#include "HPHUD.h"
 
 //state
 #include "DefaultEnemyIdle.h"
@@ -67,6 +68,7 @@ void DefaultEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f);
 	_pPannel->SetActive(false);
+	AddComponent<HPHUD>(_pHP, 1);
 
 	// 임시 추가한것
 	_pAdditiveState = AddComponent<AdditiveState>();
