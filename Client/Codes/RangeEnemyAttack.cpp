@@ -93,8 +93,7 @@ std::pair<int, int> RangeEnemyAttack::ComputeRotationTarget(int x, int y)
 
 void RangeEnemyAttack::ShowInfo()
 {
-	ShowAttackRange(); //юс╫ц
-	if (_pAnimation->IsCurrAnimation(L"Idle"))
+	//if (_pAnimation->IsCurrAnimation(L"Charge"))
 	{
 		ShowAttackRange();
 	}

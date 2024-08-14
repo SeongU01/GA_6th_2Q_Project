@@ -43,7 +43,7 @@ void RangeEnemyScript::Awake()
 	_aStar = AddComponent<AStar>(L"AStar", _targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement", 500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
-	if (false == _pAnimation->LoadAnimation(L"Enemy_Default_DefaultEnemy"))
+	if (false == _pAnimation->LoadAnimation(L"Enemy_Range_RangeEnemy"))
 		throw std::runtime_error("can't load animation!");
 	_pAnimation->ChangeAnimation(L"Idle");
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();

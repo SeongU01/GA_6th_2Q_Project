@@ -17,7 +17,7 @@ int RangeEnemySupport::Update(const float& deltaTime)
 		if (_currTime >= _delayTime)
 		{
 			_currTime = _delayTime;
-			_pAnimation->ChangeAnimation(L"Attack");
+			_pAnimation->ChangeAnimation(L"Charge");
 			_isStateOn = true;
 		}
 	}
@@ -26,7 +26,7 @@ int RangeEnemySupport::Update(const float& deltaTime)
 
 int RangeEnemySupport::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Attack") && _pAnimation->IsLastFrame())
+	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Charge") && _pAnimation->IsLastFrame())
 	{
 		if (CheckAttackRange(4, 2))
 			return (int)RangeEnemy::FSM::Attack; //АјАн
