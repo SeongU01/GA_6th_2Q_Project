@@ -22,10 +22,10 @@ void Engine::Collider::LateUpdate(const float& deltaTime)
 D2D1_RECT_F Engine::Collider::GetColliderRect() const
 {
 	D2D1_RECT_F rect{};
-	rect.left = -_originScale.x * 0.5f;
-	rect.right = _originScale.x * 0.5f;
-	rect.top = -_originScale.y * 0.5f;
-	rect.bottom = _originScale.y * 0.5f;
+	rect.left = _offset.x - _originScale.x * 0.5f;
+	rect.right = _offset.x + _originScale.x * 0.5f;
+	rect.top = _offset.y - _originScale.y * 0.5f;
+	rect.bottom = _offset.y + _originScale.y * 0.5f;
 
 	return rect;
 }
