@@ -30,7 +30,6 @@ public:
 
 private:
 	Engine::GameObject*			_pTimeObject = nullptr;
-	Engine::CollisionManager*	_pCollisionManager = nullptr;
 	CardManager*				_pCardManager = nullptr;
 	DataManager*				_pDataManager = nullptr;
 	wchar_t						_buffer[32]{};

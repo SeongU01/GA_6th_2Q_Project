@@ -13,6 +13,7 @@ class GridMovement;
 class CardSystem;
 class CombatEvent;
 class TimerSystem;
+class AttackCollider;
 class Player : public Engine::MonoBehavior
 {
 public:
@@ -22,10 +23,13 @@ private:
 
 public:
 	const Vector3& GetGridPosition() const { return _gridPosition; }
-	void SetGridPostion(const Vector3& _pos);
+	const Vector3& GetNextGridPosition() const { return _nextGridPosition; }
+	void SetGridPostion(const Vector3& position);
+	void SetNextGridPosition(const Vector3& position);
 	void ResetPlayer(const Vector3& startPos);
 	HP* GetPlayerHPComponent() { return _pHP; }
 	PlayerMP* GetPlayerMPComponent() { return _pMP; }
+	AttackCollider* GetPlayerAttackComponent() { return _pAttackCollider; }
 
 public:
 	// MonoBehavior을(를) 통해 상속됨
@@ -52,9 +56,12 @@ private:
 	CardSystem* _pCardSystem = nullptr;
 	CombatEvent* _pCombatEvent = nullptr;
 	TimerSystem* _pTimerSystem = nullptr;
+	AttackCollider* _pAttackCollider = nullptr;
 
 private:
+	std::vector<Engine::Collider*> _attackColliders;
 	Vector3 _gridPosition = { 0.f, 2.f, 0.f };
+	Vector3 _nextGridPosition;
 	Vector3 _startPosition;
 };
 

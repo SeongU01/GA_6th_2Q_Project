@@ -13,8 +13,9 @@
 #include "GridEffect.h"
 #include "TopHUD.h"
 #include "MPHUD.h"
-
 #include "TimerSystem.h"
+#include "AttackCollider.h"
+
 //object
 #include "Map.h"
 #include "TimerUI.h"
@@ -35,6 +36,9 @@ int TestScene::LateUpdate(const float& deltaTime)
                                        Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
 
     _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+                                       Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
                                        Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
     return 0;
@@ -73,8 +77,6 @@ bool TestScene::Initialize()
     ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
     MakeObject(stage1Obj);
-
-    _pCollisionManager = Engine::CollisionManager::Create();
 
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");

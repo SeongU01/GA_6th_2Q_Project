@@ -6,7 +6,9 @@ enum class SoundGroup { BGM, SFX, Voice, End };
 
 // Card
 enum class CardType { Attack, Move, Support };
-enum class CardEffectType { None, RangeAttack, RangeCast, PathMove, SelfCast, Reload, Draw };
+enum class CardEffectType { None, RangeAttack, RangeCast, PathMove, SelfCast, Reload, Draw, PathAttack };
+enum class CardAdditiveState { None, OverClock };
+
 enum AdditiveFlag : unsigned long long
 {
 	Shield		= 1 << 1,

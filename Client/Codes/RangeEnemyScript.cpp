@@ -32,7 +32,9 @@ void RangeEnemyScript::Awake()
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
+#ifdef _DEBUG
 	_pOwner->_isDrawCollider = true;
+#endif // _DEBUG
 
 	//TODO: FSM 작성하기
 	_pHP = AddComponent<HP>(L"HP", 5);

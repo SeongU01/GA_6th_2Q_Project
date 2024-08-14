@@ -143,9 +143,6 @@ bool DefaultStageScene::Initialize()
 {
     _pCollisionManager = Engine::CollisionManager::Create();
     //Timer=======================
-    Engine::GameObject* pTimer = Engine::GameObject::Create();
-    _pTimerSystem = pTimer->AddComponent<TimerSystem>();
-    pTimer->SetRenderGroup((int)RenderGroup::UI);
     //============================
     if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) == nullptr)
     {

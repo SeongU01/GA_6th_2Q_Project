@@ -197,9 +197,6 @@
     <ClCompile Include="..\Codes\JobQueue.cpp">
       <Filter>03. GameObject\Player\Script\JobQueue</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\AttackCollider.cpp">
-      <Filter>04. Component\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DefaultEnemyStrongAttack.cpp">
       <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
     </ClCompile>
@@ -229,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\RangeEnemyState.cpp">
       <Filter>03. GameObject\Enemy\Range\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\AttackCollider.cpp">
+      <Filter>04. Component\AttackCollider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -435,6 +435,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Range\State\Support">
       <UniqueIdentifier>{fbb18857-d7c6-4fc9-a611-a8af0f519fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\AttackCollider">
+      <UniqueIdentifier>{5aa9d85a-4476-430b-b7b9-550deee61153}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -677,6 +680,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\RangeEnemyState.h">
       <Filter>03. GameObject\Enemy\Range\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\AttackCollider.h">
+      <Filter>04. Component\AttackCollider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
