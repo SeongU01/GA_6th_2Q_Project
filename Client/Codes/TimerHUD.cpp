@@ -77,14 +77,15 @@ void TimerHUD::Update(const float& deltaTime)
 {
 	float timer = _pTimer->GetRemainingTime();
 	float rate = timer / _pTimer->GetMaxTime();
-	_pRed->SetOffsetPosition(Vector3(_pRed->GetImageSize().width * -0.5f * (1.f - rate), 0.f, 0.f));
+	_pRed->SetOffsetPosition(Vector3(_pRed->GetImageSize().width * -0.5f * (1.f - rate)+(1-rate)*12.0f, 0.f, 0.f));
 	_pRed->SetScale({ rate, 1.0f, 0.f });
 
 	float _skillValue = _pTimer->GetSkillTime();
 	rate = _skillValue / 60;
 	_pYellow->SetScale({ rate  ,1.0f,1.0f });
-	_pYellow->SetPosition({ 
-		_pRed->transform.position.x+_pRed->GetSize().width*0.5f-(3.15f*_skillValue) - 9.5f,
+	_pYellow->SetPosition({
+		_pRed->transform.position.x+(_pRed->GetSize().width)*0.5f - 10.0f + (1 - (timer / _pTimer->GetMaxTime())) * 10 //맨끝으로 보정
+		-(2.4f*_skillValue),//주황바 보정
 		1030.f ,0.0f});
 	if (timer <= 0) 
 	{
