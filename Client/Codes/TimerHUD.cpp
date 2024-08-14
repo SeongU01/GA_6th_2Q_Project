@@ -40,8 +40,8 @@ void TimerHUD::Start()
 	_pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTextobj); pTextobj->SetRenderGroup((int)RenderGroup::UI);
 	//아래툴팁
-	ToolTip* _ptoolTip = pTextobj->AddComponent<ToolTip>(L"TimerTool1"); //마나 안내
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(300.0f, -100.0f, 0.0f));
+	ToolTip* _ptoolTip = pTextobj->AddComponent<ToolTip>(L"TimerTool1"); 
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_TimeLimit"), Vector3(300.0f, -100.0f, 0.0f));
 	Engine::GameObject& oOwner = *pTextobj;
 	Button* btn = pTextobj->AddComponent<Button>();
 	btn->SetRange(info.position, backpUI->GetSize());
@@ -59,8 +59,8 @@ void TimerHUD::Start()
 	info = CreateInfo(L"Timer_top_red", L"UI_HUD_Timer_Top", 3, { 960, 30, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform);
 	_pTopDefault = AddUI(info);
 	//위 툴팁
-	_ptoolTip = AddComponent<ToolTip>(L"TimerTool2"); //마나 안내
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(300.0f, 100.0f, 0.0f));
+	_ptoolTip = AddComponent<ToolTip>(L"TimerTool2"); 
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_TimeLimit"), Vector3(300.0f, 100.0f, 0.0f));
 	Engine::GameObject& pOwner = transform.GetOwner();
 	btn = AddComponent<Button>();
 	btn->SetRange(info.position, _pTopDefault->GetSize());

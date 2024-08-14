@@ -30,22 +30,8 @@ void TitleButtons::Start()
 	//상세설명버튼
 	info = CreateInfo(L"TitleButton", L"UI_HUD_Button", 0, { 1800.f,500.f, -1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
-	ToolTip* pToolTip = pObj->AddComponent<ToolTip>(L"Test");
-	Vector3 NextPos = pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Char_003"), Vector3(0.f, 0.f, 0.f));
 
 	btn = pObj->AddComponent<Button>();
-	btn->SetCancel([pObj]() { 
-		ToolTip* pToolTip = pObj->GetComponent<ToolTip>(L"Test");
-		pToolTip->ActiveToolTip(false);
-		pObj->SetScale({ 1.0f,1.0f,1.0f });
-		//툴팁오프
-		});
-	btn->SetOnHover([pObj]() { 
-		//툴팁 온
-		ToolTip* pToolTip = pObj->GetComponent<ToolTip>(L"Test");
-		pToolTip->ActiveToolTip(true);
-		pObj->AddScale({ 0.0001f,0.0001f,0.0f });
-		});
 	btn->SetOnPressed([]() {
 		InfoHUD* pInfo =  Engine::FindObject((int)LayerGroup::UI, L"Info", NULL)->GetComponent<InfoHUD>();
 		pInfo->SetActives(true);

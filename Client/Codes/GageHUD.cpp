@@ -21,9 +21,9 @@ void GageHUD::Awake()
 
 	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"reChargeTool"); //마나 안내
 	if(_number==1)
-		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana"), Vector3(1500.0f, 830.0f, 0.0f));
+		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Reload_Recovery"), Vector3(1500.0f, 830.0f, 0.0f));
 	else
-		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(350.0f, 830.0f, 0.0f));
+		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana_Recovery"), Vector3(350.0f, 830.0f, 0.0f));
 	Engine::GameObject& pObj = GetOwner();
 	Button* btn = AddComponent<Button>();
 	btn->SetRange(_position, _imageSize);

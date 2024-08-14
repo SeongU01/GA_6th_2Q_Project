@@ -50,7 +50,7 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"ToolTip", pPannel);
-        pPannel->SetRenderGroup((int)RenderGroup::UI);
+        pPannel->SetRenderGroup((int)RenderGroup::Fade);
         _toolTipList[info._id] = pPannel;
 
         pPannel->SetActive(false);

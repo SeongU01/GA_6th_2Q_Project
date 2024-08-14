@@ -49,7 +49,7 @@ void DeckSystem::Start()
 
 	//¿Á¿Â¿¸
 	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"ReloadingTool");
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(-300.0f, -100.0f, 0.0f));
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Reload"), Vector3(-300.0f, -100.0f, 0.0f));
 	Engine::GameObject& oOwner = transform.GetOwner();
 	Button* pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(-75.f, 25.f, 0.f), {150.f, 150.f});
@@ -64,7 +64,7 @@ void DeckSystem::Start()
 	pButton->SetOnPressed([this]() { _pCardSystem->ReloadCard(); });
 	//µ¶
 	_ptoolTip = AddComponent<ToolTip>(L"DeckTool");
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_001"), Vector3(-300.0f, -100.0f, 0.0f));
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Deck"), Vector3(-300.0f, -100.0f, 0.0f));
 	pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(70.f, 0, 0.f), { 100.f, 50.f });
 	pButton->SetOnHover([&oOwner] {
@@ -77,7 +77,7 @@ void DeckSystem::Start()
 		});
 	//π¶¡ˆ..
 	_ptoolTip = AddComponent<ToolTip>(L"GraveTool"); 
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Deck"), Vector3(-300.0f, -100.0f, 0.0f));
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Graveyard"), Vector3(-300.0f, -100.0f, 0.0f));
 	pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(70.f, 50, 0.f), { 100.f, 50.f });
 	pButton->SetOnHover([&oOwner] {

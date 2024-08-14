@@ -22,7 +22,7 @@ void MPHUD::Start()
 	info = CreateInfo(L"MPBackground", L"UI_HUD_MP_back", 0, { 50,0 , 0.f }, { 0.7f, 0.7f,1.f }, &transform);
 	UI* pui= AddUI(info);
 	_ptoolTip = AddComponent<ToolTip>(L"MPTool"); //마나 안내
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana"), Vector3(200.0f,-100.0f, 0.0f));
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana_Storage"), Vector3(200.0f,-100.0f, 0.0f));
 	Button* btn = AddComponent<Button>();
 	btn->SetRange({ transform.GetPosition().x+50,transform.GetPosition().y,0}, {pui->GetSize().width, pui->GetSize().height});
 	Engine::GameObject& obj = GetOwner();
