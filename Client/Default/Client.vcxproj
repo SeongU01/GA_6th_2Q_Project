@@ -66,6 +66,7 @@
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
     <ClCompile Include="..\Codes\Pannel.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
+    <ClCompile Include="..\Codes\AttackCollider.cpp" />
     <ClCompile Include="..\Codes\PlayerMP.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\Headers\ObstacleScript.h" />
     <ClInclude Include="..\Headers\Pannel.h" />
     <ClInclude Include="..\Headers\Player.h" />
+    <ClInclude Include="..\Headers\AttackCollider.h" />
     <ClInclude Include="..\Headers\PlayerMP.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />

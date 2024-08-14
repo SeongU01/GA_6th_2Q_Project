@@ -84,7 +84,10 @@ void Engine::GameObject::Render()
 	if (_isDrawCollider)
 	{
 		for (auto& collider : _colliders)
-			_pSpriteRenderer->DrawRect(collider->GetColliderRect());
+		{
+			if (collider->IsActive())
+				_pSpriteRenderer->DrawRect(collider->GetColliderRect());
+		}
 	}
 #endif
 }
