@@ -20,6 +20,7 @@ void AStar::Awake()
 void AStar::Start()
 {
 	_pTargetObject = Engine::FindObject((int)LayerGroup::Object, L"Defense", _targetObjectName.c_str());
+	if (_targetObjectName == L"player") _pTargetObject = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
 }
 
 void AStar::Update(const float& deltaTime)

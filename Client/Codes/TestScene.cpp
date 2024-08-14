@@ -45,7 +45,7 @@ bool TestScene::UIinitialize()
     Engine::GameObject* pGameObject = Engine::GameObject::Create();
     pGameObject->AddComponent<DeckSystem>();
     pGameObject->SetRenderGroup((int)RenderGroup::UI);
-    pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
+    pGameObject->transform.position = Vector3(1725.f, 985.f, 0.f);
 
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 
@@ -54,13 +54,14 @@ bool TestScene::UIinitialize()
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
 
     Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
-    pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 0);
+    pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 1);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
     
     //¸¶³ª ¹Ù
     Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
+    pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
     pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerMP", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 
     return true;
 }

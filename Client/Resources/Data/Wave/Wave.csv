@@ -1,6 +1,6 @@
 ﻿StageID,WaveName,spawnX,spawnY,subSpawnX,subSpawnY,EnemyType,EnemyTarget
-Stage1,Wave1,0,0,10,5,Default,St1TargetDefense0
-Stage1,Wave1,0,2,5,5,Default,St1TargetDefense0
+Stage1,Wave1,0,0,10,5,Range,player
+Stage1,Wave1,0,2,5,5,Range,player
 Stage1,Wave1,0,3,5,5,Default,St1TargetDefense0
 Stage1,Wave2,0,3,5,5,Default,St1TargetDefense0
 Stage1,Wave2,0,4,5,5,Default,St1TargetDefense0
