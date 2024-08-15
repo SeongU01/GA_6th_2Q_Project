@@ -13,8 +13,7 @@ Engine::Collider::Collider(const wchar_t* name)
 void Engine::Collider::LateUpdate(const float& deltaTime)
 {
 	_position = XMVector3TransformCoord(_offset, XMLoadFloat4x4(&transform.xmWorldMatrix));
-	_scale = _originScale * transform.scale;
-	_scale = XMVectorAbs(_scale);
+	_scale = XMVectorAbs(_originScale * transform.scale);
 
 	if (!IsActive())
 	{
