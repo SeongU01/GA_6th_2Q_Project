@@ -230,21 +230,6 @@
     <ClCompile Include="..\Codes\AttackCollider.cpp">
       <Filter>04. Component\AttackCollider</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemy.cpp">
-      <Filter>03. GameObject\Enemy\Elite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemyScript.cpp">
-      <Filter>03. GameObject\Enemy\Elite\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemyIdle.cpp">
-      <Filter>03. GameObject\Enemy\Elite\State\Idle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemyState.cpp">
-      <Filter>03. GameObject\Enemy\Elite\State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemyMove.cpp">
-      <Filter>03. GameObject\Enemy\Elite\State\Move</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -453,20 +438,6 @@
     </Filter>
     <Filter Include="04. Component\AttackCollider">
       <UniqueIdentifier>{5aa9d85a-4476-430b-b7b9-550deee61153}</UniqueIdentifier>
-    <Filter Include="03. GameObject\Enemy\Elite\Script">
-      <UniqueIdentifier>{4bba3634-d3df-49c5-b485-9752c988efae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Elite\State">
-      <UniqueIdentifier>{20c0f892-1997-4f33-97c3-262f044d5808}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Elite\State\Idle">
-      <UniqueIdentifier>{bf3442e3-261d-4274-8e54-8828b15cb693}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Elite\State\Move">
-      <UniqueIdentifier>{6ad292a0-2775-407d-843d-27baafbf3aa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Component\Attack">
-      <UniqueIdentifier>{9e60d0cf-bc48-4ab5-baf4-539d85d8c2a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -683,26 +654,35 @@
     <ClInclude Include="..\Headers\DefaultEnemyStrongAttack.h">
       <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemy.h">
-      <Filter>03. GameObject\Enemy\Elite</Filter>
+    <ClInclude Include="..\Headers\RangeEnemyIdle.h">
+      <Filter>03. GameObject\Enemy\Range\State\Idle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyIdle.h">
-      <Filter>03. GameObject\Enemy\Elite\State\Idle</Filter>
+    <ClInclude Include="..\Headers\RangeEnemyForwardMove.h">
+      <Filter>03. GameObject\Enemy\Range\State\ForwardMove</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyInfomation.h">
-      <Filter>03. GameObject\Enemy\Elite</Filter>
+    <ClInclude Include="..\Headers\RangeEnemyBackMove.h">
+      <Filter>03. GameObject\Enemy\Range\State\BackMove</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyMove.h">
-      <Filter>03. GameObject\Enemy\Elite\State\Move</Filter>
+    <ClInclude Include="..\Headers\RangeEnemyAttack.h">
+      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyScript.h">
-      <Filter>03. GameObject\Enemy\Elite\Script</Filter>
+    <ClInclude Include="..\Headers\RangeEnemySupport.h">
+      <Filter>03. GameObject\Enemy\Range\State\Support</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyState.h">
-      <Filter>03. GameObject\Enemy\Elite\State</Filter>
+    <ClInclude Include="..\Headers\RangeEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Range\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemy.h">
+      <Filter>03. GameObject\Enemy\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemyInformation.h">
+      <Filter>03. GameObject\Enemy\Range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemyState.h">
+      <Filter>03. GameObject\Enemy\Range\State</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\AttackCollider.h">
-      <Filter>04. Component\Attack</Filter>
+      <Filter>04. Component\AttackCollider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
