@@ -266,7 +266,7 @@ void Card::ActiveEffect()
 		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
 		AttackCollider::AttackInfo attackInfo;
 		attackInfo.damage = _cardData.variable[i];
-		attackInfo.additiveState = 1 << _cardData.additiveCharState[i];
+		attackInfo.additiveState = (unsigned long long)1 << _cardData.additiveCharState[i];
 		attackInfo.additiveStateStack = _cardData.charStateNum[i];
 
 		if (CardEffectType::PathAttack == _cardData.effectType[i])
@@ -370,7 +370,7 @@ void Card::ActiveEffect()
 		if (CardEffectType::SelfCast == _cardData.effectType[i])
 		{
 			AdditiveState* pAdditiveState = _pPlayer->GetComponent<AdditiveState>();
-			pAdditiveState->AddState(1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
+			pAdditiveState->AddState((unsigned long long)1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
 		}
 
 		if (CardEffectType::Reload == _cardData.effectType[i])
