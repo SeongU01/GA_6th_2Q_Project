@@ -51,8 +51,8 @@ void RangeEnemyBackMove::OnExit()
 Vector3 RangeEnemyBackMove::FindBFS(int step)
 {
     std::vector<std::vector<Tile*>> _grid = _pMovement->_grid->GetTiles();
-    int gridHeight = _grid.size();
-    int gridWidth = _grid[0].size();
+    int gridHeight = (int)_grid.size();
+    int gridWidth = (int)_grid[0].size();
 
     std::vector<std::pair<int, int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
 
@@ -81,7 +81,7 @@ Vector3 RangeEnemyBackMove::FindBFS(int step)
         // 지정된 step에서 멈추고, 가장 먼 지점을 계산
         if (currentStep == step)
         {
-            float distance = sqrt(pow(x - _pTargetPosition->x, 2) + pow(y - _pTargetPosition->y, 2));
+            float distance = (float)sqrt(pow(x - _pTargetPosition->x, 2) + pow(y - _pTargetPosition->y, 2));
             if (distance > maxDistance)
             {
                 maxDistance = distance;

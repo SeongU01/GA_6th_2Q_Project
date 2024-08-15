@@ -60,11 +60,11 @@ std::pair<int, int> RangeEnemyAttack::ComputeRotationTarget(int x, int y)
 	Vector3 direction = _newTargetPosition - *_pGridPosition;
 	float radian = XMVectorATan2({ direction.y }, { direction.x }).m128_f32[0];
 
-	int originX = _pGridPosition->x;
-	int originY = _pGridPosition->y;
+	int originX = (int)_pGridPosition->x;
+	int originY = (int)_pGridPosition->y;
 
-	float relativeX = x - originX;
-	float relativeY = y - originY;
+	int relativeX = x - originX;
+	int relativeY = y - originY;
 
 	if (radian >= XM_PIDIV4 && radian < 3 * XM_PIDIV4)
 	{
@@ -83,7 +83,7 @@ std::pair<int, int> RangeEnemyAttack::ComputeRotationTarget(int x, int y)
 		radian = XM_PI; 
 	}
 	XMMATRIX xmRotationZ = XMMatrixRotationZ(radian);
-	Vector3 rotatePosition = XMVector3TransformCoord(Vector3(relativeX, relativeY, 0.f), xmRotationZ);
+	Vector3 rotatePosition = XMVector3TransformCoord(Vector3((float)relativeX, (float)relativeY, 0.f), xmRotationZ);
 	float rotatedX = rotatePosition.x + originX;
 	float rotatedY = rotatePosition.y + originY;
 
