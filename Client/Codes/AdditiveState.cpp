@@ -82,7 +82,7 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 
 	for (int i = 0; i < State::End; i++)
 	{
-		if (!_pBitFlag->CheckFlag((unsigned long long)1 << i))
+		if (!_pBitFlag->CheckFlag((unsigned long long)1 << (i + 1)))
 			_pTimer->SetActive(i, false);
 	}
 }

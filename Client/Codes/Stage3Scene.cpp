@@ -29,7 +29,7 @@ bool Stage3Scene::Initialize()
     MakeObject(stage1Obj);
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
-    pObject->AddComponent<GridEffect>(stage1.width, stage1.height);
+    pObject->AddComponent<GridEffect>((int)stage1.width, (int)stage1.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
