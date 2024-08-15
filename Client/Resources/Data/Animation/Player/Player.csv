@@ -1,3 +1,9 @@
 ﻿Animation,TextureTag,Duration
-1,,
-Idle,Player_Idle,0.06
+7,,
+Idle,Player_Idle,0.09
+Attack,Player_Attack,0.05
+Cast,Player_Cast,0.05
+Dash,Player_Dash,0.05
+Hit,Player_Hit,0.05
+Stab,Player_Stab,0.05
+Up,Player_Up,0.05

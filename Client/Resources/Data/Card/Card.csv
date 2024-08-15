@@ -1,11 +1,11 @@
-﻿Card_ID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,Card_Type,EffectRelation,Effect_Type_1,Target_Num_1,Additive_CharState_1,CharState_Num_1,Additive_CardState_1,Effect_Type_2,Target_Num_2,Additive_CharState_2,CharState_Num_2,Additive_CardState_2,String_Title,String_Text,CardImage,Variable_1,Variable_2,Variable_3,Variable_4
-Card_0,0,1.5,0.15,0.25,0,1,1_RangeAttack,0,,,,6_Draw,1,,,,블레이드,2,0,1,0,0,0
-Card_1,1,1,0.5,0.2,0,1,7_PathAttack,8,,,,,,,,,부스트,3,1,1,0,0,0
-Card_2,1,4,0.5,0.3,0,1,1_RangeAttack,2,,,1_OverClock,2_RangeCast,2,2_Extra,1,,이온 블래스트,4,2,1,0,0,0
-Card_3,1,1,0.15,0.15,0,1,1_RangeAttack,3,,,,2_RangeCast,3,6_WeakPoint,1,,하이 블레이드,5,3,1,,,
-Card_4,2,1,0.25,0.15,0,1,1_RangeAttack,4,,,,2_RangeCast,4,5_OverCharge,1,,하이퍼 드라이브,6,4,1,,,
-Card_5,1,0.25,0.15,0.15,1,1,3_PathMove,5,,,,0,,,,,긴급구동,7,5,,,,
-Card_6,1,0.5,0.15,0.15,1,1,3_PathMove,6,,,,4_SelfCast,,3_Charge,1,,곡예,8,6,,,,
-Card_7,1,2,0.15,0.15,2,1,4_SelfCast,0,1_Shield,1,,0,,,,,실드 전개,9,7,,,,
-Card_8,1,3,0.15,0.15,2,1,4_SelfCast,0,4_HighPower,1,1_OverClock,5_Reload,,,,,멜트다운,10,7,,,,
-Card_9,1,0.5,0.15,0.25,2,1,4_SelfCast,0,3_Charge,1,,,,,,,차지 유닛,11,7,,,,
+﻿Card_ID,ActionID,Cost_Mana,Cost_Time,Delay_Before,Delay_After,Card_Type,EffectRelation,Effect_Type_1,Target_Num_1,Additive_CharState_1,CharState_Num_1,Additive_CardState_1,Effect_Type_2,Target_Num_2,Additive_CharState_2,CharState_Num_2,Additive_CardState_2,String_Title,String_Text,CardImage,Variable_1,Variable_2,Variable_3,Variable_4
+Card_0,0,0,1.5,0.15,0.25,0,1,1_RangeAttack,0,,,,6_Draw,1,,,,블레이드,2,0,1,0,0,0
+Card_1,1,1,1,0.5,0.2,0,1,7_PathAttack,8,,,,,,,,,일섬,3,1,1,0,0,0
+Card_2,2,1,4,0.5,0.3,0,1,1_RangeAttack,2,,,1_OverClock,2_RangeCast,2,2_Extra,1,,이온 블래스트,4,2,1,0,0,0
+Card_3,3,1,1,0.15,0.15,0,1,1_RangeAttack,3,,,,2_RangeCast,3,6_WeakPoint,1,,초진동 칼날,5,3,1,,,
+Card_4,4,2,1,0.25,0.15,0,1,1_RangeAttack,4,,,,2_RangeCast,4,5_OverCharge,1,,하이퍼 드라이브,6,4,1,,,
+Card_5,5,1,0.25,0.15,0.15,1,1,3_PathMove,5,,,,0,,,,,긴급구동,7,5,,,,
+Card_6,6,1,0.5,0.15,0.15,1,1,3_PathMove,6,,,,4_SelfCast,,3_Charge,1,,전술기동,8,6,,,,
+Card_7,7,1,2,0.15,0.15,2,1,4_SelfCast,0,1_Shield,1,,0,,,,,실드 전개,9,7,,,,
+Card_8,8,1,3,0.15,0.15,2,1,4_SelfCast,0,4_HighPower,1,1_OverClock,5_Reload,,,,,멜트다운,10,8,,,,
+Card_9,9,1,0.5,0.15,0.25,2,1,4_SelfCast,0,3_Charge,1,,,,,,,차지 유닛,11,9,,,,
