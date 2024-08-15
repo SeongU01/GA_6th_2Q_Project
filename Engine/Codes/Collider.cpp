@@ -14,6 +14,7 @@ void Engine::Collider::LateUpdate(const float& deltaTime)
 {
 	_position = XMVector3TransformCoord(_offset, XMLoadFloat4x4(&transform.xmWorldMatrix));
 	_scale = _originScale * transform.scale;
+	_scale = XMVectorAbs(_scale);
 
 	if (!IsActive())
 	{
