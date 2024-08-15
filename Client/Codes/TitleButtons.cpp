@@ -33,6 +33,8 @@ void TitleButtons::Start()
 
 	btn = pObj->AddComponent<Button>();
 	btn->SetOnPressed([]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
 		InfoHUD* pInfo =  Engine::FindObject((int)LayerGroup::UI, L"Info", NULL)->GetComponent<InfoHUD>();
 		pInfo->SetActives(true);
 		});
@@ -44,6 +46,8 @@ void TitleButtons::Start()
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
 	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
 	btn->SetOnPressed([]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
 		  CreditHUD* pCredit = Engine::FindObject((int)LayerGroup::UI, L"Credit", NULL)->GetComponent<CreditHUD>();
 		  pCredit->SetActives(true);
 		});

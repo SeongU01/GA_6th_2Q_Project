@@ -33,6 +33,9 @@ bool Stage2Scene::Initialize()
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
+    Sound::StopSound((int)SoundGroup::BGM);
+    Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_2", (int)SoundGroup::BGM, 0.8f, true);
+
     UIinitialize();   
     return true;
 }

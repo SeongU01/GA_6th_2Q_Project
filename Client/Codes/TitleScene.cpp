@@ -29,7 +29,7 @@ int TitleScene::LateUpdate(const float& deltaTime)
 
 bool TitleScene::Initialize()
 {
-
+    Sound::PlaySound("Bgm_Sound_BGM_Title", (int)SoundGroup::BGM, 0.8f, true);
     UIInitialize();
     return true;
 }

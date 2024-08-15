@@ -24,6 +24,10 @@ bool Stage4Scene::Initialize()
 {
     MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
     __super::Initialize();
+    
+    Sound::StopSound((int)SoundGroup::BGM);
+    Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_4", (int)SoundGroup::BGM, 0.8f, true);
+
     return true;
 }
 
