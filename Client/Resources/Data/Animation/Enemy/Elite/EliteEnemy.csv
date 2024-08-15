@@ -1,0 +1,5 @@
+﻿Animation,TextureTag,Duration
+3,,
+Idle,Enemy_Elite_Idle,0.06
+Move,Enemy_Elite_Move,0.06
+Attack,Enemy_Elite_Attack,0.06
