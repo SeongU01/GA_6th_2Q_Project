@@ -39,7 +39,6 @@ namespace Engine
         __declspec(property(get = GetXMWorldMatrix)) XMFLOAT4X4 xmWorldMatrix;
 
     public:
-        void LateUpdate(const float& deltaTime) override;
         void UpdateTransform();
 
     private:
