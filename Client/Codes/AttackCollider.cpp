@@ -13,7 +13,8 @@ AttackCollider::AttackCollider()
 }
 
 void AttackCollider::Awake()
-{	
+{
+	gameObject._isDrawCollider = true;
 }
 
 void AttackCollider::Start()
@@ -26,15 +27,25 @@ void AttackCollider::Update(const float& deltaTime)
 	{
 		for (int j = 0; j < _maxCoordX; j++)
 		{
-			if (_colliders[i][j].second->IsActive())
-			{
-				_colliders[i][j].first -= deltaTime;
-				_colliders[i][j].second->SetOffset(_pGrid->GetTileCenter(j, i) - transform.position);
+			auto& [delay, duration, collider] = _colliders[i][j];
 
-				if (0.f >= _colliders[i][j].first)
+			if (delay > 0.f)
+			{
+				delay -= deltaTime;
+
+				if (0.f > delay)
+					collider->SetActive(true);
+			}
+
+			if (collider->IsActive())
+			{
+				duration -= deltaTime;
+				collider->SetOffset(_pGrid->GetTileCenter(j, i) - transform.position);
+
+				if (0.f > duration)
 				{
-					_colliders[i][j].first = 0.f;
-					_colliders[i][j].second->SetActive(false);
+					duration = 0.f;
+					collider->SetActive(false);
 				}
 			}
 		}
@@ -60,23 +71,25 @@ void AttackCollider::Initialize(const wchar_t* name, int width, int height)
 	{
 		for (size_t j = 0; j < _colliders[i].size(); j++)
 		{
-			if (nullptr == _colliders[i][j].second)
+			auto& [delay, duration, collider] = _colliders[i][j];
+			if (nullptr == collider)
 			{
 				Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Attack");
 				pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 				pCollider->SetActive(false);
-				_colliders[i][j].second = pCollider;
+				collider = pCollider;
 			}
 		}
 	}
 }
 
-void AttackCollider::OnCollider(float time, int coordX, int coordY, const AttackInfo& info, int index)
+void AttackCollider::OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index)
 {
 	if (0 > coordX || 0 > coordY || _maxCoordX <= coordX || _maxCoordY <= coordY)
 		return;
 
-	_colliders[coordY][coordX].first = time;
-	_colliders[coordY][coordX].second->SetActive(true);
+	auto& [_delay, _duration, _collider] = _colliders[coordY][coordX];
+	_delay = delay;
+	_duration = duration;
 	_info[index] = info;
 }

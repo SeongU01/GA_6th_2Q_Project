@@ -14,12 +14,14 @@ enum class CardAdditiveState;
 class CardEffect;
 class Card final : public Engine::MonoBehavior
 {
+	friend class CardManager;
 	friend class CardSystem;
 	friend class JobQueue;
 public:
 	struct CardData
 	{
-		std::wstring name{};
+		std::wstring name;
+		int actionID{};
 		int iconID{};
 		int variable[4]{};
 		int targetNum[2]{};
@@ -35,6 +37,19 @@ public:
 		CardType type{};
 		int effectRelation{};
 		int textID{};
+	};
+	struct CardAction
+	{
+		std::wstring animation;
+		std::wstring effectTag;
+		Vector3 position;
+		Vector3 scale;
+		float duration = 0.f;
+		float delay = 0.f;
+		float attackDelay = 0.f;
+		bool isOneDraw = false;
+		bool isFollow = false;
+		bool isRotation = false;
 	};
 public:
 	explicit Card(const CardData& cardData);
@@ -54,7 +69,7 @@ public:
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
 	void SetHoldCard(bool isActive);
-	void SetMouseHover(bool isHover);
+	bool ActiveMouseHover(bool isHover);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 
 private:
@@ -66,6 +81,7 @@ private:
 	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
 	void HandDeckSetting();
 	void JobQueueSetting();
+	void CreateEffect(const Card::CardAction& action, const Vector3& offset);
 
 public:
 	__declspec(property(get = GetID)) int ID;
@@ -77,6 +93,7 @@ private:
 
 private:
 	CardData							_cardData{};
+	std::vector<CardAction>				_cardActions;
 	std::wstring						_costMana;
 	std::wstring						_costTime;
 	std::vector<std::pair<int, int>>	_attackRange;

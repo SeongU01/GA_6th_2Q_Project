@@ -75,7 +75,7 @@ std::pair<int, int> CardEffect::ComputeRotationTarget(int x, int y)
 	GetCursorPos(&mousePoint);
 	ScreenToClient(Engine::GetWindow(), &mousePoint);
 
-	Vector3 mousePosition = { float(mousePoint.x), float(mousePoint.y),0.f };
+	Vector3 mousePosition = { float(mousePoint.x), float(mousePoint.y), 0.f };
 
 	Vector3 gridPosition = _pPlayer->GetNextGridPosition();
 	Vector3 playerPosition = _pPlayer->GetComponent<GridMovement>()->_grid->GetTileCenter((int)gridPosition.x, (int)gridPosition.y);
@@ -102,7 +102,8 @@ std::pair<int, int> CardEffect::ComputeRotationTarget(int x, int y)
 
 	XMMATRIX xmRotationZ = XMMatrixRotationZ(radian);
 	Vector3 rotatePosition = XMVector3TransformCoord(Vector3((float)x, (float)y, 0.f), xmRotationZ);
-	
+	_degree = XMConvertToDegrees(radian);
+
 	return std::pair<int, int>((int)ceil(rotatePosition.x - 0.5f), (int)ceil(rotatePosition.y - 0.5f));
 }
 

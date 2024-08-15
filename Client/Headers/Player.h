@@ -1,9 +1,9 @@
 #pragma once
 #include "MonoBehavior.h"
+
 namespace Engine
 {
 	class Animation;
-	class FiniteStateMachine;
 }
 
 class HP;
@@ -14,6 +14,7 @@ class CardSystem;
 class CombatEvent;
 class TimerSystem;
 class AttackCollider;
+class Spectrum;
 class Player : public Engine::MonoBehavior
 {
 public:
@@ -46,17 +47,17 @@ private:
 	void DefaultMove(const float& deltaTime);
 
 private:
-	GridMovement* _movement = nullptr;
-	Engine::Animation* _pAnimation = nullptr;
-	Engine::FiniteStateMachine* _pFSM = nullptr;
+	GridMovement*		_movement = nullptr;
+	Engine::Animation*	_pAnimation = nullptr;
 
-	AdditiveState* _pAdditiveState = nullptr;
-	HP* _pHP = nullptr;
-	PlayerMP* _pMP = nullptr;
-	CardSystem* _pCardSystem = nullptr;
-	CombatEvent* _pCombatEvent = nullptr;
-	TimerSystem* _pTimerSystem = nullptr;
-	AttackCollider* _pAttackCollider = nullptr;
+	AdditiveState*		_pAdditiveState = nullptr;
+	HP*					_pHP = nullptr;
+	PlayerMP*			_pMP = nullptr;
+	CardSystem*			_pCardSystem = nullptr;
+	CombatEvent*		_pCombatEvent = nullptr;
+	TimerSystem*		_pTimerSystem = nullptr;
+	AttackCollider*		_pAttackCollider = nullptr;
+	Spectrum*			_pSpectrum = nullptr;
 
 private:
 	std::vector<Engine::Collider*> _attackColliders;

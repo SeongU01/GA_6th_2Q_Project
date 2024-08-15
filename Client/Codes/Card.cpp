@@ -20,6 +20,7 @@
 #include "EventInvoker.h"
 #include "HP.h"
 #include "CardSystem.h"
+#include "Animation.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -149,10 +150,10 @@ void Card::DrawCard()
 	HandDeckSetting();
 }
 
-void Card::SetMouseHover(bool isHover)
+bool Card::ActiveMouseHover(bool isHover)
 {
 	if (_isAddQueue || _isThrow)
-		return;
+		return false;
 
 	if (isHover)
 	{
@@ -170,6 +171,8 @@ void Card::SetMouseHover(bool isHover)
 	_targetOffset[0] = _offset;
 	_lerpTime = 0.f;
 	_isLerp = true;
+
+	return true;
 }
 
 void Card::ThrowCard()
@@ -205,17 +208,7 @@ bool Card::AddJobQueue()
 		_attackRange = _pCardEffect[0]->GetAttackRange();
 
 		for (int i = 0; i < 2; i++)
-		{
-			if (CardAdditiveState::OverClock == _cardData.additiveCardState[i])
-			{
-				HP* pHP = _pPlayer->GetComponent<HP>();
-				
-				if (1 >= pHP->hp)
-					return false;
-
-				pHP->hp--;
-			}
-
+		{			
 			if (CardEffectType::PathMove == _cardData.effectType[i] || CardEffectType::PathAttack == _cardData.effectType[i])
 			{
 				Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
@@ -232,7 +225,16 @@ bool Card::AddJobQueue()
 					bool isFind = false;
 					for (auto& range : _attackRange)
 					{
-						if ((int)currentGrid.x == int(range.first + gridPosition.x) && (int)currentGrid.y == int(range.second + gridPosition.y)
+						int x = int(range.first + gridPosition.x);
+						int y = int(range.second + gridPosition.y);
+
+						if (CardEffectType::PathMove == _cardData.effectType[i])
+						{
+							if (!pGrid->IsTileWalkable(x, y))
+								return false;
+						}
+
+						if ((int)currentGrid.x == x && (int)currentGrid.y == y
 							&& pGrid->IsTileWalkable((int)currentGrid.x, (int)currentGrid.y))
 						{
 							isFind = true;
@@ -248,6 +250,16 @@ bool Card::AddJobQueue()
 				else
 					return false;
 			}
+
+			if (CardAdditiveState::OverClock == _cardData.additiveCardState[i])
+			{
+				HP* pHP = _pPlayer->GetComponent<HP>();
+
+				if (1 >= pHP->hp)
+					return false;
+
+				pHP->hp--;
+			}
 		}
 
 		pMP->mp -= _cardData.costMana;
@@ -260,7 +272,40 @@ bool Card::AddJobQueue()
 }
 
 void Card::ActiveEffect()
-{
+{	
+	Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+	const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+	_pPlayer->GetComponent<Engine::Animation>()->ChangeAnimation(_cardActions[0].animation.c_str());
+
+	int degree = (int)_pCardEffect[0]->GetAttackDegree();
+	if (180 == degree)
+		_pPlayer->transform.scale = { -1.f, 1.f, 0.f };
+	else if (0 == degree)
+		_pPlayer->transform.scale = { 1.f, 1.f, 0.f };
+
+	if (CardEffectType::PathAttack != _cardData.effectType[0])
+	{
+		for (auto& action : _cardActions)
+		{
+			_pEventInvoker->BindAction(action.delay, [=]()
+				{
+					for (auto& range : _attackRange)
+					{
+						int x = int(range.first + gridPosition.x);
+						int y = int(range.second + gridPosition.y);
+
+						if (!action.isOneDraw)
+							CreateEffect(action, pGrid->GetTileCenter(x, y));
+					}
+
+					if (action.isOneDraw)
+					{
+						CreateEffect(action, _pPlayer->transform.position);
+					}
+				});
+		}
+	}
+
 	for (int i = 0; i < 2; i++)
 	{
 		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
@@ -271,31 +316,37 @@ void Card::ActiveEffect()
 
 		if (CardEffectType::PathAttack == _cardData.effectType[i])
 		{
-			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
 			const Vector3& toGridPosition = _toGridPosition;
 
 			auto handlePathAttack = [=](int fixedCoord, int start, int end, bool isXAxis)
 				{
 					for (int j = start; j < end; j++)
-					{
+					{						
 						auto pEffect = Engine::GameObject::Create();
 						Effect::EffectInfo info;
 						info.renderGroup = RenderGroup::FrontEffect;
 						info.aniSpeed = 0.05f;
-						info.textureTag = L"Effect";
+						info.scale = { 0.75f, 0.75f, 1.f };
+						info.textureTag = L"Effect_Hit_Hit02";
 
 						if (isXAxis)
 							info.position = pGrid->GetTileCenter(j, fixedCoord);
 						else
 							info.position = pGrid->GetTileCenter(fixedCoord, j);
+
+						pEffect->AddComponent<Effect>(info);
+						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+
+						pEffect = Engine::GameObject::Create();
+						info.textureTag = L"Effect_Hit_Hit03";
+
 						pEffect->AddComponent<Effect>(info);
 						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 
 						if (isXAxis)
-							pAttackCollider->OnCollider(0.1f, j, fixedCoord, attackInfo, i);
+							pAttackCollider->OnCollider(0.f, 0.1f, j, fixedCoord, attackInfo, i);
 						else
-							pAttackCollider->OnCollider(0.1f, fixedCoord, j, attackInfo, i);
+							pAttackCollider->OnCollider(0.f, 0.1f, fixedCoord, j, attackInfo, i);
 					}
 				};
 
@@ -332,27 +383,27 @@ void Card::ActiveEffect()
 
 		if (CardEffectType::PathMove == _cardData.effectType[i] || CardEffectType::PathAttack == _cardData.effectType[i])
 		{
-			_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
-			_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
+			_pEventInvoker->BindAction(0.25f, [=]()
+				{
+					_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
+					_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
+				});			
 		}		
 
 		if (CardEffectType::RangeAttack == _cardData.effectType[i])
-		{
-			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
-
-			for (auto& range : _attackRange)
+		{						
+			for (auto& action : _cardActions)
 			{
-				auto pEffect = Engine::GameObject::Create();
-				Effect::EffectInfo info;
-				info.renderGroup = RenderGroup::FrontEffect;
-				info.aniSpeed = 0.05f;
-				info.textureTag = L"Effect";
-				info.position = pGrid->GetTileCenter(int(range.first + gridPosition.x), int(range.second + gridPosition.y));
-				pEffect->AddComponent<Effect>(info);
-				Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);				
+				_pEventInvoker->BindAction(action.delay, [=]()
+					{
+						for (auto& range : _attackRange)
+						{
+							int x = int(range.first + gridPosition.x);
+							int y = int(range.second + gridPosition.y);
 
-				pAttackCollider->OnCollider(0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+							pAttackCollider->OnCollider(action.attackDelay, 0.1f, x, y, attackInfo, i);
+						}
+					});
 			}
 		}
 
@@ -363,7 +414,7 @@ void Card::ActiveEffect()
 
 			for (auto& range : _attackRange)
 			{
-				pAttackCollider->OnCollider(0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+				pAttackCollider->OnCollider(0.f, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
 			}
 		}
 
@@ -454,6 +505,34 @@ void Card::JobQueueSetting()
 	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(false);
 
 	_isAddQueue = true;
+}
+
+void Card::CreateEffect(const Card::CardAction& action, const Vector3& offset)
+{
+	float degree = _pCardEffect[0]->GetAttackDegree();
+
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = action.duration;
+	info.textureTag = action.effectTag.c_str();
+	info.position = offset + XMVector3TransformCoord(Vector3(action.position), XMMatrixRotationZ(XMConvertToRadians(degree)));
+	info.scale = action.scale;
+
+	if (action.isRotation)
+		info.rotation = degree;
+
+	if (action.isFollow)
+	{
+		info.position -= _pPlayer->transform.position;
+		info.pTarget = &_pPlayer->transform;
+
+		if (0.f > _pPlayer->transform.scale.x)
+			info.scale.x *= -1.f;
+	}
+
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }
 
 void Card::Free()

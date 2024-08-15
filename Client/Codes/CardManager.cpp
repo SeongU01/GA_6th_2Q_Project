@@ -16,6 +16,9 @@ bool CardManager::LoadCard(const wchar_t* filePath)
     if (!LoadCardDataOptionText((path + L"/OptionText.csv").c_str()))
         return false;
 
+    if (!LoadCardDataAction((path + L"/ActionData.csv").c_str()))
+        return false;
+
     if (!LoadCardData((path + L"/Card.csv").c_str()))
         return false;
 
@@ -52,7 +55,8 @@ Card* CardManager::CloneCard(int ID)
     Engine::GameObject* pCard = Engine::GameObject::Create(); 
     pCard->SetName(L"Card");
     pCard->SetRenderGroup((int)RenderGroup::Card);
-    pCard->AddComponent<Card>(cardData);
+    Card* pCardComponent = pCard->AddComponent<Card>(cardData);
+    pCardComponent->_cardActions = _cardActionDatas[ID];
 
     Engine::TextRenderer* pTextRenderer = pCard->AddComponent<Engine::TextRenderer>(L"OptionText", D2D1::ColorF::White, 40.f);
     pTextRenderer->SetOffset(Vector3(-225.f, 70.f, 0.f));
@@ -164,9 +168,12 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
 
         Card::CardData cardData;
 
-        std::getline(wss, token, L','); // ID
+        std::getline(wss, token, L',');
         token.replace(0, 5, L"");
         cardData.ID = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        cardData.actionID = _wtoi(token.c_str());
 
         std::getline(wss, token, L',');
         cardData.costMana = _wtoi(token.c_str());
@@ -223,6 +230,79 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
         }
 
         _cardDatas.push_back(cardData);        
+    }
+
+    return true;
+}
+
+bool CardManager::LoadCardDataAction(const wchar_t* filePath)
+{
+    std::wifstream file(filePath);
+    file.imbue(std::locale("en_US.UTF-8"));
+
+    if (!file.is_open()) {
+        std::cout << "파일을 열 수 없습니다." << std::endl;
+        return false;
+    }
+
+    std::wstring line;
+    std::getline(file, line);
+
+    while (std::getline(file, line))
+    {
+        std::wstringstream wss(line);
+        std::wstring token;
+
+        Card::CardAction cardAction;
+
+        std::getline(wss, token, L','); // ID
+        int ID = _wtoi(token.c_str());
+
+        std::getline(wss, token, L',');
+        cardAction.animation = token;
+
+        std::getline(wss, token, L',');
+        cardAction.attackDelay = (float)_wtof(token.c_str());
+
+        _cardActionDatas.push_back(std::vector<Card::CardAction>());
+
+        while (std::getline(wss, token, L','))
+        {
+            if (token == L"")
+                break;
+
+            cardAction.effectTag = token;
+
+            std::getline(wss, token, L',');
+            cardAction.isRotation = (bool)_wtoi(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardAction.duration = (float)_wtof(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardAction.delay = (float)_wtof(token.c_str());
+
+            std::getline(wss, token, L',');
+            cardAction.isOneDraw = (bool)_wtoi(token.c_str());
+
+            std::getline(wss, token, L',');
+            float x = (float)_wtof(token.c_str());
+
+            std::getline(wss, token, L',');
+            float y = (float)_wtof(token.c_str());
+
+            cardAction.position = { x, y, 0.f };
+
+            std::getline(wss, token, L',');
+            float scale = (float)_wtof(token.c_str());
+
+            cardAction.scale = { scale, scale, 0.f };
+
+            std::getline(wss, token, L',');
+            cardAction.isFollow = (bool)_wtoi(token.c_str());
+
+            _cardActionDatas[ID].push_back(cardAction);
+        }
     }
 
     return true;

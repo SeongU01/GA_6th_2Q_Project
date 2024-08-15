@@ -84,6 +84,7 @@
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
     <ClCompile Include="..\Codes\SpawnEnemy.cpp" />
+    <ClCompile Include="..\Codes\Spectrum.cpp" />
     <ClCompile Include="..\Codes\Stage1Scene.cpp" />
     <ClCompile Include="..\Codes\Stage2Scene.cpp" />
     <ClCompile Include="..\Codes\Stage3Scene.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />
     <ClInclude Include="..\Headers\SpawnEnemy.h" />
+    <ClInclude Include="..\Headers\Spectrum.h" />
     <ClInclude Include="..\Headers\Stage1Scene.h" />
     <ClInclude Include="..\Headers\Stage2Scene.h" />
     <ClInclude Include="..\Headers\Stage3Scene.h" />

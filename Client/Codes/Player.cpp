@@ -4,7 +4,6 @@
 
 // Component
 #include "Animation.h"
-#include "FiniteStateMachine.h"
 #include "Grid.h"
 #include "GridMovement.h"
 #include "AdditiveState.h"
@@ -17,6 +16,7 @@
 #include "HPHUD.h"
 #include "JobQueue.h"
 #include "AttackCollider.h"
+#include "Spectrum.h"
 
 // Object
 #include "Tile.h"
@@ -57,13 +57,15 @@ void Player::Awake()
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
 		throw std::runtime_error("can't load animation!");
 
+	// 애니메이션
 	_pAnimation->ChangeAnimation(L"Idle");
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindAnimation(_pAnimation);
 	pSpriteRenderer->SetDrawOffset(Vector3(20.f, -100.f, 0.f));
+
 	_movement = AddComponent<GridMovement>(L"GridMovement", 500.f);
 
-	_pMP = AddComponent<PlayerMP>(L"MP");
+	// Systemp
 	_pCardSystem = AddComponent<CardSystem>();
 	_pHP = AddComponent<HP>(L"HP", 5);
 	_pCombatEvent = AddComponent<CombatEvent>();
@@ -71,8 +73,10 @@ void Player::Awake()
 	_pTimerSystem = AddComponent<TimerSystem>();
 	AddComponent<JobQueue>();
 	_pAttackCollider = AddComponent<AttackCollider>();
+	_pSpectrum = AddComponent<Spectrum>(0.04f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
 
-	//플레이어 체력바
+	// UI
+	_pMP = AddComponent<PlayerMP>(L"MP");
 	AddComponent<HPHUD>(_pHP, 0);
 
 	// 잔상 표시용
@@ -91,6 +95,18 @@ void Player::Awake()
 				pSpriteRenderer->Draw();
 			}
 		});
+
+	// 스펙트럼 애니메이션 바인딩
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 5;
+	frameEvent.animation = L"Dash";
+	frameEvent.isRepeat = true;
+	frameEvent.function = [=]() { _pSpectrum->SetActive(true); };
+	_pAnimation->AddFrameEvent(frameEvent);
+
+	frameEvent.activeFrame = 8;
+	frameEvent.function = [=]() { _pSpectrum->SetActive(false); };
+	_pAnimation->AddFrameEvent(frameEvent);
 }
 
 void Player::Start()
@@ -111,15 +127,25 @@ void Player::Update(const float& deltaTime)
 
 void Player::LateUpdate(const float& deltaTime)
 {
+	// 애니메이션 상태 관리
+	if (!_pAnimation->IsCurrAnimation(L"Idle"))
+	{
+		if (_pAnimation->IsLastFrame())
+			_pAnimation->ChangeAnimation(L"Idle");
+	}
 }
 
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
 	if (*info.other == L"Body")
 	{		
+		std::cout << "충돌" << std::endl;
+
 		HP* pHP = info.other->GetComponent<HP>();
 
 		AdditiveState* pAdditiveState = info.other->GetComponent<AdditiveState>();
+		if (nullptr == pAdditiveState)
+			return;
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -128,8 +154,10 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			int damage = 0;
 
-			if(attackInfo.damage)
-				damage = attackInfo.damage + _pAdditiveState->ActiveHighPower();
+			if (attackInfo.damage)
+			{
+				damage = attackInfo.damage + _pAdditiveState->ActiveHighPower() + pAdditiveState->ActiveWeakPoint();
+			}
 
 			pHP->hp -= damage;
 		}
@@ -180,7 +208,7 @@ void Player::OnCollisionExit(Engine::CollisionInfo& info)
 
 void Player::DefaultMove(const float& deltaTime)
 {	
-	if (_pTimerSystem->IsStopTime())
+	if (_pTimerSystem->IsStopTime() || !_pAnimation->IsCurrAnimation(L"Idle"))
 		return;
 
 	if (nullptr != _movement->_grid)
@@ -196,10 +224,12 @@ void Player::DefaultMove(const float& deltaTime)
 				if (Input::IsKeyDown(DIK_D))
 				{
 					_gridPosition.x++;
+					transform.scale = { 1.f, 1.f, 0.f };
 				}
 				else if (Input::IsKeyDown(DIK_A))
 				{
 					_gridPosition.x--;
+					transform.scale = { -1.f, 1.f, 0.f };
 				}
 				else if (Input::IsKeyDown(DIK_W))
 				{

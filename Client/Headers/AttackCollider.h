@@ -31,10 +31,10 @@ public:
 public:
 	const AttackInfo& GetCurrentAttackInfo(int index) const { return _info[index]; }
 	void Initialize(const wchar_t* name, int width, int height);
-	void OnCollider(float time, int coordX, int coordY, const AttackInfo& info, int index);
+	void OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index);
 
 private:
-	std::vector<std::vector<std::pair<float, Engine::Collider*>>> _colliders;
+	std::vector<std::vector<std::tuple<float, float, Engine::Collider*>>> _colliders;
 	AttackInfo _info[2];
 	Grid* _pGrid = nullptr;
 	int _maxCoordX = 0;

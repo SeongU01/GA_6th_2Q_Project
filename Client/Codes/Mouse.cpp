@@ -63,7 +63,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 
 			_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
-			_hoverCard->SetMouseHover(false);
+			_hoverCard->ActiveMouseHover(false);
 			_hoverCard = nullptr;
 			_isLineDraw = false;
 		}
@@ -72,10 +72,10 @@ void Mouse::LateUpdate(const float& deltaTime)
 		{
 			_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
-			_hoverCard->SetMouseHover(false);
+			_hoverCard->ActiveMouseHover(false);
 			_hoverCard = nullptr;
 			_isLineDraw = false;
-		}		
+		}
 	}
 
 	if (_isLineDraw)
@@ -95,7 +95,11 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		if (nullptr == _hoverCard)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
-			_hoverCard->SetMouseHover(true);
+			if (!_hoverCard->ActiveMouseHover(true))
+			{
+				_hoverCard = nullptr;
+				return;
+			}
 			_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
 		}
 		else
@@ -123,7 +127,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 			{
 				_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 				_hoverCard->isHold = false;
-				_hoverCard->SetMouseHover(false);
+				_hoverCard->ActiveMouseHover(false);
 				_hoverCard = nullptr;
 			}
 		}

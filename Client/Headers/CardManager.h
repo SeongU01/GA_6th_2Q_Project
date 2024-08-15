@@ -29,7 +29,7 @@ private:
 	bool LoadCardDataOptionText(const wchar_t* filePath);
 	bool LoadCardDataRichText(const wchar_t* filePath);
 	bool LoadCardData(const wchar_t* filePath);
-	
+	bool LoadCardDataAction(const wchar_t* filePath);
 
 private:
 	// Base을(를) 통해 상속됨
@@ -37,6 +37,7 @@ private:
 
 private:
 	std::vector<Card::CardData> _cardDatas;
+	std::vector<std::vector<Card::CardAction>> _cardActionDatas;
 	std::vector<std::wstring> _texts;
-	std::vector<std::list<RichText>> _richTexts;	
+	std::vector<std::list<RichText>> _richTexts;
 };

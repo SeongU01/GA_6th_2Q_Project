@@ -245,6 +245,9 @@
     <ClCompile Include="..\Codes\EliteEnemyState.cpp">
       <Filter>03. GameObject\Enemy\Elite\State</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Spectrum.cpp">
+      <Filter>04. Component\Spectrum</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -465,6 +468,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Elite\State\Move">
       <UniqueIdentifier>{6f4e2745-557d-4937-957f-39fd130b97e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\Spectrum">
+      <UniqueIdentifier>{7066402f-b5d6-4e04-a359-571f14f1f463}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -728,6 +734,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\EliteEnemyState.h">
       <Filter>03. GameObject\Enemy\Elite\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Spectrum.h">
+      <Filter>04. Component\Spectrum</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

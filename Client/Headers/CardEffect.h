@@ -27,6 +27,7 @@ private:
 public:
 	void ShowRange();
 	std::vector<std::pair<int, int>> GetAttackRange();
+	float GetAttackDegree() { return _degree; }
 
 private:
 	// Base을(를) 통해 상속됨
@@ -43,5 +44,6 @@ private:
 	CardEffectInfo _info;
 	Player* _pPlayer = nullptr;	
 	GridEffect* _pGridEffect = nullptr;
+	float _degree = 0.f;
 };
 
