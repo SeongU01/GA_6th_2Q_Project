@@ -683,5 +683,26 @@
     <ClInclude Include="..\Headers\DefaultEnemyStrongAttack.h">
       <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemy.h">
+      <Filter>03. GameObject\Enemy\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyIdle.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyInfomation.h">
+      <Filter>03. GameObject\Enemy\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyMove.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Elite\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyState.h">
+      <Filter>03. GameObject\Enemy\Elite\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\AttackCollider.h">
+      <Filter>04. Component\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

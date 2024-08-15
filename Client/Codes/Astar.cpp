@@ -37,42 +37,39 @@ void AStar::Update(const float& deltaTime)
 		_path = AStarMove(_gridPosition, _goalPosition, _movement->_grid->GetTiles());
 		_pathIndex = 1;
 		_currentMoveSteps = 0; // 이동 단계 초기화
+
 	}
 
 	_curTime += deltaTime;
 
 	if (!_path.empty() && _pathIndex < _path.size())
 	{
-			Vector3 nextPosition = _path[_pathIndex];
-			_gridPosition = nextPosition;
 		if (_curTime >= _moveTime)
 		{
+			Vector3 nextPosition = _path[_pathIndex];
+			_gridPosition = nextPosition;
 			_curTime = 0.0f;
 			_pathIndex++;
 			_currentMoveSteps++; // 이동 단계 증가
 
-			// 최대 이동 단계에 도달했는지 확인
-			if (_currentMoveSteps >= _maxMoveSteps)
+			// 이동 가능 여부 확인 후 이동
+			if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 			{
+				_movement->MoveToCell(_gridPosition, 0.5f);
+			}
+			else
+			{
+				_path.clear(); // 비워진 경로
 				_isMoving = false; // AStar의 움직임 비활성화
-				std::cout << "Max move steps reached: " << _currentMoveSteps << std::endl;
 			}
 		}
-	}
+		// 최대 이동 단계에 도달했는지 확인
+		if (_currentMoveSteps >= _maxMoveSteps)
+		{
+			_isMoving = false; // AStar의 움직임 비활성화
+			std::cout << "Max move steps reached: " << _currentMoveSteps << std::endl;
+		}
 
-	// 그리드 위치 클램프
-	_gridPosition.x = std::clamp(_gridPosition.x, 0.f, (float)(_movement->_grid->GetTiles()[0].size() - 1));
-	_gridPosition.y = std::clamp(_gridPosition.y, 0.f, (float)(_movement->_grid->GetTiles().size() - 1));
-
-	// 이동 가능 여부 확인 후 이동
-	if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
-	{
-		_movement->MoveToCell(_gridPosition, 0.5f);
-	}
-	else
-	{
-		_path.clear(); // 비워진 경로
-		_isMoving = false; // AStar의 움직임 비활성화
 	}
 }
 
@@ -85,6 +82,18 @@ void AStar::SetMaxMoveSteps(int steps)
 	_maxMoveSteps = steps; // 이동할 칸 수 설정
 	_currentMoveSteps = 0; // 현재 이동 단계 초기화
 	_isMoving = true; // AStar의 움직임 활성화
+	_curTime = _moveTime;
+}
+
+void AStar::ChangeTarget(std::wstring targetName)
+{
+	_targetObjectName = targetName;
+	if (L"player" == targetName)
+	{
+		_pTargetObject = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+		return;
+	}
+	_pTargetObject = Engine::FindObject((int)LayerGroup::Object, L"Defense", _targetObjectName.c_str());
 }
 
 float AStar::heuristic(const Vector3& a, const Vector3& b)

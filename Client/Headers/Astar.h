@@ -54,6 +54,7 @@ public:
 	void SetGridMovement(GridMovement* _move) { _movement = _move; }
 	void SetMaxMoveSteps(int steps);
 	bool CheckMoveEnd() { return !_isMoving; }
+	void ChangeTarget(std::wstring targetName);
 private:
 	float heuristic(const Vector3& a, const Vector3& b);
 	std::vector<Vector3> getNeighbors(const Vector3& pos, const std::vector<std::vector<Tile*>>& grid, Vector3 goal);
@@ -72,7 +73,7 @@ private:
 	std::wstring _targetObjectName;
 	size_t _pathIndex = 1;
 	float _moveTime = 0.7f;
-	float _curTime = 0.f;
+	float _curTime = 0.7f;
 private:
 	int _maxMoveSteps = 0;
 	int _currentMoveSteps = 0;

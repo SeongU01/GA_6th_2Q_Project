@@ -18,7 +18,7 @@ int EliteEnemyMove::Update(const float& deltaTime)
 		{
 			_currTime = _delayTime;
 			_pAnimation->ChangeAnimation(L"Move");
-			_pAstar->SetMaxMoveSteps(1);
+			_pAstar->SetMaxMoveSteps(2);
 			_isStateOn = true;
 		}
 	}
@@ -27,7 +27,7 @@ int EliteEnemyMove::Update(const float& deltaTime)
 
 int EliteEnemyMove::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Move") && _pAnimation->IsLastFrame())
+	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Move") && _pAnimation->IsLastFrame()&&!_pAstar->_isMoving)
 		return (int)EliteEnemy::FSM::Idle;
 	return 0;
 }
