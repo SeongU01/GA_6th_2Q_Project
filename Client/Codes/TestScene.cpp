@@ -70,19 +70,31 @@ bool TestScene::Initialize()
     __super::Initialize();
     MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
     ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
+    EnemySpawnInfo stage1Enemy = DataManager::GetInstance()->GetEnemySpawnInfo(L"Stage1");
+    
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
+
     MakeObject(stage1Obj);
+    
+    //EnemySpawner
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"EnemySpawner", EnemySpawner::Create(stage1Enemy));
 
-    _pCollisionManager = Engine::CollisionManager::Create();
-
+    // BackGround
     Engine::GameObject* pObject = Engine::GameObject::Create();
+    Engine::SpriteRenderer* pSpriteRenderer = pObject->GetComponent<Engine::SpriteRenderer>();
+    pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));
+    pSpriteRenderer->SetIndex(0);
+    pObject->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    pObject->SetRenderGroup((int)RenderGroup::BackGround);
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"BackGround", pObject);
+
+
+    pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
     pObject->AddComponent<GridEffect>((int)stage1.width, (int)stage1.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
-    EnemySpawnInfo stage1Enemy = DataManager::GetInstance()->GetEnemySpawnInfo(L"Stage1");
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"EnemySpawner", EnemySpawner::Create(stage1Enemy));
 
     UIinitialize();
 
