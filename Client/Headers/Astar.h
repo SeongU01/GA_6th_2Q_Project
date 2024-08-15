@@ -64,18 +64,18 @@ private:
 public:
 	GridMovement* _movement = nullptr;
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
+	bool _isMoving = false;
 private:
 	Engine::GameObject* _pTargetObject = nullptr;
 	Vector3 _goalPosition;
 	std::vector<Vector3> _path;
 	std::wstring _targetObjectName;
-	size_t _pathIndex = 0;
+	size_t _pathIndex = 1;
 	float _moveTime = 0.7f;
 	float _curTime = 0.f;
 private:
 	int _maxMoveSteps = 0;
 	int _currentMoveSteps = 0;
-	bool _isMoving = false;
 };
 
 

@@ -41,6 +41,11 @@
     <ClCompile Include="..\Codes\DefenseScript.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\CardEffect.cpp" />
+    <ClCompile Include="..\Codes\EliteEnemy.cpp" />
+    <ClCompile Include="..\Codes\EliteEnemyIdle.cpp" />
+    <ClCompile Include="..\Codes\EliteEnemyMove.cpp" />
+    <ClCompile Include="..\Codes\EliteEnemyScript.cpp" />
+    <ClCompile Include="..\Codes\EliteEnemyState.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\EnemySpawner.cpp" />
     <ClCompile Include="..\Codes\Fade.cpp" />
@@ -116,6 +121,12 @@
     <ClInclude Include="..\Headers\DefenseScript.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\CardEffect.h" />
+    <ClInclude Include="..\Headers\EliteEnemy.h" />
+    <ClInclude Include="..\Headers\EliteEnemyIdle.h" />
+    <ClInclude Include="..\Headers\EliteEnemyInfomation.h" />
+    <ClInclude Include="..\Headers\EliteEnemyMove.h" />
+    <ClInclude Include="..\Headers\EliteEnemyScript.h" />
+    <ClInclude Include="..\Headers\EliteEnemyState.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
     <ClInclude Include="..\Headers\EnemySpawner.h" />
     <ClInclude Include="..\Headers\Fade.h" />

@@ -3,6 +3,7 @@
 #include "Grid.h"
 //Object
 #include "DefaultEnemy.h"
+#include "EliteEnemy.h"
 
 #include "Client_Define.h"
 
@@ -45,6 +46,22 @@ void SpawnEnemy::Update(const float& deltaTime)
 					
 				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
+			}
+			else if (L"Elite" == _enemyInfo.spawnType)
+			{
+				Vector3 spawnPos;
+
+				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+				{
+					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+				}
+				else
+				{
+					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+				}
+
+				EliteEnemy* EliteEnemy = EliteEnemy::Create(spawnPos, _enemyInfo.targetName);
+				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", EliteEnemy);
 			}
 		}
 
