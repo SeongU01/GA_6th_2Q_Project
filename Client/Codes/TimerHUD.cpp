@@ -21,7 +21,7 @@ void TimerHUD::Start()
 {
 	UI* backpUI;
 	//카드 라인
-	AddUI(CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960 , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	AddUI(CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960.0f , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	backpUI = AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Box", 0, { 210.0f , 1030.f, -1.f }, { 1.0f, 1.3f, 1.0f }, &transform));
 	_pRed = AddUI(CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 210.0f , 1030.f, 0.f }, { 1.0f, 1.0f, 0.f }, &transform));
@@ -29,7 +29,7 @@ void TimerHUD::Start()
 	AddUI(CreateInfo(L"Timer_Back2", L"UI_HUD_Timer_Box", 1, { 210.0f , 1030.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
 	//텍스트
 	Engine::GameObject* pTextobj = Engine::GameObject::Create();
-	_pText = pTextobj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::White, 70);
+	_pText = pTextobj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::White, 70.0f);
 	_pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTextobj); pTextobj->SetRenderGroup((int)RenderGroup::UI);
 	//하단 툴팁
@@ -47,15 +47,15 @@ void TimerHUD::Start()
 		pToolTip->ActiveToolTip(false);
 		});
 	//상단 타이머
-	AddUI(CreateInfo(L"Timer_top_back", L"UI_HUD_Timer_Top", 0, { 960, 30, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform));
-	_pTopDefault = AddUI(CreateInfo(L"Timer_top_red", L"UI_HUD_Timer_Top", 3, { 960, 30, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform));
-	_pTopSkill = AddUI(CreateInfo(L"Timer_top_Orange", L"UI_HUD_Timer_Top", 4, { 0, 30, 1.f }, { 1.0f, 1.0f,1.0f }, &transform));
+	AddUI(CreateInfo(L"Timer_top_back", L"UI_HUD_Timer_Top", 0, { 960.0f, 30.0f, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	_pTopDefault = AddUI(CreateInfo(L"Timer_top_red", L"UI_HUD_Timer_Top", 3, { 960.0f, 30.0f, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	_pTopSkill = AddUI(CreateInfo(L"Timer_top_Orange", L"UI_HUD_Timer_Top", 4, { 0.0f, 30.0f, 1.f }, { 1.0f, 1.0f,1.0f }, &transform));
 	//상단 툴팁
 	_ptoolTip = AddComponent<ToolTip>(L"TimerTool2"); 
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_TimeLimit"), Vector3(300.0f, 100.0f, 0.0f));
 	Engine::GameObject& pOwner = transform.GetOwner();
 	btn = AddComponent<Button>();
-	btn->SetRange({ 960, 30, 0.f }, _pTopDefault->GetSize());
+	btn->SetRange({ 960.0f, 30.0f, 0.f }, _pTopDefault->GetSize());
 	btn->SetOnHover([&pOwner] {
 		ToolTip* pToolTip = pOwner.GetComponent<ToolTip>(L"TimerTool2");
 		pToolTip->ActiveToolTip(true);
@@ -89,7 +89,7 @@ void TimerHUD::Update(const float& deltaTime)
 	//사용된 시간(주황탑
 	rate = _skillValue / 60;
 	_pTopSkill->SetScale({ rate  ,1.0f,1.0f });
-	_pTopSkill->SetOffsetPosition( {_pTopDefault->GetSize().width-(15.8f*_skillValue), 0,0});
+	_pTopSkill->SetOffsetPosition( {_pTopDefault->GetSize().width-(15.8f*_skillValue), 0.0f,0.0f });
 	//글씨조정
 	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"%02d:%02d", (int)timer, (int)(timer * 100) % 100);
 	_pText->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);

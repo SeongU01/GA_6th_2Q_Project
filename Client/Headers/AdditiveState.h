@@ -24,14 +24,13 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	float GetWeakPointValue() const;
-	float GetExtraRecoveryValue() const;
+	int GetExtraRecoveryValue() const;
 	bool IsActiveState(unsigned long long flag) const;
 	void UseStack(State state);
 	void ActiveOverCharge();
-	void ActiveWeakPoint();
+	int ActiveWeakPoint();
 	void ActiveCharge();
-	void ActiveHighPower();
+	int ActiveHighPower();
 	void AddState(unsigned long long flag, int stack);
 
 private:

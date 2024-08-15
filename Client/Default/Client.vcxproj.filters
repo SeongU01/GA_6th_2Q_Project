@@ -191,20 +191,44 @@
     <ClCompile Include="..\Codes\DefaultEnemyIdle.cpp">
       <Filter>03. GameObject\Enemy\Default\State\Idle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\DefaultEnemyMove.cpp">
-      <Filter>03. GameObject\Enemy\Default\State\Move</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DefaultEnemyWeakAttack.cpp">
       <Filter>03. GameObject\Enemy\Default\State\WeakAttack</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\JobQueue.cpp">
       <Filter>03. GameObject\Player\Script\JobQueue</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\AttackCollider.cpp">
-      <Filter>04. Component\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DefaultEnemyStrongAttack.cpp">
       <Filter>03. GameObject\Enemy\Default\State\StrongAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyIdle.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyForwardMove.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\ForwardMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyBackMove.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\BackMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyAttack.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemySupport.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyScript.cpp">
+      <Filter>03. GameObject\Enemy\Range\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemy.cpp">
+      <Filter>03. GameObject\Enemy\Range</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyMove.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyState.cpp">
+      <Filter>03. GameObject\Enemy\Range\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\AttackCollider.cpp">
+      <Filter>04. Component\AttackCollider</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\EliteEnemy.cpp">
       <Filter>03. GameObject\Enemy\Elite</Filter>
@@ -406,6 +430,29 @@
     <Filter Include="03. GameObject\Enemy\Default\State\StrongAttack">
       <UniqueIdentifier>{03064725-2e61-4016-9cc3-0dd9871c204a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\Script">
+      <UniqueIdentifier>{323c4b35-5961-4269-89c0-07ad0b1ba11e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State">
+      <UniqueIdentifier>{503c1a45-a9e2-4adb-9eb8-a94d3a4b52af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Idle">
+      <UniqueIdentifier>{d10966e7-3302-4455-8f86-64352c16b0b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\ForwardMove">
+      <UniqueIdentifier>{44bf68d2-2d41-4f5d-a563-3a7929e53397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\BackMove">
+      <UniqueIdentifier>{6b59e1b9-af87-47f7-96af-d9ad6e427e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Attack">
+      <UniqueIdentifier>{4744d4a2-5198-4782-a815-ba0ed8ee00c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Support">
+      <UniqueIdentifier>{fbb18857-d7c6-4fc9-a611-a8af0f519fc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\AttackCollider">
+      <UniqueIdentifier>{5aa9d85a-4476-430b-b7b9-550deee61153}</UniqueIdentifier>
     <Filter Include="03. GameObject\Enemy\Elite\Script">
       <UniqueIdentifier>{4bba3634-d3df-49c5-b485-9752c988efae}</UniqueIdentifier>
     </Filter>

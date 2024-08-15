@@ -16,6 +16,10 @@
 #include "AdditiveState.h"
 #include "GridMovement.h"
 #include "JobQueue.h"
+#include "AttackCollider.h"
+#include "EventInvoker.h"
+#include "HP.h"
+#include "CardSystem.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -28,11 +32,15 @@ Card::Card(const CardData& cardData)
 
 void Card::Awake()
 {
+	// Component
+	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
+
 	// 카드 기본 이미지 설정
 	Engine::Texture* pTexture = Resource::FindTexture(L"Card");
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
 	pSpriteRenderer->BindTexture(pTexture);
 	pSpriteRenderer->SetIndex((int)_cardData.type);
+
 	_pixelSize = pTexture->GetImage(0)->GetSize();
 
 	// 카드 아이콘 설정
@@ -111,7 +119,6 @@ void Card::Update(const float& deltaTime)
 	if (_lerpTime >= 1.f)
 	{
 		_isLerp = false;
-		_isThrow = false;
 		_offset = _targetOffset[1];
 	}	
 }
@@ -134,6 +141,7 @@ void Card::DrawCard()
 	_pCollider->SetActive(true);
 
 	_isLerp = true;
+	_isThrow = false;
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 1000.f, 0.f, 0.f };
 	_targetOffset[1] = { 0.f, 0.f, 0.f };
@@ -143,7 +151,9 @@ void Card::DrawCard()
 
 void Card::SetMouseHover(bool isHover)
 {
-	if (_isAddQueue)return;
+	if (_isAddQueue || _isThrow)
+		return;
+
 	if (isHover)
 	{
 		_priority = 2000.f;
@@ -190,41 +200,54 @@ bool Card::AddJobQueue()
 			return false;
 
 		if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
-			return false;
+			return false;		
 
 		_attackRange = _pCardEffect[0]->GetAttackRange();
 
-		if (CardEffectType::PathMove == _cardData.effectType[0])
+		for (int i = 0; i < 2; i++)
 		{
-			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-
-			POINT mousePoint;
-			GetCursorPos(&mousePoint);
-			ScreenToClient(Engine::GetWindow(), &mousePoint);
-			Vector3 currentGrid = pGrid->GetCurrGrid(Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f));
-
-			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
-
-			if (currentGrid.z >= 0)
+			if (CardAdditiveState::OverClock == _cardData.additiveCardState[i])
 			{
-				bool isFind = false;
-				for (auto& range : _attackRange)
-				{
-					if ((int)currentGrid.x == int(range.first + gridPosition.x) && (int)currentGrid.y == int(range.second + gridPosition.y)
-						&& pGrid->IsTileWalkable((int)currentGrid.x, (int)currentGrid.y))
-					{
-						isFind = true;
-						_toGridPosition = currentGrid;
-						_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
-						break;
-					}
-				}
+				HP* pHP = _pPlayer->GetComponent<HP>();
+				
+				if (1 >= pHP->hp)
+					return false;
 
-				if (!isFind)
+				pHP->hp--;
+			}
+
+			if (CardEffectType::PathMove == _cardData.effectType[i] || CardEffectType::PathAttack == _cardData.effectType[i])
+			{
+				Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+
+				POINT mousePoint;
+				GetCursorPos(&mousePoint);
+				ScreenToClient(Engine::GetWindow(), &mousePoint);
+				Vector3 currentGrid = pGrid->GetCurrGrid(Vector3((float)mousePoint.x, (float)mousePoint.y, 0.f));
+
+				const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetNextGridPosition();
+
+				if (currentGrid.z >= 0)
+				{
+					bool isFind = false;
+					for (auto& range : _attackRange)
+					{
+						if ((int)currentGrid.x == int(range.first + gridPosition.x) && (int)currentGrid.y == int(range.second + gridPosition.y)
+							&& pGrid->IsTileWalkable((int)currentGrid.x, (int)currentGrid.y))
+						{
+							isFind = true;
+							_toGridPosition = currentGrid;
+							_pPlayer->GetComponent<Player>()->SetNextGridPosition(_toGridPosition);
+							break;
+						}
+					}
+
+					if (!isFind)
+						return false;
+				}
+				else
 					return false;
 			}
-			else
-				return false;
 		}
 
 		pMP->mp -= _cardData.costMana;
@@ -237,37 +260,129 @@ bool Card::AddJobQueue()
 }
 
 void Card::ActiveEffect()
-{			
-	if (CardEffectType::PathMove == _cardData.effectType[0])
-	{
-		_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
-		_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
-	}
-
-	if (CardEffectType::RangeAttack == _cardData.effectType[0])
-	{
-		Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-		const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
-
-		for (auto& range : _attackRange)
-		{
-			auto pEffect = Engine::GameObject::Create();
-			Effect::EffectInfo info;
-			info.renderGroup = RenderGroup::FrontEffect;
-			info.aniSpeed = 0.05f;
-			info.textureTag = L"Effect";
-			info.position = pGrid->GetTileCenter(int(range.first + gridPosition.x), int(range.second + gridPosition.y));
-			pEffect->AddComponent<Effect>(info);
-			Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
-		}
-	}
-
+{
 	for (int i = 0; i < 2; i++)
 	{
+		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
+		AttackCollider::AttackInfo attackInfo;
+		attackInfo.damage = _cardData.variable[i];
+		attackInfo.additiveState = (unsigned long long)1 << _cardData.additiveCharState[i];
+		attackInfo.additiveStateStack = _cardData.charStateNum[i];
+
+		if (CardEffectType::PathAttack == _cardData.effectType[i])
+		{
+			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+			const Vector3& toGridPosition = _toGridPosition;
+
+			auto handlePathAttack = [=](int fixedCoord, int start, int end, bool isXAxis)
+				{
+					for (int j = start; j < end; j++)
+					{
+						auto pEffect = Engine::GameObject::Create();
+						Effect::EffectInfo info;
+						info.renderGroup = RenderGroup::FrontEffect;
+						info.aniSpeed = 0.05f;
+						info.textureTag = L"Effect";
+
+						if (isXAxis)
+							info.position = pGrid->GetTileCenter(j, fixedCoord);
+						else
+							info.position = pGrid->GetTileCenter(fixedCoord, j);
+						pEffect->AddComponent<Effect>(info);
+						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+
+						if (isXAxis)
+							pAttackCollider->OnCollider(0.1f, j, fixedCoord, attackInfo, i);
+						else
+							pAttackCollider->OnCollider(0.1f, fixedCoord, j, attackInfo, i);
+					}
+				};
+
+			_pEventInvoker->BindAction(0.5f, [=]()
+				{
+					if ((int)gridPosition.x == (int)toGridPosition.x)
+					{
+						int start = min((int)gridPosition.y, (int)toGridPosition.y);
+						int end = max((int)gridPosition.y, (int)toGridPosition.y);
+
+						if (start == (int)toGridPosition.y)
+						{
+							start++;
+							end++;
+						}
+
+						handlePathAttack((int)gridPosition.x, start, end, false);
+					}
+					else if ((int)gridPosition.y == (int)toGridPosition.y)
+					{
+						int start = min((int)gridPosition.x, (int)toGridPosition.x);
+						int end = max((int)gridPosition.x, (int)toGridPosition.x);
+
+						if (start == (int)toGridPosition.x)
+						{
+							start++;
+							end++;
+						}
+
+						handlePathAttack((int)gridPosition.y, start, end, true);
+					}
+				});
+		}
+
+		if (CardEffectType::PathMove == _cardData.effectType[i] || CardEffectType::PathAttack == _cardData.effectType[i])
+		{
+			_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
+			_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
+		}		
+
+		if (CardEffectType::RangeAttack == _cardData.effectType[i])
+		{
+			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+
+			for (auto& range : _attackRange)
+			{
+				auto pEffect = Engine::GameObject::Create();
+				Effect::EffectInfo info;
+				info.renderGroup = RenderGroup::FrontEffect;
+				info.aniSpeed = 0.05f;
+				info.textureTag = L"Effect";
+				info.position = pGrid->GetTileCenter(int(range.first + gridPosition.x), int(range.second + gridPosition.y));
+				pEffect->AddComponent<Effect>(info);
+				Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);				
+
+				pAttackCollider->OnCollider(0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+			}
+		}
+
+		if (CardEffectType::RangeCast == _cardData.effectType[i])
+		{
+			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+
+			for (auto& range : _attackRange)
+			{
+				pAttackCollider->OnCollider(0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+			}
+		}
+
 		if (CardEffectType::SelfCast == _cardData.effectType[i])
 		{
 			AdditiveState* pAdditiveState = _pPlayer->GetComponent<AdditiveState>();
-			pAdditiveState->AddState(1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
+			pAdditiveState->AddState((unsigned long long)1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
+		}
+
+		if (CardEffectType::Reload == _cardData.effectType[i])
+		{
+			CardSystem* pCardSystem = _pPlayer->GetComponent<CardSystem>();
+			pCardSystem->OnReloadCoolTime();
+			pCardSystem->ReloadCard();
+		}
+
+		if (CardEffectType::Draw == _cardData.effectType[i])
+		{
+			_pPlayer->GetComponent<CardSystem>()->DrawCard();
 		}
 	}
 

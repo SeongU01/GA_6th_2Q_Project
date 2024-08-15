@@ -13,8 +13,9 @@
 #include "GridEffect.h"
 #include "TopHUD.h"
 #include "MPHUD.h"
-
 #include "TimerSystem.h"
+#include "AttackCollider.h"
+
 //object
 #include "Map.h"
 #include "TimerUI.h"
@@ -37,6 +38,9 @@ int TestScene::LateUpdate(const float& deltaTime)
     _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
                                        Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
+                                       Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+
     return 0;
 }
 
@@ -45,7 +49,7 @@ bool TestScene::UIinitialize()
     Engine::GameObject* pGameObject = Engine::GameObject::Create();
     pGameObject->AddComponent<DeckSystem>();
     pGameObject->SetRenderGroup((int)RenderGroup::UI);
-    pGameObject->transform.position = Vector3(1750.f, 950.f, 0.f);
+    pGameObject->transform.position = Vector3(1725.f, 985.f, 0.f);
 
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 
@@ -54,13 +58,14 @@ bool TestScene::UIinitialize()
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
 
     Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
-    pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 0);
+    pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 1);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
     
     //¸¶³ª ¹Ù
     Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
+    pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
     pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerMP", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 
     return true;
 }
@@ -75,11 +80,9 @@ bool TestScene::Initialize()
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1,Vector3(WINCX>>1,WINCY>>1,0.f)));
 
     MakeObject(stage1Obj);
-    
-    //EnemySpawner
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"EnemySpawner", EnemySpawner::Create(stage1Enemy));
 
-    // BackGround
+    _pCollisionManager = Engine::CollisionManager::Create();
+
     Engine::GameObject* pObject = Engine::GameObject::Create();
     Engine::SpriteRenderer* pSpriteRenderer = pObject->GetComponent<Engine::SpriteRenderer>();
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"BackGround"));

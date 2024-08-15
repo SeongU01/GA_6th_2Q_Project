@@ -1,17 +1,24 @@
 #include "DefaultEnemyScript.h"
 #include "Grid.h"
 #include "GameObject.h"
+
 //component
 #include "FiniteStateMachine.h"
 #include "Animation.h"
 #include "GridMovement.h"
 #include "Astar.h"
 #include "HP.h"
+#include "HPHUD.h"
 #include "Collider.h"
 #include "Pannel.h"
 #include "Defense.h"
 #include "DefenseScript.h"
 #include "TextRenderer.h"
+
+#include "AdditiveState.h"
+#include "AttackCollider.h"
+#include "HPHUD.h"
+
 //state
 #include "DefaultEnemyIdle.h"
 #include "DefaultEnemyMove.h"
@@ -19,6 +26,7 @@
 #include "DefaultEnemyStrongAttack.h"
 
 #include "DefaultEnemyInfomation.h"
+#include "DataManager.h"
 #include "Client_Define.h"
 
 DefaultEnemyScript::DefaultEnemyScript(const wchar_t* name, const Vector3& startPos, const std::wstring& _targetName)
@@ -32,10 +40,14 @@ void DefaultEnemyScript::Awake()
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
+#ifdef _DEBUG
 	_pOwner->_isDrawCollider = true;
+#endif // _DEBUG
+
 
 	//TODO: FSM 작성하기
 	_pHP=AddComponent<HP>(L"HP", 5);
+	AddComponent<HPHUD>(_pHP, 1);
 	_aStar = AddComponent<AStar>(L"AStar",_targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement",500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
@@ -56,6 +68,11 @@ void DefaultEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f);
 	_pPannel->SetActive(false);
+	AddComponent<HPHUD>(_pHP, 1);
+
+	// 임시 추가한것
+	_pAdditiveState = AddComponent<AdditiveState>();
+	_pAttackCollider = AddComponent<AttackCollider>();
 }
 
 void DefaultEnemyScript::Start()
@@ -76,6 +93,9 @@ void DefaultEnemyScript::Start()
 	_pFSM->AddState((int)DefaultEnemy::FSM::WeakAttack, DefaultEnemyWeakAttack::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::StrongAttack, DefaultEnemyStrongAttack::Create(this));
 	_pFSM->ChangeState((int)DefaultEnemy::FSM::Idle);
+
+	MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
+	_pAttackCollider->Initialize(L"PlayerAttack", (int)info.width, (int)info.height);
 }
 
 void DefaultEnemyScript::Update(const float& deltaTime)
@@ -88,6 +108,8 @@ void DefaultEnemyScript::Update(const float& deltaTime)
 
 void DefaultEnemyScript::LateUpdate(const float& deltaTime)
 {
+	if (_pHP->IsZeroHP())
+		gameObject.SetDead();
 }
 
 void DefaultEnemyScript::OnCollisionEnter(Engine::CollisionInfo& info)

@@ -48,18 +48,14 @@ void AdditiveState::Start()
 
 void AdditiveState::Update(const float& deltaTime)
 {
-	if (_pBitFlag->CheckFlag(AdditiveFlag::Shield))
-		std::cout << "½¯µå On" << std::endl;
-
-	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
-		std::cout << "Â÷Áö On" << std::endl;
 }
 
 void AdditiveState::LateUpdate(const float& deltaTime)
 {
 	for (int i = 0; i < State::End; i++)
 	{
-		if (!_stateStacks[i]) _pBitFlag->OffFlag((unsigned long long)1 << i);
+		if (!_stateStacks[i])
+			_pBitFlag->OffFlag((unsigned long long)1 << (i + 1));
 	}
 
 	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
@@ -86,19 +82,14 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 
 	for (int i = 0; i < State::End; i++)
 	{
-		if (!_pBitFlag->CheckFlag((unsigned long long)1 << i))
+		if (!_pBitFlag->CheckFlag((unsigned long long)1 << (i + 1)))
 			_pTimer->SetActive(i, false);
 	}
 }
 
-float AdditiveState::GetWeakPointValue() const
+int AdditiveState::GetExtraRecoveryValue() const
 {
-	return _stateDatas[State::WeakPoint][1];
-}
-
-float AdditiveState::GetExtraRecoveryValue() const
-{
-	return _stateDatas[State::Extra][2];
+	return (int)_stateDatas[State::Extra][2];
 }
 
 bool AdditiveState::IsActiveState(unsigned long long flag) const
@@ -109,10 +100,14 @@ bool AdditiveState::IsActiveState(unsigned long long flag) const
 void AdditiveState::UseStack(State state)
 {
 	_stateStacks[state]--;
+	if (0 > _stateStacks[state])
+		_stateStacks[state] = 0;
 }
 
 void AdditiveState::AddState(unsigned long long flag, int stack)
 {
+	if (1 == flag) return;
+
 	unsigned long long n = flag;
 	int count = 0;
 
@@ -136,14 +131,28 @@ void AdditiveState::ActiveCharge()
 	}
 }
 
-void AdditiveState::ActiveHighPower()
+int AdditiveState::ActiveHighPower()
 {
+	if (_pBitFlag->CheckFlag(AdditiveFlag::HighPower))
+	{
+		_stateStacks[State::HighPower]--;
+		return (int)_stateDatas[AdditiveState::HighPower][1];
+	}
+
+	return 0;
 }
 
 void AdditiveState::ActiveOverCharge()
 {
 }
 
-void AdditiveState::ActiveWeakPoint()
+int AdditiveState::ActiveWeakPoint()
 {
+	if (_pBitFlag->CheckFlag(AdditiveFlag::WeakPoint))
+	{
+		_stateStacks[State::WeakPoint]--;
+		return (int)_stateDatas[State::WeakPoint][1];
+	}
+
+	return 0;
 }

@@ -29,9 +29,12 @@ bool Stage2Scene::Initialize()
     MakeObject(stage1Obj);
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
-    pObject->AddComponent<GridEffect>(stage1.width, stage1.height);
+    pObject->AddComponent<GridEffect>((int)stage1.width, (int)stage1.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
+
+    Sound::StopSound((int)SoundGroup::BGM);
+    Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_2", (int)SoundGroup::BGM, 0.8f, true);
 
     UIinitialize();   
     return true;

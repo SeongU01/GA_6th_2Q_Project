@@ -7,19 +7,7 @@ namespace Engine
 	class GameObject;
 	class Collider;
 	class CollisionManager : public Base
-	{
-	private:
-		using CollisionBuffer = std::unordered_map<ULONGLONG, bool>;
-		union COLLIDER_ID
-		{
-			struct
-			{
-				UINT leftID;
-				UINT rightID;
-			};
-
-			ULONGLONG ID;
-		};
+	{	
 	private:
 		explicit CollisionManager() = default;
 		virtual ~CollisionManager() = default;
@@ -33,8 +21,5 @@ namespace Engine
 
 	public:
 		static CollisionManager* Create();
-
-	private:
-		CollisionBuffer _collisionBuffer;
 	};
 }

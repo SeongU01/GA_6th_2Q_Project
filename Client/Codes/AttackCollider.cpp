@@ -71,11 +71,12 @@ void AttackCollider::Initialize(const wchar_t* name, int width, int height)
 	}
 }
 
-void AttackCollider::OnCollider(float time, int coordX, int coordY)
+void AttackCollider::OnCollider(float time, int coordX, int coordY, const AttackInfo& info, int index)
 {
 	if (0 > coordX || 0 > coordY || _maxCoordX <= coordX || _maxCoordY <= coordY)
 		return;
 
 	_colliders[coordY][coordX].first = time;
 	_colliders[coordY][coordX].second->SetActive(true);
+	_info[index] = info;
 }

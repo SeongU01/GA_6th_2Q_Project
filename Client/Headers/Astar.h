@@ -11,7 +11,7 @@ struct Vector3Hash
 struct Node
 {
 	Vector3 position;
-	float gCost, hCost,fCost;
+	float gCost, hCost,fCost=0;
 	std::shared_ptr<Node> pParent;
 
 	Node(const Vector3& pos)

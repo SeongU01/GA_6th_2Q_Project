@@ -5,10 +5,8 @@
 
 using namespace Engine;
 
-_uint Collider::g_ID = 0;
-
 Engine::Collider::Collider(const wchar_t* name)
-	: Component(name), _ID(g_ID++)
+	: Component(name)
 {
 }
 
@@ -16,6 +14,22 @@ void Engine::Collider::LateUpdate(const float& deltaTime)
 {
 	_position = XMVector3TransformCoord(_offset, XMLoadFloat4x4(&transform.xmWorldMatrix));
 	_scale = _originScale * transform.scale;
+
+	if (!IsActive())
+	{
+		for (auto& collider : _collidedOthers)
+		{
+			CollisionInfo info;
+			info.itSelf = collider;
+			info.other = this;
+			collider->EraseOther(this);
+
+			gameObject.OnCollisionExit(info);
+			collider->gameObject.OnCollisionExit(info);
+		}
+
+		_collidedOthers.clear();
+	}
 }
 
 #ifdef _DEBUG
@@ -31,6 +45,27 @@ D2D1_RECT_F Engine::Collider::GetColliderRect() const
 }
 #endif
 
+void Engine::Collider::InsertOther(Collider* pCollider)
+{
+	_collidedOthers.insert(pCollider);
+}
+
+void Engine::Collider::EraseOther(Collider* pCollider)
+{
+	_collidedOthers.erase(pCollider);
+}
+
+bool Engine::Collider::FindOther(Collider* pCollider)
+{
+	auto iter = _collidedOthers.find(pCollider);
+	
+	return iter != _collidedOthers.end();
+}
+
 void Engine::Collider::Free()
 {
+	for (auto& collider : _collidedOthers)
+	{
+		collider->EraseOther(this);
+	}
 }

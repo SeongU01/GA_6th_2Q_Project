@@ -24,6 +24,9 @@ bool CardManager::LoadCard(const wchar_t* filePath)
 
 void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 {
+    if ((size_t)ID >= _richTexts.size())
+        return;
+
     for (auto& richText : _richTexts[ID])
     {
         auto [start, length, type, value] = richText;
@@ -190,9 +193,6 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
             cardData.effectType[i] = static_cast<CardEffectType>(_wtoi(token.c_str()));
 
             std::getline(wss, token, L',');
-            cardData.targetTypeID[i] = _wtoi(token.c_str());
-
-            std::getline(wss, token, L',');
             cardData.targetNum[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
@@ -203,7 +203,8 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
             cardData.charStateNum[i] = _wtoi(token.c_str());
 
             std::getline(wss, token, L',');
-            cardData.additiveCardState[i] = _wtoi(token.c_str());
+            token = token.substr(0, 1);
+            cardData.additiveCardState[i] = static_cast<CardAdditiveState>(_wtoi(token.c_str()));
         }
 
         std::getline(wss, token, L',');

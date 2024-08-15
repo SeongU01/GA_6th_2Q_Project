@@ -10,7 +10,7 @@
 
 void CardEffect::ShowRange()
 {
-	const Vector3& gridPosition = _pPlayer->GetGridPosition();
+	const Vector3& gridPosition = _pPlayer->GetNextGridPosition();
 	bool isShow = true;
 	int index = 6;
 
@@ -77,7 +77,7 @@ std::pair<int, int> CardEffect::ComputeRotationTarget(int x, int y)
 
 	Vector3 mousePosition = { float(mousePoint.x), float(mousePoint.y),0.f };
 
-	Vector3 gridPosition = _pPlayer->GetGridPosition();
+	Vector3 gridPosition = _pPlayer->GetNextGridPosition();
 	Vector3 playerPosition = _pPlayer->GetComponent<GridMovement>()->_grid->GetTileCenter((int)gridPosition.x, (int)gridPosition.y);
 	 
 	Vector3 direction = mousePosition - playerPosition;

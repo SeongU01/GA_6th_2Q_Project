@@ -19,7 +19,9 @@ void Mouse::Awake()
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Mouse");
 	pCollider->SetScale(Vector3(10.f, 10.f, 0.f));
 
+#ifdef _DEBUG
 	_pOwner->_isDrawCollider = true;
+#endif
 	_hWnd = Engine::GetWindow();
 
 	Engine::SpriteRenderer* pSpriteRenderer = GetComponent<Engine::SpriteRenderer>();
@@ -58,6 +60,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 		{
 			if (800.f > transform.position.y)
 				_pCardSystem->ActiveCard(_hoverCard);
+
 			_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
 			_hoverCard->SetMouseHover(false);

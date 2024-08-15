@@ -12,6 +12,8 @@ class GridMovement;
 class DefenseScript;
 class AStar;
 class Pannel;
+class AdditiveState;
+class AttackCollider;
 class DefaultEnemyScript:public Engine::MonoBehavior
 {
 	friend class DefaultEnemyState;
@@ -37,6 +39,10 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
+
+	AttackCollider* _pAttackCollider = nullptr;
+	AdditiveState* _pAdditiveState = nullptr;
+
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;

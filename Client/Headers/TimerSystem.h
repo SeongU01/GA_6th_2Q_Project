@@ -35,5 +35,6 @@ private:
 	float _slowTime = 0.0f;
 	float _curTime = 0.0f;
 	float _maxTime=60.f;
+	bool _isNotice = false;
 	bool _isStopTime = false;
 };

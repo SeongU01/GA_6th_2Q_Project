@@ -111,6 +111,11 @@ void CardSystem::ReloadCard()
 	}
 }
 
+void CardSystem::OnReloadCoolTime()
+{
+	_reloadTime = RELOADCOOLTIME;
+}
+
 void CardSystem::ActiveCard(Card* pCard)
 {
 	if (pCard->AddJobQueue()) MoveTo(pCard, _handDeck, _graveDeck);

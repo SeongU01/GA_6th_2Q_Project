@@ -13,33 +13,14 @@ void Engine::CollisionManager::CheckCollision(std::list<GameObject*>* src, std::
 		{
 			std::vector<Collider*>& dstColliders = Dst->GetColliders();
 			for (auto& srcCollider : srcColliders)
-			{				
+			{
+				if (!srcCollider->IsActive()) continue;
 				for (auto& dstCollider : dstColliders)
 				{
-					if (srcCollider == dstCollider) continue;					
+					if (!dstCollider->IsActive()) continue;
+					if (srcCollider == dstCollider) continue;
 
-					COLLIDER_ID ID, reverseID;
-					ID.leftID = srcCollider->GetID();
-					ID.rightID = dstCollider->GetID();
-
-					reverseID.leftID = dstCollider->GetID();
-					reverseID.rightID = srcCollider->GetID();
-
-					auto iter = _collisionBuffer.find(ID.ID);
-					auto reverseIter = _collisionBuffer.find(reverseID.ID);
-
-					if (iter == _collisionBuffer.end())
-					{
-						if (reverseIter == _collisionBuffer.end())
-						{
-							_collisionBuffer.emplace(std::make_pair(ID.ID, false));
-							iter = _collisionBuffer.find(ID.ID);
-						}
-						else
-						{
-							iter = reverseIter;
-						}
-					}
+					bool isCollide = srcCollider->FindOther(dstCollider);
 
 					CollisionInfo infoSrc, infoDst;
 					infoSrc.itSelf = srcCollider;
@@ -47,39 +28,31 @@ void Engine::CollisionManager::CheckCollision(std::list<GameObject*>* src, std::
 					infoDst.itSelf = dstCollider;
 					infoDst.other = srcCollider;
 
-					if (!srcCollider->IsActive() || !dstCollider->IsActive())
-					{
-						if (iter->second)
-						{
-							Src->OnCollisionExit(infoSrc);
-							Dst->OnCollisionExit(infoDst);
-							iter->second = false;
-						}
-
-						continue;
-					}
-
 					if (IsCollision(srcCollider, dstCollider))
-					{						
-						if (iter->second)
-						{							
-							Src->OnCollision(infoSrc);							
+					{
+						srcCollider->InsertOther(dstCollider);
+						dstCollider->InsertOther(srcCollider);
+
+						if (isCollide)
+						{
+							Src->OnCollision(infoSrc);
 							Dst->OnCollision(infoDst);
 						}
 						else
 						{
 							Src->OnCollisionEnter(infoSrc);
 							Dst->OnCollisionEnter(infoDst);
-							iter->second = true;
 						}
 					}
 					else
 					{
-						if (iter->second)
+						if (isCollide)
 						{
+							srcCollider->EraseOther(dstCollider);
+							dstCollider->EraseOther(srcCollider);
+
 							Src->OnCollisionExit(infoSrc);
 							Dst->OnCollisionExit(infoDst);
-							iter->second = false;
 						}
 					}
 				}
@@ -106,5 +79,4 @@ CollisionManager* CollisionManager::Create()
 
 void CollisionManager::Free()
 {
-	_collisionBuffer.clear();
 }

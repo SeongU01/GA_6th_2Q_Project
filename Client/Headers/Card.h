@@ -5,10 +5,12 @@ namespace Engine
 {
 	class Collider;
 	class GameObject;
+	class EventInvoker;
 }
 
 enum class CardType;
 enum class CardEffectType;
+enum class CardAdditiveState;
 class CardEffect;
 class Card final : public Engine::MonoBehavior
 {
@@ -20,11 +22,10 @@ public:
 		std::wstring name{};
 		int iconID{};
 		int variable[4]{};
-		int targetTypeID[2]{};
 		int targetNum[2]{};
 		CardEffectType effectType[2]{};
 		int additiveCharState[2]{};
-		int additiveCardState[2]{};
+		CardAdditiveState additiveCardState[2]{};
 		int charStateNum[2]{};
 		int ID{};
 		int costMana{};
@@ -87,6 +88,7 @@ private:
 	Vector3								_toGridPosition;
 	Engine::Collider*					_pCollider = nullptr;
 	Engine::GameObject*					_pPlayer = nullptr;
+	Engine::EventInvoker*				_pEventInvoker = nullptr;
 	CardEffect*							_pCardEffect[2]{};
 	D2D1_SIZE_F							_pixelSize{};
 	float								_priority = 0.f;
