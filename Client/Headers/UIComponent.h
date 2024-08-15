@@ -25,6 +25,6 @@ protected:
 public:
 	void SetActives(bool check);
 
-private:
-	std::list<UI*> _UIs;
+protected:
+	std::vector<UI*> _UIs;
 };
