@@ -27,6 +27,6 @@ private:
 
 	UI* _pTopSkill = nullptr; //상단 타이머(스킬타이머
 	Engine::TextRenderer* _pText = nullptr;
-	wchar_t _buffer[32];
+	wchar_t _buffer[32]{};
 };
 
