@@ -230,6 +230,21 @@
     <ClCompile Include="..\Codes\AttackCollider.cpp">
       <Filter>04. Component\AttackCollider</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemy.cpp">
+      <Filter>03. GameObject\Enemy\Elite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyScript.cpp">
+      <Filter>03. GameObject\Enemy\Elite\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyIdle.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyMove.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyState.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -438,6 +453,18 @@
     </Filter>
     <Filter Include="04. Component\AttackCollider">
       <UniqueIdentifier>{5aa9d85a-4476-430b-b7b9-550deee61153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\Script">
+      <UniqueIdentifier>{7f9bbd49-5c9d-408b-8ae3-c0da6e934f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State">
+      <UniqueIdentifier>{227c5bcd-ca7c-488d-8c0d-d6fc4ef58e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\Idle">
+      <UniqueIdentifier>{bae5b003-39e7-416a-9839-664e4ab229af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\Move">
+      <UniqueIdentifier>{6f4e2745-557d-4937-957f-39fd130b97e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -683,6 +710,24 @@
     </ClInclude>
     <ClInclude Include="..\Headers\AttackCollider.h">
       <Filter>04. Component\AttackCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemy.h">
+      <Filter>03. GameObject\Enemy\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyInfomation.h">
+      <Filter>03. GameObject\Enemy\Elite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Elite\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyIdle.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyMove.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyState.h">
+      <Filter>03. GameObject\Enemy\Elite\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
