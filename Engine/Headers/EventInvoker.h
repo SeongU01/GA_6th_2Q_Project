@@ -21,6 +21,7 @@ namespace Engine
 
 	public:
 		void Update(const float& deltaTime) override;
+		void SetUseGlobalDeltaTime(bool isActive) { _isUseGlobalDeltaTime = isActive; }
 		void ResetAction() { _eventActions.clear(); }
 		void BindAction(const float activeTime, const std::function<void()>& function)
 		{
@@ -31,6 +32,8 @@ namespace Engine
 		void Free() override;
 
 	private:
-		std::list<EventAction> _eventActions;
+		std::list<EventAction>	_eventActions;
+		bool					_isUseGlobalDeltaTime = false;
+
 	};
 }
