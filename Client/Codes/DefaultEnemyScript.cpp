@@ -15,9 +15,10 @@
 #include "DefenseScript.h"
 #include "TextRenderer.h"
 
-#include "AdditiveState.h"
+#include "Attribute.h"
 #include "AttackCollider.h"
 #include "HPHUD.h"
+#include "AttributeHUD.h"
 
 //state
 #include "DefaultEnemyIdle.h"
@@ -69,10 +70,11 @@ void DefaultEnemyScript::Awake()
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f);
 	_pPannel->SetActive(false);
 	AddComponent<HPHUD>(_pHP, 1);
-
+	
 	// 임시 추가한것
-	_pAdditiveState = AddComponent<AdditiveState>();
+	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
+	AddComponent<AttributeHUD>(_pAttribute);
 }
 
 void DefaultEnemyScript::Start()

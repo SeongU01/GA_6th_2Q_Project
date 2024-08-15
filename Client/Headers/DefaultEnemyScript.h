@@ -12,7 +12,7 @@ class GridMovement;
 class DefenseScript;
 class AStar;
 class Pannel;
-class AdditiveState;
+class Attribute;
 class AttackCollider;
 class DefaultEnemyScript:public Engine::MonoBehavior
 {
@@ -41,7 +41,7 @@ private:
 	Pannel* _pPannel = nullptr;
 
 	AttackCollider* _pAttackCollider = nullptr;
-	AdditiveState* _pAdditiveState = nullptr;
+	Attribute* _pAttribute = nullptr;
 
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
