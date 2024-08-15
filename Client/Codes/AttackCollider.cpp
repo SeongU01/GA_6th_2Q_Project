@@ -14,7 +14,6 @@ AttackCollider::AttackCollider()
 
 void AttackCollider::Awake()
 {
-	gameObject._isDrawCollider = true;
 }
 
 void AttackCollider::Start()
@@ -34,13 +33,23 @@ void AttackCollider::Update(const float& deltaTime)
 				delay -= deltaTime;
 
 				if (0.f > delay)
+				{
 					collider->SetActive(true);
+					delay = 0.f;
+				}
 			}
 
 			if (collider->IsActive())
 			{
 				duration -= deltaTime;
-				collider->SetOffset(_pGrid->GetTileCenter(j, i) - transform.position);
+				
+				// 부모 scale.x 의 부호 영향을 안받도록 보정
+				Vector3 offset = _pGrid->GetTileCenter(j, i) - transform.position;
+				
+				if (0.f > transform.scale.x)
+					offset.x *= -1.f;
+
+				collider->SetOffset(offset);
 
 				if (0.f > duration)
 				{

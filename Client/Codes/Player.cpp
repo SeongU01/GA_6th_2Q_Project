@@ -6,10 +6,9 @@
 #include "Animation.h"
 #include "Grid.h"
 #include "GridMovement.h"
-#include "AdditiveState.h"
+#include "Attribute.h"
 #include "HP.h"
 #include "PlayerMP.h"
-#include "CombatEvent.h"
 #include "CardSystem.h"
 #include "Collider.h"
 #include "TimerSystem.h"
@@ -17,6 +16,7 @@
 #include "JobQueue.h"
 #include "AttackCollider.h"
 #include "Spectrum.h"
+#include "AttributeHUD.h"
 
 // Object
 #include "Tile.h"
@@ -68,8 +68,7 @@ void Player::Awake()
 	// Systemp
 	_pCardSystem = AddComponent<CardSystem>();
 	_pHP = AddComponent<HP>(L"HP", 5);
-	_pCombatEvent = AddComponent<CombatEvent>();
-	_pAdditiveState = AddComponent<AdditiveState>();
+	_pAttribute = AddComponent<Attribute>();
 	_pTimerSystem = AddComponent<TimerSystem>();
 	AddComponent<JobQueue>();
 	_pAttackCollider = AddComponent<AttackCollider>();
@@ -78,6 +77,7 @@ void Player::Awake()
 	// UI
 	_pMP = AddComponent<PlayerMP>(L"MP");
 	AddComponent<HPHUD>(_pHP, 0);
+	AddComponent<AttributeHUD>(_pAttribute);
 
 	// 잔상 표시용
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
@@ -139,24 +139,22 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
 	if (*info.other == L"Body")
 	{		
-		std::cout << "충돌" << std::endl;
-
 		HP* pHP = info.other->GetComponent<HP>();
 
-		AdditiveState* pAdditiveState = info.other->GetComponent<AdditiveState>();
-		if (nullptr == pAdditiveState)
+		Attribute* pAttribute = info.other->GetComponent<Attribute>();
+		if (nullptr == pAttribute)
 			return;
 
 		for (int i = 0; i < 2; i++)
 		{
 			const AttackCollider::AttackInfo& attackInfo = _pAttackCollider->GetCurrentAttackInfo(i);
-			pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
+			pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
 
 			int damage = 0;
 
 			if (attackInfo.damage)
 			{
-				damage = attackInfo.damage + _pAdditiveState->ActiveHighPower() + pAdditiveState->ActiveWeakPoint();
+				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
 			}
 
 			pHP->hp -= damage;
@@ -164,24 +162,24 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (pHP->IsZeroHP())
 		{
-			if (pAdditiveState->IsActiveState(AdditiveFlag::Extra))
+			if (pAttribute->IsActiveState(AttributeFlag::Extra))
 			{
-				_pHP->hp += _pAdditiveState->GetExtraRecoveryValue();
+				_pHP->hp += _pAttribute->GetExtraRecoveryValue();
 			}
 		}
 	}
 
 	if (*info.other == L"Attack")
 	{
-		if (_pAdditiveState->IsActiveState(AdditiveFlag::Shield))
+		if (_pAttribute->IsActiveState(AttributeFlag::Shield))
 		{
-			_pAdditiveState->UseStack(AdditiveState::State::Shield);
+			_pAttribute->UseStack(Attribute::State::Shield);
 		}
 		else
 		{
-			_pAdditiveState->ActiveCharge();
+			_pAttribute->ActiveCharge();
 
-			if (_pAdditiveState->IsActiveState(AdditiveFlag::OverCharge))
+			if (_pAttribute->IsActiveState(AttributeFlag::OverCharge))
 			{
 				// 방전 8칸 공격
 			}
@@ -193,9 +191,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 				int damage = 0;
 				
 				if (attackInfo.damage)
-					damage = _pAdditiveState->ActiveWeakPoint() + attackInfo.damage;
+					damage = _pAttribute->ActiveWeakPoint() + attackInfo.damage;
 
-				_pAdditiveState->AddState(attackInfo.additiveState, attackInfo.additiveStateStack);
+				_pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
 				_pHP->hp -= damage;
 			}
 		}

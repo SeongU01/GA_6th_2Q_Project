@@ -13,7 +13,7 @@
 #include "Player.h"
 #include "Grid.h"
 #include "Effect.h"
-#include "AdditiveState.h"
+#include "Attribute.h"
 #include "GridMovement.h"
 #include "JobQueue.h"
 #include "AttackCollider.h"
@@ -82,7 +82,8 @@ void Card::Awake()
 	_costMana = buffer;
 	pTextRenderer->SetText(_costMana.c_str());
 
-	_pCollider = AddComponent<Engine::Collider>(L"Card");	
+	_pCollider = AddComponent<Engine::Collider>(L"Card");
+	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
 	_pCollider->SetActive(false);
 }
 
@@ -96,7 +97,7 @@ void Card::Start()
 	CardEffect::CardEffectInfo info;
 	info.effectType = _cardData.effectType[0];
 	info.ranges = pDataManager->GetAttackRange(_cardData.targetNum[0]);
-	info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[0];
+	info.AttributeFlag = (unsigned long long)1 << _cardData.additiveCharState[0];
 	info.additiveStack = _cardData.charStateNum[0];
 	_pCardEffect[0] = CardEffect::Create(pPlayer, info);
 
@@ -104,7 +105,7 @@ void Card::Start()
 	{
 		info.effectType = _cardData.effectType[1];
 		info.ranges = pDataManager->GetAttackRange(_cardData.targetNum[1]);
-		info.additiveFlag = (unsigned long long)1 << _cardData.additiveCharState[1];
+		info.AttributeFlag = (unsigned long long)1 << _cardData.additiveCharState[1];
 		info.additiveStack = _cardData.charStateNum[1];
 		_pCardEffect[1] = CardEffect::Create(pPlayer, info);
 	}
@@ -138,7 +139,6 @@ void Card::LateUpdate(const float& deltaTime)
 void Card::DrawCard()
 {
 	transform.scale = Vector3(0.34f, 0.34f, 0.f);
-	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
 	_pCollider->SetActive(true);
 
 	_isLerp = true;
@@ -150,10 +150,10 @@ void Card::DrawCard()
 	HandDeckSetting();
 }
 
-bool Card::ActiveMouseHover(bool isHover)
+void Card::SetMouseHover(bool isHover)
 {
 	if (_isAddQueue || _isThrow)
-		return false;
+		return;
 
 	if (isHover)
 	{
@@ -172,7 +172,7 @@ bool Card::ActiveMouseHover(bool isHover)
 	_lerpTime = 0.f;
 	_isLerp = true;
 
-	return true;
+	return;
 }
 
 void Card::ThrowCard()
@@ -182,14 +182,7 @@ void Card::ThrowCard()
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { -2000.f, 0.f, 0.f };
-	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
-}
-
-void Card::Reset()
-{
-	transform.scale = Vector3(1.f, 1.f, 0.f);
-	_pCollider->SetScale({ -9999.f, -9999.f, 0.f });
-	gameObject.SetActive(false);
+	_pCollider->SetActive(false);
 }
 
 bool Card::AddJobQueue()
@@ -203,7 +196,7 @@ bool Card::AddJobQueue()
 			return false;
 
 		if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
-			return false;		
+			return false;
 
 		_attackRange = _pCardEffect[0]->GetAttackRange();
 
@@ -251,7 +244,7 @@ bool Card::AddJobQueue()
 					return false;
 			}
 
-			if (CardAdditiveState::OverClock == _cardData.additiveCardState[i])
+			if (CardAttribute::OverClock == _cardData.additiveCardState[i])
 			{
 				HP* pHP = _pPlayer->GetComponent<HP>();
 
@@ -311,8 +304,8 @@ void Card::ActiveEffect()
 		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
 		AttackCollider::AttackInfo attackInfo;
 		attackInfo.damage = _cardData.variable[i];
-		attackInfo.additiveState = (unsigned long long)1 << _cardData.additiveCharState[i];
-		attackInfo.additiveStateStack = _cardData.charStateNum[i];
+		attackInfo.Attribute = (unsigned long long)1 << _cardData.additiveCharState[i];
+		attackInfo.AttributeStack = _cardData.charStateNum[i];
 
 		if (CardEffectType::PathAttack == _cardData.effectType[i])
 		{
@@ -344,9 +337,9 @@ void Card::ActiveEffect()
 						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 
 						if (isXAxis)
-							pAttackCollider->OnCollider(0.f, 0.1f, j, fixedCoord, attackInfo, i);
+							pAttackCollider->OnCollider(0.01f, 0.1f, j, fixedCoord, attackInfo, i);
 						else
-							pAttackCollider->OnCollider(0.f, 0.1f, fixedCoord, j, attackInfo, i);
+							pAttackCollider->OnCollider(0.01f, 0.1f, fixedCoord, j, attackInfo, i);
 					}
 				};
 
@@ -420,8 +413,8 @@ void Card::ActiveEffect()
 
 		if (CardEffectType::SelfCast == _cardData.effectType[i])
 		{
-			AdditiveState* pAdditiveState = _pPlayer->GetComponent<AdditiveState>();
-			pAdditiveState->AddState((unsigned long long)1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
+			Attribute* pAttribute = _pPlayer->GetComponent<Attribute>();
+			pAttribute->AddState((unsigned long long)1 << _cardData.additiveCharState[i], _cardData.charStateNum[i]);
 		}
 
 		if (CardEffectType::Reload == _cardData.effectType[i])
@@ -483,6 +476,7 @@ void Card::JobQueueSetting()
 	_isLerp = false;
 	_lerpTime = 0.f;
 	_offset = { 0.f, 0.f, 0.f };
+	_pCollider->SetActive(false);
 
 	// 카드 이미지
 	GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type + 3);
@@ -516,11 +510,21 @@ void Card::CreateEffect(const Card::CardAction& action, const Vector3& offset)
 	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = action.duration;
 	info.textureTag = action.effectTag.c_str();
-	info.position = offset + XMVector3TransformCoord(Vector3(action.position), XMMatrixRotationZ(XMConvertToRadians(degree)));
+	info.position = offset;
 	info.scale = action.scale;
 
 	if (action.isRotation)
+	{
 		info.rotation = degree;
+		info.position += XMVector3TransformCoord(Vector3(action.position), XMMatrixRotationZ(XMConvertToRadians(degree)));
+	}
+	else
+	{
+		if (0.f > _pPlayer->transform.scale.x)
+			info.scale.x *= -1.f;
+
+		info.position += action.position;
+	}
 
 	if (action.isFollow)
 	{

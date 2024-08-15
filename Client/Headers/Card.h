@@ -10,7 +10,7 @@ namespace Engine
 
 enum class CardType;
 enum class CardEffectType;
-enum class CardAdditiveState;
+enum class CardAttribute;
 class CardEffect;
 class Card final : public Engine::MonoBehavior
 {
@@ -27,7 +27,7 @@ public:
 		int targetNum[2]{};
 		CardEffectType effectType[2]{};
 		int additiveCharState[2]{};
-		CardAdditiveState additiveCardState[2]{};
+		CardAttribute additiveCardState[2]{};
 		int charStateNum[2]{};
 		int ID{};
 		int costMana{};
@@ -69,14 +69,13 @@ public:
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
 	void SetHoldCard(bool isActive);
-	bool ActiveMouseHover(bool isHover);
+	void SetMouseHover(bool isHover);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 
 private:
 	bool AddJobQueue();
 	void ActiveEffect();
 	void DrawCard();
-	void Reset();
 	void ThrowCard();
 	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
 	void HandDeckSetting();

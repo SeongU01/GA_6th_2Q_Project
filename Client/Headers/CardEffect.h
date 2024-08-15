@@ -15,7 +15,7 @@ public:
 	struct CardEffectInfo
 	{
 		std::vector<std::pair<int, int>> ranges;
-		unsigned long long additiveFlag;
+		unsigned long long AttributeFlag;
 		CardEffectType effectType;
 		int value;
 		int additiveStack;

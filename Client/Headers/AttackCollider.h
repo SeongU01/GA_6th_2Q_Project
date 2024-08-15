@@ -12,8 +12,8 @@ class AttackCollider : public Engine::MonoBehavior
 public:
 	struct AttackInfo
 	{
-		unsigned long long additiveState;
-		int additiveStateStack;
+		unsigned long long Attribute;
+		int AttributeStack;
 		int damage;
 	};
 public:

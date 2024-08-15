@@ -211,7 +211,7 @@ bool CardManager::LoadCardData(const wchar_t* filePath)
 
             std::getline(wss, token, L',');
             token = token.substr(0, 1);
-            cardData.additiveCardState[i] = static_cast<CardAdditiveState>(_wtoi(token.c_str()));
+            cardData.additiveCardState[i] = static_cast<CardAttribute>(_wtoi(token.c_str()));
         }
 
         std::getline(wss, token, L',');
