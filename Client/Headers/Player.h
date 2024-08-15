@@ -8,10 +8,9 @@ namespace Engine
 
 class HP;
 class PlayerMP;
-class AdditiveState;
+class Attribute;
 class GridMovement;
 class CardSystem;
-class CombatEvent;
 class TimerSystem;
 class AttackCollider;
 class Spectrum;
@@ -50,11 +49,10 @@ private:
 	GridMovement*		_movement = nullptr;
 	Engine::Animation*	_pAnimation = nullptr;
 
-	AdditiveState*		_pAdditiveState = nullptr;
+	Attribute*			_pAttribute = nullptr;
 	HP*					_pHP = nullptr;
 	PlayerMP*			_pMP = nullptr;
 	CardSystem*			_pCardSystem = nullptr;
-	CombatEvent*		_pCombatEvent = nullptr;
 	TimerSystem*		_pTimerSystem = nullptr;
 	AttackCollider*		_pAttackCollider = nullptr;
 	Spectrum*			_pSpectrum = nullptr;

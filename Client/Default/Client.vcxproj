@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Codes\AdditiveState.cpp" />
+    <ClCompile Include="..\Codes\Attribute.cpp" />
     <ClCompile Include="..\Codes\Astar.cpp" />
+    <ClCompile Include="..\Codes\AttributeHUD.cpp" />
     <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardManager.cpp" />
     <ClCompile Include="..\Codes\CardSystem.cpp" />
-    <ClCompile Include="..\Codes\CombatEvent.cpp" />
     <ClCompile Include="..\Codes\CreditHUD.cpp" />
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\CutScene.cpp" />
@@ -104,8 +104,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Headers\AdditiveState.h" />
+    <ClInclude Include="..\Headers\Attribute.h" />
     <ClInclude Include="..\Headers\Astar.h" />
+    <ClInclude Include="..\Headers\AttributeHUD.h" />
     <ClInclude Include="..\Headers\Button.h" />
     <ClInclude Include="..\Headers\Card.h" />
     <ClInclude Include="..\Headers\CardManager.h" />
@@ -113,7 +114,6 @@
     <ClInclude Include="..\Headers\Client_Define.h" />
     <ClInclude Include="..\Headers\Client_Enum.h" />
     <ClInclude Include="..\Headers\Client_Function.h" />
-    <ClInclude Include="..\Headers\CombatEvent.h" />
     <ClInclude Include="..\Headers\CreditHUD.h" />
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />

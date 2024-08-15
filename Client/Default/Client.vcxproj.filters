@@ -137,17 +137,14 @@
     <ClCompile Include="..\Codes\Fade.cpp">
       <Filter>04. Component\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\AdditiveState.cpp">
-      <Filter>04. Component\AdditiveState</Filter>
+    <ClCompile Include="..\Codes\Attribute.cpp">
+      <Filter>04. Component\Attribute</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\CardSystem.cpp">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\ToolTip.cpp">
       <Filter>05. UI\ToolTip</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\CombatEvent.cpp">
-      <Filter>04. Component\Combat</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Defense.cpp">
       <Filter>03. GameObject\GridObject\Defense</Filter>
@@ -248,6 +245,9 @@
     <ClCompile Include="..\Codes\Spectrum.cpp">
       <Filter>04. Component\Spectrum</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\AttributeHUD.cpp">
+      <Filter>05. UI\HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -342,12 +342,6 @@
     </Filter>
     <Filter Include="04. Component\Effect">
       <UniqueIdentifier>{cc0553d1-5241-404d-b504-6ac55fa51f09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Component\AdditiveState">
-      <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Component\Combat">
-      <UniqueIdentifier>{671df900-10b4-467f-9aad-7eeb7f79a309}</UniqueIdentifier>
     </Filter>
     <Filter Include="05. UI">
       <UniqueIdentifier>{5bf1ce68-9318-4e60-a9f8-cc73fc45ffff}</UniqueIdentifier>
@@ -471,6 +465,9 @@
     </Filter>
     <Filter Include="04. Component\Spectrum">
       <UniqueIdentifier>{7066402f-b5d6-4e04-a359-571f14f1f463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\Attribute">
+      <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -615,17 +612,14 @@
     <ClInclude Include="..\Headers\Fade.h">
       <Filter>04. Component\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\AdditiveState.h">
-      <Filter>04. Component\AdditiveState</Filter>
+    <ClInclude Include="..\Headers\Attribute.h">
+      <Filter>04. Component\Attribute</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\CardSystem.h">
       <Filter>03. GameObject\Player\Script\CardSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\ToolTip.h">
       <Filter>05. UI\ToolTip</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\CombatEvent.h">
-      <Filter>04. Component\Combat</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Defense.h">
       <Filter>03. GameObject\GridObject\Defense</Filter>
@@ -737,6 +731,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Spectrum.h">
       <Filter>04. Component\Spectrum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\AttributeHUD.h">
+      <Filter>05. UI\HUD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

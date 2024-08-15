@@ -1,4 +1,4 @@
-#include "AdditiveState.h"
+#include "Attribute.h"
 
 // Component
 #include "BitFlag.h"
@@ -6,12 +6,12 @@
 
 #include "Client_Define.h"
 
-AdditiveState::AdditiveState()
-	: MonoBehavior(L"AdditiveState")
+Attribute::Attribute()
+	: MonoBehavior(L"Attribute")
 {
 }
 
-void AdditiveState::Awake()
+void Attribute::Awake()
 {	
     std::wstring path = rootPath;
     std::wifstream file(path + L"Data/Card/AddtiveStateTable.csv");
@@ -42,15 +42,15 @@ void AdditiveState::Awake()
 	_pTimer = AddComponent<Engine::Timer>(L"Timer", State::End);
 }
 
-void AdditiveState::Start()
+void Attribute::Start()
 {	
 }
 
-void AdditiveState::Update(const float& deltaTime)
+void Attribute::Update(const float& deltaTime)
 {
 }
 
-void AdditiveState::LateUpdate(const float& deltaTime)
+void Attribute::LateUpdate(const float& deltaTime)
 {
 	for (int i = 0; i < State::End; i++)
 	{
@@ -58,24 +58,24 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 			_pBitFlag->OffFlag((unsigned long long)1 << (i + 1));
 	}
 
-	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
+	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
 	{
 		_pTimer->SetActive(State::Charge, true);
 
 		if (_pTimer->IsOverTime(State::Charge, _stateDatas[State::Charge][1]))
 		{
-			_pBitFlag->OffFlag(AdditiveFlag::Charge);
+			_pBitFlag->OffFlag(AttributeFlag::Charge);
 			_pTimer->SetActive(State::Charge, false);
 		}
 	}
 
-	if (_pBitFlag->CheckFlag(AdditiveFlag::Extra))
+	if (_pBitFlag->CheckFlag(AttributeFlag::Extra))
 	{
 		_pTimer->SetActive(State::Extra, true);
 
 		if (_pTimer->IsOverTime(State::Extra, _stateDatas[State::Extra][1]))
 		{
-			_pBitFlag->OffFlag(AdditiveFlag::Extra);
+			_pBitFlag->OffFlag(AttributeFlag::Extra);
 			_pTimer->SetActive(State::Extra, false);
 		}
 	}
@@ -87,26 +87,26 @@ void AdditiveState::LateUpdate(const float& deltaTime)
 	}
 }
 
-int AdditiveState::GetExtraRecoveryValue() const
+int Attribute::GetExtraRecoveryValue() const
 {
 	return (int)_stateDatas[State::Extra][2];
 }
 
-bool AdditiveState::IsActiveState(unsigned long long flag) const
+bool Attribute::IsActiveState(unsigned long long flag) const
 {
 	return _pBitFlag->CheckFlag(flag);
 }
 
-void AdditiveState::UseStack(State state)
+void Attribute::UseStack(State state)
 {
 	_stateStacks[state]--;
 	if (0 > _stateStacks[state])
 		_stateStacks[state] = 0;
 }
 
-void AdditiveState::AddState(unsigned long long flag, int stack)
+void Attribute::AddState(unsigned long long flag, int stack)
 {
-	if (1 == flag) return;
+	if (1 >= flag) return;
 
 	unsigned long long n = flag;
 	int count = 0;
@@ -121,34 +121,34 @@ void AdditiveState::AddState(unsigned long long flag, int stack)
 	_stateStacks[count - 1] = stack;
 }
 
-void AdditiveState::ActiveCharge()
+void Attribute::ActiveCharge()
 {
-	if (_pBitFlag->CheckFlag(AdditiveFlag::Charge))
+	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
 	{
-		_pBitFlag->OffFlag(AdditiveFlag::Charge);
-		_pBitFlag->OnFlag(AdditiveFlag::HighPower);
+		_pBitFlag->OffFlag(AttributeFlag::Charge);
+		_pBitFlag->OnFlag(AttributeFlag::HighPower);
 		_stateStacks[State::HighPower] = 1;
 	}
 }
 
-int AdditiveState::ActiveHighPower()
+int Attribute::ActiveHighPower()
 {
-	if (_pBitFlag->CheckFlag(AdditiveFlag::HighPower))
+	if (_pBitFlag->CheckFlag(AttributeFlag::HighPower))
 	{
 		_stateStacks[State::HighPower]--;
-		return (int)_stateDatas[AdditiveState::HighPower][1];
+		return (int)_stateDatas[Attribute::HighPower][1];
 	}
 
 	return 0;
 }
 
-void AdditiveState::ActiveOverCharge()
+void Attribute::ActiveOverCharge()
 {
 }
 
-int AdditiveState::ActiveWeakPoint()
+int Attribute::ActiveWeakPoint()
 {
-	if (_pBitFlag->CheckFlag(AdditiveFlag::WeakPoint))
+	if (_pBitFlag->CheckFlag(AttributeFlag::WeakPoint))
 	{
 		_stateStacks[State::WeakPoint]--;
 		return (int)_stateDatas[State::WeakPoint][1];

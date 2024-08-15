@@ -7,14 +7,14 @@ namespace Engine
 	class Timer;
 }
 
-class AdditiveState : public Engine::MonoBehavior
+class Attribute : public Engine::MonoBehavior
 {
 public:
 	enum State { Shield, Extra, Charge, HighPower, OverCharge, WeakPoint, End };
 public:
-	explicit AdditiveState();
+	explicit Attribute();
 private:
-	virtual ~AdditiveState() = default;
+	virtual ~Attribute() = default;
 
 public:
 	// MonoBehavior을(를) 통해 상속됨
@@ -34,10 +34,9 @@ public:
 	void AddState(unsigned long long flag, int stack);
 
 private:
-	Engine::BitFlag*	_pBitFlag = nullptr;
-	Engine::Timer*		_pTimer = nullptr;
-
-	std::vector<float>	_stateDatas[State::End];
-	int					_stateStacks[State::End]{};
+	Engine::BitFlag*			_pBitFlag = nullptr;
+	Engine::Timer*				_pTimer = nullptr;
+	std::vector<float>			_stateDatas[State::End];
+	int							_stateStacks[State::End]{};
 };
 
