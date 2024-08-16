@@ -48,10 +48,13 @@ void AStar::Update(const float& deltaTime)
 	if (_path.empty() || _pathIndex >= _path.size())
 	{
 		_path = AStarMove(_gridPosition, _goalPosition, _movement->_grid->GetTiles());
-		_goalPosition = _path[_path.size() - 2];
-		_path.pop_back();
-		_pathIndex = 1;
-		_currentMoveSteps = 0; // 이동 단계 초기화
+		if(!_path.empty())
+		{
+			_goalPosition = _path[_path.size() - 2];
+			_path.pop_back();
+			_pathIndex = 1;
+			_currentMoveSteps = 0; // 이동 단계 초기화
+		}
 
 	}
 	_curTime += deltaTime;
