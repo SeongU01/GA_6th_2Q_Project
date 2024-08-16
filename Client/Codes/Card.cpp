@@ -33,6 +33,8 @@ Card::Card(const CardData& cardData)
 
 void Card::Awake()
 {
+	// gameObject._isDrawCollider = true;
+
 	// Component
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
 
@@ -42,7 +44,8 @@ void Card::Awake()
 	pSpriteRenderer->BindTexture(pTexture);
 	pSpriteRenderer->SetIndex((int)_cardData.type);
 
-	_pixelSize = pTexture->GetImage(0)->GetSize();
+	_pixelSize[Hand] = pTexture->GetImage((int)_cardData.type)->GetSize();
+	_pixelSize[Queue] = pTexture->GetImage((int)_cardData.type + 3)->GetSize();
 
 	// 카드 아이콘 설정
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Icons");
@@ -82,8 +85,7 @@ void Card::Awake()
 	_costMana = buffer;
 	pTextRenderer->SetText(_costMana.c_str());
 
-	_pCollider = AddComponent<Engine::Collider>(L"Card");
-	_pCollider->SetScale({ _pixelSize.width, _pixelSize.height, 0.f });
+	_pCollider = AddComponent<Engine::Collider>(L"Card");	
 	_pCollider->SetActive(false);
 }
 
@@ -113,6 +115,12 @@ void Card::Start()
 
 void Card::Update(const float& deltaTime)
 {
+	if (_isSelectCard)
+	{
+		_pCollider->SetActive(false);
+		return;
+	}
+
 	if (_isLerp)
 	{
 		_lerpTime += Time::GetGlobalDeltaTime() / 0.3f;
@@ -127,6 +135,9 @@ void Card::Update(const float& deltaTime)
 
 void Card::LateUpdate(const float& deltaTime)
 {
+	if (_isSelectCard)
+		return;
+
 	if (_isHoldMouse)
 	{
 		_offset = { 0.f, -65.f, 0.f };
@@ -136,9 +147,13 @@ void Card::LateUpdate(const float& deltaTime)
 	transform.position = _fixPosition + _offset;
 }
 
-void Card::DrawCard()
+bool Card::DrawCard()
 {
+	if (_isAddQueue)
+		return false;
+
 	transform.scale = Vector3(0.34f, 0.34f, 0.f);
+	_pCollider->SetScale({ _pixelSize[Hand].width, _pixelSize[Hand].height, 0.f });
 	_pCollider->SetActive(true);
 
 	_isLerp = true;
@@ -148,6 +163,8 @@ void Card::DrawCard()
 	_targetOffset[1] = { 0.f, 0.f, 0.f };
 
 	HandDeckSetting();
+
+	return true;
 }
 
 void Card::SetMouseHover(bool isHover)
@@ -183,6 +200,30 @@ void Card::ThrowCard()
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { -2000.f, 0.f, 0.f };
 	_pCollider->SetActive(false);
+}
+
+void Card::OnCollision(Engine::CollisionInfo& info)
+{
+	if (*info.other == L"Mouse")
+	{
+		if (Input::IsKeyDown(Input::DIM_RB))
+		{
+			_pPlayer->GetComponent<JobQueue>()->PopQueue(this);
+			_pCollider->SetActive(false);
+			gameObject.SetActive(false);
+			
+			_pPlayer->GetComponent<PlayerMP>()->mp += _cardData.costMana;
+			_pPlayer->GetComponent<TimerSystem>()->UseTime(-_cardData.costTime);
+
+			if (CardAttribute::OverClock == _cardData.additiveCardState[0] || CardAttribute::OverClock == _cardData.additiveCardState[1])
+			{
+				HP* pHP = _pPlayer->GetComponent<HP>();
+				pHP->hp++;
+			}
+
+			_isAddQueue = false;
+		}
+	}
 }
 
 bool Card::AddJobQueue()
@@ -257,7 +298,7 @@ bool Card::AddJobQueue()
 
 		pMP->mp -= _cardData.costMana;
 		pTimerSystem->UseTime(_cardData.costTime);
-		_pPlayer->GetComponent<JobQueue>()->AddQueue(this);
+		_pPlayer->GetComponent<JobQueue>()->PushQueue(this);
 		JobQueueSetting();
 	}
 
@@ -379,7 +420,7 @@ void Card::ActiveEffect()
 			_pEventInvoker->BindAction(0.25f, [=]()
 				{
 					_pPlayer->GetComponent<Player>()->SetGridPostion(_toGridPosition);
-					_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.2f);
+					_pPlayer->GetComponent<GridMovement>()->MoveToCell(_toGridPosition, 0.25f);
 				});			
 		}		
 
@@ -434,6 +475,7 @@ void Card::ActiveEffect()
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { 250.f, 0.f, 0.f };
+	_isAddQueue = false;
 }
 
 void Card::SetHoldCard(bool isActive)
@@ -476,7 +518,6 @@ void Card::JobQueueSetting()
 	_isLerp = false;
 	_lerpTime = 0.f;
 	_offset = { 0.f, 0.f, 0.f };
-	_pCollider->SetActive(false);
 
 	// 카드 이미지
 	GetComponent<Engine::SpriteRenderer>(L"SpriteRenderer")->SetIndex((int)_cardData.type + 3);
@@ -497,6 +538,8 @@ void Card::JobQueueSetting()
 	costMana->SetDrawRect(200.f, 100.f);
 
 	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(false);
+
+	_pCollider->SetScale({ _pixelSize[Queue].width, _pixelSize[Queue].height, 0.f });
 
 	_isAddQueue = true;
 }

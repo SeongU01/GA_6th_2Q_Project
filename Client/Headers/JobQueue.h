@@ -17,7 +17,8 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	void AddQueue(Card* pCard);
+	void PushQueue(Card* pCard);
+	void PopQueue(Card* pCard);
 
 private:
 	void SetJobQueuePosition();

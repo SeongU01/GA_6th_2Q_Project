@@ -41,6 +41,12 @@ void CardSystem::Update(const float& deltaTime)
 
 void CardSystem::LateUpdate(const float& deltaTime)
 {
+	if (_currentDeck.empty() && !_graveDeck.empty())
+	{
+		_currentDeck.assign(_graveDeck.begin(), _graveDeck.end());
+		ShuffleCard();
+		_graveDeck.remove_if([](Card* pCard)->bool { return !pCard->_isAddQueue; });
+	}
 }
 
 bool CardSystem::LoadOriginDeck()
@@ -88,14 +94,15 @@ void CardSystem::StartGame()
 void CardSystem::DrawCard()
 {
 	if (_currentDeck.empty())
-	{
-		_currentDeck.assign(_graveDeck.begin(), _graveDeck.end());
-		ShuffleCard();
-	}
+		return;
 
 	Card* pCard = _currentDeck.back();
+	
+	if (!pCard->DrawCard())
+		return;
+
 	pCard->gameObject.SetActive(true);
-	pCard->DrawCard();
+
 
 	_handDeck.push_back(pCard);
 	_currentDeck.pop_back();
@@ -120,6 +127,13 @@ void CardSystem::OnReloadCoolTime()
 void CardSystem::ActiveCard(Card* pCard)
 {
 	if (pCard->AddJobQueue()) MoveTo(pCard, _handDeck, _graveDeck);
+}
+
+void CardSystem::AddCard(Card* pCard)
+{
+	pCard->gameObject.SetActive(false);
+	_currentDeck.push_back(pCard);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
 }
 
 void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst)
@@ -158,12 +172,17 @@ void CardSystem::ThrowCard()
 
 void CardSystem::ShuffleCard()
 {
-	std::vector<Card*> cards(_currentDeck.begin(), _currentDeck.end());
+	std::list<Card*> temp(_currentDeck.begin(), _currentDeck.end());
+
+	temp.remove_if([](Card* pCard)->bool
+		{
+			return pCard->_isAddQueue;
+		});
+	std::vector<Card*> cards(temp.begin(), temp.end());
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::shuffle(cards.begin(), cards.end(), gen);
 	_currentDeck.assign(cards.begin(), cards.end());
-	_graveDeck.clear();
 }
 
 void CardSystem::SetHandDeckPosition()

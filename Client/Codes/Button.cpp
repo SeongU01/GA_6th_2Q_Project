@@ -24,6 +24,9 @@ void Button::Start()
 
 void Button::Update(const float& deltaTime)
 {
+	if (!IsActive())
+		return;
+
 	MouseUpdate();
 	int x = _mousePosition.x, y = _mousePosition.y;
 	

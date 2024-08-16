@@ -21,6 +21,7 @@
 // Object
 #include "Tile.h"
 
+#include "CardManager.h"
 #include "DataManager.h"
 #include "Client_Define.h"
 
@@ -89,7 +90,11 @@ void Player::Awake()
 			{
 				Vector3 offset = { 20.f, -100.f, 0.f };
 				Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
+
 				position = position - transform.position;
+
+				if (0.f > transform.scale.x)
+					position.x *= -1.f;
 
 				pSpriteRenderer->SetDrawOffset(offset + position);
 				pSpriteRenderer->Draw();
@@ -123,6 +128,11 @@ void Player::Start()
 void Player::Update(const float& deltaTime)
 {
 	DefaultMove(deltaTime);
+
+	if (Input::IsKeyDown(DIK_O))
+	{
+		CardManager::GetInstance()->StartSelectCardScene();
+	}
 }
 
 void Player::LateUpdate(const float& deltaTime)

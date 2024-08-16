@@ -51,6 +51,8 @@ public:
 		bool isFollow = false;
 		bool isRotation = false;
 	};
+private:
+	enum Type { Hand, Queue, End };
 public:
 	explicit Card(const CardData& cardData);
 private:
@@ -72,10 +74,13 @@ public:
 	void SetMouseHover(bool isHover);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 
+public:
+	void OnCollision(Engine::CollisionInfo& info) override;
+
 private:
 	bool AddJobQueue();
 	void ActiveEffect();
-	void DrawCard();
+	bool DrawCard();
 	void ThrowCard();
 	Vector3 SmoothStep(const XMVECTOR& v0, const XMVECTOR& v1, float t);
 	void HandDeckSetting();
@@ -106,12 +111,13 @@ private:
 	Engine::GameObject*					_pPlayer = nullptr;
 	Engine::EventInvoker*				_pEventInvoker = nullptr;
 	CardEffect*							_pCardEffect[2]{};
-	D2D1_SIZE_F							_pixelSize{};
+	D2D1_SIZE_F							_pixelSize[End]{};
 	float								_priority = 0.f;
 	float								_lerpTime = 0.f;
 	bool								_isLerp = false;
 	bool								_isThrow = false;
 	bool								_isHoldMouse = false;
 	bool								_isAddQueue = false;
+	bool								_isSelectCard = false;
 };
 

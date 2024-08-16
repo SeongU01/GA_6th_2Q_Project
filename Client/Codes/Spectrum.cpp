@@ -41,6 +41,7 @@ void Spectrum::Update(const float& deltaTime)
 		info.pBitmap = _pAnimation->GetCurrentImage();
 		info.renderGroup = RenderGroup::BackEffect;
 		info.position = transform.position;
+		info.scale = transform.scale;
 		info.isActiveLife = true;
 		info.life = 0.3f;
 		info.isFadeOut = true;

@@ -42,9 +42,15 @@ void JobQueue::LateUpdate(const float& deltaTime)
 {
 }
 
-void JobQueue::AddQueue(Card* pCard)
+void JobQueue::PushQueue(Card* pCard)
 {
 	_jobQueue.push_back(std::make_pair(0.f, pCard));
+	SetJobQueuePosition();
+}
+
+void JobQueue::PopQueue(Card* pCard)
+{
+	_jobQueue.remove_if([pCard](const std::pair<float, Card*>& pair)->bool { return pair.second == pCard; });
 	SetJobQueuePosition();
 }
 
