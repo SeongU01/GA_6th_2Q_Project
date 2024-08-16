@@ -7,7 +7,7 @@ namespace Engine
 	class CollisionManager;
 }
 
-class TimerSystem;
+class EnemySpawner;
 class DefaultStageScene : public Engine::Scene
 {
 protected:
@@ -27,7 +27,6 @@ protected:
 
 protected:
 	Engine::CollisionManager*	_pCollisionManager = nullptr;
-	TimerSystem*				_pTimerSystem = nullptr;
-	wchar_t						_buffer[32]{};
+	EnemySpawner*				_pEnemySpawner = nullptr;
 };
 

@@ -80,13 +80,13 @@ void UI::Initialize(const UIInfo& info)
     _info = info;
     SetName(_info.name);
     SetRenderGroup((int)RenderGroup::UI);
+    SetNotAffectCamera(true);
 
     _pTransform->SetParent(_info.pParent);
     _pTransform->SetPosition(_info.position+ _offsetPosition);
     _pTransform->SetScale(_info.scale);
 
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));
-    _pSpriteRenderer->SetNotAffectCamera(true);
     _pSpriteRenderer->SetIndex(_info.fixFrame);
     _originScale = _info.scale;
 }

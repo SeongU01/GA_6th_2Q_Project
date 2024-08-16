@@ -33,7 +33,8 @@ Card::Card(const CardData& cardData)
 
 void Card::Awake()
 {
-	// gameObject._isDrawCollider = true;
+	// 카메라에 영향을 받지 않음
+	gameObject.SetNotAffectCamera(true);
 
 	// Component
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
@@ -365,6 +366,9 @@ void Card::ActiveEffect()
 		attackInfo.Attribute = (unsigned long long)1 << _cardData.additiveCharState[i];
 		attackInfo.AttributeStack = _cardData.charStateNum[i];
 
+		if (CardAttribute::OverClock == _cardData.additiveCardState[i])
+			_pPlayer->GetComponent<Attribute>()->ActiveCharge();
+
 		if (CardEffectType::PathAttack == _cardData.effectType[i])
 		{
 			const Vector3& toGridPosition = _toGridPosition;
@@ -465,7 +469,7 @@ void Card::ActiveEffect()
 
 			for (auto& range : _attackRange)
 			{
-				pAttackCollider->OnCollider(0.f, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+				pAttackCollider->OnCollider(0.01f, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
 			}
 		}
 
@@ -493,6 +497,12 @@ void Card::ActiveEffect()
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { 250.f, 0.f, 0.f };
 	_isAddQueue = false;
+
+	if (_cardData.name == L"이온 블래스트")
+		_pEventInvoker->BindAction(0.3f, []() {Camera::CameraShake(0.5f, 50.f); });
+
+	if (_cardData.name == L"하이퍼 드라이브")
+		_pEventInvoker->BindAction(0.5f, []() {Camera::CameraShake(0.5f, 75.f); });
 }
 
 void Card::SetHoldCard(bool isActive)

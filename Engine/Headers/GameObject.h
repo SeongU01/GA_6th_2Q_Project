@@ -35,6 +35,7 @@ namespace Engine
 		inline void SetDead() { _isDead = true; }
 		inline void SetDontDestroyObject(bool isActive) { _dontDestroy = isActive; }
 		inline void SetRenderGroup(int renderGroup) { _renderGroup = renderGroup; }
+		inline void SetNotAffectCamera(bool isActive) { _isNotAffectCamera = isActive; }
 
 		template<typename T>
 		T* GetComponent(const wchar_t* name)
@@ -108,6 +109,7 @@ namespace Engine
 		bool							_isDead = false;
 		bool							_dontDestroy = false;
 		bool							_isFirstInit = false;
+		bool							_isNotAffectCamera = false;
 
 	protected:
 		Transform*						_pTransform	= nullptr;

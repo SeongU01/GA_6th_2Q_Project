@@ -38,13 +38,11 @@ void Engine::Camera::LateUpdate(const float& deltaTime)
 		_shakeElapsedTime += deltaTime;
 
 		// 주기적으로 새로운 무작위 흔들림 벡터 생성
-		if (static_cast<int>(_shakeElapsedTime * 5) % 2 == 0) // 예: 0.05초마다 갱신
-		{
+		if (0 == int(_shakeElapsedTime * 2) % 2)
 			_currentShakePosition = GetRandomShakeVector(_shakePower);
-		}
 
 		// 이전 프레임과의 선형 보간
-		_shakePosition = XMVectorLerp(_previousShakePosition, _currentShakePosition, deltaTime * 10.0f); // 보간 속도 조절
+		_shakePosition = XMVectorLerp(_previousShakePosition, _currentShakePosition, deltaTime * 20.f); // 보간 속도 조절
 
 		// 현재 위치를 이전 위치로 업데이트
 		_previousShakePosition = _shakePosition;

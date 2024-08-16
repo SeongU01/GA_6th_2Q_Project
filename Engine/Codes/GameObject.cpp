@@ -74,6 +74,9 @@ void Engine::GameObject::Render()
 {
 	if (!_isFirstInit) return;
 
+	if (_isNotAffectCamera)
+		_cameraMatrix = D2D1::Matrix3x2F::Identity();
+
 	for (auto& component : _components)
 	{
 		if (component->IsActive())

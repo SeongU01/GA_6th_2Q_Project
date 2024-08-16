@@ -182,6 +182,7 @@ bool DefaultStageScene::Initialize()
 
     // Mouse
     Engine::GameObject* pObject = Engine::GameObject::Create();
+    pObject->SetNotAffectCamera(true);
     pObject->SetName(L"Mouse");
     pObject->SetRenderGroup((int)RenderGroup::UI);
     pObject->AddComponent<Mouse>(L"Mouse");
@@ -194,6 +195,7 @@ bool DefaultStageScene::UIinitialize()
 {
     // µ¦ ½Ã½ºÅÛ
     Engine::GameObject* pGameObject = Engine::GameObject::Create();
+    pGameObject->SetNotAffectCamera(true);
     pGameObject->AddComponent<DeckSystem>();
     pGameObject->SetRenderGroup((int)RenderGroup::UI);
     pGameObject->transform.position = Vector3(1725.f, 985.f, 0.f);

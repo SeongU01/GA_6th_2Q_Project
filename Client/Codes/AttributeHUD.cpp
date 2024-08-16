@@ -20,6 +20,7 @@ void AttributeHUD::Awake()
 	for (int i = 0; i < Attribute::State::End; i++)
 	{
 		pUI = AddUI(CreateInfo(L"Attribute", L"UI_HUD_Attribute", i, { 0.f, 0.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
+		pUI->SetNotAffectCamera(false);
 		// pUI->SetRenderGroup((int)RenderGroup::Object);
 	}
 

@@ -71,11 +71,8 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	size.height = size.height * -0.5f + _drawOffset.y;
 
 	const D2D1_MATRIX_3X2_F& offset = D2D1::Matrix3x2F::Translation(size);
-	
-	if (_notAffectCamera)
-		_pDeviceContext->SetTransform(offset * transform.worldMatrix);
-	else
-		_pDeviceContext->SetTransform(offset * transform.worldMatrix * gameObject._cameraMatrix);
+		
+	_pDeviceContext->SetTransform(offset * transform.worldMatrix * gameObject._cameraMatrix);
 
 	if (_currShader != typeid(ShaderComposite).hash_code())
 		_shaderData[_currShader]->ComputeShader(pBitmap);
@@ -83,11 +80,8 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 }
 
 void Engine::SpriteRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, float width)
-{
-	if (_notAffectCamera)
-		_pDeviceContext->SetTransform(transform.worldMatrix);
-	else
-		_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
+{	
+	_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
 
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(1.f);
@@ -95,11 +89,8 @@ void Engine::SpriteRenderer::DrawRect(const D2D1_RECT_F& rect, const D2D1::Color
 }
 
 void Engine::SpriteRenderer::DrawFillRect(const D2D1_RECT_F& rect, const D2D1::ColorF& color, const float& opacity)
-{
-	if (_notAffectCamera)
-		_pDeviceContext->SetTransform(transform.worldMatrix);
-	else
-		_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
+{	
+	_pDeviceContext->SetTransform(transform.worldMatrix * gameObject._cameraMatrix);
 
 	_pSolidColorBrush->SetColor(color);
 	_pSolidColorBrush->SetOpacity(opacity);

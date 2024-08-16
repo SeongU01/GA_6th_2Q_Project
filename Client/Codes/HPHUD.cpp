@@ -16,13 +16,14 @@ void HPHUD::Awake()
 void HPHUD::Start()
 {
 	UI::UIInfo info;
-	UI* pObj;
-	for (int i = 0; i < _pHP->GetMaxHP(); i++) {
+	UI* pUI = nullptr;
+	for (int i = 0; i < _pHP->GetMaxHP(); i++)
+	{
 		info = CreateInfo(L"HPBackground", L"UI_HUD_HP", 0, {
 			(float)((i * 10) - (_pHP->GetMaxHP() / 2 * 10)),40.0f , -1000.f}, {1.0f,1.0f,1.f}, &transform);
-		pObj = AddUI(info);
-		// pObj->SetRenderGroup((int)RenderGroup::Object);
-		_HPBar.push_back(pObj);
+		pUI = AddUI(info);
+		pUI->SetNotAffectCamera(false);
+		_HPBar.push_back(pUI);
 	}
 }
 

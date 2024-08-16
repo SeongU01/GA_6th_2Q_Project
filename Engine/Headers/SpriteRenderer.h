@@ -84,7 +84,6 @@ namespace Engine
 
 		void SetIndex(const int index) { _index = index; }
 		void SetDrawOffset(const Vector3& offset);
-		void SetNotAffectCamera(bool isActive) { _notAffectCamera = isActive; }
 		void SetOneSelfDraw(bool isActive, const std::function<void()>& function = nullptr);
 
 	private:
@@ -102,7 +101,6 @@ namespace Engine
 		ID2D1SolidColorBrush*	_pSolidColorBrush = nullptr;
 		size_t					_currShader;
 		int						_index = 0;
-		bool					_notAffectCamera = false;
 		bool					_isOneSelfDraw = false;
 	};
 }

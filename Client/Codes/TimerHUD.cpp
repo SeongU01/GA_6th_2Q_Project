@@ -29,6 +29,7 @@ void TimerHUD::Start()
 	AddUI(CreateInfo(L"Timer_Back2", L"UI_HUD_Timer_Box", 1, { 210.0f , 1030.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
 	//ÅØ½ºÆ®
 	Engine::GameObject* pTextobj = Engine::GameObject::Create();
+	pTextobj->SetNotAffectCamera(true);
 	_pText = pTextobj->AddComponent<Engine::TextRenderer>(L"Timer", D2D1::ColorF::White, 70.0f);
 	_pText->SetDrawRect(200.f, 100.f);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pTextobj); pTextobj->SetRenderGroup((int)RenderGroup::UI);
