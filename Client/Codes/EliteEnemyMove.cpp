@@ -27,7 +27,7 @@ int EliteEnemyMove::Update(const float& deltaTime)
 
 int EliteEnemyMove::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Move") && _pAnimation->IsLastFrame()&&!_pAstar->_isMoving)
+	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Move"))
 		return (int)EliteEnemy::FSM::Idle;
 	return 0;
 }

@@ -13,6 +13,9 @@ class DefenseScript;
 class Player;
 class AStar;
 class Pannel;
+class AttackCollider;
+class Attribute;
+
 class EliteEnemyScript :public Engine::MonoBehavior
 {
 	friend class EliteEnemyState;
@@ -38,6 +41,11 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
+
+
+	AttackCollider* _pAttackCollider = nullptr;
+	Attribute* _pAttribute = nullptr;
+
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;

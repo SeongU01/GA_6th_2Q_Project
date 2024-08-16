@@ -124,7 +124,7 @@ void DefaultEnemyScript::OnCollision(Engine::CollisionInfo& info)
 	Engine::GameObject* pOther = info.other->GetOwner();
 	if (*pOther == L"Mouse")
 	{
-		DefaultEnemyState* currState = dynamic_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
+		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->ShowInfo();
 	}
 }
@@ -134,7 +134,7 @@ void DefaultEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)
 	Engine::GameObject* pOther = info.other->GetOwner();
 	if (*pOther == L"Mouse")
 	{
-		DefaultEnemyState* currState = dynamic_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
+		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->CloseInfo();
 	}
 }

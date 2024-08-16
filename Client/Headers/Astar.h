@@ -49,10 +49,12 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 public:
+	void ReCalculatePath() { _path.clear(); }
 	void SetGoalPosition(const Vector3& goalPos) { _goalPosition = goalPos; }
 	void SetGridPosition(const Vector3& gridPos) { _gridPosition = gridPos; }
 	void SetGridMovement(GridMovement* _move) { _movement = _move; }
 	void SetMaxMoveSteps(int steps);
+	Vector3 GetGoalPosition()const { return _goalPosition; }
 	bool CheckMoveEnd() { return !_isMoving; }
 	void ChangeTarget(std::wstring targetName);
 private:

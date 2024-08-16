@@ -48,12 +48,12 @@ void SpawnEnemy::Update(const float& deltaTime)
 				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
 			}
-			if (L"Range" == _enemyInfo.spawnType)
+			else if (L"Range" == _enemyInfo.spawnType)
 			{
 				Vector3 spawnPos;
 
 				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
-				{
+				{	
 					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
 				}
 				else

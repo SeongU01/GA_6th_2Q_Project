@@ -20,7 +20,7 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 public:
-	Vector3 GetGridPosition() { return _gridPosition; }
+	const Vector3& GetGridPosition() { return _gridPosition; }
 private:
 	HP* _pHP = nullptr;
 	GridInfo* _pGridInfo = nullptr;

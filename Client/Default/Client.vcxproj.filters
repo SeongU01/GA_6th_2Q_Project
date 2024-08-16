@@ -239,11 +239,29 @@
     <ClCompile Include="..\Codes\EliteEnemyState.cpp">
       <Filter>03. GameObject\Enemy\Elite\State</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyNomalAttack.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\NomalAttack</Filter>
+    </ClCompile>
     <ClCompile Include="..\Codes\Spectrum.cpp">
       <Filter>04. Component\Spectrum</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemySuperSlash.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\SuperSlash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyWeekSearch.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\WeekSearch</Filter>
+    </ClCompile>
     <ClCompile Include="..\Codes\AttributeHUD.cpp">
       <Filter>05. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyGetShield.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\GetShield</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyDeath.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EliteEnemyLure.cpp">
+      <Filter>03. GameObject\Enemy\Elite\State\Lure</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Cut1Scene.cpp">
       <Filter>02. Scene\Cut</Filter>
@@ -475,8 +493,26 @@
     <Filter Include="04. Component\Spectrum">
       <UniqueIdentifier>{7066402f-b5d6-4e04-a359-571f14f1f463}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\NomalAttack">
+      <UniqueIdentifier>{1b2f1c3f-4ef5-4b05-9d6c-b7f7b39c893b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\SuperSlash">
+      <UniqueIdentifier>{f1f1bec8-73a4-4b96-9807-361854e6a1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\WeekSearch">
+      <UniqueIdentifier>{82caeb56-6111-48e9-8c75-de29aa042245}</UniqueIdentifier>
+    </Filter>
     <Filter Include="04. Component\Attribute">
       <UniqueIdentifier>{51dbac23-7810-4c8b-a58e-d74d6610c999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\GetShield">
+      <UniqueIdentifier>{aecf697d-75dc-451c-8c2f-fe7f98040f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\Death">
+      <UniqueIdentifier>{26727b91-da0d-47dc-ad4d-20581015c23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Elite\State\Lure">
+      <UniqueIdentifier>{6816dacd-8796-41e0-853b-b7d621303eb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -738,8 +774,26 @@
     <ClInclude Include="..\Headers\Spectrum.h">
       <Filter>04. Component\Spectrum</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyNomalAttack.h">
+      <Filter>03. GameObject\Enemy\Elite\State\NomalAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemySuperSlash.h">
+      <Filter>03. GameObject\Enemy\Elite\State\SuperSlash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyWeekSearch.h">
+      <Filter>03. GameObject\Enemy\Elite\State\WeekSearch</Filter>
+    </ClInclude>
     <ClInclude Include="..\Headers\AttributeHUD.h">
       <Filter>05. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyGetShield.h">
+      <Filter>03. GameObject\Enemy\Elite\State\GetShield</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyDeath.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EliteEnemyLure.h">
+      <Filter>03. GameObject\Enemy\Elite\State\Lure</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Cut1Scene.h">
       <Filter>02. Scene\Cut</Filter>

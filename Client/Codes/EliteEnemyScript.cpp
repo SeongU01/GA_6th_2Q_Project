@@ -1,12 +1,15 @@
 #include "EliteEnemyScript.h"
 #include "Grid.h"
+#include "Tile.h"
 #include "GameObject.h"
+
 //component
 #include "FiniteStateMachine.h"
 #include "Animation.h"
 #include "GridMovement.h"
 #include "Astar.h"
 #include "HP.h"
+#include "HPHUD.h"
 #include "Collider.h"
 #include "Pannel.h"
 #include "Defense.h"
@@ -14,11 +17,19 @@
 #include "Zero.h"
 #include "Player.h"
 #include "TextRenderer.h"
+
+#include "Attribute.h"
+#include "AttackCollider.h"
 //state
 #include "EliteEnemyIdle.h"
 #include "EliteEnemyMove.h"
-//#include "DefaultEnemyWeakAttack.h"
-//#include "DefaultEnemyStrongAttack.h"
+#include "EliteEnemyNomalAttack.h"
+#include "EliteEnemySuperSlash.h"
+#include "EliteEnemyWeekSearch.h"
+#include "EliteEnemyGetShield.h"
+#include "EliteEnemyLure.h"
+#include "EliteEnemyDeath.h"
+
 
 #include "EliteEnemyInfomation.h"
 #include "Client_Define.h"
@@ -36,6 +47,7 @@ void EliteEnemyScript::Awake()
 
 	//TODO: FSM 작성하기
 	_pHP = AddComponent<HP>(L"HP", 5);
+	AddComponent<HPHUD>(_pHP, 1);
 	_aStar = AddComponent<AStar>(L"AStar", _targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement", 500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
@@ -56,6 +68,10 @@ void EliteEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer", D2D1::ColorF::Black, 20.f);
 	_pPannel->SetActive(false);
+	// 임시 추가한것
+	_pAttribute = AddComponent<Attribute>();
+	_pAttackCollider = AddComponent<AttackCollider>();
+
 }
 
 void EliteEnemyScript::Start()
@@ -73,6 +89,12 @@ void EliteEnemyScript::Start()
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)EliteEnemy::FSM::End);
 	_pFSM->AddState((int)EliteEnemy::FSM::Idle, EliteEnemyIdle::Create(this));
 	_pFSM->AddState((int)EliteEnemy::FSM::Move, EliteEnemyMove::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::NomalAttack, EliteEnemyNomalAttack::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::SuperSlash, EliteEnemySuperSlash::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::WeekSearch, EliteEnemyWeekSearch::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::GetShield, EliteEnemyGetShield::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::Lure, EliteEnemyLure::Create(this));
+	_pFSM->AddState((int)EliteEnemy::FSM::Death, EliteEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)EliteEnemy::FSM::Idle);
 }
 
@@ -82,6 +104,10 @@ void EliteEnemyScript::Update(const float& deltaTime)
 
 void EliteEnemyScript::LateUpdate(const float& deltaTime)
 {
+	if (_pHP->IsZeroHP())
+	{
+		_pFSM->ChangeState((int)EliteEnemy::FSM::Death);
+	}
 }
 
 void EliteEnemyScript::OnCollisionEnter(Engine::CollisionInfo& info)
@@ -94,7 +120,7 @@ void EliteEnemyScript::OnCollision(Engine::CollisionInfo& info)
 	Engine::GameObject* pOther = info.other->GetOwner();
 	if (*pOther == L"Mouse")
 	{
-		EliteEnemyState* currState = dynamic_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
+		EliteEnemyState* currState = static_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->ShowInfo();
 	}
 }
@@ -104,7 +130,7 @@ void EliteEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)
 	Engine::GameObject* pOther = info.other->GetOwner();
 	if (*pOther == L"Mouse")
 	{
-		EliteEnemyState* currState = dynamic_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
+		EliteEnemyState* currState = static_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->CloseInfo();
 	}
 }
