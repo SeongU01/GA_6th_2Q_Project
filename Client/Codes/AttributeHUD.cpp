@@ -60,16 +60,3 @@ void AttributeHUD::Update(const float& deltaTime)
 void AttributeHUD::LateUpdate(const float& deltaTime)
 {
 }
-
-void AttributeHUD::Free()
-{
-	HP* pHP = GetComponent<HP>();
-	if (nullptr == pHP)
-		return;
-	
-	if (pHP->IsZeroHP())
-	{
-		for (auto& ui : _UIs)
-			ui->SetDead();
-	}
-}

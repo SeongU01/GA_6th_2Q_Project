@@ -15,6 +15,7 @@ protected:
 public:
 	void SetDontDestroyObjectUI(bool isActive);
 	void SetActives(bool check);
+	void DeleteUI();
 
 private:
 	void Free() override;

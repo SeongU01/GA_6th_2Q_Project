@@ -39,6 +39,12 @@ void UIComponent::SetActives(bool check)
 		ui->SetActive(check);
 }
 
+void UIComponent::DeleteUI()
+{
+	for (auto& ui : _UIs)
+		ui->SetDead();
+}
+
 void UIComponent::Free()
 {
 }

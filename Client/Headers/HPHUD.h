@@ -16,9 +16,6 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
-	void Free() override;
-
-private:
 	std::vector<UI*> _HPBar;
 	HP* _pHP = nullptr;
 	int _hpColor; //0: 플레이어초록 , 1: 적빨강
