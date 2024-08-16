@@ -18,6 +18,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 public:
 	void CheckWaveEnd();
+	bool CheckStageEnd() { return _stageEnd; }
 private:
 	EnemySpawnInfo _currSpawnInfo;
 	WaveInfo _currWave;
