@@ -321,6 +321,7 @@ void Card::ActiveEffect()
 	_pPlayer->GetComponent<Engine::Animation>()->ChangeAnimation(_cardActions[0].animation.c_str());
 
 	int degree = (int)_pCardEffect[0]->GetAttackDegree();
+
 	if (180 == degree)
 		_pPlayer->transform.scale = { -1.f, 1.f, 0.f };
 	else if (0 == degree)
@@ -338,7 +339,14 @@ void Card::ActiveEffect()
 						int y = int(range.second + gridPosition.y);
 
 						if (!action.isOneDraw)
-							CreateEffect(action, pGrid->GetTileCenter(x, y));
+						{
+							Vector3 position = pGrid->GetTileCenter(x, y);
+
+							if (0.f > position.z)
+								continue;
+
+							CreateEffect(action, position);
+						}
 					}
 
 					if (action.isOneDraw)
