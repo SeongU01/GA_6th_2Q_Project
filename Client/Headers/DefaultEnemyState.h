@@ -33,6 +33,6 @@ protected:
 	Pannel* _pPannel = nullptr;
 	GridEffect* _pGridEffect = nullptr;
 	std::wstring _infoText;
-
+	Vector3 _currDirection = { 1.f,0.f,0.f };
 };
 

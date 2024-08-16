@@ -25,6 +25,7 @@
 #include "DefaultEnemyMove.h"
 #include "DefaultEnemyWeakAttack.h"
 #include "DefaultEnemyStrongAttack.h"
+#include "DefaultEnemyDeath.h"
 
 #include "DefaultEnemyInfomation.h"
 #include "DataManager.h"
@@ -94,6 +95,7 @@ void DefaultEnemyScript::Start()
 	_pFSM->AddState((int)DefaultEnemy::FSM::Move, DefaultEnemyMove::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::WeakAttack, DefaultEnemyWeakAttack::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::StrongAttack, DefaultEnemyStrongAttack::Create(this));
+	_pFSM->AddState((int)DefaultEnemy::FSM::Death, DefaultEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)DefaultEnemy::FSM::Idle);
 
 	MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
@@ -102,20 +104,14 @@ void DefaultEnemyScript::Start()
 
 void DefaultEnemyScript::Update(const float& deltaTime)
 {
-	if (Input::IsKeyDown(DIK_M))
-	{
-		gameObject.SetDead();
-	}
+	
 }
 
 void DefaultEnemyScript::LateUpdate(const float& deltaTime)
 {
 	if (_pHP->IsZeroHP())
 	{
-		GetComponent<HPHUD>()->DeleteUI();
-		GetComponent<AttributeHUD>()->DeleteUI();
-		_pPannel->SetDead();
-		gameObject.SetDead();
+		_pFSM->ChangeState((int)DefaultEnemy::FSM::Death);
 	}
 }
 

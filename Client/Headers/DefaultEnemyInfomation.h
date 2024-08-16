@@ -3,6 +3,6 @@ namespace DefaultEnemy
 {
 	enum class FSM
 	{
-		None, Idle, Move, StrongAttack, WeakAttack,End
+		None, Idle, Move, StrongAttack, WeakAttack,Death,End
 	};
 }

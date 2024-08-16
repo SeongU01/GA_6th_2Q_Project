@@ -1,4 +1,4 @@
-#include "EliteEnemyDeath.h"
+#include "DefaultEnemyDeath.h"
 //component
 #include "Animation.h"
 #include "GridMovement.h"
@@ -9,13 +9,13 @@
 #include "Pannel.h"
 
 #include "Client_Define.h"
-#include "EliteEnemyScript.h"
-int EliteEnemyDeath::Update(const float& deltaTime)
+#include "DefaultEnemyScript.h"
+int DefaultEnemyDeath::Update(const float& deltaTime)
 {
 	return 0;
 }
 
-int EliteEnemyDeath::LateUpdate(const float& deltaTime)
+int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 {
 	if (_pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Death"))
 	{
@@ -28,18 +28,19 @@ int EliteEnemyDeath::LateUpdate(const float& deltaTime)
 	return 0;
 }
 
-void EliteEnemyDeath::OnStart()
+void DefaultEnemyDeath::OnStart()
 {
+	
 	_pAnimation->ChangeAnimation(L"Death");
 }
 
-void EliteEnemyDeath::OnExit()
+void DefaultEnemyDeath::OnExit()
 {
 }
 
-EliteEnemyDeath* EliteEnemyDeath::Create(EliteEnemyScript* pScript)
+DefaultEnemyDeath* DefaultEnemyDeath::Create(DefaultEnemyScript* pScript)
 {
-	EliteEnemyDeath* pInstance = new EliteEnemyDeath;
-	pInstance->EliteEnemyState::Initialize(pScript);
+	DefaultEnemyDeath* pInstance = new DefaultEnemyDeath;
+	pInstance->DefaultEnemyState::Initialize(pScript);
 	return pInstance;
 }

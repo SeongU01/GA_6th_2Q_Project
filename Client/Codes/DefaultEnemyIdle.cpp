@@ -3,6 +3,8 @@
 //component
 #include "Animation.h"
 #include "GridMovement.h"
+#include "DefaultEnemyScript.h"
+#include "Pannel.h"
 
 #include "Client_Define.h"
 
@@ -11,7 +13,15 @@
 int DefaultEnemyIdle::Update(const float& deltaTime)
 {
 	
+	const Vector3& gridPosition = *_pGridPosition;
+	Vector3 Direction = *_pTargetPosition - gridPosition;
 
+	if (_currDirection.x * Direction.x < 0)
+	{
+		_currDirection.x *= -1;
+		_pOwner->transform.scale *= Vector3(-1.f, 1.f, 1.f);
+		_pPannel->transform.scale *= Vector3(-1.f, 1.f, 1.f);
+	}
 	return 0;
 }
 
