@@ -51,3 +51,12 @@ void HPHUD::Update(const float& deltaTime)
 void HPHUD::LateUpdate(const float& deltaTime)
 {
 }
+
+void HPHUD::Free()
+{
+	if (_pHP->IsZeroHP())
+	{
+		for (auto& ui : _UIs)
+			ui->SetDead();
+	}
+}

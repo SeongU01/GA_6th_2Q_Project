@@ -1,5 +1,9 @@
 #include "AttributeHUD.h"
+
+// Component
 #include "Attribute.h"
+#include "HP.h"
+
 #include "Client_Define.h"
 
 constexpr float MAXWIDTH = 200.f;
@@ -39,7 +43,7 @@ void AttributeHUD::Update(const float& deltaTime)
 		}
 		else
 			_UIs[i]->SetActive(false);
-	}	
+	}
 
 	size_t size = activeUIs.size();
 	float width = 40.f * size;
@@ -55,4 +59,17 @@ void AttributeHUD::Update(const float& deltaTime)
 
 void AttributeHUD::LateUpdate(const float& deltaTime)
 {
+}
+
+void AttributeHUD::Free()
+{
+	HP* pHP = GetComponent<HP>();
+	if (nullptr == pHP)
+		return;
+	
+	if (pHP->IsZeroHP())
+	{
+		for (auto& ui : _UIs)
+			ui->SetDead();
+	}
 }

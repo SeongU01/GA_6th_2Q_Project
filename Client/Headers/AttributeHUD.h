@@ -17,6 +17,8 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
+	void Free() override;
+
+private:
 	Attribute* _pAttribute = nullptr;
 };
-
