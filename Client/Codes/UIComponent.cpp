@@ -14,6 +14,19 @@ UI* UIComponent::AddUI(const UI::UIInfo& info)
 	return pUI;
 }
 
+UI::UIInfo UIComponent::CreateInfo(const wchar_t* name, const wchar_t* textureTag, int fixframe, const Vector3& position, const Vector3& scale, Engine::Transform* pParent)
+{
+	UI::UIInfo info;
+	info.name = name;
+	info.textureTag = textureTag;
+	info.fixFrame = fixframe;
+	info.position = position;
+	info.scale = scale;
+	info.pParent = pParent;
+
+	return info;
+}
+
 void UIComponent::SetDontDestroyObjectUI(bool isActive)
 {
 	for (auto& ui : _UIs)
@@ -24,4 +37,10 @@ void UIComponent::SetActives(bool check)
 {
 	for (auto& ui : _UIs)
 		ui->SetActive(check);
+}
+
+void UIComponent::Free()
+{
+	for (auto& ui : _UIs)
+		ui->SetDead();
 }
