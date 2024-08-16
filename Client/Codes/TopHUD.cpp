@@ -24,7 +24,7 @@ void TopHUD::Start()
 		_HPBar.push_back(AddUI(info));
 		_HPBar.back()->SetRenderGroup((int)RenderGroup::UI);
 	}
-	SetDontDestroyObject(true);
+	SetDontDestroyObjectUI(true);
 }
 
 void TopHUD::Update(const float& deltaTime)
