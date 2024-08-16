@@ -48,7 +48,6 @@
     <ClCompile Include="..\Codes\EliteEnemyDeath.cpp" />
     <ClCompile Include="..\Codes\EliteEnemyGetShield.cpp" />
     <ClCompile Include="..\Codes\EliteEnemyIdle.cpp" />
-    <ClCompile Include="..\Codes\EliteEnemyLure.cpp" />
     <ClCompile Include="..\Codes\EliteEnemyMove.cpp" />
     <ClCompile Include="..\Codes\EliteEnemyNomalAttack.cpp" />
     <ClCompile Include="..\Codes\EliteEnemyScript.cpp" />
@@ -147,7 +146,6 @@
     <ClInclude Include="..\Headers\EliteEnemyGetShield.h" />
     <ClInclude Include="..\Headers\EliteEnemyIdle.h" />
     <ClInclude Include="..\Headers\EliteEnemyInfomation.h" />
-    <ClInclude Include="..\Headers\EliteEnemyLure.h" />
     <ClInclude Include="..\Headers\EliteEnemyMove.h" />
     <ClInclude Include="..\Headers\EliteEnemyNomalAttack.h" />
     <ClInclude Include="..\Headers\EliteEnemyScript.h" />

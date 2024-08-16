@@ -27,7 +27,6 @@
 #include "EliteEnemySuperSlash.h"
 #include "EliteEnemyWeekSearch.h"
 #include "EliteEnemyGetShield.h"
-#include "EliteEnemyLure.h"
 #include "EliteEnemyDeath.h"
 
 
@@ -93,7 +92,6 @@ void EliteEnemyScript::Start()
 	_pFSM->AddState((int)EliteEnemy::FSM::SuperSlash, EliteEnemySuperSlash::Create(this));
 	_pFSM->AddState((int)EliteEnemy::FSM::WeekSearch, EliteEnemyWeekSearch::Create(this));
 	_pFSM->AddState((int)EliteEnemy::FSM::GetShield, EliteEnemyGetShield::Create(this));
-	_pFSM->AddState((int)EliteEnemy::FSM::Lure, EliteEnemyLure::Create(this));
 	_pFSM->AddState((int)EliteEnemy::FSM::Death, EliteEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)EliteEnemy::FSM::Idle);
 }

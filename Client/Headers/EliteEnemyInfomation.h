@@ -3,6 +3,6 @@ namespace EliteEnemy
 {
 	enum class FSM
 	{
-		None, Idle, Move, NomalAttack, SuperSlash,WeekSearch,GetShield,Lure,Death, End
+		None, Idle, Move, NomalAttack, SuperSlash,WeekSearch,GetShield,Death, End
 	};
 }

@@ -8,6 +8,7 @@
 #include "Astar.h"
 #include "Pannel.h"
 #include "HP.h"
+#include "Attribute.h"
 
 #include "TextRenderer.h"
 #include "Client_Define.h"
@@ -81,19 +82,15 @@ EliteEnemy::FSM EliteEnemyIdle::SelectNextBehave()
 	}
 	if (CheckRange(3,1))	
 	{
-		//if(플레익어가 차지일때&&내가 방전일떄)
-		/*{
-			return EliteEnemy::FSM::Lure;
-		}*/
 		if (_count >= 2)
 		{
 			_count = 0;
 			return EliteEnemy::FSM::WeekSearch;
 		}
-		if()
+		if(_pPlayer->GetComponent<Attribute>()->IsActiveState(AttributeFlag::WeakPoint))
 		{
 			_count++;
-			return EliteEnemy::FSM::SuperSlash
+			return EliteEnemy::FSM::SuperSlash;
 		}
 		_count++;
 		return EliteEnemy::FSM::NomalAttack;

@@ -260,9 +260,6 @@
     <ClCompile Include="..\Codes\EliteEnemyDeath.cpp">
       <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\EliteEnemyLure.cpp">
-      <Filter>03. GameObject\Enemy\Elite\State\Lure</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\Cut1Scene.cpp">
       <Filter>02. Scene\Cut</Filter>
     </ClCompile>
@@ -510,9 +507,6 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Elite\State\Death">
       <UniqueIdentifier>{26727b91-da0d-47dc-ad4d-20581015c23b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Elite\State\Lure">
-      <UniqueIdentifier>{6816dacd-8796-41e0-853b-b7d621303eb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -791,9 +785,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\EliteEnemyDeath.h">
       <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\EliteEnemyLure.h">
-      <Filter>03. GameObject\Enemy\Elite\State\Lure</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Cut1Scene.h">
       <Filter>02. Scene\Cut</Filter>
