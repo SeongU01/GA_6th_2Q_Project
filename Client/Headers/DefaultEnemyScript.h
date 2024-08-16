@@ -28,10 +28,12 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+
 public:
 	virtual void OnCollisionEnter(Engine::CollisionInfo& info);
 	virtual void OnCollision(Engine::CollisionInfo& info) ;
 	virtual void OnCollisionExit(Engine::CollisionInfo& info) ;
+
 private:
 	GridMovement* _movement = nullptr;
 	AStar* _aStar = nullptr;

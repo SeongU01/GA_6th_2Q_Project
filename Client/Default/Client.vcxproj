@@ -64,6 +64,7 @@
     <ClCompile Include="..\Codes\GridEffect.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
     <ClCompile Include="..\Codes\GridMovement.cpp" />
+    <ClCompile Include="..\Codes\HitColor.cpp" />
     <ClCompile Include="..\Codes\HP.cpp" />
     <ClCompile Include="..\Codes\HPHUD.cpp" />
     <ClCompile Include="..\Codes\InfoHUD.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="..\Codes\RangeEnemyState.cpp" />
     <ClCompile Include="..\Codes\RangeEnemySupport.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
+    <ClCompile Include="..\Codes\SelectCard.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
     <ClCompile Include="..\Codes\SpawnEnemy.cpp" />
     <ClCompile Include="..\Codes\Spectrum.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="..\Headers\GridEffect.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
     <ClInclude Include="..\Headers\GridMovement.h" />
+    <ClInclude Include="..\Headers\HitColor.h" />
     <ClInclude Include="..\Headers\HP.h" />
     <ClInclude Include="..\Headers\HPHUD.h" />
     <ClInclude Include="..\Headers\InfoHUD.h" />
@@ -185,6 +188,7 @@
     <ClInclude Include="..\Headers\RangeEnemyState.h" />
     <ClInclude Include="..\Headers\RangeEnemySupport.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
+    <ClInclude Include="..\Headers\SelectCard.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />
     <ClInclude Include="..\Headers\SpawnEnemy.h" />
     <ClInclude Include="..\Headers\Spectrum.h" />

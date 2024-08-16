@@ -19,6 +19,7 @@
 #include "AttackCollider.h"
 #include "HPHUD.h"
 #include "AttributeHUD.h"
+#include "HitColor.h"
 
 //state
 #include "DefaultEnemyIdle.h"
@@ -76,6 +77,7 @@ void DefaultEnemyScript::Awake()
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	AddComponent<AttributeHUD>(_pAttribute);
+	AddComponent<HitColor>();
 }
 
 void DefaultEnemyScript::Start()

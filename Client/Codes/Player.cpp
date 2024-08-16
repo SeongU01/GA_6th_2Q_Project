@@ -17,6 +17,8 @@
 #include "AttackCollider.h"
 #include "Spectrum.h"
 #include "AttributeHUD.h"
+#include "Effect.h"
+#include "HitColor.h"
 
 // Object
 #include "Tile.h"
@@ -79,6 +81,7 @@ void Player::Awake()
 	AddComponent<JobQueue>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	_pSpectrum = AddComponent<Spectrum>(0.04f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
+	_pHitColor = AddComponent<HitColor>();
 
 	// UI
 	_pMP = AddComponent<PlayerMP>(L"MP");
@@ -125,10 +128,6 @@ void Player::Start()
 {
 	_gridPosition = _startPosition;
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
-
-	//// 스테이지 바뀔 때 마다 갱신
-	//MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-	//_pAttackCollider->Initialize(L"PlayerAttack", (int)info.width, (int)info.height);
 }
 
 void Player::Update(const float& deltaTime)
@@ -170,6 +169,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			if (attackInfo.damage)
 			{
+				HitColor* pHitColor = info.other->GetComponent<HitColor>();
+				if (pHitColor) pHitColor->OnHitColorEffect(0.05f);
 				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
 			}
 
@@ -181,6 +182,16 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			if (pAttribute->IsActiveState(AttributeFlag::Extra))
 			{
 				_pHP->hp += _pAttribute->GetExtraRecoveryValue();
+
+				Engine::GameObject* pEffect = Engine::GameObject::Create();
+				Effect::EffectInfo info;
+				info.renderGroup = RenderGroup::FrontEffect;
+				info.aniSpeed = 0.05f;
+				info.textureTag = L"Effect_Heal";
+				info.position = { 0.f, -50.f, 0.f };
+				info.pTarget = &transform;
+				pEffect->AddComponent<Effect>(info);
+				Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 			}
 		}
 	}
@@ -195,23 +206,23 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 		{
 			_pAttribute->ActiveCharge();
 
-			if (_pAttribute->IsActiveState(AttributeFlag::OverCharge))
-			{
-				// 방전 8칸 공격
-			}
+			//if (_pAttribute->IsActiveState(AttributeFlag::OverCharge))
+			//{
+			//	// 방전 8칸 공격
+			//}
+			
+			const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(0);				
 
-			for (int i = 0; i < 2; i++)
-			{
-				const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(i);				
-
-				int damage = 0;
+			int damage = 0;
 				
-				if (attackInfo.damage)
-					damage = _pAttribute->ActiveWeakPoint() + attackInfo.damage;
+			if (attackInfo.damage)
+				damage = _pAttribute->ActiveWeakPoint() + attackInfo.damage;
 
-				_pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
-				_pHP->hp -= damage;
-			}
+			_pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
+			_pHP->hp -= damage;
+			_pHitColor->OnHitColorEffect(0.05f);
+
+			Camera::CameraShake(0.5f, 30.f);
 		}
 	}
 }
