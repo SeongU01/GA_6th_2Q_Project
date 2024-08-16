@@ -1,54 +1,43 @@
 #include "Stage3Scene.h"
 #include "Client_Define.h"
-#include "DataManager.h"
+
 //object
 #include "GridEffect.h"
 #include "Map.h"
-#include "Obstacle.h"
-#include "TestEnemy.h"
-#include "Enemy.h"
+#include "EnemySpawner.h"
 
-int Stage3Scene::Update(const float& deltaTime)
-{
-    __super::Update(deltaTime);
-    return 0;
-}
-
-int Stage3Scene::LateUpdate(const float& deltaTime)
-{
-    __super::LateUpdate(deltaTime);
-    return 0;
-}
+// Manager
+#include "DataManager.h"
+#include "CollisionManager.h"
 
 bool Stage3Scene::Initialize()
 {
-    MapInfo stage1 = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-    ObjectArrangeInfo stage1Obj = DataManager::GetInstance()->GetObjectInfo(L"Stage1");
-    Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stage1, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
     __super::Initialize();
-    MakeObject(stage1Obj);
+
+    DataManager* pDataManager = DataManager::GetInstance();
+
+    const MapInfo& stageInfo = pDataManager->GetMapInfo(L"Stage3");
+    const ObjectArrangeInfo& objectInfo = pDataManager->GetObjectInfo(L"Stage3");
+    const EnemySpawnInfo& enemySpawnInfo = pDataManager->GetEnemySpawnInfo(L"Stage3");
+
+    // ¸Ê ¹èÄ¡
+    Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stageInfo, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
+    MakeObject(objectInfo);
+
+    // ½ºÆ÷´×Ç®
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", EnemySpawner::Create(enemySpawnInfo));
+
+    // ±×¸®µå ÀÌÆåÆ®
     Engine::GameObject* pObject = Engine::GameObject::Create();
     pObject->SetName(L"GridEffect");
-    pObject->AddComponent<GridEffect>((int)stage1.width, (int)stage1.height);
+    pObject->AddComponent<GridEffect>((int)stageInfo.width, (int)stageInfo.height);
     pObject->SetRenderGroup((int)RenderGroup::UI);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pObject);
 
     Sound::StopSound((int)SoundGroup::BGM);
-    Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_3", (int)SoundGroup::BGM, 0.8f, true);
+    //Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.8f, true);
 
-    UIinitialize();
     return true;
-}
-
-bool Stage3Scene::UIinitialize()
-{
-    __super::UIinitialize();
-    return false;
-}
-
-void Stage3Scene::Free()
-{
-    __super::Free();
 }
 
 Stage3Scene* Stage3Scene::Create()

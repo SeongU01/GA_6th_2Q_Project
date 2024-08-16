@@ -76,7 +76,7 @@ public:
 	bool LoadAttackRangeData(const wchar_t* filePath);
 	void Free() override;
 
-	MapInfo GetMapInfo(std::wstring _stageName) 
+	const MapInfo& GetMapInfo(std::wstring _stageName) 
 	{
 		for (const auto& mapInfo : _mapInfos) 
 		{
@@ -88,7 +88,7 @@ public:
 		throw std::runtime_error("Stage not found");
 	}
 
-	ObjectArrangeInfo GetObjectInfo(std::wstring _stageName)
+	const ObjectArrangeInfo& GetObjectInfo(std::wstring _stageName)
 	{
 		for (const auto& objInfo : _objectArrangeInfos)
 		{
@@ -100,7 +100,7 @@ public:
 		throw std::runtime_error("Stage not found");
 	}
 
-	ToolTipInfo GetToolTipInfo(std::wstring _name)
+	const ToolTipInfo& GetToolTipInfo(std::wstring _name)
 	{
 		for (const auto& objInfo : _ToolTipInfos)
 		{
@@ -112,7 +112,7 @@ public:
 		throw std::runtime_error("Stage not found");
 	}
 	
-	EnemySpawnInfo GetEnemySpawnInfo(std::wstring _stageName)
+	const EnemySpawnInfo& GetEnemySpawnInfo(std::wstring _stageName)
 	{
 		for (const auto& spawnInfo : _enemySpawnInfos)
 		{
@@ -123,7 +123,7 @@ public:
 		}
 		throw std::runtime_error("Stage not found");
 	}
-	WaveInfo GetWaveInfo(const EnemySpawnInfo& spawnInfo, const std::wstring& waveName) 
+	const WaveInfo& GetWaveInfo(const EnemySpawnInfo& spawnInfo, const std::wstring& waveName) 
 	{
 
 		for (const auto& waveInfo : spawnInfo.waveInfos) 

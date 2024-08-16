@@ -27,7 +27,7 @@ void Fade::Awake()
     _drawRect.right = (float)WINCX;
     _drawRect.bottom = (float)WINCY;
 
-    _pSpriteRenderer->SetOneSelfDraw(true, [this]() { _pSpriteRenderer->DrawFillRect(_drawRect, _fadeInfo.color, _fadeInfo.alpha); });    
+    _pSpriteRenderer->SetOneSelfDraw(true, [this]() { _pSpriteRenderer->DrawFillRect(_drawRect, _fadeInfo.color, _fadeInfo.alpha); });
 }
 
 void Fade::Start()

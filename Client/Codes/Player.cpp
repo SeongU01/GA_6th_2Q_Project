@@ -55,6 +55,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 void Player::Awake()
 {	
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
+
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
 		throw std::runtime_error("can't load animation!");
 
@@ -66,7 +67,7 @@ void Player::Awake()
 
 	_movement = AddComponent<GridMovement>(L"GridMovement", 500.f);
 
-	// Systemp
+	// System
 	_pCardSystem = AddComponent<CardSystem>();
 	_pHP = AddComponent<HP>(L"HP", 5);
 	_pAttribute = AddComponent<Attribute>();
@@ -77,8 +78,10 @@ void Player::Awake()
 
 	// UI
 	_pMP = AddComponent<PlayerMP>(L"MP");
-	AddComponent<HPHUD>(_pHP, 0);
-	AddComponent<AttributeHUD>(_pAttribute);
+	HPHUD* pHPHUD = AddComponent<HPHUD>(_pHP, 0);
+	pHPHUD->SetDontDestroyObjectUI(true);
+	AttributeHUD* pAttHUD = AddComponent<AttributeHUD>(_pAttribute);
+	pAttHUD->SetDontDestroyObjectUI(true);
 
 	// ÀÜ»ó Ç¥½Ã¿ë
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
@@ -116,7 +119,6 @@ void Player::Awake()
 
 void Player::Start()
 {
-	//_pHP->SetHP(4);
 	_gridPosition = _startPosition;
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 

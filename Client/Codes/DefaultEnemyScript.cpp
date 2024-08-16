@@ -49,6 +49,7 @@ void DefaultEnemyScript::Awake()
 	//TODO: FSM 작성하기
 	_pHP=AddComponent<HP>(L"HP", 5);
 	AddComponent<HPHUD>(_pHP, 1);
+
 	_aStar = AddComponent<AStar>(L"AStar",_targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement",500.f);
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
@@ -69,7 +70,6 @@ void DefaultEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f);
 	_pPannel->SetActive(false);
-	AddComponent<HPHUD>(_pHP, 1);
 	
 	// 임시 추가한것
 	_pAttribute = AddComponent<Attribute>();
@@ -111,7 +111,12 @@ void DefaultEnemyScript::Update(const float& deltaTime)
 void DefaultEnemyScript::LateUpdate(const float& deltaTime)
 {
 	if (_pHP->IsZeroHP())
+	{
+		GetComponent<HPHUD>()->DeleteUI();
+		GetComponent<AttributeHUD>()->DeleteUI();
+		_pPannel->SetDead();
 		gameObject.SetDead();
+	}
 }
 
 void DefaultEnemyScript::OnCollisionEnter(Engine::CollisionInfo& info)

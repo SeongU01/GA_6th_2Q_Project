@@ -208,6 +208,15 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 	{
 		if (Input::IsKeyDown(Input::DIM_RB))
 		{
+			for (int i = 0; i < 2; i++)
+			{
+				if (CardEffectType::PathAttack == _cardData.effectType[i])
+					return;
+
+				if (CardEffectType::PathMove == _cardData.effectType[i])
+					return;
+			}
+
 			_pPlayer->GetComponent<JobQueue>()->PopQueue(this);
 			_pCollider->SetActive(false);
 			gameObject.SetActive(false);

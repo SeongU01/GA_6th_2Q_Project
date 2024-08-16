@@ -2,7 +2,7 @@
 #include "Client_Define.h"
 #include "Tile.h"
 
-Grid::Grid(const wchar_t* name, MapInfo& _mapInfo,const Vector3& position)
+Grid::Grid(const wchar_t* name, const MapInfo& _mapInfo,const Vector3& position)
 	:MonoBehavior(name)
 {
 	_currMapInfo = _mapInfo;

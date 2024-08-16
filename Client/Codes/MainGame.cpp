@@ -83,7 +83,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	_pCardManager = CardManager::GetInstance();
 	_pCardManager->LoadCard((filePath + L"Data/Card").c_str());
 
-	_pGameManager->ChagneScene(TestScene::Create());
+	_pGameManager->ChagneScene(TitleScene::Create());
 
 	return true;
 }

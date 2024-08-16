@@ -11,7 +11,7 @@ enum Flag : unsigned long long { Attack, Move, Idle };
 void Zero::Initialize(const Vector3& startPos)
 {
 	SetDontDestroyObject(true);
-	AddComponent<Player>(L"PlayerComponent",startPos);	
+	AddComponent<Player>(L"PlayerComponent", startPos);;
 
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(L"Player"));
 	SetRenderGroup((int)RenderGroup::Object);
