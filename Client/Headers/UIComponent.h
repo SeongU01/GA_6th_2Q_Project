@@ -10,20 +10,14 @@ protected:
 
 protected:
 	UI* AddUI(const UI::UIInfo& info);
-	UI::UIInfo CreateInfo(const wchar_t* name, const wchar_t* tag, int fixframe, Vector3 position, Vector3 scale, Engine::Transform* parent)
-	{
-		UI::UIInfo info;
-		info.name = name;
-		info.textureTag = tag;
-		info.fixFrame = fixframe;
-		info.position = position;
-		info.scale = scale;
-		info.pParent = parent;
-		return info;
-	}
+	UI::UIInfo CreateInfo(const wchar_t* name, const wchar_t* textureTag, int fixframe, const Vector3& position, const Vector3& scale, Engine::Transform* pParent);
+
 public:
 	void SetDontDestroyObjectUI(bool isActive);
 	void SetActives(bool check);
+
+private:
+	void Free() override;
 
 protected:
 	std::vector<UI*> _UIs;
