@@ -1,5 +1,6 @@
 #include "Astar.h"
 #include "Client_Define.h"
+
 #include "Tile.h"
 #include "Grid.h"
 #include "GridMovement.h"
@@ -31,30 +32,15 @@ void AStar::Update(const float& deltaTime)
 		return;
 	}
 
-	//Vector3 temporaryGoal = _goalPosition;
-
-	//// 목표 지점이 갱신되었거나 경로가 비어있거나 인덱스 초과 시 새 경로 계산
-	//if (!((int)temporaryGoal.x == (int)_goalPosition.x && (int)temporaryGoal.y == (int)_goalPosition.y) ||
-	//	_path.empty() || _pathIndex >= _path.size())
-	//{
-	//	_goalPosition = temporaryGoal;
-	//	_path = AStarMove(_gridPosition, _goalPosition, _movement->_grid->GetTiles());
-	//	_goalPosition = _path[_path.size() - 2];
-	//	_path.pop_back();
-	//	_pathIndex = 1;
-	//	_currentMoveSteps = 0; // 이동 단계 초기화
-
-	//}
 	if (_path.empty() || _pathIndex >= _path.size())
 	{
-		_path = AStarMove(_gridPosition, _goalPosition, _movement->_grid->GetTiles());
-		if(!_path.empty())
-		{
-			_goalPosition = _path[_path.size() - 2];
-			_path.pop_back();
-			_pathIndex = 1;
-			_currentMoveSteps = 0; // 이동 단계 초기화
-		}
+		_path = AStarMove(_gridPosition, _targetPosition, _movement->_grid->GetTiles());
+		if (_path.empty())
+			return;
+		_goalPosition = _path[_path.size() - 2];
+		_path.pop_back();
+		_pathIndex = 1;
+		_currentMoveSteps = 0; // 이동 단계 초기화
 
 	}
 	_curTime += deltaTime;
@@ -64,6 +50,7 @@ void AStar::Update(const float& deltaTime)
 		if (_curTime >= _moveTime)
 		{
 			Vector3 nextPosition = _path[_pathIndex];
+			Vector3 TempPostion = _gridPosition;
 			_gridPosition = nextPosition;
 			_curTime = 0.0f;
 			_pathIndex++;
@@ -76,6 +63,7 @@ void AStar::Update(const float& deltaTime)
 			}
 			else
 			{
+				_gridPosition=TempPostion;
 				_path.clear(); // 비워진 경로
 				_isMoving = false; // AStar의 움직임 비활성화
 			}

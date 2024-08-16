@@ -50,7 +50,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 public:
 	void ReCalculatePath() { _path.clear(); }
-	void SetGoalPosition(const Vector3& goalPos) { _goalPosition = goalPos; }
+	void SetGoalPosition(const Vector3& goalPos) { _targetPosition = goalPos; }
 	void SetGridPosition(const Vector3& gridPos) { _gridPosition = gridPos; }
 	void SetGridMovement(GridMovement* _move) { _movement = _move; }
 	void SetMaxMoveSteps(int steps);
@@ -71,6 +71,7 @@ public:
 private:
 	Engine::GameObject* _pTargetObject = nullptr;
 	Vector3 _goalPosition;
+	Vector3 _targetPosition;
 	std::vector<Vector3> _path;
 	std::wstring _targetObjectName;
 	size_t _pathIndex = 1;
