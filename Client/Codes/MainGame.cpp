@@ -67,6 +67,10 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 	
+
+	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::SFX, 0.6f);
+	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::BGM, 1.f);
+	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
 	// 공통 데이터
 	_pDataManager = DataManager::GetInstance();
 	_pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());

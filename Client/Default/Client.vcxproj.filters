@@ -59,9 +59,6 @@
     <ClCompile Include="..\Codes\TitleScene.cpp">
       <Filter>02. Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\CutScene.cpp">
-      <Filter>02. Scene\Cut</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\SelectScene.cpp">
       <Filter>02. Scene\SelectStage</Filter>
     </ClCompile>
@@ -247,6 +244,18 @@
     </ClCompile>
     <ClCompile Include="..\Codes\AttributeHUD.cpp">
       <Filter>05. UI\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Cut1Scene.cpp">
+      <Filter>02. Scene\Cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Cut2Scene.cpp">
+      <Filter>02. Scene\Cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Cut3Scene.cpp">
+      <Filter>02. Scene\Cut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Cut4Scene.cpp">
+      <Filter>02. Scene\Cut</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -555,9 +564,6 @@
     <ClInclude Include="..\Headers\Stage1Scene.h">
       <Filter>02. Scene\MainStage</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\CutScene.h">
-      <Filter>02. Scene\Cut</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\SelectScene.h">
       <Filter>02. Scene\SelectStage</Filter>
     </ClInclude>
@@ -734,6 +740,18 @@
     </ClInclude>
     <ClInclude Include="..\Headers\AttributeHUD.h">
       <Filter>05. UI\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Cut1Scene.h">
+      <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Cut2Scene.h">
+      <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Cut3Scene.h">
+      <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Cut4Scene.h">
+      <Filter>02. Scene\Cut</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
