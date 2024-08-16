@@ -1,0 +1,9 @@
+Part,id,Duration,VoiceTag,Sound
+7,,,,
+1,1,1,Sound_Voice_Enemy_Dead1,
+1,2,2,Sound_Voice_Enemy_Dead1,
+1,3,3,Sound_Voice_Operator_Dialogue1,
+1,4,3,Sound_Voice_Operator_Dialogue2,
+1,5,3,Sound_Voice_Zero_Dialogue1,
+1,6,3,Sound_Voice_Operator_Dialogue3,
+1,7,5,Sound_Voice_Zero_Dialogue2,

@@ -248,6 +248,49 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 	return true;
 }
 
+bool DataManager::LoadCutScene(const wchar_t* filePath)
+{
+	std::wstring path = filePath;
+	std::wifstream file((path + L"/CutScene.csv").c_str());
+	file.imbue(std::locale("en_US.UTF-8"));
+	if (!file.is_open())
+	{
+		throw std::runtime_error("Can not open file");
+		return false;
+	}
+
+	std::wstring line;
+	// 맨 윗줄 버리기
+	std::getline(file, line);
+	std::getline(file, line);
+	std::wstringstream wss(line);
+	int CutCount = 0;
+	wss >> CutCount;
+	_CutSceneInfos.resize(CutCount);
+	for (size_t i = 0; i < CutCount; i++)
+	{
+		CutSceneInfo objInfo;
+		std::getline(file, line);
+		std::wstringstream wss(line);
+		std::wstring token;
+
+		std::getline(wss, token, L',');
+		objInfo._part = std::stof(token.c_str());
+		std::getline(wss, token, L',');
+		objInfo._order = std::stof(token.c_str());
+		std::getline(wss, token, L',');
+		objInfo._duration = std::stof(token.c_str());
+		std::getline(wss, token, L',');
+		objInfo._voiceTag = token.c_str();
+		std::getline(wss, token, L',');
+		objInfo._dummySoundTag = token.c_str();
+
+		_CutSceneInfos[i] = objInfo;
+	}
+	file.close();
+	return true;
+}
+
 bool DataManager::LoadAttackRangeData(const wchar_t* filePath)
 {
 	std::wstring path = filePath;

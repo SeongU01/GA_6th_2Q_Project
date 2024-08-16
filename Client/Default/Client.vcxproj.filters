@@ -260,16 +260,7 @@
     <ClCompile Include="..\Codes\EliteEnemyDeath.cpp">
       <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Cut1Scene.cpp">
-      <Filter>02. Scene\Cut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Cut2Scene.cpp">
-      <Filter>02. Scene\Cut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Cut3Scene.cpp">
-      <Filter>02. Scene\Cut</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Cut4Scene.cpp">
+    <ClCompile Include="..\Codes\CutScene.cpp">
       <Filter>02. Scene\Cut</Filter>
     </ClCompile>
   </ItemGroup>
@@ -786,16 +777,7 @@
     <ClInclude Include="..\Headers\EliteEnemyDeath.h">
       <Filter>03. GameObject\Enemy\Elite\State\Death</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Cut1Scene.h">
-      <Filter>02. Scene\Cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Cut2Scene.h">
-      <Filter>02. Scene\Cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Cut3Scene.h">
-      <Filter>02. Scene\Cut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Cut4Scene.h">
+    <ClInclude Include="..\Headers\CutScene.h">
       <Filter>02. Scene\Cut</Filter>
     </ClInclude>
   </ItemGroup>

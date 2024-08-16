@@ -53,6 +53,13 @@ struct ToolTipInfo {
 	bool _leftTop;
 };
 
+struct CutSceneInfo {
+	int _part; 
+	int _order;
+	float _duration;
+	std::wstring _voiceTag;
+	std::wstring _dummySoundTag;
+};
 
 class DataManager:public Engine::Base,public Engine::SingleTon<DataManager>
 {
@@ -65,6 +72,7 @@ public:
 	bool LoadObjectArrange(const wchar_t* filePath);
 	bool LoadEnemySpawn(const wchar_t* filePath);
 	bool LoadToolTip(const wchar_t* filePath);	
+	bool LoadCutScene(const wchar_t* filePath);
 	bool LoadAttackRangeData(const wchar_t* filePath);
 	void Free() override;
 
@@ -128,6 +136,21 @@ public:
 		throw std::runtime_error("Wave not found");
 	}
 
+	CutSceneInfo GetCutSceneInfo(int part, int order)
+	{
+		for (const auto& objInfo : _CutSceneInfos)
+		{
+			if (objInfo._part == part && objInfo._order ==order)
+			{
+				return objInfo;
+			}
+		}
+		CutSceneInfo info;
+		info._part = 0;
+		return info;
+	}
+
+
 	const std::vector<std::pair<int, int>>& GetAttackRange(int ID) const { return _attackRanges[ID]; }
 
 private:
@@ -136,4 +159,5 @@ private:
 	std::vector<EnemySpawnInfo>_enemySpawnInfos;
 	std::vector<ToolTipInfo>_ToolTipInfos;
 	std::vector<std::vector<std::pair<int, int>>> _attackRanges;
+	std::vector<CutSceneInfo> _CutSceneInfos;
 };
