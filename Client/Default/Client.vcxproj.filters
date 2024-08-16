@@ -263,6 +263,9 @@
     <ClCompile Include="..\Codes\CutScene.cpp">
       <Filter>02. Scene\Cut</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\DefaultEnemyDeath.cpp">
+      <Filter>03. GameObject\Enemy\Default\State\Death</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -498,6 +501,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Elite\State\Death">
       <UniqueIdentifier>{26727b91-da0d-47dc-ad4d-20581015c23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Default\State\Death">
+      <UniqueIdentifier>{187df091-c7ad-489b-9103-b0860cc7b2a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -779,6 +785,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\CutScene.h">
       <Filter>02. Scene\Cut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyDeath.h">
+      <Filter>03. GameObject\Enemy\Default\State\Death</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

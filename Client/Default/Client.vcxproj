@@ -30,6 +30,7 @@
     <ClCompile Include="..\Codes\CutScene.cpp" />
     <ClCompile Include="..\Codes\DeckSystem.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemy.cpp" />
+    <ClCompile Include="..\Codes\DefaultEnemyDeath.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyIdle.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyMove.cpp" />
     <ClCompile Include="..\Codes\DefaultEnemyScript.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\Headers\CutScene.h" />
     <ClInclude Include="..\Headers\DeckSystem.h" />
     <ClInclude Include="..\Headers\DefaultEnemy.h" />
+    <ClInclude Include="..\Headers\DefaultEnemyDeath.h" />
     <ClInclude Include="..\Headers\DefaultEnemyIdle.h" />
     <ClInclude Include="..\Headers\DefaultEnemyInfomation.h" />
     <ClInclude Include="..\Headers\DefaultEnemyMove.h" />
