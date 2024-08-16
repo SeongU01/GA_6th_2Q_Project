@@ -14,7 +14,7 @@ UI* UIComponent::AddUI(const UI::UIInfo& info)
 	return pUI;
 }
 
-void UIComponent::SetDontDestroyObject(bool isActive)
+void UIComponent::SetDontDestroyObjectUI(bool isActive)
 {
 	for (auto& ui : _UIs)
 		ui->SetDontDestroyObject(isActive);

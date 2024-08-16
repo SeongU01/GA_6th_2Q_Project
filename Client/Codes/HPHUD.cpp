@@ -24,7 +24,6 @@ void HPHUD::Start()
 		// pObj->SetRenderGroup((int)RenderGroup::Object);
 		_HPBar.push_back(pObj);
 	}
-	SetDontDestroyObject(true);
 }
 
 void HPHUD::Update(const float& deltaTime)
