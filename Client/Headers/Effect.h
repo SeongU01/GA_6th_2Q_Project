@@ -53,6 +53,7 @@ public:
 	void SetFadeOut(bool isActive, float speed);
 	void SetAlpha(float alpha);
 	void SetFixFrame(int frame);
+	void SetRotation(float degree);
 
 private:
 	EffectInfo				_info;

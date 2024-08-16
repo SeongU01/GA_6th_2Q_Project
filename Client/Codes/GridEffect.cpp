@@ -58,7 +58,7 @@ void GridEffect::LateUpdate(const float& deltaTime)
 {
 }
 
-void GridEffect::OnEffect(int x, int y, int type)
+void GridEffect::OnEffect(int x, int y, int type, float degree)
 {
 	if (y >= (int)_gridEffects.size() || y < 0)
 		return;
@@ -67,6 +67,7 @@ void GridEffect::OnEffect(int x, int y, int type)
 		return;
 
 	_gridEffects[y][x]->SetActive(true);
+	_gridEffects[y][x]->GetComponent<Effect>()->SetRotation(degree);
 	auto pEffect = _gridEffects[y][x]->GetComponent<Effect>();
 	pEffect->SetFixFrame(type);
 }

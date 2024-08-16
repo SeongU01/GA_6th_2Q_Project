@@ -16,7 +16,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	void OnEffect(int x, int y, int type);
+	void OnEffect(int x, int y, int type, float degree = 0.f);
 
 private:
 	std::vector<std::vector<Engine::GameObject*>> _gridEffects;

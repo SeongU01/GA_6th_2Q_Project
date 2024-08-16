@@ -33,7 +33,20 @@ void CardEffect::ShowRange()
 		for (auto& grid : _info.ranges)
 		{
 			std::pair<int, int> target = ComputeRotationTarget(grid.first, grid.second);
-			_pGridEffect->OnEffect(int(gridPosition.x + target.first), int(gridPosition.y + target.second), index);
+
+			int x = int(gridPosition.x + target.first);
+			int y = int(gridPosition.y + target.second);
+			float degree = 0.f;
+
+			if (CardEffectType::PathMove == _info.effectType)
+			{
+				if (!Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>()->IsTileWalkable(x, y))
+					index = 0;
+
+				degree = _degree;
+			}
+
+			_pGridEffect->OnEffect(x, y, index, degree);
 		}
 	}
 	else

@@ -161,3 +161,8 @@ void Effect::SetFixFrame(int frame)
 {
     _info.fixFrame = frame;
 }
+
+void Effect::SetRotation(float degree)
+{
+    transform.rotation = Vector3(0.f, 0.f, degree);
+}
