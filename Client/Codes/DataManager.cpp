@@ -275,9 +275,9 @@ bool DataManager::LoadCutScene(const wchar_t* filePath)
 		std::wstring token;
 
 		std::getline(wss, token, L',');
-		objInfo._part = std::stof(token.c_str());
+		objInfo._part = std::stoi(token.c_str());
 		std::getline(wss, token, L',');
-		objInfo._order = std::stof(token.c_str());
+		objInfo._order = std::stoi(token.c_str());
 		std::getline(wss, token, L',');
 		objInfo._duration = std::stof(token.c_str());
 		std::getline(wss, token, L',');
