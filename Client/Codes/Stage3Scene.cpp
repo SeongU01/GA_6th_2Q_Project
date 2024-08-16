@@ -12,8 +12,6 @@
 
 bool Stage3Scene::Initialize()
 {
-    __super::Initialize();
-
     DataManager* pDataManager = DataManager::GetInstance();
 
     const MapInfo& stageInfo = pDataManager->GetMapInfo(L"Stage3");
@@ -22,10 +20,12 @@ bool Stage3Scene::Initialize()
 
     // ¸Ê ¹èÄ¡
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stageInfo, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
+    __super::Initialize();
     MakeObject(objectInfo);
 
     // ½ºÆ÷´×Ç®
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", EnemySpawner::Create(enemySpawnInfo));
+    _pEnemySpawner = EnemySpawner::Create(enemySpawnInfo);
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", _pEnemySpawner);
 
     // ±×¸®µå ÀÌÆåÆ®
     Engine::GameObject* pObject = Engine::GameObject::Create();

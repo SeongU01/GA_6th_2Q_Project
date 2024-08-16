@@ -97,14 +97,17 @@ void SpawnEnemy::LateUpdate(const float& deltaTime)
 
 void SpawnEnemy::CheckWaveEnd()
 {
-	if (Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster")->empty()&&!_stageEnd)
+	if (Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster")->empty() && !_stageEnd)
 	{
 		_waveOn = false;
 		_currWaveCount++;
+
 		if (_currWaveCount > _maxWaveCount)
 		{
 			_stageEnd = true;
+			return;
 		}
+
 		if(!_stageEnd)
 			_currWave = DataManager::GetInstance()->GetWaveInfo(_currSpawnInfo, L"Wave" + std::to_wstring(_currWaveCount));
 	}

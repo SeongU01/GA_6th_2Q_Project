@@ -1,19 +1,37 @@
 #include "Stage1Scene.h"
 #include "Client_Define.h"
 
-//object
+// Object
 #include "GridEffect.h"
 #include "Map.h"
 #include "EnemySpawner.h"
 
+// Component
+#include "SpawnEnemy.h"
+
 // Manager
 #include "DataManager.h"
+#include "CardManager.h"
 #include "CollisionManager.h"
 
-bool Stage1Scene::Initialize()
+int Stage1Scene::LateUpdate(const float& deltaTime)
 {
-    __super::Initialize();
-   
+    if (_pEnemySpawner->GetComponent<SpawnEnemy>()->CheckStageEnd())
+    {
+        if (!_isSelectCard)
+        {
+            _isSelectCard = true;
+            CardManager::GetInstance()->StartSelectCardScene();
+        }
+    }
+
+    __super::LateUpdate(deltaTime);
+
+    return 0;
+}
+
+bool Stage1Scene::Initialize()
+{   
     DataManager* pDataManager = DataManager::GetInstance();
 
     const MapInfo& stageInfo = pDataManager->GetMapInfo(L"Stage1");
@@ -22,10 +40,12 @@ bool Stage1Scene::Initialize()
 
     // ¸Ê ¹èÄ¡
     Engine::AddObjectInLayer((int)LayerGroup::Tile, L"Tile", Map::Create(stageInfo, Vector3(WINCX >> 1, WINCY >> 1, 0.f)));
+    __super::Initialize();
     MakeObject(objectInfo);
 
     // ½ºÆ÷´×Ç®
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", EnemySpawner::Create(enemySpawnInfo));
+    _pEnemySpawner = EnemySpawner::Create(enemySpawnInfo);
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", _pEnemySpawner);
 
     // ±×¸®µå ÀÌÆåÆ®
     Engine::GameObject* pObject = Engine::GameObject::Create();

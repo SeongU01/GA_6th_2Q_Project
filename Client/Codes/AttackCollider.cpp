@@ -66,14 +66,27 @@ void AttackCollider::LateUpdate(const float& deltaTime)
 {
 }
 
-void AttackCollider::Initialize(const wchar_t* name, int width, int height)
-{	
-	_maxCoordX = width;
-	_maxCoordY = height;
-	_colliders.resize(height);
+void AttackCollider::OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index)
+{
+	if (0 > coordX || 0 > coordY || _maxCoordX <= coordX || _maxCoordY <= coordY)
+		return;
+
+	auto& [_delay, _duration, _collider] = _colliders[coordY][coordX];
+	_delay = delay;
+	_duration = duration;
+	_info[index] = info;
+}
+
+void AttackCollider::ResizeCollider()
+{
+	_pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+
+	_maxCoordX = (int)_pGrid->GetTiles()[0].size();
+	_maxCoordY = (int)_pGrid->GetTiles().size();
+	_colliders.resize(_maxCoordY);
 
 	for (auto& collider : _colliders)
-		collider.resize(width);
+		collider.resize(_maxCoordX);
 
 	for (size_t i = 0; i < _colliders.size(); i++)
 	{
@@ -89,21 +102,4 @@ void AttackCollider::Initialize(const wchar_t* name, int width, int height)
 			}
 		}
 	}
-}
-
-void AttackCollider::OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index)
-{
-	if (0 > coordX || 0 > coordY || _maxCoordX <= coordX || _maxCoordY <= coordY)
-		return;
-
-	auto& [_delay, _duration, _collider] = _colliders[coordY][coordX];
-	_delay = delay;
-	_duration = duration;
-	_info[index] = info;
-}
-
-void AttackCollider::ResizeCollider()
-{
-	_pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-	Initialize(nullptr, _pGrid->GetTiles()[0].size(), _pGrid->GetTiles().size());
 }

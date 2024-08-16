@@ -1,15 +1,15 @@
 #pragma once
-#include "Base.h"
+#include "GameObject.h"
 #include "Card.h"
 
 namespace Engine
 {
-	class GameObject;
 	class TextRenderer;
 }
 
 class Card;
-class CardManager final : public Engine::Base, public Engine::SingleTon<CardManager>
+class SelectCard;
+class CardManager final : public Engine::GameObject, public Engine::SingleTon<CardManager>
 {
 	using RichText = std::tuple<unsigned int, unsigned int, std::wstring, unsigned int>;
 	friend class SingleTon;
@@ -43,5 +43,6 @@ private:
 	std::vector<std::wstring> _texts;
 	std::vector<std::list<RichText>> _richTexts;
 	std::list<int> _cardIDs;
-	Engine::GameObject* _selectCardScene = nullptr;
+
+	SelectCard* _pSelectCard = nullptr;
 };

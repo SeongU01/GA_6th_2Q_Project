@@ -5,6 +5,7 @@
 #include "Card.h"
 #include "Button.h"
 #include "CardSystem.h"
+#include "SelectCard.h"
 
 #include "Client_Define.h"
 
@@ -28,7 +29,9 @@ bool CardManager::LoadCard(const wchar_t* filePath)
     _cardIDs.push_back(3);
     _cardIDs.push_back(4);
     _cardIDs.push_back(6);
-    _cardIDs.push_back(8);    
+    _cardIDs.push_back(8);
+
+    _pSelectCard = AddComponent<SelectCard>();
 
     return true;
 }
@@ -58,32 +61,8 @@ void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 
 void CardManager::StartSelectCardScene()
 {
-    _selectCardScene = Engine::GameObject::Create();
-    _selectCardScene->SetRenderGroup((int)RenderGroup::Fade);
-
-    Engine::SpriteRenderer* pSpriteRenderer = _selectCardScene->GetComponent<Engine::SpriteRenderer>();
-    pSpriteRenderer->SetOneSelfDraw(true, [=]()
-        {
-            pSpriteRenderer->DrawFillRect({ WINCX, WINCY }, 0x000000, 0.8f);
-        });
-
-    Engine::TextRenderer* pTextRenderer = _selectCardScene->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 150.f, DWRITE_FONT_WEIGHT_BOLD);
-    pTextRenderer->SetText(L"STAGE CLEAR!!");
-    pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-    pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-    pTextRenderer->SetOffset(Vector3(0.f, 50.f, 0.f));
-
-    pTextRenderer = _selectCardScene->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 50.f, DWRITE_FONT_WEIGHT_BOLD);
-    pTextRenderer->SetText(L"획득할 카드를 선택하세요.");
-    pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-    pTextRenderer->SetOffset(Vector3(0.f, 900.f, 0.f));
-    pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", _selectCardScene);
-
     Card* pCard[3];
     int ID[3];
-    CardPoolShuffle();
 
     for (int i = 0; i < 3; i++)
     {
@@ -95,35 +74,10 @@ void CardManager::StartSelectCardScene()
         pCard[i]->transform.position = Vector3((WINCX >> 1) + 400.f - 400.f * i, WINCY >> 1, 0.f);
         pCard[i]->gameObject.SetRenderGroup((int)RenderGroup::Fade);
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", &pCard[i]->gameObject);
-        pCard[i]->_isSelectCard = true;        
+        pCard[i]->_isSelectCard = true;
     }
-
-    for (int i = 0; i < 3; i++)
-    {
-        Button* pButton = _selectCardScene->AddComponent<Button>();
-        pButton->SetRange(pCard[i]->transform.position, { 540.f * 0.6f, 786.f * 0.6f });
-        pButton->SetOnHover([=]() { pCard[i]->transform.scale = Vector3(0.66f, 0.66f, 0.f); });
-        pButton->SetCancel([=]() { pCard[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f); });
-        pButton->SetOnPressed([=]()
-            {
-                CardSystem* pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
-                pCardSystem->AddCard(CloneCard(pCard[i]->GetID()));
-                pCardSystem->AddCard(CloneCard(pCard[i]->GetID()));
-                pCard[i]->gameObject.SetActive(false);
-                pCard[i]->_isSelectCard = false;
-
-                for (int j = 0; j < 3; j++)
-                {
-                    if (i != j)
-                        _cardIDs.push_back(pCard[j]->GetID());
-
-                    pCard[j]->gameObject.SetDead();
-                }
-
-                _selectCardScene->SetDead();
-                return;
-            });
-    }
+    
+    _pSelectCard->OnSelectCard(pCard);
 }
 
 Card* CardManager::CloneCard(int ID)

@@ -30,9 +30,9 @@ public:
 
 public:
 	const AttackInfo& GetCurrentAttackInfo(int index) const { return _info[index]; }
-	void Initialize(const wchar_t* name, int width, int height);
 	void OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index);
 	void ResizeCollider();
+
 private:
 	std::vector<std::vector<std::tuple<float, float, Engine::Collider*>>> _colliders;
 	AttackInfo _info[2];
