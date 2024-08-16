@@ -106,7 +106,7 @@ void Attribute::UseStack(State state)
 
 void Attribute::AddState(unsigned long long flag, int stack)
 {
-	if (1 >= flag) return;
+	if (1 >= flag || AttributeFlag::OverCharge == flag) return;
 
 	unsigned long long n = flag;
 	int count = 0;

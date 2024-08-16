@@ -2,6 +2,8 @@
 #include "GageHUD.h"
 #include "Client_Define.h"
 
+constexpr float RECOVERYCOOLTIME = 3.f;
+
 PlayerMP::PlayerMP(const wchar_t* name)
 	:MonoBehavior(name)
 {
@@ -10,7 +12,7 @@ PlayerMP::PlayerMP(const wchar_t* name)
 void PlayerMP::Awake()
 {
 	auto pGameObject = Engine::GameObject::Create();
-	pGameObject->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, 5.f,0);
+	pGameObject->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, RECOVERYCOOLTIME, 0);
 	pGameObject->SetRenderGroup(0);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 }
@@ -38,7 +40,7 @@ void PlayerMP::NaturalRecovery(const float& deltaTime)
 {
 	_mpRecoveryTime += deltaTime;
 
-	if (_mpRecoveryTime >= 5.f)
+	if (_mpRecoveryTime >= RECOVERYCOOLTIME)
 	{
 		_mp++;
 		_mpRecoveryTime = 0.f;
