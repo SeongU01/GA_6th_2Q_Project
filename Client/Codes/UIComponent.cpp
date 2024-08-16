@@ -41,6 +41,4 @@ void UIComponent::SetActives(bool check)
 
 void UIComponent::Free()
 {
-	for (auto& ui : _UIs)
-		ui->SetDead();
 }
