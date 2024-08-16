@@ -54,6 +54,10 @@ void Player::ResetPlayer(const Vector3& startPos)
 
 void Player::Awake()
 {	
+	//콜라이더
+	Engine::Collider* pCollider=AddComponent<Engine::Collider>(L"Body");
+	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
+	gameObject._isDrawCollider = true;
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
 
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
@@ -122,9 +126,9 @@ void Player::Start()
 	_gridPosition = _startPosition;
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 
-	// 스테이지 바뀔 때 마다 갱신
-	MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-	_pAttackCollider->Initialize(L"PlayerAttack", (int)info.width, (int)info.height);
+	//// 스테이지 바뀔 때 마다 갱신
+	//MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
+	//_pAttackCollider->Initialize(L"PlayerAttack", (int)info.width, (int)info.height);
 }
 
 void Player::Update(const float& deltaTime)

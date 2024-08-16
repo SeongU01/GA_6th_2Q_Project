@@ -12,7 +12,9 @@ public:
 	void OnStart() override;
 	void OnExit() override;
 	
+public:
 	void ShowAttackRange();
+	void Attack();
 
 	virtual void ShowInfo();
 	virtual void CloseInfo();

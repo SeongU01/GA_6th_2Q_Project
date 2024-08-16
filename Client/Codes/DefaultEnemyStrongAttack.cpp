@@ -4,7 +4,10 @@
 #include "Pannel.h"
 #include "TextRenderer.h"
 #include "GridEffect.h"
+#include "Effect.h"
+#include "AttackCollider.h"
 
+#include "DefaultEnemyScript.h"
 #include "DataManager.h"
 #include "Client_Define.h"
 int DefaultEnemyStrongAttack::Update(const float& deltaTime)
@@ -17,7 +20,7 @@ int DefaultEnemyStrongAttack::Update(const float& deltaTime)
 		if (_currTime >= _delayTime)
 		{
 			_currTime = _delayTime;
-			_pAnimation->ChangeAnimation(L"Attack");
+			_pAnimation->ChangeAnimation(L"StrongAttack");
 			_isStateOn = true;
 		}
 	}
@@ -26,7 +29,7 @@ int DefaultEnemyStrongAttack::Update(const float& deltaTime)
 
 int DefaultEnemyStrongAttack::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Attack") && _pAnimation->IsLastFrame())
+	if (_isStateOn && _pAnimation->IsCurrAnimation(L"StrongAttack") && _pAnimation->IsLastFrame())
 		return (int)DefaultEnemy::FSM::Idle;
 	return 0;
 }
@@ -76,9 +79,44 @@ void DefaultEnemyStrongAttack::CloseInfo()
 	_pPannel->SetActive(false);
 }
 
+void DefaultEnemyStrongAttack::Attack()
+{
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.03f;
+	info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
+	info.position = _pOwner->transform.position;
+	info.scale = _pOwner->transform.scale*1.5f;
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+
+
+	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
+	AttackCollider::AttackInfo attackInfo;
+	attackInfo.damage = 1;
+	const Vector3& gridPosition = *_pGridPosition;
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(12);
+	for (auto& range : ranges)
+	{
+		int x = int(range.first + gridPosition.x);
+		int y = int(range.second + gridPosition.y);
+		pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
+	}
+}
+
 DefaultEnemyStrongAttack* DefaultEnemyStrongAttack::Create(DefaultEnemyScript* pScript)
 {
 	DefaultEnemyStrongAttack* pInstance = new DefaultEnemyStrongAttack;
 	pInstance->DefaultEnemyState::Initialize(pScript);
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 6;
+	frameEvent.animation = L"StrongAttack";
+	frameEvent.isRepeat = true;
+	frameEvent.function = [pInstance]()
+		{
+			pInstance->Attack();
+		};
+	pInstance->_pAnimation->AddFrameEvent(frameEvent);
 	return pInstance;
 }

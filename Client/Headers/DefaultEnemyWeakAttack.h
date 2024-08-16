@@ -16,7 +16,7 @@ public:
 
 	virtual void ShowInfo();
 	virtual void CloseInfo();
-
+	void Attack();
 	void ShowAttackRange();
 public:
 	static DefaultEnemyWeakAttack* Create(DefaultEnemyScript* pScript);

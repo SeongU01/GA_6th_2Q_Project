@@ -97,9 +97,6 @@ void DefaultEnemyScript::Start()
 	_pFSM->AddState((int)DefaultEnemy::FSM::StrongAttack, DefaultEnemyStrongAttack::Create(this));
 	_pFSM->AddState((int)DefaultEnemy::FSM::Death, DefaultEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)DefaultEnemy::FSM::Idle);
-
-	MapInfo info = DataManager::GetInstance()->GetMapInfo(L"Stage1");
-	_pAttackCollider->Initialize(L"PlayerAttack", (int)info.width, (int)info.height);
 }
 
 void DefaultEnemyScript::Update(const float& deltaTime)
@@ -128,6 +125,7 @@ void DefaultEnemyScript::OnCollision(Engine::CollisionInfo& info)
 		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->ShowInfo();
 	}
+	
 }
 
 void DefaultEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)

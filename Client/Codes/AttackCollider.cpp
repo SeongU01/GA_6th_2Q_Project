@@ -14,6 +14,7 @@ AttackCollider::AttackCollider()
 
 void AttackCollider::Awake()
 {
+	ResizeCollider();
 }
 
 void AttackCollider::Start()
@@ -74,8 +75,6 @@ void AttackCollider::Initialize(const wchar_t* name, int width, int height)
 	for (auto& collider : _colliders)
 		collider.resize(width);
 
-	_pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-
 	for (size_t i = 0; i < _colliders.size(); i++)
 	{
 		for (size_t j = 0; j < _colliders[i].size(); j++)
@@ -101,4 +100,10 @@ void AttackCollider::OnCollider(float delay, float duration, int coordX, int coo
 	_delay = delay;
 	_duration = duration;
 	_info[index] = info;
+}
+
+void AttackCollider::ResizeCollider()
+{
+	_pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
+	Initialize(nullptr, _pGrid->GetTiles()[0].size(), _pGrid->GetTiles().size());
 }

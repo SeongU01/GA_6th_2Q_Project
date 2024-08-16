@@ -1,6 +1,7 @@
 ﻿Animation,TextureTag,Duration
-4,,
+5,,
 Idle,Enemy_Default_Idle,0.06
 Move,Enemy_Default_Move,0.06
-Attack,Enemy_Default_Attack,0.06
+WeakAttack,Enemy_Default_Attack,0.06
 Death,Enemy_Default_Death,0.06
+StrongAttack,Enemy_Default_Attack,0.06
