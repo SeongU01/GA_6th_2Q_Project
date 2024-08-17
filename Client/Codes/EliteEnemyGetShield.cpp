@@ -56,7 +56,7 @@ void EliteEnemyGetShield::OnStart()
   _directionCheck = false;
   _isStateOn = false;
   _currTime = 0.f;
-  _delayTime = (float)Engine::RandomGeneratorInt(4, 6);
+  _delayTime = (float)Engine::RandomGeneratorInt(3,5);
 }
 
 void EliteEnemyGetShield::OnExit()

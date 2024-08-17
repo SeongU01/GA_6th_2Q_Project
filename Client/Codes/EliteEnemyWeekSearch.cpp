@@ -8,6 +8,8 @@
 #include "GridEffect.h"
 #include "Player.h"
 #include "DefenseScript.h"
+#include "AttackCollider.h"
+#include "Effect.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -65,7 +67,7 @@ void EliteEnemyWeekSearch::OnStart()
 	_directionCheck = false;
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(4, 6);
+	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
 }
 
 void EliteEnemyWeekSearch::OnExit()
@@ -93,6 +95,45 @@ void EliteEnemyWeekSearch::CloseInfo()
 	_pPannel->SetActive(false);
 }
 
+void EliteEnemyWeekSearch::Attack()
+{
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.03f;
+	info.textureTag = L"AIEffect_Attack_Anim_VFX_Stab_E_Anim_VFX_Stab_01_E";
+	info.scale = _pOwner->transform.scale;
+
+
+	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
+	AttackCollider::AttackInfo attackInfo;
+	attackInfo.damage = 1;
+	const Vector3& gridPosition = *_pGridPosition;
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(16);
+	if (_currDirection.x >= 0)
+	{
+		info.position = _pOwner->transform.position + Vector3(90.f, -30.f, 0.f);
+		for (auto& range : ranges)
+		{
+			int x = int(range.first + gridPosition.x);
+			int y = int(range.second + gridPosition.y);
+			pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
+		}
+	}
+	else
+	{
+		info.position = _pOwner->transform.position + Vector3(-90.f, -30.f, 0.f);
+		for (auto& range : ranges)
+		{
+			int x = int(gridPosition.x - range.first);
+			int y = int(range.second + gridPosition.y);
+			pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
+		}
+	}
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+}
+
 void EliteEnemyWeekSearch::ShowAttackRange()
 {
 	const Vector3& gridPosition = *_pGridPosition;
@@ -113,5 +154,14 @@ EliteEnemyWeekSearch* EliteEnemyWeekSearch::Create(EliteEnemyScript* pScript)
 {
 	EliteEnemyWeekSearch* pInstance = new EliteEnemyWeekSearch;
 	pInstance->EliteEnemyState::Initialize(pScript);
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 6;
+	frameEvent.animation = L"Stab";
+	frameEvent.isRepeat = true;
+	frameEvent.function = [pInstance]()
+		{
+			pInstance->Attack();
+		};
+	pInstance->_pAnimation->AddFrameEvent(frameEvent);
 	return pInstance;
 }

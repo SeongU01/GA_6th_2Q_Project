@@ -17,6 +17,7 @@
 #include "Zero.h"
 #include "Player.h"
 #include "TextRenderer.h"
+#include "AttributeHUD.h"
 
 #include "Attribute.h"
 #include "AttackCollider.h"
@@ -70,6 +71,7 @@ void EliteEnemyScript::Awake()
 	// 임시 추가한것
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
+	AddComponent<AttributeHUD>(_pAttribute);
 
 }
 

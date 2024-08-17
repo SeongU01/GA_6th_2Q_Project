@@ -14,6 +14,7 @@ public:
 public:
 	virtual void ShowInfo();
 	virtual void CloseInfo();
+	void Attack();
 	void ShowAttackRange();
 public:
 	static EliteEnemyWeekSearch* Create(EliteEnemyScript* pScript);
