@@ -6,6 +6,7 @@
 #include "ToolTip.h"
 #include "Button.h"
 #include "TextRenderer.h"
+#include "SpriteRenderer.h"
 #include "UI.h"
 #include "Client_Define.h"
 
@@ -24,22 +25,26 @@ void DeckSystem::Awake()
 	//µ¶
 	pTextRenderer->SetText(L"µ¶");
 	pTextRenderer->SetDrawRect(100.f, 50.f);
-	pTextRenderer->SetOffset(Vector3(70.f, -30.f, 0.f));
+	pTextRenderer->SetOffset(Vector3(60.f, -30.f, 0.f));
 	pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
 	pTextRenderer = AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF);
 	_pDeck = AddComponent<Engine::TextRenderer>(L"Deck", 0xFFFFFF);
 	_pDeck->SetDrawRect(100.f, 50.f);
 	_pDeck->SetOffset(Vector3(25.f, -30.f, 0.f));
 	_pDeck->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	AddUI(CreateInfo(L"Card_Re_Icon", L"UI_HUD_Card", 4, { 130 , -15.f, 1.0f }, { 0.15f, 0.15f, 1.0f }, &transform)); //æ∆¿Ãƒ‹
+	//_icon->SetIndex(4);
+
 	//π¶¡ˆ
 	pTextRenderer->SetText(L"π¶¡ˆ");
 	pTextRenderer->SetDrawRect(100.f, 50.f);
-	pTextRenderer->SetOffset(Vector3(70.f, 20.f, 0.f));
+	pTextRenderer->SetOffset(Vector3(60.f, 20.f, 0.f));
 	pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	_pGrave = AddComponent<Engine::TextRenderer>(L"Grave", 0xFFFFFF);
 	_pGrave->SetDrawRect(100.f, 50.f);
 	_pGrave->SetOffset(Vector3(25.f, 20.f, 0.f));
 	_pGrave->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
+	AddUI(CreateInfo(L"Card_Grave_Icon", L"UI_HUD_Card", 5, { 130 , 35.f, 1.0f }, { 0.15f, 0.15f, 1.0f }, &transform)); //æ∆¿Ãƒ‹
 }
 
 void DeckSystem::Start()
