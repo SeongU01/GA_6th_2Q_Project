@@ -13,6 +13,7 @@ class DefenseScript;
 class Player;
 class AStar;
 class Pannel;
+class ToolTip;
 class AttackCollider;
 class Attribute;
 
@@ -41,6 +42,7 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
+	ToolTip* _pToolTip = nullptr;
 
 
 	AttackCollider* _pAttackCollider = nullptr;

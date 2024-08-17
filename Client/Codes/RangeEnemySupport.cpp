@@ -1,7 +1,6 @@
 #include "RangeEnemySupport.h"
 //component
 #include "Animation.h"
-#include "Pannel.h"
 #include "TextRenderer.h"
 #include "GridEffect.h"
 
@@ -75,13 +74,13 @@ bool RangeEnemySupport::CheckAttackRange(int x, int y)
 
 void RangeEnemySupport::ShowInfo()
 {
+	__super::ShowInfo();
 	if (_pAnimation->IsCurrAnimation(L"Idle"))
 	{
 		ShowAttackRange();
 	}
 
 	_pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -92,7 +91,7 @@ void RangeEnemySupport::ShowInfo()
 
 void RangeEnemySupport::CloseInfo()
 {
-	_pPannel->SetActive(false);
+	__super::CloseInfo();
 }
 
 RangeEnemySupport* RangeEnemySupport::Create(RangeEnemyScript* pScript)

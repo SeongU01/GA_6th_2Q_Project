@@ -1,5 +1,7 @@
 #pragma once
 #include "State.h"
+#include "ToolTip.h"
+#include "Pannel.h"
 #include "EliteEnemyInfomation.h"
 namespace Engine
 {
@@ -12,7 +14,6 @@ class GridEffect;
 class HP;
 class GridMovement;
 class AStar;
-class Pannel;
 class EliteEnemyScript;
 class Player;
 class DefenseScript;
@@ -25,8 +26,16 @@ protected:
 	virtual ~EliteEnemyState() = default;
 	void Initialize(EliteEnemyScript* pScript);
 public:
-	virtual void ShowInfo() {};
-	virtual void CloseInfo() {};
+	virtual void ShowInfo()
+	{
+		_pToolTip->ActiveToolTip(true);
+		_pPannel->SetActive(true);
+	};
+	virtual void CloseInfo()
+	{
+		_pToolTip->ActiveToolTip(false);
+		_pPannel->SetActive(false);
+	};
 protected:
 	bool CheckRange(int x, int y);
 protected:
@@ -42,6 +51,7 @@ protected:
 	GridMovement* _pMovement = nullptr;
 	AStar* _pAstar = nullptr;
 	Pannel* _pPannel = nullptr;
+	ToolTip* _pToolTip = nullptr;
 	GridEffect* _pGridEffect = nullptr;
 	std::wstring _infoText;
 	Vector3 _currDirection = {1.f,0.f,0.f};

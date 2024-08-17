@@ -59,13 +59,13 @@ void DefaultEnemyStrongAttack::ShowAttackRange()
 
 void DefaultEnemyStrongAttack::ShowInfo()
 {
+	__super::ShowInfo();
 	if (_pAnimation->IsCurrAnimation(L"Idle"))
 	{
 		ShowAttackRange();
 	}
 
 	_pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -76,7 +76,7 @@ void DefaultEnemyStrongAttack::ShowInfo()
 
 void DefaultEnemyStrongAttack::CloseInfo()
 {
-	_pPannel->SetActive(false);
+	__super::CloseInfo();
 }
 
 void DefaultEnemyStrongAttack::Attack()

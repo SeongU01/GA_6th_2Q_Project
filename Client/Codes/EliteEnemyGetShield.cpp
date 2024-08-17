@@ -2,7 +2,6 @@
 #include "EliteEnemyScript.h"
 //component
 #include "Animation.h"
-#include "Pannel.h"
 #include "TextRenderer.h"
 #include "GridEffect.h"
 #include "Player.h"
@@ -66,8 +65,8 @@ void EliteEnemyGetShield::OnExit()
 
 void EliteEnemyGetShield::ShowInfo()
 {
+	__super::ShowInfo();
 	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -78,7 +77,7 @@ void EliteEnemyGetShield::ShowInfo()
 
 void EliteEnemyGetShield::CloseInfo()
 {
-  _pPannel->SetActive(false);
+	__super::CloseInfo();
 }
 
 

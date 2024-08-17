@@ -2,7 +2,6 @@
 //component
 #include "Animation.h"
 #include "Astar.h"
-#include "Pannel.h"
 #include "TextRenderer.h"
 #include "GridMovement.h"
 
@@ -45,8 +44,8 @@ void EliteEnemyMove::OnExit()
 
 void EliteEnemyMove::ShowInfo()
 {
+	__super::ShowInfo();
 	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -57,7 +56,7 @@ void EliteEnemyMove::ShowInfo()
 
 void EliteEnemyMove::CloseInfo()
 {
-	_pPannel->SetActive(false);
+	__super::CloseInfo();
 }
 
 EliteEnemyMove* EliteEnemyMove::Create(EliteEnemyScript* pScript)

@@ -6,7 +6,6 @@
 #include "Player.h"
 #include "DefenseScript.h"
 #include "Astar.h"
-#include "Pannel.h"
 #include "HP.h"
 #include "Attribute.h"
 
@@ -61,8 +60,8 @@ void EliteEnemyIdle::OnExit()
 
 void EliteEnemyIdle::ShowInfo()
 {
+	__super::ShowInfo();
 	_pTextRenderer->SetOffset(Vector3(-30.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 
 	_infoText = L"[None]";
 	_pTextRenderer->SetText(_infoText.c_str());
@@ -70,7 +69,7 @@ void EliteEnemyIdle::ShowInfo()
 
 void EliteEnemyIdle::CloseInfo()
 {
-	_pPannel->SetActive(false);
+	__super::CloseInfo();
 }
 
 EliteEnemy::FSM EliteEnemyIdle::SelectNextBehave()

@@ -702,9 +702,6 @@
     <ClInclude Include="..\Headers\MPHUD.h">
       <Filter>05. UI\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\DefaultEnemyScript.h">
-      <Filter>03. GameObject\Enemy\Default\Script</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\DefaultEnemyInfomation.h">
       <Filter>03. GameObject\Enemy\Default</Filter>
     </ClInclude>
@@ -806,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\HitColor.h">
       <Filter>04. Component\HitColor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DefaultEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Default\Script</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

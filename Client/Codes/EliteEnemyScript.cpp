@@ -12,6 +12,7 @@
 #include "HPHUD.h"
 #include "Collider.h"
 #include "Pannel.h"
+#include "ToolTip.h"
 #include "Defense.h"
 #include "DefenseScript.h"
 #include "Zero.h"
@@ -68,6 +69,10 @@ void EliteEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer", D2D1::ColorF::Black, 20.f);
 	_pPannel->SetActive(false);
+
+	_pToolTip =AddComponent<ToolTip>(L"EliteToolTip");
+	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Character_003"), Vector3(0.0f, 0.0f, 0.0f));
+
 	// 임시 추가한것
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();

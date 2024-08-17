@@ -12,6 +12,7 @@ class GridMovement;
 class DefenseScript;
 class AStar;
 class Pannel;
+class ToolTip;
 class Attribute;
 class AttackCollider;
 class DefaultEnemyScript:public Engine::MonoBehavior
@@ -41,7 +42,7 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
-
+	ToolTip* _pToolTip = nullptr;
 	AttackCollider* _pAttackCollider = nullptr;
 	Attribute* _pAttribute = nullptr;
 

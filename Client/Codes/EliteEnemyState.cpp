@@ -22,6 +22,7 @@ void EliteEnemyState::Initialize(EliteEnemyScript* pScript)
 	_pMovement = pScript->_movement;
 	_pAstar = pScript->_aStar;
 	_pPannel = pScript->_pPannel;
+	_pToolTip = pScript->_pToolTip;
 	_pTextRenderer = _pPannel->GetComponent<Engine::TextRenderer>();
 	_pTextRenderer->SetDrawRect(200.f, 50.f);
 	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();

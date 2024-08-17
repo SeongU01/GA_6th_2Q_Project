@@ -12,6 +12,7 @@ class GridMovement;
 class Player;
 class AStar;
 class Pannel;
+class ToolTip;
 class RangeEnemyScript :public Engine::MonoBehavior
 {
 	friend class RangeEnemyState;
@@ -37,6 +38,7 @@ private:
 	Engine::FiniteStateMachine* _pFSM = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
+	ToolTip* _pToolTip = nullptr;
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;

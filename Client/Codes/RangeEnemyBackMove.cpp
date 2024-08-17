@@ -3,7 +3,6 @@
 //component
 #include "Animation.h"
 #include "Astar.h"
-#include "Pannel.h"
 #include "TextRenderer.h"
 #include "GridMovement.h"
 #include "Grid.h"
@@ -114,8 +113,8 @@ Vector3 RangeEnemyBackMove::FindBFS(int step)
 
 void RangeEnemyBackMove::ShowInfo()
 {
+    __super::ShowInfo();
 	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -126,7 +125,7 @@ void RangeEnemyBackMove::ShowInfo()
 
 void RangeEnemyBackMove::CloseInfo()
 {
-	_pPannel->SetActive(false);
+    __super::CloseInfo();
 }
 
 RangeEnemyBackMove* RangeEnemyBackMove::Create(RangeEnemyScript* pScript)

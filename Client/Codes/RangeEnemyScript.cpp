@@ -60,6 +60,10 @@ void RangeEnemyScript::Awake()
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
 	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer", D2D1::ColorF::Black, 20.f);
 	_pPannel->SetActive(false);
+
+	_pToolTip = AddComponent<ToolTip>(L"RangeToolTip");
+	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Character_002"), Vector3(0.0f, 0.0f, 0.0f));
+
 }
 
 void RangeEnemyScript::Start()

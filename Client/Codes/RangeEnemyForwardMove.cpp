@@ -3,7 +3,6 @@
 //component
 #include "Animation.h"
 #include "Astar.h"
-#include "Pannel.h"
 #include "TextRenderer.h"
 
 #include "Client_Define.h"
@@ -46,8 +45,8 @@ void RangeEnemyForwardMove::OnExit()
 
 void RangeEnemyForwardMove::ShowInfo()
 {
+	__super::ShowInfo();
 	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
-	_pPannel->SetActive(true);
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -58,7 +57,7 @@ void RangeEnemyForwardMove::ShowInfo()
 
 void RangeEnemyForwardMove::CloseInfo()
 {
-	_pPannel->SetActive(false);
+	__super::CloseInfo();;
 }
 
 RangeEnemyForwardMove* RangeEnemyForwardMove::Create(RangeEnemyScript* pScript)

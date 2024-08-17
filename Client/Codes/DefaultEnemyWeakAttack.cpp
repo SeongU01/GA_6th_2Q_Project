@@ -50,13 +50,12 @@ void DefaultEnemyWeakAttack::OnExit()
 
 void DefaultEnemyWeakAttack::ShowInfo()
 {
+    __super::ShowInfo();
   if (_pAnimation->IsCurrAnimation(L"Idle"))
   {
     ShowAttackRange();
   }
   _pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
-  _pPannel->SetActive(true);
-  
   std::wstringstream wss;
   wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
   std::wstring timeString = wss.str();
@@ -67,7 +66,7 @@ void DefaultEnemyWeakAttack::ShowInfo()
 
 void DefaultEnemyWeakAttack::CloseInfo()
 {
-  _pPannel->SetActive(false);
+    __super::CloseInfo();
 }
 
 void DefaultEnemyWeakAttack::Attack()

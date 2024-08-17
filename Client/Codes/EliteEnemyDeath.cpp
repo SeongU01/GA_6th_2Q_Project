@@ -6,7 +6,6 @@
 #include "Grid.h"
 #include "HPHUD.h"
 #include "AttributeHUD.h"
-#include "Pannel.h"
 
 #include "Client_Define.h"
 #include "EliteEnemyScript.h"
