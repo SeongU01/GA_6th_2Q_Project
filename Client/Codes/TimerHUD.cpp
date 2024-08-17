@@ -20,6 +20,10 @@ void TimerHUD::Awake()
 void TimerHUD::Start()
 {
 	UI* backpUI;
+	//비네팅
+	_pBene = AddUI(CreateInfo(L"UI_Bene", L"UI_HUD_Bene", 0, { 0.0f , 0.f,0.0f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	_pBene->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), -10.f);
+	_pBene->SetActive(false);
 	//카드 라인
 	AddUI(CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960.0f , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	backpUI = AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform));
@@ -103,6 +107,9 @@ void TimerHUD::Update(const float& deltaTime)
 		_pYellow->SetScale({ 0.f,0.f,0.f });
 	}
 
+	_pBene->SetActive(_pTimer->GetisSlow());
+	if (timer <= 20) //time limit!!!!
+		_pBene->SetFrame(1);
 }
 
 void TimerHUD::LateUpdate(const float& deltaTime)
