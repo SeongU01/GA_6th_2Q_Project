@@ -15,6 +15,7 @@
 #include "HPHUD.h"
 #include "TopHUD.h"
 #include "MPHUD.h"
+#include "Fade.h"
 
 // Object
 #include "CollisionManager.h"
@@ -231,6 +232,17 @@ bool DefaultStageScene::UIinitialize()
     pGameClearObj->AddComponent<GameClearHUD>();
     pGameClearObj->AddComponent<GameClearButtons>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Top);    
+
+    //페이드 인.
+    Fade::FadeInfo info;
+    info.option = Fade::Fade_Option::Fade_In;
+    info.color = 0xFF000000;
+    info.duration = 2.0f;
+    info.life = 2.0f;
+    Engine::GameObject* pFadeObj = Engine::GameObject::Create();
+    Fade* _pFade = pFadeObj->AddComponent<Fade>(info);
+    
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Fade", pFadeObj); pFadeObj->SetRenderGroup((int)RenderGroup::Fade);
 
     return true;
 }
