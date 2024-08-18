@@ -8,10 +8,11 @@
 void Obstacle::initialize(const std::pair<Vector3, Vector3>& gridRange,  const Vector3& yoffset, const wchar_t* textureTag)
 {
   SetRenderGroup((int)RenderGroup::Object);
-  AddComponent<ObstacleScript>(L"ObstacleScript", gridRange);
+  AddComponent<ObstacleScript>(L"ObstacleScript", gridRange, textureTag);
   if(nullptr!=textureTag)
    _pSpriteRenderer->BindTexture(Resource::FindTexture(textureTag));
   _pSpriteRenderer->SetDrawOffset(yoffset);
+
 }
 
 Obstacle* Obstacle::Create(const std::pair<Vector3, Vector3>& gridRange, const Vector3& yoffset,  const wchar_t* textureTag)

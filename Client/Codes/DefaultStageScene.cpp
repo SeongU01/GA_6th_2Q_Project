@@ -150,6 +150,15 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
     _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
                                        Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //방어건물
+                                       Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
+
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //장애물
+                                       Engine::FindObjectList((int)LayerGroup::Object, L"Buliding"));
+    
+    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //산
+                                        Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
+
     return 0;
 }
 

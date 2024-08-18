@@ -11,7 +11,7 @@ void Defense::Initialize(const std::pair<Vector3, Vector3>& gridRange, const Vec
 	name = tag;
 	SetName(name.c_str());
 	AddComponent<HP>(L"HP", 2);
-	AddComponent<DefenseScript>(L"DefenseScript", gridRange);
+	AddComponent<DefenseScript>(L"DefenseScript", gridRange, textureTag);
 	_pSpriteRenderer->BindTexture(Resource::FindTexture(textureTag));
 	_pSpriteRenderer->SetDrawOffset(yoffset);
 }
