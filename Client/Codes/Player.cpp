@@ -59,7 +59,11 @@ void Player::Awake()
 	//콜라이더
 	Engine::Collider* pCollider=AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
+
+#ifdef _DEBUG
 	gameObject._isDrawCollider = true;
+#endif // _DEBUG
+
 	_pAnimation = AddComponent<Engine::Animation>(L"Animation");
 
 	if (false == _pAnimation->LoadAnimation(L"Player_Player"))
@@ -152,11 +156,12 @@ void Player::LateUpdate(const float& deltaTime)
 
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
-	if (*info.other == L"Body")
+	if (*info.itSelf == L"Attack" && * info.other == L"Body")
 	{		
 		HP* pHP = info.other->GetComponent<HP>();
 
 		Attribute* pAttribute = info.other->GetComponent<Attribute>();
+
 		if (nullptr == pAttribute)
 			return;
 

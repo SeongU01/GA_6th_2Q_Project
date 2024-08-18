@@ -209,6 +209,9 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 	{
 		if (Input::IsKeyDown(Input::DIM_RB))
 		{
+			if (!_isAddQueue)
+				return;
+
 			for (int i = 0; i < 2; i++)
 			{
 				if (CardEffectType::PathAttack == _cardData.effectType[i])
