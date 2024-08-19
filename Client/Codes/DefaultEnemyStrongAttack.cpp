@@ -29,6 +29,9 @@ int DefaultEnemyStrongAttack::Update(const float& deltaTime)
 
 int DefaultEnemyStrongAttack::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsCurrAnimation(L"StrongAttack") && _pAnimation->IsLastFrame())
 		return (int)DefaultEnemy::FSM::Idle;
 	return 0;
@@ -43,6 +46,7 @@ void DefaultEnemyStrongAttack::OnStart()
 
 void DefaultEnemyStrongAttack::OnExit()
 {
+	CloseInfo();
 }
 
 void DefaultEnemyStrongAttack::ShowAttackRange()

@@ -16,7 +16,9 @@ int DefaultEnemyMove::Update(const float& deltaTime)
 	if(!_isStateOn)
 	{
 		if (_pAnimation->IsCurrAnimation(L"Idle"))
+		{
 			_currTime += deltaTime;
+		}
 
 		if (_currTime >= _delayTime)
 		{
@@ -31,6 +33,8 @@ int DefaultEnemyMove::Update(const float& deltaTime)
 
 int DefaultEnemyMove::LateUpdate(const float& deltaTime)
 {
+	if(!_isStateOn)
+		ShowInfo();
 	if (_isStateOn&&_pAnimation->IsCurrAnimation(L"Move")&&_pAnimation->IsLastFrame())
 		return (int)DefaultEnemy::FSM::Idle;
 	return 0;
@@ -45,6 +49,7 @@ void DefaultEnemyMove::OnStart()
 
 void DefaultEnemyMove::OnExit()
 {
+	CloseInfo();
 }
 
 void DefaultEnemyMove::ShowInfo()
