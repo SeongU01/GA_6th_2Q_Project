@@ -47,7 +47,6 @@ private:
 
 	AttackCollider* _pAttackCollider = nullptr;
 	Attribute* _pAttribute = nullptr;
-
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;

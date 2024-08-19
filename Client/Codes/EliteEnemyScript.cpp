@@ -18,7 +18,6 @@
 #include "Zero.h"
 #include "Player.h"
 #include "TextRenderer.h"
-#include "AttributeHUD.h"
 
 #include "Attribute.h"
 #include "AttackCollider.h"
@@ -34,6 +33,7 @@
 
 #include "EliteEnemyInfomation.h"
 #include "Client_Define.h"
+
 EliteEnemyScript::EliteEnemyScript(const wchar_t* name, const Vector3& startPos, const std::wstring& _targetName)
 	:MonoBehavior(name),_startPosition(startPos),_targetObjectName(_targetName)
 {
