@@ -38,7 +38,7 @@ void DefaultEnemyStrongAttack::OnStart()
 {
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+	_delayTime = (float)Engine::RandomGeneratorInt(2,4);
 }
 
 void DefaultEnemyStrongAttack::OnExit()
@@ -87,7 +87,7 @@ void DefaultEnemyStrongAttack::Attack()
 	info.aniSpeed = 0.03f;
 	info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
 	info.position = _pOwner->transform.position;
-	info.scale = _pOwner->transform.scale*1.5f;
+	info.scale = _pOwner->transform.scale*1.15f;
 	pEffect->AddComponent<Effect>(info);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 

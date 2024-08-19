@@ -41,7 +41,7 @@ void DefaultEnemyWeakAttack::OnStart()
 {
   _isStateOn = false;
   _currTime = 0.f;
-  _delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+  _delayTime = (float)Engine::RandomGeneratorInt(2,4);
 }
 
 void DefaultEnemyWeakAttack::OnExit()
@@ -77,7 +77,7 @@ void DefaultEnemyWeakAttack::Attack()
   info.aniSpeed = 0.03f;
   info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
   info.position = _pOwner->transform.position;
-  info.scale = _pOwner->transform.scale;
+  info.scale = _pOwner->transform.scale*0.7;
   pEffect->AddComponent<Effect>(info);
   Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 

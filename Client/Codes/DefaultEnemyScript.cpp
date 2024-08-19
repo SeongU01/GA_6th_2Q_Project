@@ -110,7 +110,11 @@ void DefaultEnemyScript::Start()
 
 void DefaultEnemyScript::Update(const float& deltaTime)
 {
-	
+	HP* pTarGetHp = _pDefense->GetComponent<HP>();
+	if (pTarGetHp->hp <= 0)
+	{
+		ChangeTarget();
+	}
 }
 
 void DefaultEnemyScript::LateUpdate(const float& deltaTime)
@@ -144,6 +148,56 @@ void DefaultEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)
 	{
 		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
 		currState->CloseInfo();
+	}
+}
+
+void DefaultEnemyScript::ChangeTarget()
+{
+	std::list<Engine::GameObject*>* defenseList = Engine::FindObjectList((int)LayerGroup::Object, L"Defense");
+	std::vector<std::pair<float, Engine::GameObject*>> defenses;
+	if (nullptr != defenseList)
+	{
+		for (auto it = defenseList->begin(); it != defenseList->end(); ++it)
+		{
+			Engine::GameObject* obj = *it;
+			HP* pHP = obj->GetComponent<HP>();
+			if (pHP->hp <= 0)
+			{
+				continue;
+			}
+			else
+			{
+				Vector3 distanceVector = this->transform.position - obj->transform.position;
+				float distance = XMVector2Length({ distanceVector.x,distanceVector.y }).m128_f32[0];
+				std::pair<float, Engine::GameObject*> temp = { distance,obj };
+				defenses.push_back(temp);
+			}
+		}
+		
+		if (defenses.empty())
+		{
+			_targetPosition = _gridPosition;
+		}
+		else
+		{
+
+			std::sort(defenses.begin(), defenses.end(), [](const std::pair<float, Engine::GameObject*>& a, const std::pair<float, Engine::GameObject*>& b)
+				{
+					return a.first < b.first;
+				}
+			);
+
+			Engine::GameObject* chageTargetObj = defenses[0].second;
+			_targetObjectName = chageTargetObj->GetName();
+			_pDefense = chageTargetObj->GetComponent<DefenseScript>();
+			_targetPosition = _pDefense->GetGridPosition();
+		}
+		_aStar->SetGoalPosition(_targetPosition);
+		_aStar->ReCalculatePath();
+	}
+	else 
+	{
+		throw	std::runtime_error ("No objects found for the specified tag.");
 	}
 }
 

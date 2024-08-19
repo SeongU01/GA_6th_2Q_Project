@@ -40,7 +40,7 @@ void DefaultEnemyMove::OnStart()
 { 
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
+	_delayTime = (float)Engine::RandomGeneratorInt(2, 4);
 }
 
 void DefaultEnemyMove::OnExit()
