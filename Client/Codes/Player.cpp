@@ -84,7 +84,7 @@ void Player::Awake()
 	_pTimerSystem = AddComponent<TimerSystem>();
 	AddComponent<JobQueue>();
 	_pAttackCollider = AddComponent<AttackCollider>();
-	_pSpectrum = AddComponent<Spectrum>(0.04f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
+	_pSpectrum = AddComponent<Spectrum>(0.034f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
 	_pHitColor = AddComponent<HitColor>();
 
 	// UI
@@ -123,7 +123,7 @@ void Player::Awake()
 	frameEvent.function = [=]() { _pSpectrum->SetActive(true); };
 	_pAnimation->AddFrameEvent(frameEvent);
 
-	frameEvent.activeFrame = 8;
+	frameEvent.activeFrame = 10;
 	frameEvent.function = [=]() { _pSpectrum->SetActive(false); };
 	_pAnimation->AddFrameEvent(frameEvent);
 }
