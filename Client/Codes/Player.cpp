@@ -174,10 +174,16 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			if (attackInfo.damage)
 			{
+				if (pAttribute->IsActiveState(AttributeFlag::Shield))
+				{
+					pAttribute->UseStack(Attribute::State::Shield);
+					break;
+				}
+
 				HitColor* pHitColor = info.other->GetComponent<HitColor>();
 				if (pHitColor) pHitColor->OnHitColorEffect(0.05f);
 				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
-			}
+			}			
 
 			pHP->hp -= damage;
 		}
