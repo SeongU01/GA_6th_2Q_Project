@@ -45,6 +45,9 @@ int EliteEnemyGetShield::Update(const float& deltaTime)
 
 int EliteEnemyGetShield::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Up"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
@@ -62,7 +65,7 @@ void EliteEnemyGetShield::OnStart()
 
 void EliteEnemyGetShield::OnExit()
 {
-	
+	CloseInfo();
 }
 
 void EliteEnemyGetShield::ShowInfo()

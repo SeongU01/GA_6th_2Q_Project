@@ -53,6 +53,9 @@ int EliteEnemyNomalAttack::Update(const float& deltaTime)
 
 int EliteEnemyNomalAttack::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"NomalAttack"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
@@ -70,7 +73,7 @@ void EliteEnemyNomalAttack::OnStart()
 
 void EliteEnemyNomalAttack::OnExit()
 {
-	
+	CloseInfo();
 }
 
 void EliteEnemyNomalAttack::ShowInfo()
@@ -98,7 +101,7 @@ void EliteEnemyNomalAttack::Attack()
 {
 	auto pEffect = Engine::GameObject::Create();
 	Effect::EffectInfo info;
-	info.renderGroup = RenderGroup::FrontEffect;
+	info.renderGroup = RenderGroup::EnemyFrontEffect;
 	info.aniSpeed = 0.03f;
 	info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
 	info.scale = _pOwner->transform.scale;

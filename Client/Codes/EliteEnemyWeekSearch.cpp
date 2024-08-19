@@ -54,6 +54,9 @@ int EliteEnemyWeekSearch::Update(const float& deltaTime)
 
 int EliteEnemyWeekSearch::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Stab"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
@@ -71,6 +74,7 @@ void EliteEnemyWeekSearch::OnStart()
 
 void EliteEnemyWeekSearch::OnExit()
 {
+	CloseInfo();
 }
 
 void EliteEnemyWeekSearch::ShowInfo()
