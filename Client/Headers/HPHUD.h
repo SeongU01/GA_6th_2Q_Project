@@ -18,5 +18,6 @@ public:
 private:
 	std::vector<UI*> _HPBar;
 	HP* _pHP = nullptr;
+	int _currDirectionX = 1;
 	int _hpColor; //0: 플레이어초록 , 1: 적빨강
 };
