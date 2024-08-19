@@ -77,6 +77,7 @@ public:
 	void SetTargetPosition(const Vector3& p0, const Vector3& p1);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 	void ResetCardInfo();
+	void Reset();
 
 public:
 	void OnCollision(Engine::CollisionInfo& info) override;

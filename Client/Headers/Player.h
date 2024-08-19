@@ -45,6 +45,7 @@ public:
 
 private:
 	void DefaultMove(const float& deltaTime);
+	void CreateEffect(const Vector3& position);
 
 private:
 	GridMovement*		_movement = nullptr;
@@ -58,6 +59,7 @@ private:
 	AttackCollider*		_pAttackCollider = nullptr;
 	Spectrum*			_pSpectrum = nullptr;
 	HitColor*			_pHitColor = nullptr;
+
 private:
 	std::vector<Engine::Collider*> _attackColliders;
 	Vector3 _gridPosition = { 0.f, 2.f, 0.f };

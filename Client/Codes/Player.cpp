@@ -335,3 +335,7 @@ void Player::DefaultMove(const float& deltaTime)
 	}
 }
 
+void Player::CreateEffect(const Vector3& position)
+{
+}
+

@@ -220,6 +220,12 @@ void Card::ResetCardInfo()
 	if (_pCardEffect[1]) _pCardEffect[1]->FindGridEffect();
 }
 
+void Card::Reset()
+{
+	gameObject.SetActive(false);
+	_pCollider->SetActive(false);
+}
+
 void Card::ThrowCard()
 {
 	_isLerp = true;
@@ -558,7 +564,7 @@ void Card::ActiveEffect()
 	Sound::StopSound((int)SoundGroup::Card);
 	Sound::PlaySound("Card_Sound_Card_Execute", (int)SoundGroup::Card, 0.8f, false);
 
-	//_isAddQueue = false;
+	_pEventInvoker->BindAction(0.3f, [this]() {_isAddQueue = false; });
 
 	if (_cardData.name == L"이온 블래스트") 
 	{

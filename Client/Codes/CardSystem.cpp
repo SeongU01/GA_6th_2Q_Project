@@ -98,7 +98,15 @@ void CardSystem::StartGame()
 		_graveDeck.pop_back();
 	}
 
-	_reloadTime = RELOADCOOLTIME;	
+	while (!_handDeck.empty())
+	{
+		Card* pCard = _handDeck.back();
+		_currentDeck.push_back(pCard);
+		pCard->Reset();
+		_handDeck.pop_back();
+	}
+
+	_reloadTime = RELOADCOOLTIME;
 
 	ShuffleCard();
 	ReloadCard();
@@ -123,7 +131,6 @@ void CardSystem::DrawCard()
 		return;
 
 	pCard->gameObject.SetActive(true);
-
 
 	_handDeck.push_back(pCard);
 	_currentDeck.pop_back();

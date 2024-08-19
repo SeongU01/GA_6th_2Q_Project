@@ -70,10 +70,10 @@ void SelectCard::OnSelectCard(Card* pCards[3])
 
     for (int i = 0; i < 3; i++)
     {        
-        _pEventInvoker->BindAction(1.2f + 0.4f * i, [=]()
+        _pEventInvoker->BindAction(1.2f, [=]()
             {
                 cards[i]->gameObject.SetActive(true);
-                cards[i]->SetTargetPosition(Vector3(-1000.f, 0.f, 0.f), Vector3(0.f, 0.f, 0.f));
+                cards[i]->SetTargetPosition(Vector3(0.f, 1000.f, 0.f), Vector3(0.f, 0.f, 0.f));
                 Button* pButton = _selectCardScene->AddComponent<Button>();
                 pButton->SetRange(cards[i]->transform.position, { 540.f * 0.6f, 786.f * 0.6f });
                 pButton->SetOnHover([=]() { cards[i]->transform.scale = Vector3(0.66f, 0.66f, 0.f); });
@@ -101,7 +101,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
             });
     }
 
-    _pEventInvoker->BindAction(2.5f, [this]()
+    _pEventInvoker->BindAction(1.8f, [this]()
         {
             Engine::TextRenderer* pTextRenderer = _selectCardScene->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 50.f, DWRITE_FONT_WEIGHT_BOLD);
             pTextRenderer->SetText(L"획득할 카드를 선택하세요.");

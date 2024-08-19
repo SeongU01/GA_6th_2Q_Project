@@ -102,7 +102,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	pEventManager->SetRenderGroup((int)RenderGroup::None);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pEventManager);
 
-	_pGameManager->ChagneScene(TestScene::Create());
+	_pGameManager->ChagneScene(TitleScene::Create());
 
 	return true;
 }
