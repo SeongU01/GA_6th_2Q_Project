@@ -2,6 +2,7 @@
 #include "UIComponent.h"
 
 class Attribute;
+class ToolTip;
 class AttributeHUD : public UIComponent
 {
 public:
@@ -17,5 +18,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 private:
+	ToolTip* _pToolTip = nullptr;
 	Attribute* _pAttribute = nullptr;
+	int _currDirectionX = 1;
 };

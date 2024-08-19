@@ -33,7 +33,6 @@ void DeckSystem::Awake()
 	_pDeck->SetOffset(Vector3(25.f, -30.f, 0.f));
 	_pDeck->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	AddUI(CreateInfo(L"Card_Re_Icon", L"UI_HUD_Card", 4, { 130 , -15.f, 1.0f }, { 0.15f, 0.15f, 1.0f }, &transform)); //¾ÆÀÌÄÜ
-	//_icon->SetIndex(4);
 
 	//¹¦Áö
 	pTextRenderer->SetText(L"¹¦Áö");

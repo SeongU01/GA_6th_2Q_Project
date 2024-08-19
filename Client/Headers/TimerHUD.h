@@ -27,6 +27,7 @@ private:
 
 	UI* _pTopSkill = nullptr; //상단 타이머(스킬타이머
 	UI* _pBene = nullptr; //타임정지시 비네팅
+	UI* _pRedBene = nullptr; //붉은색 비네팅
 	Engine::TextRenderer* _pText = nullptr;
 	wchar_t _buffer[32]{};
 };
