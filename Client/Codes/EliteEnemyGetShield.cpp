@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "DefenseScript.h"
 #include "Attribute.h"
+#include "Effect.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -93,4 +94,14 @@ void EliteEnemyGetShield::GetShield()
 {
 	Attribute* pAttribute = _pOwner->GetComponent<Attribute>();
 	pAttribute->AddState(AttributeFlag::Shield, 1);
+
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.05f;
+	info.textureTag = L"AIEffect_Buff";
+	info.scale = _pOwner->transform.scale*1.5f;
+	info.position = _pOwner->transform.position+Vector3(0.f,-50.f,0.f);
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }

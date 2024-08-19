@@ -129,6 +129,7 @@ void EliteEnemyNomalAttack::Attack()
 			pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
 		}
 	}
+
 	pEffect->AddComponent<Effect>(info);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }
