@@ -32,6 +32,7 @@ public:
 	const AttackInfo& GetCurrentAttackInfo(int index) const { return _info[index]; }
 	void OnCollider(float delay, float duration, int coordX, int coordY, const AttackInfo& info, int index);
 	void ResizeCollider();
+	void ResetAttackInfo();
 
 private:
 	std::vector<std::vector<std::tuple<float, float, Engine::Collider*>>> _colliders;

@@ -70,11 +70,14 @@ void Mouse::LateUpdate(const float& deltaTime)
 
 		if (Input::IsKeyDown(Input::DIM_RB))
 		{
-			_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
-			_hoverCard->isHold = false;
-			_hoverCard->SetMouseHover(false);
-			_hoverCard = nullptr;
-			_isLineDraw = false;
+			if (!_hoverCard->IsAddQueue())
+			{
+				_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
+				_hoverCard->isHold = false;
+				_hoverCard->SetMouseHover(false);
+				_hoverCard = nullptr;
+				_isLineDraw = false;
+			}
 		}
 	}
 
@@ -95,17 +98,23 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		if (nullptr == _hoverCard)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
-			_hoverCard->SetMouseHover(true);
-			_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
+			if (!_hoverCard->IsAddQueue())
+			{
+				_hoverCard->SetMouseHover(true);
+				_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
+			}
 		}
 		else
 		{
 			if (Input::IsKeyDown(Input::DIM_LB))
 			{
-				_hoverCard->isHold = true;
-				_linePoint[0] = { _hoverCard->transform.position.x - 10.f, _hoverCard->transform.position.y - 140.f };
-				_linePoint[1] = { _hoverCard->transform.position.x + 10.f, _hoverCard->transform.position.y - 140.f };
-				_isLineDraw = true;
+				if (!_hoverCard->IsAddQueue())
+				{
+					_hoverCard->isHold = true;
+					_linePoint[0] = { _hoverCard->transform.position.x - 10.f, _hoverCard->transform.position.y - 140.f };
+					_linePoint[1] = { _hoverCard->transform.position.x + 10.f, _hoverCard->transform.position.y - 140.f };
+					_isLineDraw = true;
+				}
 			}
 		}
 	}
