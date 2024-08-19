@@ -52,7 +52,7 @@ void DefaultEnemyScript::Awake()
 
 
 	//TODO: FSM 작성하기
-	_pHP=AddComponent<HP>(L"HP", 5);
+	_pHP=AddComponent<HP>(L"HP", 3);
 	AddComponent<HPHUD>(_pHP, 1);
 
 	_aStar = AddComponent<AStar>(L"AStar",_targetObjectName);
