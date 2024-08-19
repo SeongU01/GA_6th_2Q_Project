@@ -31,21 +31,32 @@ void HPHUD::Update(const float& deltaTime)
 {
 	int currentHP = _pHP->GetHP();
 	int maxHP = _pHP->GetMaxHP();
-	
 	for (auto& ui : _UIs)
 	{
-		if (0.f > transform.scale.x)
+		if (this->transform.scale.x < 0)
 			ui->SetScale({ -1.f, 1.f, 0.f });
 		else
 			ui->SetScale({ 1.f, 1.f, 0.f });
 	}
-
-	for (int i = 0; i < maxHP; i++)
+	if (this->transform.scale.x < 0)
 	{
-		if (i < currentHP)
-			_HPBar[i]->SetFrame(_hpColor);
-		else
-			_HPBar[i]->SetFrame(2);
+		for (int i = 0; i < maxHP; i++)
+		{
+			if (i < currentHP)
+				_HPBar[maxHP - 1 - i]->SetFrame(_hpColor);  // 뒤에서부터 설정
+			else
+				_HPBar[maxHP - 1 - i]->SetFrame(2);  // 뒤에서부터 설정
+		}
+	}
+	else
+	{
+		for (int i = 0; i < maxHP; i++)
+		{
+			if (i < currentHP)
+				_HPBar[i]->SetFrame(_hpColor);  // 원래 순서대로 설정
+			else
+				_HPBar[i]->SetFrame(2);  // 원래 순서대로 설정
+		}
 	}
 }
 
