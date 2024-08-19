@@ -523,9 +523,6 @@
     <Filter Include="06. Manager\Event">
       <UniqueIdentifier>{2b8d8afe-252e-4fa4-a240-db3e4706acb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Enemy\Elite\TEmp">
-      <UniqueIdentifier>{783e4686-aeaf-4f35-9386-4441c91e3f5b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\MainGame.h">
