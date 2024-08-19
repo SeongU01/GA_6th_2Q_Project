@@ -23,7 +23,6 @@
 // Object
 #include "Tile.h"
 
-#include "CardManager.h"
 #include "DataManager.h"
 #include "Client_Define.h"
 
@@ -52,12 +51,13 @@ void Player::ResetPlayer(const Vector3& startPos)
 	 _gridPosition = startPos;
 	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 	 GetComponent<TimerSystem>()->ResetTime();
+	 _pAttackCollider->ResizeCollider();
 }
 
 void Player::Awake()
 {	
 	//콜라이더
-	Engine::Collider* pCollider=AddComponent<Engine::Collider>(L"Body");
+	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
 #ifdef _DEBUG
@@ -137,11 +137,6 @@ void Player::Start()
 void Player::Update(const float& deltaTime)
 {
 	DefaultMove(deltaTime);
-
-	if (Input::IsKeyDown(DIK_O))
-	{
-		CardManager::GetInstance()->StartSelectCardScene();
-	}
 }
 
 void Player::LateUpdate(const float& deltaTime)

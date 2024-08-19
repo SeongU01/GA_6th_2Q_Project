@@ -29,6 +29,7 @@ public:
 public:
 	bool LoadOriginDeck();
 	void StartGame();
+	void ResetCardInfo();
 	void DrawCard();
 	void ReloadCard();
 	void OnReloadCoolTime();

@@ -1,11 +1,13 @@
 #include "SpawnEnemy.h"
 #include "GridInfo.h"
 #include "Grid.h"
+
 //Object
 #include "DefaultEnemy.h"
 #include "EliteEnemy.h"
 
 #include "RangeEnemy.h"
+#include "EventManager.h"
 #include "Client_Define.h"
 
 SpawnEnemy::SpawnEnemy(const wchar_t* name, const EnemySpawnInfo& _spawnInfo)
@@ -105,6 +107,7 @@ void SpawnEnemy::CheckWaveEnd()
 		if (_currWaveCount > _maxWaveCount)
 		{
 			_stageEnd = true;
+			EventManager::GetInstance()->SetStageClear(true);
 			return;
 		}
 

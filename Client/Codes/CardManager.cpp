@@ -61,6 +61,8 @@ void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 
 void CardManager::StartSelectCardScene()
 {
+    Time::SetSlowTime(0.f);
+
     Card* pCard[3];
     int ID[3];
 
@@ -71,10 +73,11 @@ void CardManager::StartSelectCardScene()
         _cardIDs.pop_front();
 
         pCard[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f);
-        pCard[i]->transform.position = Vector3((WINCX >> 1) + 400.f - 400.f * i, WINCY >> 1, 0.f);
+        pCard[i]->SetFixPosition(Vector3((WINCX >> 1) + 400.f - 400.f * i, WINCY >> 1, (float)-i));
+        pCard[i]->_isSelectCard = true;
+        pCard[i]->gameObject.SetActive(false);
         pCard[i]->gameObject.SetRenderGroup((int)RenderGroup::Fade);
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", &pCard[i]->gameObject);
-        pCard[i]->_isSelectCard = true;
     }
     
     _pSelectCard->OnSelectCard(pCard);
@@ -98,6 +101,11 @@ Card* CardManager::CloneCard(int ID)
     SetRichText(cardData.textID, pTextRenderer);
 
     return pCard->GetComponent<Card>();
+}
+
+void CardManager::AddCardID(int ID)
+{
+    _cardIDs.push_back(ID);
 }
 
 bool CardManager::LoadCardDataOptionText(const wchar_t* filePath)

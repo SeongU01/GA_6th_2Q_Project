@@ -5,6 +5,7 @@
 #include "Mouse.h"
 #include "DeckSystem.h"
 #include "TimerSystem.h"
+#include "CardSystem.h"
 
 // UI
 #include "TimerHUD.h"
@@ -18,12 +19,14 @@
 #include "Fade.h"
 
 // Object
-#include "CollisionManager.h"
 #include "Zero.h"
 #include "Obstacle.h"
 #include "Player.h"
 #include "Defense.h"
 
+#include "CardManager.h"
+#include "EventManager.h"
+#include "CollisionManager.h"
 
 void DefaultStageScene::Free()
 {
@@ -104,10 +107,26 @@ void DefaultStageScene::MakeObject(const ObjectArrangeInfo& objInfo)
       );
       break;
     case 99:
-        Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->ResetPlayer(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f));
+        Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
+        pPlayer->GetComponent<Player>()->ResetPlayer(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f));
+        pPlayer->GetComponent<CardSystem>()->StartGame();
       break;
     }
   }
+}
+
+void DefaultStageScene::FadeIn()
+{
+    //페이드 인.
+    Fade::FadeInfo info;
+    info.option = Fade::Fade_Option::Fade_In;
+    info.color = 0xFF000000;
+    info.duration = 2.0f;
+    info.life = 2.0f;
+    Engine::GameObject* pFadeObj = Engine::GameObject::Create();
+    Fade* _pFade = pFadeObj->AddComponent<Fade>(info);
+
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Fade", pFadeObj); pFadeObj->SetRenderGroup((int)RenderGroup::Fade);
 }
 
 int DefaultStageScene::Update(const float& deltaTime)
@@ -141,31 +160,53 @@ int DefaultStageScene::Update(const float& deltaTime)
 
 int DefaultStageScene::LateUpdate(const float& deltaTime)
 {
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
-                                       Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
+    if (!EventManager::GetInstance()->IsStageClear())
+    {
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
+                                           Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
 
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
-                                       Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+                                           Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
-                                       Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
+                                           Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
 
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //방어건물
-                                       Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //방어건물
+                                           Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
 
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //장애물
-                                       Engine::FindObjectList((int)LayerGroup::Object, L"Buliding"));
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //장애물
+                                           Engine::FindObjectList((int)LayerGroup::Object, L"Buliding"));
     
-    _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //산
-                                        Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //산
+                                           Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
+
+    }
+    else
+    {        
+        if (!_isSelectCard)
+        {
+            CardManager::GetInstance()->StartSelectCardScene();
+            _isSelectCard = true;
+        }
+    }
+
+    EventManager* pEventManager = EventManager::GetInstance();
+
+    if (pEventManager->IsNextStage())
+    {
+        pEventManager->SetNextStage(false);
+        pEventManager->SetStageClear(false);
+        Time::SetSlowTime(1.f);
+        Engine::GameManager::GetInstance()->ChagneScene(_pScene);
+    }
 
     return 0;
 }
 
 bool DefaultStageScene::Initialize()
 {
-    _pCollisionManager = Engine::CollisionManager::Create();
-    
+    _pCollisionManager = Engine::CollisionManager::Create();    
+
     Engine::GameObject* pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL);
 
     if (nullptr == pPlayer)
@@ -183,9 +224,9 @@ bool DefaultStageScene::Initialize()
     }
     else
     {        
-        pPlayer->GetComponent<Player>()->ResetPlayer({ 4.0f, 4.0f, 1.0f });
+        /*pPlayer->GetComponent<Player>()->ResetPlayer({ 1.0f, 1.0f, 1.0f });
         pPlayer->SetActive(true);
-        pPlayer->GetComponent<HPHUD>()->SetActives(true);
+        pPlayer->GetComponent<HPHUD>()->SetActives(true);*/
     }
 
     UIinitialize();
@@ -197,6 +238,8 @@ bool DefaultStageScene::Initialize()
     pObject->SetRenderGroup((int)RenderGroup::UI);
     pObject->AddComponent<Mouse>(L"Mouse");
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
+
+    FadeIn();
 
     return true;
 }

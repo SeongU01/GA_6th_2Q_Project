@@ -83,7 +83,7 @@ void UI::Initialize(const UIInfo& info)
     SetNotAffectCamera(true);
 
     _pTransform->SetParent(_info.pParent);
-    _pTransform->SetPosition(_info.position+ _offsetPosition);
+    _pTransform->SetPosition(_info.position + _offsetPosition);
     _pTransform->SetScale(_info.scale);
 
     _pSpriteRenderer->BindTexture(Resource::FindTexture(info.textureTag));

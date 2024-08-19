@@ -25,6 +25,7 @@ private:
 	virtual ~CardEffect() = default;
 
 public:
+	void FindGridEffect();
 	void ShowRange();
 	std::vector<std::pair<int, int>> GetAttackRange();
 	float GetAttackDegree() { return _degree; }

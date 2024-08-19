@@ -24,9 +24,12 @@ public:
 
 protected:
 	void MakeObject(const ObjectArrangeInfo& objInfo);
+	void FadeIn();
 
 protected:
 	Engine::CollisionManager*	_pCollisionManager = nullptr;
 	EnemySpawner*				_pEnemySpawner = nullptr;
+	Engine::Scene*				_pScene = nullptr;
+	bool						_isSelectCard = false;
 };
 

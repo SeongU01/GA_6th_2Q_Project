@@ -35,6 +35,7 @@ void Card::Awake()
 {
 	// 카메라에 영향을 받지 않음
 	gameObject.SetNotAffectCamera(true);
+	gameObject.SetDontDestroyObject(true);
 
 	// Component
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
@@ -87,16 +88,16 @@ void Card::Awake()
 	pTextRenderer->SetText(_costMana.c_str());
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");	
-	_pCollider->SetActive(false);
+	_pCollider->SetActive(false);	
 }
 
 void Card::Start()
-{
+{	
 	_pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr);
 	DataManager* pDataManager = DataManager::GetInstance();
 
 	Player* pPlayer = _pPlayer->GetComponent<Player>();
-		
+
 	CardEffect::CardEffectInfo info;
 	info.effectType = _cardData.effectType[0];
 	info.ranges = pDataManager->GetAttackRange(_cardData.targetNum[0]);
@@ -112,6 +113,9 @@ void Card::Start()
 		info.additiveStack = _cardData.charStateNum[1];
 		_pCardEffect[1] = CardEffect::Create(pPlayer, info);
 	}
+
+	if (_pCardEffect[0]) _pCardEffect[0]->FindGridEffect();
+	if (_pCardEffect[1]) _pCardEffect[1]->FindGridEffect();
 }
 
 void Card::Update(const float& deltaTime)
@@ -119,7 +123,7 @@ void Card::Update(const float& deltaTime)
 	if (_isSelectCard)
 	{
 		_pCollider->SetActive(false);
-		return;
+		//return;
 	}
 
 	if (_isLerp)
@@ -136,8 +140,8 @@ void Card::Update(const float& deltaTime)
 
 void Card::LateUpdate(const float& deltaTime)
 {
-	if (_isSelectCard)
-		return;
+	/*if (_isSelectCard)
+		return;*/
 
 	if (_isHoldMouse)
 	{
@@ -192,6 +196,21 @@ void Card::SetMouseHover(bool isHover)
 	_isLerp = true;
 
 	return;
+}
+
+void Card::SetTargetPosition(const Vector3& p0, const Vector3& p1)
+{
+	_isLerp = true;
+	_lerpTime = 0.f;
+
+	_targetOffset[0] = p0;
+	_targetOffset[1] = p1;
+}
+
+void Card::ResetCardInfo()
+{
+	if (_pCardEffect[0]) _pCardEffect[0]->FindGridEffect();
+	if (_pCardEffect[1]) _pCardEffect[1]->FindGridEffect();
 }
 
 void Card::ThrowCard()

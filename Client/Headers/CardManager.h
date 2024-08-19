@@ -25,7 +25,8 @@ public:
 	void SetRichText(int ID, Engine::TextRenderer* pTextRenderer);
 	void StartSelectCardScene();
 	Card* CloneCard(int ID);
-	
+	void AddCardID(int ID);
+
 private:
 	bool LoadCardDataOptionText(const wchar_t* filePath);
 	bool LoadCardDataRichText(const wchar_t* filePath);

@@ -12,7 +12,6 @@ GageHUD::GageHUD(const Vector3& position, float* pCurrentValue, float maxValue, 
 
 void GageHUD::Awake()
 {
-
 	UI* uis = AddUI(CreateInfo(L"Gage_BackGround", L"UI_HUD_MP_recharge", 0, _position, Vector3(1.f, 1.f, 1.f), &transform));
 	_pGage = AddUI(CreateInfo(L"Gage", L"UI_HUD_MP_recharge", 1, _position, Vector3(1.f, 1.f, 1.f), &transform));
 

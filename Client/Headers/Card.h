@@ -73,7 +73,9 @@ public:
 	bool IsAddQueue() const { return _isAddQueue; }
 	void SetHoldCard(bool isActive);
 	void SetMouseHover(bool isHover);
+	void SetTargetPosition(const Vector3& p0, const Vector3& p1);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
+	void ResetCardInfo();
 
 public:
 	void OnCollision(Engine::CollisionInfo& info) override;

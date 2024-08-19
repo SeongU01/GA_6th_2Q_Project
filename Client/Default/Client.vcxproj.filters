@@ -272,6 +272,9 @@
     <ClCompile Include="..\Codes\HitColor.cpp">
       <Filter>04. Component\HitColor</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\EventManager.cpp">
+      <Filter>06. Manager\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -516,6 +519,9 @@
     </Filter>
     <Filter Include="04. Component\HitColor">
       <UniqueIdentifier>{70721d99-cab9-47e9-8f37-5b378261aa34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. Manager\Event">
+      <UniqueIdentifier>{2b8d8afe-252e-4fa4-a240-db3e4706acb6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -806,6 +812,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\DefaultEnemyScript.h">
       <Filter>03. GameObject\Enemy\Default\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EventManager.h">
+      <Filter>06. Manager\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

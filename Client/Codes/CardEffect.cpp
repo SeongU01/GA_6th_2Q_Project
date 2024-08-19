@@ -8,6 +8,11 @@
 
 #include "Client_Define.h"
 
+void CardEffect::FindGridEffect()
+{
+	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
+}
+
 void CardEffect::ShowRange()
 {
 	const Vector3& gridPosition = _pPlayer->GetNextGridPosition();
@@ -71,9 +76,7 @@ std::vector<std::pair<int, int>> CardEffect::GetAttackRange()
 bool CardEffect::Initialize(Player* pPlayer, const CardEffectInfo& info)
 {
 	_pPlayer = pPlayer;
-	_info = info;
-
-	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
+	_info = info;	
 
 	return true;
 }

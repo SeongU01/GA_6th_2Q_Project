@@ -1,4 +1,5 @@
 #include "TimerSystem.h"
+#include "EventManager.h"
 #include "Client_Define.h"
 
 TimerSystem::TimerSystem()
@@ -47,6 +48,9 @@ void TimerSystem::Update(const float& deltaTime)
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
     {
+        if (EventManager::GetInstance()->IsStageClear())
+            return;
+
         _isStopTime = !_isStopTime;
         if (_isStopTime) 
         {

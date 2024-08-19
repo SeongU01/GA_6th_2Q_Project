@@ -20,18 +20,28 @@ CardSystem::CardSystem()
 void CardSystem::Awake()
 {
 	auto pGameObject = Engine::GameObject::Create();
-	pGameObject->AddComponent<GageHUD>(Vector3(1680.f, 930.f, 0.f), &_reloadTime, RELOADCOOLTIME, 1);
-	pGameObject->SetRenderGroup(0);
+	GageHUD* pGageHUD = pGameObject->AddComponent<GageHUD>(Vector3(1680.f, 930.f, 0.f), &_reloadTime, RELOADCOOLTIME, 1);
+	pGageHUD->SetDontDestroyObjectUI(true);
+	pGameObject->SetDontDestroyObject(true);
+	pGameObject->SetRenderGroup((int)RenderGroup::None);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
 	_pEventInvoker->SetUseGlobalDeltaTime(true);
 	LoadOriginDeck();
+
+	CardManager* pCardManager = CardManager::GetInstance();
+
+	for (auto& cardID : _originDeck)
+	{
+		_currentDeck.push_back(pCardManager->CloneCard(cardID));
+		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
+		_currentDeck.back()->gameObject.SetActive(false);
+	}
 }
 
 void CardSystem::Start()
 {
-	StartGame();
 }
 
 void CardSystem::Update(const float& deltaTime)
@@ -77,18 +87,22 @@ bool CardSystem::LoadOriginDeck()
 
 void CardSystem::StartGame()
 {
-	CardManager* pCardManager = CardManager::GetInstance();
-
-	for (auto& cardID : _originDeck)
+	while (!_graveDeck.empty())
 	{
-		_currentDeck.push_back(pCardManager->CloneCard(cardID));
-		Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
-		_currentDeck.back()->gameObject.SetActive(false);
+		_currentDeck.push_back(_graveDeck.back());
+		_graveDeck.pop_back();
 	}
 
-	_reloadTime = RELOADCOOLTIME;
+	_reloadTime = RELOADCOOLTIME;	
+
 	ShuffleCard();
 	ReloadCard();
+}
+
+void CardSystem::ResetCardInfo()
+{
+	for (auto& card : _currentDeck)
+		card->ResetCardInfo();
 }
 
 void CardSystem::DrawCard()
@@ -178,6 +192,7 @@ void CardSystem::ShuffleCard()
 		{
 			return pCard->_isAddQueue;
 		});
+
 	std::vector<Card*> cards(temp.begin(), temp.end());
 	std::random_device rd;
 	std::mt19937 gen(rd());

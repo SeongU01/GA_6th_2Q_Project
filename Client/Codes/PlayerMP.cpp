@@ -12,8 +12,10 @@ PlayerMP::PlayerMP(const wchar_t* name)
 void PlayerMP::Awake()
 {
 	auto pGameObject = Engine::GameObject::Create();
-	pGameObject->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, RECOVERYCOOLTIME, 0);
-	pGameObject->SetRenderGroup(0);
+	GageHUD* pGageHUD = pGameObject->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, RECOVERYCOOLTIME, 0);
+	pGageHUD->SetDontDestroyObjectUI(true);
+	pGameObject->SetDontDestroyObject(true);
+	pGameObject->SetRenderGroup((int)RenderGroup::None);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
 }
 

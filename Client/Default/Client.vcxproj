@@ -54,6 +54,7 @@
     <ClCompile Include="..\Codes\EliteEnemyWeekSearch.cpp" />
     <ClCompile Include="..\Codes\Enemy.cpp" />
     <ClCompile Include="..\Codes\EnemySpawner.cpp" />
+    <ClCompile Include="..\Codes\EventManager.cpp" />
     <ClCompile Include="..\Codes\Fade.cpp" />
     <ClCompile Include="..\Codes\GageHUD.cpp" />
     <ClCompile Include="..\Codes\GameClearButtons.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="..\Headers\EliteEnemyWeekSearch.h" />
     <ClInclude Include="..\Headers\Enemy.h" />
     <ClInclude Include="..\Headers\EnemySpawner.h" />
+    <ClInclude Include="..\Headers\EventManager.h" />
     <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\GageHUD.h" />
     <ClInclude Include="..\Headers\GameClearButtons.h" />

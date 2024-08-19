@@ -56,6 +56,13 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 			return srcPosition.z < dstPosition.z;
 		});
 
+	_pGameManager->SetSortGroup((int)RenderGroup::Fade, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
+		{
+			Vector3 srcPosition = src->transform.position;
+			Vector3 dstPosition = dst->transform.position;
+			return srcPosition.z < dstPosition.z;
+		});
+
 	_pGameManager->SetSortGroup((int)RenderGroup::Card, [](Engine::GameObject* src, Engine::GameObject* dst)->bool
 		{
 			Vector3 srcPosition = src->transform.position;
@@ -71,6 +78,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::SFX, 0.6f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::BGM, 1.f);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
+
 	// 공통 데이터
 	_pDataManager = DataManager::GetInstance();
 	_pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
@@ -82,6 +90,9 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	// 카드 데이터
 	_pCardManager = CardManager::GetInstance();
 	_pCardManager->LoadCard((filePath + L"Data/Card").c_str());
+	_pCardManager->SetDontDestroyObject(true);
+	_pCardManager->SetRenderGroup((int)RenderGroup::None);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", _pCardManager);
 
 	_pGameManager->ChagneScene(TestScene::Create());
 
@@ -91,7 +102,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 void MainGame::Free()
 {
 	SafeRelease(_pDataManager);
-	SafeRelease(_pCardManager);
+	//SafeRelease(_pCardManager);
 	SafeRelease(_pGameManager);
 }
 
