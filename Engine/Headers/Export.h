@@ -41,8 +41,8 @@ namespace Time
 	inline float GetGlobalDeltaTime();
 	inline void SetSumTime(float time);
 	inline void SetSlowTime(float rate);
+	inline void SetSlowTime(float rate, float duration);
 	inline float GetDeltaTime();
-	inline bool FrameLock(float frame);
 	#include "Export_Time.inl"
 }
 

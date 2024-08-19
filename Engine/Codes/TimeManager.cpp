@@ -18,6 +18,13 @@ void Engine::TimeManager::SetSlowTime(float rate)
     _slowRate = rate;
 }
 
+void Engine::TimeManager::SetSlowTime(float rate, float duration)
+{
+    _slowRate = rate;
+    _duration = duration;
+    _elapsed = 0.f;
+}
+
 void TimeManager::Update()
 {
     _oldTime = _currTime;
@@ -26,20 +33,17 @@ void TimeManager::Update()
     _globalDeltaTime = (_currTime.QuadPart - _oldTime.QuadPart) / _frequency ;
     _deltaTime = _globalDeltaTime;
 
-    _elapsed += _globalDeltaTime;
-}
-
-bool TimeManager::FrameLock(float frame)
-{
-    /*_fixTime = _deltaTime;
-    _fixFrame = 1000.0 / frame;
-
-    if (_fixFrame <= _fixTime)
+    if (0.f < _duration)
     {
-        _fixTime = 0;
-        return true;
-    }*/
-    return false;
+        _elapsed += _globalDeltaTime;
+
+        if (_elapsed >= _duration)
+        {
+            _slowRate = 1.f;
+            _elapsed = 0.f;
+            _duration = 0.f;
+        }
+    }
 }
 
 void TimeManager::Free()
