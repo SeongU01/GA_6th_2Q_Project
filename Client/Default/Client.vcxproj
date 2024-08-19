@@ -89,6 +89,7 @@
     <ClCompile Include="..\Codes\RangeEnemyScript.cpp" />
     <ClCompile Include="..\Codes\RangeEnemyState.cpp" />
     <ClCompile Include="..\Codes\RangeEnemySupport.cpp" />
+    <ClCompile Include="..\Codes\RestartGame.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectCard.cpp" />
     <ClCompile Include="..\Codes\SelectScene.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="..\Headers\RangeEnemyScript.h" />
     <ClInclude Include="..\Headers\RangeEnemyState.h" />
     <ClInclude Include="..\Headers\RangeEnemySupport.h" />
+    <ClInclude Include="..\Headers\RestartGame.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectCard.h" />
     <ClInclude Include="..\Headers\SelectScene.h" />

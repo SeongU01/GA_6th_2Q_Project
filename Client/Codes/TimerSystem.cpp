@@ -48,7 +48,7 @@ void TimerSystem::Update(const float& deltaTime)
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
     {
-        if (EventManager::GetInstance()->IsStageClear())
+        if (EventManager::GetInstance()->IsStopGame())
             return;
 
         _isStopTime = !_isStopTime;

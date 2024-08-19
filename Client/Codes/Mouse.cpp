@@ -5,8 +5,11 @@
 #include "Card.h"
 #include "CardSystem.h"
 #include "TimerSystem.h"
+
 // timer
 #include "TimerHUD.h"
+
+#include "EventManager.h"
 #include "Client_Define.h"
 
 Mouse::Mouse(const wchar_t* name)
@@ -91,6 +94,10 @@ void Mouse::OnCollisionEnter(Engine::CollisionInfo& info)
 
 void Mouse::OnCollision(Engine::CollisionInfo& info)
 {
+	EventManager* pEventManager = EventManager::GetInstance();
+	if (pEventManager->IsStopGame() || pEventManager->IsPlayerDeath())
+		return;
+
 	Engine::GameObject* pOther = info.other->GetOwner();
 
 	if (*pOther == L"Card")

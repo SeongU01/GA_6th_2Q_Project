@@ -107,7 +107,7 @@ void SpawnEnemy::CheckWaveEnd()
 		if (_currWaveCount > _maxWaveCount)
 		{
 			_stageEnd = true;
-			EventManager::GetInstance()->SetStageClear(true);
+			EventManager::GetInstance()->SetStopGame(true);
 			return;
 		}
 

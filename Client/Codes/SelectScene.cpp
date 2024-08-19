@@ -22,6 +22,7 @@ bool SelectScene::Initialize()
     Sound::PlaySound("Bgm_Sound_BGM_Select_Stage", (int)SoundGroup::BGM, 0.8f,true);
     Sound::PlaySound("Effect_Sound_FX_Stage_Select_Entry", (int)SoundGroup::SFX, 1.0f, false);
     UIInitialize();
+
     return true;
 }
 

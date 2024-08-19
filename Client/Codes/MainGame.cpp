@@ -6,10 +6,12 @@
 #include "ResourceManager.h"
 #include "SoundManager.h"
 #include "DataManager.h"
+#include "CardManager.h"
+#include "EventManager.h"
+
 #include "Card.h"
 #include "TestScene.h"
 #include "Client_Define.h"
-#include "CardManager.h"
 
 MainGame::MainGame()
 	: _pGameManager(Engine::GameManager::GetInstance())
@@ -94,6 +96,12 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	_pCardManager->SetRenderGroup((int)RenderGroup::None);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", _pCardManager);
 
+	// 이벤트 매니저
+	EventManager* pEventManager = EventManager::GetInstance();
+	pEventManager->SetDontDestroyObject(true);
+	pEventManager->SetRenderGroup((int)RenderGroup::None);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pEventManager);
+
 	_pGameManager->ChagneScene(TestScene::Create());
 
 	return true;
@@ -102,7 +110,6 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 void MainGame::Free()
 {
 	SafeRelease(_pDataManager);
-	//SafeRelease(_pCardManager);
 	SafeRelease(_pGameManager);
 }
 

@@ -1,7 +1,7 @@
 #pragma once
-#include "Base.h"
+#include "GameObject.h"
 
-class EventManager : public Engine::Base, public Engine::SingleTon<EventManager>
+class EventManager : public Engine::GameObject, public Engine::SingleTon<EventManager>
 {
 	friend class SingleTon;
 private:
@@ -10,16 +10,16 @@ private:
 	NOCOPY(EventManager);
 
 public:
-	void SetStageClear(bool isClear) { _isStageClear = isClear; }
+	void SetStopGame(bool isClear) { _isStopGame = isClear; }
 	void SetNextStage(bool isNext) { _isNextStage = isNext; }
-	bool IsStageClear() const { return _isStageClear; }
+	void SetPlayerDeath(bool isDeath) { _isPlayerDeath = isDeath; }
+	bool IsStopGame() const { return _isStopGame; }
 	bool IsNextStage() const { return _isNextStage; }
+	bool IsPlayerDeath() const { return _isPlayerDeath;	}
 
 private:
-	void Free() override;
-
-private:
-	bool _isStageClear = false;
+	bool _isStopGame = false;
 	bool _isNextStage = false;
+	bool _isPlayerDeath = false;
 };
 

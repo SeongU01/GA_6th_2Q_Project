@@ -6,6 +6,7 @@
 #include "DeckSystem.h"
 #include "TimerSystem.h"
 #include "CardSystem.h"
+#include "GridEffect.h"
 
 // UI
 #include "TimerHUD.h"
@@ -160,7 +161,7 @@ int DefaultStageScene::Update(const float& deltaTime)
 
 int DefaultStageScene::LateUpdate(const float& deltaTime)
 {
-    if (!EventManager::GetInstance()->IsStageClear())
+    if (!EventManager::GetInstance()->IsStopGame())
     {
         _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
                                            Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
@@ -195,7 +196,7 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
     if (pEventManager->IsNextStage())
     {
         pEventManager->SetNextStage(false);
-        pEventManager->SetStageClear(false);
+        pEventManager->SetStopGame(false);
         Time::SetSlowTime(1.f);
         Engine::GameManager::GetInstance()->ChagneScene(_pScene);
     }
@@ -283,18 +284,7 @@ bool DefaultStageScene::UIinitialize()
     Engine::GameObject* pGameClearObj = Engine::GameObject::Create();
     pGameClearObj->AddComponent<GameClearHUD>();
     pGameClearObj->AddComponent<GameClearButtons>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Top);    
-
-    //페이드 인.
-    Fade::FadeInfo info;
-    info.option = Fade::Fade_Option::Fade_In;
-    info.color = 0xFF000000;
-    info.duration = 2.0f;
-    info.life = 2.0f;
-    Engine::GameObject* pFadeObj = Engine::GameObject::Create();
-    Fade* _pFade = pFadeObj->AddComponent<Fade>(info);
-    
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"Fade", pFadeObj); pFadeObj->SetRenderGroup((int)RenderGroup::Fade);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Top);   
 
     return true;
 }
