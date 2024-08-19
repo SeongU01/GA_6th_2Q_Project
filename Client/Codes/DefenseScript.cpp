@@ -1,8 +1,10 @@
 #include "DefenseScript.h"
+
 #include "Grid.h"
 #include "GridInfo.h"
 #include "Tile.h"
 #include "HP.h"
+#include "HPHUD.h"
 #include "ToolTip.h"
 #include "SpriteRenderer.h"
 #include "Collider.h"
@@ -31,6 +33,8 @@ void DefenseScript::Awake()
 		_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_002"), Vector3(-200.0f, -100.0f, 0.0f));
 	else if(_name ==L"Defense_Command")
 		_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Structure_003"), Vector3(-200.0f, -100.0f, 0.0f));
+
+	AddComponent<HPHUD>(_pHP, 0);
 }
 
 void DefenseScript::Start()
