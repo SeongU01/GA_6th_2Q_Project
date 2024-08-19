@@ -36,12 +36,14 @@ public:
 		_pToolTip->ActiveToolTip(false);
 		_pPannel->SetActive(false);
 	};
+
 protected:
 	bool CheckRange(int x, int y);
+	bool CheckTower(int x, int y);
 protected:
 	Attribute* _pAttribute = nullptr;
 	HP* _pHP = nullptr;
-	DefenseScript* _pDefense=nullptr;
+	DefenseScript** _ppDefense=nullptr;
 	Player* _pPlayer = nullptr;
 	Engine::TextRenderer* _pTextRenderer = nullptr;
 	const Vector3* _pTargetPosition = nullptr;
