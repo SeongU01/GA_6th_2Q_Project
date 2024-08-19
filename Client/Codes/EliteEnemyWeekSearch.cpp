@@ -107,6 +107,8 @@ void EliteEnemyWeekSearch::Attack()
 	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
 	AttackCollider::AttackInfo attackInfo;
 	attackInfo.damage = 1;
+	attackInfo.Attribute = AttributeFlag::WeakPoint;
+	attackInfo.AttributeStack = 1;
 	const Vector3& gridPosition = *_pGridPosition;
 	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(16);
 	if (_currDirection.x >= 0)

@@ -12,9 +12,9 @@ class AttackCollider : public Engine::MonoBehavior
 public:
 	struct AttackInfo
 	{
-		unsigned long long Attribute;
-		int AttributeStack;
-		int damage;
+		unsigned long long Attribute=0;
+		int AttributeStack=0;
+		int damage=0;
 	};
 public:
 	explicit AttackCollider();

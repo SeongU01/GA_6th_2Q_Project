@@ -41,7 +41,7 @@ int EliteEnemySuperSlash::Update(const float& deltaTime)
 		if (_currTime >= _delayTime)
 		{
 			_currTime = _delayTime;
-			_pAnimation->ChangeAnimation(L"Attack");
+			_pAnimation->ChangeAnimation(L"NomalAttack");
 			//TODO : 공격하기. 피해 1
 			_isStateOn = true;
 		}
@@ -52,7 +52,7 @@ int EliteEnemySuperSlash::Update(const float& deltaTime)
 
 int EliteEnemySuperSlash::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Attack"))
+	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"NomalAttack"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
 	}

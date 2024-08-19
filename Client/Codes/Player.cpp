@@ -211,11 +211,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 		{
 			_pAttribute->ActiveCharge();
 
-			//if (_pAttribute->IsActiveState(AttributeFlag::OverCharge))
-			//{
-			//	// ¹æÀü 8Ä­ °ø°Ý
-			//}
-			
 			const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(0);				
 
 			int damage = 0;
