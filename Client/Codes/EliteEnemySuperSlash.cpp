@@ -112,5 +112,15 @@ EliteEnemySuperSlash* EliteEnemySuperSlash::Create(EliteEnemyScript* pScript)
 {
 	EliteEnemySuperSlash* pInstance = new EliteEnemySuperSlash;
 	pInstance->EliteEnemyState::Initialize(pScript);
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 5;
+	frameEvent.animation = L"SuperSlash";
+	frameEvent.isRepeat = true;
+	frameEvent.function = [pInstance]()
+		{
+			Sound::StopSound((int)SoundGroup::SFX);
+			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Truth", (int)SoundGroup::SFX, 0.8f, false);
+		};
+	pInstance->_pAnimation->AddFrameEvent(frameEvent);
 	return pInstance;
 }

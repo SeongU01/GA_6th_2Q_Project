@@ -87,6 +87,16 @@ EliteEnemyGetShield* EliteEnemyGetShield::Create(EliteEnemyScript* pScript)
 {
   EliteEnemyGetShield* pInstance = new EliteEnemyGetShield;
   pInstance->EliteEnemyState::Initialize(pScript);
+  Engine::Animation::FrameEvent frameEvent;
+  frameEvent.activeFrame = 6;
+  frameEvent.animation = L"Up";
+  frameEvent.isRepeat = true;
+  frameEvent.function = [pInstance]()
+	  {
+		  Sound::StopSound((int)SoundGroup::SFX);
+		  Sound::PlaySound("Battle_Sound_Enemy_Elite_Assist_Shield", (int)SoundGroup::SFX, 0.8f, false);
+	  };
+  pInstance->_pAnimation->AddFrameEvent(frameEvent);
   return pInstance;
 }
 
