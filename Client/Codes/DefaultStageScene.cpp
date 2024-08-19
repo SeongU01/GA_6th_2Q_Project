@@ -47,7 +47,7 @@ void DefaultStageScene::MakeObject(const ObjectArrangeInfo& objInfo)
         Defense::Create(
           std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x , obj.objectPosition.y, 0.f)),
           Vector3(0.f, -60.f, 0.f), obj.objectTag,
-          L"Defense_Generator")
+          L"Defense_Generator",2)
       );
       break;
     case 1:
@@ -56,7 +56,7 @@ void DefaultStageScene::MakeObject(const ObjectArrangeInfo& objInfo)
         Defense::Create(
           std::pair(Vector3(obj.objectPosition.x, obj.objectPosition.y, 0.f), Vector3(obj.objectPosition.x + 1.f, obj.objectPosition.y, 0.f)),
           Vector3(0.f, -80.f, 0.f), obj.objectTag,
-          L"Defense_Command")
+          L"Defense_Command",3)
       );
       break;
     case 2:
