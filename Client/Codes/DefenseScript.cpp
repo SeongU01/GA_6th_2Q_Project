@@ -17,11 +17,11 @@ DefenseScript::DefenseScript(const wchar_t* name, const std::pair<Vector3, Vecto
 void DefenseScript::Awake()
 {
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
-	pCollider->SetOffset({ 0.0f,-60.0f,0.0f });
+
 	if (_name == L"Defense_Generator") //¹ßÀü±â
-		pCollider->SetScale(Vector3(100.f, 200.f, 0.f));
+		pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 	else if (_name == L"Defense_Command")
-		pCollider->SetScale(Vector3(190.f, 200.f, 0.f));
+		pCollider->SetScale(Vector3(190.f, 90.f, 0.f));
 
 	_pGridInfo = AddComponent<GridInfo>(L"GridInfo");
 	_pHP = GetComponent<HP>(L"HP");
@@ -67,6 +67,11 @@ void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
 	if (*pOther == L"Mouse")
 	{
 		_pToolTip->ActiveToolTip(true);
+	}
+	else if (*info.other==L"Attack")
+	{
+		if(!_pHP->IsInvinsible())
+			_pHP->hp--;
 	}
 }
 

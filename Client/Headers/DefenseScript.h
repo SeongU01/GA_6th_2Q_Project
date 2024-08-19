@@ -35,5 +35,6 @@ private:
 	Engine::SpriteRenderer* _pSpriteRenderer=nullptr;
 	ToolTip* _pToolTip = nullptr;
 	std::pair<Vector3, Vector3>_gridRange;
+	
 };
 

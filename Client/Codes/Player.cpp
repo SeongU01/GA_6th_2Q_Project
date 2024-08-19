@@ -174,6 +174,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			if (attackInfo.damage)
 			{
+				if (pHP->IsInvinsible())
+					return;
+
 				if (pAttribute->IsActiveState(AttributeFlag::Shield))
 				{
 					pAttribute->UseStack(Attribute::State::Shield);
@@ -209,6 +212,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 	if (*info.other == L"Attack")
 	{
+		if (_pHP->IsInvinsible())
+			return;
+
 		if (_pAttribute->IsActiveState(AttributeFlag::Shield))
 		{
 			_pAttribute->UseStack(Attribute::State::Shield);
