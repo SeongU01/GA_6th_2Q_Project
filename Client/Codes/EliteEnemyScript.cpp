@@ -20,6 +20,7 @@
 #include "TextRenderer.h"
 
 #include "Attribute.h"
+#include "AttributeHUD.h"
 #include "AttackCollider.h"
 //state
 #include "EliteEnemyIdle.h"
