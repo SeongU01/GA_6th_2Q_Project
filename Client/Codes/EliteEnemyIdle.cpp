@@ -35,6 +35,7 @@ int EliteEnemyIdle::Update(const float& deltaTime)
 		_currDirection.x *= -1;
 		_pOwner->transform.scale *= Vector3(-1.f, 1.f, 1.f);
 		_pPannel->transform.scale*= Vector3(-1.f, 1.f, 1.f);
+		_pToolTip->transform.scale*= Vector3(-1.f, 1.f, 1.f);
 	}
 	return 0;
 }
