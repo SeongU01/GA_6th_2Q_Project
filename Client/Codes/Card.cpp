@@ -473,10 +473,11 @@ void Card::ActiveEffect()
 		{
 			Grid* pGrid = Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
 			const Vector3& gridPosition = _pPlayer->GetComponent<Player>()->GetGridPosition();
+			Card::CardAction action = _cardActions.front();
 
 			for (auto& range : _attackRange)
 			{
-				pAttackCollider->OnCollider(0.01f, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+				pAttackCollider->OnCollider(action.attackDelay, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
 			}
 		}
 
