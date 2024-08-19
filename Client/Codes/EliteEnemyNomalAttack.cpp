@@ -101,7 +101,7 @@ void EliteEnemyNomalAttack::Attack()
 {
 	auto pEffect = Engine::GameObject::Create();
 	Effect::EffectInfo info;
-	info.renderGroup = RenderGroup::EnemyFrontEffect;
+	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = 0.03f;
 	info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
 	info.scale = _pOwner->transform.scale;
