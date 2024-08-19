@@ -6,6 +6,7 @@
 #include "GridEffect.h"
 #include "Player.h"
 #include "DefenseScript.h"
+#include "Attribute.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -33,7 +34,7 @@ int EliteEnemyGetShield::Update(const float& deltaTime)
 		{
 			_currTime = _delayTime;
 			_pAnimation->ChangeAnimation(L"Up");
-			//TODO : ½¯µå ¾ò±â
+			GetShield();
 			_isStateOn = true;
 		}
 
@@ -86,4 +87,10 @@ EliteEnemyGetShield* EliteEnemyGetShield::Create(EliteEnemyScript* pScript)
   EliteEnemyGetShield* pInstance = new EliteEnemyGetShield;
   pInstance->EliteEnemyState::Initialize(pScript);
   return pInstance;
+}
+
+void EliteEnemyGetShield::GetShield()
+{
+	Attribute* pAttribute = _pOwner->GetComponent<Attribute>();
+	pAttribute->AddState(AttributeFlag::Shield, 1);
 }

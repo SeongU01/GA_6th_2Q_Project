@@ -157,6 +157,7 @@ bool Card::DrawCard()
 	_pCollider->SetScale({ _pixelSize[Hand].width, _pixelSize[Hand].height, 0.f });
 	_pCollider->SetActive(true);
 
+	_isAddQueue = false;
 	_isLerp = true;
 	_isThrow = false;
 	_lerpTime = 0.f;
@@ -226,7 +227,9 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 			gameObject.SetActive(false);
 			
 			_pPlayer->GetComponent<PlayerMP>()->mp += _cardData.costMana;
-			_pPlayer->GetComponent<TimerSystem>()->UseTime(-_cardData.costTime);
+			TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
+			pTimerSystem->UseTime(-_cardData.costTime);
+			//pTimerSystem->AddSkillTime(-_cardData.costTime);
 
 			if (CardAttribute::OverClock == _cardData.additiveCardState[0] || CardAttribute::OverClock == _cardData.additiveCardState[1])
 			{
@@ -362,8 +365,9 @@ void Card::ActiveEffect()
 	}
 
 	for (int i = 0; i < 2; i++)
-	{
+	{		
 		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
+		pAttackCollider->ResetAttackInfo();
 		AttackCollider::AttackInfo attackInfo;
 		attackInfo.damage = _cardData.variable[i];
 		attackInfo.Attribute = (unsigned long long)1 << _cardData.additiveCharState[i];
@@ -499,7 +503,7 @@ void Card::ActiveEffect()
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { 250.f, 0.f, 0.f };
-	_isAddQueue = false;
+	//_isAddQueue = false;
 
 	if (_cardData.name == L"이온 블래스트")
 		_pEventInvoker->BindAction(0.3f, []() {Camera::CameraShake(0.5f, 50.f); });

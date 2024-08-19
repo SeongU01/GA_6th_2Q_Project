@@ -70,6 +70,7 @@ public:
 	int GetID() const { return _cardData.ID; }
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
+	bool IsAddQueue() const { return _isAddQueue; }
 	void SetHoldCard(bool isActive);
 	void SetMouseHover(bool isHover);
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }

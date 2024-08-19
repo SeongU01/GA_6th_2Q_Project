@@ -103,3 +103,8 @@ void AttackCollider::ResizeCollider()
 		}
 	}
 }
+
+void AttackCollider::ResetAttackInfo()
+{
+	memset(_info, 0, sizeof(_info));
+}

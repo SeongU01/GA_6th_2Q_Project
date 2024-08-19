@@ -17,6 +17,7 @@ public:
 public:
 	static EliteEnemyGetShield* Create(EliteEnemyScript* pScript);
 private:
+	void GetShield();
 	float _currTime = 0.f;
 	float _delayTime = 0.f;
 	bool _isStateOn = false;
