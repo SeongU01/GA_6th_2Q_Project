@@ -94,7 +94,7 @@ void EliteEnemyScript::Start()
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 
 	Grid* pGrid=Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
-	pGrid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x]->canMove = false;
+	pGrid->GetTiles()[_gridPosition.y][_gridPosition.x]->canMove = false;
 
 
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)EliteEnemy::FSM::End);

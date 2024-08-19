@@ -97,7 +97,7 @@ void DefaultEnemyScript::Start()
 
 	Grid* pGrid=Engine::FindObject((int)LayerGroup::Tile, L"Tile", L"Map")->GetComponent<Grid>();
 	
-	pGrid->GetTiles()[(int)_gridPosition.y][(int)_gridPosition.x]->canMove = false;
+	pGrid->GetTiles()[_gridPosition.y][_gridPosition.x]->canMove = false;
 
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)DefaultEnemy::FSM::End);
 	_pFSM->AddState((int)DefaultEnemy::FSM::Idle, DefaultEnemyIdle::Create(this));
