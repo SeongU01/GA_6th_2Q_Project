@@ -24,7 +24,7 @@ int EliteEnemyIdle::Update(const float& deltaTime)
 	}
 	else
 	{
-		_pTargetPosition = &_pDefense->GetGridPosition();
+		_pTargetPosition =&(*_ppDefense)->GetGridPosition();
 		_pAstar->SetGoalPosition(*_pTargetPosition);
 		_pAstar->ReCalculatePath();
 	}
@@ -95,6 +95,13 @@ EliteEnemy::FSM EliteEnemyIdle::SelectNextBehave()
 		_count++;
 		return EliteEnemy::FSM::NomalAttack;
 	}
+
+	if (_pTargetPosition == &(*_ppDefense)->GetGridPosition() &&CheckTower(3, 1))
+	{
+		_count++;
+		return EliteEnemy::FSM::NomalAttack;
+	}
+
 	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
 	{
 		return EliteEnemy::FSM::Move;

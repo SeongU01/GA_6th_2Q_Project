@@ -20,7 +20,7 @@ int EliteEnemySuperSlash::Update(const float& deltaTime)
 		}
 		else
 		{
-			_pTargetPosition = &_pDefense->GetGridPosition();
+			_pTargetPosition = &(*_ppDefense)->GetGridPosition();
 		}
 		const Vector3& gridPosition = *_pGridPosition;
 		Vector3 Direction = *_pTargetPosition - gridPosition;

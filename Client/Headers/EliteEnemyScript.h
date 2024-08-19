@@ -35,6 +35,9 @@ public:
 	virtual void OnCollisionEnter(Engine::CollisionInfo& info);
 	virtual void OnCollision(Engine::CollisionInfo& info);
 	virtual void OnCollisionExit(Engine::CollisionInfo& info);
+
+private:
+	void ChangeTarget();
 private:
 	GridMovement* _movement = nullptr;
 	AStar* _aStar = nullptr;
@@ -52,7 +55,9 @@ private:
 	Vector3 _startPosition;
 	Vector3 _targetPosition;
 	Engine::GameObject* _pTargetObject = nullptr;
+	Engine::GameObject* _pNextTargetObject = nullptr;
 	std::wstring _targetObjectName;
+	
 	DefenseScript* _pDefense = nullptr;
 	Player* _pPlayer = nullptr;
 };

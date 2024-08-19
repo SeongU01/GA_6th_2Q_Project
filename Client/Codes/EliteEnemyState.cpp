@@ -2,6 +2,8 @@
 #include "EliteEnemyScript.h"
 #include "Astar.h"
 
+#include "HP.h"
+#include "DefenseScript.h"
 #include "Player.h"
 #include "TextRenderer.h"
 #include "Pannel.h"
@@ -13,7 +15,7 @@ void EliteEnemyState::Initialize(EliteEnemyScript* pScript)
 	if (nullptr == pScript)
 		return;
 	_pHP = pScript->_pHP;
-	_pDefense = pScript->_pDefense;
+	_ppDefense = &(pScript->_pDefense);
 	_pPlayer = pScript->_pPlayer;
 	_pTargetPosition = &(pScript->_targetPosition);
 	_pGridPosition = &(pScript->_aStar->_gridPosition);
@@ -41,6 +43,29 @@ bool EliteEnemyState::CheckRange(int x, int y)
 		{
 			Vector3 temp = { (float)(currGridX + dx),(float)(currGridY + dy),0.f };
 			if (temp == _pPlayer->GetGridPosition())
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool EliteEnemyState::CheckTower(int x, int y)
+{
+	Vector3 currPosition = *_pGridPosition;
+
+	int currGridX = (int)currPosition.x;
+	int currGridY = (int)currPosition.y;
+
+	for (int dx = -x; dx <= x; dx++)
+	{
+		for (int dy = -y; dy <= y; dy++)
+		{
+			Vector3 temp = { (float)(currGridX + dx),(float)(currGridY + dy),0.f };
+			HP* pHP = (*_ppDefense)->GetComponent<HP>();
+			
+			if (temp == (*_ppDefense)->GetGridPosition()&& pHP->hp > 0)
 			{
 				return true;
 			}

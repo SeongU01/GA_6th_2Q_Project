@@ -85,7 +85,7 @@ void DefaultEnemyStrongAttack::Attack()
 	Effect::EffectInfo info;
 	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = 0.03f;
-	info.textureTag = L"AIEffect_Attack_Anim_VFX_Slash_E_Final";
+	info.textureTag = L"AIEffect_Attack_Anim_VFX_Round_E";
 	info.position = _pOwner->transform.position;
 	info.scale = _pOwner->transform.scale*1.15f;
 	pEffect->AddComponent<Effect>(info);
