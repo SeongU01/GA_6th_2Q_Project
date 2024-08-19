@@ -120,7 +120,12 @@ void Player::Awake()
 	frameEvent.activeFrame = 5;
 	frameEvent.animation = L"Dash";
 	frameEvent.isRepeat = true;
-	frameEvent.function = [=]() { _pSpectrum->SetActive(true); };
+	frameEvent.function = [=]() { 
+		_pSpectrum->SetActive(true);
+		std::string str= "Battle_Sound_Player_Move_Dash" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
+		};
 	_pAnimation->AddFrameEvent(frameEvent);
 
 	frameEvent.activeFrame = 10;
@@ -174,6 +179,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 				if (pAttribute->IsActiveState(AttributeFlag::Shield))
 				{
+					Sound::StopSound((int)SoundGroup::AttributeActive);
+					Sound::PlaySound("Battle_Sound_State_Execute_Shield", (int)SoundGroup::AttributeActive, 0.8f, false);
+
 					pAttribute->UseStack(Attribute::State::Shield);
 					break;
 				}
@@ -184,12 +192,24 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			}			
 
 			pHP->hp -= damage;
+			Sound::StopSound((int)SoundGroup::Voice);
+			std::string str = "Voice_Sound_Voice_Zero_Hit" + Engine::RandomGeneratorInt(1, 3);
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+
+			if (pHP->hp == 1)
+			{
+				Sound::StopSound((int)SoundGroup::Voice);
+				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1_1", (int)SoundGroup::Voice, 0.8f, false);
+			}
 		}
 
 		if (pHP->IsZeroHP())
 		{
 			if (pAttribute->IsActiveState(AttributeFlag::Extra))
 			{
+				Sound::StopSound((int)SoundGroup::AttributeActive);
+				Sound::PlaySound("Battle_Sound_State_Execute_Residual", (int)SoundGroup::AttributeActive, 0.8f, false);
+
 				_pHP->hp += _pAttribute->GetExtraRecoveryValue();
 
 				Engine::GameObject* pEffect = Engine::GameObject::Create();
@@ -212,6 +232,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (_pAttribute->IsActiveState(AttributeFlag::Shield))
 		{
+			Sound::StopSound((int)SoundGroup::AttributeActive);
+			Sound::PlaySound("Battle_Sound_State_Execute_Shield", (int)SoundGroup::AttributeActive, 0.8f, false);
+
 			_pAttribute->UseStack(Attribute::State::Shield);
 		}
 		else
@@ -227,6 +250,15 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			_pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
 			_pHP->hp -= damage;
+			Sound::StopSound((int)SoundGroup::Voice);
+			std::string str = "Voice_Sound_Voice_Zero_Hit" + Engine::RandomGeneratorInt(1, 3);
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+
+			if (_pHP->hp == 1)
+			{
+				Sound::StopSound((int)SoundGroup::Voice);
+				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1", (int)SoundGroup::Voice, 0.8f, false);
+			}
 			_pHitColor->OnHitColorEffect(0.05f);
 
 			Camera::CameraShake(0.5f, 30.f);
@@ -252,24 +284,33 @@ void Player::DefaultMove(const float& deltaTime)
 			{
 				/*_gridPosition.x += Input::GetAxis(Input::Axis::Horizontal);
 				_gridPosition.y += Input::GetAxis(Input::Axis::Vertical);*/
-
+				int num = Engine::RandomGeneratorInt(1, 3);
+				std::string moveSound = "Battle_Sound_Player_Move_Basic"+ std::to_string(num);
 				if (Input::IsKeyDown(DIK_D))
 				{
 					_gridPosition.x++;
 					transform.scale = { 1.f, 1.f, 0.f };
+					Sound::StopSound((int)SoundGroup::Player);
+					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_A))
 				{
 					_gridPosition.x--;
 					transform.scale = { -1.f, 1.f, 0.f };
+					Sound::StopSound((int)SoundGroup::Player);
+					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_W))
 				{
 					_gridPosition.y--;
+					Sound::StopSound((int)SoundGroup::Player);
+					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_S))
 				{
 					_gridPosition.y++;
+					Sound::StopSound((int)SoundGroup::Player);
+					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 			}
 

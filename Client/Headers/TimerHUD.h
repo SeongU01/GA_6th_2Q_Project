@@ -29,6 +29,8 @@ private:
 	UI* _pBene = nullptr; //타임정지시 비네팅
 	UI* _pRedBene = nullptr; //붉은색 비네팅
 	Engine::TextRenderer* _pText = nullptr;
+
+	bool _soundTrigger = false;
 	wchar_t _buffer[32]{};
 };
 

@@ -44,6 +44,8 @@ void PlayerMP::NaturalRecovery(const float& deltaTime)
 
 	if (_mpRecoveryTime >= RECOVERYCOOLTIME)
 	{
+		Sound::StopSound((int)SoundGroup::AddSFX);
+		Sound::PlaySound("Card_Sound_Mana_Recharge", (int)SoundGroup::AddSFX, 0.8f, false);
 		_mp++;
 		_mpRecoveryTime = 0.f;
 	}

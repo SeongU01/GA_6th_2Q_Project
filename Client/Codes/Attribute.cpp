@@ -116,13 +116,38 @@ void Attribute::AddState(unsigned long long flag, int stack)
 		n >>= 1;
 		count++;
 	}
-
+	Sound::StopSound((int)SoundGroup::Attribute);
+	switch (flag)
+	{
+	case AttributeFlag::Charge:
+		Sound::PlaySound("Battle_Sound_State_Get_Charge", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	case AttributeFlag::Extra://잔류
+		Sound::PlaySound("Battle_Sound_State_Get_Residual", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	case AttributeFlag::HighPower://고출력
+		Sound::PlaySound("Battle_Sound_State_Get_OverPower", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	case AttributeFlag::OverCharge://방전(없음
+		Sound::PlaySound("Battle_Sound_State_Get_Discharge", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	case AttributeFlag::Shield:
+		Sound::PlaySound("Battle_Sound_State_Get_Shield", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	case AttributeFlag::WeakPoint:
+		Sound::PlaySound("Battle_Sound_State_Get_WeakPoint", (int)SoundGroup::Attribute, 0.8f, false);
+		break;
+	default:
+		break;
+	}
 	_pBitFlag->OnFlag(flag);
 	_stateStacks[count - 1] = stack;
 }
 
 void Attribute::ActiveCharge()
 {
+	Sound::StopSound((int)SoundGroup::AttributeActive);
+	Sound::PlaySound("Battle_Sound_State_Execute_Charge", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
 	{
 		_pBitFlag->OffFlag(AttributeFlag::Charge);
@@ -133,6 +158,8 @@ void Attribute::ActiveCharge()
 
 int Attribute::ActiveHighPower()
 {
+	Sound::StopSound((int)SoundGroup::AttributeActive);
+	Sound::PlaySound("Battle_Sound_State_Execute_OverPower", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::HighPower))
 	{
 		_stateStacks[State::HighPower]--;
@@ -148,6 +175,8 @@ void Attribute::ActiveOverCharge()
 
 int Attribute::ActiveWeakPoint()
 {
+	Sound::StopSound((int)SoundGroup::AttributeActive);
+	Sound::PlaySound("Battle_Sound_State_Execute_WeakPoint", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::WeakPoint))
 	{
 		_stateStacks[State::WeakPoint]--;

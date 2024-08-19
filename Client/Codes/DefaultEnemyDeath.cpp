@@ -19,6 +19,10 @@ int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 {
 	if (_pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Death"))
 	{
+		std::string str = "Voice_Sound_Voice_Zero_Kill" + Engine::RandomGeneratorInt(1, 4);
+		Sound::StopSound((int)SoundGroup::Voice);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Time, 0.8f, false);
+
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();
 		_pOwner->GetComponent<AttributeHUD>()->DeleteUI();
 		_pPannel->SetDead();
