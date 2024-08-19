@@ -161,8 +161,8 @@ EliteEnemyWeekSearch* EliteEnemyWeekSearch::Create(EliteEnemyScript* pScript)
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
-			Sound::StopSound((int)SoundGroup::SFX);
-			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::SFX, 0.8f, false);
+			Sound::StopSound((int)SoundGroup::Battle);
+			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

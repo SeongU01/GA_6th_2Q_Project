@@ -12,6 +12,7 @@ enum class CardType;
 enum class CardEffectType;
 enum class CardAttribute;
 class CardEffect;
+class ToolTip;
 class Card final : public Engine::MonoBehavior
 {
 	friend class CardManager;
@@ -113,6 +114,7 @@ private:
 	Engine::Collider*					_pCollider = nullptr;
 	Engine::GameObject*					_pPlayer = nullptr;
 	Engine::EventInvoker*				_pEventInvoker = nullptr;
+	ToolTip*							_pToolTip = nullptr;
 	CardEffect*							_pCardEffect[2]{};
 	D2D1_SIZE_F							_pixelSize[End]{};
 	float								_priority = 0.f;

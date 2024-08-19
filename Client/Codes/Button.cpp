@@ -38,11 +38,16 @@ void Button::Update(const float& deltaTime)
 		}
 		else
 		{
-			_onHover();
+			if (_isRepeat || (!_isRepeat && !_isExecute))
+			{
+				_onHover();
+			}
+			_isExecute = true;
 		}
 	}
 	else 
 	{
+		_isExecute = false;
 		_cancel();
 	}
 	

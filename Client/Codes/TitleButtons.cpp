@@ -19,46 +19,78 @@ void TitleButtons::Start()
 {
 	UI::UIInfo info;
 	UI* pObj;
+
 	//시작버튼
 	info = CreateInfo(L"TitleButton", L"UI_HUD_Button",0, { 1800.f,400.f, - 1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 	Button* btn = pObj->AddComponent<Button>();
+	btn->SetIsReat(false);
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
-	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
-	btn->SetOnPressed([]() {Scene::ChagneScene(SelectScene::Create()); });
+	btn->SetOnHover([pObj]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		pObj->AddScale({ 0.0001f,0.0001f,0.0f });
+		});
+	btn->SetOnPressed([]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
+		Scene::ChagneScene(SelectScene::Create()); 
+		});
 	btn->SetRange(info.position, pObj->GetImageSize());
+
 	//상세설명버튼
 	info = CreateInfo(L"TitleButton", L"UI_HUD_Button", 0, { 1800.f,500.f, -1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 
 	btn = pObj->AddComponent<Button>();
+	btn->SetIsReat(false);
+	btn->SetOnHover([pObj]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		});
 	btn->SetOnPressed([]() {
 		Sound::StopSound((int)SoundGroup::SFX);
-		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
+		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 		InfoHUD* pInfo =  Engine::FindObject((int)LayerGroup::UI, L"Info", NULL)->GetComponent<InfoHUD>();
 		pInfo->SetActives(true);
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
+
 	//크래딧버튼
 	info = CreateInfo(L"TitleButton", L"UI_HUD_Button", 0, { 1800.f,600.f, -1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 	btn = pObj->AddComponent<Button>();
+	btn->SetIsReat(false);
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
-	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
+	btn->SetOnHover([pObj]() {
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		pObj->AddScale({ 0.0001f,0.0001f,0.0f });
+		});
 	btn->SetOnPressed([]() {
 		Sound::StopSound((int)SoundGroup::SFX);
-		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
+		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 		  CreditHUD* pCredit = Engine::FindObject((int)LayerGroup::UI, L"Credit", NULL)->GetComponent<CreditHUD>();
 		  pCredit->SetActives(true);
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
+
 	//나가기버튼
 	info = CreateInfo(L"TitleButton", L"UI_HUD_Button", 0, { 1800.f,700.f, -1.f }, { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 	btn = pObj->AddComponent<Button>();
+	btn->SetIsReat(false);
 	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
-	btn->SetOnHover([pObj]() { pObj->AddScale({ 0.0001f,0.0001f,0.0f }); });
-	btn->SetOnPressed([]() { PostQuitMessage(0);});
+	btn->SetOnHover([pObj]() {
+		pObj->AddScale({ 0.0001f,0.0001f,0.0f }); 
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		});
+	btn->SetOnPressed([]() { 
+		Sound::StopSound((int)SoundGroup::SFX);
+		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
+		PostQuitMessage(0);
+		});
 	btn->SetRange(info.position, pObj->GetImageSize());
 	//SetDontDestroyObject(true);
 }

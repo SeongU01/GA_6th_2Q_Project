@@ -51,5 +51,6 @@ private:
 
 	Engine::EventInvoker*			_pEventInvoker = nullptr;
 	float							_reloadTime = 0.f;
+	bool							_isFull = false;
 };
 

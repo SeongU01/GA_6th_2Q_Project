@@ -6,6 +6,7 @@
 #include "CardEffect.h"
 
 // Component
+#include "ToolTip.h"
 #include "TextRenderer.h"
 #include "Collider.h"
 #include "PlayerMP.h"
@@ -88,7 +89,11 @@ void Card::Awake()
 	pTextRenderer->SetText(_costMana.c_str());
 
 	_pCollider = AddComponent<Engine::Collider>(L"Card");	
-	_pCollider->SetActive(false);	
+	_pCollider->SetActive(false);
+
+	_pToolTip = AddComponent<ToolTip>(L"CardToolTip",2.5f);
+	Vector3 NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Mana"), Vector3(-600.0f, -500.0f, 0.0f));
+	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Time"), { NextPos.x,NextPos.y+180,NextPos.z});
 }
 
 void Card::Start()
@@ -175,8 +180,10 @@ bool Card::DrawCard()
 
 void Card::SetMouseHover(bool isHover)
 {
-	if (_isAddQueue || _isThrow)
+	if (_isAddQueue || _isThrow) {
+		_pToolTip->ActiveToolTip(isHover);
 		return;
+	}
 
 	if (isHover)
 	{
@@ -194,7 +201,7 @@ void Card::SetMouseHover(bool isHover)
 	_targetOffset[0] = _offset;
 	_lerpTime = 0.f;
 	_isLerp = true;
-
+	_pToolTip->ActiveToolTip(isHover);
 	return;
 }
 
@@ -255,7 +262,8 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 				HP* pHP = _pPlayer->GetComponent<HP>();
 				pHP->hp++;
 			}
-
+			Sound::StopSound((int)SoundGroup::Card);
+			Sound::PlaySound("Card_Sound_Card_Register_Cancel", (int)SoundGroup::Card, 0.8f, false);
 			_isAddQueue = false;
 		}
 	}
@@ -267,12 +275,31 @@ bool Card::AddJobQueue()
 	{
 		PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
 		TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
+		Sound::StopSound((int)SoundGroup::AddSFX);
+		if (pTimerSystem->GetisSlow()) 
+		{
+			Sound::PlaySound("Card_Sound_Card_Register_Time_Stop", (int)SoundGroup::AddSFX, 0.8f, false);
+		}
+		else
+		{
+			Sound::PlaySound("Card_Sound_Mana_Recharge", (int)SoundGroup::AddSFX, 0.8f, false);
+		}
 
-		if (pMP->mp < _cardData.costMana)
+		if (pMP->mp < _cardData.costMana) 
+		{
+			Sound::StopSound((int)SoundGroup::AddSFX);
+			Sound::StopSound((int)SoundGroup::Voice);
+			Sound::PlaySound("Voice_Sound_Voice_Zero_Notify_Mana", (int)SoundGroup::Voice, 0.8f, false);
+			Sound::PlaySound("Card_Sound_Notify_Time", (int)SoundGroup::AddSFX, 0.8f, false);
 			return false;
+		}
 
 		if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
+		{
+			Sound::StopSound((int)SoundGroup::AddSFX);
+			Sound::PlaySound("Card_Sound_Notify_Mana", (int)SoundGroup::AddSFX, 0.8f, false);
 			return false;
+		}
 
 		_attackRange = _pCardEffect[0]->GetAttackRange();
 
@@ -300,7 +327,11 @@ bool Card::AddJobQueue()
 						if (CardEffectType::PathMove == _cardData.effectType[i])
 						{
 							if (!pGrid->IsTileWalkable(x, y))
+							{
+								Sound::StopSound((int)SoundGroup::AddSFX);
+								Sound::PlaySound("Card_Sound_Notify_OutOfRange", (int)SoundGroup::AddSFX, 0.8f, false);
 								return false;
+							}
 						}
 
 						if ((int)currentGrid.x == x && (int)currentGrid.y == y
@@ -523,13 +554,48 @@ void Card::ActiveEffect()
 	_lerpTime = 0.f;
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { 250.f, 0.f, 0.f };
+
+	Sound::StopSound((int)SoundGroup::Card);
+	Sound::PlaySound("Card_Sound_Card_Execute", (int)SoundGroup::Card, 0.8f, false);
+
 	//_isAddQueue = false;
 
-	if (_cardData.name == L"이온 블래스트")
+	if (_cardData.name == L"이온 블래스트") 
+	{
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound("Battle_Sound_Player_Attack_IonBlast", (int)SoundGroup::Player, 0.8f, false);
 		_pEventInvoker->BindAction(0.3f, []() {Camera::CameraShake(0.5f, 50.f); });
+	}
 
-	if (_cardData.name == L"하이퍼 드라이브")
+	if (_cardData.name == L"하이퍼 드라이브") 
+	{
+		std::string str = "Battle_Sound_Player_Attack_HyperDrive" + Engine::RandomGeneratorInt(1, 3);
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 		_pEventInvoker->BindAction(0.5f, []() {Camera::CameraShake(0.5f, 75.f); });
+	}
+
+	if (_cardData.name == L"블레이드")
+	{
+		std::string str = "Battle_Sound_Player_Attack_Blade" + Engine::RandomGeneratorInt(1, 3);
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
+	}
+
+	if (_cardData.name == L"일섬")
+	{
+		std::string str = "Battle_Sound_Player_Attack_Issen" + Engine::RandomGeneratorInt(1, 3);
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
+	}
+
+	if (_cardData.name == L"초진동 칼날")
+	{
+		std::string str = "Battle_Sound_Player_Attack_HighWave" + Engine::RandomGeneratorInt(1, 3);
+		Sound::StopSound((int)SoundGroup::Player);
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
+	}
+
 }
 
 void Card::SetHoldCard(bool isActive)
@@ -594,7 +660,9 @@ void Card::JobQueueSetting()
 	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(false);
 
 	_pCollider->SetScale({ _pixelSize[Queue].width, _pixelSize[Queue].height, 0.f });
-
+	_pToolTip->ActiveToolTip(false);
+	//대기열 카드 툴팁
+	
 	_isAddQueue = true;
 }
 

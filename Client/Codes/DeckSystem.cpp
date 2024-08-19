@@ -57,7 +57,10 @@ void DeckSystem::Start()
 	Engine::GameObject& oOwner = transform.GetOwner();
 	Button* pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(-75.f, 25.f, 0.f), {150.f, 150.f});
+	pButton->SetIsReat(false);
 	pButton->SetOnHover([&oOwner]{
+		Sound::StopSound((int)SoundGroup::Card);
+		Sound::PlaySound("Card_Sound_Reload_Hover", (int)SoundGroup::Card, 0.8f, false);
 		ToolTip * pToolTip = oOwner.GetComponent<ToolTip>(L"ReloadingTool");
 		pToolTip->ActiveToolTip(true);
 	});
@@ -65,7 +68,13 @@ void DeckSystem::Start()
 		ToolTip* pToolTip = oOwner.GetComponent<ToolTip>(L"ReloadingTool");
 		pToolTip->ActiveToolTip(false);
 		});
-	pButton->SetOnPressed([this]() { _pCardSystem->ReloadCard(); });
+	pButton->SetOnPressed([this]() { 
+		Sound::StopSound((int)SoundGroup::Card);
+		Sound::PlaySound("Card_Sound_Reload_Click", (int)SoundGroup::Card, 0.8f, false);
+		Sound::StopSound((int)SoundGroup::Voice);
+		Sound::PlaySound("Voice_Sound_Voice_Zero_Reload_1", (int)SoundGroup::Voice, 0.8f, false);
+		_pCardSystem->ReloadCard();
+		});
 	//µ¦
 	_ptoolTip = AddComponent<ToolTip>(L"DeckTool");
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Deck"), Vector3(-300.0f, -100.0f, 0.0f));
