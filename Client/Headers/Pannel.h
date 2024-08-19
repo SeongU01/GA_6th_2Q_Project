@@ -20,10 +20,10 @@ private:
 
 private:
 	bool Initialize(const PannelInfo& info);
-	
+public:
+	Vector3 GetSize() { return _info.size; }
 public:
 	static Pannel* Create(const PannelInfo& info);
-
 private:
 	PannelInfo _info;
 };

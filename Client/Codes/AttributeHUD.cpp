@@ -17,31 +17,23 @@ AttributeHUD::AttributeHUD(Attribute* pAttribute)
 
 void AttributeHUD::Awake()
 {
+	_pToolTip = AddComponent<ToolTip>(L"AttributeToolTip");
+	Button* pBtn = AddComponent<Button>();
+	Engine::GameObject& pOwner = transform.GetOwner();
+	pBtn->SetOnHover([&pOwner] {
+		ToolTip* pToolTip = pOwner.GetComponent<ToolTip>(L"AttributeToolTip");
+		pToolTip->ActiveToolTip(true);
+		});
+	pBtn->SetCancel([&pOwner] { 
+		ToolTip* pToolTip = pOwner.GetComponent<ToolTip>(L"AttributeToolTip");
+		pToolTip->ActiveToolTip(false);
+		});
 	UI::UIInfo info;
 	UI* pUI = nullptr;
 	for (int i = 0; i < Attribute::State::End; i++)
 	{
 		pUI = AddUI(CreateInfo(L"Attribute", L"UI_HUD_Attribute", i, { 0.f, 0.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
 		pUI->SetNotAffectCamera(false);
-
-
-		std::wstring str = L"State_Char_00" + std::to_wstring(i);
-		std::wstring tempStr = L"Attribute" + std::to_wstring(i);
-		const wchar_t* strTitle = tempStr.c_str();
-
-		ToolTip* _pTip = pUI->AddComponent<ToolTip>(strTitle);
-		_pTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), Vector3(200.0f, 10.0f, 0.0f));
-		Button* pBtn = pUI->AddComponent<Button>();
-		pBtn->SetOnHover([pUI, strTitle] {
-			printf("¾È³ç");
-			ToolTip* pToolTip = pUI->GetComponent<ToolTip>(strTitle);
-			pToolTip->ActiveToolTip(true);
-			});
-		pBtn->SetCancel([pUI, strTitle] {
-			ToolTip* pToolTip = pUI->GetComponent<ToolTip>(strTitle);
-			pToolTip->ActiveToolTip(false);
-			});
-		// pUI->SetRenderGroup((int)RenderGroup::Object);
 	}
 
 	SetActives(false);
@@ -53,19 +45,50 @@ void AttributeHUD::Start()
 
 void AttributeHUD::Update(const float& deltaTime)
 {
+	_currDirectionX = this->transform.scale.x > 0 ? 1 : -1;
+	GetComponent<Button>()->SetRange(transform.position, {100,100});
 	std::vector<UI*> activeUIs;
 
-	for (int i = 0; i < Attribute::State::End; i++)
+	std::wstring str;
+	Vector3 NextPos = Vector3{ 0.0f,0.0f,0.0f };
+	if(_currDirectionX>0)
 	{
-		if (_pAttribute->IsActiveState((unsigned long long)1 << (i + 1)))
+		for (int i = 0; i < Attribute::State::End; i++)
 		{
-			_UIs[i]->SetActive(true);
-			activeUIs.push_back(_UIs[i]);
+			str = L"State_Char_00" + std::to_wstring(i);
+			if (_pAttribute->IsActiveState((unsigned long long)1 << (i + 1)))
+			{
+				_UIs[i]->SetActive(true);
+				activeUIs.push_back(_UIs[i]);
+				if (!_pToolTip->FindToolTip(str))
+					NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), NextPos);
+			}
+			else
+			{
+				_UIs[i]->SetActive(false);
+				_pToolTip->DeleteToolTip(str);
+			}
 		}
-		else
-			_UIs[i]->SetActive(false);
 	}
-
+	else
+	{
+		for (int i = Attribute::State::End-1; i >= 0; i--)
+		{
+			str = L"State_Char_00" + std::to_wstring(i);
+			if (_pAttribute->IsActiveState((unsigned long long)1 << (i + 1)))
+			{
+				_UIs[i]->SetActive(true);
+				activeUIs.push_back(_UIs[i]);
+				if (!_pToolTip->FindToolTip(str))
+					NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), NextPos);
+			}
+			else
+			{
+				_UIs[i]->SetActive(false);
+				_pToolTip->DeleteToolTip(str);
+			}
+		}
+	}
 	size_t size = activeUIs.size();
 	float width = 40.f * size;
 	float maxWitdh = MAXWIDTH < width ? MAXWIDTH : width;
@@ -75,8 +98,16 @@ void AttributeHUD::Update(const float& deltaTime)
 	for (size_t i = 0; i < size; i++)
 	{
 		activeUIs[i]->transform.position = Vector3(offsetX * 0.5f - halfX + (offsetX * i), 70.f, 0.f);
-		activeUIs[i]->GetComponent<Button>()->SetRange(transform.position + activeUIs[i]->transform.position, activeUIs[i]->GetSize());
+		if(_currDirectionX  < 0 )
+		{
+			activeUIs[i]->transform.scale = {-1.0f, 1.0f, 1.0f};
+		} 
+		else
+		{
+			activeUIs[i]->transform.scale = {1.0f, 1.0f, 1.0f};
+		} 
 	}
+	_pToolTip->MirrorToolTip(_currDirectionX);
 }
 
 void AttributeHUD::LateUpdate(const float& deltaTime)
