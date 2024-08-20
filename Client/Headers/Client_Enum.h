@@ -1,6 +1,6 @@
 #pragma once
 
-enum class LayerGroup { Tile, Player, Object, Enemy, UI, End };
+enum class LayerGroup { Tile, Player, Enemy, Object, UI, End };
 enum class RenderGroup { None, BackGround, Tile, BackEffect, Object, FrontEffect, UI, Card, ToolTip, Top, Fade, End };
 enum class SoundGroup { BGM, SFX, Voice,Battle,Card, Player, Attribute,Time,AddSFX, AttributeActive,End };
 

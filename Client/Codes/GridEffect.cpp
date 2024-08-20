@@ -33,7 +33,7 @@ void GridEffect::Awake()
 			info.textureTag = L"GridEffect";
 			info.isInfinity = true;
 			pEffect->AddComponent<Effect>(info);
-			Engine::AddObjectInLayer((int)LayerGroup::Object, L"Object", pEffect);
+			Engine::AddObjectInLayer((int)LayerGroup::UI, L"Effect", pEffect);
 			_gridEffects[i][j] = pEffect;
 		}
 	}

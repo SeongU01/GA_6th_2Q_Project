@@ -181,6 +181,8 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //»ê
                                            Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
 
+        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"), //»ê
+                                           Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
     }
     else
     {        
