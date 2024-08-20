@@ -234,9 +234,21 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 
 		std::getline(wss, token, L',');
 		objInfo._id = token.c_str();
+
 		std::getline(wss, token, L',');
 		objInfo._title = token.c_str();
+
 		std::getline(wss, token, L',');
+		// _content에 개행 치환
+		while (true) {
+			size_t pos = token.find(L"\\n");
+			if (pos != std::wstring::npos) {
+				token.replace(pos, 2, L"\n");
+			}
+			else {
+				break;
+			}
+		}
 		objInfo._content = token.c_str();
 
 		std::getline(wss, token, L',');
@@ -244,6 +256,7 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 
 		_ToolTipInfos[i] = objInfo;
 	}
+
 	file.close();
 	return true;
 }

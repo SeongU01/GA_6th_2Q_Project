@@ -114,9 +114,9 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		if (nullptr == _hoverCard)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
+			_hoverCard->SetMouseHover(true);
 			if (!_hoverCard->IsAddQueue())
 			{
-				_hoverCard->SetMouseHover(true);
 				_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
 			}
 		}
@@ -148,7 +148,8 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 		{
 			if (!Input::IsKeyPress(Input::DIM_LB))
 			{
-				_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
+				if(!_hoverCard->IsAddQueue())
+					_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 				_hoverCard->isHold = false;
 				_hoverCard->SetMouseHover(false);
 				_hoverCard = nullptr;

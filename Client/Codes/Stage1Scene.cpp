@@ -41,7 +41,7 @@ bool Stage1Scene::Initialize()
     Sound::StopSound((int)SoundGroup::BGM);
     //Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.8f, true);
     Sound::StopSound((int)SoundGroup::Voice);
-    Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, true);
+    Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     _pScene = Stage2Scene::Create();
 
     return true;

@@ -92,8 +92,19 @@ void Card::Awake()
 	_pCollider->SetActive(false);
 
 	_pToolTip = AddComponent<ToolTip>(L"CardToolTip",2.5f);
+	//툴팁.
 	Vector3 NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Mana"), Vector3(-600.0f, -500.0f, 0.0f));
-	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Time"), { NextPos.x,NextPos.y+180,NextPos.z});
+	for (int num : _cardData.additiveCharState)
+	{
+		if (num != 0)
+		{
+			std::wstring str = L"State_Char_00" + std::to_wstring(num - 1);
+			NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), { NextPos.x,NextPos.y + 180,NextPos.z });
+		}
+	}
+	//추가툴팁
+	if(_cardData.name==L"이온 블래스트" || _cardData.name == L"멜트다운")
+		NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Card_000"), {NextPos.x,NextPos.y + 180,NextPos.z});
 }
 
 void Card::Start()
@@ -668,7 +679,8 @@ void Card::JobQueueSetting()
 	_pCollider->SetScale({ _pixelSize[Queue].width, _pixelSize[Queue].height, 0.f });
 	_pToolTip->ActiveToolTip(false);
 	//대기열 카드 툴팁
-	
+	_pToolTip->ClearToolTip();
+	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Queue_Ready"), { -600.0f, -100.0f, 0.0f });
 	_isAddQueue = true;
 }
 

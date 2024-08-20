@@ -50,7 +50,6 @@ void DeckSystem::Start()
 {
 	_pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
 
-
 	//ÀçÀåÀü
 	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"ReloadingTool");
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Reload"), Vector3(-300.0f, -100.0f, 0.0f));
@@ -72,7 +71,7 @@ void DeckSystem::Start()
 		Sound::StopSound((int)SoundGroup::Card);
 		Sound::PlaySound("Card_Sound_Reload_Click", (int)SoundGroup::Card, 0.8f, false);
 		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Zero_Reload_1", (int)SoundGroup::Voice, 0.8f, false);
+		Sound::PlaySound("Voice_Sound_Voice_Zero_Reload", (int)SoundGroup::Voice, 0.8f, false);
 		_pCardSystem->ReloadCard();
 		});
 	//µ¦

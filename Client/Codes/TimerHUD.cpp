@@ -58,7 +58,7 @@ void TimerHUD::Start()
 	_pTopSkill = AddUI(CreateInfo(L"Timer_top_Orange", L"UI_HUD_Timer_Top", 4, { 0.0f, 30.0f, 1.f }, { 1.0f, 1.0f,1.0f }, &transform));
 	//»ó´Ü ÅøÆÁ
 	_ptoolTip = AddComponent<ToolTip>(L"TimerTool2");
-	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_TimeLimit"), Vector3(300.0f, 100.0f, 0.0f));
+	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_TimeLimit"), Vector3(1150.0f, 70.0f, 0.0f));
 	Engine::GameObject& pOwner = transform.GetOwner();
 	btn = AddComponent<Button>();
 	btn->SetRange({ 960.0f, 30.0f, 0.f }, _pTopDefault->GetSize());
@@ -114,13 +114,13 @@ void TimerHUD::Update(const float& deltaTime)
 	{
 		_soundTrigger = true;
 		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10_1", (int)SoundGroup::Voice, 0.8f, false);
+		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10", (int)SoundGroup::Voice, 0.8f, false);
 	}
 	else if (!_soundTrigger && timer <= 30 && timer>=29)
 	{
 		_soundTrigger = true;
 		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30_1", (int)SoundGroup::Voice, 0.8f, false);
+		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30", (int)SoundGroup::Voice, 0.8f, false);
 	}
 
 	_pBene->SetActive(_pTimer->GetisSlow());
