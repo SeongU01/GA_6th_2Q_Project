@@ -133,8 +133,19 @@ void SpawnEnemy::CheckWaveEnd()
 			return;
 		}
 
-		if(!_stageEnd)
+		if (!_stageEnd) {
+			Sound::StopSound((int)SoundGroup::Voice);
+			if (_currWaveCount == _maxWaveCount)
+			{
+				Sound::PlaySound("Voice_Sound_Voice_Operator_Wave_1", (int)SoundGroup::Voice, 0.8f, false);
+			}
+			else
+			{
+				std::string str = "Voice_Sound_Voice_Zero_Begin_Wave" + std::to_string(Engine::RandomGeneratorInt(1, 4));
+				Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+			}
 			_currWave = DataManager::GetInstance()->GetWaveInfo(_currSpawnInfo, L"Wave" + std::to_wstring(_currWaveCount));
+		}
 	}
 }
 

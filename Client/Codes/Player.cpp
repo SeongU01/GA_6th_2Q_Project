@@ -229,8 +229,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			pHP->hp -= damage;
 			Sound::StopSound((int)SoundGroup::Voice);
-			std::string str = "Voice_Sound_Voice_Zero_Hit" + Engine::RandomGeneratorInt(1, 12);
-			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+			std::string str = "Voice_Sound_Voice_Zero_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 12));
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.6f, false);
 
 			if (pHP->hp == 1)
 			{
@@ -269,6 +269,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (_pAttribute->IsActiveState(AttributeFlag::Shield))
 		{
+
 			Sound::PlaySound("Battle_Sound_State_Execute_Shield", (int)SoundGroup::AttributeActive, 0.8f, false);
 
 			_pAttribute->UseStack(Attribute::State::Shield);
@@ -287,8 +288,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			_pAttribute->AddState(attackInfo.Attribute, attackInfo.AttributeStack);
 			_pHP->hp -= damage;
 			Sound::StopSound((int)SoundGroup::Voice);
-			std::string str = "Voice_Sound_Voice_Zero_Hit" + Engine::RandomGeneratorInt(1, 3);
-			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+			std::string str = "Voice_Sound_Voice_Zero_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 12));
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.6f, false);
 
 			if (_pHP->hp == 1)
 			{

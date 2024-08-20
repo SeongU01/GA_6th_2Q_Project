@@ -31,5 +31,6 @@ protected:
 	EnemySpawner*				_pEnemySpawner = nullptr;
 	Engine::Scene*				_pScene = nullptr;
 	bool						_isSelectCard = false;
+	bool						_isRemainTower1 = false;
 };
 

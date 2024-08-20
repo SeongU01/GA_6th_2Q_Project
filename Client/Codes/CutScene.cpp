@@ -67,7 +67,7 @@ bool CutScene::Initialize()
     //사운드셋팅
     std::string soundName = "Bgm_Sound_BGM_Cut_Scene_" + (_stageNum);
     Sound::StopSound((int)SoundGroup::BGM);
-    Sound::PlaySound(soundName.c_str(), (int)SoundGroup::BGM, 1.0f, false);
+    Sound::PlaySound(soundName.c_str(), (int)SoundGroup::BGM, 0.5f, false);
     //페이드셋팅(들어갈 때 한 번, 나갈 때 한 번..)
     Fade::FadeInfo info;
     info.option = Fade::Fade_Option::Fade_In;

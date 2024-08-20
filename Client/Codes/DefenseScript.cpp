@@ -102,11 +102,14 @@ void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
 			_pHP->hp--;
 			if(_pHP->hp==0)
 			{
-				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Hit", (int)SoundGroup::SFX, 0.8f, false);
+				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Break", (int)SoundGroup::SFX, 0.8f, false);
+				std::string str = "Voice_Sound_Voice_Zero_Break_Tower" + std::to_string(Engine::RandomGeneratorInt(1, 2));
+				Sound::StopSound((int)SoundGroup::Voice);
+				Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
 				_isDestroy = true;
 			}
 			else
-				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Break", (int)SoundGroup::SFX, 0.8f, false);
+				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Hit", (int)SoundGroup::SFX, 0.8f, false);
 		}
 	}
 }

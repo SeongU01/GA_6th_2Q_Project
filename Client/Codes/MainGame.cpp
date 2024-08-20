@@ -77,7 +77,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 	
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::SFX, 0.6f);
-	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::BGM, 1.f);
+	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::BGM, 0.5f);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
 
 	// 공통 데이터

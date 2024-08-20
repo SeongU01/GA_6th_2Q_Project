@@ -401,6 +401,16 @@ void Card::ActiveEffect()
 		{
 			_pEventInvoker->BindAction(action.delay, [=]()
 				{
+					if (_cardData.type == CardType::Attack)
+					{
+						if(_cardData.name==L"이온 블래스트")
+							Sound::PlaySound("Voice_Sound_Voice_Zero_Beam1", (int)SoundGroup::Voice, 0.8f, false);
+						else 
+						{
+							std::string str = "Voice_Sound_Voice_Zero_Attack" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+							Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
+						}
+					}
 					for (auto& range : _attackRange)
 					{
 						int x = int(range.first + gridPosition.x);
@@ -592,26 +602,26 @@ void Card::ActiveEffect()
 
 	if (_cardData.name == L"하이퍼 드라이브") 
 	{
-		std::string str = "Battle_Sound_Player_Attack_HyperDrive" + Engine::RandomGeneratorInt(1, 3);
+		std::string str = "Battle_Sound_Player_Attack_HyperDrive" + std::to_string(Engine::RandomGeneratorInt(1, 3));
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 		_pEventInvoker->BindAction(0.5f, []() {Camera::CameraShake(0.5f, 75.f); });
 	}
 
 	if (_cardData.name == L"블레이드")
 	{
-		std::string str = "Battle_Sound_Player_Attack_Blade" + Engine::RandomGeneratorInt(1, 3);
+		std::string str = "Battle_Sound_Player_Attack_Blade" + std::to_string(Engine::RandomGeneratorInt(1, 3));
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
 	if (_cardData.name == L"일섬")
 	{
-		std::string str = "Battle_Sound_Player_Attack_Issen1"; //+ Engine::RandomGeneratorInt(1, 3);
+		std::string str = "Battle_Sound_Player_Attack_Issen"+ std::to_string(Engine::RandomGeneratorInt(1, 3));
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
 	if (_cardData.name == L"초진동 칼날")
 	{
-		std::string str = "Battle_Sound_Player_Attack_HighWave" + Engine::RandomGeneratorInt(1, 3);
+		std::string str = "Battle_Sound_Player_Attack_HighWave" + std::to_string(Engine::RandomGeneratorInt(1, 3));
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
@@ -676,8 +686,15 @@ void Card::JobQueueSetting()
 	costMana->SetOffset(Vector3(-245.f, -84.f, 0.f));
 	costMana->SetDrawRect(200.f, 100.f);
 
+	std::string num = std::to_string(Engine::RandomGeneratorInt(1, 3));
 	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(false);
-
+	if (_cardData.type == CardType::Attack)
+		Sound::PlaySound(("Voice_Sound_Voice_Zero_Card_Attack" + num).c_str(), (int)SoundGroup::Voice, 0.8f, false);
+	else if (_cardData.type == CardType::Move)
+		Sound::PlaySound(("Voice_Sound_Voice_Zero_Card_Move" + num).c_str(), (int)SoundGroup::Voice, 0.8f, false);
+	else if (_cardData.type == CardType::Support) 
+		Sound::PlaySound(("Voice_Sound_Voice_Zero_Card_Assist" + num).c_str(), (int)SoundGroup::Voice, 0.8f, false);
+	
 	_pCollider->SetScale({ _pixelSize[Queue].width, _pixelSize[Queue].height, 0.f });
 	_pToolTip->ActiveToolTip(false);
 	//대기열 카드 툴팁

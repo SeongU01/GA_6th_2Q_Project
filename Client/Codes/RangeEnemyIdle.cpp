@@ -23,6 +23,7 @@ void RangeEnemyIdle::OnStart()
 {
 	
 	_pAnimation->ChangeAnimation(L"Idle");
+	Sound::PlaySound("Battle_Sound_Enemy_Common_Wait", (int)SoundGroup::Battle, 0.8f, false);
 }
 
 void RangeEnemyIdle::OnExit()

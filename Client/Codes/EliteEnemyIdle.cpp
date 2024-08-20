@@ -67,7 +67,7 @@ int EliteEnemyIdle::LateUpdate(const float& deltaTime)
 void EliteEnemyIdle::OnStart()
 {
 	_pAnimation->ChangeAnimation(L"Idle");
-
+	Sound::PlaySound("Battle_Sound_Enemy_Common_Wait", (int)SoundGroup::Battle, 0.8f, false);
 	//지정한 그리드로 움직이는 메소드
 	/*_pMovement->MoveToCell(Vector3(0.f, 0.f, 0.f), 0.5f);
 	_pAstar->SetGridPosition(Vector3(0.f, 0.f, 0.f));

@@ -41,6 +41,8 @@ void SelectCard::LateUpdate(const float& deltaTime)
 
 void SelectCard::OnSelectCard(Card* pCards[3])
 {
+    Sound::StopSound((int)SoundGroup::Voice);
+    Sound::PlaySound("Voice_Sound_Voice_Zero_Clear_Game", (int)SoundGroup::Voice, 0.8f, false);
     Card* cards[3];
     for (int i = 2; i >= 0; i--)
         cards[i] = pCards[2 - i];
@@ -73,6 +75,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
         _pEventInvoker->BindAction(1.2f, [=]()
             {
                 Sound::PlaySound("Card_Sound_Card_ClearSlide", (int)SoundGroup::Card, 0.8f, false);
+                Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Clear", (int)SoundGroup::SFX, 0.8f, false);
                 cards[i]->gameObject.SetActive(true);
                 cards[i]->SetTargetPosition(Vector3(0.f, 1000.f, 0.f), Vector3(0.f, 0.f, 0.f));
                 Button* pButton = _selectCardScene->AddComponent<Button>();
@@ -81,6 +84,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                 pButton->SetCancel([=]() { cards[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f); });
                 pButton->SetOnPressed([=]()
                     {
+                        Sound::PlaySound("Card_Sound_Card_ClearSelect", (int)SoundGroup::Card, 0.8f, false);
                         CardSystem* pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
                         CardManager* pCardManager = CardManager::GetInstance();
                         pCardSystem->AddCard(pCardManager->CloneCard(cards[i]->GetID()));

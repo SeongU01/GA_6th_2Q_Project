@@ -68,8 +68,6 @@ void DeckSystem::Start()
 		});
 	pButton->SetOnPressed([this]() { 
 		Sound::PlaySound("Card_Sound_Reload_Click", (int)SoundGroup::Card, 0.8f, false);
-		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Zero_Reload", (int)SoundGroup::Voice, 0.8f, false);
 		_pCardSystem->ReloadCard();
 		});
 	//µ¦

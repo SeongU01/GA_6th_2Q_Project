@@ -43,7 +43,7 @@ int TitleScene::LateUpdate(const float& deltaTime)
 
 bool TitleScene::Initialize()
 {
-    Sound::PlaySound("Bgm_Sound_BGM_Title", (int)SoundGroup::BGM, 0.8f, true);
+    Sound::PlaySound("Bgm_Sound_BGM_Title", (int)SoundGroup::BGM, 0.5f, true);
 
     Engine::GameObject* pGameObject = Engine::GameObject::Create();
     pGameObject->transform.position = Vector3(WINCX >> 1, WINCY >> 1, 0.f);

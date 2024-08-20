@@ -107,21 +107,6 @@ void TimerHUD::Update(const float& deltaTime)
 		_pRed->SetScale({ 0.f,0.f,0.f });
 		_pYellow->SetScale({ 0.f,0.f,0.f });
 	}
-	
-	if (_soundTrigger && (timer <= 28 && timer > 10))
-		_soundTrigger = false;
-	if (!_soundTrigger && timer <=10)
-	{
-		_soundTrigger = true;
-		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10", (int)SoundGroup::Voice, 0.8f, false);
-	}
-	else if (!_soundTrigger && timer <= 30 && timer>=29)
-	{
-		_soundTrigger = true;
-		Sound::StopSound((int)SoundGroup::Voice);
-		Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30", (int)SoundGroup::Voice, 0.8f, false);
-	}
 
 	_pBene->SetActive(_pTimer->GetisSlow());
 	if (timer <= 15) //time limit

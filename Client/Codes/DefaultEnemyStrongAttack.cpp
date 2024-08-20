@@ -119,6 +119,7 @@ DefaultEnemyStrongAttack* DefaultEnemyStrongAttack::Create(DefaultEnemyScript* p
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
+			Sound::PlaySound("Battle_Sound_Enemy_Basic_Attack_Range_Strong", (int)SoundGroup::Battle, 0.8f, false);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

@@ -55,7 +55,7 @@ void AStar::Update(const float& deltaTime)
 			_curTime = 0.0f;
 			_pathIndex++;
 			_currentMoveSteps++; // 이동 단계 증가
-
+			Sound::PlaySound("Battle_Sound_Enemy_Common_Move_Forward", (int)SoundGroup::Battle, 0.8f, false);
 			// 이동 가능 여부 확인 후 이동
 			if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 			{

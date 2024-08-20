@@ -79,6 +79,9 @@ void RestartGame::LateUpdate(const float& deltaTime)
 
 void RestartGame::GameOver()
 {
+    Sound::StopSound((int)SoundGroup::Voice);
+    Sound::PlaySound("Voice_Sound_Voice_Zero_Over_Game", (int)SoundGroup::Voice, 0.8f, false);
+    Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Fail", (int)SoundGroup::SFX, 0.8f, false);
     _isRestart = true;
     _alpha = 0.f;
 

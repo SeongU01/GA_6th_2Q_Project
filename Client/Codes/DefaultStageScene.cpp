@@ -170,7 +170,12 @@ int DefaultStageScene::Update(const float& deltaTime)
             if (pHP->IsZeroHP())
                 count++;
         }
-
+        if (count == 1 && !_isRemainTower1)
+        {
+            Sound::StopSound((int)SoundGroup::Voice);
+            Sound::PlaySound("Voice_Sound_Voice_Operator_Tower_1", (int)SoundGroup::Voice, 0.8f, false);
+            _isRemainTower1 = true;
+        }
         if (count == size)
             Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<HP>()->hp = 0;
     }
@@ -260,9 +265,7 @@ bool DefaultStageScene::Initialize()
     pObject->SetRenderGroup((int)RenderGroup::UI);
     pObject->AddComponent<Mouse>(L"Mouse");
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"Mouse", pObject);
-
     FadeIn();
-
     return true;
 }
 
@@ -306,7 +309,6 @@ bool DefaultStageScene::UIinitialize()
     pGameClearObj->AddComponent<GameClearHUD>();
     pGameClearObj->AddComponent<GameClearButtons>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Top);   
-
     return true;
 }
 

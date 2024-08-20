@@ -38,6 +38,8 @@ void TimerSystem::Update(const float& deltaTime)
     {
         _isNotice = true;
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_30", (int)SoundGroup::Time, 0.8f, false);
+        Sound::StopSound((int)SoundGroup::Voice);
+        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30", (int)SoundGroup::Voice, 0.8f, false);
     }
     else if (timer <= 15.f && timer >= 10.f && _isNotice)
     {
@@ -47,6 +49,8 @@ void TimerSystem::Update(const float& deltaTime)
     {
         _isNotice = true;
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_10", (int)SoundGroup::Time, 0.8f, false);
+        Sound::StopSound((int)SoundGroup::Voice);
+        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10", (int)SoundGroup::Voice, 0.8f, false);
     }
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
