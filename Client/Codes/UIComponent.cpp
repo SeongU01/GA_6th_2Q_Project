@@ -9,7 +9,7 @@ UIComponent::UIComponent(const wchar_t* name)
 UI* UIComponent::AddUI(const UI::UIInfo& info)
 {
 	UI* pUI = UI::Create(info);
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pUI);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, info.name, pUI);
 	_UIs.push_back(pUI);
 	return pUI;
 }

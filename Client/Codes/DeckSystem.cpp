@@ -18,9 +18,8 @@ DeckSystem::DeckSystem()
 void DeckSystem::Awake()
 {	
 	//ƒ´µÂ ∂Û¿Œ
-	AddUI(CreateInfo(L"Card_back", L"UI_HUD_Card", 1, { 0 , 0, -2.f }, { 1.0f, 1.0f, 1.0f }, &transform));
-	AddUI(CreateInfo(L"Card_Re", L"UI_HUD_Card", 2, { 0 , 0, -1.0f }, { 1.0f, 1.0f, 1.0f }, &transform));
-
+	 AddUI(CreateInfo(L"Card_back", L"UI_HUD_Card", 1, { 0 , 0, -2.f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	 _pReLoad = AddUI(CreateInfo(L"Card_Re", L"UI_HUD_Card", 2, { 0 , 0, -1.0f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	Engine::TextRenderer* pTextRenderer = AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF);
 	//µ¶
 	pTextRenderer->SetText(L"µ¶");
@@ -49,26 +48,34 @@ void DeckSystem::Awake()
 void DeckSystem::Start()
 {
 	_pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
-
 	//¿Á¿Â¿¸
 	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"ReloadingTool");
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Reload"), Vector3(-300.0f, -100.0f, 0.0f));
 	Engine::GameObject& oOwner = transform.GetOwner();
+	UI& pCard = *_pReLoad;
+	CardSystem& pSystem = *_pCardSystem;
 	Button* pButton = AddComponent<Button>();
 	pButton->SetRange(transform.position + Vector3(-75.f, 25.f, 0.f), {150.f, 150.f});
 	pButton->SetIsReat(false);
-	pButton->SetOnHover([&oOwner]{
+	pButton->SetOnHover(
+		[&oOwner, &pCard, &pSystem] {
 		Sound::PlaySound("Card_Sound_Reload_Hover", (int)SoundGroup::Card, 0.8f, false);
+		if(pSystem.IsReloadReady())
+		{
+			pCard.SetFrame(6);
+		}
 		ToolTip * pToolTip = oOwner.GetComponent<ToolTip>(L"ReloadingTool");
 		pToolTip->ActiveToolTip(true);
 	});
-	pButton->SetCancel([&oOwner] {
+	pButton->SetCancel([&oOwner, &pCard] {
 		ToolTip* pToolTip = oOwner.GetComponent<ToolTip>(L"ReloadingTool");
 		pToolTip->ActiveToolTip(false);
+		pCard.SetFrame(2);
 		});
-	pButton->SetOnPressed([this]() { 
+	pButton->SetOnPressed([this, &pCard]() {
 		Sound::PlaySound("Card_Sound_Reload_Click", (int)SoundGroup::Card, 0.8f, false);
 		_pCardSystem->ReloadCard();
+		pCard.SetFrame(2);
 		});
 	//µ¶
 	_ptoolTip = AddComponent<ToolTip>(L"DeckTool");

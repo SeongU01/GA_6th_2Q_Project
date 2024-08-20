@@ -80,8 +80,14 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                 cards[i]->SetTargetPosition(Vector3(0.f, 1000.f, 0.f), Vector3(0.f, 0.f, 0.f));
                 Button* pButton = _selectCardScene->AddComponent<Button>();
                 pButton->SetRange(cards[i]->transform.position, { 540.f * 0.6f, 786.f * 0.6f });
-                pButton->SetOnHover([=]() { cards[i]->transform.scale = Vector3(0.66f, 0.66f, 0.f); });
-                pButton->SetCancel([=]() { cards[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f); });
+                pButton->SetOnHover([=]() { 
+                    cards[i]->ActiveToolTips(true);
+                    cards[i]->transform.scale = Vector3(0.66f, 0.66f, 0.f); 
+                    });
+                pButton->SetCancel([=]() { 
+                    cards[i]->ActiveToolTips(false);
+                    cards[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f);
+                    });
                 pButton->SetOnPressed([=]()
                     {
                         Sound::PlaySound("Card_Sound_Card_ClearSelect", (int)SoundGroup::Card, 0.8f, false);

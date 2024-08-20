@@ -238,6 +238,11 @@ void Card::Reset()
 	_pCollider->SetActive(false);
 }
 
+void Card::ActiveToolTips(bool isActive)
+{
+	_pToolTip->ActiveToolTip(isActive);
+}
+
 void Card::ThrowCard()
 {
 	_isLerp = true;

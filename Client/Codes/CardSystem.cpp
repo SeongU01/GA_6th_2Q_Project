@@ -165,6 +165,11 @@ void CardSystem::AddCard(Card* pCard)
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Card", &_currentDeck.back()->gameObject);
 }
 
+bool CardSystem::IsReloadReady()
+{
+	return _reloadTime >= RELOADCOOLTIME; 
+}
+
 void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst)
 {
 	auto find_iter = std::find_if(src.begin(), src.end(), [pCard](Card* card) -> bool

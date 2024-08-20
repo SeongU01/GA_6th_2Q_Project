@@ -35,6 +35,7 @@ public:
 	void OnReloadCoolTime();
 	void ActiveCard(Card* pCard);
 	void AddCard(Card* pCard);
+	bool IsReloadReady();
 
 private:
 	void MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst);

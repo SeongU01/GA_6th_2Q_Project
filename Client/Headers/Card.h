@@ -78,6 +78,7 @@ public:
 	void SetFixPosition(const Vector3& position) { _fixPosition = position; }
 	void ResetCardInfo();
 	void Reset();
+	void ActiveToolTips(bool isActive);
 
 public:
 	void OnCollision(Engine::CollisionInfo& info) override;

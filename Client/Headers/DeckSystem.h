@@ -4,9 +4,11 @@
 namespace Engine
 {
 	class TextRenderer;
+	class Gameobject;
 }
 
 class CardSystem;
+class UI;
 class DeckSystem : public UIComponent
 {
 	enum DeckType { Current, Grave, Extra, End };
@@ -26,6 +28,6 @@ private:
 	CardSystem*				_pCardSystem = nullptr;
 	Engine::TextRenderer*	_pDeck = nullptr;
 	Engine::TextRenderer*	_pGrave = nullptr;
-
+	UI*		_pReLoad = nullptr;
 	std::wstring _deckCount[End];
 };
