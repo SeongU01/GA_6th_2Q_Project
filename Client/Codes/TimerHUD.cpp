@@ -97,7 +97,7 @@ void TimerHUD::Update(const float& deltaTime)
 	_pTopSkill->SetScale({ rate  ,1.0f,1.0f });
 	_pTopSkill->SetOffsetPosition({ _pTopDefault->GetSize().width - (15.8f * _skillValue), 0.0f,0.0f });
 	//±Û¾¾Á¶Á¤
-	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"%02d:%02d", (int)timer, (int)(timer * 100) % 100);
+	swprintf(_buffer, sizeof(_buffer) / sizeof(_buffer[0]), L"%02d.%02d", (int)timer, (int)(timer * 100) % 100);
 	_pText->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 	_pText->transform.SetPosition({ 120,920 });
 	_pText->SetText(_buffer);

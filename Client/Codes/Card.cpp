@@ -75,7 +75,7 @@ void Card::Awake()
 	int integer = (int)_cardData.costTime * 100;
 	int hundredths = int(_cardData.costTime * 100);
 
-	wsprintf(buffer, L"%d:%d", (int)_cardData.costTime, hundredths - integer);
+	wsprintf(buffer, L"%d.%d", (int)_cardData.costTime, hundredths - integer);
 	_costTime = buffer;
 	pTextRenderer->SetText(_costTime.c_str());
 
