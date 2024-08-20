@@ -12,6 +12,7 @@ private:
 	virtual ~ToolTip() = default;
 public:
 	//정보창 활성화/비활성화
+	void DontDestoryToolTips();
 	void ActiveToolTip(bool _isTrue);
 	Vector3 AddToolTip(const ToolTipInfo& _info,Vector3 position);
 	void ClearToolTip();
