@@ -92,6 +92,7 @@ void Card::Awake()
 	_pCollider->SetActive(false);
 
 	_pToolTip = AddComponent<ToolTip>(L"CardToolTip",2.5f);
+	_pToolTip->DontDestoryToolTips();
 	//ÅøÆÁ.
 	Vector3 NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Mana"), Vector3(-600.0f, -500.0f, 0.0f));
 	for (int num : _cardData.additiveCharState)

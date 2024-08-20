@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Attribute.h"
 #include "HP.h"
+#include "PlayerMP.h"
 
 #include "Client_Define.h"
 
@@ -20,6 +21,8 @@ void AttributeHUD::Awake()
 	_pToolTip = AddComponent<ToolTip>(L"AttributeToolTip");
 	Button* pBtn = AddComponent<Button>();
 	Engine::GameObject& pOwner = transform.GetOwner();
+	if (pOwner.GetComponent<PlayerMP>() != nullptr) 
+		_pToolTip->DontDestoryToolTips();
 	pBtn->SetOnHover([&pOwner] {
 		ToolTip* pToolTip = pOwner.GetComponent<ToolTip>(L"AttributeToolTip");
 		pToolTip->ActiveToolTip(true);

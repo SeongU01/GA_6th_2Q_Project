@@ -6,6 +6,7 @@ bool Pannel::Initialize(const PannelInfo& info)
     _info = info;
 
     SetRenderGroup((int)RenderGroup::UI);
+    
     transform.SetParent(_info.parent);
     transform.position = _info.position;
 

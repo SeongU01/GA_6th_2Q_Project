@@ -19,6 +19,7 @@ void GageHUD::Awake()
 	_imageSize = pTexture->GetImage(0)->GetSize(); 
 
 	ToolTip* _ptoolTip = AddComponent<ToolTip>(L"reChargeTool"); //마나 안내
+	_ptoolTip->DontDestoryToolTips();
 	if(_number==1)
 		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Card_Reload_Recovery"), Vector3(1500.0f, 830.0f, 0.0f));
 	else
@@ -30,7 +31,7 @@ void GageHUD::Awake()
 		ToolTip* pToolTip = pObj.GetComponent<ToolTip>(L"reChargeTool");
 		pToolTip->ActiveToolTip(true);
 		});
-	btn->SetCancel([&pObj] {
+	btn->SetCancel([&pObj] { 
 		ToolTip* pToolTip = pObj.GetComponent<ToolTip>(L"reChargeTool");
 		pToolTip->ActiveToolTip(false);
 		});

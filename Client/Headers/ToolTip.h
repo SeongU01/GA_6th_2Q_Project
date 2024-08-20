@@ -1,8 +1,8 @@
 #pragma once
 #include "MonoBehavior.h"
 #include "DataManager.h"
+#include "Pannel.h"
 
-class Pannel;
 class ToolTip :public Engine::MonoBehavior
 {
 public:
@@ -25,7 +25,9 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
+	bool _isDontDestory = false;
 	float _scale=1.0f;
+	std::vector<Pannel*> _infos;
 	std::map<std::wstring, Pannel*> _toolTipList = {}; // 활성화된 패널을 관리하는 맵
 };
 
