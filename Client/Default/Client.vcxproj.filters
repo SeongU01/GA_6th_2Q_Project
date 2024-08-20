@@ -293,6 +293,9 @@
     <ClCompile Include="..\Codes\BossEnemyMove.cpp">
       <Filter>03. GameObject\Enemy\Boss\State\Move</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Loading.cpp">
+      <Filter>02. Scene\Loading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -555,6 +558,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Boss\State\Move">
       <UniqueIdentifier>{a830df81-08e4-41fe-9c23-08f3ec1e617f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Loading">
+      <UniqueIdentifier>{e8ea8d19-6b2f-4c87-9612-af94d7c74f58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -869,6 +875,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\BossEnemyMove.h">
       <Filter>03. GameObject\Enemy\Boss\State\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Loading.h">
+      <Filter>02. Scene\Loading</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
