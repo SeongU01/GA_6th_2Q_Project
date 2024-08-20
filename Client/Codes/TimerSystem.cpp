@@ -1,4 +1,8 @@
 #include "TimerSystem.h"
+
+// Component
+#include "HP.h"
+
 #include "EventManager.h"
 #include "Client_Define.h"
 
@@ -6,6 +10,7 @@ TimerSystem::TimerSystem()
 	:MonoBehavior(L"TimeSystem")
 {
 }
+
 void TimerSystem::Awake()
 {
 }
@@ -29,17 +34,17 @@ void TimerSystem::Update(const float& deltaTime)
     float timer = GetRemainingTime();
     
     //사운드 경보
-    if (timer<=30 && timer>=20 &&!_isNotice)
+    if (timer <= 30.f && timer >= 20.f && !_isNotice)
     {
         _isNotice = true;
         Sound::StopSound((int)SoundGroup::Time);
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_30", (int)SoundGroup::Time, 0.8f, false);
     }
-    else if (timer <= 15 && timer >= 10&& _isNotice)
+    else if (timer <= 15.f && timer >= 10.f && _isNotice)
     {
         _isNotice = false;
     }
-    else if (timer <= 10 && !_isNotice)
+    else if (timer <= 10.f && !_isNotice)
     {
         _isNotice = true;
         Sound::StopSound((int)SoundGroup::Time);
@@ -48,17 +53,19 @@ void TimerSystem::Update(const float& deltaTime)
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
     {
-        if (EventManager::GetInstance()->IsStopGame())
+        EventManager* pEventManager = EventManager::GetInstance();
+
+        if (pEventManager->IsStopGame() || pEventManager->IsPlayerDeath())
             return;
 
         _isStopTime = !_isStopTime;
-        if (_isStopTime) 
+        if (_isStopTime)
         {
             Sound::StopSound((int)SoundGroup::Time);
             Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
             _slowTime = 0.0f;
         }
-        else 
+        else
         {
             _slowTime = 1.0f;
         }
@@ -69,4 +76,9 @@ void TimerSystem::Update(const float& deltaTime)
 void TimerSystem::LateUpdate(const float& deltaTime)
 {
     _curTime = std::clamp(_curTime, 0.f, _maxTime);
+
+    if (0.f >= GetRemainingTime())
+    {
+        GetComponent<HP>()->hp = 0;
+    }
 }

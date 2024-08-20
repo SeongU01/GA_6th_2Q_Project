@@ -9,6 +9,7 @@
 
 // Component
 #include "SpawnEnemy.h"
+#include "CardSystem.h"
 
 #include "Client_Define.h"
 
@@ -34,14 +35,17 @@ bool Stage1Scene::Initialize()
 
     MakeObject(objectInfo);
 
+    Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>()->ResetCardInfo();
+
     // ½ºÆ÷´×Ç®
     _pEnemySpawner = EnemySpawner::Create(enemySpawnInfo);
-    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", _pEnemySpawner);    
+    Engine::AddObjectInLayer((int)LayerGroup::Object, L"Spawner", _pEnemySpawner);
 
     Sound::StopSound((int)SoundGroup::BGM);
     //Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.8f, true);
     Sound::StopSound((int)SoundGroup::Voice);
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
+
     _pScene = Stage2Scene::Create();
 
     return true;

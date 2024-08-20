@@ -2,13 +2,17 @@
 #include "Stage3Scene.h"
 #include "Client_Define.h"
 
-// Component
-#include "CardSystem.h"
-
 // Object
 #include "GridEffect.h"
 #include "Map.h"
 #include "EnemySpawner.h"
+
+// Component
+#include "SpawnEnemy.h"
+#include "CardSystem.h"
+
+#include "Client_Define.h"
+#include "EventManager.h"
 
 bool Stage2Scene::Initialize()
 {
@@ -42,6 +46,8 @@ bool Stage2Scene::Initialize()
     //Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.8f, true);
 
     _pScene = Stage3Scene::Create();
+
+    EventManager::GetInstance()->SetCurrentStage(Stage::Stage2);
 
     return true;
 }

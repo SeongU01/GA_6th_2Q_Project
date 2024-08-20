@@ -1,10 +1,12 @@
 #include "TitleScene.h"
-
 #include "Client_Define.h"
+
 //component
 #include "UIComponent.h"
 #include "TitleButtons.h"
 #include "SpriteRenderer.h"
+#include "Animation.h"
+
 //UHD
 #include "CreditHUD.h"
 #include "InfoHUD.h"
@@ -19,18 +21,45 @@ int TitleScene::Update(const float& deltaTime)
         CreditHUD* pCredit = Engine::FindObject((int)LayerGroup::UI, L"Credit", NULL)->GetComponent<CreditHUD>();
         pCredit->SetActives(false);
     }
+
     return 0;
 }
 
 int TitleScene::LateUpdate(const float& deltaTime)
 {
+    if (_pAnimation->IsLastFrame())
+    {
+        if (_isRevers)
+            _isRevers = false;
+        else
+            _isRevers = true;
+        
+        _pAnimation->SetLastFrame();
+        _pAnimation->SetReversePlay(_isRevers);
+    }
+
     return 0;
 }
 
 bool TitleScene::Initialize()
 {
     Sound::PlaySound("Bgm_Sound_BGM_Title", (int)SoundGroup::BGM, 0.8f, true);
+
+    Engine::GameObject* pGameObject = Engine::GameObject::Create();
+    pGameObject->transform.position = Vector3(WINCX >> 1, WINCY >> 1, 0.f);
+    _pAnimation = pGameObject->AddComponent<Engine::Animation>(L"Animation");
+    _pFirefly = pGameObject->AddComponent<Engine::Animation>(L"Firefly");
+    _pFirefly->LoadAnimation(L"Title_Title");
+    _pFirefly->ChangeAnimation(L"Firefly");
+    _pAnimation->LoadAnimation(L"Title_Title");
+    _pAnimation->ChangeAnimation(L"Idle");
+    pGameObject->AddComponent<Engine::SpriteRenderer>(L"Firefly")->BindAnimation(_pFirefly);
+    pGameObject->GetComponent<Engine::SpriteRenderer>()->BindAnimation(_pAnimation);
+    pGameObject->SetRenderGroup((int)RenderGroup::UI);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
+
     UIInitialize();
+
     return true;
 }
 
@@ -41,7 +70,7 @@ bool TitleScene::UIInitialize()
     Engine::SpriteRenderer* pSpriteRenderer = pHUDObj->GetComponent<Engine::SpriteRenderer>();
     pSpriteRenderer->BindTexture(Resource::FindTexture(L"Title"));
     pSpriteRenderer->SetIndex(0);
-    pHUDObj->transform.position=Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
+    pHUDObj->transform.position = Vector3(float(WINCX >> 1), float(WINCY >> 1), 0.f);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"SelectUI", pHUDObj); pHUDObj->SetRenderGroup((int)RenderGroup::BackGround);
     
     //¹öÆ° (4°³)

@@ -6,6 +6,7 @@ namespace Engine
 	class EventInvoker;
 }
 
+enum Stage;
 class RestartGame : public Engine::MonoBehavior
 {
 public:
@@ -21,11 +22,15 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
+	void SetStage(Stage stage) { _stage = stage; }
 	void GameOver();
 
 private:
 	Engine::GameObject*		_pRestartGame = nullptr;
 	Engine::EventInvoker*	_pEventInvoker = nullptr;
+	Stage					_stage;
 	float					_alpha = 0.f;
+	float					_elapsed = 0.f;
+	bool					_isRestart = false;
 };
 

@@ -144,6 +144,16 @@ void Attribute::AddState(unsigned long long flag, int stack)
 	_stateStacks[count - 1] = stack;
 }
 
+void Attribute::Reset()
+{
+	_pBitFlag->SetFlag(0);
+	for (int i = 0; i < State::End; i++)
+	{		
+		_pTimer->SetActive(i, false);
+		_stateStacks[i] = 0;
+	}
+}
+
 void Attribute::ActiveCharge()
 {
 	Sound::StopSound((int)SoundGroup::AttributeActive);

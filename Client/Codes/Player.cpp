@@ -19,11 +19,13 @@
 #include "AttributeHUD.h"
 #include "Effect.h"
 #include "HitColor.h"
+#include "ToolTip.h"
 
 // Object
 #include "Tile.h"
 
 #include "DataManager.h"
+#include "EventManager.h"
 #include "Client_Define.h"
 
 Player::Player(const wchar_t* name, const Vector3& startPos)
@@ -52,6 +54,8 @@ void Player::ResetPlayer(const Vector3& startPos)
 	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 	 GetComponent<TimerSystem>()->ResetTime();
 	 _pAttackCollider->ResizeCollider();
+	 _pTimerSystem->SetStopTime(false);
+	 _pAttribute->Reset();
 }
 
 void Player::Awake()
@@ -120,11 +124,12 @@ void Player::Awake()
 	frameEvent.activeFrame = 5;
 	frameEvent.animation = L"Dash";
 	frameEvent.isRepeat = true;
-	frameEvent.function = [=]() { 
-		_pSpectrum->SetActive(true);
-		std::string str= "Battle_Sound_Player_Move_Dash" + std::to_string(Engine::RandomGeneratorInt(1, 3));
-		Sound::StopSound((int)SoundGroup::Player);
-		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
+	frameEvent.function = [=]()
+		{
+			_pSpectrum->SetActive(true);
+			std::string str = "Battle_Sound_Player_Move_Dash" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+			Sound::StopSound((int)SoundGroup::Player);
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 		};
 	_pAnimation->AddFrameEvent(frameEvent);
 
@@ -137,6 +142,8 @@ void Player::Start()
 {
 	_gridPosition = _startPosition;
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+
+	GetComponent<ToolTip>(L"AttributeToolTip")->DontDestoryToolTips();
 }
 
 void Player::Update(const float& deltaTime)
@@ -146,11 +153,41 @@ void Player::Update(const float& deltaTime)
 
 void Player::LateUpdate(const float& deltaTime)
 {
+	if (_pHP->IsZeroHP())
+	{
+		_pAnimation->ChangeAnimation(L"Death");
+		_isDeath = true;
+	}
+	else
+	{
+		_isDeath = false;
+	}
+
 	// 애니메이션 상태 관리
 	if (!_pAnimation->IsCurrAnimation(L"Idle"))
 	{
 		if (_pAnimation->IsLastFrame())
-			_pAnimation->ChangeAnimation(L"Idle");
+		{
+			if (_isDeath)
+			{
+				_pAnimation->SetLastFrame();
+
+				EventManager* pEventManager = EventManager::GetInstance();
+
+				if (!pEventManager->IsPlayerDeath())
+				{
+					pEventManager->SetPlayerDeath(true);
+					pEventManager->GameOver();
+				}
+			}
+			else
+				_pAnimation->ChangeAnimation(L"Idle");
+		}
+	}
+
+	if (Input::IsKeyDown(DIK_P))
+	{
+		_pHP->hp = 0;
 	}
 }
 
@@ -187,8 +224,9 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 				}
 
 				HitColor* pHitColor = info.other->GetComponent<HitColor>();
-				if (pHitColor) pHitColor->OnHitColorEffect(0.05f);
+				if (pHitColor) pHitColor->OnHitColorEffect(0.1f);
 				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
+				CreateHitEffect(info.other->transform.position);
 			}			
 
 			pHP->hp -= damage;
@@ -205,6 +243,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (pHP->IsZeroHP())
 		{
+			Time::SetSlowTime(0.3f, 0.5f);
+
 			if (pAttribute->IsActiveState(AttributeFlag::Extra))
 			{
 				Sound::StopSound((int)SoundGroup::AttributeActive);
@@ -259,9 +299,10 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 				Sound::StopSound((int)SoundGroup::Voice);
 				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1", (int)SoundGroup::Voice, 0.8f, false);
 			}
-			_pHitColor->OnHitColorEffect(0.05f);
+			_pHitColor->OnHitColorEffect(0.1f);
 
-			Camera::CameraShake(0.5f, 30.f);
+			CreateHitEffect(transform.position);
+			Camera::CameraShake(0.5f, 50.f);
 		}
 	}
 }
@@ -282,10 +323,9 @@ void Player::DefaultMove(const float& deltaTime)
 		{
 			if (!(_movement->_isMoving))
 			{
-				/*_gridPosition.x += Input::GetAxis(Input::Axis::Horizontal);
-				_gridPosition.y += Input::GetAxis(Input::Axis::Vertical);*/
 				int num = Engine::RandomGeneratorInt(1, 3);
-				std::string moveSound = "Battle_Sound_Player_Move_Basic"+ std::to_string(num);
+				std::string moveSound = "Battle_Sound_Player_Move_Basic" + std::to_string(num);
+
 				if (Input::IsKeyDown(DIK_D))
 				{
 					_gridPosition.x++;
@@ -335,7 +375,21 @@ void Player::DefaultMove(const float& deltaTime)
 	}
 }
 
-void Player::CreateEffect(const Vector3& position)
+void Player::CreateHitEffect(const Vector3& position)
 {
+	auto pEffect = Engine::GameObject::Create();
+
+	std::uniform_real_distribution<float> randomDegee(0.f, 180.f);
+
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.05f;
+	info.textureTag = L"Effect_Hit_Hit01";
+	info.position = position + Vector3(10.f, -50.f, 0.f);
+	info.scale = { 2.f, 2.f, 0.f };
+	info.rotation = randomDegee(g_gen);
+
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }
 

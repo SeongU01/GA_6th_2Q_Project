@@ -1,13 +1,17 @@
 #include "Stage4Scene.h"
 #include "Client_Define.h"
 
-// Component
-#include "CardSystem.h"
-
-//object
+// Object
 #include "GridEffect.h"
 #include "Map.h"
 #include "EnemySpawner.h"
+
+// Component
+#include "SpawnEnemy.h"
+#include "CardSystem.h"
+
+#include "Client_Define.h"
+#include "EventManager.h"
 
 bool Stage4Scene::Initialize()
 {
@@ -39,6 +43,8 @@ bool Stage4Scene::Initialize()
 
     Sound::StopSound((int)SoundGroup::BGM);
     //Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.8f, true);
+
+    EventManager::GetInstance()->SetCurrentStage(Stage::Stage4);
 
     return true;
 }

@@ -32,6 +32,7 @@ public:
 	void ActiveCharge();
 	int ActiveHighPower();
 	void AddState(unsigned long long flag, int stack);
+	void Reset();
 
 private:
 	Engine::BitFlag*			_pBitFlag = nullptr;

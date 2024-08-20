@@ -76,7 +76,6 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
 	
-
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::SFX, 0.6f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::BGM, 1.f);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
@@ -100,9 +99,10 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	EventManager* pEventManager = EventManager::GetInstance();
 	pEventManager->SetDontDestroyObject(true);
 	pEventManager->SetRenderGroup((int)RenderGroup::None);
+	pEventManager->Initialize();
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pEventManager);
 
-	_pGameManager->ChagneScene(TitleScene::Create());
+	_pGameManager->ChangeScene(TitleScene::Create());
 
 	return true;
 }

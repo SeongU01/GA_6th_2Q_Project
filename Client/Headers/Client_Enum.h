@@ -9,6 +9,8 @@ enum class CardType { Attack, Move, Support };
 enum class CardEffectType { None, RangeAttack, RangeCast, PathMove, SelfCast, Reload, Draw, PathAttack };
 enum class CardAttribute { None, OverClock };
 
+enum Stage { Stage1, Stage2, Stage3, Stage4 };
+
 enum AttributeFlag : unsigned long long
 {
 	Shield		= 1 << 1,

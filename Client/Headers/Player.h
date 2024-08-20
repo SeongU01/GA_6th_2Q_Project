@@ -45,7 +45,7 @@ public:
 
 private:
 	void DefaultMove(const float& deltaTime);
-	void CreateEffect(const Vector3& position);
+	void CreateHitEffect(const Vector3& position);
 
 private:
 	GridMovement*		_movement = nullptr;
@@ -65,5 +65,6 @@ private:
 	Vector3 _gridPosition = { 0.f, 2.f, 0.f };
 	Vector3 _nextGridPosition;
 	Vector3 _startPosition;
+	bool _isDeath = false;
 };
 

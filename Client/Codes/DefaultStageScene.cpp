@@ -7,6 +7,7 @@
 #include "TimerSystem.h"
 #include "CardSystem.h"
 #include "GridEffect.h"
+#include "HP.h"
 
 // UI
 #include "TimerHUD.h"
@@ -132,28 +133,46 @@ void DefaultStageScene::FadeIn()
 
 int DefaultStageScene::Update(const float& deltaTime)
 {
-    //테스트용 코드(게임오버, 클리어 팝업 체크
-    if (Input::IsKeyDown(DIK_1))
-    {
-        Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
-        pOver->GetComponent<GameOverHUD>()->SetActives(true);
-        pOver->GetComponent<GameOVerButtons>()->SetActives(true);
-    }
-    else if (Input::IsKeyDown(DIK_2))
-    {
-        Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
-        pClear->GetComponent<GameClearHUD>()->SetActives(true);
-        pClear->GetComponent<GameClearButtons>()->SetActives(true);
-    }
-    else if (Input::IsKeyDown(DIK_3))
-    {
-        Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
-        pOver->GetComponent<GameOverHUD>()->SetActives(false);
-        pOver->GetComponent<GameOVerButtons>()->SetActives(false);
+    ////테스트용 코드(게임오버, 클리어 팝업 체크
+    //if (Input::IsKeyDown(DIK_1))
+    //{
+    //    Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
+    //    pOver->GetComponent<GameOverHUD>()->SetActives(true);
+    //    pOver->GetComponent<GameOVerButtons>()->SetActives(true);
+    //}
+    //else if (Input::IsKeyDown(DIK_2))
+    //{
+    //    Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
+    //    pClear->GetComponent<GameClearHUD>()->SetActives(true);
+    //    pClear->GetComponent<GameClearButtons>()->SetActives(true);
+    //}
+    //else if (Input::IsKeyDown(DIK_3))
+    //{
+    //    Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
+    //    pOver->GetComponent<GameOverHUD>()->SetActives(false);
+    //    pOver->GetComponent<GameOVerButtons>()->SetActives(false);
 
-        Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
-        pClear->GetComponent<GameClearHUD>()->SetActives(false);
-        pClear->GetComponent<GameClearButtons>()->SetActives(false);
+    //    Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
+    //    pClear->GetComponent<GameClearHUD>()->SetActives(false);
+    //    pClear->GetComponent<GameClearButtons>()->SetActives(false);
+    //}
+
+    auto objectList = Engine::FindObjectList((int)LayerGroup::Object, L"Defense");
+
+    if (!objectList->empty())
+    {
+        size_t size = objectList->size();
+        size_t count = 0;
+        for (auto& object : *objectList)
+        {
+            HP* pHP = object->GetComponent<HP>();
+
+            if (pHP->IsZeroHP())
+                count++;
+        }
+
+        if (count == size)
+            Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<HP>()->hp = 0;
     }
 
     return 0;
@@ -161,7 +180,9 @@ int DefaultStageScene::Update(const float& deltaTime)
 
 int DefaultStageScene::LateUpdate(const float& deltaTime)
 {
-    if (!EventManager::GetInstance()->IsStopGame())
+    EventManager* pEventManager = EventManager::GetInstance();
+
+    if (!pEventManager->IsStopGame() && !pEventManager->IsPlayerDeath())
     {
         _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
                                            Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
@@ -184,8 +205,8 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"), //산
                                            Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
     }
-    else
-    {        
+    else if (pEventManager->IsStopGame())
+    {
         if (!_isSelectCard)
         {
             CardManager::GetInstance()->StartSelectCardScene();
@@ -193,14 +214,12 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         }
     }
 
-    EventManager* pEventManager = EventManager::GetInstance();
-
     if (pEventManager->IsNextStage())
     {
         pEventManager->SetNextStage(false);
         pEventManager->SetStopGame(false);
         Time::SetSlowTime(1.f);
-        Engine::GameManager::GetInstance()->ChagneScene(_pScene);
+        Engine::ChangeScene(_pScene);
     }
 
     return 0;
@@ -214,7 +233,7 @@ bool DefaultStageScene::Initialize()
 
     if (nullptr == pPlayer)
     {
-        pPlayer = Zero::Create({ 3.0f,1.0f,1.0f });
+        pPlayer = Zero::Create({ 3.0f, 1.0f, 1.0f });
         Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", pPlayer);
 
         // TOPHUD
