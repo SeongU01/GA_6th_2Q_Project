@@ -13,6 +13,10 @@ public:
 	void OnStart() override;
 	void OnExit() override;
 
+public:
+	virtual void ShowInfo();
+	virtual void CloseInfo();
+
 private:
 	DefaultEnemy::FSM SelectNextBehave();
 private:

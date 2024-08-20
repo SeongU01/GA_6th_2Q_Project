@@ -26,6 +26,9 @@ int EliteEnemyMove::Update(const float& deltaTime)
 
 int EliteEnemyMove::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Move"))
 		return (int)EliteEnemy::FSM::Idle;
 	return 0;
@@ -40,6 +43,7 @@ void EliteEnemyMove::OnStart()
 
 void EliteEnemyMove::OnExit()
 {
+	CloseInfo();
 }
 
 void EliteEnemyMove::ShowInfo()

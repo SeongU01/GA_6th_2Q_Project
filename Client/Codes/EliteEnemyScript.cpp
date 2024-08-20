@@ -136,7 +136,7 @@ void EliteEnemyScript::OnCollision(Engine::CollisionInfo& info)
 	if (*pOther == L"Mouse")
 	{
 		EliteEnemyState* currState = static_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
-		currState->ShowInfo();
+		currState->ShowToolTip();
 	}
 }
 
@@ -146,7 +146,7 @@ void EliteEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)
 	if (*pOther == L"Mouse")
 	{
 		EliteEnemyState* currState = static_cast<EliteEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
-		currState->CloseInfo();
+		currState->CloseToolTip();
 	}
 }
 

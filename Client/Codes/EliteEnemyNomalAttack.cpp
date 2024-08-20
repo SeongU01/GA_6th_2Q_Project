@@ -53,6 +53,9 @@ int EliteEnemyNomalAttack::Update(const float& deltaTime)
 
 int EliteEnemyNomalAttack::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"NomalAttack"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
@@ -70,7 +73,7 @@ void EliteEnemyNomalAttack::OnStart()
 
 void EliteEnemyNomalAttack::OnExit()
 {
-	
+	CloseInfo();
 }
 
 void EliteEnemyNomalAttack::ShowInfo()

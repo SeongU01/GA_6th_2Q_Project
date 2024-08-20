@@ -52,6 +52,9 @@ int EliteEnemySuperSlash::Update(const float& deltaTime)
 
 int EliteEnemySuperSlash::LateUpdate(const float& deltaTime)
 {
+	if (!_isStateOn)
+		ShowInfo();
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"NomalAttack"))
 	{
 		return (int)EliteEnemy::FSM::Idle;
@@ -69,6 +72,7 @@ void EliteEnemySuperSlash::OnStart()
 
 void EliteEnemySuperSlash::OnExit()
 {
+	CloseInfo();
 }
 
 void EliteEnemySuperSlash::ShowInfo()

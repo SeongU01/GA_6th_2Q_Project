@@ -28,15 +28,20 @@ protected:
 public:
 	virtual void ShowInfo()
 	{
-		_pToolTip->ActiveToolTip(true);
 		_pPannel->SetActive(true);
 	};
 	virtual void CloseInfo()
 	{
-		_pToolTip->ActiveToolTip(false);
 		_pPannel->SetActive(false);
 	};
-
+	virtual void ShowToolTip()
+	{
+		_pToolTip->ActiveToolTip(true);
+	};
+	virtual void CloseToolTip()
+	{
+		_pToolTip->ActiveToolTip(false);
+	};
 protected:
 	bool CheckRange(int x, int y);
 	bool CheckTower(int x, int y);

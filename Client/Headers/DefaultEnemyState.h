@@ -23,13 +23,19 @@ protected:
 public:
 	virtual void ShowInfo() 
 	{
-		_pToolTip->ActiveToolTip(true);
 		_pPannel->SetActive(true);
 	};
 	virtual void CloseInfo() 
 	{
-		_pToolTip->ActiveToolTip(false); 
 		_pPannel->SetActive(false);
+	};
+	virtual void ShowToolTip()
+	{
+		_pToolTip->ActiveToolTip(true); 
+	};
+	virtual void CloseToolTip()
+	{
+		_pToolTip->ActiveToolTip(false);
 	};
 protected:
 	Engine::TextRenderer* _pTextRenderer = nullptr;

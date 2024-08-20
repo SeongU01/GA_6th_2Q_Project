@@ -5,6 +5,8 @@
 #include "GridMovement.h"
 #include "DefaultEnemyScript.h"
 #include "Pannel.h"
+#include "TextRenderer.h"
+#include "Astar.h"
 
 #include "Client_Define.h"
 
@@ -27,7 +29,7 @@ int DefaultEnemyIdle::Update(const float& deltaTime)
 
 int DefaultEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	
+	ShowInfo();
 	return (int)SelectNextBehave();
 }
 
@@ -38,6 +40,21 @@ void DefaultEnemyIdle::OnStart()
 
 void DefaultEnemyIdle::OnExit()
 {
+	CloseInfo();
+}
+
+void DefaultEnemyIdle::ShowInfo()
+{
+	__super::ShowInfo();
+	_pTextRenderer->SetOffset(Vector3(-30.f, -15.f, 0.f));
+
+	_infoText = L"[None]";
+	_pTextRenderer->SetText(_infoText.c_str());
+}
+
+void DefaultEnemyIdle::CloseInfo()
+{
+	__super::CloseInfo();
 }
 
 DefaultEnemy::FSM DefaultEnemyIdle::SelectNextBehave()
@@ -55,8 +72,11 @@ DefaultEnemy::FSM DefaultEnemyIdle::SelectNextBehave()
 			return DefaultEnemy::FSM::StrongAttack;
 		}
 	}
-	
-	return DefaultEnemy::FSM::Move;
+	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
+	{
+		return DefaultEnemy::FSM::Move;
+	}
+	return DefaultEnemy::FSM::None;
 }
 
 bool DefaultEnemyIdle::CheckAttackRange(int x,int y)

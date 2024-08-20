@@ -32,6 +32,9 @@ int DefaultEnemyWeakAttack::Update(const float& deltaTime)
 
 int DefaultEnemyWeakAttack::LateUpdate(const float& deltaTime)
 {
+  if(!_isStateOn)
+    ShowInfo();
+  
   if (_isStateOn &&  _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"WeakAttack"))
     return (int)DefaultEnemy::FSM::Idle;
   return 0;
@@ -46,6 +49,7 @@ void DefaultEnemyWeakAttack::OnStart()
 
 void DefaultEnemyWeakAttack::OnExit()
 {
+  CloseInfo();
 }
 
 void DefaultEnemyWeakAttack::ShowInfo()

@@ -136,7 +136,7 @@ void DefaultEnemyScript::OnCollision(Engine::CollisionInfo& info)
 	if (*pOther == L"Mouse")
 	{
 		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
-		currState->ShowInfo();
+		currState->ShowToolTip();
 	}
 	
 }
@@ -147,7 +147,7 @@ void DefaultEnemyScript::OnCollisionExit(Engine::CollisionInfo& info)
 	if (*pOther == L"Mouse")
 	{
 		DefaultEnemyState* currState = static_cast<DefaultEnemyState*>(_pFSM->GetCurrState(_pFSM->GetCurrState()));
-		currState->CloseInfo();
+		currState->CloseToolTip();
 	}
 }
 
