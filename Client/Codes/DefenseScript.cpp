@@ -40,7 +40,7 @@ void DefenseScript::Awake()
 
 void DefenseScript::Start()
 {
-	_pOwner->_isDrawCollider = true;
+	//_pOwner->_isDrawCollider = true;
 	float x = (_pGridInfo->GetGrid()->GetTileCenter((int)_gridRange.first.x, (int)_gridRange.first.y).x +
 		_pGridInfo->GetGrid()->GetTileCenter((int)_gridRange.second.x, (int)_gridRange.second.y).x) / 2;
 	float y = (_pGridInfo->GetGrid()->GetTileCenter((int)_gridRange.first.x, (int)_gridRange.first.y).y +

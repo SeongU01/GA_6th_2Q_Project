@@ -37,7 +37,7 @@ void BossEnemyScript::Awake()
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
-	_pOwner->_isDrawCollider = true;
+	//_pOwner->_isDrawCollider = true;
 
 	_pHP = AddComponent<HP>(L"HP", 20);
 	AddComponent<HPHUD>(_pHP, 1);

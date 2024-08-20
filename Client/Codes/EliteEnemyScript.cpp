@@ -45,7 +45,7 @@ void EliteEnemyScript::Awake()
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
 
-	_pOwner->_isDrawCollider = true;
+	//_pOwner->_isDrawCollider = true;
 
 	//TODO: FSM 작성하기
 	_pHP = AddComponent<HP>(L"HP", 5);

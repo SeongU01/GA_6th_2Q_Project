@@ -108,11 +108,11 @@ void SpawnEnemy::Update(const float& deltaTime)
 			_waveOn = true;
 		}
 
+	}
 		if (!_stageEnd)
 		{
 			CheckWaveEnd();
 		}
-	}
 }
 
 void SpawnEnemy::LateUpdate(const float& deltaTime)
