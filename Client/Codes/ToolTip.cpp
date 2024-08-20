@@ -13,6 +13,14 @@ ToolTip::ToolTip(const wchar_t* name, float scale)
 {
 }
 
+void ToolTip::DontDestoryToolTips()
+{
+    for (auto toolTip : _toolTipList)
+    {
+        toolTip.second->SetDontDestroyObject(true);
+    }
+}
+
 void ToolTip::ActiveToolTip(bool _isTrue)
 {
     for (auto toolTip:_toolTipList)
@@ -34,12 +42,13 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         pannelInfo.position = { position.x,position.y + height / 2,position.z };
         pannelInfo.size = Vector3{ 300, height, 0 }; //크기
         pannelInfo.fillColor = 0x00000000; //색상
-        pannelInfo.opacity = 0.5f;
-        pannelInfo.outlineColor = 0xFF000000; //테두리 색상
+        pannelInfo.opacity = 0.8f;
+        pannelInfo.outlineColor= 0xFFFFFFFF; //테두리 색상
         Pannel* pPannel = Pannel::Create(pannelInfo);
         pPannel->transform.scale = { _scale,_scale,_scale };
-        //제목
-        Engine::TextRenderer* pTextRenderer = pPannel->AddComponent<Engine::TextRenderer>(L"Title", D2D1::ColorF::Red, 20.f, DWRITE_FONT_WEIGHT_BOLD);
+        //제목 0xFFDB32
+        D2D1::ColorF customColor(static_cast<DWORD>(0xFFFFDB32)); 
+        Engine::TextRenderer* pTextRenderer = pPannel->AddComponent<Engine::TextRenderer>(L"Title", customColor, 20.f, DWRITE_FONT_WEIGHT_BOLD);
         pTextRenderer->SetText(_info._title.c_str());
         pTextRenderer->SetDrawRect(250.f, 0.f); //크기(고정)
         pTextRenderer->SetOffset(Vector3(-125, -30.f - (line * 7), 0.f));
