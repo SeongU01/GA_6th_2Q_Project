@@ -25,7 +25,7 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 private:
-	float _scale=1.0;
+	float _scale=1.0f;
 	std::map<std::wstring, Pannel*> _toolTipList = {}; // 활성화된 패널을 관리하는 맵
 };
 
