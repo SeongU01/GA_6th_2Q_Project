@@ -35,7 +35,7 @@ void TopHUD::Update(const float& deltaTime)
 		if (i < currentHP)
 			_HPBar[i]->SetFrame(_hpColor);
 		else
-			_HPBar[i]->SetFrame(1);
+			_HPBar[i]->SetFrame(3);
 	}
 }
 
