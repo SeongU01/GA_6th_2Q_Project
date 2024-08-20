@@ -16,6 +16,7 @@ bool TimeManager::Initialize()
 void Engine::TimeManager::SetSlowTime(float rate)
 {
     _slowRate = rate;
+    _duration = 0.f;
 }
 
 void Engine::TimeManager::SetSlowTime(float rate, float duration)

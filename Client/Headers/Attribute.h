@@ -33,6 +33,7 @@ public:
 	int ActiveHighPower();
 	void AddState(unsigned long long flag, int stack);
 	void Reset();
+	int GetStack(int index) const { return _stateStacks[index]; }
 
 private:
 	Engine::BitFlag*			_pBitFlag = nullptr;

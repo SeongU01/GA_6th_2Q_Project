@@ -35,6 +35,8 @@ void Mouse::Awake()
 				pSpriteRenderer->DrawTriangle(_linePoint[0], _linePoint[1], _linePoint[2], D2D1::ColorF::White, 0.75f);
 			}
 		});
+
+	_pEventManager = EventManager::GetInstance();
 }
 
 void Mouse::Start()
@@ -69,6 +71,9 @@ void Mouse::LateUpdate(const float& deltaTime)
 			_hoverCard->SetMouseHover(false);
 			_hoverCard = nullptr;
 			_isLineDraw = false;
+
+			if (!_pEventManager->IsTimeStop())
+				Time::SetSlowTime(1.f);
 		}
 
 		if (Input::IsKeyDown(Input::DIM_RB))
@@ -81,6 +86,9 @@ void Mouse::LateUpdate(const float& deltaTime)
 				_hoverCard->SetMouseHover(false);
 				_hoverCard = nullptr;
 				_isLineDraw = false;
+
+				if (!_pEventManager->IsTimeStop())
+					Time::SetSlowTime(1.f);
 			}
 		}
 	}
@@ -113,6 +121,7 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		{
 			_hoverCard = pOther->GetComponent<Card>();
 			_hoverCard->SetMouseHover(true);
+
 			if (!_hoverCard->IsAddQueue())
 			{
 				_pTimerSystem->AddSkillTime(_hoverCard->GetCostTime());
@@ -129,6 +138,9 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 					_linePoint[0] = { _hoverCard->transform.position.x - 10.f, _hoverCard->transform.position.y - 140.f };
 					_linePoint[1] = { _hoverCard->transform.position.x + 10.f, _hoverCard->transform.position.y - 140.f };
 					_isLineDraw = true;
+
+					if (!_pEventManager->IsTimeStop())
+						Time::SetSlowTime(0.3f, 3.f);
 				}
 			}
 		}
@@ -147,6 +159,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 			{
 				if(!_hoverCard->IsAddQueue())
 					_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
+
 				_hoverCard->isHold = false;
 				_hoverCard->SetMouseHover(false);
 				_hoverCard = nullptr;

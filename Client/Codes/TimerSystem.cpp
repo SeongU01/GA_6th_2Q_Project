@@ -57,6 +57,8 @@ void TimerSystem::Update(const float& deltaTime)
             return;
 
         _isStopTime = !_isStopTime;
+        pEventManager->SetTimeStop(_isStopTime);
+
         if (_isStopTime)
         {
             Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
@@ -66,6 +68,7 @@ void TimerSystem::Update(const float& deltaTime)
         {
             _slowTime = 1.0f;
         }
+
         Time::SetSlowTime(_slowTime);
     }
 }

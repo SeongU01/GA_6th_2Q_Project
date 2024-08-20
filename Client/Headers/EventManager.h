@@ -16,11 +16,13 @@ public:
 	void SetStopGame(bool isClear) { _isStopGame = isClear; }
 	void SetNextStage(bool isNext) { _isNextStage = isNext; }
 	void SetPlayerDeath(bool isDeath) { _isPlayerDeath = isDeath; }
+	void SetTimeStop(bool isStop) { _isTimeStop = isStop; }
 	void SetCurrentStage(Stage stage);
 	bool IsStopGame() const { return _isStopGame; }
 	bool IsNextStage() const { return _isNextStage; }
 	bool IsPlayerDeath() const { return _isPlayerDeath;	}
-	
+	bool IsTimeStop() const { return _isTimeStop; }
+
 public:
 	void GameOver();
 
@@ -29,5 +31,6 @@ private:
 	bool _isStopGame = false;
 	bool _isNextStage = false;
 	bool _isPlayerDeath = false;
+	bool _isTimeStop = false;
 };
 

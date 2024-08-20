@@ -6,6 +6,7 @@
 #include "Attribute.h"
 #include "HP.h"
 #include "PlayerMP.h"
+#include "TextRenderer.h"
 
 #include "Client_Define.h"
 
@@ -36,6 +37,8 @@ void AttributeHUD::Awake()
 	for (int i = 0; i < Attribute::State::End; i++)
 	{
 		pUI = AddUI(CreateInfo(L"Attribute", L"UI_HUD_Attribute", i, { 0.f, 0.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
+		Engine::TextRenderer* pTextRenderer = pUI->AddComponent<Engine::TextRenderer>(L"TextRenderer", 0XFFFFFF, 25.f);
+		pTextRenderer->SetOffset(Vector3(0.f, -5.f, 0.f));
 		pUI->SetNotAffectCamera(false);
 	}
 
@@ -81,6 +84,7 @@ void AttributeHUD::Update(const float& deltaTime)
 			if (_pAttribute->IsActiveState((unsigned long long)1 << (i + 1)))
 			{
 				_UIs[i]->SetActive(true);
+				_UIs[i]->GetComponent<Engine::TextRenderer>()->SetText(std::to_wstring(_pAttribute->GetStack(i)).c_str());
 				activeUIs.push_back(_UIs[i]);
 				if (!_pToolTip->FindToolTip(str))
 					NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), NextPos);

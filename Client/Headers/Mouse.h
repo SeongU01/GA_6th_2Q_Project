@@ -4,6 +4,7 @@
 class CardSystem;
 class TimerSystem;
 class Card;
+class EventManager;
 class Mouse : public Engine::MonoBehavior
 {
 public:
@@ -25,6 +26,7 @@ private:
 
 private:
 	TimerSystem*	_pTimerSystem = nullptr;
+	EventManager*	_pEventManager = nullptr;
 	CardSystem*		_pCardSystem = nullptr;
 	Card*			_hoverCard = nullptr;
 	HWND			_hWnd = nullptr;

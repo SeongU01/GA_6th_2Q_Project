@@ -139,8 +139,9 @@ void Attribute::AddState(unsigned long long flag, int stack)
 	default:
 		break;
 	}
+
 	_pBitFlag->OnFlag(flag);
-	_stateStacks[count - 1] = stack;
+	_stateStacks[count - 1] += stack;
 }
 
 void Attribute::Reset()

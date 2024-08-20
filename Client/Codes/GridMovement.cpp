@@ -36,10 +36,10 @@ void GridMovement::Update(const float& deltaTime)
 
     transform.position = currentPosition;
 
-    if (!_isMoving)
+    /*if (!_isMoving)
     {
       transform.position = _targetPos;
-    }
+    }*/
   }
 }
 void GridMovement::LateUpdate(const float& deltaTime)
@@ -55,6 +55,9 @@ void GridMovement::SetGrid()
 	{
 		_grid = pObject->GetComponent<Grid>();
 	}
+
+    _isMoving = false;
+
 }
 
 
