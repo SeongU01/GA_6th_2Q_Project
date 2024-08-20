@@ -116,7 +116,6 @@ void Attribute::AddState(unsigned long long flag, int stack)
 		n >>= 1;
 		count++;
 	}
-	Sound::StopSound((int)SoundGroup::Attribute);
 	switch (flag)
 	{
 	case AttributeFlag::Charge:
@@ -156,7 +155,6 @@ void Attribute::Reset()
 
 void Attribute::ActiveCharge()
 {
-	Sound::StopSound((int)SoundGroup::AttributeActive);
 	Sound::PlaySound("Battle_Sound_State_Execute_Charge", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
 	{
@@ -168,7 +166,6 @@ void Attribute::ActiveCharge()
 
 int Attribute::ActiveHighPower()
 {
-	Sound::StopSound((int)SoundGroup::AttributeActive);
 	Sound::PlaySound("Battle_Sound_State_Execute_OverPower", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::HighPower))
 	{
@@ -185,7 +182,6 @@ void Attribute::ActiveOverCharge()
 
 int Attribute::ActiveWeakPoint()
 {
-	Sound::StopSound((int)SoundGroup::AttributeActive);
 	Sound::PlaySound("Battle_Sound_State_Execute_WeakPoint", (int)SoundGroup::AttributeActive, 0.8f, false);
 	if (_pBitFlag->CheckFlag(AttributeFlag::WeakPoint))
 	{

@@ -48,18 +48,18 @@ void Player::SetNextGridPosition(const Vector3& position)
 
 void Player::ResetPlayer(const Vector3& startPos)
 {
-	 _movement->SetGrid();
-	 _startPosition = startPos;
-	 _gridPosition = startPos;
-	 transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
-	 GetComponent<TimerSystem>()->ResetTime();
-	 _pAttackCollider->ResizeCollider();
-	 _pTimerSystem->SetStopTime(false);
-	 _pAttribute->Reset();
+	_movement->SetGrid();
+	_startPosition = startPos;
+	_gridPosition = startPos;
+	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
+	GetComponent<TimerSystem>()->ResetTime();
+	_pAttackCollider->ResizeCollider();
+	_pTimerSystem->SetStopTime(false);
+	_pAttribute->Reset();
 }
 
 void Player::Awake()
-{	
+{
 	//콜라이더
 	Engine::Collider* pCollider = AddComponent<Engine::Collider>(L"Body");
 	pCollider->SetScale(Vector3(90.f, 90.f, 0.f));
@@ -128,7 +128,6 @@ void Player::Awake()
 		{
 			_pSpectrum->SetActive(true);
 			std::string str = "Battle_Sound_Player_Move_Dash" + std::to_string(Engine::RandomGeneratorInt(1, 3));
-			Sound::StopSound((int)SoundGroup::Player);
 			Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 		};
 	_pAnimation->AddFrameEvent(frameEvent);
@@ -193,8 +192,8 @@ void Player::LateUpdate(const float& deltaTime)
 
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
-	if (*info.itSelf == L"Attack" && * info.other == L"Body")
-	{		
+	if (*info.itSelf == L"Attack" && *info.other == L"Body")
+	{
 		HP* pHP = info.other->GetComponent<HP>();
 
 		Attribute* pAttribute = info.other->GetComponent<Attribute>();
@@ -216,7 +215,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 				if (pAttribute->IsActiveState(AttributeFlag::Shield))
 				{
-					Sound::StopSound((int)SoundGroup::AttributeActive);
 					Sound::PlaySound("Battle_Sound_State_Execute_Shield", (int)SoundGroup::AttributeActive, 0.8f, false);
 
 					pAttribute->UseStack(Attribute::State::Shield);
@@ -227,7 +225,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 				if (pHitColor) pHitColor->OnHitColorEffect(0.1f);
 				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
 				CreateHitEffect(info.other->transform.position);
-			}			
+			}
 
 			pHP->hp -= damage;
 			Sound::StopSound((int)SoundGroup::Voice);
@@ -247,7 +245,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			if (pAttribute->IsActiveState(AttributeFlag::Extra))
 			{
-				Sound::StopSound((int)SoundGroup::AttributeActive);
 				Sound::PlaySound("Battle_Sound_State_Execute_Residual", (int)SoundGroup::AttributeActive, 0.8f, false);
 
 				_pHP->hp += _pAttribute->GetExtraRecoveryValue();
@@ -272,7 +269,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (_pAttribute->IsActiveState(AttributeFlag::Shield))
 		{
-			Sound::StopSound((int)SoundGroup::AttributeActive);
 			Sound::PlaySound("Battle_Sound_State_Execute_Shield", (int)SoundGroup::AttributeActive, 0.8f, false);
 
 			_pAttribute->UseStack(Attribute::State::Shield);
@@ -281,10 +277,10 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 		{
 			_pAttribute->ActiveCharge();
 
-			const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(0);				
+			const AttackCollider::AttackInfo& attackInfo = info.other->GetComponent<AttackCollider>()->GetCurrentAttackInfo(0);
 
 			int damage = 0;
-				
+
 			if (attackInfo.damage)
 				damage = _pAttribute->ActiveWeakPoint() + attackInfo.damage;
 
@@ -312,14 +308,14 @@ void Player::OnCollisionExit(Engine::CollisionInfo& info)
 }
 
 void Player::DefaultMove(const float& deltaTime)
-{	
+{
 	if (_pTimerSystem->IsStopTime() || !_pAnimation->IsCurrAnimation(L"Idle"))
 		return;
 
 	if (nullptr != _movement->_grid)
 	{
 		Vector3 tempGridPosition = _gridPosition;
-		if (!(_movement->_grid->GetTiles().empty())) 
+		if (!(_movement->_grid->GetTiles().empty()))
 		{
 			if (!(_movement->_isMoving))
 			{
@@ -330,26 +326,22 @@ void Player::DefaultMove(const float& deltaTime)
 				{
 					_gridPosition.x++;
 					transform.scale = { 1.f, 1.f, 0.f };
-					Sound::StopSound((int)SoundGroup::Player);
 					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_A))
 				{
 					_gridPosition.x--;
 					transform.scale = { -1.f, 1.f, 0.f };
-					Sound::StopSound((int)SoundGroup::Player);
 					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_W))
 				{
 					_gridPosition.y--;
-					Sound::StopSound((int)SoundGroup::Player);
 					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 				else if (Input::IsKeyDown(DIK_S))
 				{
 					_gridPosition.y++;
-					Sound::StopSound((int)SoundGroup::Player);
 					Sound::PlaySound(moveSound.c_str(), (int)SoundGroup::Player, 0.8f, false);
 				}
 			}

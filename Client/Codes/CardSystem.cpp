@@ -49,7 +49,6 @@ void CardSystem::Update(const float& deltaTime)
 	_reloadTime = std::clamp(_reloadTime + deltaTime, 0.f, RELOADCOOLTIME);
 	if (_reloadTime >= RELOADCOOLTIME &&_isFull==false) {
 		_isFull = true;
-		Sound::StopSound((int)SoundGroup::AddSFX);
 		Sound::PlaySound("Card_Sound_Reload_Recharge_Gauge", (int)SoundGroup::AddSFX, 0.8f, false);
 	}
 }
@@ -120,7 +119,6 @@ void CardSystem::ResetCardInfo()
 
 void CardSystem::DrawCard()
 {
-	Sound::StopSound((int)SoundGroup::Card);
 	Sound::PlaySound("Card_Sound_Card_Drow", (int)SoundGroup::Card, 0.8f, false);
 	if (_currentDeck.empty())
 		return;
@@ -196,7 +194,6 @@ void CardSystem::ThrowCard()
 	pCard->ThrowCard();
 	_graveDeck.push_back(pCard);
 	_handDeck.pop_front();
-	Sound::StopSound((int)SoundGroup::AddSFX);
 	Sound::PlaySound("Card_Sound_Card_To_Graveyard", (int)SoundGroup::AddSFX, 0.8f, false);
 	_pEventInvoker->BindAction(0.05f, [this]() {this->ThrowCard(); });
 }

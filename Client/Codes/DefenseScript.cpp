@@ -100,7 +100,6 @@ void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
 		if (!_pHP->IsInvinsible()) 
 		{
 			_pHP->hp--;
-			Sound::StopSound((int)SoundGroup::SFX);
 			if(_pHP->hp==0)
 			{
 				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Hit", (int)SoundGroup::SFX, 0.8f, false);

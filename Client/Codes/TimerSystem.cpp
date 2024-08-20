@@ -37,7 +37,6 @@ void TimerSystem::Update(const float& deltaTime)
     if (timer <= 30.f && timer >= 20.f && !_isNotice)
     {
         _isNotice = true;
-        Sound::StopSound((int)SoundGroup::Time);
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_30", (int)SoundGroup::Time, 0.8f, false);
     }
     else if (timer <= 15.f && timer >= 10.f && _isNotice)
@@ -47,7 +46,6 @@ void TimerSystem::Update(const float& deltaTime)
     else if (timer <= 10.f && !_isNotice)
     {
         _isNotice = true;
-        Sound::StopSound((int)SoundGroup::Time);
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_10", (int)SoundGroup::Time, 0.8f, false);
     }
     //시간정지
@@ -61,7 +59,6 @@ void TimerSystem::Update(const float& deltaTime)
         _isStopTime = !_isStopTime;
         if (_isStopTime)
         {
-            Sound::StopSound((int)SoundGroup::Time);
             Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
             _slowTime = 0.0f;
         }

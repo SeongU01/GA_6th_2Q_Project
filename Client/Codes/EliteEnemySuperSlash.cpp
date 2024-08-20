@@ -122,7 +122,6 @@ EliteEnemySuperSlash* EliteEnemySuperSlash::Create(EliteEnemyScript* pScript)
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
-			Sound::StopSound((int)SoundGroup::Battle);
 			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Truth", (int)SoundGroup::Battle, 0.8f, false);
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

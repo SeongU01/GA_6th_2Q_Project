@@ -75,7 +75,6 @@ void Mouse::LateUpdate(const float& deltaTime)
 		{
 			if (!_hoverCard->IsAddQueue())
 			{
-				Sound::StopSound((int)SoundGroup::Card);
 				Sound::PlaySound("Card_Sound_Card_Cancel", (int)SoundGroup::Card, 0.8f, false);
 				_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
 				_hoverCard->isHold = false;
@@ -96,7 +95,6 @@ void Mouse::OnCollisionEnter(Engine::CollisionInfo& info)
 
 	if (*pOther == L"Card")
 	{
-		Sound::StopSound((int)SoundGroup::Card);
 		Sound::PlaySound("Card_Sound_Card_Hover", (int)SoundGroup::Card, 0.8f, false);
 	}
 }
@@ -124,7 +122,6 @@ void Mouse::OnCollision(Engine::CollisionInfo& info)
 		{
 			if (Input::IsKeyDown(Input::DIM_LB))
 			{
-				Sound::StopSound((int)SoundGroup::Card);
 				Sound::PlaySound("Card_Sound_Card_Select", (int)SoundGroup::Card, 0.8f, false);
 				if (!_hoverCard->IsAddQueue())
 				{

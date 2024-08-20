@@ -280,7 +280,6 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 				HP* pHP = _pPlayer->GetComponent<HP>();
 				pHP->hp++;
 			}
-			Sound::StopSound((int)SoundGroup::Card);
 			Sound::PlaySound("Card_Sound_Card_Register_Cancel", (int)SoundGroup::Card, 0.8f, false);
 			_isAddQueue = false;
 		}
@@ -293,20 +292,8 @@ bool Card::AddJobQueue()
 	{
 		PlayerMP* pMP = _pPlayer->GetComponent<PlayerMP>();
 		TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
-		Sound::StopSound((int)SoundGroup::AddSFX);
-		if (pTimerSystem->GetisSlow()) 
-		{
-			Sound::PlaySound("Card_Sound_Card_Register_Time_Stop", (int)SoundGroup::AddSFX, 0.8f, false);
-		}
-		else
-		{
-			Sound::PlaySound("Card_Sound_Mana_Recharge", (int)SoundGroup::AddSFX, 0.8f, false);
-		}
-
 		if (pMP->mp < _cardData.costMana) 
 		{
-			Sound::StopSound((int)SoundGroup::AddSFX);
-			Sound::StopSound((int)SoundGroup::Voice);
 			Sound::PlaySound("Voice_Sound_Voice_Zero_Notify_Mana", (int)SoundGroup::Voice, 0.8f, false);
 			Sound::PlaySound("Card_Sound_Notify_Time", (int)SoundGroup::AddSFX, 0.8f, false);
 			return false;
@@ -314,9 +301,16 @@ bool Card::AddJobQueue()
 
 		if (pTimerSystem->GetRemainingTime() < _cardData.costTime)
 		{
-			Sound::StopSound((int)SoundGroup::AddSFX);
 			Sound::PlaySound("Card_Sound_Notify_Mana", (int)SoundGroup::AddSFX, 0.8f, false);
 			return false;
+		}
+		if (pTimerSystem->GetisSlow())
+		{
+ 			Sound::PlaySound("Card_Sound_Card_Register_Time_Stop", (int)SoundGroup::Card, 0.8f, false);
+		}
+		else
+		{
+			Sound::PlaySound("Card_Sound_Card_Register", (int)SoundGroup::Card, 0.8f, false);
 		}
 
 		_attackRange = _pCardEffect[0]->GetAttackRange();
@@ -346,7 +340,6 @@ bool Card::AddJobQueue()
 						{
 							if (!pGrid->IsTileWalkable(x, y))
 							{
-								Sound::StopSound((int)SoundGroup::AddSFX);
 								Sound::PlaySound("Card_Sound_Notify_OutOfRange", (int)SoundGroup::AddSFX, 0.8f, false);
 								return false;
 							}
@@ -573,14 +566,26 @@ void Card::ActiveEffect()
 	_targetOffset[0] = { 0.f, 0.f, 0.f };
 	_targetOffset[1] = { 250.f, 0.f, 0.f };
 
-	Sound::StopSound((int)SoundGroup::Card);
 	Sound::PlaySound("Card_Sound_Card_Execute", (int)SoundGroup::Card, 0.8f, false);
 
-	_pEventInvoker->BindAction(0.3f, [this]() {_isAddQueue = false; });
+	_pEventInvoker->BindAction(0.3f, [this]() {
+		_pToolTip->ClearToolTip();
+		Vector3 NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_CardCost_Mana"), Vector3(-600.0f, -500.0f, 0.0f));
+		for (int num : _cardData.additiveCharState)
+		{
+			if (num != 0)
+			{
+				std::wstring str = L"State_Char_00" + std::to_wstring(num - 1);
+				NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), { NextPos.x,NextPos.y + 180,NextPos.z });
+			}
+		}
+		if (_cardData.name == L"이온 블래스트" || _cardData.name == L"멜트다운")
+			NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"State_Card_000"), { NextPos.x,NextPos.y + 180,NextPos.z });
+		_isAddQueue = false; 
+		});
 
 	if (_cardData.name == L"이온 블래스트") 
 	{
-		Sound::StopSound((int)SoundGroup::Player);
 		Sound::PlaySound("Battle_Sound_Player_Attack_IonBlast", (int)SoundGroup::Player, 0.8f, false);
 		_pEventInvoker->BindAction(0.3f, []() {Camera::CameraShake(0.5f, 50.f); });
 	}
@@ -588,7 +593,6 @@ void Card::ActiveEffect()
 	if (_cardData.name == L"하이퍼 드라이브") 
 	{
 		std::string str = "Battle_Sound_Player_Attack_HyperDrive" + Engine::RandomGeneratorInt(1, 3);
-		Sound::StopSound((int)SoundGroup::Player);
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 		_pEventInvoker->BindAction(0.5f, []() {Camera::CameraShake(0.5f, 75.f); });
 	}
@@ -596,21 +600,18 @@ void Card::ActiveEffect()
 	if (_cardData.name == L"블레이드")
 	{
 		std::string str = "Battle_Sound_Player_Attack_Blade" + Engine::RandomGeneratorInt(1, 3);
-		Sound::StopSound((int)SoundGroup::Player);
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
 	if (_cardData.name == L"일섬")
 	{
-		std::string str = "Battle_Sound_Player_Attack_Issen" + Engine::RandomGeneratorInt(1, 3);
-		Sound::StopSound((int)SoundGroup::Player);
+		std::string str = "Battle_Sound_Player_Attack_Issen1"; //+ Engine::RandomGeneratorInt(1, 3);
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
 	if (_cardData.name == L"초진동 칼날")
 	{
 		std::string str = "Battle_Sound_Player_Attack_HighWave" + Engine::RandomGeneratorInt(1, 3);
-		Sound::StopSound((int)SoundGroup::Player);
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 

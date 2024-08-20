@@ -95,7 +95,6 @@ void CutScene::setScene()
         }
         if (_info._dummySoundTag != L"")
         {
-            Sound::StopSound((int)SoundGroup::SFX);
             Sound::PlaySound(wstring_to_string(_info._dummySoundTag).c_str(), (int)SoundGroup::SFX, 1.0f, false);
         }
     }

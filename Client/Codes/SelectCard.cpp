@@ -72,6 +72,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
     {        
         _pEventInvoker->BindAction(1.2f, [=]()
             {
+                Sound::PlaySound("Card_Sound_Card_ClearSlide", (int)SoundGroup::Card, 0.8f, false);
                 cards[i]->gameObject.SetActive(true);
                 cards[i]->SetTargetPosition(Vector3(0.f, 1000.f, 0.f), Vector3(0.f, 0.f, 0.f));
                 Button* pButton = _selectCardScene->AddComponent<Button>();
