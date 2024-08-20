@@ -9,6 +9,7 @@ namespace Engine
 	class SpriteRenderer;
 	class	TextRenderer;
 }
+class Player;
 class GridEffect;
 class HP;
 class GridMovement;
@@ -46,6 +47,7 @@ protected:
 	Engine::SpriteRenderer* _pSpriteRenderer = nullptr;
 	GridMovement* _pMovement = nullptr;
 	HP* _pHP = nullptr;
+	Player* _pPlayer = nullptr;
 	AStar* _pAstar = nullptr;
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;

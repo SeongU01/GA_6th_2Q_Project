@@ -2,6 +2,7 @@
 #include "DefaultEnemyScript.h"
 #include "Astar.h"
 
+#include "Player.h"
 #include "TextRenderer.h"
 #include "Pannel.h"
 #include "GridEffect.h"
@@ -11,6 +12,9 @@ void DefaultEnemyState::Initialize(DefaultEnemyScript* pScript)
 {
 	if (nullptr == pScript)
 		return;
+
+	Engine::GameObject* pObject= (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL));
+	_pPlayer = pObject->GetComponent<Player>();
 	_pHP = pScript->_pHP;
 	_pSpriteRenderer = pScript->GetComponent<Engine::SpriteRenderer>();
 	_pTargetPosition = &(pScript->_targetPosition);

@@ -21,7 +21,7 @@ private:
 	DefaultEnemy::FSM SelectNextBehave();
 private:
 	bool CheckAttackRange(int x, int y);
-
+	bool CheckPlayer(int x, int y);
 public:
 	static DefaultEnemyIdle* Create(DefaultEnemyScript* pScript);
 private:
@@ -32,5 +32,6 @@ private:
 	int _chargeStack = 0;
 	float _alpha = 0.f;
 	bool _isFandIn = false;
+	bool _checkPlayer = false;
 };
 
