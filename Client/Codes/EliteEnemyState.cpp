@@ -14,6 +14,8 @@ void EliteEnemyState::Initialize(EliteEnemyScript* pScript)
 {
 	if (nullptr == pScript)
 		return;
+
+	_pSpriteRenderer = pScript->GetComponent<Engine::SpriteRenderer>();
 	_pHP = pScript->_pHP;
 	_ppDefense = &(pScript->_pDefense);
 	_pPlayer = pScript->_pPlayer;

@@ -19,6 +19,7 @@ public:
 public:
 	void CheckWaveEnd();
 	bool CheckStageEnd() { return _stageEnd; }
+	void SpawnEffect(const Vector3& Position);
 private:
 	EnemySpawnInfo _currSpawnInfo;
 	WaveInfo _currWave;

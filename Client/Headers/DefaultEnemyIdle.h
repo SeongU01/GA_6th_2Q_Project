@@ -30,5 +30,7 @@ private:
 	DefaultEnemy::FSM _nextState=DefaultEnemy::FSM::None;
 	bool _checkState = false;
 	int _chargeStack = 0;
+	float _alpha = 0.f;
+	bool _isFandIn = false;
 };
 

@@ -43,7 +43,9 @@ protected:
 	Vector3* _pGridPosition = nullptr;
 	DefaultEnemyScript* _pOwner = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
+	Engine::SpriteRenderer* _pSpriteRenderer = nullptr;
 	GridMovement* _pMovement = nullptr;
+	HP* _pHP = nullptr;
 	AStar* _pAstar = nullptr;
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
