@@ -1,0 +1,4 @@
+﻿Animation,TextureTag,Duration
+2,,
+Idle,Enemy_Boss_Idle,0.06
+Move,Enemy_Boss_Move,0.055

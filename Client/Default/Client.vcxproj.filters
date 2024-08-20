@@ -278,6 +278,21 @@
     <ClCompile Include="..\Codes\RestartGame.cpp">
       <Filter>04. Component\RestartGame</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemy.cpp">
+      <Filter>03. GameObject\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyScript.cpp">
+      <Filter>03. GameObject\Enemy\Boss\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyState.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyIdle.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyMove.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State\Move</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -528,6 +543,18 @@
     </Filter>
     <Filter Include="04. Component\RestartGame">
       <UniqueIdentifier>{0abd09d6-1ae7-445b-8314-1d04682d3ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\Script">
+      <UniqueIdentifier>{a1db713b-bd24-4779-b476-23009fc748a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State">
+      <UniqueIdentifier>{d2ce48a6-393b-431c-bdc0-7198afc59771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State\Idle">
+      <UniqueIdentifier>{afc08892-2816-4a11-9ce9-230610d5b308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State\Move">
+      <UniqueIdentifier>{a830df81-08e4-41fe-9c23-08f3ec1e617f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -824,6 +851,24 @@
     </ClInclude>
     <ClInclude Include="..\Headers\RestartGame.h">
       <Filter>04. Component\RestartGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyInformation.h">
+      <Filter>03. GameObject\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemy.h">
+      <Filter>03. GameObject\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyScript.h">
+      <Filter>03. GameObject\Enemy\Boss\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyState.h">
+      <Filter>03. GameObject\Enemy\Boss\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyIdle.h">
+      <Filter>03. GameObject\Enemy\Boss\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyMove.h">
+      <Filter>03. GameObject\Enemy\Boss\State\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
