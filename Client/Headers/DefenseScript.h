@@ -21,6 +21,8 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
+	void Explosion();
+	bool IsDestroy() { return _isDestroy; }
 public:
 	virtual void OnCollisionEnter(Engine::CollisionInfo& info) override;
 	virtual void OnCollision(Engine::CollisionInfo& info) override;
@@ -36,5 +38,7 @@ private:
 	ToolTip* _pToolTip = nullptr;
 	std::pair<Vector3, Vector3>_gridRange;
 	
+	bool _isDestroy = false;
+	bool _doDestoryEffect = false;
 };
 

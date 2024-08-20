@@ -1,5 +1,6 @@
 #include "DefenseScript.h"
 
+#include "Effect.h"
 #include "Grid.h"
 #include "GridInfo.h"
 #include "Tile.h"
@@ -63,6 +64,28 @@ void DefenseScript::Update(const float& deltaTime)
 void DefenseScript::LateUpdate(const float& deltaTime)
 {
 	_pSpriteRenderer->SetIndex((_pHP->GetMaxHP() - _pHP->hp));
+	if (_isDestroy&& !_doDestoryEffect)
+	{
+		Explosion();
+		_doDestoryEffect = true;
+	}
+}
+
+void DefenseScript::Explosion()
+{
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.03f;
+	info.textureTag = L"Defense_Effect";
+	info.position = _pOwner->transform.position;
+	info.isFadeOut = true;
+	info.life = 0.3f;
+	info.fadeSpeed = 0.5f;
+	info.scale = _pOwner->transform.scale*0.5f;
+
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }
 
 void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
@@ -79,7 +102,10 @@ void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
 			_pHP->hp--;
 			Sound::StopSound((int)SoundGroup::SFX);
 			if(_pHP->hp==0)
+			{
 				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Hit", (int)SoundGroup::SFX, 0.8f, false);
+				_isDestroy = true;
+			}
 			else
 				Sound::PlaySound("Effect_Sound_FX_Object_ProtectedBuilding_Break", (int)SoundGroup::SFX, 0.8f, false);
 		}
