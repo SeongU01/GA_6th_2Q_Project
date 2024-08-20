@@ -5,6 +5,7 @@
 //Object
 #include "DefaultEnemy.h"
 #include "EliteEnemy.h"
+#include "BossEnemy.h"
 #include "Effect.h"
 
 #include "RangeEnemy.h"
@@ -31,23 +32,23 @@ void SpawnEnemy::Start()
 
 void SpawnEnemy::Update(const float& deltaTime)
 {
-	if (!_waveOn && _currWaveCount <= _maxWaveCount&&!_stageEnd)
+	if (!_waveOn && _currWaveCount <= _maxWaveCount && !_stageEnd)
 	{
 		for (auto& _enemyInfo : _currWave.enemyInfos)
 		{
-			if(L"Default"==_enemyInfo.spawnType)
+			if (L"Default" == _enemyInfo.spawnType)
 			{
 				Vector3 spawnPos;
 
-				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y)==true)
+				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
 				{
-					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f};
+					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
 				}
 				else
 				{
-					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f};
+					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
 				}
-					
+
 				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
 				SpawnEffect(spawnPos);
@@ -57,7 +58,7 @@ void SpawnEnemy::Update(const float& deltaTime)
 				Vector3 spawnPos;
 
 				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
-				{	
+				{
 					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
 				}
 				else
@@ -85,14 +86,32 @@ void SpawnEnemy::Update(const float& deltaTime)
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", EliteEnemy);
 				SpawnEffect(spawnPos);
 			}
+			else if (L"Boss" == _enemyInfo.spawnType)
+			{
+				Vector3 spawnPos;
+
+				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+				{
+					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+				}
+				else
+				{
+					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+				}
+
+				BossEnemy* BossEnemy = BossEnemy::Create(spawnPos, _enemyInfo.targetName);
+				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", BossEnemy);
+				SpawnEffect(spawnPos);
+
+			}
+
+			_waveOn = true;
 		}
 
-		_waveOn = true;
-	}
-
-	if(!_stageEnd)
-	{
-		CheckWaveEnd();
+		if (!_stageEnd)
+		{
+			CheckWaveEnd();
+		}
 	}
 }
 
@@ -126,7 +145,7 @@ void SpawnEnemy::SpawnEffect(const Vector3& Position)
 	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = 0.05f;
 	info.textureTag = L"Enemy_SpawnEffect";
-	info.position = _pGridInfo->GetGrid()->GetTileCenter(Position.x,Position.y)+Vector3(0.f,-40.f,0.f);
+	info.position = _pGridInfo->GetGrid()->GetTileCenter((int)Position.x, (int)Position.y)+Vector3(0.f,-40.f,0.f);
 	info.isFadeOut = true;
 	info.life = 0.3f;
 	info.fadeSpeed = 0.5f;
