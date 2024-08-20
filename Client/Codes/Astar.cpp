@@ -72,7 +72,7 @@ void AStar::Update(const float& deltaTime)
 		if (_currentMoveSteps >= _maxMoveSteps)
 		{
 			_isMoving = false; // AStar의 움직임 비활성화
-			std::cout << "Max move steps reached: " << _currentMoveSteps << std::endl;
+			//std::cout << "Max move steps reached: " << _currentMoveSteps << std::endl;
 		}
 
 	}
