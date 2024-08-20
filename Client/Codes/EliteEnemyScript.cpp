@@ -68,7 +68,7 @@ void EliteEnemyScript::Awake()
 	info.opacity = 0.4f;
 	_pPannel = Pannel::Create(info);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
-	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer", D2D1::ColorF::Black, 20.f);
+	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer", D2D1::ColorF::Black, 20.f,DWRITE_FONT_WEIGHT_BOLD);
 	_pPannel->SetActive(false);
 
 	_pToolTip =AddComponent<ToolTip>(L"EliteToolTip");

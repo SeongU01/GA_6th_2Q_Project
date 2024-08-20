@@ -55,13 +55,14 @@ void DefaultEnemyMove::OnExit()
 void DefaultEnemyMove::ShowInfo()
 {
 	__super::ShowInfo();
-	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
+	_pTextRenderer->SetOffset(Vector3(-53.f, -15.f, 0.f));
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
 
 	_infoText = L"[Move] " + timeString+L" s";
 	_pTextRenderer->SetText(_infoText.c_str());
+
 }
 
 void DefaultEnemyMove::CloseInfo()

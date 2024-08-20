@@ -66,6 +66,7 @@ void DefaultEnemyWeakAttack::ShowInfo()
 
   _infoText = L"[Attack] " + timeString + L" s";
   _pTextRenderer->SetText(_infoText.c_str());
+
 }
 
 void DefaultEnemyWeakAttack::CloseInfo()

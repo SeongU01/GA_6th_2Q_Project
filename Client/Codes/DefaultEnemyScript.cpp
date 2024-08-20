@@ -69,11 +69,11 @@ void DefaultEnemyScript::Awake()
 	info.position = Vector3(0.f, -170.f, 0.f);
 	info.size = Vector3{ 200, 50, 0 }; //크기
 	info.fillColor = 0x99AEAEAE; //색상
-	info.outlineColor = 0xFF000000; //테두리 색상
-	info.opacity = 0.4f;
+	info.outlineColor = 0xFFFFFFFF; //테두리 색상
+	info.opacity = 0.6f;
 	_pPannel = Pannel::Create(info);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"Ememyinfo", _pPannel);
-	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f);
+	_pPannel->AddComponent<Engine::TextRenderer>(L"TextRenderer",D2D1::ColorF::Black,20.f,DWRITE_FONT_WEIGHT_BOLD);
 	_pPannel->SetActive(false);
 	_pToolTip = AddComponent<ToolTip>(L"DefaultToolTip");
 	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Character_001"), Vector3(0.0f, 0.0f, 0.0f));
