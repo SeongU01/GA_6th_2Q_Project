@@ -228,15 +228,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			}
 
 			pHP->hp -= damage;
-			Sound::StopSound((int)SoundGroup::Voice);
-			std::string str = "Voice_Sound_Voice_Zero_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 12));
-			Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.6f, false);
-
-			if (pHP->hp == 1)
-			{
-				Sound::StopSound((int)SoundGroup::Voice);
-				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1", (int)SoundGroup::Voice, 0.8f, false);
-			}
 		}
 
 		if (pHP->IsZeroHP())
