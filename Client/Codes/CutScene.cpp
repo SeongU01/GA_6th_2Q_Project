@@ -89,7 +89,7 @@ void CutScene::setScene()
         pSpriteRenderer->SetIndex(_info._order);
         if (_info._voiceTag != L"")
         {
-            std::string str = "Voice_" + wstring_to_string(_info._voiceTag);
+         //   std::string str = "Voice_Sound_Voice_Enemy_Dead" + wstring_to_string(_info._voiceTag);
             Sound::StopSound((int)SoundGroup::Voice);
             Sound::PlaySound("Voice_Sound_Voice_Enemy_Dead1", (int)SoundGroup::Voice, 1.0f, false);
         }

@@ -22,16 +22,16 @@ void ToolTip::ActiveToolTip(bool _isTrue)
 }
 Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
 {
+        int line = ((int)_info._content.length() % 20 == 0) ? ((int)_info._content.length() / 20) : ((int)_info._content.length() / 20) + 1;
+        float height = 80 + (float)(line * 13);
         if (position.x == 0 && position.y == 0)
         {
-            position = _info._leftTop ? Vector3{ 160.f, 80.f, 0.f } : Vector3{ -150.f, -100.f, 0.f };
+            position = _info._leftTop ? Vector3{ 160.f, 150.f-height/2, 0.f } : Vector3{ -150.f, -100.f - height / 223, 0.f };
         }
-        int line = ((int)_info._content.length() % 19 == 0) ? ((int)_info._content.length() / 19) : ((int)_info._content.length() / 19) + 1;
-        float height = 80 + (float)(line * 20);
         //판넬
         Pannel::PannelInfo pannelInfo;
         pannelInfo.parent = _info._leftTop ? transform.GetParent() : &transform;
-        pannelInfo.position = position;
+        pannelInfo.position = { position.x,position.y + height / 2,position.z };
         pannelInfo.size = Vector3{ 300, height, 0 }; //크기
         pannelInfo.fillColor = 0x00000000; //색상
         pannelInfo.opacity = 0.5f;
@@ -41,14 +41,14 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         //제목
         Engine::TextRenderer* pTextRenderer = pPannel->AddComponent<Engine::TextRenderer>(L"Title", D2D1::ColorF::Red, 20.f, DWRITE_FONT_WEIGHT_BOLD);
         pTextRenderer->SetText(_info._title.c_str());
-        pTextRenderer->SetDrawRect(250.f, 0.f);//크기(고정)
-        pTextRenderer->SetOffset(Vector3(-120, -30.f - (line * 7), 0.f));
+        pTextRenderer->SetDrawRect(250.f, 0.f); //크기(고정)
+        pTextRenderer->SetOffset(Vector3(-125, -30.f - (line * 7), 0.f));
         pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
         //내용
         pTextRenderer = pPannel->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 15.f, DWRITE_FONT_WEIGHT_BOLD);
         pTextRenderer->SetText(_info._content.c_str());
-        pTextRenderer->SetDrawRect(250.f, 0.f);//크기(고정)
-        pTextRenderer->SetOffset(Vector3(-120, 10.f - (line * 7), 0.f));//위치. (왼쪽 정렬 고정. y축 체크.
+        pTextRenderer->SetDrawRect(250.f, 0.f); //크기(고정)
+        pTextRenderer->SetOffset(Vector3(-125, 5.f - (line * 7), 0.f));//위치. (왼쪽 정렬 고정. y축 체크.
         pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_JUSTIFIED);
 
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"ToolTip", pPannel);
@@ -56,7 +56,7 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
         _toolTipList[_info._id] = pPannel;
 
         pPannel->SetActive(false);
-        return { position.x,position.y + height + 20,position.z };
+        return { position.x,position.y + height+20,position.z};
 }
 
 void ToolTip::ClearToolTip()

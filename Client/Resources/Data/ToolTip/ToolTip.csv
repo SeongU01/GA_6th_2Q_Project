@@ -31,7 +31,7 @@ Object_Structure_003,방위대 본부,방어 건물입니다. 적들로부터 �
 Object_Structure_004,포탈,포탈입니다. 적들이 이 근처에서 소환됩니다.,FALSE
 UI_Cost_TimeLimit,잔여 시간,,FALSE
 UI_Queue_Ready,사용 대기 카드,사용 대기 중인 카드입니다. [슬로우]가 해제되면 순차적으로 효과가 실행됩니다.,FALSE
-UI_CardCost_Mana,마나 코스트,카드를 사용할 시 소모되는 마나양입니다.,FALSE
+UI_CardCost_Mana,코스트,카드를 사용하기 위한 자원입니다.\n시간: 지정된 시간이 소모됩니다.\n에너지: 지정된 에너지가 소모됩니다.,FALSE
 UI_CardCost_Time,시간 코스트,카드를 사용할 시 소모되는 시간양입니다.,FALSE
 UI_Cost_Mana_Recovery,마나 회복 시간,게이지가 가득 차면 마나가 1만큼 회복됩니다.,FALSE
 UI_Cost_Mana_Storage,마나,현재 보유하고 있는 마나입니다. 카드의 사용은 마나를 소모합니다.,FALSE
