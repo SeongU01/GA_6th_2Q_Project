@@ -155,7 +155,7 @@ void Engine::GameManager::SetSlowTime(float rate)
     _pTimeMgr->SetSlowTime(rate);
 }
 
-bool Engine::GameManager::ChagneScene(Scene* pScene)
+bool Engine::GameManager::ChangeScene(Scene* pScene)
 {
     return _pSceneMgr->ChangeScene(pScene);
 }

@@ -135,7 +135,11 @@ void Engine::Animation::SetFrame(int frame)
 
 void Engine::Animation::SetLastFrame()
 {
-	_currIndex = (int)_animationData[_currAnimation].size() - 1;
+	if (_isReverse)
+		_currIndex = 0;
+	else
+		_currIndex = (int)_animationData[_currAnimation].size() - 1;
+
 	_currFrame = 0.f;
 }
 

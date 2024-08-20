@@ -26,3 +26,8 @@ HWND GetWindow()
 {
 	return Engine::GameManager::GetInstance()->GetWindow();
 }
+
+void ChangeScene(Scene* pScene)
+{
+	Engine::GameManager::GetInstance()->ChangeScene(pScene);
+}

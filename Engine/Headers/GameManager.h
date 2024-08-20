@@ -61,7 +61,7 @@ namespace Engine
 		void SetSlowTime(float rate);
 
 		// SceneMgr
-		bool ChagneScene(Scene* pScene);
+		bool ChangeScene(Scene* pScene);
 		void ClearObjectList(int layerGroup, const wchar_t* listTag);
 		void ClearLayer(int layerGroup);
 		std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
