@@ -27,11 +27,12 @@ void AStar::Start()
 void AStar::Update(const float& deltaTime)
 {
 	if (!_isMoving) return;
+
 	if (_gridPosition == _goalPosition)
 	{
+		_isMoving = false;  // AStar의 움직임 비활성화
 		return;
 	}
-
 	if (_path.empty() || _pathIndex >= _path.size())
 	{
 		_path = AStarMove(_gridPosition, _targetPosition, _movement->_grid->GetTiles());
@@ -63,7 +64,7 @@ void AStar::Update(const float& deltaTime)
 			}
 			else
 			{
-				_gridPosition=TempPostion;
+				_gridPosition = TempPostion;
 				_path.clear(); // 비워진 경로
 				_isMoving = false; // AStar의 움직임 비활성화
 			}
@@ -80,6 +81,14 @@ void AStar::Update(const float& deltaTime)
 
 void AStar::LateUpdate(const float& deltaTime)
 {
+}
+
+void AStar::SetGoalPosition(const Vector3& goalPos)
+{
+	_targetPosition = goalPos;
+	std::vector<Vector3> path;
+	path = AStarMove(_gridPosition, _targetPosition, _movement->_grid->GetTiles());
+	_goalPosition = path[path.size() - 2];
 }
 
 void AStar::SetMaxMoveSteps(int steps)

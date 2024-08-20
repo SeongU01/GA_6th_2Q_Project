@@ -21,7 +21,7 @@ private:
 public:
 	static BossEnemyIdle* Create(BossEnemyScript* pScript);
 private:
-
+	Vector3 _nextTargetPosition = { 0.f,0.f,0.f };
 	float _currTime = 0.f;
 	float _delayTime = 0.f;
 	BossEnemy::FSM _nextState = BossEnemy::FSM::None;

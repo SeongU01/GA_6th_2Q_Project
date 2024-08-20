@@ -50,7 +50,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 public:
 	void ReCalculatePath() { _path.clear(); }
-	void SetGoalPosition(const Vector3& goalPos) { _targetPosition = goalPos; }
+	void SetGoalPosition(const Vector3& goalPos);
 	void SetGridPosition(const Vector3& gridPos) { _gridPosition = gridPos; }
 	void SetGridMovement(GridMovement* _move) { _movement = _move; }
 	void SetMaxMoveSteps(int steps);

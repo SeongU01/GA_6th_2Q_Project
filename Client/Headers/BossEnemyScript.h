@@ -35,6 +35,7 @@ public:
 	virtual void OnCollision(Engine::CollisionInfo& info);
 	virtual void OnCollisionExit(Engine::CollisionInfo& info);
 
+
 private:
 	GridMovement* _movement = nullptr;
 	AStar* _aStar = nullptr;

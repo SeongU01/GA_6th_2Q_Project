@@ -4,6 +4,7 @@
 #include "HP.h"
 #include "Astar.h"
 #include "Animation.h"
+#include "Player.h"
 
 #include "TextRenderer.h"
 #include "Client_Define.h"
@@ -26,9 +27,12 @@ int BossEnemyIdle::Update(const float& deltaTime)
 		}
 		return 0;
 	}
+	
+	Vector3 temp = _pAstar->GetGoalPosition();
+	_pAstar->ReCalculatePath();
 
 	const Vector3& gridPosition = *_pGridPosition;
-	Vector3 Direction = *_pTargetPosition - gridPosition;
+	Vector3 Direction = _nextTargetPosition - gridPosition;
 
 	if (_currDirection.x * Direction.x < 0)
 	{
@@ -73,7 +77,8 @@ void BossEnemyIdle::CloseInfo()
 
 BossEnemy::FSM BossEnemyIdle::SelectNextBehave()
 {
-	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
+	AStar* pAstar = _pOwner->GetComponent<AStar>();
+	if (!(pAstar->GetGoalPosition() == *_pGridPosition))
 	{
 		return BossEnemy::FSM::Move;
 	}

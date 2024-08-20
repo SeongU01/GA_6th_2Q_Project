@@ -29,6 +29,12 @@ int BossEnemyMove::LateUpdate(const float& deltaTime)
 	if (!_isStateOn)
 		ShowInfo();
 
+	if ((_pAstar->GetGoalPosition() == *_pGridPosition))
+	{
+		_pAstar->ReCalculatePath();
+		return (int)BossEnemy::FSM::Idle;
+	}
+
 	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Move"))
 		return (int)BossEnemy::FSM::Idle;
 	return 0;

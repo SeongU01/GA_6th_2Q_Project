@@ -93,6 +93,7 @@ void BossEnemyScript::Start()
 void BossEnemyScript::Update(const float& deltaTime)
 {
 	_targetPosition = _pPlayer->GetGridPosition();
+	_aStar->SetGoalPosition(_targetPosition);
 }
 
 void BossEnemyScript::LateUpdate(const float& deltaTime)
