@@ -27,5 +27,7 @@ private:
 	EliteEnemy::FSM _nextState = EliteEnemy::FSM::None;
 	bool _checkState = false;
 	int _count = 0;
+	float _alpha = 0.f;
+	bool _isFandIn = false;
 };
 

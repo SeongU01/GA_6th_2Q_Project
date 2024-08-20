@@ -9,12 +9,30 @@
 #include "HP.h"
 #include "Attribute.h"
 #include "AttributeHUD.h"
+#include "SpriteRenderer.h"
 
 #include "TextRenderer.h"
 #include "Client_Define.h"
 
 int EliteEnemyIdle::Update(const float& deltaTime)
 {
+	if (!_isFandIn)
+	{
+		_alpha += deltaTime;
+		_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+		_pHP->SetInvinsibleTime(1.f);
+		_pHP->SetInvinsible(true);
+		if (_alpha >= 1.f)
+		{
+			_alpha = 1.f;
+			_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+			_pHP->SetInvinsibleTime(0.1f);
+			_pHP->SetInvinsible(false);
+			_isFandIn = true;
+		}
+		return 0;
+	}
+
 	_nextState = SelectNextBehave();
 	if (CheckRange(5, 2))
 	{

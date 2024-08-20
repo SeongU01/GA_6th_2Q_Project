@@ -24,12 +24,15 @@ public:
 	__declspec(property(get = GetHP, put = SetHP))int hp;
 
 	const int GetMaxHP() { return _maxHP; }
+	void SetInvinsible(bool _invinsible) { _isInvinsible = _invinsible;}
+	void SetInvinsibleTime(float _time) { _invinsibleDuration = _time;}
 	bool IsZeroHP() { return 0 >= _HP; }
 	bool IsInvinsible() { return _isInvinsible; }
 private:
 	int _HP = 0;
 	int _maxHP = 0;
 	bool _isInvinsible = false;
+	float _invinsibleDuration = 1.f;
 	float _invinsibleTime = 0.f;
 };
 

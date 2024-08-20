@@ -51,6 +51,7 @@ protected:
 	DefenseScript** _ppDefense=nullptr;
 	Player* _pPlayer = nullptr;
 	Engine::TextRenderer* _pTextRenderer = nullptr;
+	Engine::SpriteRenderer* _pSpriteRenderer = nullptr;
 	const Vector3* _pTargetPosition = nullptr;
 	Vector3* _pGridPosition = nullptr;
 	EliteEnemyScript* _pOwner = nullptr;
@@ -60,6 +61,7 @@ protected:
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
 	GridEffect* _pGridEffect = nullptr;
+	
 	std::wstring _infoText;
 	Vector3 _currDirection = {1.f,0.f,0.f};
 };

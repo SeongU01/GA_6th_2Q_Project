@@ -5,6 +5,7 @@
 //Object
 #include "DefaultEnemy.h"
 #include "EliteEnemy.h"
+#include "Effect.h"
 
 #include "RangeEnemy.h"
 #include "EventManager.h"
@@ -49,6 +50,7 @@ void SpawnEnemy::Update(const float& deltaTime)
 					
 				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
+				SpawnEffect(spawnPos);
 			}
 			else if (L"Range" == _enemyInfo.spawnType)
 			{
@@ -81,6 +83,7 @@ void SpawnEnemy::Update(const float& deltaTime)
 
 				EliteEnemy* EliteEnemy = EliteEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", EliteEnemy);
+				SpawnEffect(spawnPos);
 			}
 		}
 
@@ -114,4 +117,21 @@ void SpawnEnemy::CheckWaveEnd()
 		if(!_stageEnd)
 			_currWave = DataManager::GetInstance()->GetWaveInfo(_currSpawnInfo, L"Wave" + std::to_wstring(_currWaveCount));
 	}
+}
+
+void SpawnEnemy::SpawnEffect(const Vector3& Position)
+{
+	auto pEffect = Engine::GameObject::Create();
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.05f;
+	info.textureTag = L"Enemy_SpawnEffect";
+	info.position = _pGridInfo->GetGrid()->GetTileCenter(Position.x,Position.y)+Vector3(0.f,-40.f,0.f);
+	info.isFadeOut = true;
+	info.life = 0.3f;
+	info.fadeSpeed = 0.5f;
+	info.scale = _pOwner->transform.scale;
+
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }

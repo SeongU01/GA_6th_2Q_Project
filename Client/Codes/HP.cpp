@@ -21,7 +21,7 @@ void HP::Update(const float& deltaTime)
 	if (_isInvinsible)
 	{
 		_invinsibleTime += deltaTime;
-		if (_invinsibleTime >= 0.1f)
+		if (_invinsibleTime >= _invinsibleDuration)
 		{
 			_isInvinsible = false;
 			_invinsibleTime = 0.f;

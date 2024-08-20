@@ -7,6 +7,8 @@
 #include "Pannel.h"
 #include "TextRenderer.h"
 #include "Astar.h"
+#include "SpriteRenderer.h"
+#include "HP.h"
 
 #include "Client_Define.h"
 
@@ -14,7 +16,26 @@
 
 int DefaultEnemyIdle::Update(const float& deltaTime)
 {
-	
+	if (!_isFandIn)
+	{
+		_alpha += deltaTime;
+		_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+		_pHP->SetInvinsibleTime(1.f);
+		_pHP->SetInvinsible(true);
+
+		if (_alpha >= 1.f)
+		{
+			_alpha = 1.f;
+			_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+			_pHP->SetInvinsibleTime(0.1f);
+			_pHP->SetInvinsible(false);
+			_isFandIn = true;
+		}
+		return 0;
+	}
+
+	_nextState = SelectNextBehave();
+
 	const Vector3& gridPosition = *_pGridPosition;
 	Vector3 Direction = *_pTargetPosition - gridPosition;
 
@@ -30,7 +51,7 @@ int DefaultEnemyIdle::Update(const float& deltaTime)
 int DefaultEnemyIdle::LateUpdate(const float& deltaTime)
 {
 	ShowInfo();
-	return (int)SelectNextBehave();
+	return (int)_nextState;
 }
 
 void DefaultEnemyIdle::OnStart()

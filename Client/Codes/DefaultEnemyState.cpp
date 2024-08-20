@@ -11,6 +11,8 @@ void DefaultEnemyState::Initialize(DefaultEnemyScript* pScript)
 {
 	if (nullptr == pScript)
 		return;
+	_pHP = pScript->_pHP;
+	_pSpriteRenderer = pScript->GetComponent<Engine::SpriteRenderer>();
 	_pTargetPosition = &(pScript->_targetPosition);
 	_pGridPosition = &(pScript->_aStar->_gridPosition);
 	_pOwner = pScript;
