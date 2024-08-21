@@ -1,7 +1,9 @@
 #include "BossEnemyState.h"
 #include "BossEnemyScript.h"
 #include "Astar.h"
+#include "Grid.h"
 
+#include "Animation.h"
 #include "HP.h"
 #include "DefenseScript.h"
 #include "Player.h"
@@ -31,6 +33,7 @@ void BossEnemyState::Initialize(BossEnemyScript* pScript)
 	_pTextRenderer = _pPannel->GetComponent<Engine::TextRenderer>();
 	_pTextRenderer->SetDrawRect(200.f, 50.f);
 	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
+
 }
 bool BossEnemyState::CheckRange(int x, int y)
 {

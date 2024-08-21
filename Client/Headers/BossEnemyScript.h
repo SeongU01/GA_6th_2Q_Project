@@ -15,6 +15,7 @@ class Pannel;
 class ToolTip;
 class AttackCollider;
 class Attribute;
+class Spectrum;
 
 class BossEnemyScript :public Engine::MonoBehavior
 {
@@ -44,7 +45,7 @@ private:
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
-
+	Spectrum* _pSpectrum = nullptr;
 
 	AttackCollider* _pAttackCollider = nullptr;
 	Attribute* _pAttribute = nullptr;
@@ -53,6 +54,6 @@ private:
 	Vector3 _startPosition;
 	Vector3 _targetPosition;
 	std::wstring _targetObjectName;
-
+	
 	Player* _pPlayer = nullptr;
 };

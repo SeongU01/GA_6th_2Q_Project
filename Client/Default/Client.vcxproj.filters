@@ -318,6 +318,12 @@
     <ClCompile Include="..\Codes\BossEnemyDeath.cpp">
       <Filter>03. GameObject\Enemy\Boss\State\Death</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyReadyMove.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State\ReadyMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemyLaserBurst.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State\LaserBurst</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -604,6 +610,12 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Boss\State\Death">
       <UniqueIdentifier>{8a3d84e7-32e5-4eea-a523-505789651154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State\ReadyMove">
+      <UniqueIdentifier>{068fd805-6cb9-484d-ae6b-c915bc04406e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State\LaserBurst">
+      <UniqueIdentifier>{02c1cac5-52ae-4d6d-b0a3-41a336a69add}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -943,6 +955,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\BossEnemyDeath.h">
       <Filter>03. GameObject\Enemy\Boss\State\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyReadyMove.h">
+      <Filter>03. GameObject\Enemy\Boss\State\ReadyMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemyLaserBurst.h">
+      <Filter>03. GameObject\Enemy\Boss\State\LaserBurst</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

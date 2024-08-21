@@ -28,13 +28,21 @@ int BossEnemyIdle::Update(const float& deltaTime)
 		}
 		return 0;
 	}
-	
- 	_pTargetPosition = &_pPlayer->GetGridPosition();
+
+	_pTargetPosition = &_pPlayer->GetGridPosition();
 	_pAstar->SetGoalPosition(*_pTargetPosition);
 	_pAstar->ReCalculatePath();
-
-	const Vector3& gridPosition = *_pGridPosition;
-	Vector3 Direction = *_pTargetPosition - gridPosition;
+	Vector3 Direction;
+	if (_charge >= 4)
+	{
+		const Vector3& gridPosition = *_pGridPosition;
+		Direction = Vector3(7.f,3.f,0.f) - gridPosition;
+	}
+	else
+	{
+		const Vector3& gridPosition = *_pGridPosition;
+		Direction = *_pTargetPosition - gridPosition;
+	}
 
 	if (_currDirection.x * Direction.x < 0)
 	{
@@ -79,6 +87,11 @@ void BossEnemyIdle::CloseInfo()
 
 BossEnemy::FSM BossEnemyIdle::SelectNextBehave()
 {
+	if (_charge >= 4)
+	{
+		_charge = 0;
+		return BossEnemy::FSM::ReadyMove;
+	}
 	if (CheckRange(3, 2))
 	{
 		if (_charge >= 1)

@@ -21,6 +21,7 @@
 #include "Attribute.h"
 #include "AttributeHUD.h"
 #include "AttackCollider.h"
+#include "Spectrum.h"
 
 //state
 #include "BossEnemyIdle.h"
@@ -30,6 +31,8 @@
 #include "BossEnemyRealMeteorSlash.h"
 #include "BossEnemyLaserWave.h"
 #include "BossEnemyRealLaserWave.h"
+#include "BossEnemyReadyMove.h"
+#include "BossEnemyLaserBurst.h"
 #include "BossEnemyDeath.h"
 
 #include "BossEnemyInformation.h"
@@ -75,6 +78,9 @@ void BossEnemyScript::Awake()
 	_pToolTip = AddComponent<ToolTip>(L"EliteToolTip");
 	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Character_003"), Vector3(0.0f, 0.0f, 0.0f));
 
+	_pSpectrum = AddComponent<Spectrum>(0.1f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
+	_pSpectrum->SetColor(XMFLOAT4(0.f, 0.f, 0.f, 0.f), XMFLOAT4(0.578f, 0.0859f, 0.1171875f, 1.f));	
+
 	// 임시 추가한것
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
@@ -91,6 +97,20 @@ void BossEnemyScript::Awake()
 	text->SetTextRangeEffectFontFamily(0, lstrlen(L"\"퍼스트 미닛\""), L"HY견고딕");
 	text->SetOffset(Vector3(110.f, 55.0f, 0.f));
 	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 1;
+	frameEvent.animation = L"ReadyMove";
+	frameEvent.function = [this]() {
+		_pSpectrum->SetActive(true);
+		};
+	frameEvent.isRepeat = true;
+	_pAnimation->AddFrameEvent(frameEvent);
+	frameEvent.activeFrame = 11;
+	frameEvent.function = [this]() {
+		_pSpectrum->SetActive(false);
+		};
+	_pAnimation->AddFrameEvent(frameEvent);
 }
 
 void BossEnemyScript::Start()
@@ -112,6 +132,8 @@ void BossEnemyScript::Start()
 	_pFSM->AddState((int)BossEnemy::FSM::RealMeteorSlash, BossEnemyRealMeteorSlash::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::LaserWave, BossEnemyLaserWave::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::RealLaserWave, BossEnemyRealLaserWave::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::ReadyMove, BossEnemyReadyMove::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::LaserBurst, BossEnemyLaserBurst::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::Death, BossEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
 }

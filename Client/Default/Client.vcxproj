@@ -25,9 +25,11 @@
     <ClCompile Include="..\Codes\BossEnemy.cpp" />
     <ClCompile Include="..\Codes\BossEnemyDeath.cpp" />
     <ClCompile Include="..\Codes\BossEnemyIdle.cpp" />
+    <ClCompile Include="..\Codes\BossEnemyLaserBurst.cpp" />
     <ClCompile Include="..\Codes\BossEnemyLaserWave.cpp" />
     <ClCompile Include="..\Codes\BossEnemyMeteorSlash.cpp" />
     <ClCompile Include="..\Codes\BossEnemyMove.cpp" />
+    <ClCompile Include="..\Codes\BossEnemyReadyMove.cpp" />
     <ClCompile Include="..\Codes\BossEnemyRealLaserWave.cpp" />
     <ClCompile Include="..\Codes\BossEnemyRealMeteorSlash.cpp" />
     <ClCompile Include="..\Codes\BossEnemyScript.cpp" />
@@ -134,9 +136,11 @@
     <ClInclude Include="..\Headers\BossEnemyDeath.h" />
     <ClInclude Include="..\Headers\BossEnemyIdle.h" />
     <ClInclude Include="..\Headers\BossEnemyInformation.h" />
+    <ClInclude Include="..\Headers\BossEnemyLaserBurst.h" />
     <ClInclude Include="..\Headers\BossEnemyLaserWave.h" />
     <ClInclude Include="..\Headers\BossEnemyMeteorSlash.h" />
     <ClInclude Include="..\Headers\BossEnemyMove.h" />
+    <ClInclude Include="..\Headers\BossEnemyReadyMove.h" />
     <ClInclude Include="..\Headers\BossEnemyRealLaserWave.h" />
     <ClInclude Include="..\Headers\BossEnemyRealMeteorSlash.h" />
     <ClInclude Include="..\Headers\BossEnemyScript.h" />
