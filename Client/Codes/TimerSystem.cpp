@@ -11,6 +11,58 @@ TimerSystem::TimerSystem()
 {
 }
 
+void TimerSystem::TimeStop()
+{
+    EventManager* pEventManager = EventManager::GetInstance();
+
+    if (pEventManager->IsStopGame() || pEventManager->IsPlayerDeath() || pEventManager->IsTutorial())
+        return;
+
+    _isStopTime = !_isStopTime;
+    pEventManager->SetTimeStop(_isStopTime);
+
+    if (_isStopTime)
+    {
+        Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
+        _slowTime = 0.0f;
+
+        for (int i = 0; i < (int)SoundGroup::End; i++)
+        {
+            Sound::PuaseSound(i, true);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < (int)SoundGroup::End; i++)
+        {
+            Sound::PuaseSound(i, false);
+        }
+        _slowTime = 1.0f;
+    }
+
+    Time::SetSlowTime(_slowTime);
+}
+
+void TimerSystem::TutorialTimeStop(bool isActive)
+{
+    EventManager* pEventManager = EventManager::GetInstance();
+
+    _isStopTime = isActive;
+    pEventManager->SetTimeStop(_isStopTime);
+    pEventManager->SetActiveTutorial(_isStopTime);
+
+    if (_isStopTime)
+    {
+        _slowTime = 0.0f;
+    }
+    else
+    {
+        _slowTime = 1.0f;
+    }
+
+    Time::SetSlowTime(_slowTime);
+}
+
 void TimerSystem::Awake()
 {
 }
@@ -54,27 +106,7 @@ void TimerSystem::Update(const float& deltaTime)
     }
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE))
-    {
-        EventManager* pEventManager = EventManager::GetInstance();
-
-        if (pEventManager->IsStopGame() || pEventManager->IsPlayerDeath())
-            return;
-
-        _isStopTime = !_isStopTime;
-        pEventManager->SetTimeStop(_isStopTime);
-
-        if (_isStopTime)
-        {
-            Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
-            _slowTime = 0.0f;
-        }
-        else
-        {
-            _slowTime = 1.0f;
-        }
-
-        Time::SetSlowTime(_slowTime);
-    }
+        TimeStop();
 }
 
 void TimerSystem::LateUpdate(const float& deltaTime)

@@ -89,6 +89,7 @@
     <ClCompile Include="..\Codes\MPHUD.cpp" />
     <ClCompile Include="..\Codes\Obstacle.cpp" />
     <ClCompile Include="..\Codes\ObstacleScript.cpp" />
+    <ClCompile Include="..\Codes\Operator.cpp" />
     <ClCompile Include="..\Codes\Pannel.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\AttackCollider.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="..\Headers\MPHUD.h" />
     <ClInclude Include="..\Headers\Obstacle.h" />
     <ClInclude Include="..\Headers\ObstacleScript.h" />
+    <ClInclude Include="..\Headers\Operator.h" />
     <ClInclude Include="..\Headers\Pannel.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\AttackCollider.h" />

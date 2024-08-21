@@ -11,6 +11,7 @@
 #include "SpawnEnemy.h"
 #include "CardSystem.h"
 
+#include "EventManager.h"
 #include "Client_Define.h"
 
 bool Stage1Scene::Initialize()
@@ -45,8 +46,28 @@ bool Stage1Scene::Initialize()
     Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_1", (int)SoundGroup::BGM, 0.5f, true);
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Entry", (int)SoundGroup::SFX, 0.8f, false);
+    
     _pScene = Stage2Scene::Create();
+
     return true;
+}
+
+int Stage1Scene::Update(const float& deltaTime)
+{
+    __super::Update(deltaTime);
+    
+    _elapsed += deltaTime;
+
+    if (!_isTutorial)
+    {
+        if (1.f <= _elapsed)
+        {
+            EventManager::GetInstance()->Tutorial1();
+            _isTutorial = true;
+        }
+    }
+
+    return 0;
 }
 
 Stage1Scene* Stage1Scene::Create()

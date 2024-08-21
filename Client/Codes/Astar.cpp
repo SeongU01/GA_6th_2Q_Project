@@ -88,6 +88,13 @@ void AStar::SetGoalPosition(const Vector3& goalPos)
 	_targetPosition = goalPos;
 	std::vector<Vector3> path;
 	path = AStarMove(_gridPosition, _targetPosition, _movement->_grid->GetTiles());
+	
+	if (2 > path.size())
+	{
+		_goalPosition = path[0];
+		return;
+	}
+
 	_goalPosition = path[path.size() - 2];
 }
 

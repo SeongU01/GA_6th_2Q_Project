@@ -25,4 +25,5 @@ private:
 
 private:
 	std::list<std::pair<float, Card*>> _jobQueue;
+	bool _isTutorial = false;
 };

@@ -40,6 +40,7 @@ void Card::Awake()
 
 	// Component
 	_pEventInvoker = AddComponent<Engine::EventInvoker>(L"EventInvoker");
+	
 
 	// 카드 기본 이미지 설정
 	Engine::Texture* pTexture = Resource::FindTexture(L"Card");
@@ -152,7 +153,7 @@ void Card::Update(const float& deltaTime)
 	{
 		_isLerp = false;
 		_offset = _targetOffset[1];
-	}	
+	}
 }
 
 void Card::LateUpdate(const float& deltaTime)
@@ -176,7 +177,11 @@ bool Card::DrawCard()
 
 	transform.scale = Vector3(0.34f, 0.34f, 0.f);
 	_pCollider->SetScale({ _pixelSize[Hand].width, _pixelSize[Hand].height, 0.f });
-	_pCollider->SetActive(true);
+	_pEventInvoker->SetUseGlobalDeltaTime(true);
+	_pEventInvoker->BindAction(0.3f, [this]() {
+		_pEventInvoker->SetUseGlobalDeltaTime(false);
+		_pCollider->SetActive(true); 
+		});
 
 	_isAddQueue = false;
 	_isLerp = true;

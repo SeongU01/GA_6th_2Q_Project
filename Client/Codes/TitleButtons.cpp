@@ -1,6 +1,7 @@
 #include "TitleButtons.h"
 #include "Button.h"
 #include "InfoHUD.h"
+#include "Stage1Scene.h"
 #include "CreditHUD.h"
 #include "Client_Define.h"
 
@@ -26,18 +27,17 @@ void TitleButtons::Start()
 
 	Button* btn = pObj->AddComponent<Button>();
 	btn->SetIsReat(false);
-	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
-	btn->SetOnHover([pObj]() {
-		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
-		pObj->AddScale({ 0.0001f,0.0001f,0.0f });
-		});
-	btn->SetOnPressed([]() {
-		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
-		Scene::ChagneScene(SelectScene::Create()); 
-		});
 	btn->SetCancel([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(7); });
-	btn->SetOnHover([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(8); });
-	btn->SetOnPressed([]() { Scene::ChagneScene(SelectScene::Create()); });
+	btn->SetOnHover([pObj]()
+		{ 
+			Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+			pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(8);
+		});
+	btn->SetOnPressed([]()
+		{ 
+			Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
+			Scene::ChagneScene(Stage1Scene::Create()); 
+		});
 	btn->SetRange(info.position, pObj->GetImageSize());
 
 	//상세설명버튼

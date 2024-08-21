@@ -6,6 +6,7 @@
 #include "EventInvoker.h"
 #include "GageHUD.h"
 
+#include "EventManager.h"
 #include "Client_Define.h"
 
 constexpr float MAXWIDTH = 1150.f;
@@ -47,9 +48,18 @@ void CardSystem::Start()
 void CardSystem::Update(const float& deltaTime)
 {
 	_reloadTime = std::clamp(_reloadTime + deltaTime, 0.f, RELOADCOOLTIME);
+
 	if (_reloadTime >= RELOADCOOLTIME &&_isFull==false) {
 		_isFull = true;
 		Sound::PlaySound("Card_Sound_Reload_Recharge_Gauge", (int)SoundGroup::AddSFX, 0.8f, false);
+	}
+
+	if (!_isTutorial)
+	{
+		if (2 >= _handDeck.size() && EventManager::GetInstance()->Tutorial3())
+		{
+			_isTutorial = true;
+		}
 	}
 }
 

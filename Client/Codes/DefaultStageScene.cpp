@@ -1,4 +1,5 @@
 #include "DefaultStageScene.h"
+#include "TitleScene.h"
 #include "Client_Define.h"
 
 // Script
@@ -123,8 +124,8 @@ void DefaultStageScene::FadeIn()
     Fade::FadeInfo info;
     info.option = Fade::Fade_Option::Fade_In;
     info.color = 0xFF000000;
-    info.duration = 2.0f;
-    info.life = 2.0f;
+    info.duration = 1.0f;
+    info.life = 1.0f;
     Engine::GameObject* pFadeObj = Engine::GameObject::Create();
     Fade* _pFade = pFadeObj->AddComponent<Fade>(info);
 
@@ -187,35 +188,38 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
 {
     EventManager* pEventManager = EventManager::GetInstance();
 
-    if (!pEventManager->IsStopGame() && !pEventManager->IsPlayerDeath())
+    if (!pEventManager->IsPlayerDeath())
     {
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), 
-                                           Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
-
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
-                                           Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
-
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
-                                           Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
-
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //방어건물
-                                           Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
-
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //장애물
-                                           Engine::FindObjectList((int)LayerGroup::Object, L"Buliding"));
-    
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //산
-                                           Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
-
-        _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"), //산
-                                           Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
-    }
-    else if (pEventManager->IsStopGame())
-    {
-        if (!_isSelectCard)
+        if (!pEventManager->IsStopGame())
         {
-            CardManager::GetInstance()->StartSelectCardScene();
-            _isSelectCard = true;
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+                Engine::FindObjectList((int)LayerGroup::Object, L"Card"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"),
+                Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Player, L"Player"),
+                Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //방어건물
+                Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //장애물
+                Engine::FindObjectList((int)LayerGroup::Object, L"Buliding"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::UI, L"Mouse"), //산
+                Engine::FindObjectList((int)LayerGroup::Object, L"Mountain"));
+
+            _pCollisionManager->CheckCollision(Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster"), //산
+                Engine::FindObjectList((int)LayerGroup::Object, L"Defense"));
+        }
+        else
+        {
+            if (!_isSelectCard)
+            {
+                CardManager::GetInstance()->StartSelectCardScene();
+                _isSelectCard = true;
+            }
         }
     }
 
@@ -226,6 +230,16 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         Time::SetSlowTime(1.f);
         Engine::ChangeScene(_pScene);
     }
+
+    if (Input::IsKeyDown(DIK_RBRACKET))
+    {
+        if (_pScene) Engine::ChangeScene(_pScene);
+    }
+
+    /*if (Input::IsKeyDown(DIK_HOME))
+    {
+        Engine::ChangeScene(TitleScene::Create());
+    }*/
 
     return 0;
 }

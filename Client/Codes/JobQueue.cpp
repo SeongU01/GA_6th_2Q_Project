@@ -3,6 +3,7 @@
 // Component
 #include "Card.h"
 
+#include "EventManager.h"
 #include "Client_Define.h"
 
 constexpr float OFFSET = 130.f;
@@ -44,6 +45,11 @@ void JobQueue::LateUpdate(const float& deltaTime)
 
 void JobQueue::PushQueue(Card* pCard)
 {
+	if (!_isTutorial && EventManager::GetInstance()->Tutorial2())
+	{		
+		_isTutorial = true;
+	}
+
 	_jobQueue.push_back(std::make_pair(0.f, pCard));
 	SetJobQueuePosition();
 }

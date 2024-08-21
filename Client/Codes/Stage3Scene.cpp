@@ -46,7 +46,7 @@ bool Stage3Scene::Initialize()
     Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_3", (int)SoundGroup::BGM, 0.5f, true);
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Entry", (int)SoundGroup::SFX, 0.8f, false);
-    _pScene = Stage3Scene::Create();
+    _pScene = Stage4Scene::Create();
 
     EventManager::GetInstance()->SetCurrentStage(Stage::Stage3);
 
