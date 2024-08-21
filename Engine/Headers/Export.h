@@ -84,6 +84,6 @@ namespace Sound
 	inline void SetVolume(int groupID, float volume);
 	inline void StopSound(int groupID);
 	inline void SetSoundTarget(Engine::GameObject* pTarget);
-	inline void PuaseSound(int groupID, bool isPause);
+	inline void PauseSound(int groupID, bool isPause);
 	#include "Export_Sound.inl"
 }

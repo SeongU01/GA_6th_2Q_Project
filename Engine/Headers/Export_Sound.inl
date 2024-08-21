@@ -25,7 +25,7 @@ void SetSoundTarget(Engine::GameObject* pTarget)
 {
 	// Engine::SoundManager::GetInstance()->SetSoundTarget(pTarget);
 }
-void PuaseSound(int groupID, bool isPause)
+void PauseSound(int groupID, bool isPause)
 {
 	Engine::SoundManager::GetInstance()->PauseSound(groupID, isPause);
 }

@@ -28,14 +28,18 @@ void TimerSystem::TimeStop()
 
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            Sound::PuaseSound(i, true);
+            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX)
+                continue;
+            Sound::PauseSound(i, true);
         }
     }
     else
     {
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            Sound::PuaseSound(i, false);
+            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX)
+                continue;
+            Sound::PauseSound(i, false);
         }
         _slowTime = 1.0f;
     }
