@@ -1,4 +1,7 @@
 ﻿Animation,TextureTag,Duration
-2,,
+5,,
 Idle,Enemy_Boss_Idle,0.06
 Move,Enemy_Boss_Move,0.055
+SonicStab,Enemy_Boss_Stab,0.06
+MeteorSlash,Enemy_Boss_SwordSwing,0.06
+RealMeteorSlash,Enemy_Boss_SwordSwing,0.06

@@ -27,6 +27,7 @@ private:
 	BossEnemy::FSM _nextState = BossEnemy::FSM::None;
 	bool _checkState = false;
 	int _anger = 0;
+	int _charge = 0;
 	float _alpha = 0.f;
 	bool _isFandIn = false;
 };

@@ -16,6 +16,7 @@ void BossEnemyState::Initialize(BossEnemyScript* pScript)
 	if (nullptr == pScript)
 		return;
 
+	_pAttribute = pScript->_pAttribute;
 	_pSpriteRenderer = pScript->GetComponent<Engine::SpriteRenderer>();
 	_pHP = pScript->_pHP;
 	_pPlayer = pScript->_pPlayer;

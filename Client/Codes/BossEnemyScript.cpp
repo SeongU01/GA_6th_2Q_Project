@@ -23,6 +23,9 @@
 //state
 #include "BossEnemyIdle.h"
 #include "BossEnemyMove.h"
+#include "BossEnemySonicStab.h"
+#include "BossEnemyMeteorSlash.h"
+#include "BossEnemyRealMeteorSlash.h"
 
 #include "BossEnemyInformation.h"
 #include "Client_Define.h"
@@ -87,13 +90,14 @@ void BossEnemyScript::Start()
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)BossEnemy::FSM::End);
 	_pFSM->AddState((int)BossEnemy::FSM::Idle, BossEnemyIdle::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::Move, BossEnemyMove::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::SonicStab, BossEnemySonicStab::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::MeteorSlash, BossEnemyMeteorSlash::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::RealMeteorSlash, BossEnemyRealMeteorSlash::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
 }
 
 void BossEnemyScript::Update(const float& deltaTime)
 {
-	_targetPosition = _pPlayer->GetGridPosition();
-	_aStar->SetGoalPosition(_targetPosition);
 }
 
 void BossEnemyScript::LateUpdate(const float& deltaTime)

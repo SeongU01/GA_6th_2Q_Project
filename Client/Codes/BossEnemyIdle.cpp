@@ -4,6 +4,7 @@
 #include "HP.h"
 #include "Astar.h"
 #include "Animation.h"
+#include "Attribute.h"
 #include "Player.h"
 
 #include "TextRenderer.h"
@@ -28,11 +29,12 @@ int BossEnemyIdle::Update(const float& deltaTime)
 		return 0;
 	}
 	
-	Vector3 temp = _pAstar->GetGoalPosition();
+ 	_pTargetPosition = &_pPlayer->GetGridPosition();
+	_pAstar->SetGoalPosition(*_pTargetPosition);
 	_pAstar->ReCalculatePath();
 
 	const Vector3& gridPosition = *_pGridPosition;
-	Vector3 Direction = _nextTargetPosition - gridPosition;
+	Vector3 Direction = *_pTargetPosition - gridPosition;
 
 	if (_currDirection.x * Direction.x < 0)
 	{
@@ -77,8 +79,21 @@ void BossEnemyIdle::CloseInfo()
 
 BossEnemy::FSM BossEnemyIdle::SelectNextBehave()
 {
-	AStar* pAstar = _pOwner->GetComponent<AStar>();
-	if (!(pAstar->GetGoalPosition() == *_pGridPosition))
+	if (CheckRange(3, 2))
+	{
+		if (_charge >= 1)
+		{
+			_charge++;
+			if (_pPlayer->GetComponent<Attribute>()->IsActiveState(AttributeFlag::WeakPoint))
+			{
+				return BossEnemy::FSM::RealMeteorSlash;
+			}
+			return BossEnemy::FSM::MeteorSlash;
+		}
+		_charge++;
+		return BossEnemy::FSM::SonicStab;
+	}
+	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
 	{
 		return BossEnemy::FSM::Move;
 	}
