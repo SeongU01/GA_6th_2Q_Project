@@ -84,12 +84,12 @@ void EliteEnemyWeekSearch::ShowInfo()
 	{
 		ShowAttackRange();
 	}
-	_pTextRenderer->SetOffset(Vector3(-70.f, -15.f, 0.f));
+	_pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
 
-	_infoText = L"[WeekFind] " + timeString + L" s";
+	_infoText = L"[Attack] " + timeString + L" s";
 	_pTextRenderer->SetText(_infoText.c_str());
 }
 

@@ -83,7 +83,7 @@ void EliteEnemyNomalAttack::ShowInfo()
 	{
 		ShowAttackRange();
 	}
-	_pTextRenderer->SetOffset(Vector3(-50.f, -15.f, 0.f));
+	_pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
 	std::wstring timeString = wss.str();
@@ -141,7 +141,7 @@ void EliteEnemyNomalAttack::ShowAttackRange()
 {
 	const Vector3& gridPosition = *_pGridPosition;
 	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(14);
-	int index = 1;
+	int index = 7;
 
 	for (auto& grid : ranges)
 	{
