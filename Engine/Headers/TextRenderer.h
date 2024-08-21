@@ -20,7 +20,8 @@ namespace Engine
 		void SetTextLayout(const wchar_t* text, float width, float height);
 		void SetTextRangeEffectColor(unsigned int start, unsigned int length, D2D1::ColorF color);
 		void SetTextRangeEffectBold(unsigned int start, unsigned int length);
-		void SetTextRangeEffectUnderline(unsigned int start, unsigned int length);		
+		void SetTextRangeEffectUnderline(unsigned int start, unsigned int length);
+		void SetTextRangeEffectFontFamily(unsigned int start, unsigned int length, const wchar_t* fontFamily);
 		void SetTextAlignment(DWRITE_TEXT_ALIGNMENT alignment);
 		void SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT alignment);
 		void SetNotAffectCamera(bool isActive) { _notAffectCamera = isActive; }
