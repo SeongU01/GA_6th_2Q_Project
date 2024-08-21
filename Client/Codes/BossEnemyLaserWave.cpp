@@ -7,7 +7,7 @@
 #include "Effect.h"
 #include "GridEffect.h"
 #include "Attribute.h"
-//#include ""
+#include "Player.h"
 
 #include "Client_Define.h"
 int BossEnemyLaserWave::Update(const float& deltaTime)
@@ -95,7 +95,7 @@ void BossEnemyLaserWave::Attack()
 	Effect::EffectInfo info;
 	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = 0.03f;
-	info.textureTag = L"AIEffect_Attack_Anim_VFX_Round_E";
+	info.textureTag = L"AIEffect_Attack_Anim_VFX_Beam_E";
 	info.scale = _pOwner->transform.scale * Vector3(1.3f, 1.15f, 0.f);
 	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
 	AttackCollider::AttackInfo attackInfo;
@@ -140,14 +140,12 @@ void BossEnemyLaserWave::ShowAttackRange()
 {
 	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(17);
 	int index = 7;
-	//_pPlayer->
+	int playerX=(int)_pPlayer->GetGridPosition().x;
+	int RandX= Engine::RandomGeneratorInt(0, 15);
 	for (auto& grid : ranges)
 	{
-		/*if (_currDirection.x >= 0)
-			_pGridEffect->OnEffect((int)grid.first,, index);
-		else
-			_pGridEffect->OnEffect(int(gridPosition.x - grid.first), int(gridPosition.y + grid.second), index);*/
-		_pGridEffect->OnEffect((int)grid.first,, index);
+		_pGridEffect->OnEffect(playerX,(int)grid.first, index);
+		_pGridEffect->OnEffect(RandX,(int)grid.first, index);
 	}
 }
 
