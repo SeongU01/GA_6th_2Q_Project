@@ -71,10 +71,6 @@
     <ClCompile Include="..\Codes\EventManager.cpp" />
     <ClCompile Include="..\Codes\Fade.cpp" />
     <ClCompile Include="..\Codes\GageHUD.cpp" />
-    <ClCompile Include="..\Codes\GameClearButtons.cpp" />
-    <ClCompile Include="..\Codes\GameClearHUD.cpp" />
-    <ClCompile Include="..\Codes\GameOverButtons.cpp" />
-    <ClCompile Include="..\Codes\GameOverHUD.cpp" />
     <ClCompile Include="..\Codes\Grid.cpp" />
     <ClCompile Include="..\Codes\GridEffect.cpp" />
     <ClCompile Include="..\Codes\GridInfo.cpp" />
@@ -105,9 +101,7 @@
     <ClCompile Include="..\Codes\RangeEnemyScript.cpp" />
     <ClCompile Include="..\Codes\RangeEnemyState.cpp" />
     <ClCompile Include="..\Codes\RestartGame.cpp" />
-    <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectCard.cpp" />
-    <ClCompile Include="..\Codes\SelectScene.cpp" />
     <ClCompile Include="..\Codes\SpawnEnemy.cpp" />
     <ClCompile Include="..\Codes\Spectrum.cpp" />
     <ClCompile Include="..\Codes\Stage1Scene.cpp" />
@@ -187,10 +181,6 @@
     <ClInclude Include="..\Headers\EventManager.h" />
     <ClInclude Include="..\Headers\Fade.h" />
     <ClInclude Include="..\Headers\GageHUD.h" />
-    <ClInclude Include="..\Headers\GameClearButtons.h" />
-    <ClInclude Include="..\Headers\GameClearHUD.h" />
-    <ClInclude Include="..\Headers\GameOverButtons.h" />
-    <ClInclude Include="..\Headers\GameOverHUD.h" />
     <ClInclude Include="..\Headers\Grid.h" />
     <ClInclude Include="..\Headers\GridEffect.h" />
     <ClInclude Include="..\Headers\GridInfo.h" />
@@ -222,9 +212,7 @@
     <ClInclude Include="..\Headers\RangeEnemyScript.h" />
     <ClInclude Include="..\Headers\RangeEnemyState.h" />
     <ClInclude Include="..\Headers\RestartGame.h" />
-    <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectCard.h" />
-    <ClInclude Include="..\Headers\SelectScene.h" />
     <ClInclude Include="..\Headers\SpawnEnemy.h" />
     <ClInclude Include="..\Headers\Spectrum.h" />
     <ClInclude Include="..\Headers\Stage1Scene.h" />

@@ -57,15 +57,15 @@ bool TestScene::UIinitialize()
     pTimerObj->AddComponent<TimerHUD>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
 
-    Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
-    pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 1);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
-    
-    //마나 바
-    Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
-    pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
-    pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+    //Engine::GameObject* pHPHUDDObj = Engine::GameObject::Create();
+    //pHPHUDDObj->AddComponent<TopHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerHPComponent(), 1);
+    //Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerHP", pHPHUDDObj); pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+    //
+    ////마나 바
+    //Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
+    //pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
+    //pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
+    //Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 
     return true;
 }

@@ -7,6 +7,7 @@ namespace Engine
 }
 
 class Card;
+class GageHUD;
 class CardSystem : public Engine::MonoBehavior
 {
 public:
@@ -36,6 +37,7 @@ public:
 	void ActiveCard(Card* pCard);
 	void AddCard(Card* pCard);
 	bool IsReloadReady();
+	void SetPlayerActives(bool _isActive);
 
 private:
 	void MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst);
@@ -49,7 +51,8 @@ private:
 	std::list<Card*>				_handDeck;
 	std::list<Card*>				_graveDeck;
 	std::list<Card*>				_extraDeck;
-
+	
+	GageHUD*						_pGageHUD = nullptr;
 	Engine::EventInvoker*			_pEventInvoker = nullptr;
 	float							_reloadTime = 0.f;
 	bool							_isFull = false;

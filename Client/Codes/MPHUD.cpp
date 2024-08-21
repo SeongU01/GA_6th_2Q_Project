@@ -40,6 +40,7 @@ void MPHUD::Start()
 		info = CreateInfo(L"MPState", L"UI_HUD_MP", 1, {15+(float)((i * 18)),0 , 2.f }, { 0.7f, 0.7f,1.f }, &transform);
 		_MPBar.push_back(AddUI(info));
 	}
+	SetDontDestroyObjectUI(true);
 }
 
 void MPHUD::Update(const float& deltaTime)

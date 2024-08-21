@@ -28,8 +28,9 @@ void TimerSystem::TimeStop()
 
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX)
+            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX|| i == (int)SoundGroup::BGM)
                 continue;
+            Sound::SetVolume((int)SoundGroup::BGM, 0.5f);
             Sound::PauseSound(i, true);
         }
     }
@@ -37,8 +38,9 @@ void TimerSystem::TimeStop()
     {
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX)
+            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX || i == (int)SoundGroup::BGM)
                 continue;
+            Sound::SetFadeVolume((int)SoundGroup::BGM, 0.3f);
             Sound::PauseSound(i, false);
         }
         _slowTime = 1.0f;

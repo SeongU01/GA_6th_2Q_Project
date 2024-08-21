@@ -60,6 +60,7 @@ void Loading::LoadResource()
 	// 공통 데이터
 	DataManager* pDataManager = DataManager::GetInstance();
 	pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
+	pDataManager->LoadCutScene((filePath + L"Data/CutScene").c_str());
 	pDataManager->LoadEnemySpawn((filePath + L"Data/Wave").c_str());
 	pDataManager->LoadMap((filePath + L"Data/Map").c_str());
 	pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());

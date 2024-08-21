@@ -1,5 +1,5 @@
 #include "Stage1Scene.h"
-#include "Stage2Scene.h"
+#include "CutScene.h"
 #include "Client_Define.h"
 
 // Object
@@ -47,7 +47,7 @@ bool Stage1Scene::Initialize()
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Entry", (int)SoundGroup::SFX, 0.8f, false);
     
-    _pScene = Stage2Scene::Create();
+    _pScene = CutScene::Create(2);
 
     return true;
 }

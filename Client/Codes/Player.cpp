@@ -13,6 +13,7 @@
 #include "Collider.h"
 #include "TimerSystem.h"
 #include "HPHUD.h"
+#include "TopHUD.h"
 #include "JobQueue.h"
 #include "AttackCollider.h"
 #include "Spectrum.h"
@@ -20,6 +21,7 @@
 #include "Effect.h"
 #include "HitColor.h"
 #include "ToolTip.h"
+#include "MPHUD.h"
 
 // Object
 #include "Tile.h"
@@ -56,6 +58,18 @@ void Player::ResetPlayer(const Vector3& startPos)
 	_pAttackCollider->ResizeCollider();
 	_pTimerSystem->SetStopTime(false);
 	_pAttribute->Reset();
+}
+
+void Player::SetPlayerActives(bool _isActive)
+{
+	GetComponent<HPHUD>()->SetActives(_isActive);
+	_pMP->SetPlayerActivies(_isActive);
+	_pMPHUD->SetActives(_isActive);
+	_pHPHUD->SetActives(_isActive);
+	_pAttHUD->SetActives(_isActive);
+	_pAttribute->Reset();
+	_pCardSystem->SetPlayerActives(_isActive);
+	GetComponent<Engine::SpriteRenderer>()->SetActive(_isActive);
 }
 
 void Player::Awake()
@@ -95,9 +109,23 @@ void Player::Awake()
 	_pMP = AddComponent<PlayerMP>(L"MP");
 	HPHUD* pHPHUD = AddComponent<HPHUD>(_pHP, 0);
 	pHPHUD->SetDontDestroyObjectUI(true);
-	AttributeHUD* pAttHUD = AddComponent<AttributeHUD>(_pAttribute);
-	pAttHUD->SetDontDestroyObjectUI(true);
-
+	_pAttHUD = AddComponent<AttributeHUD>(_pAttribute);
+	_pAttHUD->SetDontDestroyObjectUI(true);
+	// 마나 바
+	Engine::GameObject* _pMPHUDDObj = Engine::GameObject::Create();
+	_pMPHUDDObj->SetDontDestroyObject(true);
+	_pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
+	_pMPHUD = _pMPHUDDObj->AddComponent<MPHUD>(_pMP, 0);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", _pMPHUDDObj); 
+	_pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+	// TOPHUD
+	Engine::GameObject* _pHPHUDDObj = Engine::GameObject::Create();
+	_pHPHUD = _pHPHUDDObj->AddComponent<TopHUD>(_pHP, 1);
+	_pHPHUDDObj->transform.SetPosition(Vector3{ 30.0f,0.0f,0.0f });
+	_pHPHUDDObj->SetDontDestroyObject(true);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerTopHP", _pHPHUDDObj);
+	_pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
+	
 	// 잔상 표시용
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
 	pSpriteRenderer->BindAnimation(_pAnimation);
