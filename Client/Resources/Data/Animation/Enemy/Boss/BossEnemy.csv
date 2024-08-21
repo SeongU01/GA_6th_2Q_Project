@@ -1,8 +1,9 @@
 ﻿Animation,TextureTag,Duration
-6,,
+7,,
 Idle,Enemy_Boss_Idle,0.06
 Move,Enemy_Boss_Move,0.055
 SonicStab,Enemy_Boss_Stab,0.06
 MeteorSlash,Enemy_Boss_SwordSwing,0.06
 RealMeteorSlash,Enemy_Boss_SwordSwing,0.06
 LaserWave,Enemy_Boss_Up,0.06
+Death,Enemy_Boss_Death,0.06

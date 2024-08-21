@@ -28,6 +28,9 @@
 #include "BossEnemySonicStab.h"
 #include "BossEnemyMeteorSlash.h"
 #include "BossEnemyRealMeteorSlash.h"
+#include "BossEnemyLaserWave.h"
+#include "BossEnemyRealLaserWave.h"
+#include "BossEnemyDeath.h"
 
 #include "BossEnemyInformation.h"
 #include "Client_Define.h"
@@ -107,6 +110,9 @@ void BossEnemyScript::Start()
 	_pFSM->AddState((int)BossEnemy::FSM::SonicStab, BossEnemySonicStab::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::MeteorSlash, BossEnemyMeteorSlash::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::RealMeteorSlash, BossEnemyRealMeteorSlash::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::LaserWave, BossEnemyLaserWave::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::RealLaserWave, BossEnemyRealLaserWave::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::Death, BossEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
 }
 
@@ -116,6 +122,10 @@ void BossEnemyScript::Update(const float& deltaTime)
 
 void BossEnemyScript::LateUpdate(const float& deltaTime)
 {
+	if (_pHP->IsZeroHP())
+	{
+		_pFSM->ChangeState((int)BossEnemy::FSM::Death);
+	}
 }
 
 void BossEnemyScript::OnCollisionEnter(Engine::CollisionInfo& info)

@@ -134,6 +134,7 @@ void BossEnemyRealMeteorSlash::Attack()
 	}
 	pEffect->AddComponent<Effect>(info);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+	Camera::CameraShake(0.2f, 100.f);
 }
 
 void BossEnemyRealMeteorSlash::ShowAttackRange()

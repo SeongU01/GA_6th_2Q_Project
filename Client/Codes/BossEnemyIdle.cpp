@@ -93,9 +93,23 @@ BossEnemy::FSM BossEnemyIdle::SelectNextBehave()
 		_charge++;
 		return BossEnemy::FSM::SonicStab;
 	}
-	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
+	else
 	{
-		return BossEnemy::FSM::Move;
+		if (_charge >= 1)
+		{
+			if (_pHP->hp <= _pHP->GetMaxHP() / 2)
+			{
+				_charge++;
+				return BossEnemy::FSM::RealLaserWave;
+			}
+			_charge++;
+			return BossEnemy::FSM::LaserWave;
+		}
+
+		if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
+		{
+			return BossEnemy::FSM::Move;
+		}
 	}
 	return BossEnemy::FSM::None;
 }

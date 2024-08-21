@@ -4,7 +4,7 @@ namespace BossEnemy
 	enum class FSM
 	{
 		None, Idle, Move, 
-		LaserWave, RealLAserWave,
+		LaserWave, RealLaserWave,
 		MeteorSlash, RealMeteorSlash,
 		LaserBurst,
 		SonicStab,

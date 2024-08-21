@@ -1,4 +1,4 @@
-#include "BossEnemyLaserWave.h"
+#include "BossEnemyRealLaserWave.h"
 #include "BossEnemyScript.h"
 //component
 #include "Animation.h"
@@ -12,7 +12,7 @@
 #include "Grid.h"
 
 #include "Client_Define.h"
-int BossEnemyLaserWave::Update(const float& deltaTime)
+int BossEnemyRealLaserWave::Update(const float& deltaTime)
 {
 	if (_directionCheck == false)
 	{
@@ -35,7 +35,7 @@ int BossEnemyLaserWave::Update(const float& deltaTime)
 		if (_currTime >= _delayTime)
 		{
 			_currTime = _delayTime;
-			_pAnimation->ChangeAnimation(L"LaserWave");
+			_pAnimation->ChangeAnimation(L"RealLaserWave");
 			//TODO : 공격하기. 피해 1, 허점부여
 			_isStateOn = true;
 		}
@@ -44,25 +44,26 @@ int BossEnemyLaserWave::Update(const float& deltaTime)
 	return 0;
 }
 
-int BossEnemyLaserWave::LateUpdate(const float& deltaTime)
+int BossEnemyRealLaserWave::LateUpdate(const float& deltaTime)
 {
 	if (!_isStateOn)
 		ShowInfo();
 
-	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"LaserWave"))
+	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"RealLaserWave"))
 	{
 		return (int)BossEnemy::FSM::Idle;
 	}
 	return 0;
 }
 
-void BossEnemyLaserWave::OnStart()
+void BossEnemyRealLaserWave::OnStart()
 {
 	_directionCheck = false;
 	_isStateOn = false;
 	_currTime = 0.f;
 	_delayTime = Engine::RandomGeneratorFloat(1.5f, 2.5f);
 	RandX = Engine::RandomGeneratorInt(0, 15);
+	RandY = Engine::RandomGeneratorInt(0, 6);
 	playerX = (int)_pPlayer->GetGridPosition().x;
 	if (RandX == playerX)
 	{
@@ -77,12 +78,12 @@ void BossEnemyLaserWave::OnStart()
 	}
 }
 
-void BossEnemyLaserWave::OnExit()
+void BossEnemyRealLaserWave::OnExit()
 {
 	CloseInfo();
 }
 
-void BossEnemyLaserWave::ShowInfo()
+void BossEnemyRealLaserWave::ShowInfo()
 {
 	__super::ShowInfo();
 	if (_pAnimation->IsCurrAnimation(L"Idle"))
@@ -98,35 +99,45 @@ void BossEnemyLaserWave::ShowInfo()
 	_pTextRenderer->SetText(_infoText.c_str());
 }
 
-void BossEnemyLaserWave::CloseInfo()
+void BossEnemyRealLaserWave::CloseInfo()
 {
 	__super::CloseInfo();
 }
 
-void BossEnemyLaserWave::Attack()
+void BossEnemyRealLaserWave::Attack()
 {
 	auto pEffect = Engine::GameObject::Create();
 	auto pEffect2 = Engine::GameObject::Create();
+	auto pEffect3 = Engine::GameObject::Create();
 
 	Effect::EffectInfo info;
 	info.renderGroup = RenderGroup::FrontEffect;
 	info.aniSpeed = 0.03f;
 	info.textureTag = L"AIEffect_Attack_Anim_VFX_Beam_E";
-	info.scale = _pOwner->transform.scale * Vector3(1.5f, 2.f, 0.f);
-	float info1X=_pMovement->_grid->GetTileCenter(playerX, 0).x;
-	info.position = Vector3(info1X,0.f,0.f);
-	
+	info.scale = _pOwner->transform.scale * Vector3(3.f, 2.f, 0.f);
+	float info1X = _pMovement->_grid->GetTileCenter(playerX, 0).x;
+	info.position = Vector3(info1X, 0.f, 0.f);
+
 	Effect::EffectInfo info2;
 	info2.renderGroup = RenderGroup::FrontEffect;
 	info2.aniSpeed = 0.03f;
 	info2.textureTag = L"AIEffect_Attack_Anim_VFX_Beam_E";
-	info2.scale = _pOwner->transform.scale * Vector3(1.5f, 2.f, 0.f);
+	info2.scale = _pOwner->transform.scale * Vector3(3.f, 2.f, 0.f);
 	float info2X = _pMovement->_grid->GetTileCenter(RandX, 0).x;
 	info2.position = Vector3(info2X, 0.f, 0.f);
 
+	Effect::EffectInfo info3;
+	info3.renderGroup = RenderGroup::FrontEffect;
+	info3.aniSpeed = 0.03f;
+	info3.textureTag = L"AIEffect_Attack_Anim_VFX_Beam_E";
+	info3.scale = _pOwner->transform.scale * Vector3(3.f, 2.f, 0.f);
+	float info3Y = _pMovement->_grid->GetTileCenter(0, RandY).y;
+	info3.position = Vector3(2000.f, info3Y, 0.f);
+
 	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
 	AttackCollider::AttackInfo attackInfo;
-
+	attackInfo.Attribute = AttributeFlag::WeakPoint;
+	attackInfo.AttributeStack = 1;
 	if (_pAttribute->IsActiveState(AttributeFlag::HighPower))
 	{
 		_pAttribute->UseStack(Attribute::HighPower);
@@ -143,6 +154,7 @@ void BossEnemyLaserWave::Attack()
 		{
 			pAttackCollider->OnCollider(0.01f, 0.05f, playerX, (int)range.first, attackInfo, 0);
 			pAttackCollider->OnCollider(0.01f, 0.05f, RandX, (int)range.first, attackInfo, 0);
+			pAttackCollider->OnCollider(0.01f, 0.05f, (int)range.first, RandY, attackInfo, 0);
 		}
 		info.rotation = 90.f;
 		info2.rotation = 90.f;
@@ -153,6 +165,7 @@ void BossEnemyLaserWave::Attack()
 		{
 			pAttackCollider->OnCollider(0.01f, 0.05f, playerX, (int)range.first, attackInfo, 0);
 			pAttackCollider->OnCollider(0.01f, 0.05f, RandX, (int)range.first, attackInfo, 0);
+			pAttackCollider->OnCollider(0.01f, 0.05f, (int)range.first, RandY, attackInfo, 0);
 		}
 		info.rotation = -90.f;
 		info2.rotation = -90.f;
@@ -160,28 +173,32 @@ void BossEnemyLaserWave::Attack()
 
 	pEffect->AddComponent<Effect>(info);
 	pEffect2->AddComponent<Effect>(info2);
+	pEffect3->AddComponent<Effect>(info3);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect2);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect3);
+	Camera::CameraShake(0.2f, 100.f);
 }
 
-void BossEnemyLaserWave::ShowAttackRange()
+void BossEnemyRealLaserWave::ShowAttackRange()
 {
 	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(17);
-	int index = 7;
+	int index = 1;
 	for (auto& grid : ranges)
 	{
 		_pGridEffect->OnEffect(playerX, (int)grid.first, index);
 		_pGridEffect->OnEffect(RandX, (int)grid.first, index);
+		_pGridEffect->OnEffect((int)grid.first, RandY, index);
 	}
 }
 
-BossEnemyLaserWave* BossEnemyLaserWave::Create(BossEnemyScript* pScript)
+BossEnemyRealLaserWave* BossEnemyRealLaserWave::Create(BossEnemyScript* pScript)
 {
-	BossEnemyLaserWave* pInstance = new BossEnemyLaserWave;
+	BossEnemyRealLaserWave* pInstance = new BossEnemyRealLaserWave;
 	pInstance->BossEnemyState::Initialize(pScript);
 	Engine::Animation::FrameEvent frameEvent;
 	frameEvent.activeFrame = 6;
-	frameEvent.animation = L"LaserWave";
+	frameEvent.animation = L"RealLaserWave";
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
