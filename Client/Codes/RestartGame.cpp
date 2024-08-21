@@ -84,33 +84,34 @@ void RestartGame::GameOver()
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Fail", (int)SoundGroup::SFX, 0.8f, false);
     _isRestart = true;
     _alpha = 0.f;
+    _elapsed = 0.f;
 
     _pRestartGame = Engine::GameObject::Create();
     _pRestartGame->SetRenderGroup((int)RenderGroup::Top);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", _pRestartGame);
 
     Engine::SpriteRenderer* pSpriteRenderer = _pRestartGame->GetComponent<Engine::SpriteRenderer>();
+    Engine::Texture* pTexture = Resource::FindTexture(L"UI_Text");
+
     pSpriteRenderer->SetOneSelfDraw(true, [=]()
         {
             pSpriteRenderer->DrawFillRect({ WINCX, WINCY }, 0x000000, _alpha);
         });
 
-    _pEventInvoker->BindAction(1.f, [this]()
+    _pEventInvoker->BindAction(1.f, [=]()
         {
-            Engine::TextRenderer* pTextRenderer = _pRestartGame->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 150.f, DWRITE_FONT_WEIGHT_BOLD);
-            pTextRenderer->SetText(L"Game Over");
-            pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-            pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-            pTextRenderer->SetOffset(Vector3(0.f, 50.f, 0.f));
+            Engine::SpriteRenderer* pSpriteRenderer = _pRestartGame->AddComponent<Engine::SpriteRenderer>(L"");
+            pSpriteRenderer->BindTexture(pTexture);
+            pSpriteRenderer->SetIndex(2);
+            pSpriteRenderer->SetDrawOffset(Vector3(WINCX >> 1, (WINCY >> 1) - 150.f, 0.f));
         });
 
-    _pEventInvoker->BindAction(1.5f, [this]()
+    _pEventInvoker->BindAction(1.5f, [=]()
         {
-            Engine::TextRenderer* pTextRenderer = _pRestartGame->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 50.f, DWRITE_FONT_WEIGHT_BOLD);
-            pTextRenderer->SetText(L"Press Space to Retry");
-            pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-            pTextRenderer->SetOffset(Vector3(0.f, 900.f, 0.f));
-            pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+            Engine::SpriteRenderer* pSpriteRenderer = _pRestartGame->AddComponent<Engine::SpriteRenderer>(L"");
+            pSpriteRenderer->BindTexture(pTexture);
+            pSpriteRenderer->SetIndex(3);
+            pSpriteRenderer->SetDrawOffset(Vector3(WINCX >> 1, (WINCY >> 1) + 150.f, 0.f));
         });
 
     Time::SetSlowTime(0.f);

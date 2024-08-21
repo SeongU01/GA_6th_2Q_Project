@@ -56,18 +56,18 @@ void SelectCard::OnSelectCard(Card* pCards[3])
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", _selectCardScene);
 
     Engine::SpriteRenderer* pSpriteRenderer = _selectCardScene->GetComponent<Engine::SpriteRenderer>();
+    Engine::Texture* pTexture = Resource::FindTexture(L"UI_Text");
+
     pSpriteRenderer->SetOneSelfDraw(true, [=]()
         {
             pSpriteRenderer->DrawFillRect({ WINCX, WINCY }, 0x000000, _alpha);
         });
 
-    _pEventInvoker->BindAction(1.f, [this]()
+    _pEventInvoker->BindAction(1.f, [=]()
         {
-            Engine::TextRenderer* pTextRenderer = _selectCardScene->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 150.f, DWRITE_FONT_WEIGHT_BOLD);
-            pTextRenderer->SetText(L"STAGE CLEAR!!");
-            pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-            pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-            pTextRenderer->SetOffset(Vector3(0.f, 50.f, 0.f));
+            Engine::SpriteRenderer* pSpriteRenderer = _selectCardScene->AddComponent<Engine::SpriteRenderer>(L"");
+            pSpriteRenderer->BindTexture(pTexture);
+            pSpriteRenderer->SetDrawOffset(Vector3(WINCX >> 1, 150.f, 0.f));
         });
 
     for (int i = 0; i < 3; i++)
@@ -84,7 +84,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                     cards[i]->ActiveToolTips(true);
                     cards[i]->transform.scale = Vector3(0.66f, 0.66f, 0.f); 
                     });
-                pButton->SetCancel([=]() { 
+                pButton->SetCancel([=]() {             
                     cards[i]->ActiveToolTips(false);
                     cards[i]->transform.scale = Vector3(0.6f, 0.6f, 0.f);
                     });
@@ -102,6 +102,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                             if (i != j)
                                 pCardManager->AddCardID(cards[j]->GetID());
 
+                            cards[j]->ActiveToolTips(false);
                             cards[j]->gameObject.SetDead();
                         }
 
@@ -112,12 +113,11 @@ void SelectCard::OnSelectCard(Card* pCards[3])
             });
     }
 
-    _pEventInvoker->BindAction(1.8f, [this]()
+    _pEventInvoker->BindAction(1.8f, [=]()
         {
-            Engine::TextRenderer* pTextRenderer = _selectCardScene->AddComponent<Engine::TextRenderer>(L"", 0xFFFFFF, 50.f, DWRITE_FONT_WEIGHT_BOLD);
-            pTextRenderer->SetText(L"획득할 카드를 선택하세요.");
-            pTextRenderer->SetDrawRect((float)WINCX, 200.f);
-            pTextRenderer->SetOffset(Vector3(0.f, 900.f, 0.f));
-            pTextRenderer->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);            
+            Engine::SpriteRenderer* pSpriteRenderer = _selectCardScene->AddComponent<Engine::SpriteRenderer>(L"");
+            pSpriteRenderer->BindTexture(pTexture);
+            pSpriteRenderer->SetIndex(1);
+            pSpriteRenderer->SetDrawOffset(Vector3(WINCX >> 1, 900.f, 0.f));
         });    
 }

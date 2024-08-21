@@ -100,7 +100,7 @@ void Player::Awake()
 	_pHP = AddComponent<HP>(L"HP", 5);
 	_pAttribute = AddComponent<Attribute>();
 	_pTimerSystem = AddComponent<TimerSystem>();
-	AddComponent<JobQueue>();
+	_pJobQueue = AddComponent<JobQueue>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	_pSpectrum = AddComponent<Spectrum>(0.034f, Vector3(20.f, -100.f, 0.f), Vector3(1.f, 1.f, 1.f));
 	_pHitColor = AddComponent<HitColor>();
@@ -371,7 +371,7 @@ void Player::DefaultMove(const float& deltaTime)
 
 			if (_movement->_grid->IsTileWalkable((int)_gridPosition.x, (int)_gridPosition.y))
 			{
-				_movement->MoveToCell(_gridPosition, 0.25f);
+				_movement->MoveToCell(_gridPosition, 0.4f);
 				Tile* prevTile = _movement->_grid->GetTiles()[(int)tempGridPosition.y][(int)tempGridPosition.x];
 				prevTile->canMove = true;
 			}

@@ -21,7 +21,7 @@ void TitleButtons::Start()
 	UI* pObj;
 
 	//시작버튼
-	info = CreateInfo(L"TitleButton", L"Title", 7, { 400.f, 450.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
+	info = CreateInfo(L"TitleButton", L"Title", 7, { 313.f, 450.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
 	pObj = AddUI(info);
 
 	Button* btn = pObj->AddComponent<Button>();
@@ -40,7 +40,7 @@ void TitleButtons::Start()
 	btn->SetRange(info.position, pObj->GetImageSize());
 
 	//상세설명버튼
-	info = CreateInfo(L"TitleButton", L"Title", 3, { 400.f, 550.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
+	info = CreateInfo(L"TitleButton", L"Title", 3, { 400.f, 570.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
 	pObj = AddUI(info);
 
 	btn = pObj->AddComponent<Button>();
@@ -59,7 +59,7 @@ void TitleButtons::Start()
 	btn->SetRange(info.position, pObj->GetImageSize());
 
 	//크래딧버튼
-	info = CreateInfo(L"TitleButton", L"Title", 5, { 400.f, 650.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
+	info = CreateInfo(L"TitleButton", L"Title", 5, { 355.f, 690.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
 	pObj = AddUI(info);
 
 	btn = pObj->AddComponent<Button>();
@@ -80,7 +80,7 @@ void TitleButtons::Start()
 	btn->SetRange(info.position, pObj->GetImageSize());
 
 	//나가기버튼
-	info = CreateInfo(L"TitleButton", L"Title", 1, { 400.f, 750.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
+	info = CreateInfo(L"TitleButton", L"Title", 1, { 305.f, 810.f, -1.f }, { 1.f, 1.f, 1.f }, &transform);
 	pObj = AddUI(info);
 	btn = pObj->AddComponent<Button>();
 	btn->SetIsReat(false);
@@ -98,6 +98,7 @@ void TitleButtons::Start()
 	btn->SetOnHover([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(2); });
 	btn->SetOnPressed([]() { PostQuitMessage(0);});
 	btn->SetRange(info.position, pObj->GetImageSize());
+
 	//SetDontDestroyObject(true);
 }
 

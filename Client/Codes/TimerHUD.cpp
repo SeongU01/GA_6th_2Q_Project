@@ -22,9 +22,11 @@ void TimerHUD::Start()
 	UI* backpUI;
 	//비네팅
 	_pRedBene = AddUI(CreateInfo(L"UI_Bene", L"UI_HUD_Bene", 1, Vector3(float(WINCX >> 1), float(WINCY >> 1), -100.f), { 1.0f, 1.0f, 1.0f }, &transform));
+	_pRedBene->SetRenderGroup((int)RenderGroup::FrontEffect);
 	_pRedBene->SetActive(false);
 	_pBene = AddUI(CreateInfo(L"UI_Bene", L"UI_HUD_Bene", 0, Vector3(float(WINCX >> 1), float(WINCY >> 1), -100.f), { 1.0f, 1.0f, 1.0f }, &transform));
-	_pBene->SetActive(false);
+	_pBene->SetRenderGroup((int)RenderGroup::FrontEffect);
+	_pBene->SetActive(true);
 	//카드 라인
 	AddUI(CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960.0f , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	backpUI = AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform));
@@ -108,9 +110,29 @@ void TimerHUD::Update(const float& deltaTime)
 		_pYellow->SetScale({ 0.f,0.f,0.f });
 	}
 
-	_pBene->SetActive(_pTimer->GetisSlow());
+	if (_pTimer->GetisSlow())
+	{
+		_alpha += Time::GetGlobalDeltaTime() / 0.1f;
+		if (1.f <= _alpha) _alpha = 1.f;
+
+		_pBene->SetAlpha(_alpha);
+	}
+	else
+	{
+		_alpha -= Time::GetGlobalDeltaTime() / 0.1f;
+		if (0.f >= _alpha) _alpha = 0.f;
+
+		_pBene->SetAlpha(_alpha);
+	}
+
 	if (timer <= 15) //time limit
+	{
+		_redAlpha += deltaTime / 0.1f;
+		if (1.f <= _redAlpha) _redAlpha = 1.f;
+
+		_pRedBene->SetAlpha(_redAlpha);
 		_pRedBene->SetActive(true);
+	}
 }
 
 void TimerHUD::LateUpdate(const float& deltaTime)

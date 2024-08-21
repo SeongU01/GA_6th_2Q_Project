@@ -19,6 +19,7 @@ public:
 public:
 	void PushQueue(Card* pCard);
 	void PopQueue(Card* pCard);
+	bool IsJobQueueEmpty() { return _jobQueue.empty(); }
 
 private:
 	void SetJobQueuePosition();

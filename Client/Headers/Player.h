@@ -18,6 +18,7 @@ class Spectrum;
 class HitColor;
 class TopHUD;
 class MPHUD;
+class JobQueue;
 class Player : public Engine::MonoBehavior
 {
 public:
@@ -63,6 +64,7 @@ private:
 	HitColor*			_pHitColor = nullptr;
 	MPHUD*				_pMPHUD = nullptr;
 	TopHUD*				_pHPHUD = nullptr;
+	JobQueue*			_pJobQueue = nullptr;
 
 private:
 	std::vector<Engine::Collider*> _attackColliders;

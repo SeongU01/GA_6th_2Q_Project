@@ -74,6 +74,11 @@ void UI::AddScale(const Vector3& scale)
     _pTransform->SetScale(_info.scale);
 }
 
+void UI::SetAlpha(float alpha)
+{
+    _pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, alpha);
+}
+
 
 void UI::Initialize(const UIInfo& info)
 {

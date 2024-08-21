@@ -3,6 +3,7 @@
 // Component
 #include "BitFlag.h"
 #include "Timer.h"
+#include "PlayerMP.h"
 
 #include "Client_Define.h"
 
@@ -54,42 +55,33 @@ void Attribute::LateUpdate(const float& deltaTime)
 {
 	for (int i = 0; i < State::End; i++)
 	{
+		unsigned long long flag = (unsigned long long)1 << (i + 1);
+
 		if (!_stateStacks[i])
-			_pBitFlag->OffFlag((unsigned long long)1 << (i + 1));
-	}
+			_pBitFlag->OffFlag(flag);
 
-	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
-	{
-		_pTimer->SetActive(State::Charge, true);
+		if (State::Shield == i)
+			continue;
 
-		if (_pTimer->IsOverTime(State::Charge, _stateDatas[State::Charge][1]))
+		if (_pBitFlag->CheckFlag(flag))
 		{
-			_pBitFlag->OffFlag(AttributeFlag::Charge);
-			_pTimer->SetActive(State::Charge, false);
+			_pTimer->SetActive(i, true);
+
+			if (_pTimer->IsOverTime(i, _stateDatas[i][0]))
+			{
+				_pBitFlag->OffFlag(flag);
+				_pTimer->SetElapsed(i, 0.f);
+				_stateStacks[i]--;
+			}
 		}
-	}
-
-	if (_pBitFlag->CheckFlag(AttributeFlag::Extra))
-	{
-		_pTimer->SetActive(State::Extra, true);
-
-		if (_pTimer->IsOverTime(State::Extra, _stateDatas[State::Extra][1]))
-		{
-			_pBitFlag->OffFlag(AttributeFlag::Extra);
-			_pTimer->SetActive(State::Extra, false);
-		}
-	}
-
-	for (int i = 0; i < State::End; i++)
-	{
-		if (!_pBitFlag->CheckFlag((unsigned long long)1 << (i + 1)))
+		else
 			_pTimer->SetActive(i, false);
 	}
 }
 
 int Attribute::GetExtraRecoveryValue() const
 {
-	return (int)_stateDatas[State::Extra][2];
+	return (int)_stateDatas[State::Extra][1];
 }
 
 bool Attribute::IsActiveState(unsigned long long flag) const
@@ -116,6 +108,7 @@ void Attribute::AddState(unsigned long long flag, int stack)
 		n >>= 1;
 		count++;
 	}
+
 	switch (flag)
 	{
 	case AttributeFlag::Charge:
@@ -155,21 +148,22 @@ void Attribute::Reset()
 }
 
 void Attribute::ActiveCharge()
-{
-	Sound::PlaySound("Battle_Sound_State_Execute_Charge", (int)SoundGroup::AttributeActive, 0.8f, false);
+{	
 	if (_pBitFlag->CheckFlag(AttributeFlag::Charge))
 	{
-		_pBitFlag->OffFlag(AttributeFlag::Charge);
+		Sound::PlaySound("Battle_Sound_State_Execute_Charge", (int)SoundGroup::AttributeActive, 0.8f, false);
 		_pBitFlag->OnFlag(AttributeFlag::HighPower);
-		_stateStacks[State::HighPower] = 1;
+		_stateStacks[State::HighPower] += 1;
+		_stateStacks[State::Charge]--;
+		GetComponent<PlayerMP>()->mp++;
 	}
 }
 
 int Attribute::ActiveHighPower()
-{
-	Sound::PlaySound("Battle_Sound_State_Execute_OverPower", (int)SoundGroup::AttributeActive, 0.8f, false);
+{	
 	if (_pBitFlag->CheckFlag(AttributeFlag::HighPower))
 	{
+		Sound::PlaySound("Battle_Sound_State_Execute_OverPower", (int)SoundGroup::AttributeActive, 0.8f, false);
 		_stateStacks[State::HighPower]--;
 		return (int)_stateDatas[Attribute::HighPower][1];
 	}
@@ -177,15 +171,11 @@ int Attribute::ActiveHighPower()
 	return 0;
 }
 
-void Attribute::ActiveOverCharge()
-{
-}
-
 int Attribute::ActiveWeakPoint()
-{
-	Sound::PlaySound("Battle_Sound_State_Execute_WeakPoint", (int)SoundGroup::AttributeActive, 0.8f, false);
+{	
 	if (_pBitFlag->CheckFlag(AttributeFlag::WeakPoint))
 	{
+		Sound::PlaySound("Battle_Sound_State_Execute_WeakPoint", (int)SoundGroup::AttributeActive, 0.8f, false);
 		_stateStacks[State::WeakPoint]--;
 		return (int)_stateDatas[State::WeakPoint][1];
 	}
