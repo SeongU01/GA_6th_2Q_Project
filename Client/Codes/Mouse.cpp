@@ -157,7 +157,7 @@ void Mouse::OnCollisionExit(Engine::CollisionInfo& info)
 		{
 			if (!Input::IsKeyPress(Input::DIM_LB))
 			{
-				if(!_hoverCard->IsAddQueue())
+				if(!_hoverCard->IsAddQueue()&& !_hoverCard->IsAddDrow())
 					_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 
 				_hoverCard->isHold = false;

@@ -293,7 +293,6 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 			_pPlayer->GetComponent<PlayerMP>()->mp += _cardData.costMana;
 			TimerSystem* pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
 			pTimerSystem->UseTime(-_cardData.costTime);
-			//pTimerSystem->AddSkillTime(-_cardData.costTime);
 
 			if (CardAttribute::OverClock == _cardData.additiveCardState[0] || CardAttribute::OverClock == _cardData.additiveCardState[1])
 			{
@@ -302,6 +301,7 @@ void Card::OnCollision(Engine::CollisionInfo& info)
 			}
 			Sound::PlaySound("Card_Sound_Card_Register_Cancel", (int)SoundGroup::Card, 0.8f, false);
 			_isAddQueue = false;
+			_isAddDrow = true;
 		}
 	}
 }
@@ -645,6 +645,16 @@ void Card::ActiveEffect()
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Player, 0.8f, false);
 	}
 
+}
+
+bool Card::IsAddDrow()
+{
+	if (_isAddDrow == true) 
+	{
+		_isAddDrow = false;
+		return true;
+	}
+	return _isAddDrow;
 }
 
 void Card::SetHoldCard(bool isActive)

@@ -45,11 +45,11 @@ void TitleButtons::Start()
 
 	btn = pObj->AddComponent<Button>();
 	btn->SetIsReat(false);
-	btn->SetOnHover([pObj]() {
-		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
-		});
 	btn->SetCancel([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(3); });
-	btn->SetOnHover([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(4); });
+	btn->SetOnHover([pObj]() { 
+		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(4); 
+		});
 	btn->SetOnPressed([]() {
 		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
@@ -64,13 +64,10 @@ void TitleButtons::Start()
 
 	btn = pObj->AddComponent<Button>();
 	btn->SetIsReat(false);
-	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
+	btn->SetCancel([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(5); });
 	btn->SetOnHover([pObj]() {
 		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
-		pObj->AddScale({ 0.0001f,0.0001f,0.0f });
-		});
-	btn->SetCancel([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(5); });
-	btn->SetOnHover([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(6); });
+		pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(6); });
 	btn->SetOnPressed([]() {
 		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 		Sound::PlaySound("Effect_Sound_FX_UI_Popup", (int)SoundGroup::SFX, 0.8f, false);
@@ -84,19 +81,16 @@ void TitleButtons::Start()
 	pObj = AddUI(info);
 	btn = pObj->AddComponent<Button>();
 	btn->SetIsReat(false);
-	btn->SetCancel([pObj]() { pObj->SetScale({ 1.0f,1.0f,1.0f }); });
+	btn->SetCancel([pObj]() { 
+		pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(1); });
 	btn->SetOnHover([pObj]() {
-		pObj->AddScale({ 0.0001f,0.0001f,0.0f }); 
 		Sound::PlaySound("Effect_Sound_Button_Hover", (int)SoundGroup::SFX, 0.8f, false);
+		pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(2); 
 		});
-	btn->SetOnPressed([]() { 
+	btn->SetOnPressed([]() {
 		Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 		PostQuitMessage(0);
 		});
-
-	btn->SetCancel([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(1); });
-	btn->SetOnHover([pObj]() { pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(2); });
-	btn->SetOnPressed([]() { PostQuitMessage(0);});
 	btn->SetRange(info.position, pObj->GetImageSize());
 	//SetDontDestroyObject(true);
 }

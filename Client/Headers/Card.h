@@ -72,6 +72,7 @@ public:
 	float GetPriority() const { return _priority; }
 	bool GetHoldCard() const { return _isHoldMouse; }
 	bool IsAddQueue() const { return _isAddQueue; }
+	bool IsAddDrow();
 	void SetHoldCard(bool isActive);
 	void SetMouseHover(bool isHover);
 	void SetTargetPosition(const Vector3& p0, const Vector3& p1);
@@ -126,6 +127,7 @@ private:
 	bool								_isThrow = false;
 	bool								_isHoldMouse = false;
 	bool								_isAddQueue = false;
+	bool								_isAddDrow = false;
 	bool								_isSelectCard = false;
 };
 
