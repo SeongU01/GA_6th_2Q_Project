@@ -36,17 +36,18 @@ void Fade::Start()
 
 void Fade::Update(const float& deltaTime)
 {
-    _elapsed += deltaTime;
+    float _deltaTime = Time::GetGlobalDeltaTime();
+    _elapsed +=_deltaTime;
 
     switch (_fadeInfo.option)
     {
     case Fade::Fade_In:
-        _fadeInfo.alpha -= deltaTime / _fadeInfo.duration;
+        _fadeInfo.alpha -= _deltaTime / _fadeInfo.duration;
         if (0.f >= _fadeInfo.alpha) _fadeInfo.alpha = 0.f;
         break;
 
     case Fade::Fade_Out:
-        _fadeInfo.alpha += deltaTime / _fadeInfo.duration;
+        _fadeInfo.alpha += _deltaTime / _fadeInfo.duration;
         if (1.f <= _fadeInfo.alpha) _fadeInfo.alpha = 1.f;
         break;
 
@@ -55,7 +56,7 @@ void Fade::Update(const float& deltaTime)
         {
             if (!_isOutIn)
             {
-                _fadeInfo.alpha += deltaTime / _fadeInfo.duration;
+                _fadeInfo.alpha += _deltaTime / _fadeInfo.duration;
                 if (1.f <= _fadeInfo.alpha)
                 {
                     _fadeInfo.alpha = 1.f;
@@ -67,7 +68,7 @@ void Fade::Update(const float& deltaTime)
             {
                 if (_fadeInfo.outInDelay <= _elapsed - _fadeInfo.delay)
                 {
-                    _fadeInfo.alpha -= deltaTime / _fadeInfo.duration;
+                    _fadeInfo.alpha -= _deltaTime / _fadeInfo.duration;
                     if (0.f >= _fadeInfo.alpha)
                     {
                         _fadeInfo.alpha = 0.f;

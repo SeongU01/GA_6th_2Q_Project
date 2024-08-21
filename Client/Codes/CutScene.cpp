@@ -4,6 +4,7 @@
 #include "SpriteRenderer.h"
 #include "Player.h"
 #include "EventManager.h"
+#include "TimerSystem.h"
 //scene
 #include "Stage1Scene.h"
 #include "Stage2Scene.h"
@@ -15,7 +16,11 @@
 //페이드 인, 페이드 아웃 타이밍 넣기 + 컷씬 종료시 스테이지 넘겨주기.
 void changeStage(int stage,Player* player)
 {
-    if (player != nullptr)player->SetPlayerActives(true);
+    if (player != nullptr) 
+    {
+        player->SetPlayerActives(true);
+        player->GetComponent<TimerSystem>()->TutorialTimeStop(false);
+    }
     EventManager::GetInstance()->SetStopGame(false);
     if (stage == 1) 
     {
@@ -52,7 +57,8 @@ std::string wstring_to_string(const std::wstring& wstr) {
 
 int CutScene::Update(const float& deltaTime)
 {
-    _cutTime += deltaTime;
+    float _deltaTime = Time::GetGlobalDeltaTime();
+    _cutTime += _deltaTime;
     if (Input::IsKeyDown(DIK_EQUALS)) //스킵기능
     {
         changeStage(_stageNum,_pPlayer);
@@ -91,6 +97,7 @@ bool CutScene::Initialize()
     {
         _pPlayer = Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>();
         _pPlayer->SetPlayerActives(false);
+        _pPlayer->GetComponent<TimerSystem>()->TutorialTimeStop(true);
     }
     //이미지셋팅
     _pBObj = Engine::GameObject::Create();
@@ -124,7 +131,9 @@ bool CutScene::Initialize()
     _pFadeObj = Engine::GameObject::Create();
     Fade* _pFade = _pFadeObj->AddComponent<Fade>(info);
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"Fade", _pFadeObj); _pFadeObj->SetRenderGroup((int)RenderGroup::Fade);
+    
     EventManager::GetInstance()->SetStopGame(true);
+    
     return true;
 }
 

@@ -130,23 +130,23 @@ void Player::Awake()
 	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
 	pSpriteRenderer->BindAnimation(_pAnimation);
 	pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, 0.5f);
-	pSpriteRenderer->SetOneSelfDraw(true, [=]()
-		{
-			if (_pTimerSystem->IsStopTime())
-			{
-				Vector3 offset = { 20.f, -100.f, 0.f };
-				Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
-
-				position = position - transform.position;
-
-				if (0.f > transform.scale.x)
-					position.x *= -1.f;
-
-				pSpriteRenderer->SetDrawOffset(offset + position);
-				pSpriteRenderer->Draw();
-			}
-		});
-
+	//pSpriteRenderer->SetOneSelfDraw(true, [=]()
+	//	{
+	//		if (_pTimerSystem->IsStopTime())
+	//		{
+	//			Vector3 offset = { 20.f, -100.f, 0.f };
+	//			Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
+	//
+	//			position = position - transform.position;
+	//
+	//			if (0.f > transform.scale.x)
+	//				position.x *= -1.f;
+	//
+	//			pSpriteRenderer->SetDrawOffset(offset + position);
+	//			pSpriteRenderer->Draw();
+	//		}
+	//	});
+	//
 	// 스펙트럼 애니메이션 바인딩
 	Engine::Animation::FrameEvent frameEvent;
 	frameEvent.activeFrame = 5;
