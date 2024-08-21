@@ -1,6 +1,6 @@
 #include "Loading.h"
 #include "TitleScene.h"
-
+#include "Animation.h"
 #include "DataManager.h"
 #include "CardManager.h"
 
@@ -29,8 +29,15 @@ bool Loading::Initialize()
 	pGameObject->transform.position = Vector3(WINCX >> 1, WINCY >> 1, 0.f);
 	pGameObject->SetRenderGroup((int)RenderGroup::None);
 	pGameObject->GetComponent<Engine::SpriteRenderer>()->BindTexture(Resource::FindTexture(L"Image"));
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
+	
+	Engine::SpriteRenderer* pSpriteRenderer = pGameObject->AddComponent<Engine::SpriteRenderer>(L"");
+	Engine::Animation* pAnimation = pGameObject->AddComponent<Engine::Animation>(L"");
+	pSpriteRenderer->BindAnimation(pAnimation);
+	Engine::Texture* pTexture = Resource::FindTexture(L"Animation");
+	pAnimation->AddAllFrame(L"Loading", pTexture, 0.05f);
+	pAnimation->ChangeAnimation(L"Loading");
 
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
     std::thread loading(&Loading::LoadResource, this);
     loading.detach();
 
