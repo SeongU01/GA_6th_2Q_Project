@@ -41,6 +41,14 @@ namespace Engine
 
 		return random(gen);
 	}
+	inline float RandomGeneratorFloat(float first, float last)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_real_distribution<float> random(first, last);
+
+		return random(gen);
+	}
 
 	template<typename T>
 	inline constexpr T RandomGeneratorReal(T first, T last)
