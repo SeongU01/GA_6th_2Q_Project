@@ -17,6 +17,7 @@ public:
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
 public:
+	bool WaveOn() { return _waveOn; }
 	void CheckWaveEnd();
 	bool CheckStageEnd() { return _stageEnd; }
 	void SpawnEffect(const Vector3& Position);
