@@ -31,9 +31,9 @@ void TimerHUD::Start()
 	AddUI(CreateInfo(L"UI_Back", L"UI_HUD_Card", 0, { 960.0f , 980.f, -100.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	backpUI = AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Back", 0, { 210.0f , 980.f, -1.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	AddUI(CreateInfo(L"Timer_Back", L"UI_HUD_Timer_Box", 0, { 210.0f , 1030.f, -1.f }, { 1.0f, 1.3f, 1.0f }, &transform));
-	_pRed = AddUI(CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 210.0f , 1030.f, 0.f }, { 1.0f, 1.0f, 0.f }, &transform));
-	_pYellow = AddUI(CreateInfo(L"Timer_Orange", L"UI_HUD_Timer_Gage", 1, { 210.0f , 1030.f, 0.f }, { 1.0, 1.0f, 0.f }, &transform));
-	AddUI(CreateInfo(L"Timer_Back2", L"UI_HUD_Timer_Box", 1, { 210.0f , 1030.f, 0.f }, { 1.f, 1.f, 0.f }, &transform));
+	_pRed = AddUI(CreateInfo(L"Timer_Red", L"UI_HUD_Timer_Gage", 0, { 210.0f , 1030.f, 0.f }, { 1.0f, 1.0f, 1.0f }, &transform));
+	_pYellow = AddUI(CreateInfo(L"Timer_Orange", L"UI_HUD_Timer_Gage", 1, { 210.0f , 1030.f, 0.f }, { 1.0, 1.0f, 1.0f }, &transform));
+	AddUI(CreateInfo(L"Timer_Back2", L"UI_HUD_Timer_Box", 1, { 210.0f , 1030.f, 10.f }, { 1.0f, 1.0f, 1.0f }, &transform));
 	//ÅØ½ºÆ®
 	Engine::GameObject* pTextobj = Engine::GameObject::Create();
 	pTextobj->SetNotAffectCamera(true);
