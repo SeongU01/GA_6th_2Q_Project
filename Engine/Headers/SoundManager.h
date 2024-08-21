@@ -22,9 +22,10 @@ namespace Engine
 
     public:
         void Update(const float& deltaTime);
-        void PlaySound(const char* soundTag, int channelID, float volume, bool isLoop);
+        FMOD::Channel* PlaySound(const char* soundTag, int channelID, float volume, bool isLoop);
         void StopSound();
         void StopSound(int channelID);
+        void PauseSound(int groupID, bool isPause);
         void SetVolume(int groupID, float volume);
         void SetFadeVolume(int groupID, float volume);
         void SetPitch(int groupID, float pitch);

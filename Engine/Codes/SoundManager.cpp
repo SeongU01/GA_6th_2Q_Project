@@ -33,7 +33,7 @@ void Engine::SoundManager::Update(const float& deltaTime)
     _pSystem->update();
 }
 
-void Engine::SoundManager::PlaySound(const char* soundTag, int groupID, float volume, bool isLoop)
+FMOD::Channel* Engine::SoundManager::PlaySound(const char* soundTag, int groupID, float volume, bool isLoop)
 {
     FMOD::Sound* pSound = _soundData[soundTag];
 
@@ -45,7 +45,11 @@ void Engine::SoundManager::PlaySound(const char* soundTag, int groupID, float vo
         _pSystem->playSound(pSound, _channelGroups[groupID], FALSE, &pChannel);
         if (isLoop) pChannel->setMode(FMOD_LOOP_NORMAL);
         pChannel->setVolume(volume);
+
+        return pChannel;
     }
+
+    return nullptr;
 }
 
 void Engine::SoundManager::StopSound()
@@ -56,6 +60,11 @@ void Engine::SoundManager::StopSound()
 void Engine::SoundManager::StopSound(int groupID)
 {
     _channelGroups[groupID]->stop();
+}
+
+void Engine::SoundManager::PauseSound(int groupID, bool isPause)
+{
+    _channelGroups[groupID]->setPaused(isPause);
 }
 
 void Engine::SoundManager::SetVolume(int groupID, float volume)

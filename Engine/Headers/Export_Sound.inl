@@ -1,9 +1,9 @@
 #pragma once
 
 // SoundMgr
-void PlaySound(const char* soundTag, int channelID, float volume = 1.f, bool isLoop = false)
+FMOD::Channel* PlaySound(const char* soundTag, int channelID, float volume = 1.f, bool isLoop = false)
 {
-	Engine::SoundManager::GetInstance()->PlaySound(soundTag, channelID, volume, isLoop);
+	return Engine::SoundManager::GetInstance()->PlaySound(soundTag, channelID, volume, isLoop);
 }
 void DistancePlaySound(const Vector3& position, const char* soundTag, int groupID, bool isloop = false)
 {
@@ -24,4 +24,8 @@ void StopSound(int groupID)
 void SetSoundTarget(Engine::GameObject* pTarget)
 {
 	// Engine::SoundManager::GetInstance()->SetSoundTarget(pTarget);
+}
+void PuaseSound(int groupID, bool isPause)
+{
+	Engine::SoundManager::GetInstance()->PauseSound(groupID, isPause);
 }

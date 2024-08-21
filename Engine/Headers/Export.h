@@ -78,11 +78,12 @@ namespace Input
 namespace Sound
 {
 	// SoundMgr
-	inline void PlaySound(const char* soundTag, int channelID, float volume, bool isLoop);
+	inline FMOD::Channel* PlaySound(const char* soundTag, int channelID, float volume, bool isLoop);
 	inline void DistancePlaySound(const Vector3& position, const char* soundTag, int groupID, bool isLoop);
 	inline void SetFadeVolume(int groupID, float volume);
 	inline void SetVolume(int groupID, float volume);
 	inline void StopSound(int groupID);
 	inline void SetSoundTarget(Engine::GameObject* pTarget);
+	inline void PuaseSound(int groupID, bool isPause);
 	#include "Export_Sound.inl"
 }
