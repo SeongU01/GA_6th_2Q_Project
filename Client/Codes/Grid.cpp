@@ -66,6 +66,7 @@ bool Grid::IsTileWalkable(int x, int y) const
 
 Vector3 Grid::GetTileCenter(int x, int y) const
 {
+	if (_tiles.empty())return Vector3();
 	int width = (int)_tiles[0].size();
 	int height = (int)_tiles.size();
 
