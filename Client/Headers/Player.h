@@ -66,6 +66,7 @@ private:
 	TopHUD*				_pHPHUD = nullptr;
 	JobQueue*			_pJobQueue = nullptr;
 
+	Engine::SpriteRenderer* _psSilhouette = nullptr;
 private:
 	std::vector<Engine::Collider*> _attackColliders;
 	Vector3 _gridPosition = { 0.f, 2.f, 0.f };

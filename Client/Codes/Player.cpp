@@ -62,6 +62,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 
 void Player::SetPlayerActives(bool _isActive)
 {
+	gameObject.SetActive(_isActive);
 	GetComponent<HPHUD>()->SetActives(_isActive);
 	_pMP->SetPlayerActivies(_isActive);
 	_pMPHUD->SetActives(_isActive);
@@ -127,26 +128,26 @@ void Player::Awake()
 	_pHPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 	
 	// 잔상 표시용
-	pSpriteRenderer = AddComponent<Engine::SpriteRenderer>(L"Dummy");
-	pSpriteRenderer->BindAnimation(_pAnimation);
-	pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, 0.5f);
-	//pSpriteRenderer->SetOneSelfDraw(true, [=]()
-	//	{
-	//		if (_pTimerSystem->IsStopTime())
-	//		{
-	//			Vector3 offset = { 20.f, -100.f, 0.f };
-	//			Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
-	//
-	//			position = position - transform.position;
-	//
-	//			if (0.f > transform.scale.x)
-	//				position.x *= -1.f;
-	//
-	//			pSpriteRenderer->SetDrawOffset(offset + position);
-	//			pSpriteRenderer->Draw();
-	//		}
-	//	});
-	//
+	_psSilhouette = AddComponent<Engine::SpriteRenderer>(L"Dummy");
+	_psSilhouette->BindAnimation(_pAnimation);
+	_psSilhouette->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, 0.5f);
+	_psSilhouette->SetOneSelfDraw(true, [=]()
+		{
+			if (_pTimerSystem->IsStopTime())
+			{
+				Vector3 offset = { 20.f, -100.f, 0.f };
+				Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
+	
+				position = position - transform.position;
+	
+				if (0.f > transform.scale.x)
+					position.x *= -1.f;
+	
+				_psSilhouette->SetDrawOffset(offset + position);
+				_psSilhouette->Draw();
+			}
+		});
+	
 	// 스펙트럼 애니메이션 바인딩
 	Engine::Animation::FrameEvent frameEvent;
 	frameEvent.activeFrame = 5;
