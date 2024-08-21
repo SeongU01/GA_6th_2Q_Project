@@ -104,7 +104,7 @@ void DefaultEnemyWeakAttack::ShowAttackRange()
 {
   const Vector3& gridPosition = *_pGridPosition;
   std::vector<std::pair<int, int>> ranges =DataManager::GetInstance()->GetAttackRange(11);
-  int index = 1;
+  int index = 7;
   for (auto& grid : ranges)
   {
     _pGridEffect->OnEffect(int(gridPosition.x+grid.first), int(gridPosition.y+ grid.second), index);
