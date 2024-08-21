@@ -12,10 +12,6 @@
 
 // UI
 #include "TimerHUD.h"
-#include "GameOverHUD.h"
-#include "GameOverButtons.h"
-#include "GameClearHUD.h"
-#include "GameClearButtons.h"
 #include "HPHUD.h"
 #include "TopHUD.h"
 #include "MPHUD.h"
@@ -134,29 +130,7 @@ void DefaultStageScene::FadeIn()
 
 int DefaultStageScene::Update(const float& deltaTime)
 {
-    ////테스트용 코드(게임오버, 클리어 팝업 체크
-    //if (Input::IsKeyDown(DIK_1))
-    //{
-    //    Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
-    //    pOver->GetComponent<GameOverHUD>()->SetActives(true);
-    //    pOver->GetComponent<GameOVerButtons>()->SetActives(true);
-    //}
-    //else if (Input::IsKeyDown(DIK_2))
-    //{
-    //    Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
-    //    pClear->GetComponent<GameClearHUD>()->SetActives(true);
-    //    pClear->GetComponent<GameClearButtons>()->SetActives(true);
-    //}
-    //else if (Input::IsKeyDown(DIK_3))
-    //{
-    //    Engine::GameObject* pOver = Engine::FindObject((int)LayerGroup::UI, L"GameOver", NULL);
-    //    pOver->GetComponent<GameOverHUD>()->SetActives(false);
-    //    pOver->GetComponent<GameOVerButtons>()->SetActives(false);
 
-    //    Engine::GameObject* pClear = Engine::FindObject((int)LayerGroup::UI, L"GameClear", NULL);
-    //    pClear->GetComponent<GameClearHUD>()->SetActives(false);
-    //    pClear->GetComponent<GameClearButtons>()->SetActives(false);
-    //}
 
     auto objectList = Engine::FindObjectList((int)LayerGroup::Object, L"Defense");
 
@@ -298,17 +272,6 @@ bool DefaultStageScene::UIinitialize()
     pTimerObj->AddComponent<TimerHUD>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerObj", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
 
-    // 게임오버 팝업
-    Engine::GameObject* pGameOverObj = Engine::GameObject::Create();
-    pGameOverObj->AddComponent<GameOverHUD>();
-    pGameOverObj->AddComponent<GameOVerButtons>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameOver", pGameOverObj); pGameOverObj->SetRenderGroup((int)RenderGroup::Top); //팝업이라 더 높게..
-
-    // 게임클리어 팝업
-    Engine::GameObject* pGameClearObj = Engine::GameObject::Create();
-    pGameClearObj->AddComponent<GameClearHUD>();
-    pGameClearObj->AddComponent<GameClearButtons>();
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"GameClear", pGameClearObj); pGameClearObj->SetRenderGroup((int)RenderGroup::Top);   
     return true;
 }
 

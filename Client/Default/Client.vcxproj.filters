@@ -92,9 +92,6 @@
     <ClCompile Include="..\Codes\HPHUD.cpp">
       <Filter>05. UI\HUD</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\SelectButtons.cpp">
-      <Filter>05. UI\Interaction\Button</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\CreditHUD.cpp">
       <Filter>05. UI\HUD</Filter>
     </ClCompile>
@@ -112,18 +109,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\HP.cpp">
       <Filter>04. Component\HP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameOverHUD.cpp">
-      <Filter>05. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameClearHUD.cpp">
-      <Filter>05. UI\HUD</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameClearButtons.cpp">
-      <Filter>05. UI\Interaction\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\GameOverButtons.cpp">
-      <Filter>05. UI\Interaction\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Effect.cpp">
       <Filter>04. Component\Effect</Filter>
@@ -697,9 +682,6 @@
     <ClInclude Include="..\Headers\HPHUD.h">
       <Filter>05. UI\HUD</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\SelectButtons.h">
-      <Filter>05. UI\Interaction\Button</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\TitleButtons.h">
       <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
@@ -720,18 +702,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\HP.h">
       <Filter>04. Component\HP</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\GameOverHUD.h">
-      <Filter>05. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\GameClearHUD.h">
-      <Filter>05. UI\HUD</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\GameClearButtons.h">
-      <Filter>05. UI\Interaction\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\GameOverButtons.h">
-      <Filter>05. UI\Interaction\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\UI.h">
       <Filter>05. UI</Filter>
