@@ -65,6 +65,7 @@ void AttributeHUD::Update(const float& deltaTime)
 			if (_pAttribute->IsActiveState((unsigned long long)1 << (i + 1)))
 			{
 				_UIs[i]->SetActive(true);
+				_UIs[i]->GetComponent<Engine::TextRenderer>()->SetText(std::to_wstring(_pAttribute->GetStack(i)).c_str());
 				activeUIs.push_back(_UIs[i]);
 				if (!_pToolTip->FindToolTip(str))
 					NextPos = _pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(str), NextPos);

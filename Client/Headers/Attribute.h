@@ -27,7 +27,6 @@ public:
 	int GetExtraRecoveryValue() const;
 	bool IsActiveState(unsigned long long flag) const;
 	void UseStack(State state);
-	void ActiveOverCharge();
 	int ActiveWeakPoint();
 	void ActiveCharge();
 	int ActiveHighPower();

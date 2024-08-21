@@ -10,6 +10,7 @@
 // Component
 #include "SpawnEnemy.h"
 #include "CardSystem.h"
+#include "TextRenderer.h"
 
 #include "EventManager.h"
 #include "Client_Define.h"
@@ -47,6 +48,14 @@ bool Stage1Scene::Initialize()
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Entry", (int)SoundGroup::SFX, 0.8f, false);
     
+    Engine::GameObject* pUI = Engine::GameObject::Create();
+    pUI->SetRenderGroup((int)RenderGroup::UI);
+    Engine::TextRenderer* pTextRenderer = pUI->AddComponent<Engine::TextRenderer>(L"TextRenderer", 0XFFFFFF, 25.f, DWRITE_FONT_WEIGHT_BOLD);
+    pTextRenderer->SetText(L"스테이지 1");
+    pTextRenderer->SetDrawRect(200.f, 100.f);
+    Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pUI);
+    pUI->transform.position = Vector3(1770.f, 20.f, 0.f);
+
     _pScene = CutScene::Create(2);
 
     return true;

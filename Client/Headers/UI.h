@@ -30,7 +30,7 @@ public:
 	void SetRotation(float angle);
 	void AddRotation(float angle);
 	void AddScale(const Vector3& scale);
-
+	void SetAlpha(float alpha);
 private:
 	void Initialize(const UIInfo& info);
 	void Free() override;

@@ -6,6 +6,7 @@
 #include "Animation.h"
 #include "Attribute.h"
 #include "Player.h"
+#include "TimerSystem.h"
 
 #include "TextRenderer.h"
 #include "Client_Define.h"
@@ -87,6 +88,20 @@ void BossEnemyIdle::CloseInfo()
 
 BossEnemy::FSM BossEnemyIdle::SelectNextBehave()
 {
+	float remainTime = _pTimerSystem->GetRemainingTime();
+	if (remainTime <= 40.f && 0==_spawnCount)
+	{
+		_spawnCount++;
+		return BossEnemy::FSM::SpawnRange;
+	}
+
+	if (remainTime <= 20.f && 1 == _spawnCount)
+	{
+		_spawnCount++;
+		return BossEnemy::FSM::SpawnRange;
+	}
+
+
 	if (_charge >= 4)
 	{
 		_charge = 0;

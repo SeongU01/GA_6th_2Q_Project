@@ -83,7 +83,7 @@ void DefenseScript::Explosion()
 	info.life = 0.3f;
 	info.fadeSpeed = 0.5f;
 	info.scale = _pOwner->transform.scale*0.5f;
-
+	Camera::CameraShake(0.5f, 100.f);
 	pEffect->AddComponent<Effect>(info);
 	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 }
@@ -99,6 +99,7 @@ void DefenseScript::OnCollisionEnter(Engine::CollisionInfo& info)
 	{
 		if (!_pHP->IsInvinsible()) 
 		{
+			Camera::CameraShake(0.5f, 50.f);
 			_pHP->hp--;
 			if(_pHP->hp==0)
 			{

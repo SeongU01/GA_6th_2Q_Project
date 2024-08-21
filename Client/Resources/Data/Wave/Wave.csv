@@ -15,12 +15,4 @@ Stage3,Wave2,1,0,1,1,Default,Defense_Generator_1
 Stage3,Wave2,2,1,2,1,Elite,Defense_Generator_0
 Stage3,Wave2,8,1,7,1,Elite,Defense_Generator_1
 Stage3,Wave2,9,0,9,1,Default,Defense_Generator_1
-Stage4,Wave1,1,1,1,0,Default,Defense_Generator_0
-Stage4,Wave1,12,1,12,0,Elite,Defense_Generator_0
-Stage4,Wave1,12,6,12,5,Default,Defense_Generator_0
-Stage4,Wave2,1,1,1,0,Elite,Defense_Generator_0
-Stage4,Wave2,0,1,1,0,Default,Defense_Generator_0
-Stage4,Wave2,12,1,12,0,Elite,Defense_Generator_0
-Stage4,Wave2,1,5,1,6,Elite,Defense_Generator_0
-Stage4,Wave2,12,5,12,6,Default,Defense_Generator_0
-Stage4,Wave2,13,5,12,6,Elite,Defense_Generator_0
+Stage4,Wave1,8,1,7,1,Boss,player

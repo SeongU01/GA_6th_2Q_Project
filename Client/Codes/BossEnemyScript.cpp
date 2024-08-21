@@ -33,6 +33,7 @@
 #include "BossEnemyRealLaserWave.h"
 #include "BossEnemyReadyMove.h"
 #include "BossEnemyLaserBurst.h"
+#include "BossEnemySpawnRange.h"
 #include "BossEnemyDeath.h"
 
 #include "BossEnemyInformation.h"
@@ -134,6 +135,7 @@ void BossEnemyScript::Start()
 	_pFSM->AddState((int)BossEnemy::FSM::RealLaserWave, BossEnemyRealLaserWave::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::ReadyMove, BossEnemyReadyMove::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::LaserBurst, BossEnemyLaserBurst::Create(this));
+	_pFSM->AddState((int)BossEnemy::FSM::SpawnRange, BossEnemySpawnRange::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::Death, BossEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
 }

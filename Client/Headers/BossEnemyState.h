@@ -18,6 +18,7 @@ class AStar;
 class HP;
 class GridMovement;
 class Attribute;
+class TimerSystem;
 
 class BossEnemyState :public Engine::State
 {
@@ -58,7 +59,7 @@ protected:
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
 	GridEffect* _pGridEffect = nullptr;
-
+	TimerSystem* _pTimerSystem = nullptr;
 	std::wstring _infoText;
 	Vector3 _currDirection = { 1.f,0.f,0.f };
 

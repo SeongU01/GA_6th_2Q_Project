@@ -62,6 +62,7 @@ void CardManager::SetRichText(int ID, Engine::TextRenderer* pTextRenderer)
 void CardManager::StartSelectCardScene()
 {
     Time::SetSlowTime(0.f);
+    CardPoolShuffle();
 
     Card* pCard[3];
     int ID[3];

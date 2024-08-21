@@ -30,4 +30,5 @@ private:
 	int _charge = 0;
 	float _alpha = 0.f;
 	bool _isFandIn = false;
+	int _spawnCount = 0;
 };

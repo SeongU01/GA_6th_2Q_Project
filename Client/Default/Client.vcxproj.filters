@@ -303,6 +303,9 @@
     <ClCompile Include="..\Codes\RangeEnemyAttack.cpp">
       <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\BossEnemySpawnRange.cpp">
+      <Filter>03. GameObject\Enemy\Boss\State\SpawnRange</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="01. MainGame">
@@ -589,6 +592,9 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Range\State\Attack">
       <UniqueIdentifier>{42333e7a-d970-4138-bc73-e02a31356780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Boss\State\SpawnRange">
+      <UniqueIdentifier>{8bf36448-cdcd-478f-bd79-339724e077f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -913,6 +919,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\RangeEnemyAttack.h">
       <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\BossEnemySpawnRange.h">
+      <Filter>03. GameObject\Enemy\Boss\State\SpawnRange</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

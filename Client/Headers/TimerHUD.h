@@ -31,5 +31,7 @@ private:
 	Engine::TextRenderer* _pText = nullptr;
 
 	wchar_t _buffer[32]{};
+	float _alpha = 0.f;
+	float _redAlpha = 0.f;
 };
 

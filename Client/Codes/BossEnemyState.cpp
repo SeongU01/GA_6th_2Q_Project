@@ -10,6 +10,7 @@
 #include "TextRenderer.h"
 #include "Pannel.h"
 #include "GridEffect.h"
+#include "TimerSystem.h"
 #include "Client_Define.h"
 
 
@@ -33,7 +34,7 @@ void BossEnemyState::Initialize(BossEnemyScript* pScript)
 	_pTextRenderer = _pPannel->GetComponent<Engine::TextRenderer>();
 	_pTextRenderer->SetDrawRect(200.f, 50.f);
 	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
-
+	_pTimerSystem = _pPlayer->GetComponent<TimerSystem>();
 }
 bool BossEnemyState::CheckRange(int x, int y)
 {

@@ -455,14 +455,15 @@ void Card::ActiveEffect()
 		}
 	}
 
+ 	AttackCollider::AttackInfo attackInfo[2];
+	AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
+	pAttackCollider->ResetAttackInfo();
+
 	for (int i = 0; i < 2; i++)
-	{		
-		AttackCollider* pAttackCollider = _pPlayer->GetComponent<Player>()->GetPlayerAttackComponent();
-		pAttackCollider->ResetAttackInfo();
-		AttackCollider::AttackInfo attackInfo;
-		attackInfo.damage = _cardData.variable[i];
-		attackInfo.Attribute = (unsigned long long)1 << _cardData.additiveCharState[i];
-		attackInfo.AttributeStack = _cardData.charStateNum[i];
+	{				
+		attackInfo[i].damage = _cardData.variable[i];
+		attackInfo[i].Attribute = (unsigned long long)1 << _cardData.additiveCharState[i];
+		attackInfo[i].AttributeStack = _cardData.charStateNum[i];
 
 		if (CardAttribute::OverClock == _cardData.additiveCardState[i])
 			_pPlayer->GetComponent<Attribute>()->ActiveCharge();
@@ -497,9 +498,9 @@ void Card::ActiveEffect()
 						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 
 						if (isXAxis)
-							pAttackCollider->OnCollider(0.01f, 0.1f, j, fixedCoord, attackInfo, i);
+							pAttackCollider->OnCollider(0.01f, 0.1f, j, fixedCoord, attackInfo[i], i);
 						else
-							pAttackCollider->OnCollider(0.01f, 0.1f, fixedCoord, j, attackInfo, i);
+							pAttackCollider->OnCollider(0.01f, 0.1f, fixedCoord, j, attackInfo[i], i);
 					}
 				};
 
@@ -554,7 +555,7 @@ void Card::ActiveEffect()
 							int x = int(range.first + gridPosition.x);
 							int y = int(range.second + gridPosition.y);
 
-							pAttackCollider->OnCollider(action.attackDelay, 0.1f, x, y, attackInfo, i);
+							pAttackCollider->OnCollider(action.attackDelay, 0.1f, x, y, attackInfo[i], i);
 						}
 					});
 			}
@@ -568,7 +569,7 @@ void Card::ActiveEffect()
 
 			for (auto& range : _attackRange)
 			{
-				pAttackCollider->OnCollider(action.attackDelay, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo, i);
+				pAttackCollider->OnCollider(action.attackDelay + action.delay, 0.1f, int(range.first + gridPosition.x), int(range.second + gridPosition.y), attackInfo[i], i);
 			}
 		}
 
