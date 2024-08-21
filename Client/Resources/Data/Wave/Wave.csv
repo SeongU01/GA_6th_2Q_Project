@@ -1,5 +1,5 @@
 ﻿StageID,WaveName,spawnX,spawnY,subSpawnX,subSpawnY,EnemyType,EnemyTarget
-Stage1,Wave1,7,2,6,2,Default,Defense_Generator_0
+Stage1,Wave1,7,2,6,2,Boss,Defense_Generator_0
 Stage1,Wave2,7,4,6,4,Default,Defense_Generator_1
 Stage2,Wave1,8,1,10,0,Elite,Defense_Generator_0
 Stage2,Wave1,8,5,10,0,Default,Defense_Generator_1

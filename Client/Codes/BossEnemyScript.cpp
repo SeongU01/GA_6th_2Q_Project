@@ -8,6 +8,8 @@
 #include "Astar.h"
 #include "HP.h"
 #include "HPHUD.h"
+#include "TopHUD.h"
+#include "TextRenderer.h"
 #include "Collider.h"
 #include "Pannel.h"
 #include "ToolTip.h"
@@ -23,9 +25,9 @@
 //state
 #include "BossEnemyIdle.h"
 #include "BossEnemyMove.h"
-#include "BossEnemySonicStab.h"
-#include "BossEnemyMeteorSlash.h"
-#include "BossEnemyRealMeteorSlash.h"
+//#include "BossEnemySonicStab.h"
+//#include "BossEnemyMeteorSlash.h"
+//#include "BossEnemyRealMeteorSlash.h"
 
 #include "BossEnemyInformation.h"
 #include "Client_Define.h"
@@ -42,7 +44,7 @@ void BossEnemyScript::Awake()
 
 	//_pOwner->_isDrawCollider = true;
 
-	_pHP = AddComponent<HP>(L"HP", 20);
+	_pHP = AddComponent<HP>(L"HP", 15);
 	AddComponent<HPHUD>(_pHP, 1);
 
 	_aStar = AddComponent<AStar>(L"AStar", _targetObjectName);
@@ -74,6 +76,18 @@ void BossEnemyScript::Awake()
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	AddComponent<AttributeHUD>(_pAttribute);
+
+	// TOPHUD
+	Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
+	pHPHUDObj->transform.SetPosition(Vector3{ 782.0f,40.0f,0.0f });
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"BossTopHP", pHPHUDObj);
+	pHPHUDObj->AddComponent<TopHUD>(_pHP, 2);
+	pHPHUDObj->SetRenderGroup((int)RenderGroup::UI);
+	Engine::TextRenderer* text = pHPHUDObj->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
+	text->SetTextLayout(L"\"ÆÛ½ºÆ® ¹Ì´Ö\"", 250.f, 0.f);
+	text->SetTextRangeEffectFontFamily(0, lstrlen(L"\"ÆÛ½ºÆ® ¹Ì´Ö\""), L"HY°ß°íµñ");
+	text->SetOffset(Vector3(110.f, 55.0f, 0.f));
+	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 }
 
 void BossEnemyScript::Start()
@@ -90,9 +104,9 @@ void BossEnemyScript::Start()
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)BossEnemy::FSM::End);
 	_pFSM->AddState((int)BossEnemy::FSM::Idle, BossEnemyIdle::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::Move, BossEnemyMove::Create(this));
-	_pFSM->AddState((int)BossEnemy::FSM::SonicStab, BossEnemySonicStab::Create(this));
-	_pFSM->AddState((int)BossEnemy::FSM::MeteorSlash, BossEnemyMeteorSlash::Create(this));
-	_pFSM->AddState((int)BossEnemy::FSM::RealMeteorSlash, BossEnemyRealMeteorSlash::Create(this));
+	//_pFSM->AddState((int)BossEnemy::FSM::SonicStab, BossEnemySonicStab::Create(this));
+	//_pFSM->AddState((int)BossEnemy::FSM::MeteorSlash, BossEnemyMeteorSlash::Create(this));
+	//_pFSM->AddState((int)BossEnemy::FSM::RealMeteorSlash, BossEnemyRealMeteorSlash::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
 }
 

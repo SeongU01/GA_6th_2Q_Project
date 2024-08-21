@@ -84,6 +84,12 @@ void Engine::TextRenderer::SetTextRangeEffectUnderline(unsigned int start, unsig
 	_pWriteTextLayout->SetUnderline(TRUE, textRange);
 }
 
+void Engine::TextRenderer::SetTextRangeEffectFontFamily(unsigned int start, unsigned int length, const wchar_t* fontFamily)
+{
+	DWRITE_TEXT_RANGE textRange = { start, length };
+	_pWriteTextLayout->SetFontFamilyName(fontFamily, textRange);
+}
+
 void Engine::TextRenderer::SetTextAlignment(DWRITE_TEXT_ALIGNMENT alignment)
 {
 	_pWriteTextFormat->SetTextAlignment(alignment);

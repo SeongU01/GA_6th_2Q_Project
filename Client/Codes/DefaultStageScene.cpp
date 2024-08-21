@@ -243,6 +243,7 @@ bool DefaultStageScene::Initialize()
 
         // TOPHUD
         Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
+        pHPHUDObj->transform.SetPosition(Vector3{ 30.0f,0.0f,0.0f });
         pHPHUDObj->SetDontDestroyObject(true);
         Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerTopHP", pHPHUDObj);
 
