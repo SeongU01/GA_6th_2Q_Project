@@ -1,67 +1,117 @@
 #include "RangeEnemyIdle.h"
-
+#include "RangeEnemyScript.h"
 //component
-#include "Animation.h"
-#include "GridMovement.h"
+#include "HP.h"
 #include "Astar.h"
+#include "Animation.h"
+#include "Attribute.h"
+#include "Player.h"
+
+#include "TextRenderer.h"
 #include "Client_Define.h"
+
 
 
 
 int RangeEnemyIdle::Update(const float& deltaTime)
 {
+	if (!_isFandIn)
+	{
+		_alpha += deltaTime;
+		_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+		_pHP->SetInvinsibleTime(1.f);
+		_pHP->SetInvinsible(true);
+		if (_alpha >= 1.f)
+		{
+			_alpha = 1.f;
+			_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
+			_pHP->SetInvinsibleTime(0.1f);
+			_pHP->SetInvinsible(false);
+			_isFandIn = true;
+		}
+		return 0;
+	}
+
+	_pTargetPosition = &_pPlayer->GetGridPosition();
+	_pAstar->SetGoalPosition(*_pTargetPosition);
+	_pAstar->ReCalculatePath();
+	Vector3 Direction;
+
+	const Vector3& gridPosition = *_pGridPosition;
+	Direction = _pPlayer->GetGridPosition() - gridPosition;
+	
+
+	if (_currDirection.x * Direction.x < 0)
+	{
+		_currDirection.x *= -1;
+		_pOwner->transform.scale *= Vector3(-1.f, 1.f, 1.f);
+		_pPannel->transform.scale *= Vector3(-1.f, 1.f, 1.f);
+	}
+	_nextState = SelectNextBehave();
 	return 0;
 }
 
 int RangeEnemyIdle::LateUpdate(const float& deltaTime)
 {
-
-	return (int)SelectNextBehave();
+	ShowInfo();
+	return (int)_nextState;
 }
 
 void RangeEnemyIdle::OnStart()
 {
-	
 	_pAnimation->ChangeAnimation(L"Idle");
 	Sound::PlaySound("Battle_Sound_Enemy_Common_Wait", (int)SoundGroup::Battle, 0.8f, false);
 }
 
 void RangeEnemyIdle::OnExit()
 {
+	CloseInfo();
+}
+
+void RangeEnemyIdle::ShowInfo()
+{
+	__super::ShowInfo();
+	_pTextRenderer->SetOffset(Vector3(-30.f, -15.f, 0.f));
+
+	_infoText = L"[None]";
+	_pTextRenderer->SetText(_infoText.c_str());
+}
+
+void RangeEnemyIdle::CloseInfo()
+{
+	__super::CloseInfo();
 }
 
 RangeEnemy::FSM RangeEnemyIdle::SelectNextBehave()
 {
-	_pAstar->SetGoalPosition(*_pTargetPosition);
-	if (_chargeStack == 2) //충전완료
+	if (CheckTargetRange(2, 1))
 	{
-		_chargeStack = 0;
-		_isBack = false;
-		return RangeEnemy::FSM::Support;
+		return RangeEnemy::FSM::Attack;
 	}
-	else
+	if (!(_pAstar->GetGoalPosition() == *_pGridPosition))
 	{
-		_chargeStack++;
-		if (CheckAttackRange(2, 2)&& !_isBack)//범위안에있다
-		{
-			_isBack = true;
-			return RangeEnemy::FSM::BackMove;
-		}
-		_isBack = false;
-		return RangeEnemy::FSM::ForwardMove;
+		return RangeEnemy::FSM::Move;
 	}
+	return RangeEnemy::FSM::None;
 }
 
-bool RangeEnemyIdle::CheckAttackRange(int x, int y)
+bool RangeEnemyIdle::CheckTargetRange(int x, int y)
 {
 	Vector3 currPosition = *_pGridPosition;
 
 	int currGridX = (int)currPosition.x;
 	int currGridY = (int)currPosition.y;
-	if (abs(currGridX - _pTargetPosition->x) <= x &&
-		abs(currGridY - _pTargetPosition->y) <= y)
+
+	for (int dx = -x; dx <= x; dx++)
 	{
-		return true;
+		for (int dy = -y; dy <= y; dy++)
+		{
+			Vector3 temp = { (float)(currGridX + dx),(float)(currGridY + dy),0.f };
+			if (temp == _pPlayer->GetGridPosition())
+			{
+				return true;
+			}
+		}
 	}
 	return false;
 }

@@ -1,103 +1,81 @@
 #include "RangeEnemyAttack.h"
+#include "RangeEnemyScript.h"
 //component
 #include "Animation.h"
 #include "TextRenderer.h"
+#include "AttackCollider.h"
+#include "Effect.h"
 #include "GridEffect.h"
+#include "Attribute.h"
+#include "Player.h"
+#include "GridMovement.h"
+#include "Grid.h"
 
-#include "DataManager.h"
 #include "Client_Define.h"
 int RangeEnemyAttack::Update(const float& deltaTime)
 {
+	if (_directionCheck == false)
+	{
+		const Vector3& gridPosition = *_pGridPosition;
+		Vector3 Direction = _pPlayer->GetGridPosition() - gridPosition;
+
+		if (_currDirection.x * Direction.x < 0)
+		{
+			_currDirection.x *= -1;
+		}
+		_directionCheck = true;
+	}
+
 	if (!_isStateOn)
 	{
-
-		_currTime += deltaTime;
-
+		if (_pAnimation->IsCurrAnimation(L"Idle"))
+		{
+			_currTime += deltaTime;
+		}
 		if (_currTime >= _delayTime)
 		{
 			_currTime = _delayTime;
 			_pAnimation->ChangeAnimation(L"Attack");
+			//TODO : 공격하기. 피해 1, 허점부여
 			_isStateOn = true;
 		}
+
 	}
 	return 0;
 }
 
 int RangeEnemyAttack::LateUpdate(const float& deltaTime)
 {
-	if (_isStateOn && _pAnimation->IsCurrAnimation(L"Attack") && _pAnimation->IsLastFrame())
+	if (!_isStateOn)
+		ShowInfo();
+
+	if (_isStateOn && _pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Attack"))
+	{
 		return (int)RangeEnemy::FSM::Idle;
+	}
 	return 0;
 }
 
 void RangeEnemyAttack::OnStart()
 {
+	_directionCheck = false;
 	_isStateOn = false;
 	_currTime = 0.f;
-	_delayTime = (float)Engine::RandomGeneratorInt(1, 3);
-	_newTargetPosition = *_pTargetPosition;
+	_delayTime = (float)Engine::RandomGeneratorInt(3, 5);
 }
 
 void RangeEnemyAttack::OnExit()
 {
+	CloseInfo();
 }
-
-void RangeEnemyAttack::ShowAttackRange()
-{
-	const Vector3& gridPosition = *_pGridPosition;
-	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(13);
-	int index = 1;
-	for (auto& grid : ranges)
-	{
-		std::pair<int, int> _computePosition= ComputeRotationTarget((int)(gridPosition.x + grid.first), int(gridPosition.y + grid.second));
-		_pGridEffect->OnEffect(_computePosition.first,_computePosition.second, index);
-	}
-}
-
-std::pair<int, int> RangeEnemyAttack::ComputeRotationTarget(int x, int y)
-{
-	Vector3 direction = _newTargetPosition - *_pGridPosition;
-	float radian = XMVectorATan2({ direction.y }, { direction.x }).m128_f32[0];
-
-	int originX = (int)_pGridPosition->x;
-	int originY = (int)_pGridPosition->y;
-
-	int relativeX = x - originX;
-	int relativeY = y - originY;
-
-	if (radian >= XM_PIDIV4 && radian < 3 * XM_PIDIV4)
-	{
-		radian = XM_PIDIV2; 
-	}
-	else if (radian >= 3 * -XM_PIDIV4 && radian < -XM_PIDIV4)
-	{
-		radian = -XM_PIDIV2; 
-	}
-	else if (radian >= -XM_PIDIV4 && radian < XM_PIDIV4)
-	{
-		radian = 0.f; 
-	}
-	else
-	{
-		radian = XM_PI; 
-	}
-	XMMATRIX xmRotationZ = XMMatrixRotationZ(radian);
-	Vector3 rotatePosition = XMVector3TransformCoord(Vector3((float)relativeX, (float)relativeY, 0.f), xmRotationZ);
-	float rotatedX = rotatePosition.x + originX;
-	float rotatedY = rotatePosition.y + originY;
-
-	return std::pair<int, int>((int)ceil(rotatedX - 0.5f), (int)ceil(rotatedY - 0.5f));
-}
-
 
 void RangeEnemyAttack::ShowInfo()
 {
 	__super::ShowInfo();
-	//if (_pAnimation->IsCurrAnimation(L"Charge"))
+	if (_pAnimation->IsCurrAnimation(L"Idle"))
 	{
 		ShowAttackRange();
 	}
-
 	_pTextRenderer->SetOffset(Vector3(-60.f, -15.f, 0.f));
 	std::wstringstream wss;
 	wss << std::fixed << std::setprecision(1) << (_delayTime - _currTime);
@@ -112,9 +90,77 @@ void RangeEnemyAttack::CloseInfo()
 	__super::CloseInfo();
 }
 
+void RangeEnemyAttack::Attack()
+{
+	auto pEffect = Engine::GameObject::Create();
+
+	Effect::EffectInfo info;
+	info.renderGroup = RenderGroup::FrontEffect;
+	info.aniSpeed = 0.03f;
+	info.textureTag = L"AIEffect_Attack_Anim_VFX_Beam_E";
+	info.scale = _pOwner->transform.scale;
+
+	AttackCollider* pAttackCollider = _pOwner->GetComponent<AttackCollider>();
+	AttackCollider::AttackInfo attackInfo;
+
+
+	attackInfo.damage = 1;
+	
+	const Vector3& gridPosition = *_pGridPosition;
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(2);
+	if (_currDirection.x >= 0)
+	{
+		info.position = _pOwner->transform.position + Vector3(1000.f, 0.f, 0.f);
+		for (auto& range : ranges)
+		{
+			int x = int(range.first + gridPosition.x);
+			int y = int(range.second + gridPosition.y);
+			pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
+		}
+	}
+	else
+	{
+		info.position = _pOwner->transform.position - Vector3(1000.f, 0.f, 0.f);
+		for (auto& range : ranges)
+		{
+			int x = int(gridPosition.x - range.first);
+			int y = int(range.second + gridPosition.y);
+			pAttackCollider->OnCollider(0.01f, 0.05f, x, y, attackInfo, 0);
+		}
+	}
+
+	pEffect->AddComponent<Effect>(info);
+	Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+}
+
+void RangeEnemyAttack::ShowAttackRange()
+{
+	const Vector3& gridPosition = *_pGridPosition;
+	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(2);
+	int index = 7;
+	for (auto& grid : ranges)
+	{
+		if (_currDirection.x >= 0)
+			_pGridEffect->OnEffect(int(gridPosition.x + grid.first), int(gridPosition.y + grid.second), index);
+		else
+			_pGridEffect->OnEffect(int(gridPosition.x - grid.first), int(gridPosition.y + grid.second), index);
+
+	}
+}
+
 RangeEnemyAttack* RangeEnemyAttack::Create(RangeEnemyScript* pScript)
 {
 	RangeEnemyAttack* pInstance = new RangeEnemyAttack;
 	pInstance->RangeEnemyState::Initialize(pScript);
+	Engine::Animation::FrameEvent frameEvent;
+	frameEvent.activeFrame = 5;
+	frameEvent.animation = L"Attack";
+	frameEvent.isRepeat = true;
+	frameEvent.function = [pInstance]()
+		{
+			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
+			pInstance->Attack();
+		};
+	pInstance->_pAnimation->AddFrameEvent(frameEvent);
 	return pInstance;
 }

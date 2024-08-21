@@ -10,6 +10,8 @@ namespace Engine
 	class SpriteRenderer;
 	class	TextRenderer;
 }
+class Attribute;
+class Player;
 class GridEffect;
 class HP;
 class GridMovement;
@@ -24,17 +26,27 @@ protected:
 public:
 	virtual void ShowInfo()
 	{
-		_pToolTip->ActiveToolTip(true);
 		_pPannel->SetActive(true);
 	};
 	virtual void CloseInfo()
 	{
-		_pToolTip->ActiveToolTip(false);
 		_pPannel->SetActive(false);
 	};
+	virtual void ShowToolTip()
+	{
+		_pToolTip->ActiveToolTip(true);
+	};
+	virtual void CloseToolTip()
+	{
+		_pToolTip->ActiveToolTip(false);
+	};
 protected:
+	Attribute* _pAttribute = nullptr;
+	HP* _pHP = nullptr;
+	Player* _pPlayer = nullptr;
 	Engine::TextRenderer* _pTextRenderer = nullptr;
-	Vector3* _pTargetPosition = nullptr;
+	Engine::SpriteRenderer* _pSpriteRenderer = nullptr;
+	const Vector3* _pTargetPosition = nullptr;
 	Vector3* _pGridPosition = nullptr;
 	RangeEnemyScript* _pOwner = nullptr;
 	Engine::Animation* _pAnimation = nullptr;
@@ -43,8 +55,9 @@ protected:
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
 	GridEffect* _pGridEffect = nullptr;
+
 	std::wstring _infoText;
-	bool _isBack = false;
+	Vector3 _currDirection = { 1.f,0.f,0.f };
 
 };
 

@@ -12,10 +12,12 @@ public:
 	void OnStart() override;
 	void OnExit() override;
 
+	virtual void ShowInfo();
+	virtual void CloseInfo();
 private:
 	RangeEnemy::FSM SelectNextBehave();
 private:
-	bool CheckAttackRange(int x, int y);
+	bool CheckTargetRange(int x, int y);
 
 public:
 	static RangeEnemyIdle* Create(RangeEnemyScript* pScript);
@@ -23,7 +25,8 @@ private:
 	float _currTime = 0.f;
 	float _delayTime = 0.f;
 	RangeEnemy::FSM _nextState = RangeEnemy::FSM::None;
-	bool _checkState = false;
-	int _chargeStack = 0;
+
+	float _alpha = 0.f;
+	bool _isFandIn = false;
 };
 

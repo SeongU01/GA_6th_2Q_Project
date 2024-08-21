@@ -7,6 +7,8 @@ namespace Engine
 	class GameObject;
 	class FiniteStateMachine;
 }
+class AttackCollider;
+class Attribute;
 class HP;
 class GridMovement;
 class Player;
@@ -39,12 +41,14 @@ private:
 	Engine::Animation* _pAnimation = nullptr;
 	Pannel* _pPannel = nullptr;
 	ToolTip* _pToolTip = nullptr;
+	AttackCollider* _pAttackCollider = nullptr;
+	Attribute* _pAttribute = nullptr;
 private:
 	Vector3 _gridPosition = { 0.f,2.f,0.f };
 	Vector3 _startPosition;
 	Vector3 _targetPosition;
 	Engine::GameObject* _pTargetObject = nullptr;
 	std::wstring _targetObjectName;
-	Player* _pDefense = nullptr;
+	Player* _pPlayer = nullptr;
 };
 

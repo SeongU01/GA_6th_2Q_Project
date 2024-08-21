@@ -68,6 +68,7 @@ void SpawnEnemy::Update(const float& deltaTime)
 
 				RangeEnemy* rangeEnemy = RangeEnemy::Create(spawnPos, _enemyInfo.targetName);
 				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", rangeEnemy);
+				SpawnEffect(spawnPos);
 			}
 			else if (L"Elite" == _enemyInfo.spawnType)
 			{

@@ -12,12 +12,15 @@
 #include "Pannel.h"
 #include "Player.h"
 #include "TextRenderer.h"
+#include "Attribute.h"
+#include "AttributeHUD.h"
+#include "AttackCollider.h"
 //state
 #include "RangeEnemyIdle.h"
-#include "RangeEnemyForwardMove.h"
-#include "RangeEnemyBackMove.h"
+#include "RangeEnemyDeath.h"
+#include "RangeEnemyMove.h"
 #include "RangeEnemyAttack.h"
-#include "RangeEnemySupport.h"
+
 
 #include "RangeEnemyInformation.h"
 #include "Client_Define.h"
@@ -38,7 +41,7 @@ void RangeEnemyScript::Awake()
 #endif // _DEBUG
 
 	//TODO: FSM 작성하기
-	_pHP = AddComponent<HP>(L"HP", 5);
+	_pHP = AddComponent<HP>(L"HP", 2);
 	AddComponent<HPHUD>(_pHP, 1);
 	_aStar = AddComponent<AStar>(L"AStar", _targetObjectName);
 	_movement = AddComponent<GridMovement>(L"Movement", 500.f);
@@ -64,35 +67,36 @@ void RangeEnemyScript::Awake()
 	_pToolTip = AddComponent<ToolTip>(L"RangeToolTip");
 	_pToolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"Object_Character_002"), Vector3(0.0f, 0.0f, 0.0f));
 
+	// 임시 추가한것
+	_pAttribute = AddComponent<Attribute>();
+	_pAttackCollider = AddComponent<AttackCollider>();
+	AddComponent<AttributeHUD>(_pAttribute);
 }
 
 void RangeEnemyScript::Start()
 {
 	_pTargetObject = Engine::FindObject((int)LayerGroup::Player, L"Player",NULL);
-	_pDefense = _pTargetObject->GetComponent<Player>();
+	_pPlayer = _pTargetObject->GetComponent<Player>();
 	_gridPosition = _startPosition;
-	_targetPosition = _pDefense->GetGridPosition();
 	_aStar->SetGridMovement(_movement);
-	_aStar->SetGoalPosition(_pDefense->GetGridPosition());
 	_aStar->SetGridPosition(_startPosition);
 	transform.position = _movement->_grid->GetTileCenter((int)_gridPosition.x, (int)_gridPosition.y);
 
 
 	_pFSM = AddComponent<Engine::FiniteStateMachine>(L"FSM", (int)RangeEnemy::FSM::End);
 	_pFSM->AddState((int)RangeEnemy::FSM::Idle, RangeEnemyIdle::Create(this));
+	_pFSM->AddState((int)RangeEnemy::FSM::Death, RangeEnemyDeath::Create(this));
+	_pFSM->AddState((int)RangeEnemy::FSM::Move, RangeEnemyMove::Create(this));
 	_pFSM->AddState((int)RangeEnemy::FSM::Attack, RangeEnemyAttack::Create(this));
-	_pFSM->AddState((int)RangeEnemy::FSM::ForwardMove, RangeEnemyForwardMove::Create(this));
-	_pFSM->AddState((int)RangeEnemy::FSM::BackMove, RangeEnemyBackMove::Create(this));
-	_pFSM->AddState((int)RangeEnemy::FSM::Support, RangeEnemySupport::Create(this));
+
 	_pFSM->ChangeState((int)RangeEnemy::FSM::Idle);
 }
 
 void RangeEnemyScript::Update(const float& deltaTime)
 {
-	_targetPosition = _pDefense->GetGridPosition();
-	if (Input::IsKeyDown(DIK_M))
+	if (_pHP->IsZeroHP())
 	{
-		gameObject.SetDead();
+		_pFSM->ChangeState((int)RangeEnemy::FSM::Death);
 	}
 }
 

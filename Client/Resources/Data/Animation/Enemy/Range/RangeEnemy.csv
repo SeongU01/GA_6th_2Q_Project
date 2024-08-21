@@ -1,6 +1,6 @@
-Animation,TextureTag,Duration
-4,,		
+﻿Animation,TextureTag,Duration
+4,,
 Idle,Enemy_Range_Idle,0.06
-Move,Enemy_Range_Move,0.06
+Death,Enemy_Range_Death,0.06
+Move,Enemy_Range_Move,0.055
 Attack,Enemy_Range_Attack,0.06
-Charge,Enemy_Range_Charge,0.06

@@ -71,6 +71,7 @@ int BossEnemyLaserBurst::LateUpdate(const float& deltaTime)
 void BossEnemyLaserBurst::OnStart()
 {
 	_pAnimation->ChangeAnimation(L"Idle");
+	_useAttack = false;
 	_directionCheck = false;
 	_isStateOn = false;
 	_currTime = 0.f;

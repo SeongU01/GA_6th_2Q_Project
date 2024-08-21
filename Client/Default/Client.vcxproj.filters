@@ -197,18 +197,6 @@
     <ClCompile Include="..\Codes\RangeEnemyIdle.cpp">
       <Filter>03. GameObject\Enemy\Range\State\Idle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\RangeEnemyForwardMove.cpp">
-      <Filter>03. GameObject\Enemy\Range\State\ForwardMove</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\RangeEnemyBackMove.cpp">
-      <Filter>03. GameObject\Enemy\Range\State\BackMove</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\RangeEnemyAttack.cpp">
-      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\RangeEnemySupport.cpp">
-      <Filter>03. GameObject\Enemy\Range\State\Support</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\RangeEnemyScript.cpp">
       <Filter>03. GameObject\Enemy\Range\Script</Filter>
     </ClCompile>
@@ -323,6 +311,15 @@
     </ClCompile>
     <ClCompile Include="..\Codes\BossEnemyLaserBurst.cpp">
       <Filter>03. GameObject\Enemy\Boss\State\LaserBurst</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyDeath.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyMove.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\RangeEnemyAttack.cpp">
+      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -512,18 +509,6 @@
     <Filter Include="03. GameObject\Enemy\Range\State\Idle">
       <UniqueIdentifier>{d10966e7-3302-4455-8f86-64352c16b0b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. GameObject\Enemy\Range\State\ForwardMove">
-      <UniqueIdentifier>{44bf68d2-2d41-4f5d-a563-3a7929e53397}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Range\State\BackMove">
-      <UniqueIdentifier>{6b59e1b9-af87-47f7-96af-d9ad6e427e7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Range\State\Attack">
-      <UniqueIdentifier>{4744d4a2-5198-4782-a815-ba0ed8ee00c6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. GameObject\Enemy\Range\State\Support">
-      <UniqueIdentifier>{fbb18857-d7c6-4fc9-a611-a8af0f519fc9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Component\AttackCollider">
       <UniqueIdentifier>{5aa9d85a-4476-430b-b7b9-550deee61153}</UniqueIdentifier>
     </Filter>
@@ -616,6 +601,15 @@
     </Filter>
     <Filter Include="03. GameObject\Enemy\Boss\State\LaserBurst">
       <UniqueIdentifier>{02c1cac5-52ae-4d6d-b0a3-41a336a69add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Death">
+      <UniqueIdentifier>{db2174b6-f1f6-4975-a8e2-a9e86ce31c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Move">
+      <UniqueIdentifier>{df011037-45fb-491a-95ce-d1984bb3d5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameObject\Enemy\Range\State\Attack">
+      <UniqueIdentifier>{42333e7a-d970-4138-bc73-e02a31356780}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -826,18 +820,6 @@
     <ClInclude Include="..\Headers\RangeEnemyIdle.h">
       <Filter>03. GameObject\Enemy\Range\State\Idle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\RangeEnemyForwardMove.h">
-      <Filter>03. GameObject\Enemy\Range\State\ForwardMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\RangeEnemyBackMove.h">
-      <Filter>03. GameObject\Enemy\Range\State\BackMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\RangeEnemyAttack.h">
-      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\RangeEnemySupport.h">
-      <Filter>03. GameObject\Enemy\Range\State\Support</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\RangeEnemyScript.h">
       <Filter>03. GameObject\Enemy\Range\Script</Filter>
     </ClInclude>
@@ -961,6 +943,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\BossEnemyLaserBurst.h">
       <Filter>03. GameObject\Enemy\Boss\State\LaserBurst</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemyDeath.h">
+      <Filter>03. GameObject\Enemy\Range\State\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemyMove.h">
+      <Filter>03. GameObject\Enemy\Range\State\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\RangeEnemyAttack.h">
+      <Filter>03. GameObject\Enemy\Range\State\Attack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

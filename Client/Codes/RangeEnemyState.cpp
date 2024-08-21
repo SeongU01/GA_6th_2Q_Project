@@ -11,9 +11,14 @@ void RangeEnemyState::Initialize(RangeEnemyScript* pScript)
 {
 	if (nullptr == pScript)
 		return;
+
+	_pHP = pScript->_pHP;
+	_pPlayer = pScript->_pPlayer;
+	_pOwner = pScript;
+	_pAttribute = pScript->_pAttribute;
+	_pSpriteRenderer = pScript->GetComponent<Engine::SpriteRenderer>();
 	_pTargetPosition = &(pScript->_targetPosition);
 	_pGridPosition = &(pScript->_aStar->_gridPosition);
-	_pOwner = pScript;
 	_pAnimation = pScript->_pAnimation;
 	_pMovement = pScript->_movement;
 	_pAstar = pScript->_aStar;
