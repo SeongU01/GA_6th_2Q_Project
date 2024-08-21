@@ -67,7 +67,6 @@ int DefaultEnemyIdle::Update(const float& deltaTime)
 
 int DefaultEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	ShowInfo();
 	return (int)_nextState;
 }
 

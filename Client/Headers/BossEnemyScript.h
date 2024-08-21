@@ -56,4 +56,6 @@ private:
 	std::wstring _targetObjectName;
 	
 	Player* _pPlayer = nullptr;
+	bool _eraseTopHud = false;
+	Engine::GameObject* _pTopHud = nullptr;
 };

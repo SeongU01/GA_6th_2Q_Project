@@ -88,12 +88,12 @@ void BossEnemyScript::Awake()
 	AddComponent<AttributeHUD>(_pAttribute);
 
 	// TOPHUD
-	Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
-	pHPHUDObj->transform.SetPosition(Vector3{ 782.0f,40.0f,0.0f });
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"BossTopHP", pHPHUDObj);
-	pHPHUDObj->AddComponent<TopHUD>(_pHP, 2);
-	pHPHUDObj->SetRenderGroup((int)RenderGroup::UI);
-	Engine::TextRenderer* text = pHPHUDObj->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
+	_pTopHud = Engine::GameObject::Create();
+	_pTopHud->transform.SetPosition(Vector3{ 782.0f,40.0f,0.0f });
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"BossTopHP", _pTopHud);
+	_pTopHud->AddComponent<TopHUD>(_pHP, 2);
+	_pTopHud->SetRenderGroup((int)RenderGroup::UI);
+	Engine::TextRenderer* text = _pTopHud->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
 	text->SetTextLayout(L"\"ÆÛ½ºÆ® ¹Ì´Ö\"", 250.f, 0.f);
 	text->SetTextRangeEffectFontFamily(0, lstrlen(L"\"ÆÛ½ºÆ® ¹Ì´Ö\""), L"HY°ß°íµñ");
 	text->SetOffset(Vector3(110.f, 55.0f, 0.f));
@@ -148,6 +148,11 @@ void BossEnemyScript::LateUpdate(const float& deltaTime)
 {
 	if (_pHP->IsZeroHP())
 	{
+		if (!_eraseTopHud)
+		{
+			_eraseTopHud = true;
+			_pTopHud->SetDead();
+		}
 		_pFSM->ChangeState((int)BossEnemy::FSM::Death);
 	}
 }

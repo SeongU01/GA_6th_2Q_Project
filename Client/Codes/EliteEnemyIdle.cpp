@@ -60,7 +60,6 @@ int EliteEnemyIdle::Update(const float& deltaTime)
 
 int EliteEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	ShowInfo();
 	return (int)_nextState;
 }
 

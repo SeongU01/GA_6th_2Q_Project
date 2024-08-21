@@ -7,6 +7,7 @@
 #include "Grid.h"
 #include "HPHUD.h"
 #include "AttributeHUD.h"
+#include "Collider.h"
 
 #include "Client_Define.h"
 int RangeEnemyDeath::Update(const float& deltaTime)
@@ -29,6 +30,7 @@ int RangeEnemyDeath::LateUpdate(const float& deltaTime)
 
 void RangeEnemyDeath::OnStart()
 {
+	_pOwner->GetComponent<Engine::Collider>()->SetActive(false);
 }
 
 void RangeEnemyDeath::OnExit()

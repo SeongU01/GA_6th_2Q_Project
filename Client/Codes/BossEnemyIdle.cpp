@@ -57,7 +57,6 @@ int BossEnemyIdle::Update(const float& deltaTime)
 
 int BossEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	ShowInfo();
 	return (int)_nextState;
 }
 

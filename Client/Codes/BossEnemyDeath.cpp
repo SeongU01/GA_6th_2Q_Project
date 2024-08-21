@@ -6,6 +6,8 @@
 #include "Grid.h"
 #include "HPHUD.h"
 #include "AttributeHUD.h"
+#include "Collider.h"
+#include "TopHUD.h"
 
 #include "Client_Define.h"
 #include "BossEnemyScript.h"
@@ -29,6 +31,7 @@ int BossEnemyDeath::LateUpdate(const float& deltaTime)
 
 void BossEnemyDeath::OnStart()
 {
+	_pOwner->GetComponent<Engine::Collider>()->SetActive(false);
 	_pAnimation->ChangeAnimation(L"Death");
 }
 

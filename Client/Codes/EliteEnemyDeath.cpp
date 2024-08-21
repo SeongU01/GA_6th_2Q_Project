@@ -6,6 +6,7 @@
 #include "Grid.h"
 #include "HPHUD.h"
 #include "AttributeHUD.h"
+#include "Collider.h"
 
 #include "Client_Define.h"
 #include "EliteEnemyScript.h"
@@ -29,6 +30,7 @@ int EliteEnemyDeath::LateUpdate(const float& deltaTime)
 
 void EliteEnemyDeath::OnStart()
 {
+	_pOwner->GetComponent<Engine::Collider>()->SetActive(false);
 	_pAnimation->ChangeAnimation(L"Death");
 }
 

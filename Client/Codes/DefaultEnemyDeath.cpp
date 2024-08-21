@@ -7,6 +7,7 @@
 #include "HPHUD.h"
 #include "AttributeHUD.h"
 #include "Pannel.h"
+#include "Collider.h"
 
 #include "Client_Define.h"
 #include "DefaultEnemyScript.h"
@@ -35,7 +36,7 @@ int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 
 void DefaultEnemyDeath::OnStart()
 {
-	
+	_pOwner->GetComponent<Engine::Collider>()->SetActive(false);
 	_pAnimation->ChangeAnimation(L"Death");
 }
 

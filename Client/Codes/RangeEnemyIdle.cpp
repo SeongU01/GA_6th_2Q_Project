@@ -53,7 +53,6 @@ int RangeEnemyIdle::Update(const float& deltaTime)
 
 int RangeEnemyIdle::LateUpdate(const float& deltaTime)
 {
-	ShowInfo();
 	return (int)_nextState;
 }
 
