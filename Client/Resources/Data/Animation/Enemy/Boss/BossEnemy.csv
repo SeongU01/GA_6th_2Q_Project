@@ -10,4 +10,4 @@ RealLaserWave,Enemy_Boss_Up,0.06
 Death,Enemy_Boss_Death,0.06
 ReadyMove,Enemy_Boss_ReadyMove,0.06
 LaserBurst,Enemy_Boss_Up,0.04
-Effect,AIEffect_Attack_Anim_VFX_BeamDrop_02_E,0.03
+SpawnRange,Enemy_Boss_Up,0.04

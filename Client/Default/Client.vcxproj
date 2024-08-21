@@ -33,6 +33,7 @@
     <ClCompile Include="..\Codes\BossEnemyRealLaserWave.cpp" />
     <ClCompile Include="..\Codes\BossEnemyRealMeteorSlash.cpp" />
     <ClCompile Include="..\Codes\BossEnemyScript.cpp" />
+    <ClCompile Include="..\Codes\BossEnemySpawnRange.cpp" />
     <ClCompile Include="..\Codes\BossEnemyState.cpp" />
     <ClCompile Include="..\Codes\BossEnemySonicStab.cpp" />
     <ClCompile Include="..\Codes\Button.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="..\Headers\BossEnemyRealLaserWave.h" />
     <ClInclude Include="..\Headers\BossEnemyRealMeteorSlash.h" />
     <ClInclude Include="..\Headers\BossEnemyScript.h" />
+    <ClInclude Include="..\Headers\BossEnemySpawnRange.h" />
     <ClInclude Include="..\Headers\BossEnemyState.h" />
     <ClInclude Include="..\Headers\BossEnemySonicStab.h" />
     <ClInclude Include="..\Headers\Button.h" />
