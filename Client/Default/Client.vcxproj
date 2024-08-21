@@ -24,9 +24,13 @@
     <ClCompile Include="..\Codes\AttributeHUD.cpp" />
     <ClCompile Include="..\Codes\BossEnemy.cpp" />
     <ClCompile Include="..\Codes\BossEnemyIdle.cpp" />
+    <ClCompile Include="..\Codes\BossEnemyLaserWave.cpp" />
+    <ClCompile Include="..\Codes\BossEnemyMeteorSlash.cpp" />
     <ClCompile Include="..\Codes\BossEnemyMove.cpp" />
+    <ClCompile Include="..\Codes\BossEnemyRealMeteorSlash.cpp" />
     <ClCompile Include="..\Codes\BossEnemyScript.cpp" />
     <ClCompile Include="..\Codes\BossEnemyState.cpp" />
+    <ClCompile Include="..\Codes\BossEnemySonicStab.cpp" />
     <ClCompile Include="..\Codes\Button.cpp" />
     <ClCompile Include="..\Codes\Card.cpp" />
     <ClCompile Include="..\Codes\CardManager.cpp" />
@@ -126,9 +130,13 @@
     <ClInclude Include="..\Headers\BossEnemy.h" />
     <ClInclude Include="..\Headers\BossEnemyIdle.h" />
     <ClInclude Include="..\Headers\BossEnemyInformation.h" />
+    <ClInclude Include="..\Headers\BossEnemyLaserWave.h" />
+    <ClInclude Include="..\Headers\BossEnemyMeteorSlash.h" />
     <ClInclude Include="..\Headers\BossEnemyMove.h" />
+    <ClInclude Include="..\Headers\BossEnemyRealMeteorSlash.h" />
     <ClInclude Include="..\Headers\BossEnemyScript.h" />
     <ClInclude Include="..\Headers\BossEnemyState.h" />
+    <ClInclude Include="..\Headers\BossEnemySonicStab.h" />
     <ClInclude Include="..\Headers\Button.h" />
     <ClInclude Include="..\Headers\Card.h" />
     <ClInclude Include="..\Headers\CardManager.h" />
