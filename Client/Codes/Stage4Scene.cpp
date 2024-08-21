@@ -1,6 +1,7 @@
 #include "Stage4Scene.h"
 #include "Client_Define.h"
 
+#include "CutScene.h"
 // Object
 #include "GridEffect.h"
 #include "Map.h"
@@ -45,6 +46,7 @@ bool Stage4Scene::Initialize()
     Sound::PlaySound("Bgm_Sound_BGM_Battle_Stage_4", (int)SoundGroup::BGM, 0.5f, true);
     Sound::PlaySound("Voice_Sound_Voice_Zero_Begin_Game", (int)SoundGroup::Voice, 0.8f, false);
     Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Entry", (int)SoundGroup::SFX, 0.8f, false);
+    _pScene = CutScene::Create(5);
 
     EventManager::GetInstance()->SetCurrentStage(Stage::Stage4);
 

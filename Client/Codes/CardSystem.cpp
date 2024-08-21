@@ -21,8 +21,8 @@ CardSystem::CardSystem()
 void CardSystem::Awake()
 {
 	auto pGameObject = Engine::GameObject::Create();
-	GageHUD* pGageHUD = pGameObject->AddComponent<GageHUD>(Vector3(1680.f, 930.f, 0.f), &_reloadTime, RELOADCOOLTIME, 1);
-	pGageHUD->SetDontDestroyObjectUI(true);
+	_pGageHUD = pGameObject->AddComponent<GageHUD>(Vector3(1680.f, 930.f, 0.f), &_reloadTime, RELOADCOOLTIME, 1);
+	_pGageHUD->SetDontDestroyObjectUI(true);
 	pGameObject->SetDontDestroyObject(true);
 	pGameObject->SetRenderGroup((int)RenderGroup::None);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
@@ -178,6 +178,15 @@ void CardSystem::AddCard(Card* pCard)
 bool CardSystem::IsReloadReady()
 {
 	return _reloadTime >= RELOADCOOLTIME; 
+}
+
+void CardSystem::SetPlayerActives(bool _isActive)
+{
+	_pGageHUD->SetActives(_isActive);
+	for (auto e : _handDeck)
+	{
+		e->SetPlayerActives(_isActive);
+	}
 }
 
 void CardSystem::MoveTo(Card* pCard, std::list<Card*>& src, std::list<Card*>& dst)

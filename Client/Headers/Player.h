@@ -9,12 +9,15 @@ namespace Engine
 class HP;
 class PlayerMP;
 class Attribute;
+class AttributeHUD;
 class GridMovement;
 class CardSystem;
 class TimerSystem;
 class AttackCollider;
 class Spectrum;
 class HitColor;
+class TopHUD;
+class MPHUD;
 class Player : public Engine::MonoBehavior
 {
 public:
@@ -28,10 +31,8 @@ public:
 	void SetGridPostion(const Vector3& position);
 	void SetNextGridPosition(const Vector3& position);
 	void ResetPlayer(const Vector3& startPos);
-	HP* GetPlayerHPComponent() { return _pHP; }
-	PlayerMP* GetPlayerMPComponent() { return _pMP; }
 	AttackCollider* GetPlayerAttackComponent() { return _pAttackCollider; }
-
+	void SetPlayerActives(bool _isActive);
 public:
 	// MonoBehavior을(를) 통해 상속됨
 	void Awake() override;
@@ -52,6 +53,7 @@ private:
 	Engine::Animation*	_pAnimation = nullptr;
 
 	Attribute*			_pAttribute = nullptr;
+	AttributeHUD*		_pAttHUD = nullptr;
 	HP*					_pHP = nullptr;
 	PlayerMP*			_pMP = nullptr;
 	CardSystem*			_pCardSystem = nullptr;
@@ -59,6 +61,8 @@ private:
 	AttackCollider*		_pAttackCollider = nullptr;
 	Spectrum*			_pSpectrum = nullptr;
 	HitColor*			_pHitColor = nullptr;
+	MPHUD*				_pMPHUD = nullptr;
+	TopHUD*				_pHPHUD = nullptr;
 
 private:
 	std::vector<Engine::Collider*> _attackColliders;

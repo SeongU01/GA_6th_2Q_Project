@@ -79,6 +79,7 @@ public:
 	void ResetCardInfo();
 	void Reset();
 	void ActiveToolTips(bool isActive);
+	void SetPlayerActives(bool _isActive);
 
 public:
 	void OnCollision(Engine::CollisionInfo& info) override;

@@ -254,15 +254,6 @@ bool DefaultStageScene::Initialize()
     {
         pPlayer = Zero::Create({ 3.0f, 1.0f, 1.0f });
         Engine::AddObjectInLayer((int)LayerGroup::Player, L"Player", pPlayer);
-
-        // TOPHUD
-        Engine::GameObject* pHPHUDObj = Engine::GameObject::Create();
-        pHPHUDObj->transform.SetPosition(Vector3{ 30.0f,0.0f,0.0f });
-        pHPHUDObj->SetDontDestroyObject(true);
-        Engine::AddObjectInLayer((int)LayerGroup::UI, L"PlayerTopHP", pHPHUDObj);
-
-        pHPHUDObj->AddComponent<TopHUD>(pPlayer->GetComponent<Player>()->GetPlayerHPComponent(), 1);
-        pHPHUDObj->SetRenderGroup((int)RenderGroup::UI);
     }
     else
     {        
@@ -306,12 +297,6 @@ bool DefaultStageScene::UIinitialize()
     Engine::GameObject* pTimerObj = Engine::GameObject::Create();
     pTimerObj->AddComponent<TimerHUD>();
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"TimerObj", pTimerObj); pTimerObj->SetRenderGroup((int)RenderGroup::UI);
-
-    // 마나 바
-    Engine::GameObject* pMPHUDDObj = Engine::GameObject::Create();
-    pMPHUDDObj->transform.SetPosition(Vector3(250, 920.0f, 0));
-    pMPHUDDObj->AddComponent<MPHUD>(Engine::FindObject((int)LayerGroup::Player, L"Player", NULL)->GetComponent<Player>()->GetPlayerMPComponent(), 0);
-    Engine::AddObjectInLayer((int)LayerGroup::UI, L"MPHUD", pMPHUDDObj); pMPHUDDObj->SetRenderGroup((int)RenderGroup::UI);
 
     // 게임오버 팝업
     Engine::GameObject* pGameOverObj = Engine::GameObject::Create();

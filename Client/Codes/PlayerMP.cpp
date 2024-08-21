@@ -11,12 +11,12 @@ PlayerMP::PlayerMP(const wchar_t* name)
 
 void PlayerMP::Awake()
 {
-	auto pGameObject = Engine::GameObject::Create();
-	GageHUD* pGageHUD = pGameObject->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, RECOVERYCOOLTIME, 0);
-	pGageHUD->SetDontDestroyObjectUI(true);
-	pGameObject->SetDontDestroyObject(true);
-	pGameObject->SetRenderGroup((int)RenderGroup::None);
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", pGameObject);
+	Engine::GameObject* _pObj = Engine::GameObject::Create();
+	_pGageHUD = _pObj->AddComponent<GageHUD>(Vector3(160.f, 920.f, 0.f), &_mpRecoveryTime, RECOVERYCOOLTIME, 0);
+	_pGageHUD->SetDontDestroyObjectUI(true);
+	_pObj->SetDontDestroyObject(true);
+	_pObj->SetRenderGroup((int)RenderGroup::None);
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", _pObj);
 }
 
 void PlayerMP::Start()
@@ -30,6 +30,11 @@ void PlayerMP::Update(const float& deltaTime)
 
 void PlayerMP::LateUpdate(const float& deltaTime)
 {
+}
+
+void PlayerMP::SetPlayerActivies(bool _isActive)
+{
+	_pGageHUD->SetActives(_isActive);
 }
 
 void PlayerMP::MPUpdate(const float& deltaTime)

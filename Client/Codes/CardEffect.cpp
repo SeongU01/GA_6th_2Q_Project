@@ -10,7 +10,8 @@
 
 void CardEffect::FindGridEffect()
 {
-	_pGridEffect = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect")->GetComponent<GridEffect>();
+	Engine::GameObject* pGridObject = Engine::FindObject((int)LayerGroup::UI, L"UI", L"GridEffect");
+	if (pGridObject) _pGridEffect = pGridObject->GetComponent<GridEffect>();
 }
 
 void CardEffect::ShowRange()

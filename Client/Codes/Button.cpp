@@ -36,7 +36,7 @@ void Button::Update(const float& deltaTime)
 		{
 			_onPressed();
 		}
-		else
+		else if(GetOwner().IsActive())
 		{
 			if (_isRepeat || (!_isRepeat && !_isExecute))
 			{

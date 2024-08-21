@@ -4,8 +4,7 @@
 #include "Stage1Scene.h"
 #include "CreditHUD.h"
 #include "Client_Define.h"
-
-#include "SelectScene.h"
+#include "CutScene.h"
 #include "ToolTip.h"
 TitleButtons::TitleButtons()
 	:UIComponent(L"TitleButtons")
@@ -36,7 +35,7 @@ void TitleButtons::Start()
 	btn->SetOnPressed([]()
 		{ 
 			Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
-			Scene::ChagneScene(Stage1Scene::Create()); 
+			Scene::ChagneScene(CutScene::Create(1));
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
 

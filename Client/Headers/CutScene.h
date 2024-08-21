@@ -6,6 +6,7 @@ namespace Engine
 	class GameObject;
 };
 
+class Player;
 class CutScene : public Engine::Scene
 {
 private:
@@ -22,9 +23,10 @@ private:
 	void setScene();
 public:
 	static CutScene* Create(int stage);
-	Engine::GameObject* pBObj = nullptr;
-	Engine::GameObject* pFadeObj = nullptr;
+	Engine::GameObject* _pBObj = nullptr;
+	Engine::GameObject* _pFadeObj = nullptr;
+	Player*				 _pPlayer = nullptr;
 	CutSceneInfo _info;
 	int _stageNum = 1;
-	float CutTime = 0.0f;
+	float _cutTime = 0.0f;
 };

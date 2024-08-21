@@ -248,6 +248,16 @@ void Card::ActiveToolTips(bool isActive)
 	_pToolTip->ActiveToolTip(isActive);
 }
 
+void Card::SetPlayerActives(bool _isActive)
+{
+	GetComponent<Engine::SpriteRenderer>()->SetActive(_isActive);
+	GetComponent<Engine::SpriteRenderer>(L"Icons")->SetActive(_isActive);
+	GetComponent<Engine::TextRenderer>(L"Title")->SetActive(_isActive);
+	GetComponent<Engine::TextRenderer>(L"CostTime")->SetActive(_isActive);
+	GetComponent<Engine::TextRenderer>(L"CostMana")->SetActive(_isActive);
+	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(_isActive);
+}
+
 void Card::ThrowCard()
 {
 	_isLerp = true;

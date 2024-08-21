@@ -59,9 +59,6 @@
     <ClCompile Include="..\Codes\TitleScene.cpp">
       <Filter>02. Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\SelectScene.cpp">
-      <Filter>02. Scene\SelectStage</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\DeckSystem.cpp">
       <Filter>05. UI\Interaction\Deck</Filter>
     </ClCompile>
@@ -386,9 +383,6 @@
     <Filter Include="02. Scene\Cut">
       <UniqueIdentifier>{723f12ae-f280-4c90-af80-5b32308385aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. Scene\SelectStage">
-      <UniqueIdentifier>{5331ef60-78aa-4c3f-99ab-5878b8aab5ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. Scene\MainStage">
       <UniqueIdentifier>{76e35784-d337-403f-8a66-e23766c8431e}</UniqueIdentifier>
     </Filter>
@@ -696,9 +690,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Stage1Scene.h">
       <Filter>02. Scene\MainStage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\SelectScene.h">
-      <Filter>02. Scene\SelectStage</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\TitleScene.h">
       <Filter>02. Scene\Title</Filter>

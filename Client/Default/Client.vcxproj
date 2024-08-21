@@ -106,7 +106,6 @@
     <ClCompile Include="..\Codes\RestartGame.cpp" />
     <ClCompile Include="..\Codes\SelectButtons.cpp" />
     <ClCompile Include="..\Codes\SelectCard.cpp" />
-    <ClCompile Include="..\Codes\SelectScene.cpp" />
     <ClCompile Include="..\Codes\SpawnEnemy.cpp" />
     <ClCompile Include="..\Codes\Spectrum.cpp" />
     <ClCompile Include="..\Codes\Stage1Scene.cpp" />
@@ -222,7 +221,6 @@
     <ClInclude Include="..\Headers\RestartGame.h" />
     <ClInclude Include="..\Headers\SelectButtons.h" />
     <ClInclude Include="..\Headers\SelectCard.h" />
-    <ClInclude Include="..\Headers\SelectScene.h" />
     <ClInclude Include="..\Headers\SpawnEnemy.h" />
     <ClInclude Include="..\Headers\Spectrum.h" />
     <ClInclude Include="..\Headers\Stage1Scene.h" />
