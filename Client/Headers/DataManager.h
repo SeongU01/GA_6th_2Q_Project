@@ -125,8 +125,7 @@ public:
 	}
 	const WaveInfo& GetWaveInfo(const EnemySpawnInfo& spawnInfo, const std::wstring& waveName) 
 	{
-		Sound::PlaySound("Battle_Sound_Enemy_Common_Spawn", (int)SoundGroup::Battle, 0.8f, false);
-		Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Begin_Wave", (int)SoundGroup::SFX, 0.8f, false);
+		
 		for (const auto& waveInfo : spawnInfo.waveInfos) 
 		{
 			if (waveInfo.waveName == waveName)

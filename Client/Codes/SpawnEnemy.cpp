@@ -34,86 +34,95 @@ void SpawnEnemy::Update(const float& deltaTime)
 {
 	if (!_waveOn && _currWaveCount <= _maxWaveCount && !_stageEnd)
 	{
-		for (auto& _enemyInfo : _currWave.enemyInfos)
+		if(1!=_currWaveCount)
+			_spawnCoolTime += deltaTime;
+
+		if(_currWaveCount==1||0.3f<=_spawnCoolTime)
 		{
-			if (L"Default" == _enemyInfo.spawnType)
+			Sound::PlaySound("Battle_Sound_Enemy_Common_Spawn", (int)SoundGroup::Battle, 0.8f, false);
+			Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Begin_Wave", (int)SoundGroup::SFX, 0.8f, false);
+			for (auto& _enemyInfo : _currWave.enemyInfos)
 			{
-				Vector3 spawnPos;
-
-				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+				if (L"Default" == _enemyInfo.spawnType)
 				{
-					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+					Vector3 spawnPos;
+
+					if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+					{
+						spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+					}
+					else
+					{
+						spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+					}
+
+					DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
+					Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
+					SpawnEffect(spawnPos);
 				}
-				else
+				else if (L"Range" == _enemyInfo.spawnType)
 				{
-					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+					Vector3 spawnPos;
+
+					if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+					{
+						spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+					}
+					else
+					{
+						spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+					}
+
+					RangeEnemy* rangeEnemy = RangeEnemy::Create(spawnPos, _enemyInfo.targetName);
+					Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", rangeEnemy);
+					SpawnEffect(spawnPos);
+				}
+				else if (L"Elite" == _enemyInfo.spawnType)
+				{
+					Vector3 spawnPos;
+
+					if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+					{
+						spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+					}
+					else
+					{
+						spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+					}
+
+					EliteEnemy* EliteEnemy = EliteEnemy::Create(spawnPos, _enemyInfo.targetName);
+					Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", EliteEnemy);
+					SpawnEffect(spawnPos);
+				}
+				else if (L"Boss" == _enemyInfo.spawnType)
+				{
+					Vector3 spawnPos;
+
+					if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
+					{
+						spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
+					}
+					else
+					{
+						spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
+					}
+
+					BossEnemy* BossEnemy = BossEnemy::Create(spawnPos, _enemyInfo.targetName);
+					Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", BossEnemy);
+					SpawnEffect(spawnPos);
+
 				}
 
-				DefaultEnemy* defaultEnemy = DefaultEnemy::Create(spawnPos, _enemyInfo.targetName);
-				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", defaultEnemy);
-				SpawnEffect(spawnPos);
 			}
-			else if (L"Range" == _enemyInfo.spawnType)
-			{
-				Vector3 spawnPos;
-
-				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
-				{
-					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
-				}
-				else
-				{
-					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
-				}
-
-				RangeEnemy* rangeEnemy = RangeEnemy::Create(spawnPos, _enemyInfo.targetName);
-				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", rangeEnemy);
-				SpawnEffect(spawnPos);
-			}
-			else if (L"Elite" == _enemyInfo.spawnType)
-			{
-				Vector3 spawnPos;
-
-				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
-				{
-					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
-				}
-				else
-				{
-					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
-				}
-
-				EliteEnemy* EliteEnemy = EliteEnemy::Create(spawnPos, _enemyInfo.targetName);
-				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", EliteEnemy);
-				SpawnEffect(spawnPos);
-			}
-			else if (L"Boss" == _enemyInfo.spawnType)
-			{
-				Vector3 spawnPos;
-
-				if (_pGridInfo->GetGrid()->IsTileWalkable((int)_enemyInfo.spawnPosition.x, (int)_enemyInfo.spawnPosition.y) == true)
-				{
-					spawnPos = { _enemyInfo.spawnPosition.x, _enemyInfo.spawnPosition.y ,0.f };
-				}
-				else
-				{
-					spawnPos = { _enemyInfo.subSpawnPosition.x, _enemyInfo.subSpawnPosition.y, 0.f };
-				}
-
-				BossEnemy* BossEnemy = BossEnemy::Create(spawnPos, _enemyInfo.targetName);
-				Engine::AddObjectInLayer((int)LayerGroup::Enemy, L"Monster", BossEnemy);
-				SpawnEffect(spawnPos);
-
-			}
-
-			_waveOn = true;
+				_waveOn = true;
+				_spawnCoolTime = 0.f;
+				_currWaveCount++;
 		}
-
 	}
-		if (!_stageEnd)
-		{
-			CheckWaveEnd();
-		}
+	if (!_stageEnd)
+	{
+		CheckWaveEnd();
+	}
 }
 
 void SpawnEnemy::LateUpdate(const float& deltaTime)
@@ -124,8 +133,7 @@ void SpawnEnemy::CheckWaveEnd()
 {
 	if (Engine::FindObjectList((int)LayerGroup::Enemy, L"Monster")->empty() && !_stageEnd)
 	{
-		_waveOn = false;
-		_currWaveCount++;
+		_waveOn = false;	
 
 		if (_currWaveCount > _maxWaveCount)
 		{

@@ -27,6 +27,7 @@ private:
 	GridInfo* _pGridInfo=nullptr;
 	bool _waveOn=false;
 	bool _stageEnd = false;
+	float _spawnCoolTime = 0.f;
 	int _currWaveCount = 0;
 	int _maxWaveCount = 0;
 };
