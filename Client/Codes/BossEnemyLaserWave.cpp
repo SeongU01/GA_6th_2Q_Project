@@ -140,7 +140,7 @@ void BossEnemyLaserWave::ShowAttackRange()
 {
 	std::vector<std::pair<int, int>> ranges = DataManager::GetInstance()->GetAttackRange(17);
 	int index = 7;
-	_pPlayer->
+	//_pPlayer->
 	for (auto& grid : ranges)
 	{
 		/*if (_currDirection.x >= 0)
