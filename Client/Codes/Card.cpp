@@ -435,6 +435,7 @@ void Card::ActiveEffect()
 						else 
 						{
 							std::string str = "Voice_Sound_Voice_Zero_Attack" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+							Sound::StopSound((int)SoundGroup::Voice);
 							Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
 						}
 					}

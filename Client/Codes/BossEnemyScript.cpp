@@ -161,6 +161,8 @@ void BossEnemyScript::LateUpdate(const float& deltaTime)
 		{
 			_eraseTopHud = true;
 			_pTopHud->SetDead();
+			std::string str = "Voice_Sound_Voice_First_HP_0_" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+			Sound::PlaySound(str.c_str(), (int)SoundGroup::FirstEnemy, 1.0f, false);
 		}
 		_pFSM->ChangeState((int)BossEnemy::FSM::Death);
 	}

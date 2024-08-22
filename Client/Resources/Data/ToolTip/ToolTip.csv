@@ -5,7 +5,7 @@ State_Char_001,잔류,10초간 지속됩니다. <잔류> 상태의 캐릭터가 
 State_Char_002,차지,10초간 지속됩니다. <차지> 상태의 캐릭터가 피해를 입으면 고출력을 획득합니다.,FALSE
 State_Char_003,고출력,캐릭터의 다음 공격이 1의 피해를 추가로 입힙니다.,FALSE
 State_Char_004,방전,캐릭터가 피격 당했을 때 캐릭터 주변 1칸 범위(최대 8칸)에 1의 피해를 입힙니다.,FALSE
-State_Char_005,허점,"피격 당했을 때, 1의 피해를 추가로 입습니다.",FALSE
+State_Char_005,허점,피격 당했을 때 1의 피해를 추가로 입습니다.,FALSE
 State_Card_000,오버클럭,카드 사용 시 1의 피해를 입습니다.,FALSE
 Behavior_Attack,공격,에너미가 공격을 준비중입니다.,FALSE
 Behavior_Support,보조,에너미가 보조를 준비중입니다.,FALSE
@@ -21,7 +21,7 @@ Card_7,실드 전개,,FALSE
 Card_8,멜트다운,,FALSE
 Card_9,차지 유닛,,FALSE
 Object_Character_001,근접 에너미,이 유닛은 방어 구조물을 목표로 전진합니다. ,TRUE
-Object_Character_002,원거리 에너미,"이 유닛은 플레이어만을 목표로 삼으며, 강력한 레이저를 발사합니다. ",TRUE
+Object_Character_002,원거리 에너미,이 유닛은 플레이어만을 목표로 삼으며 강력한 레이저를 발사합니다. ,TRUE
 Object_Character_003,엘리트 에너미,이 유닛은 방어 구조물과 플레이어 모두를 타겟으로 삼습니다.,TRUE
 Object_Character_004,퍼스트,변이에 침식당한 강력한 유닛입니다.\n이 유닛은 플레이어만을 목표로 삼습니다. ,TRUE
 Object_Structure_000,산,파괴하거나 넘어갈 수 없습니다.\n*'일섬' 카드를 사용하면 여러 구조물을 넘어갈 수 있습니다. ,FALSE
@@ -35,7 +35,7 @@ UI_CardCost_Mana,코스트,카드를 사용하기 위한 자원입니다.\n시�
 UI_CardCost_Time,시간 코스트,카드를 사용할 시 소모되는 시간양입니다.,FALSE
 UI_Cost_Mana_Recovery,에너지 회복 시간,게이지가 가득 차면 1의 에너지가\n회복됩니다.,FALSE
 UI_Cost_Mana_Storage,에너지,현재 보유하고 있는 에너지입니다. 카드의 사용은 애너지를 소모합니다.,FALSE
-UI_Card_Reload_Recovery,재장전 대기 시간,게이지가 가득 차면 재장전을 사용할 수 있습니다.,FALSE
-UI_Card_Reload,재장전,손패에 있는 카드를 모두 묘지로 보내고 덱에서 5장의 카드를 드로우합니다.,FALSE
+UI_Card_Reload_Recovery,리로드 대기 시간,게이지가 가득 차면 리로드를 사용할 수 있습니다.,FALSE
+UI_Card_Reload,리로드,손패에 있는 카드를 모두 묘지로 보내고 덱에서 5장의 카드를 드로우합니다.,FALSE
 UI_Card_Deck,덱,사용되지 않은 카드를 보관합니다. 드로우할 카드가 없으면 묘지의 카드를 덱에 넣고 섞습니다. ,FALSE
 UI_Card_Graveyard,묘지,사용된 카드를 보관합니다. ,FALSE
