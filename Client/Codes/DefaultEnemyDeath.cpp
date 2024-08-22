@@ -25,6 +25,7 @@ int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
 		Sound::PlaySound("Battle_Sound_Enemy_Common_Dead", (int)SoundGroup::Battle, 0.8f, false);
 
+		_pToolTip->ActiveToolTip(false);
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();
 		_pOwner->GetComponent<AttributeHUD>()->DeleteUI();
 		_pPannel->SetDead();

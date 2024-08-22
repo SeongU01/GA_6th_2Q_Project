@@ -19,6 +19,7 @@ int RangeEnemyDeath::LateUpdate(const float& deltaTime)
 {
 	if (_pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Death"))
 	{
+		_pToolTip->ActiveToolTip(false);
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();
 		_pOwner->GetComponent<AttributeHUD>()->DeleteUI();
 		_pPannel->SetDead();
