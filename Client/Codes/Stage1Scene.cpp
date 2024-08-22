@@ -58,6 +58,8 @@ bool Stage1Scene::Initialize()
 
     _pScene = CutScene::Create(2);
 
+    _currentStage = Stage::Stage1;
+
     return true;
 }
 

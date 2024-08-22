@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "CardSystem.h"
 #include "SelectCard.h"
+#include "EventManager.h"
 
 #include "Client_Define.h"
 

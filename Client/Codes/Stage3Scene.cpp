@@ -59,6 +59,8 @@ bool Stage3Scene::Initialize()
 
     EventManager::GetInstance()->SetCurrentStage(Stage::Stage3);
 
+    _currentStage = Stage::Stage3;
+
     return true;
 }
 

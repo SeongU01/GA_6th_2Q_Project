@@ -7,6 +7,7 @@ namespace Engine
 	class CollisionManager;
 }
 
+enum Stage;
 class EnemySpawner;
 class DefaultStageScene : public Engine::Scene
 {
@@ -32,5 +33,6 @@ protected:
 	Engine::Scene*				_pScene = nullptr;
 	bool						_isSelectCard = false;
 	bool						_isRemainTower1 = false;
+	Stage						_currentStage;
 };
 

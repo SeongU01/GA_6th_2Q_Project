@@ -189,7 +189,11 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         }
         else
         {
-            if (!_isSelectCard)
+            if (Stage::Stage4 == _currentStage)
+            {
+                pEventManager->SetNextStage(true);
+            }
+            else if (!_isSelectCard)
             {
                 CardManager::GetInstance()->StartSelectCardScene();
                 _isSelectCard = true;

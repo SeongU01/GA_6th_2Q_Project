@@ -58,6 +58,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 	_pAttackCollider->ResizeCollider();
 	_pTimerSystem->SetStopTime(false);
 	_pAttribute->Reset();
+	_pMP->mp = 3;
 }
 
 void Player::SetPlayerActives(bool _isActive)
@@ -229,6 +230,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 		if (nullptr == pAttribute)
 			return;
+
+		pHP->hp -= 10;
 
 		for (int i = 0; i < 2; i++)
 		{
