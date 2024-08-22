@@ -75,8 +75,7 @@ void Mouse::LateUpdate(const float& deltaTime)
 			if (!_pEventManager->IsTimeStop())
 				Time::SetSlowTime(1.f);
 		}
-
-		if (Input::IsKeyDown(Input::DIM_RB))
+		else if (Input::IsKeyDown(Input::DIM_RB))
 		{
 			if (!_hoverCard->IsAddQueue())
 			{
