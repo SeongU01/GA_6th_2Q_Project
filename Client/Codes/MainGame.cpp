@@ -35,7 +35,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	info.renderGroupSize = (int)RenderGroup::End;
 	info.maxSoundGroup = (int)SoundGroup::End;
 	info.fiexedCount = 50;
-	info.isFullScreen = true;
+	info.isFullScreen = false;
 
 	_pGameManager->Initialize(info);
 

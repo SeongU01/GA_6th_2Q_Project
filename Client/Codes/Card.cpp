@@ -485,33 +485,43 @@ void Card::ActiveEffect()
 
 			auto handlePathAttack = [=](int fixedCoord, int start, int end, bool isXAxis)
 				{
+					int index = 0;
+					bool isRevers = false;
+					if ((int)toGridPosition.x + 1 == start || (int)toGridPosition.y + 1 == start)
+					{
+						index = end - start;
+						isRevers = true;
+					}
+
 					for (int j = start; j < end; j++)
-					{						
-						auto pEffect = Engine::GameObject::Create();
-						Effect::EffectInfo info;
-						info.renderGroup = RenderGroup::FrontEffect;
-						info.aniSpeed = 0.05f;
-						info.scale = { 0.75f, 0.75f, 1.f };
-						info.textureTag = L"Effect_Hit_Hit02";
+					{
+						_pEventInvoker->BindAction(index * 0.05f, [=]()
+							{
+								auto pEffect = Engine::GameObject::Create();
+								Effect::EffectInfo info;
+								info.renderGroup = RenderGroup::FrontEffect;
+								info.aniSpeed = 0.05f;
+								info.scale = { 0.5f, 0.5f, 1.f };
+								info.textureTag = L"Effect_Attack_Anim_VFX_BeamDrop_01";
 
-						if (isXAxis)
-							info.position = pGrid->GetTileCenter(j, fixedCoord);
-						else
-							info.position = pGrid->GetTileCenter(fixedCoord, j);
+								if (isXAxis)
+									info.position = pGrid->GetTileCenter(j, fixedCoord) + Vector3(0.f, -140.f, 0.f);
+								else
+									info.position = pGrid->GetTileCenter(fixedCoord, j) + Vector3(0.f, -140.f, 0.f);
 
-						pEffect->AddComponent<Effect>(info);
-						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+								pEffect->AddComponent<Effect>(info);
+								Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
 
-						pEffect = Engine::GameObject::Create();
-						info.textureTag = L"Effect_Hit_Hit03";
+								Camera::CameraShake(0.5f, 50.f);
 
-						pEffect->AddComponent<Effect>(info);
-						Engine::AddObjectInLayer((int)LayerGroup::Object, L"Effect", pEffect);
+								if (isXAxis)
+									pAttackCollider->OnCollider(0.1f, 0.1f, j, fixedCoord, attackInfo[i], i);
+								else
+									pAttackCollider->OnCollider(0.1f, 0.1f, fixedCoord, j, attackInfo[i], i);
+							});
 
-						if (isXAxis)
-							pAttackCollider->OnCollider(0.01f, 0.1f, j, fixedCoord, attackInfo[i], i);
-						else
-							pAttackCollider->OnCollider(0.01f, 0.1f, fixedCoord, j, attackInfo[i], i);
+						if (isRevers) index--;
+						else		  index++;					
 					}
 				};
 
