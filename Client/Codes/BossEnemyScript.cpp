@@ -91,7 +91,8 @@ void BossEnemyScript::Awake()
 	_pTopHud = Engine::GameObject::Create();
 	_pTopHud->transform.SetPosition(Vector3{ 782.0f,40.0f,0.0f });
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"BossTopHP", _pTopHud);
-	_pTopHud->AddComponent<TopHUD>(_pHP, 2);
+	TopHUD* pTopHud = _pTopHud->AddComponent<TopHUD>(_pHP, 2);
+	pTopHud->SetDontDestroyObjectUI(false);
 	_pTopHud->SetRenderGroup((int)RenderGroup::UI);
 	Engine::TextRenderer* text = _pTopHud->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
 	text->SetTextLayout(L"\"ÆÛ½ºÆ® ¹Ì´Ö\"", 250.f, 0.f);

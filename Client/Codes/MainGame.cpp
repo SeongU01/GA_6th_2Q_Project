@@ -73,7 +73,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Battle, 0.4f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Player, 0.7f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::SFX, 0.7f);
-	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Voice, 1.2f);
+	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Voice, 1.f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::FirstEnemy, 1.0f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Operator, 1.0f);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);

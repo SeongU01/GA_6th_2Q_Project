@@ -26,7 +26,7 @@ void changeStage(int stage,Player* player)
         player->GetComponent<TimerSystem>()->TutorialTimeStop(false);
     }
     EventManager::GetInstance()->SetStopGame(false);
-    if (stage == 1) 
+    if (stage == 1)
     {
         Engine::ChangeScene(Stage1Scene::Create());
     }
@@ -40,6 +40,12 @@ void changeStage(int stage,Player* player)
     }
     else if (stage == 5)
     {
+        if (player != nullptr)
+        {
+            player->SetPlayerActives(false);
+            player->gameObject.SetDead();
+        }
+
         if (player != nullptr)player->SetPlayerActives(false);
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
@@ -89,6 +95,9 @@ int CutScene::Update(const float& deltaTime)
     {
         changeStage(_stageNum, _pPlayer);
     }
+
+    SetCursorPos(WINCX >> 1, WINCY >> 1);
+
     return 0;
 }
 
