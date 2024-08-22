@@ -7,6 +7,8 @@
 #include "GridMovement.h"
 #include "Attribute.h"
 #include "Effect.h"
+#include "Grid.h"
+#include "Tile.h"
 
 #include "Client_Define.h"
 int BossEnemyReadyMove::Update(const float& deltaTime)
@@ -20,9 +22,18 @@ int BossEnemyReadyMove::Update(const float& deltaTime)
 		{
 			_currTime = _delayTime;
 			_pAnimation->ChangeAnimation(L"ReadyMove");
-			_pMovement->MoveToCell(Vector3(7.f, 3.f, 0.f), 0.5f);
-			_pAstar->SetGridPosition(Vector3(7.f, 3.f, 0.f));
-			_pAstar->ReCalculatePath();
+			if(_pMovement->_grid->GetTiles()[3][7]->canMove)
+			{
+				_pMovement->MoveToCell(Vector3(7.f, 3.f, 0.f), 0.5f);
+				_pAstar->SetGridPosition(Vector3(7.f, 3.f, 0.f));
+				_pAstar->ReCalculatePath();
+			}
+			else
+			{
+				_pMovement->MoveToCell(Vector3(8.f, 3.f, 0.f), 0.5f);
+				_pAstar->SetGridPosition(Vector3(8.f, 3.f, 0.f));
+				_pAstar->ReCalculatePath();
+			}
 			Boost();
 			_isStateOn = true;
 		}
