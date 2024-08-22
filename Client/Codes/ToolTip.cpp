@@ -71,11 +71,6 @@ Vector3 ToolTip::AddToolTip(const ToolTipInfo& _info, Vector3 position)
 
 void ToolTip::ClearToolTip()
 {
-    for (auto e : _toolTipList)
-    {
-        e.second->SetDontDestroyObject(false);
-        _toolTipList.erase(e.first);
-    }
     _toolTipList.clear();
 }
 
