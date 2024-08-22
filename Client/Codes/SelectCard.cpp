@@ -78,6 +78,8 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                 Sound::PlaySound("Effect_Sound_FX_Stage_Battle_Clear", (int)SoundGroup::SFX, 0.8f, false);
                 cards[i]->gameObject.SetActive(true);
                 cards[i]->SetTargetPosition(Vector3(0.f, 1000.f, 0.f), Vector3(0.f, 0.f, 0.f));
+                cards[i]->SetSelectCardToolTipInfo();
+
                 Button* pButton = _selectCardScene->AddComponent<Button>();
                 pButton->SetRange(cards[i]->transform.position, { 540.f * 0.6f, 786.f * 0.6f });
                 pButton->SetOnHover([=]() { 

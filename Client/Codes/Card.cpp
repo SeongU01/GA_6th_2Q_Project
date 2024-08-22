@@ -258,6 +258,11 @@ void Card::SetPlayerActives(bool _isActive)
 	GetComponent<Engine::TextRenderer>(L"OptionText")->SetActive(_isActive);
 }
 
+void Card::SetSelectCardToolTipInfo()
+{
+	_pToolTip->SetSelectCardToolTipInfo();
+}
+
 void Card::ThrowCard()
 {
 	_isLerp = true;

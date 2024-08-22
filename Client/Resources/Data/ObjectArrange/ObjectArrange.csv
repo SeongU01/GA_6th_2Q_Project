@@ -1,7 +1,8 @@
 ﻿ObjectID,Gridx,Gridy,ObjectName
 4,,,
-Stage1,22,,
+Stage1,23,,
 99,0,3,Player
+5,7,3,Portal
 2,0,0,Yama
 2,2,0,Yama
 2,4,0,Yama

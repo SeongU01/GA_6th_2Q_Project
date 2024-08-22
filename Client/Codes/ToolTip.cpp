@@ -83,12 +83,12 @@ void ToolTip::DeleteToolTip(std::wstring str)
         _toolTipList[str]->SetDontDestroyObject(false);
         _toolTipList.erase(str);
     }
-     for (auto toolTip : _toolTipList)
-     {
-         Pannel* tip = toolTip.second;
-         tip->transform.SetPosition(startPos);
-         startPos={ startPos.x,startPos.y + tip->GetSize().y + 20,startPos.z};
-     }
+    for (auto toolTip : _toolTipList)
+    {
+        Pannel* tip = toolTip.second;
+        tip->transform.SetPosition(startPos);
+        startPos={ startPos.x,startPos.y + tip->GetSize().y + 20,startPos.z};
+    }
 }
 
 void ToolTip::MirrorToolTip(int _direction)
@@ -111,10 +111,27 @@ void ToolTip::MirrorToolTip(int _direction)
 
 void ToolTip::RemoveAllToolTip()
 {
-  for (auto& tooltip : _toolTipList)
-  {
-    tooltip.second->SetDead();
-  }
+    for (auto& toolTip : _toolTipList)
+    {
+        toolTip.second->SetDead();
+    }
+}
+
+void ToolTip::SetSelectCardToolTipInfo()
+{
+    for (auto& toolTip : _toolTipList)
+        toolTip.second->SetRenderGroup((int)RenderGroup::Fade);
+
+    for (auto& toolTip : _toolTipList)
+        toolTip.second->transform.scale = Vector3(1.7f, 1.7f, 0.f);
+
+    Vector3 startPos = { -450.f, -300.f, 0.f };
+    for (auto toolTip : _toolTipList)
+    {
+        Pannel* tip = toolTip.second;
+        tip->transform.SetPosition(startPos);
+        startPos = { startPos.x, startPos.y + 210.f, startPos.z };
+    }
 }
 
 void ToolTip::Awake()

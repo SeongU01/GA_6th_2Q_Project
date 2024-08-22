@@ -20,6 +20,8 @@ public:
 	void DeleteToolTip(std::wstring str);
 	void MirrorToolTip(int _direction);
 	void RemoveAllToolTip();
+	void SetSelectCardToolTipInfo();
+
 public:
 	void Awake() override;
 	void Start() override;
