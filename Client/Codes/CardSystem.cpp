@@ -148,6 +148,9 @@ void CardSystem::DrawCard()
 
 void CardSystem::ReloadCard()
 {
+	if (EventManager::GetInstance()->IsStopGame())
+		return;
+
 	if (_reloadTime >= RELOADCOOLTIME)
 	{
 		Sound::StopSound((int)SoundGroup::Voice);
