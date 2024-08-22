@@ -94,11 +94,15 @@ void BossEnemyScript::Awake()
 	TopHUD* pTopHud = _pTopHud->AddComponent<TopHUD>(_pHP, 2);
 	pTopHud->SetDontDestroyObjectUI(false);
 	_pTopHud->SetRenderGroup((int)RenderGroup::UI);
-	Engine::TextRenderer* text = _pTopHud->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
+	Engine::SpriteRenderer* name = _pTopHud->AddComponent<Engine::SpriteRenderer>(L"firstminute");
+	name->BindTexture(Resource::FindTexture(L"UI_Text"));
+	name->SetIndex(4);
+	name->SetDrawOffset(Vector3(180.f, 75.0f, 0.f));
+/*	Engine::TextRenderer* text = _pTopHud->AddComponent<Engine::TextRenderer>(L"Content", D2D1::ColorF::White, 20.f, DWRITE_FONT_WEIGHT_EXTRA_LIGHT);
 	text->SetTextLayout(L"\"ÆÛ½ºÆ® ¹Ì´Ö\"", 250.f, 0.f);
 	text->SetTextRangeEffectFontFamily(0, lstrlen(L"\"ÆÛ½ºÆ® ¹Ì´Ö\""), L"HY°ß°íµñ");
 	text->SetOffset(Vector3(110.f, 55.0f, 0.f));
-	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+	text->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER)*/;
 
 	Engine::Animation::FrameEvent frameEvent;
 	frameEvent.activeFrame = 1;
