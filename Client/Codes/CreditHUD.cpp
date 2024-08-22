@@ -14,7 +14,7 @@ void CreditHUD::Start()
 {
 	UI::UIInfo info;
 	UI* pObj;
-	info = CreateInfo(L"HPBackground", L"UI_HUD_Popup", 0, Vector3(WINCX >> 1, WINCY >> 1, 0.f), { 1.f,1.f,1.f }, &transform);
+	info = CreateInfo(L"HPBackground", L"UI_HUD_Popup", 1, Vector3(WINCX >> 1, WINCY >> 1, 0.f), { 1.f,1.f,1.f }, &transform);
 	pObj = AddUI(info);
 	SetActives(false);
 }
