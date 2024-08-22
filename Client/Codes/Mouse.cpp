@@ -63,10 +63,10 @@ void Mouse::LateUpdate(const float& deltaTime)
 	{
 		if (Input::IsKeyUp(Input::DIM_LB))
 		{
+			if (!_hoverCard->IsAddQueue())
+				_pTimerSystem->AddSkillTime(-1 * _hoverCard->GetCostTime());
 			if (800.f > transform.position.y)
 				_pCardSystem->ActiveCard(_hoverCard);
-
-			_pTimerSystem->AddSkillTime(-1*_hoverCard->GetCostTime());
 			_hoverCard->isHold = false;
 			_hoverCard->SetMouseHover(false);
 			_hoverCard = nullptr;
