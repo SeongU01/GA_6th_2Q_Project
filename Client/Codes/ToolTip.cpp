@@ -134,6 +134,15 @@ void ToolTip::SetSelectCardToolTipInfo()
     }
 }
 
+void ToolTip::AttributeRemoveToolTips()
+{
+    for (auto& toolTip : _toolTipList)
+    {
+        toolTip.second->SetActive(false);
+    }
+    _toolTipList.clear();
+}
+
 void ToolTip::Awake()
 {
 }

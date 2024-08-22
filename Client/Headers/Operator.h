@@ -22,7 +22,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
-	void Tutorial1();
+	bool Tutorial1();
 	bool Tutorial2();
 	bool Tutorial3();
 

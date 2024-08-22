@@ -22,8 +22,8 @@ void EventManager::GameOver()
 
 void EventManager::Tutorial1()
 {
-	_pOperator->Tutorial1();
-	_isTutorial = true;
+	if(_pOperator->Tutorial1())
+		_isTutorial = true;
 }
 
 bool EventManager::Tutorial2()

@@ -31,6 +31,7 @@ void RestartGame::Start()
 
 void RestartGame::Update(const float& deltaTime)
 {
+
     if (_isRestart)
     {
         float delta = Time::GetGlobalDeltaTime();
@@ -44,6 +45,7 @@ void RestartGame::Update(const float& deltaTime)
         {
             if (Input::IsKeyDown(DIK_SPACE))
             {
+                Sound::StopSound((int)SoundGroup::Time);
                 switch (_stage)
                 {
                 case Stage1:

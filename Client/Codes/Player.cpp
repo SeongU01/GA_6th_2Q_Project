@@ -57,6 +57,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 	GetComponent<TimerSystem>()->ResetTime();
 	_pAttackCollider->ResizeCollider();
 	_pTimerSystem->SetStopTime(false);
+	_pAttHUD->AttrubuteRemoveToolTip();
 	_pAttribute->Reset();
 	_pMP->mp = 3;
 	_pJobQueue->ResetQueue();
@@ -216,10 +217,13 @@ void Player::LateUpdate(const float& deltaTime)
 		}
 	}
 
-	/*if (Input::IsKeyDown(DIK_P))
+	if (Input::IsKeyDown(DIK_MINUS))
 	{
-		_pHP->hp = 0;
-	}*/
+		if (0 == _bonusAttack)
+			_bonusAttack = 10;
+		else
+			_bonusAttack = 0;
+	}
 }
 
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
@@ -258,7 +262,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 				HitColor* pHitColor = info.other->GetComponent<HitColor>();
 				if (pHitColor) pHitColor->OnHitColorEffect(0.1f);
-				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint();
+				damage = attackInfo.damage + _pAttribute->ActiveHighPower() + pAttribute->ActiveWeakPoint() + _bonusAttack;
 				CreateHitEffect(info.other->transform.position);
 			}
 

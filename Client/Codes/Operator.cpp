@@ -109,7 +109,7 @@ void Operator::LateUpdate(const float& deltaTime)
 {
 }
 
-void Operator::Tutorial1()
+bool Operator::Tutorial1()
 {
 	if (!_isTutorial)
 	{
@@ -120,7 +120,11 @@ void Operator::Tutorial1()
 		_isTutorial1 = true;
 		Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<TimerSystem>()->TutorialTimeStop(true);
 		_isTutorial = true;
+
+		return true;
 	}
+
+	return false;
 }
 
 bool Operator::Tutorial2()

@@ -72,6 +72,7 @@ private:
 	Vector3 _gridPosition = { 0.f, 2.f, 0.f };
 	Vector3 _nextGridPosition;
 	Vector3 _startPosition;
+	int _bonusAttack = 0;
 	bool _isDeath = false;
 };
 

@@ -122,7 +122,13 @@ void AttributeHUD::LateUpdate(const float& deltaTime)
 {
 }
 
+
 void AttributeHUD::RemoveAllToolTip()
 {
 	_pToolTip->RemoveAllToolTip();
+}
+
+void AttributeHUD::AttrubuteRemoveToolTip()
+{
+	_pToolTip->AttributeRemoveToolTips();
 }

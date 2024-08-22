@@ -18,14 +18,15 @@ void TimerSystem::TimeStop()
     if (pEventManager->IsStopGame() || pEventManager->IsPlayerDeath() || pEventManager->IsTutorial())
         return;
 
+
     _isStopTime = !_isStopTime;
     pEventManager->SetTimeStop(_isStopTime);
 
     if (_isStopTime)
     {
-        Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
         _slowTime = 0.0f;
-
+        Sound::PlaySound("Effect_Sound_FX_Time_WhilePause", (int)SoundGroup::Time, 0.8f, true);
+        Sound::PlaySound("Effect_Sound_FX_Time_Pause", (int)SoundGroup::Time, 0.8f, false);
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
             if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX ||
@@ -39,6 +40,7 @@ void TimerSystem::TimeStop()
     }
     else
     {
+
         Sound::SetVolume((int)SoundGroup::BGM, 0.5f);
         Sound::StopSound((int)SoundGroup::Time);
         for (int i = 0; i < (int)SoundGroup::End; i++)
@@ -113,7 +115,6 @@ void TimerSystem::Update(const float& deltaTime)
     //시간정지
     if (Input::IsKeyDown(DIK_SPACE)) 
     {
-        if(!_isStopTime)  Sound::PlaySound("Effect_Sound_FX_Time_WhilePause", (int)SoundGroup::Time, 0.8f, true);
         TimeStop();
     }
 }

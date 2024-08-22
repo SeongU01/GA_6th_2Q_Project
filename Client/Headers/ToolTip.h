@@ -21,7 +21,7 @@ public:
 	void MirrorToolTip(int _direction);
 	void RemoveAllToolTip();
 	void SetSelectCardToolTipInfo();
-
+	void AttributeRemoveToolTips();
 public:
 	void Awake() override;
 	void Start() override;

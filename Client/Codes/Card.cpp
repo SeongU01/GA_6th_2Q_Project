@@ -22,6 +22,7 @@
 #include "HP.h"
 #include "CardSystem.h"
 #include "Animation.h"
+#include "HitColor.h"
 
 #include "DataManager.h"
 #include "Client_Define.h"
@@ -472,7 +473,10 @@ void Card::ActiveEffect()
 		attackInfo[i].AttributeStack = _cardData.charStateNum[i];
 
 		if (CardAttribute::OverClock == _cardData.additiveCardState[i])
+		{
+			_pPlayer->GetComponent<HitColor>()->OnHitColorEffect(0.1f);
 			_pPlayer->GetComponent<Attribute>()->ActiveCharge();
+		}
 
 		if (CardEffectType::PathAttack == _cardData.effectType[i])
 		{
