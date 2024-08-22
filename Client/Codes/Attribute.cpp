@@ -57,7 +57,7 @@ void Attribute::LateUpdate(const float& deltaTime)
 	{
 		unsigned long long flag = (unsigned long long)1 << (i + 1);
 
-		if (!_stateStacks[i])
+		if (0 >= _stateStacks[i])
 			_pBitFlag->OffFlag(flag);
 
 		if (State::Shield == i)

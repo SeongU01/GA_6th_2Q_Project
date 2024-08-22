@@ -29,7 +29,7 @@ bool CardManager::LoadCard(const wchar_t* filePath)
     _cardIDs.push_back(3);
     _cardIDs.push_back(4);
     _cardIDs.push_back(6);
-    _cardIDs.push_back(8);
+    _cardIDs.push_back(7);
 
     _pSelectCard = AddComponent<SelectCard>();
 
