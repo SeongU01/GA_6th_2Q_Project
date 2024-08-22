@@ -186,6 +186,7 @@ void CardSystem::SetPlayerActives(bool _isActive)
 	for (auto e : _handDeck)
 	{
 		e->SetPlayerActives(_isActive);
+		e->ActiveToolTips(false);
 	}
 }
 
