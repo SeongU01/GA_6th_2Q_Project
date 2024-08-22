@@ -35,17 +35,21 @@ void TopHUD::Start()
 
 void TopHUD::Update(const float& deltaTime)
 {
-	int currentHP = _pHP->GetHP();
-	for (int i = 0; i < _pHP->GetMaxHP(); i++)
-	{
-		if (i < currentHP)
-			_HPBar[i]->SetFrame(_hpColor);
-		else
-			_HPBar[i]->SetFrame(3);
-	}
-	if (currentHP == 0 &&_hpColor==2) //암어보스
-	{
-		SetDontDestroyObjectUI(false);
+	if(transform.gameObject.IsDead())
+		DeleteUI();
+	else {
+		int currentHP = _pHP->GetHP();
+		for (int i = 0; i < _pHP->GetMaxHP(); i++)
+		{
+			if (i < currentHP)
+				_HPBar[i]->SetFrame(_hpColor);
+			else
+				_HPBar[i]->SetFrame(3);
+		}
+		if (currentHP == 0 && _hpColor == 2) //암어보스
+		{
+			DeleteUI();
+		}
 	}
 }
 
