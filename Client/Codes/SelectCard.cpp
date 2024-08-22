@@ -115,7 +115,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
             });
     }
 
-    _pEventInvoker->BindAction(1.8f, [=]()
+    _pEventInvoker->BindAction(1.2f, [=]()
         {
             Engine::SpriteRenderer* pSpriteRenderer = _selectCardScene->AddComponent<Engine::SpriteRenderer>(L"");
             pSpriteRenderer->BindTexture(pTexture);
