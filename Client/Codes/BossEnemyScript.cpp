@@ -22,6 +22,7 @@
 #include "AttributeHUD.h"
 #include "AttackCollider.h"
 #include "Spectrum.h"
+#include "HitColor.h"
 
 //state
 #include "BossEnemyIdle.h"
@@ -86,6 +87,7 @@ void BossEnemyScript::Awake()
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	AddComponent<AttributeHUD>(_pAttribute);
+	AddComponent<HitColor>();
 
 	// TOPHUD
 	_pTopHud = Engine::GameObject::Create();

@@ -29,4 +29,5 @@ private:
 	Engine::Animation* _pAnimation = nullptr;
 	Engine::Animation* _pFirefly = nullptr;
 	bool _isRevers = false;
+	bool _isFirstInit = false;
 };

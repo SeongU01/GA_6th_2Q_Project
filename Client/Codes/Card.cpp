@@ -227,6 +227,7 @@ void Card::SetTargetPosition(const Vector3& p0, const Vector3& p1)
 	_isLerp = true;
 	_lerpTime = 0.f;
 
+	_offset = p0;
 	_targetOffset[0] = p0;
 	_targetOffset[1] = p1;
 }

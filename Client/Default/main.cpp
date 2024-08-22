@@ -1,4 +1,5 @@
 #include "MainGame.h"
+#include "GameManager.h"
 
 #ifdef _DEBUG
 	#ifdef UNICODE
@@ -10,6 +11,9 @@
 
 void CheckMemoryLeaks()
 {
+	Engine::GameManager* pGameManager = Engine::GameManager::GetInstance();
+	pGameManager->RestoreDisplay();
+	SafeRelease(pGameManager);
 	_CrtDumpMemoryLeaks();
 }
 
