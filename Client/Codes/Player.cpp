@@ -72,6 +72,7 @@ void Player::SetPlayerActives(bool _isActive)
 	_pAttribute->Reset();
 	_pCardSystem->SetPlayerActives(_isActive);
 	GetComponent<Engine::SpriteRenderer>()->SetActive(_isActive);
+	_pJobQueue->ResetQueue();
 }
 
 void Player::Awake()

@@ -37,6 +37,7 @@ void Operator::Awake()
 	
 	_pPannel = Pannel::Create(info);
 	_pPannel->SetDontDestroyObject(true);
+	_pPannel->SetRenderGroup((int)RenderGroup::Top);
 	Engine::AddObjectInLayer((int)LayerGroup::UI, L"UI", _pPannel);
 
 	_pTitle = _pPannel->AddComponent<Engine::TextRenderer>(L"Title", (DWORD)0xFFFFDB32, 30.f, DWRITE_FONT_WEIGHT_BOLD);
