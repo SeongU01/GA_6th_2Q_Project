@@ -11,6 +11,9 @@
 #include "CreditHUD.h"
 #include "InfoHUD.h"
 
+#include "DataManager.h"
+#include "CardManager.h"
+
 int TitleScene::Update(const float& deltaTime)
 {
     if (Input::IsKeyDown(DIK_ESCAPE))
@@ -42,7 +45,7 @@ int TitleScene::LateUpdate(const float& deltaTime)
 }
 
 bool TitleScene::Initialize()
-{
+{    
     Sound::PlaySound("Bgm_Sound_BGM_Title", (int)SoundGroup::BGM, 0.5f, true);
 
     Engine::GameObject* pGameObject = Engine::GameObject::Create();

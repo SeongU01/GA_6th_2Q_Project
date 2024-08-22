@@ -343,9 +343,6 @@
     <None Include="..\Headers\Export_Input.inl">
       <Filter>Export</Filter>
     </None>
-    <None Include="..\Headers\Export_Scene.inl">
-      <Filter>Export</Filter>
-    </None>
     <None Include="..\Headers\Export_Sound.inl">
       <Filter>Export</Filter>
     </None>

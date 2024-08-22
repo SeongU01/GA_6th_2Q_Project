@@ -23,6 +23,7 @@ namespace Engine
 		bool AddObject(const wchar_t* listTag, GameObject* pObject);
 		void ClearObjectList(const wchar_t* listTag);
 		void ClearAllObjectList();
+		void RemoveAll();
 
 	private:
 		void Free() override;

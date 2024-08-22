@@ -108,6 +108,17 @@ void Engine::Layer::ClearAllObjectList()
     }
 }
 
+void Engine::Layer::RemoveAll()
+{
+    for (auto& pair : _objectData)
+    {
+        for (auto& object : pair.second)
+        {
+            object->SetDead();
+        }
+    }
+}
+
 GameObject* Engine::Layer::FindObject(const wchar_t* listTag, const wchar_t* objectTag)
 {
     if (0 == _objectData[listTag].size())

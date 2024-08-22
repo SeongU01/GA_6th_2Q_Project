@@ -96,6 +96,12 @@ void Engine::SceneManager::ClearLayer(int layerGroup)
 	_layers[layerGroup]->ClearAllObjectList();
 }
 
+void Engine::SceneManager::RemoveAll()
+{
+	for (auto& layer : _layers)
+		layer->RemoveAll();
+}
+
 std::list<GameObject*>* Engine::SceneManager::FindObjectList(int layerGroup, const wchar_t* listTag)
 {
 	return _layers[layerGroup]->FindObjectList(listTag);

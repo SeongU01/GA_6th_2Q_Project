@@ -1,10 +1,12 @@
 #include "CutScene.h"
+
 //component
 #include "Fade.h"
 #include "SpriteRenderer.h"
 #include "Player.h"
 #include "EventManager.h"
 #include "TimerSystem.h"
+
 //scene
 #include "Stage1Scene.h"
 #include "Stage2Scene.h"
@@ -24,20 +26,20 @@ void changeStage(int stage,Player* player)
     EventManager::GetInstance()->SetStopGame(false);
     if (stage == 1) 
     {
-        Scene::ChagneScene(Stage1Scene::Create());
+        Engine::ChangeScene(Stage1Scene::Create());
     }
     else if (stage == 2)
     {
-        Scene::ChagneScene(Stage2Scene::Create());
+        Engine::ChangeScene(Stage2Scene::Create());
     }
     else if (stage == 4)
     {
-        Scene::ChagneScene(Stage4Scene::Create());
+        Engine::ChangeScene(Stage4Scene::Create());
     }
     else if (stage == 5)
     {
         if (player != nullptr)player->SetPlayerActives(false);
-        Scene::ChagneScene(TitleScene::Create());
+        Engine::ChangeScene(TitleScene::Create());
     }
 }
 

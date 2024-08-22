@@ -35,7 +35,7 @@ void TitleButtons::Start()
 	btn->SetOnPressed([]()
 		{ 
 			Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
-			Scene::ChagneScene(CutScene::Create(1));
+			Engine::ChangeScene(CutScene::Create(1));
 		});
 	btn->SetRange(info.position, pObj->GetImageSize());
 

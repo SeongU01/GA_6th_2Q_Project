@@ -9,6 +9,7 @@ void ClearObjectList(int layerGroup, const wchar_t* listTag)
 {
 	Engine::GameManager::GetInstance()->ClearObjectList(layerGroup, listTag);
 }
+
 std::list<Engine::GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag)
 {
 	return Engine::GameManager::GetInstance()->FindObjectList(layerGroup, listTag);
@@ -27,7 +28,12 @@ HWND GetWindow()
 	return Engine::GameManager::GetInstance()->GetWindow();
 }
 
-void ChangeScene(Scene* pScene)
+bool ChangeScene(Engine::Scene* pScene)
 {
-	Engine::GameManager::GetInstance()->ChangeScene(pScene);
+	return Engine::GameManager::GetInstance()->ChangeScene(pScene);
+}
+
+void RemoveAll()
+{
+	Engine::GameManager::GetInstance()->RemoveAll();
 }

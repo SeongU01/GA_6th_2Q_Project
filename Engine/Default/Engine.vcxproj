@@ -104,7 +104,6 @@
     <None Include="..\Headers\Export_Camera.inl" />
     <None Include="..\Headers\Export_Input.inl" />
     <None Include="..\Headers\Export_Resource.inl" />
-    <None Include="..\Headers\Export_Scene.inl" />
     <None Include="..\Headers\Export_Sound.inl" />
     <None Include="..\Headers\Export_Time.inl" />
   </ItemGroup>

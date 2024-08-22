@@ -67,6 +67,7 @@ namespace Engine
 		std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
 		GameObject* FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag);
 		bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject);
+		void RemoveAll();
 
 		// SoundMgr
 		void LoadSound(const char* filePath);

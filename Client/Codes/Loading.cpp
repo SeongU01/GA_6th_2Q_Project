@@ -25,6 +25,24 @@ int Loading::LateUpdate(const float& deltaTime)
 
 bool Loading::Initialize()
 {
+	// 공통 데이터
+	std::wstring filePath = rootPath;
+	DataManager* pDataManager = DataManager::GetInstance();
+	pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
+	pDataManager->LoadCutScene((filePath + L"Data/CutScene").c_str());
+	pDataManager->LoadEnemySpawn((filePath + L"Data/Wave").c_str());
+	pDataManager->LoadMap((filePath + L"Data/Map").c_str());
+	pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
+	pDataManager->LoadAttackRangeData((filePath + L"Data/Card").c_str());
+
+	// 카드 데이터
+	CardManager* pCardManager = CardManager::GetInstance();
+	pCardManager->LoadCard((filePath + L"Data/Card").c_str());
+	pCardManager->SetDontDestroyObject(true);
+	pCardManager->SetRenderGroup((int)RenderGroup::None);
+
+	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pCardManager);
+
 	Engine::GameObject* pGameObject = Engine::GameObject::Create();
 	pGameObject->transform.position = Vector3(WINCX >> 1, WINCY >> 1, 0.f);
 	pGameObject->SetRenderGroup((int)RenderGroup::None);
@@ -56,23 +74,6 @@ void Loading::LoadResource()
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Texture").c_str());
 	Engine::ResourceManager::GetInstance()->LoadAnimation(4, (filePath + L"Data/Animation").c_str());
 	Engine::SoundManager::GetInstance()->LoadSound(multibyteFilePath);
-
-	// 공통 데이터
-	DataManager* pDataManager = DataManager::GetInstance();
-	pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
-	pDataManager->LoadCutScene((filePath + L"Data/CutScene").c_str());
-	pDataManager->LoadEnemySpawn((filePath + L"Data/Wave").c_str());
-	pDataManager->LoadMap((filePath + L"Data/Map").c_str());
-	pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
-	pDataManager->LoadAttackRangeData((filePath + L"Data/Card").c_str());
-
-	// 카드 데이터
-	CardManager* pCardManager = CardManager::GetInstance();
-	pCardManager->LoadCard((filePath + L"Data/Card").c_str());
-	pCardManager->SetDontDestroyObject(true);
-	pCardManager->SetRenderGroup((int)RenderGroup::None);
-
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pCardManager);
 
 	_isLoading = true;
 }

@@ -254,3 +254,8 @@ bool Engine::GameManager::AddObjectInLayer(int layerGroup, const wchar_t* listTa
 {
     return _pSceneMgr->AddObjectInLayer(layerGroup, listTag, pObject);
 }
+
+void Engine::GameManager::RemoveAll()
+{
+    _pSceneMgr->RemoveAll();
+}

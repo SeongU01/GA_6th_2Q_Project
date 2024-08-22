@@ -9,12 +9,13 @@ namespace Engine
 {
 	// Layer
 	inline void ClearLayer(int layerGroup);
-	inline void ClearObjectList(int layerGroup, const wchar_t* listTag);
+	inline void ClearObjectList(int layerGroup, const wchar_t* listTag);	
 	inline std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
 	inline GameObject* FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag);
 	inline bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject);
 	inline HWND GetWindow();
-	inline void ChangeScene(Scene* pScene);
+	inline bool ChangeScene(Engine::Scene* pScene);
+	inline void RemoveAll();
 	#include "Export.inl"
 }
 
@@ -45,13 +46,6 @@ namespace Time
 	inline void SetSlowTime(float rate, float duration);
 	inline float GetDeltaTime();
 	#include "Export_Time.inl"
-}
-
-namespace Scene
-{
-	// SceneMgr
-	inline bool ChagneScene(Engine::Scene* pScene);
-	#include "Export_Scene.inl"
 }
 
 namespace Input

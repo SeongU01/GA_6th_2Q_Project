@@ -23,6 +23,7 @@ namespace Engine
 		bool ChangeScene(Scene* pScene);
 		void ClearObjectList(int layerGroup, const wchar_t* listTag);
 		void ClearLayer(int layerGroup);
+		void RemoveAll();
 		std::list<GameObject*>* FindObjectList(int layerGroup, const wchar_t* listTag);
 		GameObject* FindObject(int layerGroup, const wchar_t* listTag, const wchar_t* objectTag);
 		bool AddObjectInLayer(int layerGroup, const wchar_t* listTag, GameObject* pObject);
