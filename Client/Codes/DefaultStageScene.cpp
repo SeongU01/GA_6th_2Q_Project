@@ -203,6 +203,10 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
 
     if (pEventManager->IsNextStage())
     {
+        for (int i = 0; i < (int)SoundGroup::End; i++)
+        {
+            Sound::StopSound(i);
+        }
         pEventManager->SetNextStage(false);
         pEventManager->SetStopGame(false);
         Time::SetSlowTime(1.f);
