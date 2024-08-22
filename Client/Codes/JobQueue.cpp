@@ -43,6 +43,12 @@ void JobQueue::LateUpdate(const float& deltaTime)
 {
 }
 
+void JobQueue::ResetQueue()
+{
+	_jobQueue.clear();
+	SetJobQueuePosition();
+}
+
 void JobQueue::PushQueue(Card* pCard)
 {
 	if (!_isTutorial && EventManager::GetInstance()->Tutorial2())
