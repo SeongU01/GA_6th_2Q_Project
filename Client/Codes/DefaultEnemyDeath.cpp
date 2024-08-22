@@ -23,7 +23,6 @@ int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 		std::string str = "Voice_Sound_Voice_Zero_Kill" + std::to_string(Engine::RandomGeneratorInt(1, 4));
 		Sound::StopSound((int)SoundGroup::Voice);
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
-		Sound::PlaySound("Battle_Sound_Enemy_Common_Dead", (int)SoundGroup::Battle, 0.8f, false);
 
 		_pToolTip->RemoveAllToolTip();
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();

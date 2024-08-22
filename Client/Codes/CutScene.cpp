@@ -65,6 +65,13 @@ std::string wstring_to_string(const std::wstring& wstr) {
 
 int CutScene::Update(const float& deltaTime)
 {
+    //사운드제어
+    for (int i = 0; i < (int)SoundGroup::End; i++)
+    {
+        if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::BGM)
+            continue;
+        Sound::PauseSound(i, true);
+    }
     float _deltaTime = Time::GetGlobalDeltaTime();
     _cutTime += _deltaTime;
     if (Input::IsKeyDown(DIK_EQUALS)) //스킵기능
@@ -81,14 +88,6 @@ int CutScene::Update(const float& deltaTime)
     if (_cutTime<-8.0f && _cutTime>-9.0f)
     {
         changeStage(_stageNum, _pPlayer);
-    }
-
-    //사운드제어
-    for (int i = 0; i < (int)SoundGroup::End; i++)
-    {
-        if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::BGM)
-            continue;
-        Sound::PauseSound(i, true);
     }
     return 0;
 }
