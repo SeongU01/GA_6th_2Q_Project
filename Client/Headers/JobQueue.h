@@ -17,6 +17,7 @@ public:
 	void LateUpdate(const float& deltaTime) override;
 
 public:
+	void ResetQueue();
 	void PushQueue(Card* pCard);
 	void PopQueue(Card* pCard);
 	bool IsJobQueueEmpty() { return _jobQueue.empty(); }
