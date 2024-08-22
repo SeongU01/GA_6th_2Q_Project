@@ -45,8 +45,10 @@ void JobQueue::LateUpdate(const float& deltaTime)
 
 void JobQueue::ResetQueue()
 {
+	for (auto& jobQueue : _jobQueue)
+		jobQueue.second->Reset();
+
 	_jobQueue.clear();
-	SetJobQueuePosition();
 }
 
 void JobQueue::PushQueue(Card* pCard)

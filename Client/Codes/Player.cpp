@@ -59,6 +59,7 @@ void Player::ResetPlayer(const Vector3& startPos)
 	_pTimerSystem->SetStopTime(false);
 	_pAttribute->Reset();
 	_pMP->mp = 3;
+	_pJobQueue->ResetQueue();
 }
 
 void Player::SetPlayerActives(bool _isActive)
