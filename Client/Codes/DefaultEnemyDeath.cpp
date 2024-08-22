@@ -25,9 +25,10 @@ int DefaultEnemyDeath::LateUpdate(const float& deltaTime)
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::Voice, 0.8f, false);
 		Sound::PlaySound("Battle_Sound_Enemy_Common_Dead", (int)SoundGroup::Battle, 0.8f, false);
 
-		_pToolTip->ActiveToolTip(false);
+		_pToolTip->RemoveAllToolTip();
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();
 		_pOwner->GetComponent<AttributeHUD>()->DeleteUI();
+		_pOwner->GetComponent<AttributeHUD>()->RemoveAllToolTip();
 		_pPannel->SetDead();
 		_pMovement->_grid->GetTiles()[(int)_pGridPosition->y][(int)_pGridPosition->x]->canMove = true;
 		_pOwner->gameObject.SetDead();

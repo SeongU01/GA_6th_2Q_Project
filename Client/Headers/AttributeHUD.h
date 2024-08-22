@@ -16,7 +16,8 @@ public:
 	void Start() override;
 	void Update(const float& deltaTime) override;
 	void LateUpdate(const float& deltaTime) override;
-
+public:
+	void RemoveAllToolTip();
 private:
 	ToolTip* _pToolTip = nullptr;
 	Attribute* _pAttribute = nullptr;

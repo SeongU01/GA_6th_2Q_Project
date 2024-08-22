@@ -19,6 +19,7 @@ public:
 	bool FindToolTip(std::wstring str) { return _toolTipList[str] != nullptr; }
 	void DeleteToolTip(std::wstring str);
 	void MirrorToolTip(int _direction);
+	void RemoveAllToolTip();
 public:
 	void Awake() override;
 	void Start() override;

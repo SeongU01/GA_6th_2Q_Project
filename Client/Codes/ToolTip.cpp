@@ -109,6 +109,14 @@ void ToolTip::MirrorToolTip(int _direction)
     }
 }
 
+void ToolTip::RemoveAllToolTip()
+{
+  for (auto& tooltip : _toolTipList)
+  {
+    tooltip.second->SetDead();
+  }
+}
+
 void ToolTip::Awake()
 {
 }

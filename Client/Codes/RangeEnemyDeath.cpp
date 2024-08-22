@@ -19,9 +19,10 @@ int RangeEnemyDeath::LateUpdate(const float& deltaTime)
 {
 	if (_pAnimation->IsLastFrame() && _pAnimation->IsCurrAnimation(L"Death"))
 	{
-		_pToolTip->ActiveToolTip(false);
+		_pToolTip->RemoveAllToolTip();
 		_pOwner->GetComponent<HPHUD>()->DeleteUI();
 		_pOwner->GetComponent<AttributeHUD>()->DeleteUI();
+		_pOwner->GetComponent<AttributeHUD>()->RemoveAllToolTip();
 		_pPannel->SetDead();
 		_pMovement->_grid->GetTiles()[(int)_pGridPosition->y][(int)_pGridPosition->x]->canMove = true;
 		_pOwner->gameObject.SetDead();
