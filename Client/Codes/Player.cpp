@@ -232,8 +232,6 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 		if (nullptr == pAttribute)
 			return;
 
-		/*pHP->hp -= 10;
-		pHP->hp -= 10;*/
 		std::string str = "Battle_Sound_Common_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 6));
 		Sound::PlaySound(str.c_str(), (int)SoundGroup::AttributeActive, 0.8f, false);
 

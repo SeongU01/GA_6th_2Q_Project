@@ -153,7 +153,7 @@ void CardSystem::ReloadCard()
 		Sound::StopSound((int)SoundGroup::Voice);
 		Sound::PlaySound("Voice_Sound_Voice_Zero_Reload", (int)SoundGroup::Voice, 0.8f, false);
 		_pEventInvoker->BindAction(0.f, [this]() { this->ThrowCard(); });
-		_reloadTime -= 0.f;
+		_reloadTime = 0.f;
 		_isFull = false;
 	}
 }

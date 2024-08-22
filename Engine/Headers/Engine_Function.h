@@ -27,6 +27,7 @@ namespace Engine
 
 			return _pInstance;
 		}
+		static void ResetInstance() { _pInstance = nullptr; }
 	private:
 		static T* _pInstance;
 	};

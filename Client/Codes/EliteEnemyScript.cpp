@@ -22,6 +22,8 @@
 #include "Attribute.h"
 #include "AttributeHUD.h"
 #include "AttackCollider.h"
+#include "HitColor.h"
+
 //state
 #include "EliteEnemyIdle.h"
 #include "EliteEnemyMove.h"
@@ -78,6 +80,7 @@ void EliteEnemyScript::Awake()
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	AddComponent<AttributeHUD>(_pAttribute);
+	AddComponent<HitColor>();
 
 }
 

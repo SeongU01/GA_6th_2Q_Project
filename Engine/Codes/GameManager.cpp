@@ -111,7 +111,7 @@ void Engine::GameManager::RenderGame()
 
 bool Engine::GameManager::Initialize(const GameDefaultSetting& info)
 {
-    _pWinApp = WinApp::Create(info.hInstance, info.appName, info.width, info.height);    
+    _pWinApp = WinApp::Create(info.hInstance, info.appName, info.width, info.height, info.isFullScreen);
 
     if (nullptr == _pWinApp)
         return false;
@@ -231,6 +231,11 @@ void Engine::GameManager::SetCameraArea(const Vector3& area)
 Camera* Engine::GameManager::GetCurrCamera()
 {
     return _pCamera;
+}
+
+void Engine::GameManager::RestoreDisplay()
+{
+    _pWinApp->RestoreDisplay();
 }
 
 void Engine::GameManager::LoadSound(const char* filePath)

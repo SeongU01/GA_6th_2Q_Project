@@ -43,6 +43,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
 {
     Sound::StopSound((int)SoundGroup::Voice);
     Sound::PlaySound("Voice_Sound_Voice_Zero_Clear_Game", (int)SoundGroup::Voice, 0.8f, false);
+
     Card* cards[3];
     for (int i = 2; i >= 0; i--)
         cards[i] = pCards[2 - i];

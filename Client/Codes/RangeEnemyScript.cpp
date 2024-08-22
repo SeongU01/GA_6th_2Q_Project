@@ -15,6 +15,8 @@
 #include "Attribute.h"
 #include "AttributeHUD.h"
 #include "AttackCollider.h"
+#include "HitColor.h"
+
 //state
 #include "RangeEnemyIdle.h"
 #include "RangeEnemyDeath.h"
@@ -71,6 +73,8 @@ void RangeEnemyScript::Awake()
 	_pAttribute = AddComponent<Attribute>();
 	_pAttackCollider = AddComponent<AttackCollider>();
 	AddComponent<AttributeHUD>(_pAttribute);
+	AddComponent<HitColor>();
+
 }
 
 void RangeEnemyScript::Start()

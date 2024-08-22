@@ -6,6 +6,10 @@
 #include "Client_Define.h"
 #include "CutScene.h"
 #include "ToolTip.h"
+
+#include "EventManager.h"
+#include "CardManager.h"
+
 TitleButtons::TitleButtons()
 	:UIComponent(L"TitleButtons")
 {
@@ -33,7 +37,25 @@ void TitleButtons::Start()
 			pObj->GetComponent<Engine::SpriteRenderer>()->SetIndex(8);
 		});
 	btn->SetOnPressed([]()
-		{ 
+		{
+			std::wstring filePath = rootPath;			
+
+			// 카드 데이터
+			CardManager::ResetInstance();
+			CardManager* pCardManager = CardManager::GetInstance();
+			pCardManager->LoadCard((filePath + L"Data/Card").c_str());
+			pCardManager->SetDontDestroyObject(true);
+			pCardManager->SetRenderGroup((int)RenderGroup::None);
+
+			Engine::AddObjectInLayer((int)LayerGroup::UI, L"Manager", pCardManager);
+
+			EventManager::ResetInstance();
+			EventManager* pEventManager = EventManager::GetInstance();
+			pEventManager->SetDontDestroyObject(true);
+			pEventManager->SetRenderGroup((int)RenderGroup::None);
+			pEventManager->Initialize();
+			Engine::AddObjectInLayer((int)LayerGroup::UI, L"Manager", pEventManager);
+
 			Sound::PlaySound("Effect_Sound_Button_Click", (int)SoundGroup::SFX, 0.8f, false);
 			Engine::ChangeScene(CutScene::Create(1));
 		});

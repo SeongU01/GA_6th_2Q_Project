@@ -51,8 +51,12 @@ void changeStage(int stage,Player* player)
         {
             Sound::StopSound(i);
         }
+
+        Engine::RemoveAll();
         Engine::ChangeScene(TitleScene::Create());
     }
+
+    ShowCursor(true);
 }
 
 CutScene::CutScene(int stage):_stageNum(stage)   
@@ -82,7 +86,7 @@ int CutScene::Update(const float& deltaTime)
     _cutTime += _deltaTime;
     if (Input::IsKeyDown(DIK_EQUALS)) //½ºÅµ±â´É
     {
-        changeStage(_stageNum,_pPlayer);
+        changeStage(_stageNum, _pPlayer);
         return 0;
     }
 
@@ -96,18 +100,22 @@ int CutScene::Update(const float& deltaTime)
         changeStage(_stageNum, _pPlayer);
     }
 
-    SetCursorPos(WINCX >> 1, WINCY >> 1);
+    POINT mousePoint = { WINCX >> 1, WINCY >> 1 };
+    ScreenToClient(Engine::GetWindow(), &mousePoint);
+    SetCursorPos(mousePoint.x, mousePoint.y);
 
     return 0;
 }
 
 int CutScene::LateUpdate(const float& deltaTime)
-{
+{    
     return 0;
 }
 
 bool CutScene::Initialize()
 {
+    ShowCursor(false);
+
     //ÇÃ·¹ÀÌ¾î ²ô±â
     if (Engine::FindObject((int)LayerGroup::Player, L"Player", NULL) != nullptr) 
     {
@@ -150,6 +158,7 @@ bool CutScene::Initialize()
     std::string soundName = "Bgm_Sound_BGM_Cut_Scene_" + std::to_string(_stageNum);
     Sound::StopSound((int)SoundGroup::BGM);
     Sound::PlaySound(soundName.c_str(), (int)SoundGroup::BGM, 0.5f, true);
+
     return true;
 }
 

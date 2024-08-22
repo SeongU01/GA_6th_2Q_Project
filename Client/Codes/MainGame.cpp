@@ -24,7 +24,7 @@ void MainGame::Run()
 }
 
 bool MainGame::Initialize(HINSTANCE hInstance)
-{	
+{	 
 	Engine::GameManager::GameDefaultSetting info;
 
 	info.hInstance = hInstance;
@@ -35,7 +35,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	info.renderGroupSize = (int)RenderGroup::End;
 	info.maxSoundGroup = (int)SoundGroup::End;
 	info.fiexedCount = 50;
-	info.isFullScreen = true;
+	info.isFullScreen = false;
 
 	_pGameManager->Initialize(info);
 
@@ -78,14 +78,17 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Operator, 1.0f);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
 
-	// 이벤트 매니저
-	EventManager* pEventManager = EventManager::GetInstance();
-	pEventManager->SetDontDestroyObject(true);
-	pEventManager->SetRenderGroup((int)RenderGroup::None);
-	pEventManager->Initialize();
-	Engine::AddObjectInLayer((int)LayerGroup::UI, L"", pEventManager);	
 
 	std::wstring filePath = rootPath;
+
+	DataManager* pDataManager = DataManager::GetInstance();
+	pDataManager->LoadToolTip((filePath + L"Data/ToolTip").c_str());
+	pDataManager->LoadCutScene((filePath + L"Data/CutScene").c_str());
+	pDataManager->LoadEnemySpawn((filePath + L"Data/Wave").c_str());
+	pDataManager->LoadMap((filePath + L"Data/Map").c_str());
+	pDataManager->LoadObjectArrange((filePath + L"Data/ObjectArrange").c_str());
+	pDataManager->LoadAttackRangeData((filePath + L"Data/Card").c_str());
+
 	Engine::ResourceManager::GetInstance()->LoadTexture(3, (filePath + L"Loading").c_str());
 	
 	_pGameManager->ChangeScene(Loading::Create());
@@ -96,7 +99,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 void MainGame::Free()
 {
 	SafeRelease(_pDataManager);
-	SafeRelease(_pGameManager);
+	// SafeRelease(_pGameManager);
 }
 
 MainGame* MainGame::Create(HINSTANCE hInstance)

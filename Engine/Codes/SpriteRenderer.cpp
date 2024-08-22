@@ -70,7 +70,7 @@ void Engine::SpriteRenderer::Draw(ID2D1Bitmap* pBitmap)
 	size.width = size.width * -0.5f + _drawOffset.x;
 	size.height = size.height * -0.5f + _drawOffset.y;
 
-	const D2D1_MATRIX_3X2_F& offset = D2D1::Matrix3x2F::Translation(size);
+	D2D1_MATRIX_3X2_F offset = D2D1::Matrix3x2F::Translation(size);
 		
 	_pDeviceContext->SetTransform(offset * transform.worldMatrix * gameObject._cameraMatrix);
 

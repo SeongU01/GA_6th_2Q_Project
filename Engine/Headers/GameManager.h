@@ -86,6 +86,9 @@ namespace Engine
 		void CameraShake(float shakeTime, float shakePower);
 		Camera* GetCurrCamera();
 
+	public:
+		void RestoreDisplay();
+
 	private:
 		void StartGame();
 		void FixedUpdateGame(int count);
