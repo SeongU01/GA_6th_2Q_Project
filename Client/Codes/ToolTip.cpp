@@ -80,6 +80,7 @@ void ToolTip::DeleteToolTip(std::wstring str)
     Vector3 startPos = { -150.f, -100.f, 0.f };
     if (_toolTipList.find(str) != _toolTipList.end())
     {
+        _toolTipList[str]->SetActive(false);
         _toolTipList[str]->SetDontDestroyObject(false);
         _toolTipList.erase(str);
     }
