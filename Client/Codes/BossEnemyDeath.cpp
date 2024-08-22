@@ -35,7 +35,8 @@ void BossEnemyDeath::OnStart()
 {
 	_pOwner->GetComponent<Engine::Collider>()->SetActive(false);
 	_pAnimation->ChangeAnimation(L"Death");
-	Sound::PlaySound("Voice_Sound_Voice_First_HP_0", (int)SoundGroup::FirstEnemy);
+	std::string str = "Voice_Sound_Voice_First_HP_0_" + std::to_string(Engine::RandomGeneratorInt(1, 3));
+	Sound::PlaySound(str.c_str(), (int)SoundGroup::FirstEnemy);
 }
 
 void BossEnemyDeath::OnExit()
