@@ -138,6 +138,8 @@ void BossEnemyScript::Start()
 	_pFSM->AddState((int)BossEnemy::FSM::SpawnRange, BossEnemySpawnRange::Create(this));
 	_pFSM->AddState((int)BossEnemy::FSM::Death, BossEnemyDeath::Create(this));
 	_pFSM->ChangeState((int)BossEnemy::FSM::Idle);
+
+	Sound::PlaySound("Voice_Sound_Voice_Operator_Spawn_Boss", (int)SoundGroup::Operator);
 }
 
 void BossEnemyScript::Update(const float& deltaTime)

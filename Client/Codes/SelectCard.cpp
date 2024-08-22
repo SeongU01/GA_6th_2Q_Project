@@ -92,7 +92,7 @@ void SelectCard::OnSelectCard(Card* pCards[3])
                     });
                 pButton->SetOnPressed([=]()
                     {
-                        Sound::PlaySound("Card_Sound_Card_ClearSelect", (int)SoundGroup::Card, 0.8f, false);
+                        Sound::PlaySound("Card_Sound_Card_ClearSelect", (int)SoundGroup::Card, 0.6f, false);
                         CardSystem* pCardSystem = Engine::FindObject((int)LayerGroup::Player, L"Player", nullptr)->GetComponent<CardSystem>();
                         CardManager* pCardManager = CardManager::GetInstance();
                         pCardSystem->AddCard(pCardManager->CloneCard(cards[i]->GetID()));

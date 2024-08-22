@@ -113,7 +113,7 @@ void Operator::Tutorial1()
 {
 	if (!_isTutorial)
 	{
-		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_001", (int)SoundGroup::Voice);
+		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_001", (int)SoundGroup::Operator);
 		_pPannel->SetActive(true);
 		_length = 0.f;
 		_count = 0;
@@ -127,7 +127,7 @@ bool Operator::Tutorial2()
 {
 	if (!_isTutorial2 && !_isTutorial1)
 	{
-		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_100", (int)SoundGroup::Voice);
+		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_100", (int)SoundGroup::Operator);
 		_pPannel->SetActive(true);
 		_length = 0.f;
 		_count = 3;
@@ -144,7 +144,7 @@ bool Operator::Tutorial3()
 {
 	if (!_isTutorial3 && _isTutorial && _isTutorial2End && !EventManager::GetInstance()->IsTimeStop())
 	{			
-		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_200", (int)SoundGroup::Voice);
+		Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_200", (int)SoundGroup::Operator);
 		_pPannel->SetActive(true);
 		_length = 0.f;
 		_count = 6;
@@ -171,27 +171,27 @@ void Operator::Text(const float& deltaTime, int count)
 				_length = 0.f;
 				_count++;
 
-				Sound::StopSound((int)SoundGroup::Voice);
+				Sound::StopSound((int)SoundGroup::Operator);
 
 				switch (_count)
 				{
 				case 1:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_002", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_002", (int)SoundGroup::Operator);
 					break;
 				case 2:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_003", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_003", (int)SoundGroup::Operator);
 					break;
 				case 4:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_101", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_101", (int)SoundGroup::Operator);
 					break;
 				case 5:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_102", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_102", (int)SoundGroup::Operator);
 					break;
 				case 7:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_201", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_201", (int)SoundGroup::Operator);
 					break;
 				case 8:
-					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_202", (int)SoundGroup::Voice);
+					Sound::PlaySound("Voice_Sound_Voice_Operator_Tuorial_202", (int)SoundGroup::Operator);
 					break;
 				}
 			}

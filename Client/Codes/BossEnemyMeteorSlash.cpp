@@ -162,6 +162,7 @@ BossEnemyMeteorSlash* BossEnemyMeteorSlash::Create(BossEnemyScript* pScript)
 	frameEvent.function = [pInstance]()
 		{
 			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
+			Sound::PlaySound("Battle_Sound_Enemy_Boss_WholeCut", (int)SoundGroup::Battle);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

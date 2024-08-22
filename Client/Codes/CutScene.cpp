@@ -18,6 +18,8 @@
 //페이드 인, 페이드 아웃 타이밍 넣기 + 컷씬 종료시 스테이지 넘겨주기.
 void changeStage(int stage,Player* player)
 {
+    for (int i = 0; i < (int)SoundGroup::End; i++)
+        Sound::PauseSound(i, false);
     if (player != nullptr) 
     {
         player->SetPlayerActives(true);
@@ -39,6 +41,10 @@ void changeStage(int stage,Player* player)
     else if (stage == 5)
     {
         if (player != nullptr)player->SetPlayerActives(false);
+        for (int i = 0; i < (int)SoundGroup::End; i++)
+        {
+            Sound::StopSound(i);
+        }
         Engine::ChangeScene(TitleScene::Create());
     }
 }
@@ -80,7 +86,7 @@ int CutScene::Update(const float& deltaTime)
     //사운드제어
     for (int i = 0; i < (int)SoundGroup::End; i++)
     {
-        if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX)
+        if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::BGM)
             continue;
         Sound::PauseSound(i, true);
     }
@@ -120,10 +126,6 @@ bool CutScene::Initialize()
         Sound::PlaySound(wstring_to_string(_info._dummySoundTag).c_str(), (int)SoundGroup::SFX, 1.0f, false);
     }
 
-    //사운드셋팅
-    std::string soundName = "Bgm_Sound_BGM_Cut_Scene_" + std::to_string(_stageNum);
-    Sound::StopSound((int)SoundGroup::BGM);
-    Sound::PlaySound(soundName.c_str(), (int)SoundGroup::BGM, 0.5f, false);
     //페이드셋팅(들어갈 때 한 번, 나갈 때 한 번..)
     Fade::FadeInfo info;
     info.option = Fade::Fade_Option::Fade_In;
@@ -135,7 +137,11 @@ bool CutScene::Initialize()
     Engine::AddObjectInLayer((int)LayerGroup::UI, L"Fade", _pFadeObj); _pFadeObj->SetRenderGroup((int)RenderGroup::Fade);
     
     EventManager::GetInstance()->SetStopGame(true);
-    
+
+    //사운드셋팅
+    std::string soundName = "Bgm_Sound_BGM_Cut_Scene_" + std::to_string(_stageNum);
+    Sound::StopSound((int)SoundGroup::BGM);
+    Sound::PlaySound(soundName.c_str(), (int)SoundGroup::BGM, 0.5f, true);
     return true;
 }
 

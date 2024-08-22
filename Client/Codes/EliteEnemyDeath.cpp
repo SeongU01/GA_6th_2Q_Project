@@ -25,6 +25,7 @@ int EliteEnemyDeath::LateUpdate(const float& deltaTime)
 		_pOwner->GetComponent<AttributeHUD>()->RemoveAllToolTip();
 		_pPannel->SetDead();
 		_pMovement->_grid->GetTiles()[(int)_pGridPosition->y][(int)_pGridPosition->x]->canMove = true;
+		Sound::PlaySound("Battle_Sound_Enemy_Common_Dead", (int)SoundGroup::Battle);
 		_pOwner->gameObject.SetDead();
 	}
 	return 0;

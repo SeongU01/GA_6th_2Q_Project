@@ -189,7 +189,8 @@ BossEnemyLaserBurst* BossEnemyLaserBurst::Create(BossEnemyScript* pScript)
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
-			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
+			Sound::PlaySound("Voice_Sound_Voice_First_Attack1", (int)SoundGroup::FirstEnemy);
+			Sound::PlaySound("Battle_Sound_Enemy_Boss_Laser", (int)SoundGroup::Battle);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

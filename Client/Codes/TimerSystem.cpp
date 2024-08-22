@@ -28,19 +28,21 @@ void TimerSystem::TimeStop()
 
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX|| i == (int)SoundGroup::BGM)
+            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX ||
+                i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX ||
+                i == (int)SoundGroup::BGM || i == (int)SoundGroup::Operator
+                || i == (int)SoundGroup::Time)
                 continue;
-            Sound::SetVolume((int)SoundGroup::BGM, 0.5f);
             Sound::PauseSound(i, true);
         }
+        Sound::SetVolume((int)SoundGroup::BGM, 0.1f);
     }
     else
     {
+        Sound::SetVolume((int)SoundGroup::BGM, 0.5f);
+        Sound::StopSound((int)SoundGroup::Time);
         for (int i = 0; i < (int)SoundGroup::End; i++)
         {
-            if (i == (int)SoundGroup::Voice || i == (int)SoundGroup::SFX || i == (int)SoundGroup::Card || i == (int)SoundGroup::AddSFX || i == (int)SoundGroup::BGM)
-                continue;
-            Sound::SetFadeVolume((int)SoundGroup::BGM, 0.3f);
             Sound::PauseSound(i, false);
         }
         _slowTime = 1.0f;
@@ -96,8 +98,7 @@ void TimerSystem::Update(const float& deltaTime)
     {
         _isNotice = true;
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_30", (int)SoundGroup::Time, 0.8f, false);
-        Sound::StopSound((int)SoundGroup::Voice);
-        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30", (int)SoundGroup::Voice, 0.8f, false);
+        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_30", (int)SoundGroup::Operator, 0.8f, false);
     }
     else if (timer <= 15.f && timer >= 10.f && _isNotice)
     {
@@ -107,12 +108,14 @@ void TimerSystem::Update(const float& deltaTime)
     {
         _isNotice = true;
         Sound::PlaySound("Effect_Sound_FX_Notify_TimeOut_10", (int)SoundGroup::Time, 0.8f, false);
-        Sound::StopSound((int)SoundGroup::Voice);
-        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10", (int)SoundGroup::Voice, 0.8f, false);
+        Sound::PlaySound("Voice_Sound_Voice_Operator_TimeOut_10", (int)SoundGroup::Operator, 0.8f, false);
     }
     //시간정지
-    if (Input::IsKeyDown(DIK_SPACE))
+    if (Input::IsKeyDown(DIK_SPACE)) 
+    {
+        if(!_isStopTime)  Sound::PlaySound("Effect_Sound_FX_Time_WhilePause", (int)SoundGroup::Time, 0.8f, true);
         TimeStop();
+    }
 }
 
 void TimerSystem::LateUpdate(const float& deltaTime)

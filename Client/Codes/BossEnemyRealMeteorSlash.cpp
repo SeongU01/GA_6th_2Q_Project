@@ -163,7 +163,8 @@ BossEnemyRealMeteorSlash* BossEnemyRealMeteorSlash::Create(BossEnemyScript* pScr
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
-			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
+			Sound::PlaySound("Voice_Sound_Voice_First_Attack4", (int)SoundGroup::FirstEnemy);
+			Sound::PlaySound("Battle_Sound_Enemy_Boss_WholeCut", (int)SoundGroup::Battle);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

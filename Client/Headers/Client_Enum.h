@@ -2,7 +2,7 @@
 
 enum class LayerGroup { Tile, Player, Enemy, Object, UI, End };
 enum class RenderGroup { None, BackGround, Tile, BackEffect, Object, FrontEffect, UI, Card, ToolTip, Top, Fade, End };
-enum class SoundGroup { BGM, SFX, Voice,Battle,Card, Player, Attribute,Time,AddSFX, AttributeActive,End };
+enum class SoundGroup { BGM, SFX, Voice,Battle,Card, Player, FirstEnemy,Operator, Attribute,Time,AddSFX, AttributeActive,End };
 
 // Card
 enum class CardType { Attack, Move, Support };

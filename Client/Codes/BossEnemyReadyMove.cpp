@@ -100,6 +100,7 @@ void BossEnemyReadyMove::GetShield()
 
 void BossEnemyReadyMove::Boost()
 {
+	Sound::PlaySound("Battle_Sound_Enemy_Boss_Wander", (int)SoundGroup::Battle);
 	auto pEffect = Engine::GameObject::Create();
 	Effect::EffectInfo info;
 	info.renderGroup = RenderGroup::FrontEffect;
@@ -115,14 +116,5 @@ BossEnemyReadyMove* BossEnemyReadyMove::Create(BossEnemyScript* pScript)
 {
 	BossEnemyReadyMove* pInstance = new BossEnemyReadyMove;
 	pInstance->BossEnemyState::Initialize(pScript);
-	Engine::Animation::FrameEvent frameEvent;
-	frameEvent.activeFrame = 6;
-	frameEvent.animation = L"ReadyMove";
-	frameEvent.isRepeat = true;
-	frameEvent.function = [pInstance]()
-		{
-			Sound::PlaySound("Battle_Sound_Enemy_Elite_Assist_Shield", (int)SoundGroup::Battle, 0.8f, false);
-		};
-	pInstance->_pAnimation->AddFrameEvent(frameEvent);
 	return pInstance;
 }

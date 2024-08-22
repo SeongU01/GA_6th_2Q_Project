@@ -55,7 +55,7 @@ void DeckSystem::Start()
 	UI& pCard = *_pReLoad;
 	CardSystem& pSystem = *_pCardSystem;
 	Button* pButton = AddComponent<Button>();
-	pButton->SetRange(transform.position + Vector3(-75.f, 25.f, 0.f), {150.f, 150.f});
+	pButton->SetRange(transform.position + Vector3(-75.f, 35.f, 0.f), {150.f, 150.f});
 	pButton->SetIsReat(false);
 	pButton->SetOnHover(
 		[&oOwner, &pCard, &pSystem] {

@@ -26,7 +26,7 @@ void GageHUD::Awake()
 		_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana_Recovery"), Vector3(350.0f, 830.0f, 0.0f));
 	Engine::GameObject& pObj = GetOwner();
 	Button* btn = AddComponent<Button>();
-	btn->SetRange(_position, _imageSize);
+	btn->SetRange(_position, { _imageSize .width-10,_imageSize.height});
 	btn->SetOnHover([&pObj] {
 		ToolTip* pToolTip = pObj.GetComponent<ToolTip>(L"reChargeTool");
 		pToolTip->ActiveToolTip(true);

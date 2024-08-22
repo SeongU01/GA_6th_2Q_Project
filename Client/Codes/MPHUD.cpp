@@ -25,7 +25,7 @@ void MPHUD::Start()
 	_ptoolTip = AddComponent<ToolTip>(L"MPTool"); //마나 안내
 	_ptoolTip->AddToolTip(DataManager::GetInstance()->GetToolTipInfo(L"UI_Cost_Mana_Storage"), Vector3(200.0f,-100.0f, 0.0f));
 	Button* btn = AddComponent<Button>();
-	btn->SetRange({ transform.GetPosition().x+50,transform.GetPosition().y,0}, {pui->GetSize().width, pui->GetSize().height});
+	btn->SetRange({ transform.GetPosition().x+60,transform.GetPosition().y,0}, {pui->GetSize().width, pui->GetSize().height});
 	Engine::GameObject& obj = GetOwner();
 	btn->SetOnHover([&obj] {
 		ToolTip* pToolTip = obj.GetComponent<ToolTip>(L"MPTool");

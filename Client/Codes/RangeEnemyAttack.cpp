@@ -158,7 +158,7 @@ RangeEnemyAttack* RangeEnemyAttack::Create(RangeEnemyScript* pScript)
 	frameEvent.isRepeat = true;
 	frameEvent.function = [pInstance]()
 		{
-			Sound::PlaySound("Battle_Sound_Enemy_Elite_Attack_Weakness", (int)SoundGroup::Battle, 0.8f, false);
+			Sound::PlaySound("Battle_Sound_Enemy_Common_Attack_Beam", (int)SoundGroup::Battle);
 			pInstance->Attack();
 		};
 	pInstance->_pAnimation->AddFrameEvent(frameEvent);

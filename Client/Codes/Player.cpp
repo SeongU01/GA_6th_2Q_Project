@@ -135,7 +135,7 @@ void Player::Awake()
 	_psSilhouette->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, 0.5f);
 	_psSilhouette->SetOneSelfDraw(true, [=]()
 		{
-			if (_pTimerSystem->IsStopTime())
+			if (_pTimerSystem->GetisSlow())
 			{
 				Vector3 offset = { 20.f, -100.f, 0.f };
 				Vector3 position = _movement->_grid->GetTileCenter((int)_nextGridPosition.x, (int)_nextGridPosition.y);
@@ -233,6 +233,8 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			return;
 
 		pHP->hp -= 10;
+		std::string str = "Battle_Sound_Common_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 6));
+		Sound::PlaySound(str.c_str(), (int)SoundGroup::AttributeActive, 0.8f, false);
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -317,8 +319,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 
 			if (_pHP->hp == 1)
 			{
-				Sound::StopSound((int)SoundGroup::Voice);
-				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1", (int)SoundGroup::Voice, 0.8f, false);
+				Sound::PlaySound("Voice_Sound_Voice_Operator_HP_1", (int)SoundGroup::Operator, 0.8f, false);
 			}
 			_pHitColor->OnHitColorEffect(0.1f);
 
@@ -334,7 +335,7 @@ void Player::OnCollisionExit(Engine::CollisionInfo& info)
 
 void Player::DefaultMove(const float& deltaTime)
 {
-	if (_pTimerSystem->IsStopTime() || !_pAnimation->IsCurrAnimation(L"Idle"))
+	if (_pTimerSystem->GetisSlow() || !_pAnimation->IsCurrAnimation(L"Idle"))
 		return;
 
 	if (nullptr != _movement->_grid)
