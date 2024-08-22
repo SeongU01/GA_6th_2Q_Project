@@ -28,7 +28,7 @@ int DefaultEnemyIdle::Update(const float& deltaTime)
 		{
 			_alpha = 1.f;
 			_pSpriteRenderer->GetShader<Engine::ShaderColor>()->SetColor(1.f, 1.f, 1.f, _alpha);
-			_pHP->SetInvinsibleTime(0.1f);
+			_pHP->SetInvinsibleTime(0.2f);
 			_pHP->SetInvinsible(false);
 			_isFandIn = true;
 		}
