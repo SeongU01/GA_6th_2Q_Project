@@ -1,81 +1,53 @@
-**코딩 컨벤션**
+<div align=center>
+  <h1> Last Minute Zero </h1>
 
--클래스, 함수, 변수명 생략 자제 -> 명확하게 하기
 
--형변환 명시하기
+![title](https://github.com/user-attachments/assets/1e02bb52-871c-4e98-a676-7a0e107b387f)
 
--변수는 camelCase
 
--함수는 PascalCase
+![game1](https://github.com/user-attachments/assets/05e53213-2f07-48b1-ab4e-e42483722ab0)
 
--프라이빗 변수는 _로 시작 + camelCase
 
--클래스 기본 변수 초기화는 선언과 동시에
+![game2](https://github.com/user-attachments/assets/e79a0b0d-2ea7-4f0b-b29a-982b1cc4eed6)
 
--포인터는 p로 명시하기 ex)pPointer
 
--글로벌변수는 g_로 명시하기 ex)g_global
 
--라인이 길어지면 짤라서!-> 파일 많이 띄어놓고 해서 양해 부탁.
+![game3](https://github.com/user-attachments/assets/419eb8b8-c15c-4c8c-8575-8ca89314c065)
 
--로컬 변수는 본인 편한대로!
 
-이외에 자유. 여러분들을 믿습니다~읽을때 불편하지만 않으면됨
 
-ex)
-class MyClass 
-{
-  //클래스 기본 변수 초기화는 선언과 동시에
-  int _myPrivateVariable=0;  // 
+# 프로젝트 개요
+| 항목            | 내용                                                                 |
+|-----------------|----------------------------------------------------------------------|
+| **프로젝트**    | Direct2D 자체엔진을 활용한 게임 제작                                  |
+| **장르**        | 실시간 전략 초스피드 덱빌딩 카드게임                                  |
+| **진행 방식**   | 시간을 자원으로 사용하는 실시간 전략 게임                                            |
+| **게임 설명**   | 플레이어는 최초의 강화 인간 ‘제로’를 플레이하여, 제한 시간 동안 모든 적을 처치해야만 한다. |
+
+
+<div align=center>
+  <h2> 기술스택 </h2>
   
-
-public:
-  int myPublicVariable;  // 퍼블릭 변수는 camelCase
-  // 포인터는 포인터라고 이름에 명시하시오. e.i. pObj or objPointer
-  OtherObject* pOtherObj, otherObjPointer;
-
-  // 이니셜라이징 리스트가 많으면 짤라서!
-  MyClass
-(
-    int myPrivateVar, 
-    int myPublicVar, 
-    OtherObject* pObj, 
-    OtherObject& rObj
-) 
-  : _myPrivateVariable(myPrivateVar), 
-    myPublicVariable(myPublicVar), 
-    pOtherObj(pObj), rOtherObj(rObj) {}
-
-  void MyPublicFunction() 
-{  //함수는 PascalCase
-    int a;  // 로컬 변수는 본인 편한대로!
-    return;
-}
-
-  bool MyFunctionWithLongParameterList
-(  // 함수 파라미터가 많은면 짤라서!
-    int a,            // a
-    double d,         // d
-    Object* pObj,     // pObj
-) 
-{
-    int localA=a;    // 로컬 변수는 본인 편한대로!
-    double local_d=d // 로컬 변수는 본인 편한대로!
-    
-    // 라인이 길어지면 짤라서!
-    return (a == 1) && 
-      (d == 0.7) && 
-      (pObj != nullptr) &&
-      (pReserved == nullptr);
-  }
-};
+<div align="center">
+ <img src="https://img.shields.io/badge/Visual%20Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white" alt="Visual Studio">
+</div>
+<div align="center">
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" alt="GitHub">
+</div>
+<div align="center">
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white" alt="Git">
+</div>
 
 
-**Git**
--커밋하고 푸시하기전에 무조건 팀원들한테 말하고 커밋하고 푸시하기.
-	
--커밋 메시지 무조건 남기기. 간단한 이유에도 "temp" 라도 메시지 남기기
 
-이외에 딱히 특별한거 x 여러분들을 믿습니다~
+<div align=center>
+  <h2>👻 Programing Team Member</h2>
+<div align=center>
+  
+  |Programmer|Programmer|Programmer|
+  |[진성우](https://github.com/SeongU01)|[정민재](https://github.com/bmbany)|[김수인](https://github.com/lsuinl)|
+</div>
+
+</div>
 
 
