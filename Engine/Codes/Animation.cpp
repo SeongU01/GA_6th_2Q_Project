@@ -11,7 +11,7 @@ Engine::Animation::Animation(const wchar_t* name)
 
 void Engine::Animation::Update(const float& deltaTime)
 {
-	if (_animationData.empty())
+	if (_animationData.empty()|| _animationData[_currAnimation].empty())
 		return;
 
 	_isLastFrame = false;
@@ -19,7 +19,6 @@ void Engine::Animation::Update(const float& deltaTime)
 
 	Frame& currFrame = _animationData[_currAnimation][_currIndex];
 	_currFrame += deltaTime * currFrame.duration;
-
 	if (_isReverse)
 	{
 		if (1.f <= _currFrame)
