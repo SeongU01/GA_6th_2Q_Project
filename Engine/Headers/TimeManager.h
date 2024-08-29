@@ -14,7 +14,9 @@ namespace Engine
     public:
         float GetSumTime() { return _elapsed; }
         void SetSumTime(float time) { _elapsed = time; }
-        float GetDeltaTime() { return 0.001f <= _deltaTime ? 0.001f * _slowRate : _deltaTime * _slowRate; }
+
+        float GetDeltaTime() { return 0.1f <= _deltaTime ? 0.1f * _slowRate : _deltaTime * _slowRate; }
+
         void SetSlowTime(float rate);
         void SetSlowTime(float rate, float duration);
         float GetGlobalDeltaTime() { return 0.001f <= _globalDeltaTime ? 0.001f : _globalDeltaTime; }

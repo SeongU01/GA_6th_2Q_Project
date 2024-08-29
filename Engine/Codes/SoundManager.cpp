@@ -117,6 +117,11 @@ bool Engine::SoundManager::SetUpSound(int maxGroup)
     return true;
 }
 
+void Engine::SoundManager::SetMode(int groupID, FMOD_MODE mode)
+{
+    _channelGroups[groupID]->setMode(mode);
+}
+
 void Engine::SoundManager::LoadSound(const char* path)
 {
     _finddatai64_t  fd;

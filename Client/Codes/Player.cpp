@@ -217,24 +217,24 @@ void Player::LateUpdate(const float& deltaTime)
 		}
 	}
 
-	if (Input::IsKeyDown(DIK_MINUS))
+	/*if (Input::IsKeyDown(DIK_MINUS))
 	{
 		if (0 == _bonusAttack)
 			_bonusAttack = 10;
 		else
 			_bonusAttack = 0;
-	}
+	}*/
 }
 
 void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 {
+	// 자신의 Attack 콜라이더와 상대방의 Body와 충돌했을 때
 	if (*info.itSelf == L"Attack" && *info.other == L"Body")
 	{
 		HP* pHP = info.other->GetComponent<HP>();
-
 		Attribute* pAttribute = info.other->GetComponent<Attribute>();
 
-		if (nullptr == pAttribute)
+		if (nullptr == pAttribute || nullptr == pHP)
 			return;
 
 		std::string str = "Battle_Sound_Common_Hit" + std::to_string(Engine::RandomGeneratorInt(1, 6));
@@ -267,7 +267,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 			}
 
 			pHP->hp -= damage;
-		}
+		} // Attack Event
 
 		if (pHP->IsZeroHP())
 		{
@@ -292,6 +292,7 @@ void Player::OnCollisionEnter(Engine::CollisionInfo& info)
 		}
 	}
 
+	// Attack 콜라이더와 충돌했을 때
 	if (*info.other == L"Attack")
 	{
 		if (_pHP->IsInvinsible())

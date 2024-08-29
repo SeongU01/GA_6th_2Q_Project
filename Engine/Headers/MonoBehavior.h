@@ -4,7 +4,6 @@
 
 namespace Engine
 {
-	class Transform;
 	class MonoBehavior abstract : public Component, public ICollisionNotify
 	{
 	protected:

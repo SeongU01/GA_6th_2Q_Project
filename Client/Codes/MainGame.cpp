@@ -28,7 +28,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::GameManager::GameDefaultSetting info;
 
 	info.hInstance = hInstance;
-	info.appName = L"Archtype:0";
+	info.appName = L"LastMinute : Zero";
 	info.width = WINCX;
 	info.height = WINCY;
 	info.layerSize = (int)LayerGroup::End;
@@ -76,6 +76,7 @@ bool MainGame::Initialize(HINSTANCE hInstance)
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Voice, 1.f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::FirstEnemy, 1.0f);
 	Engine::SoundManager::GetInstance()->SetVolume((int)SoundGroup::Operator, 1.0f);
+	Engine::SoundManager::GetInstance()->SetMode((int)SoundGroup::BGM, FMOD_LOOP_NORMAL);
 	Engine::SoundManager::GetInstance()->SetMasterVolume(1.f);
 
 

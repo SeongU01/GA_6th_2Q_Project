@@ -211,6 +211,7 @@ bool DataManager::LoadToolTip(const wchar_t* filePath)
 	std::wstring path = filePath;
 	std::wifstream file((path + L"/ToolTip.csv").c_str());
 	   file.imbue(std::locale("en_US.UTF-8"));
+
 	if (!file.is_open())
 	{
 		throw std::runtime_error("Can not open file");

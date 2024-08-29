@@ -213,7 +213,7 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
         Engine::ChangeScene(_pScene);
     }
 
-    if (Input::IsKeyDown(DIK_RBRACKET))
+    /*if (Input::IsKeyDown(DIK_RBRACKET))
     {
         if (_pScene) Engine::ChangeScene(_pScene);
     }
@@ -222,7 +222,7 @@ int DefaultStageScene::LateUpdate(const float& deltaTime)
     {
         Engine::RemoveAll();
         Engine::ChangeScene(TitleScene::Create());
-    }
+    }*/
 
     return 0;
 }

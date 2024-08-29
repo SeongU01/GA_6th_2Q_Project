@@ -4,7 +4,6 @@
 namespace Engine
 {
 	class GameObject;
-	class Collider;
 	class Transform;
 	class Component abstract : public Base
 	{

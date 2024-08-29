@@ -19,6 +19,7 @@ void Engine::Animation::Update(const float& deltaTime)
 
 	Frame& currFrame = _animationData[_currAnimation][_currIndex];
 	_currFrame += deltaTime * currFrame.duration;
+
 	if (_isReverse)
 	{
 		if (1.f <= _currFrame)
@@ -54,28 +55,25 @@ void Engine::Animation::Update(const float& deltaTime)
 void Engine::Animation::LateUpdate(const float& deltaTime)
 {
 	auto iter_end = _frameEvents.end();
+
 	for (auto iter = _frameEvents.begin(); iter != iter_end;)
 	{
-		if (!lstrcmp(iter->animation, _currAnimation) &&
-			iter->activeFrame == _currIndex)
+		if (iter->activeFrame == _currIndex &&
+			!lstrcmp(iter->animation, _currAnimation))
 		{
 			if (_isFrameChange)
 			{
 				iter->function();
 
-				if (iter->isRepeat)
+				if (!iter->isRepeat)
 				{
-					++iter;
+					iter = _frameEvents.erase(iter);
 					continue;
 				}
-				else
-					iter = _frameEvents.erase(iter);
 			}
-			else
-				++iter;
 		}
-		else
-			++iter;
+
+		++iter;
 	}
 }
 

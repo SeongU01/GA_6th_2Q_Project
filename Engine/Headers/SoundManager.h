@@ -31,6 +31,8 @@ namespace Engine
         void SetPitch(int groupID, float pitch);
         void SetMasterVolume(float volume);
         bool SetUpSound(int maxGroup);
+        void SetMode(int groupID, FMOD_MODE mode);
+
         void LoadSound(const char* filePath);
         std::vector<std::string> GetSoundKey();
 

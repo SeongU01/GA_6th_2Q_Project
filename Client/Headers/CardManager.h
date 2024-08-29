@@ -32,6 +32,7 @@ private:
 	bool LoadCardDataRichText(const wchar_t* filePath);
 	bool LoadCardData(const wchar_t* filePath);
 	bool LoadCardDataAction(const wchar_t* filePath);
+	bool LoadSelectCardPool(const wchar_t* filePath);
 	void CardPoolShuffle();
 
 private:

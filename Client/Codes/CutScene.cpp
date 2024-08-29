@@ -84,7 +84,7 @@ int CutScene::Update(const float& deltaTime)
     }
     float _deltaTime = Time::GetGlobalDeltaTime();
     _cutTime += _deltaTime;
-    if (Input::IsKeyDown(DIK_EQUALS)) //½ºÅµ±â´É
+    if (Input::IsKeyDown(DIK_ESCAPE)) //½ºÅµ±â´É
     {
         changeStage(_stageNum, _pPlayer);
         return 0;

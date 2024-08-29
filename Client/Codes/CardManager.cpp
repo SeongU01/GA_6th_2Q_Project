@@ -26,13 +26,8 @@ bool CardManager::LoadCard(const wchar_t* filePath)
     if (!LoadCardData((path + L"/Card.csv").c_str()))
         return false;        
 
-    _cardIDs.push_back(1);
-    _cardIDs.push_back(3);
-    _cardIDs.push_back(4);
-    _cardIDs.push_back(6);
-    _cardIDs.push_back(7);
-
-    _pSelectCard = AddComponent<SelectCard>();
+    if (!LoadSelectCardPool((path + L"/SelectCardPool.csv").c_str()))
+        return false;    
 
     return true;
 }
@@ -346,6 +341,33 @@ bool CardManager::LoadCardDataAction(const wchar_t* filePath)
             _cardActionDatas[ID].push_back(cardAction);
         }
     }
+
+    return true;
+}
+
+bool CardManager::LoadSelectCardPool(const wchar_t* filePath)
+{
+    std::wifstream file(filePath);
+    file.imbue(std::locale("en_US.UTF-8"));
+
+    if (!file.is_open()) {
+        std::cout << "파일을 열 수 없습니다." << std::endl;
+        return false;
+    }
+
+    std::wstring line;
+    std::getline(file, line);
+
+    while (std::getline(file, line))
+    {
+        std::wstringstream wss(line);
+        std::wstring token;
+
+        std::getline(wss, token, L',');
+        _cardIDs.push_back(_wtoi(token.c_str()));
+    }
+
+    _pSelectCard = AddComponent<SelectCard>();
 
     return true;
 }
