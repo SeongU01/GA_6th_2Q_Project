@@ -1,11 +1,11 @@
 ID,AnimationTag,AttackDelay,EffectTag,IsRotation,Duration,Delay,OneDraw,X,Y,Scale,Follow,EffectTag,IsRotation,Duration,Delay,OneDraw,X,Y,Scale,Follow,EffectTag,Duration,Delay,OneDraw,X,Y,Scale,Follow
-0,Attack,0.08,Effect_Attack_Anim_VFX_Slash_02,1,0.022,0.15,1,100,-10,0.75,0,,,,,,,,,,,,,,,,,
+0,Attack,0.085,Effect_Attack_Anim_VFX_Slash_02,1,0.022,0.15,1,100,-10,0.75,0,,,,,,,,,,,,,,,,,
 1,Dash,1,Effect_Booster_Anim_VFX_Booster,0,0.04,1,1,-100,-50,1,1,Effect_Attack_Anim_VFX_Stab_01,1,0.04,0.5,1,100,100,1,0,Effect_Attack_Anim_VFX_Stab_02,0.04,0.1,1,0,0,1,0
-2,Cast,0.288,Effect_Attack_Anim_VFX_EnergyBall,1,0.02,0.005,1,80,0,0.6,0,Effect_Attack_Anim_VFX_Beam,1,0.015,0.3,1,980,0,1,0,,,,,,,,
+2,Cast,0.298,Effect_Attack_Anim_VFX_EnergyBall,1,0.02,0.015,1,80,0,0.6,0,Effect_Attack_Anim_VFX_Beam,1,0.015,0.3,1,980,0,1,0,,,,,,,,
 3,Stab,0.1,Effect_Attack_Anim_VFX_Stab_01,1,0.015,0.15,1,180,0,0.8,0,Effect_Attack_Anim_VFX_Stab_02,1,0.04,0.2,1,100,0,0.8,0,,,,,,,,
-4,Up,0.15,Effect_Attack_Anim_VFX_BeamDrop_02,0,0.04,0.5,0,0,-100,0.4,0,,,,,,,,,,,,,,,,,
+4,Up,0.16,Effect_Attack_Anim_VFX_BeamDrop_02,0,0.04,0.51,0,0,-100,0.4,0,,,,,,,,,,,,,,,,,
 5,Dash,1,Effect_Booster_Anim_VFX_Booster,0,0.03,0.05,1,-100,-50,1,1,,,,,,,,,,,,,,,,,
 6,Dash,1,Effect_Booster_Anim_VFX_Booster,0,0.02,0.05,1,-100,-50,1,1,,,,,,,,,,,,,,,,,
-7,Up,1,Effect_Shield,0,0.025,0.2,1,0,-50,1,1,,,,,,,,,,,,,,,,,
-8,Up,1,Effect_Buff,0,0.02,0.2,1,0,-50,1,1,,,,,,,,,,,,,,,,,
-9,Up,1,Effect_Buff,0,0.02,0.2,1,0,-50,1,1,,,,,,,,,,,,,,,,,
+7,Up,1.01,Effect_Shield,0,0.025,0.21,1,0,-50,1,1,,,,,,,,,,,,,,,,,
+8,Up,1.01,Effect_Buff,0,0.02,0.21,1,0,-50,1,1,,,,,,,,,,,,,,,,,
+9,Up,1.01,Effect_Buff,0,0.02,0.21,1,0,-50,1,1,,,,,,,,,,,,,,,,,
