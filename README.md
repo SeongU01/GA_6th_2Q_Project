@@ -1,15 +1,12 @@
 <div align=center>
   <h1> Last Minute Zero </h1>
-
-
+제한시간 60초안에 살아남아라.
+  
 ![title](https://github.com/user-attachments/assets/1e02bb52-871c-4e98-a676-7a0e107b387f)
-
 
 ![game1](https://github.com/user-attachments/assets/05e53213-2f07-48b1-ab4e-e42483722ab0)
 
-
 ![game2](https://github.com/user-attachments/assets/e79a0b0d-2ea7-4f0b-b29a-982b1cc4eed6)
-
 
 ![game3](https://github.com/user-attachments/assets/419eb8b8-c15c-4c8c-8575-8ca89314c065)
 
@@ -37,16 +34,15 @@
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white" alt="Git">
 </div>
 
-
-
-<div align=center>
+<div align=center>  
   <h2>👻 Programing Team Member</h2>
-<div align=center>
+  <div align="center">
   
-  |Programmer|Programmer|Programmer|
-  |[진성우](https://github.com/SeongU01)|[정민재](https://github.com/bmbany)|[김수인](https://github.com/lsuinl)|
-</div>
-
+  | <img src="https://github.com/SeongU01.png" width="80"> | <img src="https://github.com/bmbany.png" width="80"> | <img src="https://github.com/lsuinl.png" width="80"> |
+  |:---:|:---:|:---:|
+  | [진성우](https://github.com/SeongU01) | [정민재](https://github.com/bmbany) | [김수인](https://github.com/lsuinl) |
+  
+  </div>
 </div>
 
 
